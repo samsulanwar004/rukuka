@@ -5,12 +5,12 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminProductStocksController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminAmenitiesController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "id";
+			$this->title_field = "name";
 			$this->limit = "20";
 			$this->orderby = "id,desc";
 			$this->global_privilege = false;
@@ -25,29 +25,25 @@
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "product_stocks";
+			$this->table = "amenities";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Product Name","name"=>"products_id","join"=>"products,name"];
-			$this->col[] = ["label"=>"Sku","name"=>"sku"];
-			$this->col[] = ["label"=>"Size","name"=>"size"];
-			$this->col[] = ["label"=>"Unit","name"=>"unit"];
+			$this->col[] = ["label"=>"Name","name"=>"name"];
+			$this->col[] = ["label"=>"Icon","name"=>"icon","image"=>true];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Product Code','name'=>'products_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'products,product_code'];
-			$this->form[] = ['label'=>'Size','name'=>'size','type'=>'radio','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'S;M;L;XL;XL;ALL SIZE'];
-			$this->form[] = ['label'=>'Unit','name'=>'unit','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Icon','name'=>'icon','type'=>'upload','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Product Name','name'=>'products_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'products,name'];
-			//$this->form[] = ['label'=>'Size','name'=>'size','type'=>'radio','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Unit','name'=>'unit','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10','dataenum'=>'S;M;L;XL;XXL;All Size'];
+			//$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Icon','name'=>'icon','type'=>'upload','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			# OLD END FORM
 
 			/* 
@@ -257,7 +253,6 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-	        $postdata['sku'] = 'KUKA'.rand(0,99).date('YmdHis');
 
 	    }
 

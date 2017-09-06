@@ -36,10 +36,10 @@ class CreateProductsTable extends Migration
             $t->increments('id');            
             $t->unsignedInteger('product_designers_id');
             $t->unsignedInteger('product_categories_id');
-            $t->string('product_code', 10)->unique();
+            $t->string('product_code', 20)->unique();
             $t->string('name', 100);
             $t->string('color', 100);
-            $t->string('slug', 150)->unique();
+            $t->string('slug', 150)->unique()->nullable();
             $t->text('content')->nullable();
             $t->text('detail_and_care')->nullable();
             $t->text('size_and_fit')->nullable();

@@ -5,12 +5,12 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminProductStocksController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminHomestayImagesController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "id";
+			$this->title_field = "name";
 			$this->limit = "20";
 			$this->orderby = "id,desc";
 			$this->global_privilege = false;
@@ -25,29 +25,28 @@
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "product_stocks";
+			$this->table = "homestay_images";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Product Name","name"=>"products_id","join"=>"products,name"];
-			$this->col[] = ["label"=>"Sku","name"=>"sku"];
-			$this->col[] = ["label"=>"Size","name"=>"size"];
-			$this->col[] = ["label"=>"Unit","name"=>"unit"];
+			$this->col[] = ["label"=>"Homestays code","name"=>"homestays_id","join"=>"homestays,homestay_code"];
+			$this->col[] = ["label"=>"Name","name"=>"name"];
+			$this->col[] = ["label"=>"Photo","name"=>"photo","image"=>true];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Product Code','name'=>'products_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'products,product_code'];
-			$this->form[] = ['label'=>'Size','name'=>'size','type'=>'radio','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'S;M;L;XL;XL;ALL SIZE'];
-			$this->form[] = ['label'=>'Unit','name'=>'unit','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Homestays Code','name'=>'homestays_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'homestays,homestay_code'];
+			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
+			$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'required|image|max:3000','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Product Name','name'=>'products_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'products,name'];
-			//$this->form[] = ['label'=>'Size','name'=>'size','type'=>'radio','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Unit','name'=>'unit','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10','dataenum'=>'S;M;L;XL;XXL;All Size'];
+			//$this->form[] = ["label"=>"Homestays Id","name"=>"homestays_id","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"homestays,name"];
+			//$this->form[] = ["label"=>"Name","name"=>"name","type"=>"text","required"=>TRUE,"validation"=>"required|string|min:3|max:70","placeholder"=>"You can only enter the letter only"];
+			//$this->form[] = ["label"=>"Photo","name"=>"photo","type"=>"upload","required"=>TRUE,"validation"=>"required|image|max:3000","help"=>"File types support : JPG, JPEG, PNG, GIF, BMP"];
 			# OLD END FORM
 
 			/* 
@@ -257,7 +256,6 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-	        $postdata['sku'] = 'KUKA'.rand(0,99).date('YmdHis');
 
 	    }
 

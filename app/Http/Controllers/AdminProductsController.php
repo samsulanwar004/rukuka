@@ -39,8 +39,8 @@
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Product Designers Id','name'=>'product_designers_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_designers,name'];
-			$this->form[] = ['label'=>'Product Categories Id','name'=>'product_categories_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_categories,name'];
+			$this->form[] = ['label'=>'Product Designers','name'=>'product_designers_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_designers,name'];
+			$this->form[] = ['label'=>'Product Categories','name'=>'product_categories_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_categories,name'];
 			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Color','name'=>'color','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'Black;Red;White'];
 			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
@@ -92,7 +92,7 @@
 	        	'parent_columns'=>'name',
 	        	'foreign_key'=>'products_id',
 	        	'button_color'=>'success',
-	        	'button_icon'=>'fa fa-bars'
+	        	'button_icon'=>'fa fa-picture-o'
 	        ];
 
 	        $this->sub_module[] = [
@@ -297,8 +297,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-	        $postdata['product_code'] = date('Ymd').rand(0,99);
-	        $postdata['slug'] = str_slug($postdata['name']);
+	        $postdata['product_code'] = 'KP'.date('Ymd').rand(0,99);	        
 
 	    }
 
@@ -311,7 +310,10 @@
 	    */
 	    public function hook_after_add($id) {        
 	        //Your code here
-
+	        $products = DB::table('products');
+	        $product = $products->where('id', $id)->first();
+	        $postdata['slug'] = str_slug($product->name.' '.$product->id);
+	        $products->update($postdata);
 	    }
 
 	    /* 
@@ -323,8 +325,7 @@
 	    | 
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
-	        //Your code here	        
-	        $postdata['slug'] = str_slug($postdata['name']);
+	        //Your code here	      
 	    }
 
 	    /* 
@@ -336,7 +337,10 @@
 	    */
 	    public function hook_after_edit($id) {
 	        //Your code here 
-
+	        $products = DB::table('products');
+	        $product = $products->where('id', $id)->first();
+	        $postdata['slug'] = str_slug($product->name.' '.$product->id);
+	        $products->update($postdata);
 	    }
 
 	    /* 

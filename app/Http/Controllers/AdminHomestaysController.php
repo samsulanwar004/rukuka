@@ -5,12 +5,12 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminProductStocksController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminHomestaysController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "id";
+			$this->title_field = "name";
 			$this->limit = "20";
 			$this->orderby = "id,desc";
 			$this->global_privilege = false;
@@ -25,29 +25,64 @@
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "product_stocks";
+			$this->table = "homestays";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Product Name","name"=>"products_id","join"=>"products,name"];
-			$this->col[] = ["label"=>"Sku","name"=>"sku"];
-			$this->col[] = ["label"=>"Size","name"=>"size"];
-			$this->col[] = ["label"=>"Unit","name"=>"unit"];
+			$this->col[] = ["label"=>"Homestay Owners","name"=>"homestay_owners_id","join"=>"homestay_owners,name"];
+			$this->col[] = ["label"=>"Homestay Code","name"=>"homestay_code"];
+			$this->col[] = ["label"=>"Name","name"=>"name"];
+			$this->col[] = ["label"=>"Accommodates","name"=>"accommodates"];
+			$this->col[] = ["label"=>"Bedrooms","name"=>"bedrooms"];
+			$this->col[] = ["label"=>"Bathrooms","name"=>"bathrooms"];
+			$this->col[] = ["label"=>"Price","name"=>"price"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Product Code','name'=>'products_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'products,product_code'];
-			$this->form[] = ['label'=>'Size','name'=>'size','type'=>'radio','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'S;M;L;XL;XL;ALL SIZE'];
-			$this->form[] = ['label'=>'Unit','name'=>'unit','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Homestay Owners','name'=>'homestay_owners_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'homestay_owners,name'];
+			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Accommodates','name'=>'accommodates','type'=>'number','validation'=>'required|integer|min:0|max:2','width'=>'col-sm-2'];
+			$this->form[] = ['label'=>'Bedrooms','name'=>'bedrooms','type'=>'number','validation'=>'required|integer|min:0|max:2','width'=>'col-sm-2'];
+			$this->form[] = ['label'=>'Bathrooms','name'=>'bathrooms','type'=>'number','validation'=>'required|integer|min:0|max:2','width'=>'col-sm-2'];
+			$this->form[] = ['label'=>'Beds','name'=>'beds','type'=>'number','validation'=>'required|integer|min:0|max:2','width'=>'col-sm-2'];
+			$this->form[] = ['label'=>'Currency','name'=>'currency','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'IDR;USD;EUR'];
+			$this->form[] = ['label'=>'Price','name'=>'price','type'=>'money','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Cancellations','name'=>'cancellations','type'=>'textarea','validation'=>'string|min:5|max:5000','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Availability','name'=>'availability','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-2'];
+			$this->form[] = ['label'=>'Latitude','name'=>'latitude','type'=>'hidden','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Longitude','name'=>'longitude','type'=>'hidden','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Address','name'=>'address','type'=>'googlemaps','validation'=>'required|min:1|max:255','width'=>'col-sm-10','latitude'=>'latitude','longitude'=>'longitude'];
+			$this->form[] = ['label'=>'Descriptions','name'=>'descriptions','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Check In Time','name'=>'check_in_time','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'1;2;3;4;5;6;7;8;9;10;11;12'];
+			$this->form[] = ['label'=>'Check Out Time','name'=>'check_out_time','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'1;2;3;4;5;6;7;8;9;10;11;12'];
+			$this->form[] = ['label'=>'Safety Features','name'=>'safety_features','type'=>'textarea','validation'=>'min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'House Rules','name'=>'house_rules','type'=>'textarea','validation'=>'min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Is Active','name'=>'is_active','type'=>'checkbox','width'=>'col-sm-10','dataenum'=>'Active'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Product Name','name'=>'products_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'products,name'];
-			//$this->form[] = ['label'=>'Size','name'=>'size','type'=>'radio','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Unit','name'=>'unit','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10','dataenum'=>'S;M;L;XL;XXL;All Size'];
+			//$this->form[] = ['label'=>'Homestay Owners','name'=>'homestay_owners_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'homestay_owners,name'];
+			//$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Accommodates','name'=>'accommodates','type'=>'number','validation'=>'required|integer|min:0|max:2','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Bedrooms','name'=>'bedrooms','type'=>'number','validation'=>'required|integer|min:0|max:2','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Bathrooms','name'=>'bathrooms','type'=>'number','validation'=>'required|integer|min:0|max:2','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Beds','name'=>'beds','type'=>'number','validation'=>'required|integer|min:0|max:2','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Currency','name'=>'currency','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'IDR;USD;EUR'];
+			//$this->form[] = ['label'=>'Price','name'=>'price','type'=>'money','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Cancellations','name'=>'cancellations','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Availability','name'=>'availability','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Latitude','name'=>'latitude','type'=>'hidden','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Longitude','name'=>'longitude','type'=>'hidden','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Address','name'=>'address','type'=>'googlemaps','validation'=>'required|min:1|max:255','width'=>'col-sm-10','latitude'=>'latitude','longitude'=>'longitude'];
+			//$this->form[] = ['label'=>'Descriptions','name'=>'descriptions','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Check In Time','name'=>'check_in_time','type'=>'time','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Check Out Time','name'=>'check_out_time','type'=>'time','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Safety Features','name'=>'safety_features','type'=>'textarea','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'House Rules','name'=>'house_rules','type'=>'textarea','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Is Active','name'=>'is_active','type'=>'checkbox','validation'=>'string','width'=>'col-sm-10','dataenum'=>'Active'];
 			# OLD END FORM
 
 			/* 
@@ -63,6 +98,23 @@
 	        | 
 	        */
 	        $this->sub_module = array();
+	        $this->sub_module[] = [
+	        	'label'=>'Photos',
+	        	'path'=>'homestay-images',
+	        	'parent_columns'=>'name',
+	        	'foreign_key'=>'homestays_id',
+	        	'button_color'=>'success',
+	        	'button_icon'=>'fa fa-picture-o'
+	        ];
+
+	        $this->sub_module[] = [
+	        	'label'=>'Amenities',
+	        	'path'=>'homestay-amenities',
+	        	'parent_columns'=>'name',
+	        	'foreign_key'=>'homestays_id',
+	        	'button_color'=>'success',
+	        	'button_icon'=>'fa fa-bars'
+	        ];
 
 
 	        /* 
@@ -257,7 +309,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-	        $postdata['sku'] = 'KUKA'.rand(0,99).date('YmdHis');
+	        $postdata['homestay_code'] = 'KH'.date('Ymd').rand(0,99);
 
 	    }
 
@@ -270,6 +322,10 @@
 	    */
 	    public function hook_after_add($id) {        
 	        //Your code here
+	        $homestays = DB::table('homestays');
+	        $homestay = $homestays->where('id', $id)->first();
+	        $postdata['slug'] = str_slug($homestay->name.' '.$homestay->id);
+	        $homestays->update($postdata);
 
 	    }
 
@@ -295,7 +351,10 @@
 	    */
 	    public function hook_after_edit($id) {
 	        //Your code here 
-
+	    	$homestays = DB::table('homestays');
+	        $homestay = $homestays->where('id', $id)->first();
+	        $postdata['slug'] = str_slug($homestay->name.' '.$homestay->id);
+	        $homestays->update($postdata);
 	    }
 
 	    /* 

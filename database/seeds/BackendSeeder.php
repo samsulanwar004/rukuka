@@ -81,6 +81,56 @@ class CmsModulsSeeder extends Seeder {
             'controller'=>'AdminProductStocksController',
             'is_protected'=>0,                                
             'is_active'=>0
+        ],[ 
+            
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Homestay Owners',
+            'icon'=>'fa fa-circle-o',
+            'path'=>'homestay-owners',
+            'table_name'=>'homestay_owners',
+            'controller'=>'AdminHomestayOwnersController',
+            'is_protected'=>0,                                
+            'is_active'=>0
+        ],[ 
+            
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Amenities',
+            'icon'=>'fa fa-circle-o',
+            'path'=>'amenities',
+            'table_name'=>'amenities',
+            'controller'=>'AdminAmenitiesController',
+            'is_protected'=>0,                                
+            'is_active'=>0
+        ],[ 
+            
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Homestays',
+            'icon'=>'fa fa-circle-o',
+            'path'=>'homestays',
+            'table_name'=>'homestays',
+            'controller'=>'AdminHomestaysController',
+            'is_protected'=>0,                                
+            'is_active'=>0
+        ],[ 
+            
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Homestay Images',
+            'icon'=>'fa fa-circle-o',
+            'path'=>'homestay-images',
+            'table_name'=>'homestay_images',
+            'controller'=>'AdminHomestayImagesController',
+            'is_protected'=>0,                                
+            'is_active'=>0
+        ],[ 
+            
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Homestay Amenities',
+            'icon'=>'fa fa-circle-o',
+            'path'=>'homestay-amenities',
+            'table_name'=>'homestay_amenities',
+            'controller'=>'AdminHomestayAmenitiesController',
+            'is_protected'=>0,                                
+            'is_active'=>0
         ]       
             ];
 
@@ -193,6 +243,84 @@ class CmsMenusSeeder extends Seeder {
             'color' => null,
             'icon'=>'fa fa-circle-o',
             'parent_id'=>1,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 5
+        ],[
+            
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Eco Toursim',
+            'type'=>'Route',
+            'path'=>'ecotoursim',
+            'color' => null,
+            'icon'=>'fa fa-home',
+            'parent_id'=>0,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 2
+        ],[
+            
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Homestay Owners',
+            'type'=>'Route',
+            'path'=>'AdminHomestayOwnersControllerGetIndex',
+            'color' => null,
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>7,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 1
+        ],[
+            
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Amenities',
+            'type'=>'Route',
+            'path'=>'AdminAmenitiesControllerGetIndex',
+            'color' => null,
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>7,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 2
+        ],[
+            
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Homestays',
+            'type'=>'Route',
+            'path'=>'AdminHomestaysControllerGetIndex',
+            'color' => null,
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>7,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 3
+        ],[
+            
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Homestay Images',
+            'type'=>'Route',
+            'path'=>'AdminHomestayImagesControllerGetIndex',
+            'color' => null,
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>7,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 4
+        ],[
+            
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Homestay Amenities',
+            'type'=>'Route',
+            'path'=>'AdminHomestayAmenitiesControllerGetIndex',
+            'color' => null,
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>7,
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
