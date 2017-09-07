@@ -11,6 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+    'as'   => 'index',
+    'uses' => 'Frontend\PageController@index',
+]);
+
+Route::get('/shop/{category}/{slug}', [
+    'as'   => 'shop',
+    'uses' => 'Frontend\PageController@shop',
+]);
+
+Route::get('/product/{slug}', [
+    'as'   => 'product',
+    'uses' => 'Frontend\PageController@product',
+]);
+
+Route::get('/menu/{parent}', [
+    'as'   => 'menu',
+    'uses' => 'Frontend\PageController@menu',
+]);
