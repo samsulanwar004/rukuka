@@ -13,7 +13,7 @@
   <body>
 
   @include('partials.nav')
-    <div class="uk-container uk-container-small">
+    <div class="uk-container uk-container-small" id="content">
        @yield('content')
     </div>
   @include('partials.footer')

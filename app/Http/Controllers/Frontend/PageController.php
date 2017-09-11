@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
-use App\Product;
-use App\Category;
-use App\Designer;
+use App\Repositories\ProductRepository;
 
 class PageController extends BaseController
 {
@@ -17,10 +15,7 @@ class PageController extends BaseController
 
     public function shop($category, $slug)
     {
-    	$products = Product::whereHas('category', function ($query) use ($slug) {
-            $query->where('slug', '=', $slug);
-        })
-        ->paginate(9);
+    	$products = (new ProductRepository)->getProducts($category, $slug);
 
         return view('pages.shop', compact('products', 'category'));
 
@@ -28,23 +23,9 @@ class PageController extends BaseController
 
     public function product($slug)
     {
-    	$product = Product::where('slug', $slug)
-    		->first();
+    	$product = (new ProductRepository)->getProductBySlug($slug);
 
     	return view('pages.product', compact('product'));
     }
 
-    public function menu($parent)
-    {
-    	if ($parent == 'designers') {
-    		$desingers = Designer::get();
-
-    		return response()->json($desingers);
-    	} else {
-    		$categories = Category::where('name', $parent)
-    		->first();
-
-    		return response()->json($categories->childs);
-    	}
-    }
 }

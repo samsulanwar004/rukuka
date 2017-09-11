@@ -49,15 +49,7 @@
                                       </ul>
                                   </div>
                                     <div class="uk-width-2-5@m uk-child-width-1-2 uk-margin-remove uk-padding-remove" uk-grid>
-                                      <div>
-                                        <ul class="uk-nav uk-navbar-dropdown-nav">
-                                          <li class="uk-active">Clothing</li>
-                   {{--                        <li class="uk-parent" v-for="women in womens">
-                                            <a href="/shop/women/@{{ women.slug }}">@{{ women.name }}</a>
-                                          </li>   --}}                                    
-                                        </ul>
-                                      </div>
-
+                                      <women></women>
                                       <div>
                                         <ul class="uk-nav uk-navbar-dropdown-nav">
                                             <li class="uk-active">More Clothing</li>
@@ -166,15 +158,7 @@
                         <li><a href="#"><h5 class="uk-margin-remove">KIDS</h5></a>
                           <div class="uk-navbar-dropdown uk-navbar-dropdown-width-3">
                               <div class="uk-navbar-dropdown-grid uk-child-width-1-3" uk-grid>
-                                  <div>
-                                      <ul class="uk-nav uk-navbar-dropdown-nav">
-                                          <li class="uk-active"><a href="#">Active</a></li>
-                                          <li class="uk-parent"><a href="#">Parent</a></li>
-                                          <li class="uk-nav-header">Header</li>
-                                          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: table"></span> Item</a></li>
-                                          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Item</a></li>
-                                      </ul>
-                                  </div>
+                                  <kid></kid>
                                   <div>
                                       <ul class="uk-nav uk-navbar-dropdown-nav">
                                           <li class="uk-active"><a href="#">Active</a></li>
@@ -191,13 +175,7 @@
                         <li><a href="#"><h5 class="uk-margin-remove">DESIGNERS</h5></a>
                           <div class="uk-navbar-dropdown uk-navbar-dropdown-width-3">
                               <div class="uk-navbar-dropdown-grid uk-child-width-1-3" uk-grid>
-                                  <div>
-                                      <ul class="uk-nav uk-navbar-dropdown-nav">
-                                  {{--       <li class="uk-parent" v-for="designer in designers">
-                                          <a href="/shop/designer/@{{ designer.slug }}">@{{ designer.name }}</a>
-                                        </li> --}} 
-                                      </ul>
-                                  </div>
+                                  <designer></designer>
                                   <div>
                                       <ul class="uk-nav uk-navbar-dropdown-nav">
                                           <li class="uk-active"><a href="#">Active</a></li>

@@ -11791,7 +11791,7 @@ module.exports = Vue$3;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"_process":1}],5:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -11799,8 +11799,76 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
     created: function created() {
         var self = this;
-        $.get('/menu/men', function (mens) {
-            self.mens = mens;
+        $.get("/api/v1/menu/designers", function (designers) {
+            if (designers.status == 'Ok') {
+                self.designers = designers.data;
+            }
+        });
+    },
+    data: function data() {
+        return {
+            designers: {}
+        };
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div>\n  <ul class=\"uk-nav uk-navbar-dropdown-nav\">\n    <li class=\"uk-parent\" v-for=\"designer in designers\">\n        <a :href=\"'/shop/designers/'+ designer.slug \">{{ designer.name }}</a>\n    </li>\n  </ul>\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-d5e8b8be", module.exports)
+  } else {
+    hotAPI.update("_v-d5e8b8be", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":4,"vue-hot-reload-api":2}],6:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    created: function created() {
+        var self = this;
+        $.get("/api/v1/menu/kids", function (kids) {
+            if (kids.status == 'Ok') {
+                self.kids = kids.data;
+            }
+        });
+    },
+    data: function data() {
+        return {
+            kids: {}
+        };
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div>\n  <ul class=\"uk-nav uk-navbar-dropdown-nav\">\n    <li class=\"uk-active\">Clothing</li>\n    <li class=\"uk-parent\" v-for=\"kid in kids\">\n      <a :href=\"'/shop/kids/'+ kid.slug \">{{ kid.name }}</a>\n    </li>\n  </ul>\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-6f84ac00", module.exports)
+  } else {
+    hotAPI.update("_v-6f84ac00", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":4,"vue-hot-reload-api":2}],7:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    created: function created() {
+        var self = this;
+        $.get("/api/v1/menu/mens", function (mens) {
+            if (mens.status == 'Ok') {
+                self.mens = mens.data;
+            }
         });
     },
     data: function data() {
@@ -11810,18 +11878,84 @@ exports.default = {
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div>\n  <ul class=\"uk-nav uk-navbar-dropdown-nav\">\n      <li class=\"uk-active\">Clothing</li>\n        <li class=\"uk-parent\" v-for=\"men in mens\">\n          <a :href=\"'/shop/men/'+ men.slug \">{{ men.name }}</a>\n      </li>\n  </ul>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div>\n  <ul class=\"uk-nav uk-navbar-dropdown-nav\">\n    <li class=\"uk-active\">Clothing</li>\n    <li class=\"uk-parent\" v-for=\"men in mens\">\n      <a :href=\"'/shop/mens/'+ men.slug \">{{ men.name }}</a>\n    </li>\n  </ul>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-5d43aa6c", module.exports)
+    hotAPI.createRecord("_v-59eaa9e0", module.exports)
   } else {
-    hotAPI.update("_v-5d43aa6c", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-59eaa9e0", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":4,"vue-hot-reload-api":2}],6:[function(require,module,exports){
+},{"vue":4,"vue-hot-reload-api":2}],8:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    created: function created() {
+        var self = this;
+        $.get("/api/v1/popular", function (products) {
+            if (products.status == 'Ok') {
+                self.products = products.data;
+            }
+        });
+    },
+    data: function data() {
+        return {
+            products: {}
+        };
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"uk-grid-small uk-child-width-1-4@m uk-margin-large-bottom\" uk-grid=\"\">\n    <!-- start product -->\n    <div class=\"uk-panel uk-text-left\" v-for=\"product in products\">\n      <div class=\"uk-card uk-card-small uk-padding-remove\">\n          <div class=\"uk-card-media-top\">\n              <img :src=\"product.photo\" :alt=\"product.name\">\n\n          </div>\n          <div class=\"uk-card-body uk-padding-remove uk-margin-small-top\">\n            <a :href=\"'/product/'+ product.slug\" class=\"uk-text-muted\">{{ product.name }}</a>\n            <br>\n            <span class=\"uk-text-bold\">{{ product.currency }}{{ product.price }}</span>\n          </div>\n          <!-- <div class=\"uk-card-footer\">\n            <span class=\"uk-text-meta\">Shirt<h4 class=\"uk-card-price\">$400</h4></span>\n          </div> -->\n      </div>\n    </div>\n    <!-- end product single -->\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-9053c4da", module.exports)
+  } else {
+    hotAPI.update("_v-9053c4da", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":4,"vue-hot-reload-api":2}],9:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    created: function created() {
+        var self = this;
+        $.get("/api/v1/menu/womens", function (womens) {
+            if (womens.status == 'Ok') {
+                self.womens = womens.data;
+            }
+        });
+    },
+    data: function data() {
+        return {
+            womens: {}
+        };
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div>\n  <ul class=\"uk-nav uk-navbar-dropdown-nav\">\n    <li class=\"uk-active\">Clothing</li>\n    <li class=\"uk-parent\" v-for=\"women in womens\">\n      <a :href=\"'/shop/womens/'+ women.slug \">{{ women.name }}</a>\n    </li>\n  </ul>\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-3ce7d8b8", module.exports)
+  } else {
+    hotAPI.update("_v-3ce7d8b8", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":4,"vue-hot-reload-api":2}],10:[function(require,module,exports){
 'use strict';
 
 var _vue = require('vue');
@@ -11832,20 +11966,46 @@ var _vueResource = require('vue-resource-2');
 
 var _vueResource2 = _interopRequireDefault(_vueResource);
 
-var _Navigation = require('./components/Navigation.vue');
+var _Men = require('./components/Men.vue');
 
-var _Navigation2 = _interopRequireDefault(_Navigation);
+var _Men2 = _interopRequireDefault(_Men);
+
+var _Women = require('./components/Women.vue');
+
+var _Women2 = _interopRequireDefault(_Women);
+
+var _Kid = require('./components/Kid.vue');
+
+var _Kid2 = _interopRequireDefault(_Kid);
+
+var _Designer = require('./components/Designer.vue');
+
+var _Designer2 = _interopRequireDefault(_Designer);
+
+var _Popular = require('./components/Popular.vue');
+
+var _Popular2 = _interopRequireDefault(_Popular);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_vueResource2.default);
 
-_vue2.default.component('men', _Navigation2.default);
+_vue2.default.component('men', _Men2.default);
+_vue2.default.component('women', _Women2.default);
+_vue2.default.component('kid', _Kid2.default);
+_vue2.default.component('designer', _Designer2.default);
+_vue2.default.component('popular', _Popular2.default);
 
 new _vue2.default({
     el: '#menu'
 });
 
-},{"./components/Navigation.vue":5,"vue":4,"vue-resource-2":3}]},{},[6]);
+_vue2.default.component('popular', _Popular2.default);
+
+new _vue2.default({
+    el: '#content'
+});
+
+},{"./components/Designer.vue":5,"./components/Kid.vue":6,"./components/Men.vue":7,"./components/Popular.vue":8,"./components/Women.vue":9,"vue":4,"vue-resource-2":3}]},{},[10]);
 
 //# sourceMappingURL=main.js.map

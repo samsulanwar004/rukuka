@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('v1/menu/{parent}', 'Api\PageController@menu');
+Route::get('v1/popular', 'Api\PageController@popular');

@@ -25,8 +25,3 @@ Route::get('/product/{slug}', [
     'as'   => 'product',
     'uses' => 'Frontend\PageController@product',
 ]);
-
-Route::get('/menu/{parent}', [
-    'as'   => 'menu',
-    'uses' => 'Frontend\PageController@menu',
-]);
