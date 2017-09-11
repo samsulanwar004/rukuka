@@ -52,9 +52,9 @@
                                       <div>
                                         <ul class="uk-nav uk-navbar-dropdown-nav">
                                           <li class="uk-active">Clothing</li>
-                                          <li class="uk-parent" v-for="women in womens">
+                   {{--                        <li class="uk-parent" v-for="women in womens">
                                             <a href="/shop/women/@{{ women.slug }}">@{{ women.name }}</a>
-                                          </li>                                      
+                                          </li>   --}}                                    
                                         </ul>
                                       </div>
 
@@ -116,14 +116,7 @@
                                     </ul>
                                 </div>
                                   <div class="uk-width-2-5@m uk-child-width-1-2 uk-margin-remove uk-padding-remove" uk-grid>
-                                    <div>
-                                      <ul class="uk-nav uk-navbar-dropdown-nav">
-                                          <li class="uk-active">Clothing</li>
-                                            <li class="uk-parent" v-for="men in mens">
-                                              <a href="/shop/men/@{{ men.slug }}">@{{ men.name }}</a>
-                                          </li>
-                                      </ul>
-                                    </div>
+                                    <men></men>
 
                                     <div>
                                       <ul class="uk-nav uk-navbar-dropdown-nav">
@@ -200,9 +193,9 @@
                               <div class="uk-navbar-dropdown-grid uk-child-width-1-3" uk-grid>
                                   <div>
                                       <ul class="uk-nav uk-navbar-dropdown-nav">
-                                        <li class="uk-parent" v-for="designer in designers">
+                                  {{--       <li class="uk-parent" v-for="designer in designers">
                                           <a href="/shop/designer/@{{ designer.slug }}">@{{ designer.name }}</a>
-                                        </li> 
+                                        </li> --}} 
                                       </ul>
                                   </div>
                                   <div>
