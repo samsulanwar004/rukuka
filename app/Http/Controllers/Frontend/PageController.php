@@ -16,7 +16,12 @@ class PageController extends BaseController
 
     public function shop($category, $slug)
     {
-    	$products = (new ProductRepository)->getProducts($category, $slug);
+        
+    	if ($slug == 'all') {
+            $products = (new ProductRepository)->getProductByCategory($category);
+        } else {
+            $products = (new ProductRepository)->getProductBySlugCategory($slug);
+        }
 
         return view('pages.shop', compact('products', 'category'));
 
