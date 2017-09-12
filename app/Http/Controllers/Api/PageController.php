@@ -11,7 +11,7 @@ use App\Repositories\ProductRepository;
 class PageController extends BaseApiController
 {
     
-    public function menu($parent)
+    public function menu($parent, $child)
     {
     	try {
     		if ($parent == 'designers') {
@@ -19,9 +19,7 @@ class PageController extends BaseApiController
 
 	    		return $this->success($desingers,200, true);
 	    	} else {
-	    		$categories = (new CategoryRepository)->getCategoryByName($parent);
-
-	    		$categories = collect($categories->childs)->toArray();
+	    		$categories = (new CategoryRepository)->getCategoryByParent($parent, $child);
 
 	    		return $this->success($categories,200, true);
 	    	}

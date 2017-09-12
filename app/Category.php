@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Nestable\NestableTrait;
 
 class Category extends Model
 {
+	use NestableTrait;
+
+    protected $parent = 'parent_product_categories_id';
     protected $table = 'product_categories';
 
     public function products()
