@@ -12,5 +12,7 @@ yarn-error.log
 .env
 /public/images
 /public/build
+/public/js
+/public/css
 
 

@@ -25,3 +25,18 @@ Route::get('/product/{slug}', [
     'as'   => 'product',
     'uses' => 'Frontend\PageController@product',
 ]);
+
+Route::get('/landing/women', [
+    'as'   => 'women',
+    'uses' => 'Frontend\PageController@women',
+]);
+
+Route::get('/landing/men', [
+    'as'   => 'men',
+    'uses' => 'Frontend\PageController@men',
+]);
+
+Route::get('/landing/kids', [
+    'as'   => 'kids',
+    'uses' => 'Frontend\PageController@kids',
+]);

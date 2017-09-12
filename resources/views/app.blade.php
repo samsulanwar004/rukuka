@@ -17,8 +17,7 @@
        @yield('content')
     </div>
   @include('partials.footer')
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="{{ elixir('js/vendor.js') }}"></script>
   <script src="{{ elixir('js/main.js') }}"></script>
   <script src="{{ elixir('js/app.js') }}"></script>
   </body>

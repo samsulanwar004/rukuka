@@ -13,7 +13,6 @@ Vue.component('men', Men);
 Vue.component('women', Women);
 Vue.component('kid', Kid);
 Vue.component('designer', Designer);
-Vue.component('popular', Popular);
 
 new Vue({
     el: '#menu'

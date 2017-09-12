@@ -23,7 +23,7 @@
         <div class="uk-panel uk-text-left" v-for="product in products">
           <div class="uk-card uk-card-small uk-padding-remove">
               <div class="uk-card-media-top">
-                  <img :src="product.photo" :alt="product.name">
+                  <img :src="'/'+ product.photo" :alt="product.name">
 
               </div>
               <div class="uk-card-body uk-padding-remove uk-margin-small-top">

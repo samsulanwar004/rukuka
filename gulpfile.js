@@ -10,6 +10,11 @@ elixir(function(mix) {
     mix.browserify('main.js');
 
     mix.scripts([
+        nodePath + 'jquery/dist/jquery.min.js'
+    ], 'public/js/vendor.js');
+
+    mix.scripts([
+        nodePath + 'jquery/dist/jquery.min.js',
         assetPath + 'uikit/js/uikit-core.min.js',
         assetPath + 'uikit/js/uikit-icons.min.js',
         assetPath + 'uikit/js/uikit.min.js'
@@ -20,6 +25,7 @@ elixir(function(mix) {
     ], 'public/css/app.css');
 
     mix.version([
+        'js/vendor.js',
     	'js/app.js',
     	'js/main.js',
     	'css/app.css'
