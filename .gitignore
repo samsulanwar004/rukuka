@@ -14,5 +14,6 @@ yarn-error.log
 /public/build
 /public/js
 /public/css
+/public/vendor
 
 
