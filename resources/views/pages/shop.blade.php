@@ -14,7 +14,15 @@
 </div>
 
 <div class="uk-grid-small uk-margin-top">
-@include('partials.breadcrumb')
+@if($slug == 'all')
+  @include('partials.breadcrumb', [
+      'breadcrumbs' => [$category => '/shop/'.$category.'/all', 'All' => 'categories']
+  ])
+@else
+  @include('partials.breadcrumb', [
+      'breadcrumbs' => [$category => '/shop/'.$category.'/all', 'Clothing' => false, $products->first()->category->name => 'categories']
+  ])
+@endif
 </div>
 <div class="uk-grid-small uk-margin-top uk-grid-divider uk-margin-large-bottom" uk-grid>
 <div class="uk-width-1-5@m">
