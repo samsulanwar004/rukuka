@@ -3,16 +3,24 @@
 namespace App\Repositories;
 
 use App\Product;
+use App\Repositories\CategoryRepository;
 
-class ProductRepository 
+class ProductRepository
 {
 
-	public function getProductBySlugCategory($slug)
+	public function getProductBySlugCategory($request, $slug)
 	{
-		return Product::whereHas('category', function ($query) use ($slug) {
+		$query = Product::whereHas('category', function ($query) use ($slug) {
             $query->where('slug', '=', $slug);
-        })
-        ->paginate(9);
+        });
+        
+        if ($request->has('price')) {
+        	$query->orderBy('sell_price', $request->input('price'));
+        } else {
+        	$query->orderBy('id', 'desc');
+        }
+
+        return $query->paginate(9);
 	}
 
 	public function getProductBySlug($slug)
@@ -27,12 +35,31 @@ class ProductRepository
 			->get();
 	}
 
-	public function getProductByCategory($category)
+	public function getProductByCategory($request, $category)
 	{
-		return Product::whereHas('category', function ($query) use ($category) {
-            $query->where('name', '=', $category);
-        })
-        ->paginate(9);
+		$parents = (new CategoryRepository)->getCategoryByParent($category);
+
+		$ids = [];
+		if($parents) {
+			foreach ($parents as $value) {
+				foreach ($value['child'] as $value) {
+					$ids[] = $value['id'];
+				}
+			}
+		}
+
+		$query = Product::whereHas('category', function ($query) use ($ids) {
+            $query->whereIn('id', $ids);
+        });
+
+        if ($request->has('price')) {
+        	$query->orderBy('sell_price', $request->input('price'));
+        } else {
+        	$query->orderBy('id', 'desc');
+        }
+
+        return $query->paginate(9);
+
 	}
 
 	public function getRelatedProduct($categoryId)

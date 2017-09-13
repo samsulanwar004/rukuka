@@ -21,11 +21,10 @@ class PageController extends BaseApiController
 	    	} else {
 	    		$categories = (new CategoryRepository)->getCategoryByParent($parent);
 
-                $category = [];
-                foreach ($categories as $key => $value) {
-                    $name = strtolower($value['name']);
-                    $category[$name] = $value['child'];
-                }
+                $category = collect($categories)->mapWithKeys(function ($item) {
+                    return [strtolower($item['name']) => $item['child']];
+                })->toArray();
+
 	    		return $this->success($category,200, true);
 	    	}
     	} catch (Exception $e) {

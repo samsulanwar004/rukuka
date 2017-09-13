@@ -20,7 +20,7 @@
                 <img src="images/2_2.jpg" alt="">
                 <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
                 <div class="uk-overlay uk-overlay-default uk-padding-remove uk-position-medium uk-position-bottom-left">
-                  <button class="uk-button uk-button-small uk-button-default uk-padding-small-right">SHOP NOW FOR WOMEN</button>
+                  <a href="/shop/womens/all"><button class="uk-button uk-button-small uk-button-default uk-padding-small-right">SHOP NOW FOR WOMEN</button></a>
                 </div>
             </div>
             <h3 class="uk-margin-remove">2017: Women in Style</h3>
@@ -32,7 +32,7 @@
               <img src="images/Batik_Merah.jpg" alt="">
               <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
               <div class="uk-overlay uk-overlay-default uk-padding-remove uk-position-medium uk-position-bottom-left">
-                <button class="uk-button uk-button-small uk-button-default uk-padding-small-right">SHOP NOW FOR MEN</button>
+                <a href="/shop/mens/all"><button class="uk-button uk-button-small uk-button-default uk-padding-small-right">SHOP NOW FOR MEN</button></a>
               </div>
           </div>
           <h3 class="uk-margin-remove">2017: Men Perfect Outfit</h3>
@@ -45,7 +45,7 @@
               <img src="images/06.jpg" alt="">
               <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
               <div class="uk-overlay uk-overlay-default uk-padding-remove uk-position-medium uk-position-bottom-left">
-                <button class="uk-button uk-button-small uk-button-default uk-padding-small-right">SHOP NOW FOR KIDS</button>
+                <a href="/shop/kids/all"><button class="uk-button uk-button-small uk-button-default uk-padding-small-right">SHOP NOW FOR KIDS</button></a>
               </div>
           </div>
           <h3 class="uk-margin-remove">2017: Cute and Beauty Everywhere</h3>

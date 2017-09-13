@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-<div class="uk-grid-small uk-margin-top" uk-grid>
+{{-- <div class="uk-grid-small uk-margin-top" uk-grid>
 <div class="uk-text-center">
   <div class="uk-inline-clip uk-transition-toggle uk-dark">
       <img src="/images/baner-home.png" alt="">
@@ -11,7 +11,7 @@
       </div> -->
   </div>
 </div>
-</div>
+</div> --}}
 
 <div class="uk-grid-small uk-margin-top">
 @if($slug == 'all')
@@ -27,7 +27,12 @@
 <div class="uk-grid-small uk-margin-top uk-grid-divider uk-margin-large-bottom" uk-grid>
 <div class="uk-width-1-5@m">
   <div class="uk-panel">
-    <h3 class="uk-heading-divider">Casual Shirts</h3>
+    <h3 class="uk-heading-divider">
+    @if($slug == 'all') 
+      All 
+    @else 
+      {{ $products->first()->category->name }} 
+    @endif</h3>
     <ul class="uk-nav-default uk-nav-parent-icon" uk-nav="multiple: true">
         <li class="uk-active"><a href="#">All</a></li>
         <li class="uk-parent">
@@ -58,7 +63,7 @@
   <div class="uk-panel">
     <div class="uk-grid-small uk-child-width-1-2@m uk-flex-center" uk-grid>
       <div class="uk-text-left">
-        Sort by price: <a href="#" class="uk-text-muted">high</a> | <a href="#" class="uk-text-muted">low</a>
+        Sort by price: <a href="?price=desc" class="uk-text-muted">high</a> | <a href="?price=asc" class="uk-text-muted">low</a>
         </div>
         <div class="uk-text-right">
           Page : 1 of 2  &nbsp;
@@ -95,7 +100,7 @@
       <hr>
       <div class="uk-grid-small uk-child-width-1-2@m uk-flex-center" uk-grid>
         <div class="uk-text-left">
-          Sort by price: <a href="#" class="uk-text-muted">high</a> | <a href="#" class="uk-text-muted">low</a>
+          Sort by price: <a href="?price=desc" class="uk-text-muted">high</a> | <a href="?price=asc" class="uk-text-muted">low</a>
           </div>
           <div class="uk-text-right">
             Page : 1 of 2  &nbsp;

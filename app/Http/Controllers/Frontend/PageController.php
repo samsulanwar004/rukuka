@@ -14,13 +14,19 @@ class PageController extends BaseController
     	return view('pages.index');
     }
 
-    public function shop($category, $slug)
+    public function shop(Request $request, $category, $slug)
     {
-
+        
     	if ($slug == 'all') {
-            $products = (new ProductRepository)->getProductByCategory($category);
+            $products = (new ProductRepository)->getProductByCategory($request, $category);
+            foreach ($request->all() as $key => $value) {
+                $products->appends($key, $value);
+            }
         } else {
-            $products = (new ProductRepository)->getProductBySlugCategory($slug);
+            $products = (new ProductRepository)->getProductBySlugCategory($request, $slug); 
+            foreach ($request->all() as $key => $value) {
+                $products->appends($key, $value);
+            }
         }
 
         return view('pages.shop', compact('products', 'category', 'slug'));
