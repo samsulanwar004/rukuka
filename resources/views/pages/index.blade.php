@@ -117,7 +117,7 @@
   <div class="uk-text-left">
   	<h2><span>Most Popular</span></h2>
   </div>
-  	<popular></popular>
+  	<popular api="{{ route('populer')}}"></popular>
   <hr>
   <div class="uk-text-left">
   <h2><span><b>KuKa <i>Stories</i>: The Blog</b></span></h2>

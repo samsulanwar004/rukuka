@@ -1,10 +1,12 @@
 <script>
     export default {
+        props: ['api'],
         created() {
             var self = this;
-            $.get("/api/v1/popular", function(products) {
-                if (products.status == 'Ok') {
-                  self.products = products.data;
+            var api = this.api;
+            $.get(api, function(products) {
+                if (products.data !== 'undefined') {
+                    self.products = products.data;
                 }
               });
         },

@@ -6,6 +6,11 @@ import Women from './components/Women.vue';
 import Kid from './components/Kid.vue';
 import Designer from './components/Designer.vue';
 import Popular from './components/Popular.vue';
+import Related from './components/Related.vue';
+
+Vue.config.devtools = true
+Vue.config.debug = true
+Vue.config.silent = true
 
 Vue.use(VueResource);
 
@@ -19,6 +24,7 @@ new Vue({
 });
 
 Vue.component('popular', Popular);
+Vue.component('related', Related);
 
 new Vue({
     el: '#content'

@@ -1,17 +1,19 @@
 <script>
     export default {
+        props: ['api'],
         created() {
             var self = this;
-            $.get("/api/v1/menu/kids/clothing", function(kids) {
-                if (kids.status == 'Ok') {
-                  self.kids = kids.data;
-                }
+            var api = this.api;
+            $.get(api, function(kids) {
+                if (typeof kids.data !== 'undefined') {
+                    self.clothings = kids.data.clothing;
+                } 
               });
         },
 
         data() {
             return {
-                kids: {}
+                clothings: {}
             }
         }
     }
@@ -24,8 +26,8 @@
           <div>
             <ul class="uk-nav uk-navbar-dropdown-nav">
               <li class="uk-active">Clothing</li>
-              <li class="uk-parent" v-for="kid in kids">
-                <a :href="'/shop/kids/'+ kid.slug ">{{ kid.name }}</a>
+              <li class="uk-parent" v-for="clothing in clothings">
+                <a :href="'/shop/kids/'+ clothing.slug ">{{ clothing.name }}</a>
               </li>
             </ul>
           </div>

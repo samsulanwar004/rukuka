@@ -11,7 +11,7 @@ use App\Repositories\ProductRepository;
 class PageController extends BaseApiController
 {
     
-    public function menu($parent, $child)
+    public function menu($parent)
     {
     	try {
     		if ($parent == 'designers') {
@@ -19,9 +19,14 @@ class PageController extends BaseApiController
 
 	    		return $this->success($desingers,200, true);
 	    	} else {
-	    		$categories = (new CategoryRepository)->getCategoryByParent($parent, $child);
+	    		$categories = (new CategoryRepository)->getCategoryByParent($parent);
 
-	    		return $this->success($categories,200, true);
+                $category = [];
+                foreach ($categories as $key => $value) {
+                    $name = strtolower($value['name']);
+                    $category[$name] = $value['child'];
+                }
+	    		return $this->success($category,200, true);
 	    	}
     	} catch (Exception $e) {
     		return $this->error($e, 400, true);
@@ -44,6 +49,27 @@ class PageController extends BaseApiController
             })->toArray();
 
             return $this->success($popular, 200, true);
+        } catch (Exception $e) {
+            return $this->error($e, 400, true);
+        }
+    }
+
+    public function related($categoryId)
+    {
+        try {
+            $related = (new ProductRepository)->getRelatedProduct($categoryId);
+
+            $related = $related->map(function ($entry) {
+                return [
+                    'name' => $entry->name,
+                    'slug' => $entry->slug,
+                    'price' => $entry->sell_price,
+                    'currency' => $entry->currency,
+                    'photo' => $entry->images->first()->photo,
+                ];
+            })->toArray();
+
+            return $this->success($related, 200, true);
         } catch (Exception $e) {
             return $this->error($e, 400, true);
         }

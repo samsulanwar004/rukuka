@@ -12,7 +12,7 @@ class CategoryRepository
 	    	->first();
 	}
 
-	public function getCategoryByParent($parent, $child)
+	public function getCategoryByParent($parent)
 	{
 		$categories = Category::nested()->get();
 		$categories = collect($categories);
@@ -20,12 +20,6 @@ class CategoryRepository
 			return strtolower($entry['name']) == strtolower($parent);
 		})->first();
 
-		$childs = collect($parent['child']);
-
-		$child = $childs->filter(function ($entry) use ($child) {
-			return strtolower($entry['name']) == strtolower($child);
-		})->first();
-
-		return $child['child'];
+		return $parent['child'];
 	}
 }

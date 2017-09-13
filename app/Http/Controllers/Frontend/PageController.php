@@ -23,7 +23,7 @@ class PageController extends BaseController
             $products = (new ProductRepository)->getProductBySlugCategory($slug);
         }
 
-        return view('pages.shop', compact('products', 'category'));
+        return view('pages.shop', compact('products', 'category', 'slug'));
 
     }
 

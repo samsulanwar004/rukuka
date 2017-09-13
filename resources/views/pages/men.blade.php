@@ -89,5 +89,5 @@
       </div>
   </div>
   <h3 class="uk-text-center uk-heading-divider">TRENDING NOW</h3>
-    <popular></popular>
+    <popular api="{{ route('populer')}}"></popular>
 @endsection

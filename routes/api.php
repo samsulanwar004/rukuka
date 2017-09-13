@@ -17,5 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('v1/menu/{parent}/{child}', 'Api\PageController@menu');
-Route::get('v1/popular', 'Api\PageController@popular');
+Route::get('v1/menu/{parent}', 'Api\PageController@menu')->name('menu');
+
+Route::get('v1/popular', 'Api\PageController@popular')->name('populer');
+
+Route::get('v1/related/{categoryId}', 'Api\PageController@related')->name('related');

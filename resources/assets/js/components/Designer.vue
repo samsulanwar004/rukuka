@@ -1,12 +1,14 @@
 <script>
     export default {
+        props: ['api'],
         created() {
             var self = this;
-            $.get("/api/v1/menu/designers/all", function(designers) {
-                if (designers.status == 'Ok') {
+            var api = this.api;
+            $.get(api, function(designers) {
+              if (typeof designers.data !== 'undefined') {
                   self.designers = designers.data;
-                }
-              });
+              }
+            });
         },
 
         data() {

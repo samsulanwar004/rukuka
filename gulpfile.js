@@ -14,7 +14,6 @@ elixir(function(mix) {
     ], 'public/js/vendor.js');
 
     mix.scripts([
-        nodePath + 'jquery/dist/jquery.min.js',
         assetPath + 'uikit/js/uikit-core.min.js',
         assetPath + 'uikit/js/uikit-icons.min.js',
         assetPath + 'uikit/js/uikit.min.js'

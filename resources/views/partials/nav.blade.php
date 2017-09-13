@@ -37,16 +37,18 @@
                     <ul class="uk-navbar-nav">
                         <li>
                             <a href="/landing/women"><h5 class="uk-margin-remove">WOMEN</h5></a>
-                            <women></women>
+                            <women api="{{ route('menu', ['parent' => 'womens']) }}"></women>
                         </li>
                         <li><a href="/landing/men"><h5 class="uk-margin-remove">MEN</h5></a>
-                            <men></men>
+                            <men api="{{ route('menu', ['parent' => 'mens']) }}"></men>
                         </li>
                         <li><a href="/landing/kids"><h5 class="uk-margin-remove">KIDS</h5></a>
-                            <kid></kid>
+                            <kid api="{{ route('menu', ['parent' => 'kids']) }}"></kid>
                         </li>
                         <li><a href="#"><h5 class="uk-margin-remove">DESIGNERS</h5></a>
-                            <designer></designer>
+                            <designer api="{{ route('menu', ['parent' => 'designers']) }}">
+                              
+                            </designer>
                         </li>
                         <li><a href="#"><h5 class="uk-margin-remove">HOME</h5></a>
                           <div class="uk-navbar-dropdown uk-navbar-dropdown-width-3">
