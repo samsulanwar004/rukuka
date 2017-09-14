@@ -66,12 +66,8 @@
         Sort by price: <a href="?price=desc" class="uk-text-muted">high</a> | <a href="?price=asc" class="uk-text-muted">low</a>
         </div>
         <div class="uk-text-right">
-          Page : 1 of 2  &nbsp;
-
-              <a class="uk-icon-link" uk-icon="icon: chevron-left"></a>
-              <a class="uk-icon-link" uk-icon="icon: chevron-right"></a>
-
-          </div>
+          @include('pagination.default', ['paginator' => $products])
+        </div>
       </div>
       <div class="uk-grid-small uk-child-width-1-3@m uk-flex-center" uk-grid>
       @foreach($products as $product)
@@ -102,14 +98,11 @@
         <div class="uk-text-left">
           Sort by price: <a href="?price=desc" class="uk-text-muted">high</a> | <a href="?price=asc" class="uk-text-muted">low</a>
           </div>
-          <div class="uk-text-right">
-            Page : 1 of 2  &nbsp;
-
-                <a class="uk-icon-link" uk-icon="icon: chevron-left"></a>
-                <a class="uk-icon-link" uk-icon="icon: chevron-right"></a>
-
+            <div class="uk-text-right">
+              @include('pagination.default', ['paginator' => $products])
             </div>
         </div>
+
   </div>
 </div>
 

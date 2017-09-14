@@ -20,7 +20,7 @@ class ProductRepository
         	$query->orderBy('id', 'desc');
         }
 
-        return $query->paginate(9);
+        return $query->paginate(30);
 	}
 
 	public function getProductBySlug($slug)
@@ -58,7 +58,7 @@ class ProductRepository
         	$query->orderBy('id', 'desc');
         }
 
-        return $query->paginate(9);
+        return $query->paginate(30);
 
 	}
 
