@@ -16,17 +16,23 @@ class PageController extends BaseController
 
     public function shop(Request $request, $category, $slug)
     {
-        
     	if ($slug == 'all') {
-            $products = (new ProductRepository)->getProductByCategory($request, $category);
-            foreach ($request->all() as $key => $value) {
-                $products->appends($key, $value);
+            if ($category == 'designers') {
+                $products = (new ProductRepository)->getProductByDesigner($request, $slug);
+            } else {
+                $products = (new ProductRepository)->getProductByCategory($request, $category);
             }
         } else {
-            $products = (new ProductRepository)->getProductBySlugCategory($request, $slug); 
-            foreach ($request->all() as $key => $value) {
-                $products->appends($key, $value);
+            if ($category == 'designers') {
+                $products = (new ProductRepository)->getProductByDesigner($request, $slug);
+            } else {
+                $products = (new ProductRepository)->getProductBySlugCategory($request, $slug); 
             }
+            
+        }
+
+        foreach ($request->all() as $key => $value) {
+            $products->appends($key, $value);
         }
 
         return view('pages.shop', compact('products', 'category', 'slug'));

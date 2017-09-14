@@ -71,4 +71,22 @@ class ProductRepository
         ->take(4)
         ->get();
 	}
+
+	public function getProductByDesigner($request, $slug)
+	{
+
+		$query = Product::whereHas('designer', function ($query) use ($slug) {
+            if ($slug != 'all') {
+            	$query->where('slug', $slug);
+            }
+        });
+
+        if ($request->has('price')) {
+        	$query->orderBy('sell_price', $request->input('price'));
+        } else {
+        	$query->orderBy('id', 'desc');
+        }
+
+        return $query->paginate(30);
+	}
 }

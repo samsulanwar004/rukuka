@@ -8,9 +8,16 @@
       'breadcrumbs' => [$category => '/shop/'.$category.'/all', 'All' => 'categories']
   ])
 @else
-  @include('partials.breadcrumb', [
-      'breadcrumbs' => [$category => '/shop/'.$category.'/all', 'Clothing' => false, $products->first()->category->name => 'categories']
-  ])
+  @if($category == 'designers')
+    @include('partials.breadcrumb', [
+        'breadcrumbs' => [$category => '/shop/'.$category.'/all']
+    ])
+  @else
+    @include('partials.breadcrumb', [
+        'breadcrumbs' => [$category => '/shop/'.$category.'/all', 'Clothing' => false, $products->first()->category->name => 'categories']
+    ])
+  @endif
+  
 @endif
 </div>
 <div class="uk-grid-small uk-margin-top uk-grid-divider uk-margin-large-bottom" uk-grid>
@@ -20,7 +27,11 @@
     @if($slug == 'all') 
       All 
     @else 
-      {{ $products->first()->category->name }} 
+      @if($category == 'designers')
+        {{ ucfirst($category) }}
+      @else
+        {{ $products->first()->category->name }} 
+      @endif
     @endif</h3>
     <categories api="{{ route('menu', ['parent' => $category]) }}" parent="{{ $category }}">
       
