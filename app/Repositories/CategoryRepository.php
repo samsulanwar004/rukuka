@@ -15,8 +15,7 @@ class CategoryRepository
 	public function getCategoryByParent($parent)
 	{
 		$categories = Category::nested()->get();
-		$categories = collect($categories);
-		$parent = $categories->filter(function ($entry) use ($parent) {
+		$parent = collect($categories)->filter(function ($entry) use ($parent) {
 			return strtolower($entry['name']) == strtolower($parent);
 		})->first();
 

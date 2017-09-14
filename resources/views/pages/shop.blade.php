@@ -1,17 +1,6 @@
 @extends('app')
 
 @section('content')
-{{-- <div class="uk-grid-small uk-margin-top" uk-grid>
-<div class="uk-text-center">
-  <div class="uk-inline-clip uk-transition-toggle uk-dark">
-      <img src="/images/baner-home.png" alt="">
-      <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
-      <!-- <div class="uk-overlay uk-overlay-default uk-padding-small uk-position-medium uk-position-bottom-right">HOT DEALS THIS WEEKEND, WITH 50% DISCOUNT, <br>
-        SIGN UP NOW, ON KUKAINDONESIA.COM
-      </div> -->
-  </div>
-</div>
-</div> --}}
 
 <div class="uk-grid-small uk-margin-top">
 @if($slug == 'all')
@@ -33,30 +22,9 @@
     @else 
       {{ $products->first()->category->name }} 
     @endif</h3>
-    <ul class="uk-nav-default uk-nav-parent-icon" uk-nav="multiple: true">
-        <li class="uk-active"><a href="#">All</a></li>
-        <li class="uk-parent">
-            <a href="#">ACCESSORIES</a>
-            <ul class="uk-nav-sub">
-                <li><a href="#">Sub item</a></li>
-                <li><a href="#">Sub item</a></li>
-            </ul>
-        </li>
-        <li class="uk-parent">
-            <a href="#">CLOTHING</a>
-            <ul class="uk-nav-sub">
-                <li><a href="#">Sub item</a></li>
-                <li><a href="#">Sub item</a></li>
-            </ul>
-        </li>
-        <li class="uk-parent">
-            <a href="#">SHOES</a>
-            <ul class="uk-nav-sub">
-                <li><a href="#">Sub item</a></li>
-                <li><a href="#">Sub item</a></li>
-            </ul>
-        </li>
-    </ul>
+    <categories api="{{ route('menu', ['parent' => $category]) }}" parent="{{ $category }}">
+      
+    </categories>
   </div>
 </div>
 <div class="uk-width-expand@m">

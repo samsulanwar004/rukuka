@@ -7,6 +7,7 @@ import Kid from './components/Kid.vue';
 import Designer from './components/Designer.vue';
 import Popular from './components/Popular.vue';
 import Related from './components/Related.vue';
+import Categories from './components/Categories.vue';
 
 Vue.config.devtools = true
 Vue.config.debug = true
@@ -25,6 +26,7 @@ new Vue({
 
 Vue.component('popular', Popular);
 Vue.component('related', Related);
+Vue.component('categories', Categories);
 
 new Vue({
     el: '#content'
