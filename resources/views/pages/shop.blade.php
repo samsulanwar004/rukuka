@@ -3,37 +3,36 @@
 @section('content')
 
 <div class="uk-grid-small uk-margin-top">
-@if($slug == 'all')
+@if($categories == 'designers')
   @include('partials.breadcrumb', [
-      'breadcrumbs' => [$category => '/shop/'.$category.'/all', 'All' => 'categories']
+      'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => 'categories']
   ])
 @else
-  @if($category == 'designers')
+  @if($category == 'all')
     @include('partials.breadcrumb', [
-        'breadcrumbs' => [$category => '/shop/'.$category.'/all']
+      'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => 'categories']
     ])
   @else
     @include('partials.breadcrumb', [
-        'breadcrumbs' => [$category => '/shop/'.$category.'/all', 'Clothing' => false, $products->first()->category->name => 'categories']
+        'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false, $products->first()->category->name => 'categories']
     ])
   @endif
-  
 @endif
 </div>
 <div class="uk-grid-small uk-margin-top uk-grid-divider uk-margin-large-bottom" uk-grid>
 <div class="uk-width-1-5@m">
   <div class="uk-panel">
     <h3 class="uk-heading-divider">
-    @if($slug == 'all') 
-      All 
-    @else 
-      @if($category == 'designers')
+      @if($categories == 'designers')
         {{ ucfirst($category) }}
       @else
-        {{ $products->first()->category->name }} 
-      @endif
-    @endif</h3>
-    <categories api="{{ route('menu', ['parent' => $category]) }}" parent="{{ $category }}">
+        @if($category == 'all')
+          All
+        @else
+          {{ $products->first()->category->name }} 
+        @endif
+      @endif</h3>
+    <categories api="{{ route('menu', ['parent' => $categories]) }}" parent="{{ $categories }}">
       
     </categories>
   </div>

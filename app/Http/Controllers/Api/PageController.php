@@ -11,7 +11,7 @@ use App\Repositories\ProductRepository;
 class PageController extends BaseApiController
 {
     
-    public function menu($parent)
+    public function menu($parent = null)
     {
     	try {
     		if ($parent == 'designers') {
@@ -19,13 +19,25 @@ class PageController extends BaseApiController
 
 	    		return $this->success($desingers,200, true);
 	    	} else {
-	    		$categories = (new CategoryRepository)->getCategoryByParent($parent);
+	    		if ($parent == null) {
+                    $categories = (new CategoryRepository)->getCategories();
 
-                $category = collect($categories)->mapWithKeys(function ($item) {
-                    return [strtolower($item['name']) => $item['child']];
-                })->toArray();
+                    $categories = collect($categories)->mapWithKeys(function ($item) {
+                        return [strtolower($item['name']) => $item['child']];
+                    })->toArray();
 
-	    		return $this->success($category,200, true);
+                    $categories['designers'] = (new DesignerRepository)->getDesigners();
+
+                    return $this->success($categories, 200, true);
+                } else {
+                    $categories = (new CategoryRepository)->getCategoryByParent($parent);
+
+                    $category = collect($categories)->mapWithKeys(function ($item) {
+                        return [strtolower($item['name']) => $item['child']];
+                    })->toArray();
+
+                    return $this->success($category,200, true);
+                }
 	    	}
     	} catch (Exception $e) {
     		return $this->error($e, 400, true);

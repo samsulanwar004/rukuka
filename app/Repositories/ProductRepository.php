@@ -72,12 +72,12 @@ class ProductRepository
         ->get();
 	}
 
-	public function getProductByDesigner($request, $slug)
+	public function getProductByDesigner($request, $category)
 	{
 
-		$query = Product::whereHas('designer', function ($query) use ($slug) {
-            if ($slug != 'all') {
-            	$query->where('slug', $slug);
+		$query = Product::whereHas('designer', function ($query) use ($category) {
+            if ($category != 'all') {
+            	$query->where('slug', $category);
             }
         });
 

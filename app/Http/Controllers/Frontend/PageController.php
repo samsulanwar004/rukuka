@@ -11,31 +11,33 @@ class PageController extends BaseController
 
     public function index()
     {
-    	return view('pages.index');
+        $settings = (new SettingRepository)->getSettingByGroup('Home Page');
+
+        $home = collect($settings)->mapWithKeys(function ($item) {
+            return [$item['name'] => $item['content']];
+        })->toArray();
+
+    	return view('pages.index', compact('home'));
     }
 
-    public function shop(Request $request, $category, $slug)
+    public function shop(Request $request, $categories, $category, $slug = null)
     {
-    	if ($slug == 'all') {
-            if ($category == 'designers') {
-                $products = (new ProductRepository)->getProductByDesigner($request, $slug);
-            } else {
-                $products = (new ProductRepository)->getProductByCategory($request, $category);
-            }
+
+        if ($categories == 'designers') {
+            $products = (new ProductRepository)->getProductByDesigner($request, $category);
         } else {
-            if ($category == 'designers') {
-                $products = (new ProductRepository)->getProductByDesigner($request, $slug);
+            if ($category == 'all') {
+                $products = (new ProductRepository)->getProductByCategory($request, $categories);
             } else {
-                $products = (new ProductRepository)->getProductBySlugCategory($request, $slug); 
-            }
-            
+                $products = (new ProductRepository)->getProductBySlugCategory($request, $slug);      
+            }  
         }
 
         foreach ($request->all() as $key => $value) {
             $products->appends($key, $value);
         }
 
-        return view('pages.shop', compact('products', 'category', 'slug'));
+        return view('pages.shop', compact('products', 'categories', 'category', 'slug'));
 
     }
 
@@ -50,10 +52,9 @@ class PageController extends BaseController
     {
         $settings = (new SettingRepository)->getSettingByGroup('Women Landing Page');
 
-        $women = [];
-        foreach ($settings as $key => $value) {
-            $women[$value->name] = $value->content;
-        }
+        $women = collect($settings)->mapWithKeys(function ($item) {
+            return [$item['name'] => $item['content']];
+        })->toArray();
 
         return view('pages.women', compact('women'));
     }
@@ -62,10 +63,9 @@ class PageController extends BaseController
     {
         $settings = (new SettingRepository)->getSettingByGroup('Men Landing Page');
 
-        $men = [];
-        foreach ($settings as $key => $value) {
-            $men[$value->name] = $value->content;
-        }
+        $men = collect($settings)->mapWithKeys(function ($item) {
+            return [$item['name'] => $item['content']];
+        })->toArray();
 
         return view('pages.men', compact('men'));
     }
@@ -74,10 +74,9 @@ class PageController extends BaseController
     {
         $settings = (new SettingRepository)->getSettingByGroup('Kids Landing Page');
 
-        $kids = [];
-        foreach ($settings as $key => $value) {
-            $kids[$value->name] = $value->content;
-        }
+        $kids = collect($settings)->mapWithKeys(function ($item) {
+            return [$item['name'] => $item['content']];
+        })->toArray();
 
         return view('pages.kids', compact('kids'));
     }
