@@ -16,7 +16,7 @@ Route::get('/', [
     'uses' => 'Frontend\PageController@index',
 ]);
 
-Route::get('/shop/{category}/{slug}', [
+Route::get('/shop/{categories}/{category}/{slug?}', [
     'as'   => 'shop',
     'uses' => 'Frontend\PageController@shop',
 ]);

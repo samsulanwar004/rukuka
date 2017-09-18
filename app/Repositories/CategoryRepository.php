@@ -14,11 +14,17 @@ class CategoryRepository
 
 	public function getCategoryByParent($parent)
 	{
-		$categories = Category::nested()->get();
+		$categories = $this->getCategories();
+
 		$parent = collect($categories)->filter(function ($entry) use ($parent) {
 			return strtolower($entry['name']) == strtolower($parent);
 		})->first();
 
 		return $parent['child'];
+	}
+
+	public function getCategories()
+	{
+		return Category::nested()->get();;
 	}
 }

@@ -7,60 +7,45 @@
             self.parent = this.parent;
             $.get(api, function(categories) {
               if (typeof categories.data !== 'undefined') {
-                if (typeof categories.data.accessories !== 'undefined') {
-                  self.accessories = categories.data.accessories;
-                }
-
-                if (typeof categories.data.clothing !== 'undefined') {
-                  self.clothings = categories.data.clothing;
-                }
-
-                if (typeof categories.data.shoes !== 'undefined') {
-                  self.shoes = categories.data.shoes;
-                }
+                self.categories = categories.data;
               } 
             });
         },
 
         data() {
             return {
-                accessories: {},
-                clothings: {},
-                shoes: {},
-                parent: {}
+                categories: {}
             }
         }
     }
 </script>
 
-<template>   
-<ul class="uk-nav-default uk-nav-parent-icon" uk-nav="multiple: true">
+<template>  
+<ul class="uk-nav-default uk-nav-parent-icon" uk-nav="multiple: true" v-if="parent == 'designers'">
     <li class="uk-active">
       <a :href="'/shop/'+parent+'/all'">All</a>
     </li>
     <li class="uk-parent">
-        <a href="#">ACCESSORIES</a>
+        <a href="#">{{ parent.toUpperCase() }}</a>
         <ul class="uk-nav-sub">
-            <li v-for="accessoris in accessories">
-              <a :href="'/shop/'+parent+'/'+ accessoris.slug ">{{ accessoris.name }}</a>
+            <li v-for="category in categories">
+              <a :href="'/shop/'+parent+'/'+ category.slug ">{{ category.name }}</a>
             </li>
         </ul>
     </li>
-    <li class="uk-parent">
-        <a href="#">CLOTHING</a>
-        <ul class="uk-nav-sub">
-            <li v-for="clothing in clothings">
-              <a :href="'/shop/'+parent+'/'+ clothing.slug ">{{ clothing.name }}</a>
-            </li>
-        </ul>
+</ul>
+<ul class="uk-nav-default uk-nav-parent-icon" uk-nav="multiple: true" v-else>
+    <li class="uk-active">
+      <a :href="'/shop/'+parent+'/all'">All</a>
     </li>
-    <li class="uk-parent">
-        <a href="#">SHOES</a>
+    <li class="uk-parent" v-for="(category, key) in categories">
+        <a href="#">{{ key.toUpperCase() }}</a>
         <ul class="uk-nav-sub">
-            <li v-for="shoe in shoes">
-              <a :href="'/shop/'+parent+'/'+ shoe.slug ">{{ shoe.name }}</a>
+            <li v-for="cat in category">
+              <a :href="'/shop/'+parent+'/'+ key +'/'+ cat.slug ">{{ cat.name }}</a>
             </li>
         </ul>
     </li>
 </ul>
 </template>
+
