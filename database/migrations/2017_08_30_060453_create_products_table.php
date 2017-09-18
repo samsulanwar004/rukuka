@@ -28,7 +28,7 @@ class CreateProductsTable extends Migration
             $t->increments('id');
             $t->unsignedInteger('parent_product_categories_id')->default(0);
             $t->string('name', 50);
-            $t->string('slug', 80)->unique();
+            $t->string('slug', 80)->unique()->nullable();
             $t->timestamps();
         });
 

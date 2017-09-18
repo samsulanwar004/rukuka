@@ -1,64 +1,51 @@
 @extends('app')
 
 @section('content')
-<div class="uk-grid-small uk-margin-top" uk-grid>
-<div class="uk-text-center">
-  <div class="uk-inline-clip uk-transition-toggle uk-dark">
-      <img src="/images/baner-home.png" alt="">
-      <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
-      <!-- <div class="uk-overlay uk-overlay-default uk-padding-small uk-position-medium uk-position-bottom-right">HOT DEALS THIS WEEKEND, WITH 50% DISCOUNT, <br>
-        SIGN UP NOW, ON KUKAINDONESIA.COM
-      </div> -->
-  </div>
-</div>
-</div>
 
 <div class="uk-grid-small uk-margin-top">
-@include('partials.breadcrumb')
+@if($categories == 'designers')
+  @include('partials.breadcrumb', [
+      'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => 'categories']
+  ])
+@else
+  @if($category == 'all')
+    @include('partials.breadcrumb', [
+      'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => 'categories']
+    ])
+  @else
+    @include('partials.breadcrumb', [
+        'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false, $products->first()->category->name => 'categories']
+    ])
+  @endif
+@endif
 </div>
 <div class="uk-grid-small uk-margin-top uk-grid-divider uk-margin-large-bottom" uk-grid>
 <div class="uk-width-1-5@m">
   <div class="uk-panel">
-    <h3 class="uk-heading-divider">Casual Shirts</h3>
-    <ul class="uk-nav-default uk-nav-parent-icon" uk-nav="multiple: true">
-        <li class="uk-active"><a href="#">All</a></li>
-        <li class="uk-parent">
-            <a href="#">ACCESSORIES</a>
-            <ul class="uk-nav-sub">
-                <li><a href="#">Sub item</a></li>
-                <li><a href="#">Sub item</a></li>
-            </ul>
-        </li>
-        <li class="uk-parent">
-            <a href="#">CLOTHING</a>
-            <ul class="uk-nav-sub">
-                <li><a href="#">Sub item</a></li>
-                <li><a href="#">Sub item</a></li>
-            </ul>
-        </li>
-        <li class="uk-parent">
-            <a href="#">SHOES</a>
-            <ul class="uk-nav-sub">
-                <li><a href="#">Sub item</a></li>
-                <li><a href="#">Sub item</a></li>
-            </ul>
-        </li>
-    </ul>
+    <h3 class="uk-heading-divider">
+      @if($categories == 'designers')
+        {{ ucfirst($category) }}
+      @else
+        @if($category == 'all')
+          All
+        @else
+          {{ $products->first()->category->name }} 
+        @endif
+      @endif</h3>
+    <categories api="{{ route('menu', ['parent' => $categories]) }}" parent="{{ $categories }}">
+      
+    </categories>
   </div>
 </div>
 <div class="uk-width-expand@m">
   <div class="uk-panel">
     <div class="uk-grid-small uk-child-width-1-2@m uk-flex-center" uk-grid>
       <div class="uk-text-left">
-        Sort by price: <a href="#" class="uk-text-muted">high</a> | <a href="#" class="uk-text-muted">low</a>
+        Sort by price: <a href="?price=desc" class="uk-text-muted">high</a> | <a href="?price=asc" class="uk-text-muted">low</a>
         </div>
         <div class="uk-text-right">
-          Page : 1 of 2  &nbsp;
-
-              <a class="uk-icon-link" uk-icon="icon: chevron-left"></a>
-              <a class="uk-icon-link" uk-icon="icon: chevron-right"></a>
-
-          </div>
+          @include('pagination.default', ['paginator' => $products])
+        </div>
       </div>
       <div class="uk-grid-small uk-child-width-1-3@m uk-flex-center" uk-grid>
       @foreach($products as $product)
@@ -87,16 +74,13 @@
       <hr>
       <div class="uk-grid-small uk-child-width-1-2@m uk-flex-center" uk-grid>
         <div class="uk-text-left">
-          Sort by price: <a href="#" class="uk-text-muted">high</a> | <a href="#" class="uk-text-muted">low</a>
+          Sort by price: <a href="?price=desc" class="uk-text-muted">high</a> | <a href="?price=asc" class="uk-text-muted">low</a>
           </div>
-          <div class="uk-text-right">
-            Page : 1 of 2  &nbsp;
-
-                <a class="uk-icon-link" uk-icon="icon: chevron-left"></a>
-                <a class="uk-icon-link" uk-icon="icon: chevron-right"></a>
-
+            <div class="uk-text-right">
+              @include('pagination.default', ['paginator' => $products])
             </div>
         </div>
+
   </div>
 </div>
 

@@ -3,9 +3,17 @@
 @section('content')
 	
 <div class="uk-grid-small uk-margin-top" uk-grid>
+
+    @php
+      $leftTitle = explode('|', $home['left_title']);
+      $rightTitle = explode('|', $home['right_title']);
+      $womenTitle = explode('|', $home['women_title']);
+      $menTitle = explode('|', $home['men_title']);
+      $kidTitle = explode('|', $home['kid_title']);
+    @endphp
     <div class="uk-text-center">
       <div class="uk-inline-clip uk-transition-toggle uk-dark">
-          <img src="images/baner-home.png" alt="">
+          <img src="/{{ $home['main_banner'] }}" alt="">
           <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
           <!-- <div class="uk-overlay uk-overlay-default uk-padding-small uk-position-medium uk-position-bottom-right">HOT DEALS THIS WEEKEND, WITH 50% DISCOUNT, <br>
             SIGN UP NOW, ON KUKAINDONESIA.COM
@@ -17,39 +25,39 @@
       <div class="uk-width-1-3@m">
 
             <div class="uk-inline-clip uk-transition-toggle uk-dark">
-                <img src="images/2_2.jpg" alt="">
+                <img src="/{{ $home['women_banner'] }}" alt="">
                 <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
                 <div class="uk-overlay uk-overlay-default uk-padding-remove uk-position-medium uk-position-bottom-left">
-                  <button class="uk-button uk-button-small uk-button-default uk-padding-small-right">SHOP NOW FOR WOMEN</button>
+                  <a href="/shop/womens/all"><button class="uk-button uk-button-small uk-button-default uk-padding-small-right">SHOP NOW FOR WOMEN</button></a>
                 </div>
             </div>
-            <h3 class="uk-margin-remove">2017: Women in Style</h3>
-            <a href="#" class="uk-text-muted">Shop all this amazing outfit now<span uk-icon="icon: triangle-right"></span></a>
+            <h3 class="uk-margin-remove">{{ $womenTitle[0] }}</h3>
+            <a href="/{{ $home['women_link'] }}" class="uk-text-muted">{{ $womenTitle[1] }}<span uk-icon="icon: triangle-right"></span></a>
       </div>
       <div class="uk-width-1-3@m uk-inline">
 
           <div class="uk-inline-clip uk-transition-toggle uk-dark">
-              <img src="images/Batik_Merah.jpg" alt="">
+              <img src="/{{ $home['men_banner'] }}" alt="">
               <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
               <div class="uk-overlay uk-overlay-default uk-padding-remove uk-position-medium uk-position-bottom-left">
-                <button class="uk-button uk-button-small uk-button-default uk-padding-small-right">SHOP NOW FOR MEN</button>
+                <a href="/shop/mens/all"><button class="uk-button uk-button-small uk-button-default uk-padding-small-right">SHOP NOW FOR MEN</button></a>
               </div>
           </div>
-          <h3 class="uk-margin-remove">2017: Men Perfect Outfit</h3>
-          <a href="#" class="uk-text-muted">Shop all this amazing outfit now<span uk-icon="icon: triangle-right"></span></a>
+          <h3 class="uk-margin-remove">{{ $menTitle[0] }}</h3>
+          <a href="/{{ $home['men_link'] }}" class="uk-text-muted">{{ $menTitle[1] }}<span uk-icon="icon: triangle-right"></span></a>
 
       </div>
       <div class="uk-width-1-3@m uk-inline">
 
           <div class="uk-inline-clip uk-transition-toggle uk-dark">
-              <img src="images/06.jpg" alt="">
+              <img src="/{{ $home['kid_banner'] }}" alt="">
               <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
               <div class="uk-overlay uk-overlay-default uk-padding-remove uk-position-medium uk-position-bottom-left">
-                <button class="uk-button uk-button-small uk-button-default uk-padding-small-right">SHOP NOW FOR KIDS</button>
+                <a href="/shop/kids/all"><button class="uk-button uk-button-small uk-button-default uk-padding-small-right">SHOP NOW FOR KIDS</button></a>
               </div>
           </div>
-          <h3 class="uk-margin-remove">2017: Cute and Beauty Everywhere</h3>
-          <a href="#" class="uk-text-muted">Shop all this amazing outfit now<span uk-icon="icon: triangle-right"></span></a>
+          <h3 class="uk-margin-remove">{{ $kidTitle[0] }}</h3>
+          <a href="/{{ $home['kid_link'] }}" class="uk-text-muted">{{ $kidTitle[1] }}<span uk-icon="icon: triangle-right"></span></a>
 
       </div>
   </div>
@@ -92,103 +100,32 @@
       <div class="uk-panel">
 
             <div class="uk-inline-clip uk-transition-toggle uk-dark">
-                <img src="images/coll-women.jpg" alt="">
+                <img src="/{{ $home['left_banner'] }}" alt="">
                 <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
                 <div class="uk-overlay uk-overlay-default uk-padding-small uk-position-medium uk-position-bottom-left"><b>FOR WOMEN</b> <br>Our Clothes, Your Style
                 </div>
 
             </div>
-            <h3 class="uk-margin-remove">Classic with a twist: colorful espadrilles</h3>
-            <a href="#" class="uk-text-muted">Shop them now<span uk-icon="icon: triangle-right"></span></a>
+            <h3 class="uk-margin-remove">{{ $leftTitle[0] }}</h3>
+            <a href="/{{ $home['left_link'] }}" class="uk-text-muted">{{ $leftTitle[1] }}<span uk-icon="icon: triangle-right"></span></a>
       </div>
       <div class="uk-panel">
 
           <div class="uk-inline-clip uk-transition-toggle uk-dark">
-              <img src="images/coll-men.jpg" alt="">
+              <img src="/{{ $home['right_banner'] }}" alt="">
               <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
               <div class="uk-overlay uk-overlay-default uk-padding-small uk-position-medium uk-position-bottom-right"><b>FOR MEN</b> <br>Our broken-in tees
               </div>
           </div>
-          <h3 class="uk-margin-remove">What to wear when you’re sweating on purpose</h3>
-          <a href="#" class="uk-text-muted">New Balance® X J.Crew<span uk-icon="icon: triangle-right"></span></a>
+          <h3 class="uk-margin-remove">{{ $rightTitle[0] }}</h3>
+          <a href="/{{ $home['right_link'] }}" class="uk-text-muted">{{ $rightTitle[1] }}<span uk-icon="icon: triangle-right"></span></a>
       </div>
   </div>
   <hr>
   <div class="uk-text-left">
-  <h2><span>Most Popular</span></h2>
+  	<h2><span>Most Popular</span></h2>
   </div>
-  <div class="uk-grid-small uk-child-width-1-4@m uk-margin-large-bottom" uk-grid>
-    <!-- start product -->
-    <div class="uk-panel uk-text-left">
-      <div class="uk-card uk-card-small uk-padding-remove">
-          <div class="uk-card-media-top">
-              <img src="images/2_2.jpg" alt="">
-
-          </div>
-          <div class="uk-card-body uk-padding-remove uk-margin-small-top">
-            <a href="#" class="uk-text-muted">Slim-Fit Stretch-Cotton Twill Bermuda</a>
-            <br>
-            <span class="uk-text-bold">$333</span>
-          </div>
-          <!-- <div class="uk-card-footer">
-            <span class="uk-text-meta">Shirt<h4 class="uk-card-price">$400</h4></span>
-          </div> -->
-      </div>
-    </div>
-    <!-- end product single -->
-    <!-- start product -->
-    <div class="uk-panel uk-text-left">
-      <div class="uk-card uk-card-small uk-padding-remove">
-          <div class="uk-card-media-top">
-              <img src="images/6_2.jpg" alt="">
-          </div>
-          <div class="uk-card-body uk-padding-remove uk-margin-small-top">
-            <a href="#" class="uk-text-muted">Slim-Fit Stretch-Cotton Twill Bermuda</a>
-            <br>
-            <span class="uk-text-bold">$333</span>
-          </div>
-          <!-- <div class="uk-card-footer">
-            <span class="uk-text-meta">Shirt<h4 class="uk-card-price">$400</h4></span>
-          </div> -->
-      </div>
-    </div>
-    <!-- end product single -->
-    <!-- start product -->
-    <div class="uk-panel uk-text-left">
-      <div class="uk-card uk-card-small uk-padding-remove">
-          <div class="uk-card-media-top">
-              <img src="images/10_1.jpg" alt="">
-          </div>
-          <div class="uk-card-body uk-padding-remove uk-margin-small-top">
-            <a href="#" class="uk-text-muted">Slim-Fit Stretch-Cotton Twill Bermuda</a>
-            <br>
-            <span class="uk-text-bold">$333</span>
-          </div>
-          <!-- <div class="uk-card-footer">
-            <span class="uk-text-meta">Shirt<h4 class="uk-card-price">$400</h4></span>
-          </div> -->
-      </div>
-    </div>
-    <!-- end product single -->
-    <!-- start product -->
-    <div class="uk-panel uk-text-left">
-      <div class="uk-card uk-card-small uk-padding-remove">
-          <div class="uk-card-media-top">
-              <img src="images/2_2.jpg" alt="">
-          </div>
-          <div class="uk-card-body uk-padding-remove uk-margin-small-top">
-              <a href="#" class="uk-text-muted">Slim-Fit Stretch-Cotton Twill Bermuda</a>
-              <br>
-              <span class="uk-text-bold">$333</span>
-          </div>
-          <!-- <div class="uk-card-footer">
-            <span class="uk-text-meta">Shirt<h4 class="uk-card-price">$400</h4></span>
-          </div> -->
-      </div>
-    </div>
-    <!-- end product single -->
-
-  </div>
+  	<popular api="{{ route('populer')}}"></popular>
   <hr>
   <div class="uk-text-left">
   <h2><span><b>KuKa <i>Stories</i>: The Blog</b></span></h2>

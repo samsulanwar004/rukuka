@@ -126,78 +126,7 @@
     <h3>RELATED PRODUCTS</h3>
   </div>
 </div>
-<div class="uk-grid-small uk-child-width-1-4@m uk-margin-large-bottom" uk-grid>
-  <!-- start product -->
-  <div class="uk-panel uk-text-left">
-    <div class="uk-card uk-card-small uk-padding-remove">
-        <div class="uk-card-media-top">
-            <img src="images/2_2.jpg" alt="">
-
-        </div>
-        <div class="uk-card-body uk-padding-remove uk-margin-small-top">
-            <a href="#" class="uk-text-muted">Slim-Fit Stretch-Cotton Twill Bermuda</a>
-            <br>
-            <span class="uk-text-bold">$333</span>
-        </div>
-        <!-- <div class="uk-card-footer">
-          <span class="uk-text-meta">Shirt<h4 class="uk-card-price">$400</h4></span>
-        </div> -->
-    </div>
-  </div>
-  <!-- end product single -->
-  <!-- start product -->
-  <div class="uk-panel uk-text-left">
-    <div class="uk-card uk-card-small uk-padding-remove">
-        <div class="uk-card-media-top">
-            <img src="images/6_2.jpg" alt="">
-        </div>
-        <div class="uk-card-body uk-padding-remove uk-margin-small-top">
-            <a href="#" class="uk-text-muted">Slim-Fit Stretch-Cotton Twill Bermuda</a>
-            <br>
-            <span class="uk-text-bold">$333</span>
-        </div>
-        <!-- <div class="uk-card-footer">
-          <span class="uk-text-meta">Shirt<h4 class="uk-card-price">$400</h4></span>
-        </div> -->
-    </div>
-  </div>
-  <!-- end product single -->
-  <!-- start product -->
-  <div class="uk-panel uk-text-left">
-    <div class="uk-card uk-card-small uk-padding-remove">
-        <div class="uk-card-media-top">
-            <img src="images/10_1.jpg" alt="">
-        </div>
-        <div class="uk-card-body uk-padding-remove uk-margin-small-top">
-            <a href="#" class="uk-text-muted">Slim-Fit Stretch-Cotton Twill Bermuda</a>
-            <br>
-            <span class="uk-text-bold">$333</span>
-        </div>
-        <!-- <div class="uk-card-footer">
-          <span class="uk-text-meta">Shirt<h4 class="uk-card-price">$400</h4></span>
-        </div> -->
-    </div>
-  </div>
-  <!-- end product single -->
-  <!-- start product -->
-  <div class="uk-panel uk-text-left">
-    <div class="uk-card uk-card-small uk-padding-remove">
-        <div class="uk-card-media-top">
-            <img src="images/2_2.jpg" alt="">
-        </div>
-        <div class="uk-card-body uk-padding-remove uk-margin-small-top">
-            <a href="#" class="uk-text-muted">Slim-Fit Stretch-Cotton Twill Bermuda</a>
-            <br>
-            <span class="uk-text-bold">$333</span>
-        </div>
-        <!-- <div class="uk-card-footer">
-          <span class="uk-text-meta">Shirt<h4 class="uk-card-price">$400</h4></span>
-        </div> -->
-    </div>
-  </div>
-  <!-- end product single -->
-
-</div>
+<related api="{{ route('related', ['categoryId' => $product->product_categories_id]) }}"></related>
 <div class="uk-grid-small uk-margin-small-bottom uk-margin-medium-top uk-margin-xlarge-bottom">
   <div class="uk-panel uk-text-center">
     <button class="uk-button uk-button-secondary">SHOW ALL PRODUCT</button>

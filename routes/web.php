@@ -16,7 +16,7 @@ Route::get('/', [
     'uses' => 'Frontend\PageController@index',
 ]);
 
-Route::get('/shop/{category}/{slug}', [
+Route::get('/shop/{categories}/{category}/{slug?}', [
     'as'   => 'shop',
     'uses' => 'Frontend\PageController@shop',
 ]);
@@ -26,7 +26,17 @@ Route::get('/product/{slug}', [
     'uses' => 'Frontend\PageController@product',
 ]);
 
-Route::get('/menu/{parent}', [
-    'as'   => 'menu',
-    'uses' => 'Frontend\PageController@menu',
+Route::get('/landing/women', [
+    'as'   => 'women',
+    'uses' => 'Frontend\PageController@women',
+]);
+
+Route::get('/landing/men', [
+    'as'   => 'men',
+    'uses' => 'Frontend\PageController@men',
+]);
+
+Route::get('/landing/kids', [
+    'as'   => 'kids',
+    'uses' => 'Frontend\PageController@kids',
 ]);

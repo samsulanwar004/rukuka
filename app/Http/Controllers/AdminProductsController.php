@@ -4,8 +4,12 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+	use App\Category;
+	use App\Product;
 
 	class AdminProductsController extends \crocodicstudio\crudbooster\controllers\CBController {
+
+		private $categoryId;
 
 	    public function cbInit() {
 
@@ -40,7 +44,7 @@
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Product Designers','name'=>'product_designers_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_designers,name'];
-			$this->form[] = ['label'=>'Product Categories','name'=>'product_categories_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_categories,name'];
+			$this->form[] = ['label'=>'Product Categories','name'=>'product_categories_id','type'=>'custom','validation'=>'required','width'=>'col-sm-10', 'html' => $this->categories()];
 			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Color','name'=>'color','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'Black;Red;White'];
 			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
@@ -50,15 +54,14 @@
 			$this->form[] = ['label'=>'Currency','name'=>'currency','type'=>'select2','validation'=>'required|min:1|max:4','width'=>'col-sm-10','dataenum'=>'IDR;USD;EUR'];
 			$this->form[] = ['label'=>'Price','name'=>'price','type'=>'money','validation'=>'required|min:1|max:9','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'money','validation'=>'required|min:1|max:9','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Diskon','name'=>'diskon','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Diskon','name'=>'diskon','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Is Active','name'=>'is_active','type'=>'checkbox','width'=>'col-sm-10','dataenum'=>'Active'];
 			$this->form[] = ['label'=>'Tags','name'=>'tags','type'=>'multitext','validation'=>'min:1|max:20','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Product Designers Id','name'=>'product_designers_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_designers,name'];
-			//$this->form[] = ['label'=>'Product Categories Id','name'=>'product_categories_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_categories,name'];
+			//$this->form[] = ['label'=>'Product Designers','name'=>'product_designers_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_designers,name'];
 			//$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Color','name'=>'color','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'Black;Red;White'];
 			//$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
@@ -262,7 +265,7 @@
 	    */
 	    public function actionButtonSelected($id_selected,$button_name) {
 	        //Your code here
-	            
+	   
 	    }
 
 
@@ -325,7 +328,7 @@
 	    | 
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
-	        //Your code here	      
+	        //Your code here	  
 	    }
 
 	    /* 
@@ -367,9 +370,57 @@
 
 	    }
 
-
-
 	    //By the way, you can still create your own method in here... :) 
 
+	    public function getEdit($id)
+	    {
+	    	$this->setCategoryId($id);
+	    	$this->cbLoader();
+	    	$row = \DB::table($this->table)->where($this->primary_key,$id)->first();
+
+			if(!CRUDBooster::isRead() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {
+				CRUDBooster::insertLog(trans("crudbooster.log_try_edit",['name'=>$row->{$this->title_field},'module'=>CRUDBooster::getCurrentModule()->name]));
+				CRUDBooster::redirect(CRUDBooster::adminPath(),trans('crudbooster.denied_access'));
+			}
+
+
+			$page_menu       = \Route::getCurrentRoute()->getActionName();
+			$page_title 	 = trans("crudbooster.edit_data_page_title",['module'=>CRUDBooster::getCurrentModule()->name,'name'=>$row->{$this->title_field}]);
+			$command 		 = 'edit';
+			Session::put('current_row_id',$id);
+			return view('crudbooster::default.form',compact('id','row','page_menu','page_title','command'));
+	    }
+
+
+	    private function categories()
+	    {
+	    	$id = $this->getCategoryId();
+
+	    	$product = $this->getProductById($id);
+
+
+	    	return Category::attr([
+	    		'name' => 'product_categories_id',
+	    		'class' => 'form-control'
+	    	])
+		    ->selected($product->product_categories_id)
+		    ->renderAsDropdown();
+	    }
+
+	    private function getProductById($id)
+	    {
+	    	return Product::where('id', $id)->first();
+	    }
+
+	    private function setCategoryId($value)
+	    {
+	    	$this->categoryId = $value;
+	    	return $this;
+	    }
+
+	    private function getCategoryId()
+	    {
+	    	return $this->categoryId;
+	    }
 
 	}
