@@ -40,3 +40,20 @@ Route::get('/landing/kids', [
     'as'   => 'kids',
     'uses' => 'Frontend\PageController@kids',
 ]);
+
+Route::get('/login', [
+    'as'   => 'login',
+    'uses' => 'Frontend\UserController@login',
+]);
+
+Route::get('/register', [
+    'as'   => 'register',
+    'uses' => 'Frontend\UserController@login',
+]);
+
+Route::post('/register', [
+    'as'   => 'register',
+    'uses' => 'Frontend\UserController@register',
+]);
+
+

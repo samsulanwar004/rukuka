@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class="uk-grid-small uk-child-width-1-3@m uk-flex-center" uk-grid>
-      @foreach($products as $product)
+      @forelse($products as $product)
         <!-- start product -->
         <div class="uk-panel uk-text-left">
           <div class="uk-card uk-card-small uk-padding-remove">
@@ -69,7 +69,9 @@
           </div>
         </div>
         <!-- end product single -->
-       @endforeach
+       @empty
+          Product is not found
+       @endforelse
       </div>
       <hr>
       <div class="uk-grid-small uk-child-width-1-2@m uk-flex-center" uk-grid>
