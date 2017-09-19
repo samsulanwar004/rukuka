@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use Exception;
 use DB;
+use Validator;
 use App\Repositories\UserRepository;
 
 
 class UserController extends BaseController
 {
-    protected $afterRegister = '/register';
+    protected $redirectRegister = '/register';
+    protected $redirectAfterLogin = '/user/profile';
 
     public function login()
     {
@@ -35,11 +37,44 @@ class UserController extends BaseController
 
             DB::commit();
 
-            return redirect($this->afterRegister)
+            return redirect($this->redirectAfterRegister)
                 ->with(['success' => 'Registration successfully! Please, Check your email!']);
         } catch (Exception $e) {
             DB::rollBack();
             return back()->with(['errors' => 'Registration failed']);
         }
     }
+
+    public function profile()
+    {
+        return view('users.profile');
+    }
+
+    public function authenticate(Request $request)
+    {
+        $this->validate($request, [
+            'email_login' => 'required|string|email|max:255|exists:users,email',
+            'password_login' => 'required|string|min:6',
+        ]);
+
+        try {
+
+            $auth = (new UserRepository)->auth($request);
+            if (!$auth) {
+                throw new Exception("Login failed!", 1);     
+            }
+        } catch (Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
+
+        return redirect($this->redirectAfterLogin)->with('success', 'Login successfully!');
+    }
+
+    public function logout()
+    {
+        (new UserRepository)->logout();
+
+        return view('pages.landing')->withErrors(['success' => 'Logout successfully!']);
+    }
+
 }

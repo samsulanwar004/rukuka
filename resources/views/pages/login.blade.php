@@ -14,21 +14,21 @@
 
 
       <h3>SIGN IN</h3>
-        <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+        <form class="form-horizontal" method="POST" action="{{ route('authenticate') }}">
             {{ csrf_field() }}
           <ul class="uk-list">
             <li>
-                <input class="uk-input uk-form-width-medium" id="form-s-email" type="email" placeholder="*Email" required="required" name="email">
+                <input class="uk-input uk-form-width-medium {{ $errors->has('email_login') ? ' uk-form-danger' : '' }}" id="form-s-email" type="email" placeholder="*Email" required="required" name="email_login" value="{{ old('email_login') }}">
 
             </li>
             <li>
-                <input class="uk-input uk-form-width-medium" id="form-s-password" type="password" placeholder="*Password" required="required" name="password">
+                <input class="uk-input uk-form-width-medium" id="form-s-password" type="password" placeholder="*Password" required="required" name="password_login">
 
             </li>
             <li>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="remember"> Remember Me
+                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
                     </label>
                 </div>
             </li>

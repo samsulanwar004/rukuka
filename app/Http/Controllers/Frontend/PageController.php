@@ -5,9 +5,18 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Repositories\ProductRepository;
 use App\Repositories\SettingRepository;
+use App\Repositories\UserRepository;
+use Exception;
+use Carbon\Carbon;
 
 class PageController extends BaseController
 {
+    private $date;
+
+    public function __construct()
+    {
+        $this->date = Carbon::now('Asia/Jakarta');
+    }
 
     public function index()
     {
@@ -79,6 +88,30 @@ class PageController extends BaseController
         })->toArray();
 
         return view('pages.kids', compact('kids'));
+    }
+
+    public function activation($code)
+    {
+        try {
+            $user = (new UserRepository)->getUserByActivationCode($code);
+
+            if (!$user) {
+                throw new Exception("Activation code not found!", 1);   
+            }
+
+            if ($user->verification_expired <= $this->date) {
+                throw new Exception("Activation code expired!", 1);                
+            }
+
+            $user->status = 1;
+            $user->is_verified = 1;
+
+            $user->update();
+        } catch (Exception $e) {
+            return view('pages.landing')->withErrors($e->getMessage());
+        }
+
+        return view('pages.landing')->withErrors(['success' => 'Activation successfully!']);
     }
 
 }

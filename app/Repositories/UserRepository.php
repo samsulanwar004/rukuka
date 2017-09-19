@@ -6,6 +6,8 @@ use App\User;
 use DB;
 use Exception;
 use Carbon\Carbon;
+use App\Services\EmailService;
+use Illuminate\Support\Facades\Auth;
 
 class UserRepository
 {
@@ -48,7 +50,20 @@ class UserRepository
 		$user->social_media_id = $this->getSocialMediaId();
 		$user->verification_token = $verificationToken;
 		$user->verification_expired = $verificationExpired;
-		$user->save();
+
+		if ($user->save()) {
+			(new EmailService)->sendActivationCode($user);
+		}
+
+
+	}
+
+	public function getUserByActivationCode($code)
+	{
+		return $this->model()
+			->where('verification_token', $code)
+			->where('is_verified', 0)
+			->first();
 	}
 
 	public function setMediaSocialId($value)
@@ -73,5 +88,20 @@ class UserRepository
 	public function getSocialMediaType()
 	{
 		return $this->socialMediaType;
+	}
+
+	public function auth($request)
+	{
+		return Auth::attempt([
+            'email' => $request->input('email_login'), 
+            'password' => $request->input('password_login'),
+            'status' => 1,
+            'is_verified' => 1,
+        ], $request->input('remember'));
+	}
+
+	public function logout()
+	{
+		return Auth::logout();
 	}
 }

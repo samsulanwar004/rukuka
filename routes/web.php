@@ -16,6 +16,11 @@ Route::get('/', [
     'uses' => 'Frontend\PageController@index',
 ]);
 
+Route::get('/home', [
+    'as'   => 'home',
+    'uses' => 'Frontend\PageController@index',
+]);
+
 Route::get('/shop/{categories}/{category}/{slug?}', [
     'as'   => 'shop',
     'uses' => 'Frontend\PageController@shop',
@@ -41,19 +46,44 @@ Route::get('/landing/kids', [
     'uses' => 'Frontend\PageController@kids',
 ]);
 
-Route::get('/login', [
-    'as'   => 'login',
-    'uses' => 'Frontend\UserController@login',
-]);
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [
+        'as'   => 'login',
+        'uses' => 'Frontend\UserController@login',
+    ]);
 
-Route::get('/register', [
-    'as'   => 'register',
-    'uses' => 'Frontend\UserController@login',
-]);
+    Route::get('/register', [
+        'as'   => 'register',
+        'uses' => 'Frontend\UserController@login',
+    ]);
 
-Route::post('/register', [
-    'as'   => 'register',
-    'uses' => 'Frontend\UserController@register',
-]);
+    Route::post('/register', [
+        'as'   => 'register',
+        'uses' => 'Frontend\UserController@register',
+    ]);
+
+    Route::get('/activation/{code}', [
+        'as'   => 'activation',
+        'uses' => 'Frontend\PageController@activation',
+    ]);
+
+    Route::post('/authenticate', [
+        'as'   => 'authenticate',
+        'uses' => 'Frontend\UserController@authenticate',
+    ]);
+});
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/user/profile', [
+        'as'   => 'user.profile',
+        'uses' => 'Frontend\UserController@profile',
+    ]);
+
+    Route::get('/logout', [
+        'as'   => 'logout',
+        'uses' => 'Frontend\UserController@logout',
+    ]);
+});
 
 
