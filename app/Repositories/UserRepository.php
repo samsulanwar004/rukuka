@@ -12,9 +12,25 @@ use Illuminate\Support\Facades\Auth;
 class UserRepository
 {
 
+	private $email;
+
+	private $password;
+
 	private $socialMediaType;
 
 	private $socialMediaId;
+
+	private $firstName;
+
+	private $lastName;
+
+	private $phone;
+
+	private $dob;
+
+	private $gender;
+
+	private $avatar;
 
 	private $date;
 
@@ -30,31 +46,37 @@ class UserRepository
 		return new User;
 	}
 
-	public function create($request)
+	public function create()
 	{
 
-		$dob = $request->input('year').'-'.$request->input('month').'-'.$request->input('day');
 		$verificationToken = strtolower(str_random(60));
 		$verificationExpired = $this->date->addDay(self::EXPIRED_VERIFICATION_TOKEN_IN);
 
 		
 		$user = $this->model();
-		$user->email = $request->input('email');
-		$user->password = $request->input('password');
-		$user->first_name = $request->input('first_name');
-		$user->last_name = $request->input('last_name');
-		$user->phone_number = $request->input('phone_number');
-		$user->dob = $request->input('dob');
-		$user->gender = $request->input('gender');
+		$user->email = $this->getEmail();
+		$user->password = $this->getPassword();
+		$user->first_name = $this->getFirstName();
+		$user->last_name = $this->getLastName();
+		$user->phone_number = $this->getPhone();
+		$user->dob = $this->getDob();
+		$user->gender = $this->getGender();
 		$user->social_media_type = $this->getSocialMediaType();
 		$user->social_media_id = $this->getSocialMediaId();
+		$user->avatar = $this->getAvatar();
 		$user->verification_token = $verificationToken;
 		$user->verification_expired = $verificationExpired;
 
-		if ($user->save()) {
+		if ($user->social_media_type != 'web') {
+			$user->status = 1;
+			$user->is_verified = 1;
+		}
+
+		if ($user->save() && $user->social_media_type == 'web') {
 			(new EmailService)->sendActivationCode($user);
 		}
 
+		return $user;
 
 	}
 
@@ -66,7 +88,31 @@ class UserRepository
 			->first();
 	}
 
-	public function setMediaSocialId($value)
+	public function setPassword($value)
+	{
+		$this->password = $value;
+
+		return $this;
+	}
+
+	public function getPassword()
+	{
+		return $this->password;
+	}
+
+	public function setEmail($value)
+	{
+		$this->email = $value;
+
+		return $this;
+	}
+
+	public function getEmail()
+	{
+		return $this->email;
+	}
+
+	public function setSocialMediaId($value)
 	{
 		$this->socialMediaId = $value;
 
@@ -78,7 +124,7 @@ class UserRepository
 		return $this->socialMediaId;
 	}
 
-	public function setMediaSocialType($value)
+	public function setSocialMediaType($value)
 	{
 		$this->socialMediaType = $value;
 
@@ -90,18 +136,112 @@ class UserRepository
 		return $this->socialMediaType;
 	}
 
-	public function auth($request)
+	public function setFirstName($value)
 	{
-		return Auth::attempt([
-            'email' => $request->input('email_login'), 
-            'password' => $request->input('password_login'),
+		$this->firstName = $value;
+
+		return $this;
+	}
+
+	public function getFirstName()
+	{
+		return $this->firstName;
+	}
+
+	public function setLastName($value)
+	{
+		$this->lastName = $value;
+
+		return $this;
+	}
+
+	public function getLastName()
+	{
+		return $this->lastName;
+	}
+
+	public function setPhone($value)
+	{
+		$this->phone = $value;
+
+		return $this;
+	}
+
+	public function getPhone()
+	{
+		return $this->phone;
+	}
+
+	public function setDob($value)
+	{
+		$this->dob = $value;
+
+		return $this;
+	}
+
+	public function getDob()
+	{
+		return $this->dob;
+	}
+
+	public function setGender($value)
+	{
+		$this->gender = $value;
+
+		return $this;
+	}
+
+	public function getGender()
+	{
+		return $this->gender;
+	}
+
+	public function setRemember($value)
+	{
+		$this->remember = $value;
+
+		return $this;
+	}
+
+	public function getRemember()
+	{
+		return $this->remember;
+	}
+
+	public function setAvatar($value)
+	{
+		$this->avatar = $value;
+
+		return $this;
+	}
+
+	public function getAvatar()
+	{
+		return $this->avatar;
+	}
+
+	public function auth($user = null)
+	{
+		return is_null($user) ?
+		Auth::attempt([
+            'email' => $this->getEmail(), 
+            'password' => $this->getPassword(),
             'status' => 1,
             'is_verified' => 1,
-        ], $request->input('remember'));
+        ], $this->getRemember()) :
+
+        Auth::login($user, true);
 	}
 
 	public function logout()
 	{
 		return Auth::logout();
+	}
+
+	public function getUserByEmail($email)
+	{
+		return $this->model()
+			->where('email', $email)
+			->first();
 	}
 }

@@ -49,17 +49,12 @@ Route::get('/landing/kids', [
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [
         'as'   => 'login',
-        'uses' => 'Frontend\UserController@login',
-    ]);
-
-    Route::get('/register', [
-        'as'   => 'register',
-        'uses' => 'Frontend\UserController@login',
+        'uses' => 'Frontend\LoginController@showLoginPage',
     ]);
 
     Route::post('/register', [
         'as'   => 'register',
-        'uses' => 'Frontend\UserController@register',
+        'uses' => 'Frontend\LoginController@register',
     ]);
 
     Route::get('/activation/{code}', [
@@ -69,8 +64,23 @@ Route::middleware(['guest'])->group(function () {
 
     Route::post('/authenticate', [
         'as'   => 'authenticate',
-        'uses' => 'Frontend\UserController@authenticate',
+        'uses' => 'Frontend\LoginController@authenticate',
     ]);
+
+    Route::get('/login/{provider}', [
+        'as'   => 'social.login',
+        'uses' => 'Frontend\LoginController@socialLogin',
+    ])->where([
+        'provider' => 'facebook|google|twitter'
+    ]);
+
+    Route::get('/login/{provider}/callback', [
+        'as'   => 'social.login.callback',
+        'uses' => 'Frontend\LoginController@socialLoginCallback',
+    ])->where([
+        'provider' => 'facebook|google|twitter'
+    ]);
+
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -82,7 +92,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/logout', [
         'as'   => 'logout',
-        'uses' => 'Frontend\UserController@logout',
+        'uses' => 'Frontend\LoginController@logout',
     ]);
 });
 

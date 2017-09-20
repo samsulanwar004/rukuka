@@ -9,6 +9,7 @@
         "atayahmet/laravel-nestable": "^0.8.1",
         "crocodicstudio/crudbooster": "v5.4.0.8",
         "laravel/framework": "5.4.*",
+        "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0"
     },
     "require-dev": {

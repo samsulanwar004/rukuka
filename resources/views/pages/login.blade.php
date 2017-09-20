@@ -38,6 +38,10 @@
             <li>
                 <a href="#">forgot your password?</a>
             </li>
+            <li>
+              <a href="{{ route('social.login', ['provider' => 'facebook']) }}" class="uk-button uk-button-primary">
+                <span class="uk-margin-small-right uk-icon" uk-icon="icon: facebook"></span>Login with Facebook</a>
+            </li>
           </ul>
         </form>
     </div>
@@ -157,6 +161,9 @@
 
             </div>
             <button class="uk-button uk-button-secondary" type="submit">REGISTER</button>
+
+            <a href="{{ route('social.login', ['provider' => 'facebook']) }}" class="uk-button uk-button-primary">
+                <span class="uk-margin-small-right uk-icon" uk-icon="icon: facebook"></span>Register with Facebook</a>
 
             </form>
           </div>
