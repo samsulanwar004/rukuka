@@ -1,0 +1,33 @@
+@extends('app')
+
+@section('content')
+  	<div class="uk-grid-small uk-margin-top">
+    	@include('partials.alert')
+  	</div>
+  	    <form class="form-horizontal" method="POST" action="{{ route('reset') }}">
+            {{ csrf_field() }}
+          <ul class="uk-list">
+
+          	<input type="hidden" name="token" value="{{ old('email', $code) }}">
+
+            <li>
+                <input name="password" class="uk-input uk-form-width-medium {{ $errors->has('password') ? ' uk-form-danger' : '' }}" id="password" type="password" placeholder="*PASSWORD" required="required">              
+            </li>
+
+            <li>
+            	<input name="confirmed" class="uk-input uk-form-width-medium {{ $errors->has('confirmed') ? ' uk-form-danger' : '' }}" id="confirmed" type="password" placeholder="*CONFIRM PASSWORD" required="required">
+            </li>
+
+            <li>
+            	<button class="uk-button uk-button-secondary" type="submit">SUBMIT</button>
+            </li>
+          </ul>
+        </form>
+  	<div class="uk-grid-small uk-margin-small-bottom uk-margin-medium-top uk-margin-xlarge-bottom">
+	  <div class="uk-panel uk-text-center">
+	    <a href="{{ route('index') }}"><button class="uk-button uk-button-secondary">Back To Home</button></a>
+	  </div>
+	</div>
+@endsection
+
+

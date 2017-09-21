@@ -15,6 +15,7 @@ class LoginController extends BaseController
 	private $user;
     protected $redirectAfterRegister = '/login';
     protected $redirectAfterLogin = '/user/profile';
+    protected $redirectAfterForgot = '/forgot';
 
     public function __construct(SocialMediaService $social, UserRepository $user)
     {
@@ -60,7 +61,7 @@ class LoginController extends BaseController
                 ->with(['success' => 'Registration successfully! Please, Check your email!']);
         } catch (Exception $e) {
             DB::rollBack();
-            return back()->with(['errors' => 'Registration failed']);
+            return back()->withErrors($e->getMessage());
         }
     }
     
@@ -79,7 +80,7 @@ class LoginController extends BaseController
             	->setPassword($request->input('password_login'))
             	->setRemember($request->input('remember'))
             	->auth();
-            	
+
             if (!$auth) {
                 throw new Exception("Login failed!", 1);     
             }
@@ -110,6 +111,82 @@ class LoginController extends BaseController
         } catch (SocialAuthException $e) {
             return back()->withErrors($e->getMessage());
         }
+    }
+
+    public function activation($code)
+    {
+        try {
+            $user = (new UserRepository)->getUserByActivationCode($code);
+
+            if (!$user) {
+                throw new Exception("Activation code not found!", 1);   
+            }
+
+            if ($user->verification_expired <= $this->date) {
+                throw new Exception("Activation code expired!", 1);                
+            }
+
+            if ($user->is_verified >= 1) {
+            	throw new Exception("Activation is verified!", 1);
+            }
+
+            $user->status = 1;
+            $user->is_verified = 1;
+
+            $user->update();
+        } catch (Exception $e) {
+            return view('pages.landing')->withErrors($e->getMessage());
+        }
+
+        return view('pages.landing')->withErrors(['success' => 'Activation successfully!']);
+    }
+
+    public function showForgotPage()
+    {
+    	return view('pages.password.forgot');
+    }
+
+    public function forgot(Request $request)
+    {
+    	$this->validate($request, [
+    		'email' => 'required|string|email|max:255|exists:users,email'
+    	]);
+
+    	try {
+    		$this->user
+    		->setEmail($request->input('email'))
+    		->forgot();
+
+    		return redirect($this->redirectAfterForgot)->with('success', 'Forgot successfully! Please, check your email.');
+    	} catch (Exception $e) {
+    		return back()->withErrors($e->getMessage());
+    	}
+    }
+
+    public function showResetPage($code)
+    {
+    	return view('pages.password.reset', compact('code'));
+    }
+
+    public function reset(Request $request)
+    {
+    	$this->validate($request, [
+    		'token' => 'required|string',
+    		'password' => 'required|string|min:6|same:confirmed',
+            'confirmed' => 'required|string|min:6',
+       	]);
+
+       	try {
+       		$this->user
+       			->setToken($request->input('token'))
+       			->setPassword($request->input('password'))
+       			->reset();
+
+       		return redirect($this->redirectAfterRegister)->with('success', 'Reset password successfully!');
+
+       	} catch (Exception $e) {
+       		return back()->withErrors($e->getMessage());
+       	}
     }
  
 }

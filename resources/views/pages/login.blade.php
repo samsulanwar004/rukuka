@@ -36,7 +36,7 @@
                 <button class="uk-button uk-button-secondary" type="submit">SIGN IN</button>
             </li>
             <li>
-                <a href="#">forgot your password?</a>
+                <a href="{{ route('page.forgot') }}">forgot your password?</a>
             </li>
             <li>
               <a href="{{ route('social.login', ['provider' => 'facebook']) }}" class="uk-button uk-button-primary">

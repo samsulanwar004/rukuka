@@ -32,6 +32,8 @@ class UserRepository
 
 	private $avatar;
 
+	private $token;
+
 	private $date;
 
 	const EXPIRED_VERIFICATION_TOKEN_IN = 2;
@@ -84,7 +86,6 @@ class UserRepository
 	{
 		return $this->model()
 			->where('verification_token', $code)
-			->where('is_verified', 0)
 			->first();
 	}
 
@@ -220,6 +221,18 @@ class UserRepository
 		return $this->avatar;
 	}
 
+	public function setToken($value)
+	{
+		$this->token = $value;
+
+		return $this;
+	}
+
+	public function getToken()
+	{
+		return $this->token;
+	}
+
 	public function auth($user = null)
 	{
 		return is_null($user) ?
@@ -243,5 +256,35 @@ class UserRepository
 		return $this->model()
 			->where('email', $email)
 			->first();
+	}
+
+	public function forgot()
+	{
+		$user = $this->getUserByEmail($this->getEmail());
+
+		$user->verification_token = strtolower(str_random(60));
+		$user->verification_expired = $this->date->addHour();
+
+		if ($user->update()) {
+			(new EmailService)->sendForgotCode($user);
+		}
+	}
+
+	public function reset()
+	{
+		$user = $this->getUserByActivationCode($this->getToken());
+
+		if (!$user) {
+            throw new Exception("Token code not found!", 1);   
+        }
+
+        if ($user->verification_expired <= $this->date) {
+            throw new Exception("Token code expired!", 1);                
+        }
+
+		$user->password = $this->getPassword();
+
+		$user->update();
+
 	}
 }

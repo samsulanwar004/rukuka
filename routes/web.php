@@ -59,7 +59,7 @@ Route::middleware(['guest'])->group(function () {
 
     Route::get('/activation/{code}', [
         'as'   => 'activation',
-        'uses' => 'Frontend\PageController@activation',
+        'uses' => 'Frontend\LoginController@activation',
     ]);
 
     Route::post('/authenticate', [
@@ -80,6 +80,27 @@ Route::middleware(['guest'])->group(function () {
     ])->where([
         'provider' => 'facebook|google|twitter'
     ]);
+
+    Route::get('/forgot', [
+        'as'   => 'page.forgot',
+        'uses' => 'Frontend\LoginController@showForgotPage',
+    ]);
+
+    Route::post('/forgot', [
+        'as'   => 'forgot',
+        'uses' => 'Frontend\LoginController@forgot',
+    ]);
+
+    Route::get('/reset/{code}', [
+        'as'   => 'page.reset',
+        'uses' => 'Frontend\LoginController@showResetPage',
+    ]);
+
+    Route::post('/reset', [
+        'as'   => 'reset',
+        'uses' => 'Frontend\LoginController@reset',
+    ]);
+
 
 });
 
