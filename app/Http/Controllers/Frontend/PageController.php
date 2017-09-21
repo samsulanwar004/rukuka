@@ -5,9 +5,18 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Repositories\ProductRepository;
 use App\Repositories\SettingRepository;
+use App\Repositories\UserRepository;
+use Exception;
+use Carbon\Carbon;
 
 class PageController extends BaseController
 {
+    private $date;
+
+    public function __construct()
+    {
+        $this->date = Carbon::now('Asia/Jakarta');
+    }
 
     public function index()
     {
@@ -80,5 +89,6 @@ class PageController extends BaseController
 
         return view('pages.kids', compact('kids'));
     }
+    
 
 }

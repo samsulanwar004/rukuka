@@ -14,21 +14,21 @@
 
 
       <h3>SIGN IN</h3>
-        <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+        <form class="form-horizontal" method="POST" action="{{ route('authenticate') }}">
             {{ csrf_field() }}
           <ul class="uk-list">
             <li>
-                <input class="uk-input uk-form-width-medium" id="form-s-email" type="email" placeholder="*Email" required="required" name="email">
+                <input class="uk-input uk-form-width-medium {{ $errors->has('email_login') ? ' uk-form-danger' : '' }}" id="form-s-email" type="email" placeholder="*Email" required="required" name="email_login" value="{{ old('email_login') }}">
 
             </li>
             <li>
-                <input class="uk-input uk-form-width-medium" id="form-s-password" type="password" placeholder="*Password" required="required" name="password">
+                <input class="uk-input uk-form-width-medium" id="form-s-password" type="password" placeholder="*Password" required="required" name="password_login">
 
             </li>
             <li>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="remember"> Remember Me
+                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
                     </label>
                 </div>
             </li>
@@ -36,7 +36,11 @@
                 <button class="uk-button uk-button-secondary" type="submit">SIGN IN</button>
             </li>
             <li>
-                <a href="#">forgot your password?</a>
+                <a href="{{ route('page.forgot') }}">forgot your password?</a>
+            </li>
+            <li>
+              <a href="{{ route('social.login', ['provider' => 'facebook']) }}" class="uk-button uk-button-primary">
+                <span class="uk-margin-small-right uk-icon" uk-icon="icon: facebook"></span>Login with Facebook</a>
             </li>
           </ul>
         </form>
@@ -157,6 +161,9 @@
 
             </div>
             <button class="uk-button uk-button-secondary" type="submit">REGISTER</button>
+
+            <a href="{{ route('social.login', ['provider' => 'facebook']) }}" class="uk-button uk-button-primary">
+                <span class="uk-margin-small-right uk-icon" uk-icon="icon: facebook"></span>Register with Facebook</a>
 
             </form>
           </div>

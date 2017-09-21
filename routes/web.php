@@ -16,6 +16,11 @@ Route::get('/', [
     'uses' => 'Frontend\PageController@index',
 ]);
 
+Route::get('/home', [
+    'as'   => 'home',
+    'uses' => 'Frontend\PageController@index',
+]);
+
 Route::get('/shop/{categories}/{category}/{slug?}', [
     'as'   => 'shop',
     'uses' => 'Frontend\PageController@shop',
@@ -41,19 +46,75 @@ Route::get('/landing/kids', [
     'uses' => 'Frontend\PageController@kids',
 ]);
 
-Route::get('/login', [
-    'as'   => 'login',
-    'uses' => 'Frontend\UserController@login',
-]);
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [
+        'as'   => 'login',
+        'uses' => 'Frontend\LoginController@showLoginPage',
+    ]);
 
-Route::get('/register', [
-    'as'   => 'register',
-    'uses' => 'Frontend\UserController@login',
-]);
+    Route::post('/register', [
+        'as'   => 'register',
+        'uses' => 'Frontend\LoginController@register',
+    ]);
 
-Route::post('/register', [
-    'as'   => 'register',
-    'uses' => 'Frontend\UserController@register',
-]);
+    Route::get('/activation/{code}', [
+        'as'   => 'activation',
+        'uses' => 'Frontend\LoginController@activation',
+    ]);
+
+    Route::post('/authenticate', [
+        'as'   => 'authenticate',
+        'uses' => 'Frontend\LoginController@authenticate',
+    ]);
+
+    Route::get('/login/{provider}', [
+        'as'   => 'social.login',
+        'uses' => 'Frontend\LoginController@socialLogin',
+    ])->where([
+        'provider' => 'facebook|google|twitter'
+    ]);
+
+    Route::get('/login/{provider}/callback', [
+        'as'   => 'social.login.callback',
+        'uses' => 'Frontend\LoginController@socialLoginCallback',
+    ])->where([
+        'provider' => 'facebook|google|twitter'
+    ]);
+
+    Route::get('/forgot', [
+        'as'   => 'page.forgot',
+        'uses' => 'Frontend\LoginController@showForgotPage',
+    ]);
+
+    Route::post('/forgot', [
+        'as'   => 'forgot',
+        'uses' => 'Frontend\LoginController@forgot',
+    ]);
+
+    Route::get('/reset/{code}', [
+        'as'   => 'page.reset',
+        'uses' => 'Frontend\LoginController@showResetPage',
+    ]);
+
+    Route::post('/reset', [
+        'as'   => 'reset',
+        'uses' => 'Frontend\LoginController@reset',
+    ]);
+
+
+});
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/user/profile', [
+        'as'   => 'user.profile',
+        'uses' => 'Frontend\UserController@profile',
+    ]);
+
+    Route::get('/logout', [
+        'as'   => 'logout',
+        'uses' => 'Frontend\LoginController@logout',
+    ]);
+});
 
 
