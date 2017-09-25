@@ -106,7 +106,12 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/user/profile', [
+    Route::get('/account', [
+        'as'   => 'user',
+        'uses' => 'Frontend\UserController@index',
+    ]);
+
+    Route::get('/account/profile', [
         'as'   => 'user.profile',
         'uses' => 'Frontend\UserController@profile',
     ]);
