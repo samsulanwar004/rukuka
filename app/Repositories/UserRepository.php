@@ -290,4 +290,16 @@ class UserRepository
 		$user->update();
 
 	}
+
+	public function update($id)
+	{
+		$user = $this->model()->where('id', $id)->first();
+		$user->first_name = $this->getFirstName();
+		$user->last_name = $this->getLastName();
+		$user->phone_number = $this->getPhone();
+		$user->dob = $this->getDob();
+		$user->gender = $this->getGender();
+
+		$user->update();
+	}
 }

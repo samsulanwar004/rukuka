@@ -111,9 +111,14 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@index',
     ]);
 
-    Route::get('/account/profile', [
-        'as'   => 'user.profile',
-        'uses' => 'Frontend\UserController@profile',
+    Route::get('/account/detail', [
+        'as'   => 'user.detail',
+        'uses' => 'Frontend\UserController@detail',
+    ]);
+
+    Route::post('/account/update', [
+        'as'   => 'user.update',
+        'uses' => 'Frontend\UserController@update',
     ]);
 
     Route::get('/logout', [
