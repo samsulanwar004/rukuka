@@ -4,7 +4,15 @@
           <div class="uk-position-top-right">
             <a class="uk-icon-button uk-icon" href="#" uk-icon="icon: pencil"></a>
           </div>
-          <img src="{{ $user->avatar }}" alt="">
+          @if($user->avatar)
+            <img src="{{ $user->avatar }}" alt="">
+          @else
+            @if($user->gender == 'm')
+              <img src="/images/men_profile.jpg" alt="">
+            @else
+              <img src="" alt="">
+            @endif
+          @endif
       </div>
       <div class="uk-card-body">
           <h3 class="uk-card-title uk-margin-small">{{ ucfirst($user->first_name).' '.ucfirst($user->last_name) }}</h3>
@@ -13,7 +21,7 @@
           <ul class="uk-list">
             <li><a href="{{ route('user') }}" class="uk-text-small">Home</a></li>
             <li><a href="{{ route('user.detail') }}" class="uk-text-small">My Details</a></li>
-            <li><a href="#" class="uk-text-small">Payment Methods</a></li>
+            <li><a href="{{ route('user.cc') }}" class="uk-text-small">Payment Methods</a></li>
             <li><a href="#" class="uk-text-small">Order History</a></li>
             <li><a href="#" class="uk-text-small">My Wishlist</a></li>
             <li><a href="#" class="uk-text-small">Reset Password</a></li>
