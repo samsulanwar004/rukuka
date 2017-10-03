@@ -10,7 +10,7 @@
             @if($user->gender == 'm')
               <img src="/images/men_profile.jpg" alt="">
             @else
-              <img src="" alt="">
+              <img src="/images/women_profile.jpg" alt="">
             @endif
           @endif
       </div>
