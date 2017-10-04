@@ -125,6 +125,37 @@ Route::middleware(['auth'])->group(function () {
         'as'   => 'logout',
         'uses' => 'Frontend\LoginController@logout',
     ]);
+
+    Route::get('/account/cc', [
+        'as'   => 'user.cc',
+        'uses' => 'Frontend\UserController@creditCard',
+    ]);
+
+    Route::post('/account/cc', [
+        'as'   => 'user.cc',
+        'uses' => 'Frontend\UserController@saveCreditCard',
+    ]);
+
+    Route::get('/account/address', [
+        'as'   => 'user.address',
+        'uses' => 'Frontend\UserController@address',
+    ]);
+
+    Route::post('/account/address', [
+        'as'   => 'user.address',
+        'uses' => 'Frontend\UserController@saveAddress',
+    ]);
+
+    Route::post('/account/cc-default', [
+        'as'   => 'user.cc.default',
+        'uses' => 'Frontend\UserController@defaultCreditCard',
+    ]);
+
+    Route::post('/account/address-default', [
+        'as'   => 'user.address.default',
+        'uses' => 'Frontend\UserController@defaultAddress',
+    ]);
+
 });
 
 

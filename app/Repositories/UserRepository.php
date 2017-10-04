@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\User;
+use App\CreditCard;
+use App\Address;
 use DB;
 use Exception;
 use Carbon\Carbon;
@@ -35,6 +37,8 @@ class UserRepository
 	private $token;
 
 	private $date;
+
+	private $user;
 
 	const EXPIRED_VERIFICATION_TOKEN_IN = 2;
 
@@ -301,5 +305,104 @@ class UserRepository
 		$user->gender = $this->getGender();
 
 		$user->update();
+	}
+
+	public function persistCreditCard($request, $id = null)
+	{
+		$cc = is_null($id) ? new CreditCard : $this->getCreditCardById($id);
+		$cc->card_number = $request->input('card_number');
+		$cc->expired_date = $request->input('expired_date');
+		$cc->name_card = $request->input('name_card');
+
+		if (is_null($id)) {
+			$cc->user()->associate($this->getUser());
+			$cc->address()->associate($request->input('address'));
+		}
+
+		$cc->save();
+	}
+
+	public function getCreditCardById($id)
+	{
+		return CreditCard::where('id', $id)
+			->first();
+	}
+
+	public function setUser($value)
+	{
+		$this->user = $value;
+
+		return $this;
+	}
+
+	public function getUser()
+	{
+		return $this->user;
+	}
+
+	public function persistAddress($request, $id = null)
+	{
+		$address = is_null($id) ? new Address : $this->getAddressById($id);
+		$address->first_name = $request->input('first_name');
+		$address->last_name = $request->input('last_name');
+		$address->company = $request->input('company');
+		$address->address_line = $request->input('address_line');
+		$address->city = $request->input('city');
+		$address->province = $request->input('province');
+		$address->postal = $request->input('postal');
+		$address->country = $request->input('country');
+		$address->phone_number = $request->input('phone_number');
+
+		if (is_null($id)) {
+			$address->user()->associate($this->getUser());
+		}
+
+		$address->save();
+	}
+
+	public function getAddressById($id)
+	{
+		return Address::where('id', $id)
+			->first();
+	}
+
+	public function defaultCreditCard($request)
+	{
+		$ids = [];
+		foreach ($request->input('default') as $key => $value) {
+    		$ids[] = isset($key) ? $key : 0;
+    	}
+
+    	$user = $this->getUser();
+
+    	$cc = new CreditCard;
+
+    	$cc->where('users_id', $user->id)
+			->whereNotIn('id', $ids)
+			->update(array('is_default' => 0));
+
+		$cc->where('users_id', $user->id)
+			->whereIn('id', $ids)
+			->update(array('is_default' => 1));
+	}
+
+	public function defaultAddress($request)
+	{
+		$ids = [];
+		foreach ($request->input('default') as $key => $value) {
+    		$ids[] = isset($key) ? $key : 0;
+    	}
+
+    	$user = $this->getUser();
+
+    	$address = new Address;
+
+    	$address->where('users_id', $user->id)
+			->whereNotIn('id', $ids)
+			->update(array('is_default' => 0));
+
+		$address->where('users_id', $user->id)
+			->whereIn('id', $ids)
+			->update(array('is_default' => 1));
 	}
 }
