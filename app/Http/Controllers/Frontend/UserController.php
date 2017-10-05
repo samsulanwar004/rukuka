@@ -12,6 +12,7 @@ class UserController extends BaseController
     protected $redirectAfterSaveProfile = '/account/detail';
     protected $redirectAfterSaveCC = '/account/cc';
     protected $redirectAfterSaveAddress = '/account/address';
+    protected $redirectAfterSavePassword = '/account/reset-password';
     private $user;
 
     public function __construct(UserRepository $user)
@@ -26,7 +27,7 @@ class UserController extends BaseController
     	return view('users.index', compact('user'));
     }
 
-    public function detail()
+    public function showDetailPage()
     {
     	$user = $this->getUserActive();
 
@@ -64,7 +65,7 @@ class UserController extends BaseController
         }
     }
 
-    public function creditCard()
+    public function showCreditCardPage()
     {
     	$user = $this->getUserActive();
 
@@ -102,7 +103,7 @@ class UserController extends BaseController
     	}
     }
 
-    public function address()
+    public function showAddressPage()
     {
     	$user = $this->getUserActive();
 
@@ -180,6 +181,40 @@ class UserController extends BaseController
     		
     		return redirect($this->redirectAfterSaveAddress)->with(['success' => 'Save default address successfully!']);
         	
+        } catch (Exception $e) {
+        	DB::rollBack();
+
+        	return back()->withErrors($e->getMessage());
+        }
+    }
+
+    public function showResetPasswordPage()
+    {
+    	$user = $this->getUserActive();
+
+    	return view('users.reset_password', compact('user'));
+    }
+
+    public function updatePassword(Request $request)
+    {
+    	$this->validate($request, [
+    		'old_password' => 'required|string|min:6',
+    		'new_password' => 'required|string|min:6|different:old_password',
+            'confirmed' => 'required|string|min:6|same:new_password'
+        ]);
+
+        try {
+        	DB::beginTransaction();
+
+    		$user = $this->getUserActive();
+
+    		$this->user
+    			->setUser($user)
+    			->updatePassword($request); 
+
+    		DB::commit();
+    		
+    		return redirect($this->redirectAfterSavePassword)->with(['success' => 'Update password successfully!']);
         } catch (Exception $e) {
         	DB::rollBack();
 

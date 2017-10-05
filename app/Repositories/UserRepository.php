@@ -10,6 +10,7 @@ use Exception;
 use Carbon\Carbon;
 use App\Services\EmailService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository
 {
@@ -404,5 +405,20 @@ class UserRepository
 		$address->where('users_id', $user->id)
 			->whereIn('id', $ids)
 			->update(array('is_default' => 1));
+	}
+
+	public function updatePassword($request)
+	{
+		
+		$user = $this->getUser();
+
+		if(Hash::check($request->input('old_password'), $user->password)){
+
+	    	$user->password = $request->input('new_password');
+	       	$user->update();
+	    }else{
+
+	       throw new Exception("The specified old password does not match the database password", 1);
+	    }
 	}
 }

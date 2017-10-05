@@ -25,7 +25,7 @@
             <li><a href="{{ route('user.cc') }}" class="uk-text-small">Payment Methods</a></li>
             <li><a href="#" class="uk-text-small">Order History</a></li>
             <li><a href="#" class="uk-text-small">My Wishlist</a></li>
-            <li><a href="#" class="uk-text-small">Reset Password</a></li>
+            <li><a href="{{ route('user.reset.password') }}" class="uk-text-small">Reset Password</a></li>
             <li><a href="{{ route('logout') }}" class="uk-text-small">Sign Out</a></li>
 
           </ul>

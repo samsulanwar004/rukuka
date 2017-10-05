@@ -172,8 +172,8 @@ class LoginController extends BaseController
     {
     	$this->validate($request, [
     		'token' => 'required|string',
-    		'password' => 'required|string|min:6|same:confirmed',
-            'confirmed' => 'required|string|min:6',
+    		'password' => 'required|string|min:6',
+            'confirmed' => 'required|string|min:6|same:password',
        	]);
 
        	try {
