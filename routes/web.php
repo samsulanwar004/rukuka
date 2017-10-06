@@ -106,15 +106,66 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/user/profile', [
-        'as'   => 'user.profile',
-        'uses' => 'Frontend\UserController@profile',
+    Route::get('/account', [
+        'as'   => 'user',
+        'uses' => 'Frontend\UserController@index',
+    ]);
+
+    Route::get('/account/detail', [
+        'as'   => 'user.detail',
+        'uses' => 'Frontend\UserController@showDetailPage',
+    ]);
+
+    Route::post('/account/update', [
+        'as'   => 'user.update',
+        'uses' => 'Frontend\UserController@update',
     ]);
 
     Route::get('/logout', [
         'as'   => 'logout',
         'uses' => 'Frontend\LoginController@logout',
     ]);
+
+    Route::get('/account/cc', [
+        'as'   => 'user.cc',
+        'uses' => 'Frontend\UserController@showCreditCardPage',
+    ]);
+
+    Route::post('/account/cc', [
+        'as'   => 'user.cc',
+        'uses' => 'Frontend\UserController@saveCreditCard',
+    ]);
+
+    Route::get('/account/address', [
+        'as'   => 'user.address',
+        'uses' => 'Frontend\UserController@showAddressPage',
+    ]);
+
+    Route::post('/account/address', [
+        'as'   => 'user.address',
+        'uses' => 'Frontend\UserController@saveAddress',
+    ]);
+
+    Route::post('/account/cc-default', [
+        'as'   => 'user.cc.default',
+        'uses' => 'Frontend\UserController@defaultCreditCard',
+    ]);
+
+    Route::post('/account/address-default', [
+        'as'   => 'user.address.default',
+        'uses' => 'Frontend\UserController@defaultAddress',
+    ]);
+
+    Route::get('/account/reset-password', [
+        'as'   => 'user.reset.password',
+        'uses' => 'Frontend\UserController@showResetPasswordPage',
+    ]);
+
+    Route::post('/account/reset-password', [
+        'as'   => 'user.reset.password',
+        'uses' => 'Frontend\UserController@updatePassword',
+    ]);
+
 });
 
 

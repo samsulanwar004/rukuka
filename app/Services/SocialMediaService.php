@@ -17,6 +17,7 @@ class SocialMediaService
 	{
 		$this->user = $user;
 	}
+
 	public function authenticate($provider)
     {
         return Socialite::driver($provider)->redirect();
@@ -26,7 +27,7 @@ class SocialMediaService
     {
         try {
             $userSocial = Socialite::driver($provider)->user();
- 
+
             $user = $this->user->getUserByEmail($userSocial->getEmail());
 
             if (!$user) {
@@ -41,7 +42,7 @@ class SocialMediaService
             		->setLastName($nameArr[1])
             		->setSocialMediaType($provider)
             		->setSocialMediaId($userSocial->getId())
-            		->setAvatar($userSocial->getAvatar())            		
+            		->setAvatar($userSocial->avatar_original)            		
             		->create();
             }
 

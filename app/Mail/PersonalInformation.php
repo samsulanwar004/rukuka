@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Forgot extends Mailable
+class PersonalInformation extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -30,7 +30,7 @@ class Forgot extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.forgot', ['user' => $this->user])
-            ->subject('Reset Password');
+        return $this->markdown('emails.personal_information', ['user' => $this->user])
+            ->subject('Personal Information');
     }
 }

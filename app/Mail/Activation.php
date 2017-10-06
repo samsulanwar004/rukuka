@@ -31,6 +31,7 @@ class Activation extends Mailable
     public function build()
     {
 
-        return $this->markdown('emails.activation', ['user' => $this->user]);
+        return $this->markdown('emails.activation', ['user' => $this->user])
+            ->subject('Activation');
     }
 }

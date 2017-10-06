@@ -17,7 +17,7 @@
               </div>
               <div class="uk-width-1-5@m">
                 <ul class="uk-grid-small uk-flex-middle" uk-grid>
-                  <li><a class="uk-icon-button" uk-icon="icon: user" href="{{ route('user.profile') }}"></a></li>
+                  <li><a class="uk-icon-button" uk-icon="icon: user" href="{{ route('user') }}"></a></li>
                   <li><a class="uk-icon-button" uk-icon="icon: heart"></a></li>
                   <li><a class="uk-icon-button" uk-icon="icon: cart" href="bag.html"></a></li>
 

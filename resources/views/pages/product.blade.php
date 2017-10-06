@@ -23,7 +23,7 @@
     </div>
   </div>
   <div class="uk-width-2-5@m">
-    <h4 class="uk-margin-remove"><a href="#" class="uk-text-muted">{{ $product->designer->name }}</a></h4>
+    <h4 class="uk-margin-remove"><a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}" class="uk-text-muted">{{ $product->designer->name }}</a></h4>
     <h3 class="uk-margin-remove">{{ $product->name }}</h3>
     <h3 class="uk-margin-remove">{{ $product->currency }} {{ number_format($product->sell_price) }}</h3>
     <span class="uk-text-meta uk-text-bold">
