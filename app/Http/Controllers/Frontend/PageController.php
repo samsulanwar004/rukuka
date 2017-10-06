@@ -89,6 +89,11 @@ class PageController extends BaseController
 
         return view('pages.kids', compact('kids'));
     }
+
+    public function bag()
+    {
+        return view('pages.bag');
+    }
     
 
 }

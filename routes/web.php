@@ -46,6 +46,11 @@ Route::get('/landing/kids', [
     'uses' => 'Frontend\PageController@kids',
 ]);
 
+Route::get('/shopping-bag', [
+    'as'   => 'bag',
+    'uses' => 'Frontend\PageController@bag',
+]);
+
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [
         'as'   => 'login',
