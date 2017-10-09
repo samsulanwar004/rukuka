@@ -46,7 +46,12 @@ Route::get('/landing/kids', [
     'uses' => 'Frontend\PageController@kids',
 ]);
 
-Route::get('/shopping-bag', [
+Route::get('/bag', [
+    'as'   => 'bag',
+    'uses' => 'Frontend\PageController@bag',
+]);
+
+Route::post('/bag', [
     'as'   => 'bag',
     'uses' => 'Frontend\PageController@bag',
 ]);

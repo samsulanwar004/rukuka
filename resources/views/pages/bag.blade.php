@@ -22,29 +22,33 @@
           </tr>
       </thead>
       <tbody>
+         @forelse($bags as $item)
           <tr>
-              <td rowspan="2"><img class="uk-preserve-width" src="images/2_2.jpg" width="130" alt=""></td>
+              <td rowspan="2"><img class="uk-preserve-width" src="/{{ $item->options['photo'] }}" width="130" alt=""></td>
               <td class="uk-table-link">
-                  <a class="uk-link-reset" href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+                  <a class="uk-link-reset" href="">{{ $item->options['description'] }}</a>
               </td>
-              <td>WHITE</td>
-              <td class="uk-text-truncate">L</td>
+              <td>{{ $item->options['color'] }}</td>
+              <td class="uk-text-truncate">{{ $item->options['size'] }}</td>
               <td class="uk-text-nowrap">
                 <ul class="uk-grid-small uk-flex-middle" uk-grid>
-                  <li><a class="uk-icon-button" uk-icon="icon: minus"></a></li>
-                  <li><input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="1"></li>
-                  <li><a class="uk-icon-button" uk-icon="icon: plus"></a></li>
+                  <li><a class="uk-icon-button" uk-icon="icon: minus" href="{{ url("bag?decrease=$item->id") }}"></a></li>
+                  <li><input type="text" class="uk-input uk-form-width-xsmall uk-form-small" value="{{ $item->qty }}"></li>
+                  <li><a class="uk-icon-button" uk-icon="icon: plus" href="{{ url("bag?increment=$item->id") }}"></a></li>
                 </ul>
               </td>
-              <td class="uk-text-nowrap">$340.00</td>
+              <td class="uk-text-nowrap">{{ $item->price }}</td>
           </tr>
           <tr class="uk-background-muted">
             <td colspan="3"></td>
             <td colspan="2" class="uk-text-right">
               <button class="uk-button uk-button-small uk-button-default uk-padding-small-right uk-margin-remove">MOVE TO WISHLIST</button>
-              <button class="uk-button uk-button-small uk-button-default uk-padding-small-right uk-text-right">REMOVE FROM BAG</button>
+              <a class="uk-button uk-button-small uk-button-default uk-padding-small-right uk-text-right" href="{{ url("bag?remove=$item->id") }}">REMOVE FROM BAG</a>
             </td>
-          </tr>          
+          </tr>  
+          @empty
+            <tr><td colspan="6" align="center"><p>You have no items in the shopping bag</p></td></tr>
+          @endforelse
       </tbody>
   </table>
 </div>
@@ -59,11 +63,11 @@
     </p>
   </div>
   <div class="uk-text-right">
-    $1204.00
+    {{ $subtotal }}
     <br>
     free
     <p>
-    $1204.00
+    {{ $subtotal }}
   </p>
   </div>
 

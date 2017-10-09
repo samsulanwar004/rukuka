@@ -1,7 +1,9 @@
 @extends('app')
 
 @section('content')
-
+<div class="uk-grid-small uk-margin-top">
+    @include('partials.alert')
+</div>
 <div class="uk-grid-small uk-margin-top" uk-grid>
   <div class="uk-width-3-5@m">
     <div uk-grid>
@@ -74,17 +76,21 @@
         Color : {{ $product->color }}
       </div>
       <div class="">
-        <select class="uk-select">
-          <option>Select Size</option>
+        <select class="uk-select {{ $errors->has('size') ? ' uk-form-danger' : '' }}" id="size">
+          <option value="">Select Size</option>
           @foreach($product->stocks as $stock)
-            <option value="{{ $stock->id }}">{{ $stock->size }}</option>
+            <option value="{{ $stock->sku }}">{{ $stock->size }}</option>
           @endforeach
         </select>
       </div>
     </div>
     <div class="uk-child-width-1-2 uk-margin-small-top" uk-grid>
       <div class="">
+        <form action="{{ route('bag') }}" method="POST">
+          {{ csrf_field() }}
+          <input type="hidden" name="size" id="sku">
         <button class="uk-button uk-button-secondary uk-text-bold uk-padding-small-right"><span class="uk-margin-small-right uk-icon" uk-icon="icon: cart; ratio:0.8"></span> ADD TO BAG </button>
+      </form>
       </div>
       <div class="">
         <button class="uk-button uk-button-default uk-text-bold uk-padding-small-right">ADD TO WHISHLIST</button>
@@ -132,4 +138,17 @@
     <button class="uk-button uk-button-secondary">SHOW ALL PRODUCT</button>
   </div>
 </div>
+@endsection
+
+@section('footer_scripts')
+
+<script type="text/javascript">
+  $(function () {
+      $('#size').on('change', function () {
+        var size = this.value;
+        console.log(size);
+        $('#sku').val(size);
+      });
+  });
+</script>
 @endsection
