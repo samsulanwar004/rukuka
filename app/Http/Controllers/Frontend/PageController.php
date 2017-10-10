@@ -5,9 +5,22 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Repositories\ProductRepository;
 use App\Repositories\SettingRepository;
+use App\Repositories\UserRepository;
+use App\Repositories\ProductStockRepository;
+use Exception;
+use Carbon\Carbon;
+use App\Services\BagService;
 
 class PageController extends BaseController
 {
+    const INSTANCE_SHOP = 'shopping';
+
+    private $date;
+
+    public function __construct()
+    {
+        $this->date = Carbon::now('Asia/Jakarta');
+    }
 
     public function index()
     {
@@ -80,5 +93,75 @@ class PageController extends BaseController
 
         return view('pages.kids', compact('kids'));
     }
+
+    public function bag(Request $request)
+    {
+
+        $bag = new BagService;
+
+        //add or update product item to bag
+        if ($request->isMethod('post')) {
+            $this->validate($request, [
+                'size' => 'required|string|max:255'
+            ]);  
+
+            $stock = (new ProductStockRepository)->getStockBySku($request->input('size'));
+
+            $product = [
+                'id' => $stock->sku, 
+                'name' => $stock->product->name, 
+                'qty' => 1, 
+                'price' => $stock->product->sell_price, 
+                'options' => [
+                    'size' => $stock->size,
+                    'color' => $stock->product->color,
+                    'photo' => $stock->product->images->first()->photo,
+                    'description' => $stock->product->content
+                ]
+            ];
+
+            $bag->save($product, self::INSTANCE_SHOP);
+  
+        }
+
+        //increment the quantity
+        if ($request->has('increment')) {
+
+            $rowId = $bag->search($request->input('increment'), self::INSTANCE_SHOP);
+
+            if ($rowId) {
+                $item = $bag->getItemByRowId($rowId);
+
+                $bag->update($rowId, $item->qty + 1);
+            }
+        }
+
+        //decrease the quantity
+        if ($request->has('decrease')) {
+            $rowId = $bag->search($request->input('decrease'), self::INSTANCE_SHOP);
+
+            if ($rowId) {
+                $item = $bag->getItemByRowId($rowId);
+
+                $bag->update($rowId, $item->qty - 1);
+            }
+        }
+
+        //remove the item
+        if ($request->has('remove')) {
+            $rowId = $bag->search($request->input('remove'), self::INSTANCE_SHOP);
+
+            if ($rowId) {
+                $bag->remove($rowId);
+            }
+        }        
+
+        $bags = $bag->get(self::INSTANCE_SHOP);
+
+        $subtotal = $bag->subtotal();
+
+        return view('pages.bag', compact('bags', 'subtotal'));
+    }
+    
 
 }

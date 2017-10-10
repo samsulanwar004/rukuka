@@ -167,7 +167,11 @@ class CmsModulsSeeder extends Seeder {
 class CmsMenusSeeder extends Seeder {
 
     public function run()
-    {        
+    {    
+
+        $menu = DB::table('cms_menus');
+
+        $menu->truncate();    
         
         $data = [
         [
@@ -329,7 +333,6 @@ class CmsMenusSeeder extends Seeder {
         ]       
             ];
 
-        $menu = DB::table('cms_menus');  
 
         $menu->insert($data);
 
@@ -353,6 +356,12 @@ class CmsSettingSeeder extends Seeder
 {
     public function run()
     {
+
+        $settings = DB::table('cms_settings');
+
+        $settings->truncate();
+
+
         $data = [
         [            
             "name" => "main_banner",
@@ -870,7 +879,7 @@ class CmsSettingSeeder extends Seeder
             ];
 
 
-        DB::table('cms_settings')->insert($data);
+        $settings->insert($data);
     }
 }
 

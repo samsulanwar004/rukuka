@@ -1,7 +1,9 @@
 @extends('app')
 
 @section('content')
-
+<div class="uk-grid-small uk-margin-top">
+    @include('partials.alert')
+</div>
 <div class="uk-grid-small uk-margin-top" uk-grid>
   <div class="uk-width-3-5@m">
     <div uk-grid>
@@ -23,7 +25,7 @@
     </div>
   </div>
   <div class="uk-width-2-5@m">
-    <h4 class="uk-margin-remove"><a href="#" class="uk-text-muted">{{ $product->designer->name }}</a></h4>
+    <h4 class="uk-margin-remove"><a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}" class="uk-text-muted">{{ $product->designer->name }}</a></h4>
     <h3 class="uk-margin-remove">{{ $product->name }}</h3>
     <h3 class="uk-margin-remove">{{ $product->currency }} {{ number_format($product->sell_price) }}</h3>
     <span class="uk-text-meta uk-text-bold">
@@ -74,20 +76,28 @@
         Color : {{ $product->color }}
       </div>
       <div class="">
-        <select class="uk-select">
-          <option>Select Size</option>
+        <select class="uk-select {{ $errors->has('size') ? ' uk-form-danger' : '' }}" id="size">
+          <option value="">Select Size</option>
           @foreach($product->stocks as $stock)
-            <option value="{{ $stock->id }}">{{ $stock->size }}</option>
+            <option value="{{ $stock->sku }}">{{ $stock->size }}</option>
           @endforeach
         </select>
       </div>
     </div>
     <div class="uk-child-width-1-2 uk-margin-small-top" uk-grid>
       <div class="">
+        <form action="{{ route('bag') }}" method="POST">
+          {{ csrf_field() }}
+          <input type="hidden" name="size" id="bag">
         <button class="uk-button uk-button-secondary uk-text-bold uk-padding-small-right"><span class="uk-margin-small-right uk-icon" uk-icon="icon: cart; ratio:0.8"></span> ADD TO BAG </button>
+      </form>
       </div>
       <div class="">
-        <button class="uk-button uk-button-default uk-text-bold uk-padding-small-right">ADD TO WHISHLIST</button>
+        <form action="{{ route('user.wishlist') }}" method="POST">
+          {{ csrf_field() }}
+          <input type="hidden" name="size" id="wishlist">
+        <button class="uk-button uk-button-default uk-text-bold uk-padding-small-right">ADD TO WISHLIST</button>
+        </form>
       </div>
     </div>
     <hr>
@@ -132,4 +142,17 @@
     <button class="uk-button uk-button-secondary">SHOW ALL PRODUCT</button>
   </div>
 </div>
+@endsection
+
+@section('footer_scripts')
+
+<script type="text/javascript">
+  $(function () {
+      $('#size').on('change', function () {
+        var size = this.value;
+        $('#bag').val(size);
+        $('#wishlist').val(size);
+      });
+  });
+</script>
 @endsection

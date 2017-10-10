@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'password', 'avatar', 'dob', 'gender'
     ];
 
     /**
@@ -26,4 +26,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function setPasswordAttribute($password){
+        $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function creditCards()
+    {
+        return $this->hasMany(CreditCard::class, 'users_id', 'id')->orderBy('id', 'DESC');
+    }
+
+    public function address()
+    {
+        return $this->hasMany(Address::class, 'users_id', 'id')->orderBy('id', 'DESC');
+    }
+
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class, 'users_id', 'id')->orderBy('id', 'DESC');
+    }
 }

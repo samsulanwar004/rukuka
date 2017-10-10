@@ -16,6 +16,11 @@ Route::get('/', [
     'uses' => 'Frontend\PageController@index',
 ]);
 
+Route::get('/home', [
+    'as'   => 'home',
+    'uses' => 'Frontend\PageController@index',
+]);
+
 Route::get('/shop/{categories}/{category}/{slug?}', [
     'as'   => 'shop',
     'uses' => 'Frontend\PageController@shop',
@@ -40,3 +45,147 @@ Route::get('/landing/kids', [
     'as'   => 'kids',
     'uses' => 'Frontend\PageController@kids',
 ]);
+
+Route::get('/bag', [
+    'as'   => 'bag',
+    'uses' => 'Frontend\PageController@bag',
+]);
+
+Route::post('/bag', [
+    'as'   => 'bag',
+    'uses' => 'Frontend\PageController@bag',
+]);
+
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [
+        'as'   => 'login',
+        'uses' => 'Frontend\LoginController@showLoginPage',
+    ]);
+
+    Route::post('/register', [
+        'as'   => 'register',
+        'uses' => 'Frontend\LoginController@register',
+    ]);
+
+    Route::get('/activation/{code}', [
+        'as'   => 'activation',
+        'uses' => 'Frontend\LoginController@activation',
+    ]);
+
+    Route::post('/authenticate', [
+        'as'   => 'authenticate',
+        'uses' => 'Frontend\LoginController@authenticate',
+    ]);
+
+    Route::get('/login/{provider}', [
+        'as'   => 'social.login',
+        'uses' => 'Frontend\LoginController@socialLogin',
+    ])->where([
+        'provider' => 'facebook|google|twitter'
+    ]);
+
+    Route::get('/login/{provider}/callback', [
+        'as'   => 'social.login.callback',
+        'uses' => 'Frontend\LoginController@socialLoginCallback',
+    ])->where([
+        'provider' => 'facebook|google|twitter'
+    ]);
+
+    Route::get('/forgot', [
+        'as'   => 'page.forgot',
+        'uses' => 'Frontend\LoginController@showForgotPage',
+    ]);
+
+    Route::post('/forgot', [
+        'as'   => 'forgot',
+        'uses' => 'Frontend\LoginController@forgot',
+    ]);
+
+    Route::get('/reset/{code}', [
+        'as'   => 'page.reset',
+        'uses' => 'Frontend\LoginController@showResetPage',
+    ]);
+
+    Route::post('/reset', [
+        'as'   => 'reset',
+        'uses' => 'Frontend\LoginController@reset',
+    ]);
+
+
+});
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/account', [
+        'as'   => 'user',
+        'uses' => 'Frontend\UserController@index',
+    ]);
+
+    Route::get('/account/detail', [
+        'as'   => 'user.detail',
+        'uses' => 'Frontend\UserController@showDetailPage',
+    ]);
+
+    Route::post('/account/update', [
+        'as'   => 'user.update',
+        'uses' => 'Frontend\UserController@update',
+    ]);
+
+    Route::get('/logout', [
+        'as'   => 'logout',
+        'uses' => 'Frontend\LoginController@logout',
+    ]);
+
+    Route::get('/account/cc', [
+        'as'   => 'user.cc',
+        'uses' => 'Frontend\UserController@showCreditCardPage',
+    ]);
+
+    Route::post('/account/cc', [
+        'as'   => 'user.cc',
+        'uses' => 'Frontend\UserController@saveCreditCard',
+    ]);
+
+    Route::get('/account/address', [
+        'as'   => 'user.address',
+        'uses' => 'Frontend\UserController@showAddressPage',
+    ]);
+
+    Route::post('/account/address', [
+        'as'   => 'user.address',
+        'uses' => 'Frontend\UserController@saveAddress',
+    ]);
+
+    Route::post('/account/cc-default', [
+        'as'   => 'user.cc.default',
+        'uses' => 'Frontend\UserController@defaultCreditCard',
+    ]);
+
+    Route::post('/account/address-default', [
+        'as'   => 'user.address.default',
+        'uses' => 'Frontend\UserController@defaultAddress',
+    ]);
+
+    Route::get('/account/reset-password', [
+        'as'   => 'user.reset.password',
+        'uses' => 'Frontend\UserController@showResetPasswordPage',
+    ]);
+
+    Route::post('/account/reset-password', [
+        'as'   => 'user.reset.password',
+        'uses' => 'Frontend\UserController@updatePassword',
+    ]);
+
+    Route::get('/account/wishlist', [
+        'as'   => 'user.wishlist',
+        'uses' => 'Frontend\UserController@showWishlistPage',
+    ]);
+
+    Route::post('/account/wishlist', [
+        'as'   => 'user.wishlist',
+        'uses' => 'Frontend\UserController@wishlist',
+    ]);
+
+});
+
+
