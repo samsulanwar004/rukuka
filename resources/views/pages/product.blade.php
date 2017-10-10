@@ -88,12 +88,16 @@
       <div class="">
         <form action="{{ route('bag') }}" method="POST">
           {{ csrf_field() }}
-          <input type="hidden" name="size" id="sku">
+          <input type="hidden" name="size" id="bag">
         <button class="uk-button uk-button-secondary uk-text-bold uk-padding-small-right"><span class="uk-margin-small-right uk-icon" uk-icon="icon: cart; ratio:0.8"></span> ADD TO BAG </button>
       </form>
       </div>
       <div class="">
-        <button class="uk-button uk-button-default uk-text-bold uk-padding-small-right">ADD TO WHISHLIST</button>
+        <form action="{{ route('user.wishlist') }}" method="POST">
+          {{ csrf_field() }}
+          <input type="hidden" name="size" id="wishlist">
+        <button class="uk-button uk-button-default uk-text-bold uk-padding-small-right">ADD TO WISHLIST</button>
+        </form>
       </div>
     </div>
     <hr>
@@ -146,8 +150,8 @@
   $(function () {
       $('#size').on('change', function () {
         var size = this.value;
-        console.log(size);
-        $('#sku').val(size);
+        $('#bag').val(size);
+        $('#wishlist').val(size);
       });
   });
 </script>

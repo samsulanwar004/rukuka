@@ -176,6 +176,16 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@updatePassword',
     ]);
 
+    Route::get('/account/wishlist', [
+        'as'   => 'user.wishlist',
+        'uses' => 'Frontend\UserController@showWishlistPage',
+    ]);
+
+    Route::post('/account/wishlist', [
+        'as'   => 'user.wishlist',
+        'uses' => 'Frontend\UserController@wishlist',
+    ]);
+
 });
 
 

@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\Services\EmailService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Wishlist;
 
 class UserRepository
 {
@@ -420,5 +421,32 @@ class UserRepository
 
 	       throw new Exception("The specified old password does not match the database password", 1);
 	    }
+	}
+
+	public function persistWishlist($product, $id = null)
+	{
+		$wishlist = is_null($id) ? new Wishlist : $this->getWishlistById($id);
+		$wishlist->content = $product;
+		
+
+		if (is_null($id)) {
+			$wishlist->user()->associate($this->getUser());
+			$wishlist->stock()->associate($product['product_stocks_id']);
+		}
+
+		$wishlist->save();
+	}
+
+	public function getWishlistById($id)
+	{
+		return Wishlist::where('id', $id)
+			->first();
+	}
+
+	public function checkWishlistExist($userId, $stockId)
+	{
+		return Wishlist::where('product_stocks_id', $stockId)
+			->where('users_id', $userId)
+			->first();
 	}
 }
