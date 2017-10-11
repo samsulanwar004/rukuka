@@ -228,7 +228,19 @@ class UserController extends BaseController
     {
         $user = $this->getUserActive();
 
-        $wishlists = $user->wishlists;
+        $wishlists = collect($user->wishlists)->map(function($entry) {
+
+            return [
+                'name' => $entry->stock->product->name,
+                'slug' => $entry->stock->product->slug,
+                'price' => $entry->stock->product->sell_price,
+                'currency' => $entry->stock->product->currency,
+                'size' => $entry->content['options']['size'],
+                'color' => $entry->content['options']['color'],
+                'photo' => $entry->content['options']['photo'],
+                'qty' => $entry->content['qty'],
+            ];
+        });
 
         return view('users.wishlist', compact('user', 'wishlists'));
     }
@@ -263,7 +275,7 @@ class UserController extends BaseController
                     'photo' => $stock->product->images->first()->photo,
                     'description' => $stock->product->content
                 ],
-                'product_stocks_id' => $stock->id,
+                'product_stocks_id' => $stock->id
             ];
 
             $this->user
