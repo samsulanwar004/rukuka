@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Exception;
 use DB;
 use App\Repositories\UserRepository;
+use App\Repositories\ProductStockRepository;
 
 class UserController extends BaseController
 {
@@ -13,6 +14,7 @@ class UserController extends BaseController
     protected $redirectAfterSaveCC = '/account/cc';
     protected $redirectAfterSaveAddress = '/account/address';
     protected $redirectAfterSavePassword = '/account/reset-password';
+    protected $redirectAfterAddWishlist = '/account/wishlist';
     private $user;
 
     public function __construct(UserRepository $user)
@@ -219,6 +221,62 @@ class UserController extends BaseController
         	DB::rollBack();
 
         	return back()->withErrors($e->getMessage());
+        }
+    }
+
+    public function showWishlistPage()
+    {
+        $user = $this->getUserActive();
+
+        $wishlists = $user->wishlists;
+
+        return view('users.wishlist', compact('user', 'wishlists'));
+    }
+
+    public function wishlist(Request $request)
+    {
+        $this->validate($request, [
+            'size' => 'required|string|max:255'
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $user = $this->getUserActive();
+
+            $stock = (new ProductStockRepository)->getStockBySku($request->input('size'));
+
+            $wishlistExist = $this->user->checkWishlistExist($user->id, $stock->id);
+
+            if ($wishlistExist) {
+                throw new Exception("Item have been added", 1);   
+            }
+
+            $product = [
+                'id' => $stock->sku, 
+                'name' => $stock->product->name, 
+                'qty' => 1, 
+                'price' => $stock->product->sell_price, 
+                'options' => [
+                    'size' => $stock->size,
+                    'color' => $stock->product->color,
+                    'photo' => $stock->product->images->first()->photo,
+                    'description' => $stock->product->content
+                ],
+                'product_stocks_id' => $stock->id,
+            ];
+
+            $this->user
+                ->setUser($user)
+                ->persistWishlist($product);
+
+            DB::commit();
+
+            return redirect($this->redirectAfterAddWishlist)->with(['success' => 'Add wishlist successfully!']);
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return back()->withErrors($e->getMessage());
         }
     }
 

@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Address::class, 'users_id', 'id')->orderBy('id', 'DESC');
     }
+
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class, 'users_id', 'id')->orderBy('id', 'DESC');
+    }
 }

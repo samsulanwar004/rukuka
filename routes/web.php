@@ -46,6 +46,16 @@ Route::get('/landing/kids', [
     'uses' => 'Frontend\PageController@kids',
 ]);
 
+Route::get('/bag', [
+    'as'   => 'bag',
+    'uses' => 'Frontend\PageController@bag',
+]);
+
+Route::post('/bag', [
+    'as'   => 'bag',
+    'uses' => 'Frontend\PageController@bag',
+]);
+
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [
         'as'   => 'login',
@@ -164,6 +174,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/account/reset-password', [
         'as'   => 'user.reset.password',
         'uses' => 'Frontend\UserController@updatePassword',
+    ]);
+
+    Route::get('/account/wishlist', [
+        'as'   => 'user.wishlist',
+        'uses' => 'Frontend\UserController@showWishlistPage',
+    ]);
+
+    Route::post('/account/wishlist', [
+        'as'   => 'user.wishlist',
+        'uses' => 'Frontend\UserController@wishlist',
     ]);
 
 });
