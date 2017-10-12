@@ -15,7 +15,7 @@
             <!-- start product -->
             <div class="uk-card uk-card-small uk-padding-remove">
                 <div class="uk-card-media-top">
-                    <img src="/{{ $wish->content['options']['photo'] }}" alt="">
+                    <img src="/{{ $wish['photo'] }}" alt="">
 
                 </div>
                 <div class="uk-card-body uk-padding-remove uk-margin-small-top">
@@ -43,12 +43,12 @@
                             </div>
                         </div>
                       </div>
-                        <img src="/{{ $wish->content['options']['photo'] }}" alt="">
+                        <img src="/{{ $wish['photo'] }}" alt="">
                     </div>
                     <div class="uk-card-body uk-padding-small uk-margin-small-top">
-                        <a href="#">Slim-Fit Stretch-Cotton Twill Bermuda Shorts</a>
+                        <a href="/product/{{ $wish['slug'] }}">{{ $wish['name'] }}</a>
                         <br>
-                        <span>{{ $wish->content['price'] }}</span>
+                        <span>{{ $wish['currency'] }} {{ $wish['price'] }}</span>
                         <br>
                         <button type="button" class="uk-button-secondary uk-button-small uk-width-1-1" name="button">add to cart</button>
                     </div>
@@ -56,13 +56,13 @@
                     <div class="uk-card-footer uk-remove-padding-vertical uk-text-meta uk-padding-small">
                         <div class="uk-child-width-1-3" uk-grid>
                           <div class="">
-                            color: <br> {{ $wish->content['options']['color'] }}
+                            color: <br> {{ $wish['color'] }}
                           </div>
                           <div class="">
-                            size: <br> {{ $wish->content['options']['size'] }}
+                            size: <br> {{ $wish['size'] }}
                           </div>
                           <div class="">
-                            Qty: <br> {{ $wish->content['qty'] }}
+                            Qty: <br> {{ $wish['qty'] }}
                           </div>
                         </div>
                     </div>

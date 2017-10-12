@@ -1,6 +1,6 @@
 <script>
     export default {
-        props: ['api'],
+        props: ['api', 'men_link', 'women_link', 'kid_link'],
         created() {
             var self = this;
             var api = this.api;
@@ -44,7 +44,10 @@
                 menCloths: {},
                 womenCloths: {},
                 kidCloths: {},
-                designers: {}
+                designers: {},
+                menLink: this.men_link,
+                womenLink: this.women_link,
+                kidLink: this.kid_link,
             }
         }
     }
@@ -59,7 +62,7 @@
 
           <ul class="uk-navbar-nav">
               <li>
-                  <a href="/landing/women"><h5 class="uk-margin-remove">WOMEN</h5></a>
+                  <a :href="womenLink"><h5 class="uk-margin-remove">WOMEN</h5></a>
                   <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                       <div class="uk-navbar-dropdown-grid" uk-grid>
                         <div class="uk-width-1-5@m">
@@ -126,7 +129,7 @@
                       </div>
                   </div>
               </li>
-              <li><a href="/landing/men"><h5 class="uk-margin-remove">MEN</h5></a>
+              <li><a :href="menLink"><h5 class="uk-margin-remove">MEN</h5></a>
                 <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                     <div class="uk-navbar-dropdown-grid" uk-grid>
                       <div class="uk-width-1-5@m uk-margin-remove uk-padding-remove">
@@ -193,7 +196,7 @@
                     </div>
                 </div>
               </li>
-              <li><a href="/landing/kids"><h5 class="uk-margin-remove">KIDS</h5></a>
+              <li><a :href="kidLink"><h5 class="uk-margin-remove">KIDS</h5></a>
                 <div class="uk-navbar-dropdown uk-navbar-dropdown-width-3">
                     <div class="uk-navbar-dropdown-grid uk-child-width-1-3" uk-grid>
                         <div>
