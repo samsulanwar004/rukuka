@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 class BaseController extends Controller
 {  
 
-    public function getUserActive()
+    protected function getUserActive()
     {
     	return auth('web')->user();
     }
