@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Exception;
 
 class BaseApiController extends Controller
 {
@@ -94,6 +95,11 @@ class BaseApiController extends Controller
             'status' => $status,
             'message' => $message,
         ];
+    }
+
+    protected function getUserActive()
+    {
+        return auth('api')->user();
     }
 
 }

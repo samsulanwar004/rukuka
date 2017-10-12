@@ -74,6 +74,7 @@ class UserRepository
 		$user->avatar = $this->getAvatar();
 		$user->verification_token = $verificationToken;
 		$user->verification_expired = $verificationExpired;
+		$user->api_token = str_random(60);
 
 		if ($user->social_media_type != 'web') {
 			$user->status = 1;
