@@ -7,9 +7,12 @@ use Exception;
 use DB;
 use App\Repositories\UserRepository;
 use App\Repositories\ProductStockRepository;
+use App\Services\BagService;
 
 class UserController extends BaseController
 {
+    const INSTANCE_SHOP = 'shopping';
+
     protected $redirectAfterSaveProfile = '/account/detail';
     protected $redirectAfterSaveCC = '/account/cc';
     protected $redirectAfterSaveAddress = '/account/address';
@@ -267,7 +270,7 @@ class UserController extends BaseController
             $product = [
                 'id' => $stock->sku, 
                 'name' => $stock->product->name, 
-                'qty' => 1, 
+                'qty' => $request->has('qty') ? $request->input('qty') : 1, 
                 'price' => $stock->product->sell_price, 
                 'options' => [
                     'size' => $stock->size,
@@ -281,6 +284,16 @@ class UserController extends BaseController
             $this->user
                 ->setUser($user)
                 ->persistWishlist($product);
+
+            //remove the item
+            if ($request->has('move')) {
+                $bag = new BagService;
+                $rowId = $bag->search($request->input('move'), self::INSTANCE_SHOP);
+
+                if ($rowId) {
+                    $bag->remove($rowId);
+                }
+            }
 
             DB::commit();
 
