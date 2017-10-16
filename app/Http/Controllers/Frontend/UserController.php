@@ -234,6 +234,8 @@ class UserController extends BaseController
         $wishlists = collect($user->wishlists)->map(function($entry) {
 
             return [
+                'id' => $entry->id,
+                'sku' => $entry->stock->sku,
                 'name' => $entry->stock->product->name,
                 'slug' => $entry->stock->product->slug,
                 'price' => $entry->stock->product->sell_price,
@@ -301,6 +303,19 @@ class UserController extends BaseController
         } catch (Exception $e) {
             DB::rollBack();
 
+            return back()->withErrors($e->getMessage());
+        }
+    }
+
+    public function wishlistDestroy($id)
+    {
+        try {
+            $this->user
+                ->wishlistDestroy($id);
+
+            return redirect($this->redirectAfterAddWishlist)->with(['success' => 'Delete wishlist successfully!']);
+
+        } catch (Exception $e) {
             return back()->withErrors($e->getMessage());
         }
     }

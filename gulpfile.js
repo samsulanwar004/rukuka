@@ -16,7 +16,8 @@ elixir(function(mix) {
     mix.scripts([
         assetPath + 'uikit/js/uikit-core.min.js',
         assetPath + 'uikit/js/uikit-icons.min.js',
-        assetPath + 'uikit/js/uikit.min.js'
+        assetPath + 'uikit/js/uikit.min.js',
+        assetPath + 'js/custom.js',
     ], 'public/js/app.js');
 
     mix.styles([

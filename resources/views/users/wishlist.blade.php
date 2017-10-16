@@ -36,13 +36,30 @@
                             <div id="parent-drop-card-click">
                               <ul class="uk-list">
                                 <li><a href="#" class="uk-icon-button"  uk-icon="icon: pencil"></a></li>
-                                <li><a href="#" class="uk-icon-button"  uk-icon="icon: trash"></a></li>
+                                <li>
+                                  <a href="#destroy-{{ $wish['id'] }}" class="uk-icon-button"  uk-icon="icon: trash" uk-toggle></a>
+                                  <!-- This is the modal -->
+                                  <div id="destroy-{{ $wish['id'] }}" uk-modal>
+                                      <div class="uk-modal-dialog uk-modal-body">
+                                          <h2 class="uk-modal-title">Confirmation</h2>
+                                          <p>Delete your wishlist {{ $wish['name'] }} ?</p>
+                                          <form action="{{ route('user.wishlist.destroy', ['id' => $wish['id'] ]) }}" method="POST">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <p class="uk-text-right">
+                                                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                                                <button class="uk-button uk-button-primary" type="submit">Save</button>
+                                            </p>
+                                          </form>
+                                          
+                                      </div>
+                                  </div>
+                                </li>
 
                               </ul>
-
                             </div>
                         </div>
-                      </div>
+                      </div>                      
                         <img src="/{{ $wish['photo'] }}" alt="">
                     </div>
                     <div class="uk-card-body uk-padding-small uk-margin-small-top">
