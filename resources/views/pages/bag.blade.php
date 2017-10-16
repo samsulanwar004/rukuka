@@ -1,7 +1,9 @@
 @extends('app')
 
 @section('content')
-
+<div class="uk-grid-small uk-margin-top">
+    @include('partials.alert')
+</div>
 <div class="uk-grid-small uk-margin-top">
   <h2 class="uk-text-center">SHOPPING BAG</h2>
   <p class="uk-text-center">NEED HELP?  CALL US: +44 (0)20 3471 4090 |  <a href="#" class="uk-text-muted">EMAIL CUSTOMER CARE</a> |
@@ -42,8 +44,13 @@
           <tr class="uk-background-muted">
             <td colspan="3"></td>
             <td colspan="2" class="uk-text-right">
+              <form action="{{ route('user.wishlist') }}" method="POST">
+                {{ csrf_field() }}
+                <input type="hidden" name="size" value="{{ $item->id }}">
+                <input type="hidden" name="qty" value="{{ $item->qty }}">
+                <input type="hidden" name="move" value="{{ $item->id }}">
               <button class="uk-button uk-button-small uk-button-default uk-padding-small-right uk-margin-remove">MOVE TO WISHLIST</button>
-              <a class="uk-button uk-button-small uk-button-default uk-padding-small-right uk-text-right" href="{{ url("bag?remove=$item->id") }}">REMOVE FROM BAG</a>
+              <a class="uk-button uk-button-small uk-button-default uk-padding-small-right uk-text-right" href="{{ url("bag?remove=$item->id") }}">REMOVE FROM BAG</a></form>
             </td>
           </tr>  
           @empty
