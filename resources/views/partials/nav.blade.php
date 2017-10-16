@@ -15,19 +15,24 @@
                   <h2><b>KUKA</b> INDONESIA</h2>
                 </div>
               </div>
-              <div class="uk-width-1-5@m">
-                <ul class="uk-grid-small uk-flex-middle" uk-grid>
-                  <li><a class="uk-icon-button" uk-icon="icon: user" href="{{ route('user') }}"></a></li>
-                  <li><a class="uk-icon-button" uk-icon="icon: heart"></a></li>
-                  <li><a class="uk-icon-button" uk-icon="icon: cart" href="{{ route('bag') }}"></a></li>
-
-                </ul>
-
-              </div>
+              <user-panel 
+                profile_link="{{ route('user') }}"
+                wishlist_link="{{ route('user.wishlist') }}"
+                bag_link="{{ route('bag') }}"
+                bag_count="{{ Cart::instance('shopping')->content()->count() }}"
+                login_link="{{ route('login') }}"
+                auth="{{ Auth::check() ? 1 : 0 }}"
+                wishlist_api="{{ route('wishlist', ['api_token' => Auth::user('web')->api_token]) }}"
+              ></user-panel>
           </div>
 
         </div>
     </div>
-    <navigation api="{{ route('menu')}}"></navigation>
+    <navigation 
+      api="{{ route('menu')}}"
+      men_link="{{ route('men') }}"
+      women_link="{{ route('women') }}"
+      kid_link="{{ route('kids') }}"
+    ></navigation>
 
   </div>

@@ -21,6 +21,7 @@ elixir(function(mix) {
 
     mix.styles([
         assetPath + 'uikit/css/uikit.min.css',
+        assetPath + 'css/custom.css',
     ], 'public/css/app.css');
 
     mix.version([

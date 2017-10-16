@@ -89,8 +89,8 @@
         <form action="{{ route('bag') }}" method="POST">
           {{ csrf_field() }}
           <input type="hidden" name="size" id="bag">
-        <button class="uk-button uk-button-secondary uk-text-bold uk-padding-small-right"><span class="uk-margin-small-right uk-icon" uk-icon="icon: cart; ratio:0.8"></span> ADD TO BAG </button>
-      </form>
+          <button class="uk-button uk-button-secondary uk-text-bold uk-padding-small-right"><span class="uk-margin-small-right uk-icon" uk-icon="icon: cart; ratio:0.8"></span> ADD TO BAG </button>
+        </form>
       </div>
       <div class="">
         <form action="{{ route('user.wishlist') }}" method="POST">

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use Exception;
 use App\Repositories\DesignerRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;

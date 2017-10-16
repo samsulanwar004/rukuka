@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueResource from 'vue-resource-2';
 
+import UserPanel from './components/UserPanel.vue';
 import Navigation from './components/Navigation.vue';
 import Popular from './components/Popular.vue';
 import Related from './components/Related.vue';
@@ -12,6 +13,7 @@ Vue.config.silent = true
 
 Vue.use(VueResource);
 
+Vue.component('user-panel', UserPanel);
 Vue.component('navigation', Navigation);
 
 new Vue({

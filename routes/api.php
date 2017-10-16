@@ -22,3 +22,10 @@ Route::get('v1/menu/{parent?}', 'Api\PageController@menu')->name('menu');
 Route::get('v1/popular', 'Api\PageController@popular')->name('populer');
 
 Route::get('v1/related/{categoryId}', 'Api\PageController@related')->name('related');
+
+Route::group([
+	'prefix' => 'v1', 
+	'middleware' => 'auth:api'
+], function () {
+	Route::get('wishlist/', 'Api\UserController@wishlist')->name('wishlist');
+});

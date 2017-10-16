@@ -7,9 +7,12 @@ use Exception;
 use DB;
 use App\Repositories\UserRepository;
 use App\Repositories\ProductStockRepository;
+use App\Services\BagService;
 
 class UserController extends BaseController
 {
+    const INSTANCE_SHOP = 'shopping';
+
     protected $redirectAfterSaveProfile = '/account/detail';
     protected $redirectAfterSaveCC = '/account/cc';
     protected $redirectAfterSaveAddress = '/account/address';
@@ -228,7 +231,19 @@ class UserController extends BaseController
     {
         $user = $this->getUserActive();
 
-        $wishlists = $user->wishlists;
+        $wishlists = collect($user->wishlists)->map(function($entry) {
+
+            return [
+                'name' => $entry->stock->product->name,
+                'slug' => $entry->stock->product->slug,
+                'price' => $entry->stock->product->sell_price,
+                'currency' => $entry->stock->product->currency,
+                'size' => $entry->content['options']['size'],
+                'color' => $entry->content['options']['color'],
+                'photo' => $entry->content['options']['photo'],
+                'qty' => $entry->content['qty'],
+            ];
+        });
 
         return view('users.wishlist', compact('user', 'wishlists'));
     }
@@ -255,7 +270,7 @@ class UserController extends BaseController
             $product = [
                 'id' => $stock->sku, 
                 'name' => $stock->product->name, 
-                'qty' => 1, 
+                'qty' => $request->has('qty') ? $request->input('qty') : 1, 
                 'price' => $stock->product->sell_price, 
                 'options' => [
                     'size' => $stock->size,
@@ -263,12 +278,22 @@ class UserController extends BaseController
                     'photo' => $stock->product->images->first()->photo,
                     'description' => $stock->product->content
                 ],
-                'product_stocks_id' => $stock->id,
+                'product_stocks_id' => $stock->id
             ];
 
             $this->user
                 ->setUser($user)
                 ->persistWishlist($product);
+
+            //remove the item
+            if ($request->has('move')) {
+                $bag = new BagService;
+                $rowId = $bag->search($request->input('move'), self::INSTANCE_SHOP);
+
+                if ($rowId) {
+                    $bag->remove($rowId);
+                }
+            }
 
             DB::commit();
 
