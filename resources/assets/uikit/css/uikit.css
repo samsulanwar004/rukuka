@@ -484,7 +484,7 @@ textarea {
  ========================================================================== */
 a.uk-link-muted,
 .uk-link-muted a {
-  color: #999;
+  color: #666;
 }
 a.uk-link-muted:hover,
 .uk-link-muted a:hover {
@@ -837,7 +837,7 @@ a.uk-link-reset:focus,
   /* 1 */
   font-size: 12px;
   font-weight: normal;
-  color: #999;
+  color: #666;
   text-transform: uppercase;
 }
 /* Cell
@@ -862,7 +862,7 @@ a.uk-link-reset:focus,
 .uk-table caption {
   font-size: 12px;
   text-align: left;
-  color: #999;
+  color: #666;
 }
 /* Row
  ========================================================================== */
@@ -1031,7 +1031,7 @@ a.uk-link-reset:focus,
  * Link
  */
 .uk-icon-link {
-  color: #999;
+  color: #666;
 }
 .uk-icon-link:hover,
 .uk-icon-link:focus {
@@ -1053,7 +1053,7 @@ a.uk-link-reset:focus,
   height: 36px;
   border-radius: 500px;
   background: #f8f8f8;
-  color: #999;
+  color: #666;
   vertical-align: middle;
   /* 1 */
   display: -ms-inline-flexbox;
@@ -1258,29 +1258,29 @@ a.uk-link-reset:focus,
 .uk-select:disabled,
 .uk-textarea:disabled {
   background-color: #f8f8f8;
-  color: #999;
+  color: #666;
   border-color: #e5e5e5;
 }
 /*
  * Placeholder
  */
 .uk-input:-ms-input-placeholder {
-  color: #999 !important;
+  color: #666 !important;
 }
 .uk-input::-moz-placeholder {
-  color: #999;
+  color: #666;
 }
 .uk-input::-webkit-input-placeholder {
-  color: #999;
+  color: #666;
 }
 .uk-textarea:-ms-input-placeholder {
-  color: #999 !important;
+  color: #666 !important;
 }
 .uk-textarea::-moz-placeholder {
-  color: #999;
+  color: #666;
 }
 .uk-textarea::-webkit-input-placeholder {
-  color: #999;
+  color: #666;
 }
 /* Style modifier (`uk-input`, `uk-select` and `uk-textarea`)
  ========================================================================== */
@@ -1379,7 +1379,7 @@ select.uk-form-width-xsmall {
  * Disabled
  */
 .uk-select:not([multiple]):not([size]):disabled {
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Cpolygon%20fill%3D%22%23999%22%20points%3D%224%201%201%206%207%206%22%3E%3C%2Fpolygon%3E%0A%20%20%20%20%3Cpolygon%20fill%3D%22%23999%22%20points%3D%224%2013%201%208%207%208%22%3E%3C%2Fpolygon%3E%0A%3C%2Fsvg%3E");
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Cpolygon%20fill%3D%22%23666%22%20points%3D%224%201%201%206%207%206%22%3E%3C%2Fpolygon%3E%0A%20%20%20%20%3Cpolygon%20fill%3D%22%23666%22%20points%3D%224%2013%201%208%207%208%22%3E%3C%2Fpolygon%3E%0A%3C%2Fsvg%3E");
 }
 /* Radio and checkbox
  * Note: Only works in Chrome, Safari, Opera and Edge
@@ -1461,13 +1461,13 @@ select.uk-form-width-xsmall {
   border-color: #e5e5e5;
 }
 .uk-radio:disabled:checked {
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Ccircle%20fill%3D%22%23999%22%20cx%3D%228%22%20cy%3D%228%22%20r%3D%222%22%3E%3C%2Fcircle%3E%0A%3C%2Fsvg%3E");
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Ccircle%20fill%3D%22%23666%22%20cx%3D%228%22%20cy%3D%228%22%20r%3D%222%22%3E%3C%2Fcircle%3E%0A%3C%2Fsvg%3E");
 }
 .uk-checkbox:disabled:checked {
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2214%22%20height%3D%2211%22%20viewBox%3D%220%200%2014%2011%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Cpolygon%20fill%3D%22%23999%22%20points%3D%2212%201%205%207.5%202%205%201%205.5%205%2010%2013%201.5%22%2F%3E%0A%3C%2Fsvg%3E");
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2214%22%20height%3D%2211%22%20viewBox%3D%220%200%2014%2011%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Cpolygon%20fill%3D%22%23666%22%20points%3D%2212%201%205%207.5%202%205%201%205.5%205%2010%2013%201.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 .uk-checkbox:disabled:indeterminate {
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Crect%20fill%3D%22%23999%22%20x%3D%223%22%20y%3D%228%22%20width%3D%2210%22%20height%3D%221%22%3E%3C%2Frect%3E%0A%3C%2Fsvg%3E");
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Crect%20fill%3D%22%23666%22%20x%3D%223%22%20y%3D%228%22%20width%3D%2210%22%20height%3D%221%22%3E%3C%2Frect%3E%0A%3C%2Fsvg%3E");
 }
 /* Legend
  ========================================================================== */
@@ -1605,7 +1605,7 @@ select.uk-form-width-xsmall {
   -webkit-align-items: center;
   align-items: center;
   /* 4 */
-  color: #999;
+  color: #666;
 }
 /*
  * Required for `a`.
@@ -1793,7 +1793,7 @@ select.uk-form-width-xsmall {
 .uk-button-secondary:disabled,
 .uk-button-danger:disabled {
   background-color: transparent;
-  color: #999;
+  color: #666;
   border-color: #e5e5e5;
 }
 /* Size modifiers
@@ -1845,7 +1845,7 @@ select.uk-form-width-xsmall {
 }
 /* Disabled */
 .uk-button-text:disabled {
-  color: #999;
+  color: #666;
 }
 .uk-button-text:disabled::before {
   display: none;
@@ -1871,7 +1871,7 @@ select.uk-form-width-xsmall {
 }
 /* Disabled */
 .uk-button-link:disabled {
-  color: #999;
+  color: #666;
   text-decoration: none;
 }
 /* Group
@@ -2734,7 +2734,7 @@ select.uk-form-width-xsmall {
   overflow: visible;
   /* 4 */
   font: inherit;
-  color: #999;
+  color: #666;
   /* 5 */
   text-transform: none;
   /* 6. */
@@ -2836,7 +2836,7 @@ select.uk-form-width-xsmall {
  */
 .uk-totop {
   padding: 5px;
-  color: #999;
+  color: #666;
   -webkit-transition: color 0.1s ease-in-out;
   transition: color 0.1s ease-in-out;
 }
@@ -3084,10 +3084,10 @@ select.uk-form-width-xsmall {
 .uk-article-meta {
   font-size: 12px;
   line-height: 1.4;
-  color: #999;
+  color: #666;
 }
 .uk-article-meta a {
-  color: #999;
+  color: #666;
 }
 .uk-article-meta a:hover {
   color: #000;
@@ -3133,7 +3133,7 @@ select.uk-form-width-xsmall {
 .uk-comment-meta {
   font-size: 12px;
   line-height: 1.4;
-  color: #999;
+  color: #666;
 }
 /* Avatar
  ========================================================================== */
@@ -3243,13 +3243,13 @@ select.uk-form-width-xsmall {
 }
 /* Placeholder */
 .uk-search-input:-ms-input-placeholder {
-  color: #999 !important;
+  color: #666 !important;
 }
 .uk-search-input::-moz-placeholder {
-  color: #999;
+  color: #666;
 }
 .uk-search-input::-webkit-input-placeholder {
-  color: #999;
+  color: #666;
 }
 /* Icon
  ========================================================================== */
@@ -3318,13 +3318,13 @@ select.uk-form-width-xsmall {
   -webkit-align-items: center;
   align-items: center;
   /* 3 */
-  color: #999;
+  color: #666;
 }
 /*
  * Required for `a`.
  */
 .uk-search .uk-search-icon:hover {
-  color: #999;
+  color: #666;
 }
 /*
  * Make `input` element clickable through icon, e.g. if it's a `span`
@@ -3423,7 +3423,7 @@ select.uk-form-width-xsmall {
 /* Toggle
  ========================================================================== */
 .uk-search-toggle {
-  color: #999;
+  color: #666;
 }
 /* Hover + Focus */
 .uk-search-toggle:hover,
@@ -3524,7 +3524,7 @@ ul.uk-nav-sub {
  */
 .uk-nav-default > li > a {
   font-size: 12px;
-  color: #999;
+  color: #666;
 }
 /* Hover + Focus */
 .uk-nav-default > li > a:hover,
@@ -3551,7 +3551,7 @@ ul.uk-nav-sub {
  * Sublists
  */
 .uk-nav-default .uk-nav-sub a {
-  color: #999;
+  color: #666;
 }
 .uk-nav-default .uk-nav-sub a:hover,
 .uk-nav-default .uk-nav-sub a:focus {
@@ -3565,7 +3565,7 @@ ul.uk-nav-sub {
 .uk-nav-primary > li > a {
   font-size: 22px;
   line-height: 1.5;
-  color: #999;
+  color: #666;
 }
 /* Hover + Focus */
 .uk-nav-primary > li > a:hover,
@@ -3592,7 +3592,7 @@ ul.uk-nav-sub {
  * Sublists
  */
 .uk-nav-primary .uk-nav-sub a {
-  color: #999;
+  color: #666;
 }
 .uk-nav-primary .uk-nav-sub a:hover,
 .uk-nav-primary .uk-nav-sub a:focus {
@@ -3765,7 +3765,7 @@ ul.uk-nav-sub {
  * Nav items
  */
 .uk-navbar-nav > li > a {
-  color: #999;
+  color: #666;
   text-transform: uppercase;
   -webkit-transition: 0.1s ease-in-out;
   transition: 0.1s ease-in-out;
@@ -3798,7 +3798,7 @@ ul.uk-nav-sub {
 /* Toggle
  ========================================================================== */
 .uk-navbar-toggle {
-  color: #999;
+  color: #666;
 }
 .uk-navbar-toggle:hover,
 .uk-navbar-toggle:focus,
@@ -3914,7 +3914,7 @@ ul.uk-nav-sub {
  * Items
  */
 .uk-navbar-dropdown-nav > li > a {
-  color: #999;
+  color: #666;
 }
 /* Hover + Focus */
 .uk-navbar-dropdown-nav > li > a:hover,
@@ -3941,7 +3941,7 @@ ul.uk-nav-sub {
  * Sublists
  */
 .uk-navbar-dropdown-nav .uk-nav-sub a {
-  color: #999;
+  color: #666;
 }
 .uk-navbar-dropdown-nav .uk-nav-sub a:hover,
 .uk-navbar-dropdown-nav .uk-nav-sub a:focus {
@@ -3962,7 +3962,7 @@ ul.uk-nav-sub {
  */
 .uk-navbar-dropbar-slide {
   position: absolute;
-  z-index: 1020;
+  z-index: 980;
   left: 0;
   right: 0;
 }
@@ -4048,7 +4048,7 @@ ul.uk-nav-sub {
   /* 1 */
   display: block;
   /* 2 */
-  color: #999;
+  color: #666;
   font-size: 12px;
   text-transform: uppercase;
   -webkit-transition: 0.1s ease-in-out;
@@ -4097,7 +4097,7 @@ ul.uk-nav-sub {
 .uk-subnav-pill > * > :first-child {
   padding: 5px 10px;
   background: transparent;
-  color: #999;
+  color: #666;
 }
 /* Hover + Focus */
 .uk-subnav-pill > * > a:hover,
@@ -4119,7 +4119,7 @@ ul.uk-nav-sub {
  * The same for all style modifiers
  ========================================================================== */
 .uk-subnav > .uk-disabled > a {
-  color: #999;
+  color: #666;
 }
 /* ========================================================================
    Component: Breadcrumb
@@ -4153,7 +4153,7 @@ ul.uk-nav-sub {
 .uk-breadcrumb > * > * {
   display: inline-block;
   font-size: 12px;
-  color: #999;
+  color: #666;
 }
 /* Hover + Focus */
 .uk-breadcrumb > * > :hover,
@@ -4173,7 +4173,7 @@ ul.uk-nav-sub {
   content: "/";
   display: inline-block;
   margin: 0 20px;
-  color: #999;
+  color: #666;
 }
 /* ========================================================================
    Component: Pagination
@@ -4222,7 +4222,7 @@ ul.uk-nav-sub {
   /* 1 */
   display: block;
   /* 2 */
-  color: #999;
+  color: #666;
   -webkit-transition: color 0.1s ease-in-out;
   transition: color 0.1s ease-in-out;
 }
@@ -4238,7 +4238,7 @@ ul.uk-nav-sub {
 }
 /* Disabled */
 .uk-pagination > .uk-disabled > * {
-  color: #999;
+  color: #666;
 }
 /* ========================================================================
    Component: Tab
@@ -4299,7 +4299,7 @@ ul.uk-nav-sub {
   text-align: center;
   /* 2 */
   padding: 5px 10px;
-  color: #999;
+  color: #666;
   border-bottom: 1px solid transparent;
   font-size: 12px;
   text-transform: uppercase;
@@ -4319,7 +4319,7 @@ ul.uk-nav-sub {
 }
 /* Disabled */
 .uk-tab > .uk-disabled > a {
-  color: #999;
+  color: #666;
 }
 /* Position modifier
  ========================================================================== */
@@ -4644,7 +4644,7 @@ ul.uk-nav-sub {
  * Items
  */
 .uk-dropdown-nav > li > a {
-  color: #999;
+  color: #666;
 }
 /* Hover + Focus + Active */
 .uk-dropdown-nav > li > a:hover,
@@ -4668,7 +4668,7 @@ ul.uk-nav-sub {
  * Sublists
  */
 .uk-dropdown-nav .uk-nav-sub a {
-  color: #999;
+  color: #666;
 }
 .uk-dropdown-nav .uk-nav-sub a:hover,
 .uk-dropdown-nav .uk-nav-sub a:focus {
@@ -5247,7 +5247,7 @@ ul.uk-nav-sub {
   /* 1 */
   display: block;
   /* 2 */
-  color: #999;
+  color: #666;
 }
 /* Hover + Focus */
 .uk-iconnav > * > :hover,
@@ -6737,10 +6737,10 @@ ul.uk-nav-sub {
 .uk-text-meta {
   font-size: 12px;
   line-height: 1.4;
-  color: #999;
+  color: #666;
 }
 .uk-text-meta a {
-  color: #999;
+  color: #666;
 }
 .uk-text-meta a:hover {
   color: #000;
@@ -6775,7 +6775,7 @@ ul.uk-nav-sub {
 /* Color modifiers
  ========================================================================== */
 .uk-text-muted {
-  color: #999 !important;
+  color: #666 !important;
 }
 .uk-text-primary {
   color: #1e87f0 !important;
