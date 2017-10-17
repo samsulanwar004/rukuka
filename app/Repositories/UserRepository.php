@@ -12,9 +12,15 @@ use App\Services\EmailService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Wishlist;
+use App\Libraries\ImageFile;
+use Storage;
+use Image;
 
 class UserRepository
 {
+
+	const DEFAULT_FILE_DRIVER = 'local';
+    const RESIZE_IMAGE = [240, null];
 
 	private $email;
 
@@ -455,5 +461,45 @@ class UserRepository
 	{
 		return $this->getWishlistById($id)
 			->delete();
+	}
+
+	public function changeProfile($request)
+	{
+		$user = $this->getUser();
+		$link = '/uploads/user/profile/';
+
+        $file = $request->file('files')[0];
+        $filename = sprintf(
+            "%s-%s.%s",
+            strtolower($user->first_name),
+            date('Ymdhis'),
+            $file->getClientOriginalExtension()
+        );
+
+        //tmp file in storage local
+        $path = storage_path('app/public') . $filename;
+        //resize image
+        $image = new ImageFile(Image::make($file->path())
+            ->resize(self::RESIZE_IMAGE[0], self::RESIZE_IMAGE[1], function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($path));
+
+        Storage::disk(self::DEFAULT_FILE_DRIVER)
+            ->putFileAs($link, $image, $filename, 'public');
+
+        $link = $this->linkMerge($link.$filename);
+
+        $user->avatar = $link;
+        $user->update();
+
+	}
+
+	public function linkMerge($link)
+	{
+		return sprintf(
+			"%s/%s",
+			route('index'),
+			$link
+		);
 	}
 }

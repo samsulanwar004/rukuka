@@ -190,6 +190,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -243,6 +244,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

@@ -320,4 +320,32 @@ class UserController extends BaseController
         }
     }
 
+    public function uploadProfile(Request $request)
+    {
+        $this->validate($request, [
+            'files.*' => 'required|mimes:jpeg,png|dimensions:min_width=100,min_height=200,max_width=700,max_height=700|max:300'
+        ]);
+
+        try {
+
+            $user = $this->getUserActive();
+
+            if ($request->hasFile('files')) {
+                $this->user
+                    ->setUser($user)
+                    ->changeProfile($request);
+            }
+
+           return response()->json([
+                'status' => 'ok',
+                'message' => 'success' 
+            ]); 
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
 }
