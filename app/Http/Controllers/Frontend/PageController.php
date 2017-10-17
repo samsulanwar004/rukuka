@@ -110,7 +110,7 @@ class PageController extends BaseController
             $product = [
                 'id' => $stock->sku, 
                 'name' => $stock->product->name, 
-                'qty' => 1, 
+                'qty' => $request->has('qty') ? $request->input('qty') : 1, 
                 'price' => $stock->product->sell_price, 
                 'options' => [
                     'size' => $stock->size,
@@ -154,7 +154,12 @@ class PageController extends BaseController
             if ($rowId) {
                 $bag->remove($rowId);
             }
-        }        
+        } 
+
+        //remove the item from wishlist
+        if ($request->has('move')) {
+            (new UserRepository)->wishlistDestroy($request->input('move'));
+        }       
 
         $bags = $bag->get(self::INSTANCE_SHOP);
 

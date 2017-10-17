@@ -35,7 +35,7 @@
                         <div id="parent-drop-click" uk-drop="mode: click">
                             <div id="parent-drop-card-click">
                               <ul class="uk-list">
-                                <li><a href="#" class="uk-icon-button"  uk-icon="icon: pencil"></a></li>
+                                <li><a href="/account/wishlist" class="uk-icon-button"  uk-icon="icon: pencil"></a></li>
                                 <li>
                                   <a href="#destroy-{{ $wish['id'] }}" class="uk-icon-button"  uk-icon="icon: trash" uk-toggle></a>
                                   <!-- This is the modal -->
@@ -67,7 +67,13 @@
                         <br>
                         <span>{{ $wish['currency'] }} {{ $wish['price'] }}</span>
                         <br>
-                        <button type="button" class="uk-button-secondary uk-button-small uk-width-1-1" name="button">add to cart</button>
+                        <form action="{{ route('bag') }}" method="POST">
+                          {{ csrf_field() }}
+                          <input type="hidden" name="size" value="{{ $wish['sku'] }}">
+                          <input type="hidden" name="qty" value="{{ $wish['qty'] }}">
+                          <input type="hidden" name="move" value="{{ $wish['id'] }}">
+                          <button type="submit" class="uk-button uk-button-secondary uk-button-small uk-width-1-1">Add to cart</button>
+                        </form>
                     </div>
                     <hr class="uk-margin-remove">
                     <div class="uk-card-footer uk-remove-padding-vertical uk-text-meta uk-padding-small">
