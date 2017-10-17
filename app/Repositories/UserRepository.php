@@ -450,4 +450,10 @@ class UserRepository
 			->where('users_id', $userId)
 			->first();
 	}
+
+	public function wishlistDestroy($id)
+	{
+		return $this->getWishlistById($id)
+			->delete();
+	}
 }

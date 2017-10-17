@@ -43,11 +43,13 @@
         var self = this;
         var wishlist_api = this.wishlist_api;
 
-        $.get(wishlist_api, function(wishlist) {
-          if (typeof wishlist.data !== 'undefined') {
-            self.wishlistCount = wishlist.data.length;
-          }
-        });
+        if (this.auth == 1) {
+          $.get(wishlist_api, function(wishlist) {
+            if (typeof wishlist.data !== 'undefined') {
+              self.wishlistCount = wishlist.data.length;
+            }
+          });
+        }
       },
 
       data() {
