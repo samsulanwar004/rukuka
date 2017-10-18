@@ -191,6 +191,11 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@wishlistDestroy',
     ]);
 
+    Route::post('/account/upload-profile', [
+        'as'   => 'user.upload.profile',
+        'uses' => 'Frontend\UserController@uploadProfile',
+    ]);
+
 });
 
 
