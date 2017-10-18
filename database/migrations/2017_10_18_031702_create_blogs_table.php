@@ -32,7 +32,12 @@ class CreateBlogsTable extends Migration
             $table->boolean('read')->default(0);
             $table->boolean('is_publish')->default(0);
             $table->timestamps();
+
+            $table->foreign('blog_categories_id', 'FK_blog_categories_id_on_blogs')
+              ->references('id')->on('blog_categories')
+              ->onUpdate('NO ACTION')->onDelete('NO ACTION');
         });
+
     }
 
     /**
