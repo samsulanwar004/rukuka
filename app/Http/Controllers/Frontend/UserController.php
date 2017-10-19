@@ -331,14 +331,15 @@ class UserController extends BaseController
             $user = $this->getUserActive();
 
             if ($request->hasFile('files')) {
-                $this->user
+                $link = $this->user
                     ->setUser($user)
                     ->changeProfile($request);
             }
 
            return response()->json([
                 'status' => 'ok',
-                'message' => 'success' 
+                'message' => 'success',
+                'data' => $link
             ]); 
         } catch (Exception $e) {
             return response()->json([

@@ -9,12 +9,12 @@
             </div>
           </div>
           @if($user->avatar)
-            <img src="{{ $user->avatar }}" alt="">
+            <img src="{{ $user->avatar }}" alt="" id="photo-profile">
           @else
             @if($user->gender == 'm')
-              <img src="/images/men_profile.jpg" alt="">
+              <img src="/images/men_profile.jpg" alt="" id="photo-profile">
             @else
-              <img src="/images/women_profile.jpg" alt="">
+              <img src="/images/women_profile.jpg" alt="" id="photo-profile">
             @endif
           @endif
           
@@ -51,14 +51,7 @@
             url: '{{ route('user.upload.profile') }}',
             multiple: true,
 
-            beforeSend: function() { console.log('beforeSend', arguments); },
-            beforeAll: function() { console.log('beforeAll', arguments); },
-            load: function() { console.log('load', arguments); },
-            error: function() { console.log('error', arguments); },
-            complete: function() { console.log('complete', arguments); },
-
             loadStart: function (e) {
-                console.log('loadStart', arguments);
 
                 bar.removeAttribute('hidden');
                 bar.max =  e.total;
@@ -66,7 +59,6 @@
             },
 
             progress: function (e) {
-                console.log('progress', arguments);
 
                 bar.max =  e.total;
                 bar.value =  e.loaded;
@@ -74,15 +66,20 @@
             },
 
             loadEnd: function (e) {
-                console.log('loadEnd', arguments);
+                console.log(e.currentTarget.response);
+                try {
+                  var response = JSON.parse(e.currentTarget.response); 
+                  // this is how you parse a string into JSON 
+                  $("#photo-profile").attr("src",response.data);
+                } catch (ex) {
+                  console.error(ex);
+                }
 
                 bar.max =  e.total;
                 bar.value =  e.loaded;
             },
 
             completeAll: function () {
-                console.log('completeAll', arguments);
-
                 setTimeout(function () {
                     bar.setAttribute('hidden', 'hidden');
                 }, 1000);
