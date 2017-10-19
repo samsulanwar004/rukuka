@@ -20,6 +20,7 @@
                 wishlist_link="{{ route('user.wishlist') }}"
                 bag_link="{{ route('bag') }}"
                 bag_count="{{ Cart::instance('shopping')->content()->count() }}"
+                bag="{{ Cart::instance('shopping')->content() }}"
                 login_link="{{ route('login') }}"
                 auth="{{ Auth::check() ? 1 : 0 }}"
                 wishlist_api="{{ route('wishlist', ['api_token' => Auth::user('web')->api_token]) }}"
