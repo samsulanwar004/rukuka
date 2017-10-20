@@ -12,7 +12,7 @@
     <!-- jQuery is required -->
     <script src="{{ elixir('js/vendor.js') }}"></script>
     <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
-    
+
   </head>
   <body>
 
