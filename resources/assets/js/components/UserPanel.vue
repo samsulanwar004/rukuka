@@ -71,7 +71,7 @@
           });
         }
         self.bags = JSON.parse(this.bag);
-
+        
       },
 
       data() {

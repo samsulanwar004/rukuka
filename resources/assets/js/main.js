@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueResource from 'vue-resource-2';
+import VueSession from 'vue-session'
 
 import UserPanel from './components/UserPanel.vue';
 import Navigation from './components/Navigation.vue';
@@ -12,7 +13,7 @@ Vue.config.debug = true
 Vue.config.silent = true
 
 Vue.use(VueResource);
-
+Vue.use(VueSession);
 Vue.component('user-panel', UserPanel);
 Vue.component('navigation', Navigation);
 
