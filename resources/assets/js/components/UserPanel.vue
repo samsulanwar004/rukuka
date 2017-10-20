@@ -18,35 +18,20 @@
 
     <li>
       <a class="uk-icon-button" uk-icon="icon: cart" :href="bagLink"></a>
-      <div uk-drop="pos: bottom-right">
+      <div uk-drop="pos: bottom-right" v-if="bags != null">
             <div class="uk-card uk-card-body uk-card-small uk-card-default">
-              <div class="uk-grid-small" uk-grid>
+              <div class="uk-grid-small" uk-grid v-for="bag in bags">
                 <div class="uk-width-1-3">
-                  <img src="images/2_2.jpg" alt="">
+                  <img :src="'/'+bag.options.photo" :alt="bag.name">
                 </div>
                 <div class="uk-width-2-3">
                   <div class="uk-panel">
-                    <h4 class="uk-margin-remove uk-padding-remove">Hijabers</h4>
-                    <h5 class="uk-margin-remove uk-padding-remove">IDR 450000</h5>
-                    <span class="uk-text-meta">color : blue</span><br>
-                    <span class="uk-text-meta">size  : M</span><br>
-                    <button type="button" class="uk-button uk-button-default uk-button-small" name="button">edit</button>
-                    <button type="button" class="uk-button uk-button-default uk-button-small" name="button">remove</button>
-                  </div>
-                </div>
-              </div>
-              <div class="uk-grid-small" uk-grid>
-                <div class="uk-width-1-3">
-                  <img src="images/2_2.jpg" alt="">
-                </div>
-                <div class="uk-width-2-3">
-                  <div class="uk-panel">
-                    <h4 class="uk-margin-remove uk-padding-remove">Hijabers</h4>
-                    <h5 class="uk-margin-remove uk-padding-remove">IDR 450000</h5>
-                    <span class="uk-text-meta">color : blue</span><br>
-                    <span class="uk-text-meta">size  : M</span><br>
-                    <button type="button" class="uk-button uk-button-default uk-button-small" name="button">edit</button>
-                    <button type="button" class="uk-button uk-button-default uk-button-small" name="button">remove</button>
+                    <h4 class="uk-margin-remove uk-padding-remove">{{ bag.name }}</h4>
+                    <h5 class="uk-margin-remove uk-padding-remove">{{ bag.options.currency }} {{ bag.price }}</h5>
+                    <span class="uk-text-meta">color : {{ bag.options.color }}</span><br>
+                    <span class="uk-text-meta">size  : {{ bag.options.size }}</span><br>
+                    <!-- <button type="button" class="uk-button uk-button-default uk-button-small" name="button">edit</button>
+                    <button type="button" class="uk-button uk-button-default uk-button-small" name="button">remove</button> -->
                   </div>
                 </div>
               </div>
@@ -70,7 +55,8 @@
         'bag_count',
         'login_link',
         'auth',
-        'wishlist_api'
+        'wishlist_api',
+        'bag'
       ],
 
       created () {
@@ -84,6 +70,8 @@
             }
           });
         }
+        self.bags = JSON.parse(this.bag);
+
       },
 
       data() {
@@ -94,7 +82,8 @@
                 bagLink: this.bag_link,
                 bagCount: this.bag_count,
                 auth: this.auth,
-                wishlistCount: {}
+                wishlistCount: {},
+                bags: {}
             }
         }
     }

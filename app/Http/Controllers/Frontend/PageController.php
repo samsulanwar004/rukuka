@@ -116,7 +116,8 @@ class PageController extends BaseController
                     'size' => $stock->size,
                     'color' => $stock->product->color,
                     'photo' => $stock->product->images->first()->photo,
-                    'description' => $stock->product->content
+                    'description' => $stock->product->content,
+                    'currency' => $stock->product->currency,
                 ]
             ];
 

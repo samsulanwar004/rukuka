@@ -21,6 +21,7 @@ class UserRepository
 
 	const DEFAULT_FILE_DRIVER = 'local';
     const RESIZE_IMAGE = [240, null];
+    const HOME_PAGE = 'index';
 
 	private $email;
 
@@ -466,7 +467,7 @@ class UserRepository
 	public function changeProfile($request)
 	{
 		$user = $this->getUser();
-		$link = '/uploads/user/profile/';
+		$link = 'uploads/user/profile/';
 
         $file = $request->file('files')[0];
         $filename = sprintf(
@@ -477,29 +478,33 @@ class UserRepository
         );
 
         //tmp file in storage local
-        $path = storage_path('app/public') . $filename;
+        $path = storage_path('app/') . $link.$filename;
         //resize image
         $image = new ImageFile(Image::make($file->path())
             ->resize(self::RESIZE_IMAGE[0], self::RESIZE_IMAGE[1], function ($constraint) {
                 $constraint->aspectRatio();
             })->save($path));
 
-        Storage::disk(self::DEFAULT_FILE_DRIVER)
-            ->putFileAs($link, $image, $filename, 'public');
+        $oldFile = $this->linkMergeOrUnMerge($link, $user->avatar);
 
-        $link = $this->linkMerge($link.$filename);
+        Storage::delete($link . $oldFile);
+
+        $link = $this->linkMergeOrUnMerge($link.$filename);
 
         $user->avatar = $link;
         $user->update();
 
+        return $link;
 	}
 
-	public function linkMerge($link)
+	public function linkMergeOrUnMerge($link, $name = null)
 	{
-		return sprintf(
+		return is_null($name) ?
+		sprintf(
 			"%s/%s",
-			route('index'),
+			route(self::HOME_PAGE),
 			$link
-		);
+		) :
+		explode(route(self::HOME_PAGE).'/'.$link, $name)[1];
 	}
 }
