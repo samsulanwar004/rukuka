@@ -18,7 +18,7 @@
 
     <li>
       <a class="uk-icon-button" uk-icon="icon: cart" :href="bagLink"></a>
-      <div uk-drop="pos: bottom-right" v-if="bags != null">
+      <div uk-drop="pos: bottom-right" v-if="bags.length != 0">
             <div class="uk-card uk-card-body uk-card-small uk-card-default">
               <div class="uk-grid-small" uk-grid v-for="bag in bags">
                 <div class="uk-width-1-3">
