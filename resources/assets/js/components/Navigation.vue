@@ -7,25 +7,15 @@
             $.get(api, function(navigations) {
               if (typeof navigations.data !== 'undefined') {
                 if (typeof navigations.data.mens !== 'undefined') {
-
-                    $.each( navigations.data.mens, function( key, value ) {
-                      if(value.name == 'Clothing') {
-                        self.menCloths = value.child;
-                      }
-                    });
-
+                  self.menCloths = navigations.data.mens;
                 }
 
                 if (typeof navigations.data.womens !== 'undefined') {
-                        self.womenCloths = navigations.data.womens;
+                  self.womenCloths = navigations.data.womens;
                 }
 
                 if (typeof navigations.data.kids !== 'undefined') {
-                    $.each( navigations.data.kids, function( key, value ) {
-                      if(value.name == 'Clothing') {
-                        self.kidCloths = value.child;
-                      }
-                    });
+                  self.kidCloths = avigations.data.kids;
                 }
 
                 if (typeof navigations.data.designers !== 'undefined') {
