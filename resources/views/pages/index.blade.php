@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-	
+
 <div class="uk-grid-small uk-margin-top" uk-grid>
 
     @php
@@ -27,9 +27,7 @@
             <div class="uk-inline-clip uk-transition-toggle uk-dark">
                 <img src="/{{ $home['women_banner'] }}" alt="">
                 <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
-                <div class="uk-overlay uk-overlay-default uk-padding-remove uk-position-medium uk-position-bottom-left">
-                  <a href="/shop/womens/all"><button class="uk-button uk-button-small uk-button-default uk-padding-small-right">SHOP NOW FOR WOMEN</button></a>
-                </div>
+
             </div>
             <h3 class="uk-margin-remove">{{ $womenTitle[0] }}</h3>
             <a href="/{{ $home['women_link'] }}" class="uk-text-muted">{{ $womenTitle[1] }}<span uk-icon="icon: triangle-right"></span></a>
@@ -39,9 +37,7 @@
           <div class="uk-inline-clip uk-transition-toggle uk-dark">
               <img src="/{{ $home['men_banner'] }}" alt="">
               <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
-              <div class="uk-overlay uk-overlay-default uk-padding-remove uk-position-medium uk-position-bottom-left">
-                <a href="/shop/mens/all"><button class="uk-button uk-button-small uk-button-default uk-padding-small-right">SHOP NOW FOR MEN</button></a>
-              </div>
+
           </div>
           <h3 class="uk-margin-remove">{{ $menTitle[0] }}</h3>
           <a href="/{{ $home['men_link'] }}" class="uk-text-muted">{{ $menTitle[1] }}<span uk-icon="icon: triangle-right"></span></a>
@@ -52,9 +48,6 @@
           <div class="uk-inline-clip uk-transition-toggle uk-dark">
               <img src="/{{ $home['kid_banner'] }}" alt="">
               <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
-              <div class="uk-overlay uk-overlay-default uk-padding-remove uk-position-medium uk-position-bottom-left">
-                <a href="/shop/kids/all"><button class="uk-button uk-button-small uk-button-default uk-padding-small-right">SHOP NOW FOR KIDS</button></a>
-              </div>
           </div>
           <h3 class="uk-margin-remove">{{ $kidTitle[0] }}</h3>
           <a href="/{{ $home['kid_link'] }}" class="uk-text-muted">{{ $kidTitle[1] }}<span uk-icon="icon: triangle-right"></span></a>

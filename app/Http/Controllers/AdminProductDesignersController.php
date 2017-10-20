@@ -40,7 +40,7 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
 			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Banner','name'=>'banner','type'=>'upload','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Banner','name'=>'banner','type'=>'upload','validation'=>'required|min:1|max:1024','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'required|image|max:3000','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
