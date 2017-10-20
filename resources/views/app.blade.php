@@ -12,8 +12,8 @@
     <!-- jQuery is required -->
 
     <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
-    
-    
+
+
   </head>
   <body>
 
