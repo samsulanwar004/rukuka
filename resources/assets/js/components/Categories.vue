@@ -38,13 +38,16 @@
     <li class="uk-active">
       <a :href="'/shop/'+parent+'/all'">All</a>
     </li>
-    <li class="uk-parent" v-for="(category, key) in categories">
+<!--     <li class="uk-parent" v-for="(category, key) in categories">
         <a href="#">{{ key.toUpperCase() }}</a>
         <ul class="uk-nav-sub">
             <li v-for="cat in category">
               <a :href="'/shop/'+parent+'/'+ key +'/'+ cat.slug ">{{ cat.name }}</a>
             </li>
         </ul>
+    </li> -->
+    <li class="uk-parent" v-for="category in categories">
+        <a href="#">{{ category.name.toUpperCase() }}</a>
     </li>
 </ul>
 </template>

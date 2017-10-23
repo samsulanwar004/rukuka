@@ -15,7 +15,7 @@
                 }
 
                 if (typeof navigations.data.kids !== 'undefined') {
-                  self.kidCloths = avigations.data.kids;
+                  self.kidCloths = navigations.data.kids;
                 }
 
                 if (typeof navigations.data.designers !== 'undefined') {
