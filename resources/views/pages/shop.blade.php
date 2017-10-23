@@ -14,11 +14,33 @@
     ])
   @else
     @include('partials.breadcrumb', [
-        'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false, $products->first()->category->name => 'categories']
+        'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false, isset($products->first()->category->name) ? $products->first()->category->name : 'Product not available' => 'categories']
     ])
   @endif
 @endif
 </div>
+@if($categories == 'designers')
+  <div class="uk-grid-small uk-section-muted" uk-grid>
+    <div class="uk-panel uk-width-1-5@m uk-flex uk-flex-middle uk-flex-center">
+
+        <img src="/{{ $designer->photo }}" width="120" alt="" class="uk-box-shadow-medium">
+
+
+
+    </div>
+    <div class="uk-panel uk-width-2-5@m">
+      <h2 class="uk-margin-small">{{ $designer->name }}</h2>
+      <h3 class="uk-margin-small">{{ $designer->content }}</h3>
+    </div>
+    <div class="uk-panel uk-width-2-5@m">
+      <img src="/{{ $designer->banner }}" width="200" alt="">
+    </div>
+  </div>
+
+@else
+
+@endif
+
 <div class="uk-grid-small uk-margin-top uk-grid-divider uk-margin-large-bottom" uk-grid>
 <div class="uk-width-1-5@m">
   <div class="uk-panel">
@@ -29,11 +51,11 @@
         @if($category == 'all')
           All
         @else
-          {{ $products->first()->category->name }} 
+          {{ isset($products->first()->category->name) ? $products->first()->category->name : 'Product not available' }}
         @endif
       @endif</h3>
     <categories api="{{ route('menu', ['parent' => $categories]) }}" parent="{{ $categories }}">
-      
+
     </categories>
   </div>
 </div>
@@ -70,7 +92,7 @@
         </div>
         <!-- end product single -->
        @empty
-          Product is not found
+          Product not available
        @endforelse
       </div>
       <hr>

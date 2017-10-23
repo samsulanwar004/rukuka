@@ -12,14 +12,15 @@
               </div>
               <div class="uk-width-3-5@m">
                 <div class="uk-panel uk-text-center">
-                  <h2><b>KUKA</b> INDONESIA</h2>
+                  <a href="/" class="uk-link-reset"><h2><b>KUKA</b> INDONESIA</h2></a>
                 </div>
               </div>
-              <user-panel 
+              <user-panel
                 profile_link="{{ route('user') }}"
                 wishlist_link="{{ route('user.wishlist') }}"
                 bag_link="{{ route('bag') }}"
                 bag_count="{{ Cart::instance('shopping')->content()->count() }}"
+                bag="{{ Cart::instance('shopping')->content() }}"
                 login_link="{{ route('login') }}"
                 auth="{{ Auth::check() ? 1 : 0 }}"
                 wishlist_api="{{ route('wishlist', ['api_token' => Auth::user('web')->api_token]) }}"
@@ -28,7 +29,7 @@
 
         </div>
     </div>
-    <navigation 
+    <navigation
       api="{{ route('menu')}}"
       men_link="{{ route('men') }}"
       women_link="{{ route('women') }}"

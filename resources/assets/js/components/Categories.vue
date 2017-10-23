@@ -8,7 +8,7 @@
             $.get(api, function(categories) {
               if (typeof categories.data !== 'undefined') {
                 self.categories = categories.data;
-              } 
+              }
             });
         },
 
@@ -20,7 +20,7 @@
     }
 </script>
 
-<template>  
+<template>
 <ul class="uk-nav-default uk-nav-parent-icon" uk-nav="multiple: true" v-if="parent == 'designers'">
     <li class="uk-active">
       <a :href="'/shop/'+parent+'/all'">All</a>
@@ -38,14 +38,13 @@
     <li class="uk-active">
       <a :href="'/shop/'+parent+'/all'">All</a>
     </li>
-    <li class="uk-parent" v-for="(category, key) in categories">
-        <a href="#">{{ key.toUpperCase() }}</a>
+    <li class="uk-parent" v-for="category in categories">
+        <a href="#">{{ category.name.toUpperCase() }}</a>
         <ul class="uk-nav-sub">
-            <li v-for="cat in category">
-              <a :href="'/shop/'+parent+'/'+ key +'/'+ cat.slug ">{{ cat.name }}</a>
+            <li v-for="cat in category.child">
+              <a :href="'/shop/'+parent+'/'+ category.name.toLowerCase() +'/'+ cat.slug ">{{ cat.name }}</a>
             </li>
         </ul>
     </li>
 </ul>
 </template>
-

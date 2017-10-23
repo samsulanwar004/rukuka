@@ -37,20 +37,22 @@ class PageController extends BaseController
     {
 
         if ($categories == 'designers') {
-            $products = (new ProductRepository)->getProductByDesigner($request, $category);
+            $product = (new ProductRepository);
+            $products = $product->getProductByDesigner($request, $category);
+            $designer = $product->getDesigner();
         } else {
             if ($category == 'all') {
                 $products = (new ProductRepository)->getProductByCategory($request, $categories);
             } else {
-                $products = (new ProductRepository)->getProductBySlugCategory($request, $slug);      
-            }  
+                $products = (new ProductRepository)->getProductBySlugCategory($request, $slug);
+            }
         }
 
         foreach ($request->all() as $key => $value) {
             $products->appends($key, $value);
         }
 
-        return view('pages.shop', compact('products', 'categories', 'category', 'slug'));
+        return view('pages.shop', compact('products', 'categories', 'category', 'slug', 'designer'));
 
     }
 
@@ -103,25 +105,26 @@ class PageController extends BaseController
         if ($request->isMethod('post')) {
             $this->validate($request, [
                 'size' => 'required|string|max:255'
-            ]);  
+            ]);
 
             $stock = (new ProductStockRepository)->getStockBySku($request->input('size'));
 
             $product = [
-                'id' => $stock->sku, 
-                'name' => $stock->product->name, 
-                'qty' => $request->has('qty') ? $request->input('qty') : 1, 
-                'price' => $stock->product->sell_price, 
+                'id' => $stock->sku,
+                'name' => $stock->product->name,
+                'qty' => $request->has('qty') ? $request->input('qty') : 1,
+                'price' => $stock->product->sell_price,
                 'options' => [
                     'size' => $stock->size,
                     'color' => $stock->product->color,
                     'photo' => $stock->product->images->first()->photo,
-                    'description' => $stock->product->content
+                    'description' => $stock->product->content,
+                    'currency' => $stock->product->currency,
                 ]
             ];
 
             $bag->save($product, self::INSTANCE_SHOP);
-  
+
         }
 
         //increment the quantity
@@ -154,12 +157,12 @@ class PageController extends BaseController
             if ($rowId) {
                 $bag->remove($rowId);
             }
-        } 
+        }
 
         //remove the item from wishlist
         if ($request->has('move')) {
             (new UserRepository)->wishlistDestroy($request->input('move'));
-        }       
+        }
 
         $bags = $bag->get(self::INSTANCE_SHOP);
 
@@ -167,6 +170,6 @@ class PageController extends BaseController
 
         return view('pages.bag', compact('bags', 'subtotal'));
     }
-    
+
 
 }

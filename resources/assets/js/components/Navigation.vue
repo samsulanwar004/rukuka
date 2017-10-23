@@ -7,25 +7,15 @@
             $.get(api, function(navigations) {
               if (typeof navigations.data !== 'undefined') {
                 if (typeof navigations.data.mens !== 'undefined') {
-
-                    $.each( navigations.data.mens, function( key, value ) {
-                      if(value.name == 'Clothing') {
-                        self.menCloths = value.child;
-                      }
-                    });
-
+                  self.menCloths = navigations.data.mens;
                 }
 
                 if (typeof navigations.data.womens !== 'undefined') {
-                        self.womenCloths = navigations.data.womens;
+                  self.womenCloths = navigations.data.womens;
                 }
 
                 if (typeof navigations.data.kids !== 'undefined') {
-                    $.each( navigations.data.kids, function( key, value ) {
-                      if(value.name == 'Clothing') {
-                        self.kidCloths = value.child;
-                      }
-                    });
+                  self.kidCloths = navigations.data.kids;
                 }
 
                 if (typeof navigations.data.designers !== 'undefined') {
@@ -111,14 +101,22 @@
                             </ul>
                         </div>
                           <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
-                            <div>
-                              <ul class="uk-list uk-column-1-3">
-                                <li class="uk-parent uk-active" v-for="cloth in womenCloths">
-                                    <a :href="'/shop/womens/categories/'+ cloth.slug ">{{ cloth.name }}</a>
+                            <div class="uk-width-2-3">
+                              <span v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'">{{ cloth.name }}</span>
+                              <hr class="uk-padding-remove">
+                              <ul class="uk-list uk-column-1-2" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
+                                <li class="uk-parent uk-active">
+                                  <a href="/shop/womens/all">All</a>
+                                </li>
+                                <li class="uk-parent" v-for="cat in cloth.child">
+                                    <a :href="'/shop/womens/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                               </ul>
                             </div>
-                        </div>
+                            <div class="uk-width-1-3">
+
+                            </div>
+                          </div>
 
                           <div class="uk-width-1-5@m uk-margin-remove">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
@@ -150,15 +148,24 @@
                               <li><a href="#" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
                           </ul>
                       </div>
+
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
-                          <div>
-                            <ul class="uk-list uk-column-1-3">
-                              <li class="uk-parent" v-for="cloth in menCloths">
-                                <a :href="'/shop/mens/clothing/'+ cloth.slug ">{{ cloth.name }}</a>
-                              </li>
-                            </ul>
+                            <div class="uk-width-2-3">
+                              <span v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'">{{ cloth.name }}</span>
+                              <hr class="uk-padding-remove">
+                              <ul class="uk-list uk-column-1-2" v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
+                                <li class="uk-parent uk-active">
+                                  <a href="/shop/mens/all">All</a>
+                                </li>
+                                <li class="uk-parent" v-for="cat in cloth.child">
+                                    <a :href="'/shop/mens/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="uk-width-1-3">
+
+                            </div>
                           </div>
-                      </div>
 
                         <div class="uk-width-1-5@m uk-margin-remove">
                           <ul class="uk-nav uk-navbar-dropdown-nav">
@@ -190,13 +197,24 @@
                               <li><a href="#" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
                           </ul>
                       </div>
+
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
-                          <div>
-                            <ul class="uk-list uk-column-1-3">
-                                <li class="uk-parent" v-for="cloth in kidCloths"><a :href="'/shop/kids/clothing/'+ cloth.slug ">{{ cloth.name }}</a></li>
-                            </ul>
-                          </div>
-                      </div>
+                            <div class="uk-width-2-3">
+                              <span v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'clothing'">{{ cloth.name }}</span>
+                              <hr class="uk-padding-remove">
+                              <ul class="uk-list uk-column-1-2" v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
+                                <li class="uk-parent uk-active">
+                                  <a href="/shop/kids/all">All</a>
+                                </li>
+                                <li class="uk-parent" v-for="cat in cloth.child">
+                                    <a :href="'/shop/kids/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="uk-width-1-3">
+
+                            </div>
+                        </div>
 
                         <div class="uk-width-1-5@m uk-margin-remove">
                           <ul class="uk-nav uk-navbar-dropdown-nav">

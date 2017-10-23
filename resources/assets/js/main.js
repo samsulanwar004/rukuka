@@ -12,7 +12,6 @@ Vue.config.debug = true
 Vue.config.silent = true
 
 Vue.use(VueResource);
-
 Vue.component('user-panel', UserPanel);
 Vue.component('navigation', Navigation);
 
