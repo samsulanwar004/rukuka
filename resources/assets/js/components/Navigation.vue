@@ -101,12 +101,20 @@
                             </ul>
                         </div>
                           <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
-                            <div>
-                              <ul class="uk-list uk-column-1-3">
-                                <li class="uk-parent uk-active" v-for="cloth in womenCloths">
-                                    <a :href="'/shop/womens/categories/'+ cloth.slug ">{{ cloth.name }}</a>
+                            <div class="uk-width-2-3">
+                              <span v-for="cloth in womenCloths" v-if="cloth.name == 'Clothing'">{{ cloth.name }}</span>
+                              <hr class="uk-padding-remove">
+                              <ul class="uk-list uk-column-1-2" v-for="cloth in womenCloths" v-if="cloth.name == 'Clothing'">
+                                <li class="uk-parent uk-active">
+                                  <a href="/shop/womens/all">All</a>
+                                </li>
+                                <li class="uk-parent" v-for="cat in cloth.child">
+                                    <a :href="'/shop/womens/categories/'+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                               </ul>
+                            </div>
+                            <div class="uk-width-1-3">
+
                             </div>
                         </div>
 

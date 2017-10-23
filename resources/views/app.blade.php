@@ -10,8 +10,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- jQuery is required -->
-    <script src="{{ elixir('js/vendor.js') }}"></script>
+
     <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
+
 
   </head>
   <body>
@@ -21,8 +22,8 @@
        @yield('content')
     </div>
   @include('partials.footer')
-  <script src="{{ elixir('js/main.js') }}"></script>
   <script src="{{ elixir('js/vendor.js') }}"></script>
+  <script src="{{ elixir('js/main.js') }}"></script>
   <script src="{{ elixir('js/app.js') }}"></script>
 
   @section('footer_scripts')

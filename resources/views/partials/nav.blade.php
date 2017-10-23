@@ -12,10 +12,10 @@
               </div>
               <div class="uk-width-3-5@m">
                 <div class="uk-panel uk-text-center">
-                  <h2><b>KUKA</b> INDONESIA</h2>
+                  <a href="/" class="uk-link-reset"><h2><b>KUKA</b> INDONESIA</h2></a>
                 </div>
               </div>
-              <user-panel 
+              <user-panel
                 profile_link="{{ route('user') }}"
                 wishlist_link="{{ route('user.wishlist') }}"
                 bag_link="{{ route('bag') }}"
@@ -29,7 +29,7 @@
 
         </div>
     </div>
-    <navigation 
+    <navigation
       api="{{ route('menu')}}"
       men_link="{{ route('men') }}"
       women_link="{{ route('women') }}"
