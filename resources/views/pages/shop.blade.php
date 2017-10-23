@@ -14,7 +14,7 @@
     ])
   @else
     @include('partials.breadcrumb', [
-        'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false, $products->first()->category->name => 'categories']
+        'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false, isset($products->first()->category->name) ? $products->first()->category->name : 'Product not available' => 'categories']
     ])
   @endif
 @endif
@@ -51,7 +51,7 @@
         @if($category == 'all')
           All
         @else
-          {{ $products->first()->category->name }}
+          {{ isset($products->first()->category->name) ? $products->first()->category->name : 'Product not available' }}
         @endif
       @endif</h3>
     <categories api="{{ route('menu', ['parent' => $categories]) }}" parent="{{ $categories }}">
@@ -92,7 +92,7 @@
         </div>
         <!-- end product single -->
        @empty
-          Product is not found
+          Product not available
        @endforelse
       </div>
       <hr>
