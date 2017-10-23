@@ -10,12 +10,14 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- jQuery is required -->
-    <script src="{{ elixir('js/vendor.js') }}"></script>
-  <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
+    <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
 
   </head>
   <body>
-
+  <!-- Preloader -->
+  <div id="preloader">
+    <div id="status">&nbsp;</div>
+  </div>
   @include('partials.nav')
     <div class="uk-container uk-container-small" id="content">
        @yield('content')
