@@ -511,9 +511,9 @@ class UserRepository
 		explode(route(self::HOME_PAGE).'/'.$link, $name)[1];
 	}
 
-	public function subcriber($user)
+	public function subcriber($user = null)
 	{
-		if (is_object($user)) {
+		if (!is_null($user)) {
 			if ($subcriber = $this->getSubcriberByEmail($user->email)) {
 				$subcriber->user()->associate($user);
 				$subcriber->save();
@@ -526,9 +526,11 @@ class UserRepository
 			
 		} else {
 			$subcriber = new Subcriber;
-			$subcriber->email = $user;
+			$subcriber->email = $this->getEmail();
 			$subcriber->save();
 		}
+
+		return $subcriber;
 	}
 
 	public function getSubcriberByEmail($email)

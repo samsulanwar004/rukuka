@@ -28,5 +28,8 @@
   "browser": {
     "vue": "vue/dist/vue.common.js",
     "vue-resource-2": "vue-resource-2/dist/vue-resource.common.js"
+  },
+  "dependencies": {
+    "vee-validate": "^2.0.0-rc.19"
   }
 }
