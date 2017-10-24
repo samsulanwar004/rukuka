@@ -102,9 +102,11 @@
                         </div>
                           <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
                             <div class="uk-width-2-3">
-                              <span v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'">{{ cloth.name }}</span>
-                              <hr class="uk-padding-remove">
-                              <ul class="uk-list uk-column-1-2" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
+                              <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'">{{ cloth.name.toUpperCase() }}</li>
+                              </ul>
+                              <hr class="uk-margin-small">
+                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
                                 <li class="uk-parent uk-active">
                                   <a href="/shop/womens/all">All</a>
                                 </li>
@@ -114,7 +116,18 @@
                               </ul>
                             </div>
                             <div class="uk-width-1-3">
-
+                              <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'shoes & accessories'">{{ cloth.name.toUpperCase() }}</li>
+                              </ul>
+                              <hr class="uk-margin-small">
+                              <ul class="uk-nav uk-navbar-dropdown-nav" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'shoes & accessories'">
+                                <li class="uk-parent uk-active">
+                                  <a href="/shop/womens/all">All</a>
+                                </li>
+                                <li class="uk-parent" v-for="cat in cloth.child">
+                                    <a :href="'/shop/womens/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
+                                </li>
+                              </ul>
                             </div>
                           </div>
 
@@ -151,9 +164,11 @@
 
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
                             <div class="uk-width-2-3">
-                              <span v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'">{{ cloth.name }}</span>
-                              <hr class="uk-padding-remove">
-                              <ul class="uk-list uk-column-1-2" v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
+                              <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'">{{ cloth.name.toUpperCase() }}</li>
+                              </ul>
+                              <hr class="uk-margin-small">
+                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2" v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
                                 <li class="uk-parent uk-active">
                                   <a href="/shop/mens/all">All</a>
                                 </li>
@@ -163,7 +178,18 @@
                               </ul>
                             </div>
                             <div class="uk-width-1-3">
-
+                              <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'shoes & accessories'">{{ cloth.name.toUpperCase() }}</li>
+                              </ul>
+                              <hr class="uk-margin-small">
+                              <ul class="uk-nav uk-navbar-dropdown-nav" v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'shoes & accessories'">
+                                <li class="uk-parent uk-active">
+                                  <a href="/shop/mens/all">All</a>
+                                </li>
+                                <li class="uk-parent" v-for="cat in cloth.child">
+                                    <a :href="'/shop/mens/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
+                                </li>
+                              </ul>
                             </div>
                           </div>
 
