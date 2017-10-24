@@ -1,4 +1,4 @@
-<div class="uk-section uk-section-muted uk-section-xsmall">
+<div class="uk-section uk-section-muted uk-section-xsmall" id="vue-footer">
         <div class="uk-container uk-container-small">
           <div class="uk-panel uk-grid" uk-grid>
             <div class="uk-width-1-5@m">
@@ -35,14 +35,7 @@
 
             </div>
             <div class="uk-width-2-5@m">
-              <ul class="uk-nav uk-navbar-dropdown-nav">
-                <li>STAY UPDATE WITH US</li>
-                <li><input type="text" class="uk-input uk-form-small uk-form-width-medium uk-first-column" name="" value="" placeholder="ENTER YOUR EMAIL">
-                  <button type="button" name="button" class="uk-button uk-button-small uk-button-secondary">subscribe</button>
-                </li>
-                <li class="uk-text-meta"><i>Then get your can't-miss style news, before everybody else.</i></li>
-
-              </ul>
+              <subcriber api="{{ route('subcriber') }}"></subcriber>
               <p class="uk-margin-large">
                 <ul class="uk-nav uk-navbar-dropdown-nav">
                   <li>CONNECT WITH US</li>

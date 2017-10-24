@@ -19,11 +19,12 @@
     <div id="status">&nbsp;</div>
   </div>
   @include('partials.nav')
-    <div class="uk-container uk-container-small" id="content">
+    <div class="uk-container uk-container-small" id="vue-content">
        @yield('content')
     </div>
   @include('partials.footer')
   <script src="{{ elixir('js/vendor.js') }}"></script>
+  <script src="{{ elixir('js/custom.js') }}"></script>
   <script src="{{ elixir('js/main.js') }}"></script>
   <script src="{{ elixir('js/app.js') }}"></script>
   @section('footer_scripts')
