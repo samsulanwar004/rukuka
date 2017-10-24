@@ -96,11 +96,11 @@ class UserController extends BaseController
 
     		$this->user
     			->setUser($user)
-    			->persistCreditCard($request); 
+    			->persistCreditCard($request);
 
     		DB::commit();
-    		
-    		return redirect($this->redirectAfterSaveCC)->with(['success' => 'Save credit card successfully!']);   		
+
+    		return redirect($this->redirectAfterSaveCC)->with(['success' => 'Save credit card successfully!']);
     	} catch (Exception $e) {
     		DB::rollBack();
 
@@ -134,12 +134,12 @@ class UserController extends BaseController
 
     		$this->user
     			->setUser($user)
-    			->persistAddress($request); 
+    			->persistAddress($request);
 
     		DB::commit();
-    		
+
     		return redirect($this->redirectAfterSaveAddress)->with(['success' => 'Save address book successfully!']);
-        	
+
         } catch (Exception $e) {
         	DB::rollBack();
 
@@ -157,12 +157,12 @@ class UserController extends BaseController
 
     		$this->user
     			->setUser($user)
-    			->defaultCreditCard($request); 
+    			->defaultCreditCard($request);
 
     		DB::commit();
-    		
+
     		return redirect($this->redirectAfterSaveCC)->with(['success' => 'Save default credit card successfully!']);
-        	
+
         } catch (Exception $e) {
         	DB::rollBack();
 
@@ -180,12 +180,12 @@ class UserController extends BaseController
 
     		$this->user
     			->setUser($user)
-    			->defaultAddress($request); 
+    			->defaultAddress($request);
 
     		DB::commit();
-    		
+
     		return redirect($this->redirectAfterSaveAddress)->with(['success' => 'Save default address successfully!']);
-        	
+
         } catch (Exception $e) {
         	DB::rollBack();
 
@@ -215,10 +215,10 @@ class UserController extends BaseController
 
     		$this->user
     			->setUser($user)
-    			->updatePassword($request); 
+    			->updatePassword($request);
 
     		DB::commit();
-    		
+
     		return redirect($this->redirectAfterSavePassword)->with(['success' => 'Update password successfully!']);
         } catch (Exception $e) {
         	DB::rollBack();
@@ -266,14 +266,14 @@ class UserController extends BaseController
             $wishlistExist = $this->user->checkWishlistExist($user->id, $stock->id);
 
             if ($wishlistExist) {
-                throw new Exception("Item have been added", 1);   
+                throw new Exception("Item have been added", 1);
             }
 
             $product = [
-                'id' => $stock->sku, 
-                'name' => $stock->product->name, 
-                'qty' => $request->has('qty') ? $request->input('qty') : 1, 
-                'price' => $stock->product->sell_price, 
+                'id' => $stock->sku,
+                'name' => $stock->product->name,
+                'qty' => $request->has('qty') ? $request->input('qty') : 1,
+                'price' => $stock->product->sell_price,
                 'options' => [
                     'size' => $stock->size,
                     'color' => $stock->product->color,
@@ -323,7 +323,7 @@ class UserController extends BaseController
     public function uploadProfile(Request $request)
     {
         $this->validate($request, [
-            'files.*' => 'required|mimes:jpeg,png|dimensions:min_width=100,min_height=200,max_width=700,max_height=700|max:300'
+            'files.*' => 'required|mimes:jpeg,png|dimensions:min_width=100,min_height=200|max:5000'
         ]);
 
         try {
@@ -340,7 +340,7 @@ class UserController extends BaseController
                 'status' => 'ok',
                 'message' => 'success',
                 'data' => $link
-            ]); 
+            ]);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
