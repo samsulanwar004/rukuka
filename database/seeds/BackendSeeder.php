@@ -145,7 +145,7 @@ class CmsModulsSeeder extends Seeder {
         ],[
 
             'created_at'=>date('Y-m-d H:i:s'),
-            'name'=>'Categories',
+            'name'=>'Blog Categories',
             'icon'=>'fa fa-circle-o',
             'path'=>'blog-categories',
             'table_name'=>'blog_categories',

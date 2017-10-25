@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Exception;
+use Validator;
 
 class BaseApiController extends Controller
 {
@@ -100,6 +101,17 @@ class BaseApiController extends Controller
     protected function getUserActive()
     {
         return auth('api')->user();
+    }
+
+    /**
+     * Validate the user request input data.
+     *
+     * @param  Request $request
+     * @return \Illuminate\Validation\Validator
+     */
+    protected function validRequest(Request $request, $rules)
+    {
+        return Validator::make($request->all(), $rules);
     }
 
 }

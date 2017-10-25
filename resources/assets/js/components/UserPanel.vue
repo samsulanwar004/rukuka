@@ -69,23 +69,24 @@
             }
           });
         }
-        self.bags = JSON.parse(this.bag);
-        self.accounts = JSON.parse(this.account);
 
+        self.bags = this.bag ? JSON.parse(this.bag) : {};
+
+        self.accounts = this.account ? JSON.parse(this.account) : {};
       },
 
       data() {
-            return {
-                profileLink: this.profile_link,
-                wishlistLink: this.wishlist_link,
-                loginLink: this.login_link,
-                bagLink: this.bag_link,
-                bagCount: this.bag_count,
-                auth: this.auth,
-                wishlistCount: {},
-                bags: {},
-                accounts: {}
-            }
+        return {
+          profileLink: this.profile_link,
+          wishlistLink: this.wishlist_link,
+          loginLink: this.login_link,
+          bagLink: this.bag_link,
+          bagCount: this.bag_count,
+          auth: this.auth,
+          wishlistCount: {},
+          bags: {},
+          accounts: {}
         }
+      }
     }
 </script>
