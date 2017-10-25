@@ -260,67 +260,11 @@
                     </div>
                 </div>
               </li>
-              <li><a href="#"><h5 class="uk-margin-remove">HOME</h5></a>
-                <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
-                    <div class="uk-navbar-dropdown-grid" uk-grid>
-                      <div class="uk-width-1-5@m">
-                          <ul class="uk-nav uk-navbar-dropdown-nav">
-                              <li class="uk-active">What's New</li>
-                              <li class="uk-parent"><a href="#">New Arrival</a></li>
-                              <li class="uk-nav-header">Featured Style Story</li>
-                              <li><img src="images/coll-women.jpg" alt=""></li>
-                              <li><a href="#" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
-                          </ul>
-                      </div>
-                        <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
-                          <div>
-
-                            <ul class="uk-list uk-column-1-3">
-                                <li class="uk-parent"><a href="#">Shirts & Tops</a></li>
-                                <li class="uk-parent"><a href="#">T-Shirts & Tank Tops</a></li>
-                                <li class="uk-parent"><a href="#">Dresses</a></li>
-                                <li class="uk-parent"><a href="#">Ready-To-Party Collection collection collection</a></li>
-                                <li class="uk-parent"><a href="#">Sweaters</a></li>
-                                <li class="uk-parent"><a href="#">Pants</a></li>
-                                <li class="uk-parent"><a href="#">Denim</a></li>
-                                <li class="uk-parent"><a href="#">Blazers</a></li>
-                                <li class="uk-parent"><a href="#">Coats & Jackets</a></li>
-                                <li class="uk-parent"><a href="#">Suiting</a></li>
-                                <li class="uk-parent"><a href="#">Shirts & Tops</a></li>
-                                <li class="uk-parent"><a href="#">T-Shirts & Tank Tops</a></li>
-                                <li class="uk-parent"><a href="#">Dresses</a></li>
-                                <li class="uk-parent"><a href="#">Ready-To-Party Collection collection collection</a></li>
-                                <li class="uk-parent"><a href="#">Sweaters</a></li>
-                                <li class="uk-parent"><a href="#">Pants</a></li>
-                                <li class="uk-parent"><a href="#">Denim</a></li>
-                                <li class="uk-parent"><a href="#">Blazers</a></li>
-                                <li class="uk-parent"><a href="#">Coats & Jackets</a></li>
-                                <li class="uk-parent"><a href="#">Suiting</a></li>
-                            </ul>
-                          </div>
-                      </div>
-
-                        <div class="uk-width-1-5@m uk-margin-remove">
-                          <ul class="uk-nav uk-navbar-dropdown-nav">
-                              <li class="uk-active">SPECIAL SIZE</li>
-                              <li class="uk-parent"><a href="#">Petite</a></li>
-                              <li class="uk-parent"><a href="#">Tall</a></li>
-                              <li class="uk-parent"><a href="#">Size 16</a></li>
-                              <li class="uk-nav-header">Our Shops</li>
-                              <li class="uk-parent"><a href="#">Mother's Day Shop</a></li>
-                              <li class="uk-parent"><a href="#">Ready-To-Party Collection</a></li>
-                              <li class="uk-parent"><a href="#">Wear-To-Work Shop</a></li>
-                              <li class="uk-parent"><a href="#">Garments For Good</a></li>
-                              <li class="uk-parent"><a href="#">Vacation Shop</a></li>
-                              <li class="uk-parent"><a href="#" class="uk-text-danger"><b>VISIT OUR SALE</b></a></li>
-                          </ul>
-                        </div>
-                    </div>
-                </div>
+              <li><a href="#"><h5 class="uk-margin-remove">ECO TRAVEL</h5></a>
               </li>
-              <li><a href="#"><h5 class="uk-margin-remove">CULINARRY</h5></a>
+              <li><a href="#"><h5 class="uk-margin-remove">SALE</h5></a>
               </li>
-              <li><a href="#"><h5 class="uk-margin-remove">ECO TOURISM</h5></a>
+              <li><a href="#"><h5 class="uk-margin-remove">BLOG</h5></a>
               </li>
           </ul>
       </div>

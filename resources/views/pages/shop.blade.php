@@ -41,10 +41,12 @@
 
 @endif
 
-<div class="uk-grid-small uk-margin-top uk-grid-divider uk-margin-large-bottom" uk-grid>
-<div class="uk-width-1-5@m">
-  <div class="uk-panel">
-    <h3 class="uk-heading-divider">
+<div class="uk-grid-small uk-margin-top uk-margin-large-bottom" uk-grid>
+<div class="uk-width-1-4@m">
+  <div class="uk-card-border uk-card-small uk-panel uk-sticky uk-sticky-fixed uk-active" uk-sticky="offset: 115; bottom:#viewport">
+    <div class="uk-card-header uk-card-secondary">
+
+
       @if($categories == 'designers')
         {{ ucfirst($category) }}
       @else
@@ -53,10 +55,12 @@
         @else
           {{ isset($products->first()->category->name) ? $products->first()->category->name : 'Product not available' }}
         @endif
-      @endif</h3>
-    <categories api="{{ route('menu', ['parent' => $categories]) }}" parent="{{ $categories }}">
-
-    </categories>
+      @endif
+      </div>
+      <div class="uk-card-body">
+      <categories api="{{ route('menu', ['parent' => $categories]) }}" parent="{{ $categories }}">
+      </categories>
+    </div>
   </div>
 </div>
 <div class="uk-width-expand@m">

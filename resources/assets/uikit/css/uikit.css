@@ -2480,6 +2480,10 @@ select.uk-form-width-xsmall {
   -webkit-transition: box-shadow 0.1s ease-in-out;
   transition: box-shadow 0.1s ease-in-out;
 }
+.uk-card-border {
+  position: relative;
+  border: solid 1px #e5e5e5;
+}
 /* Sections
  ========================================================================== */
 .uk-card-body {

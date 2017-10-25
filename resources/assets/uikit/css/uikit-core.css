@@ -2367,6 +2367,10 @@ select.uk-form-width-xsmall {
   position: relative;
   box-sizing: border-box;
 }
+.uk-card-border {
+  position: relative;
+  border: solid 1px #e5e5e5;
+}
 /* Sections
  ========================================================================== */
 .uk-card-body {
@@ -3515,7 +3519,7 @@ ul.uk-nav-sub {
   height: 40px;
   padding: 0 15px;
   /* 3 */
-  font-size: 14px;
+  font-size: 20px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   /* 4 */
   text-decoration: none;
