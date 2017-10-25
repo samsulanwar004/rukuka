@@ -489,8 +489,10 @@ class UserRepository
             })->save($path));
 
         $oldFile = $this->linkMergeOrUnMerge($link, $user->avatar);
-
-        Storage::delete($link . $oldFile);
+		
+		if ($oldFile) {
+			Storage::delete($link . $oldFile);
+		}
 
         $link = $this->linkMergeOrUnMerge($link.$filename);
 
