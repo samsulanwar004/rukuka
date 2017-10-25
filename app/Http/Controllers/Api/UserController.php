@@ -3,9 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use App\Repositories\UserRepository;
 
 class UserController extends BaseApiController
 {
+
+    private $user;
+
+    public function __construct(UserRepository $user)
+    {
+        $this->user = $user;
+    }
+
     public function wishlist(Request $request)
     {
     	try {
@@ -17,5 +26,22 @@ class UserController extends BaseApiController
     	} catch (Exception $e) {
     		return $this->error($e, 400, true);
     	}
+    }
+
+    public function subcriber(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|string|email|max:255|unique:subcribers',
+        ]);
+
+        try {
+            $subcriber = $this->user
+                ->setEmail($request->input('email'))
+                ->subcriber()->toArray();
+
+            return $this->success($subcriber, 200, true);
+        } catch (Exception $e) {
+            return $this->error($e, 400, true);
+        }
     }
 }

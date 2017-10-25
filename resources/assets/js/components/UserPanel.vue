@@ -1,24 +1,21 @@
 <template>
-<div class="uk-width-1-5@m">
+<div class="uk-width-1-3@m uk-flex uk-flex-right">
   <ul class="uk-grid-small uk-flex-middle" uk-grid>
-    <li v-if="auth == 0">
-      <a class="uk-button uk-button-default" :href="loginLink">Sign In</a>
-    </li>
-    <li v-if="auth == 1">
-      <a class="uk-icon-button" uk-icon="icon: user" :href="profileLink">
 
+    <li v-if="auth == 1" class="uk-margin-right">
+      <a class="uk-button uk-button-text uk-button-small" :href="profileLink"> Hallo, <b>{{ accounts.first_name }}</b></a>
       </a>
     </li>
-    <li v-if="auth == 1">
-      <a class="uk-icon-button" uk-icon="icon: heart" :href="wishlistLink"></a>
+    <li v-if="auth == 1"  class="uk-margin-right">
+      <a class="uk-button uk-button-text uk-button-small" :href="wishlistLink"><b>L O V E</b></a>
         <div class="uk-badge custom-badge" v-if="wishlistCount > 0">
           {{ wishlistCount }}
         </div>
     </li>
 
     <li>
-      <a class="uk-icon-button" uk-icon="icon: cart" :href="bagLink"></a>
-      <div uk-drop="pos: bottom-right" v-if="bags.length != 0">
+      <a class="uk-button uk-button-text uk-button-small" :href="bagLink"> <b>B A G</b></a>
+      <div uk-drop="pos: bottom-right; delay-hide:0" v-if="bags.length != 0">
             <div class="uk-card uk-card-body uk-card-small uk-card-default">
               <div class="uk-grid-small" uk-grid v-for="bag in bags">
                 <div class="uk-width-1-3">
@@ -30,8 +27,6 @@
                     <h5 class="uk-margin-remove uk-padding-remove">{{ bag.options.currency }} {{ bag.price }}</h5>
                     <span class="uk-text-meta">color : {{ bag.options.color }}</span><br>
                     <span class="uk-text-meta">size  : {{ bag.options.size }}</span><br>
-                    <!-- <button type="button" class="uk-button uk-button-default uk-button-small" name="button">edit</button>
-                    <button type="button" class="uk-button uk-button-default uk-button-small" name="button">remove</button> -->
                   </div>
                 </div>
               </div>
@@ -40,6 +35,9 @@
         <div class="uk-badge custom-badge" v-if="bagCount > 0">
           {{ bagCount }}
         </div>
+    </li>
+    <li v-if="auth == 0" class="uk-margin-left">
+      <a class="uk-button uk-button-text uk-button-small" :href="loginLink"><b>L O G I N</b></a>
     </li>
   </ul>
 
@@ -56,7 +54,8 @@
         'login_link',
         'auth',
         'wishlist_api',
-        'bag'
+        'bag',
+        'account'
       ],
 
       created () {
@@ -71,7 +70,8 @@
           });
         }
         self.bags = JSON.parse(this.bag);
-        
+        self.accounts = JSON.parse(this.account);
+
       },
 
       data() {
@@ -83,7 +83,8 @@
                 bagCount: this.bag_count,
                 auth: this.auth,
                 wishlistCount: {},
-                bags: {}
+                bags: {},
+                accounts: {}
             }
         }
     }

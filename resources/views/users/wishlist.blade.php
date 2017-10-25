@@ -26,9 +26,9 @@
                 </div> -->
             </div>
             <!-- end product single -->
-            <div class="uk-panel uk-position-cover uk-invisible-hover">
+            <div class="uk-panel uk-position-cover-card uk-invisible-hover">
               <!-- start product -->
-                <div class="uk-card uk-card-small uk-box-shadow-large uk-padding-remove">
+                <div class="uk-box-shadow-large uk-padding-remove">
                     <div class="uk-card-media-top uk-inline">
                       <div class="uk-position-small uk-position-top-right">
                         <a href="#" class="uk-icon-button"  uk-icon="icon: triangle-down" title="Manage Your Cart" uk-tooltip="pos: right"></a>
@@ -51,7 +51,7 @@
                                                 <button class="uk-button uk-button-primary" type="submit">Save</button>
                                             </p>
                                           </form>
-                                          
+
                                       </div>
                                   </div>
                                 </li>
@@ -59,10 +59,10 @@
                               </ul>
                             </div>
                         </div>
-                      </div>                      
+                      </div>
                         <img src="/{{ $wish['photo'] }}" alt="">
                     </div>
-                    <div class="uk-card-body uk-padding-small uk-margin-small-top">
+                    <div class="uk-card-body uk-background-default uk-padding-small uk-margin-small-top">
                         <a href="/product/{{ $wish['slug'] }}">{{ $wish['name'] }}</a>
                         <br>
                         <span>{{ $wish['currency'] }} {{ $wish['price'] }}</span>
@@ -76,7 +76,7 @@
                         </form>
                     </div>
                     <hr class="uk-margin-remove">
-                    <div class="uk-card-footer uk-remove-padding-vertical uk-text-meta uk-padding-small">
+                    <div class="uk-card-footer uk-background-default uk-remove-padding-vertical uk-text-meta uk-padding-small">
                         <div class="uk-child-width-1-3" uk-grid>
                           <div class="">
                             color: <br> {{ $wish['color'] }}
@@ -97,7 +97,7 @@
               <!-- end product single -->
             </div>
         </div>
-        @empty 
+        @empty
          <center>wishlist not found</center>
         @endforelse
       </div>
