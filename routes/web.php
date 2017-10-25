@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/blog', [
+    'as'   => 'blog-index',
+    'uses' => 'Frontend\BlogController@index',
+]);
 
 Route::get('/', [
     'as'   => 'index',
