@@ -26,7 +26,7 @@
                 </div> -->
             </div>
             <!-- end product single -->
-            <div class="uk-panel uk-position-cover uk-invisible-hover">
+            <div class="uk-panel uk-position-cover-card uk-invisible-hover">
               <!-- start product -->
                 <div class="uk-box-shadow-large uk-padding-remove">
                     <div class="uk-card-media-top uk-inline">
