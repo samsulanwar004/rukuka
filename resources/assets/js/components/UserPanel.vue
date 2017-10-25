@@ -36,8 +36,8 @@
           {{ bagCount }}
         </div>
     </li>
-    <li v-if="auth == 0">
-      <a class="uk-button uk-button-text uk-button-small" :href="loginLink"><img src="/images/account.png" alt="" class="uk-margin-small"> &nbsp; <b>L O G I N</b></a>
+    <li v-if="auth == 0" class="uk-margin-left">
+      <a class="uk-button uk-button-text uk-button-small" :href="loginLink"><b>L O G I N</b></a>
     </li>
   </ul>
 
