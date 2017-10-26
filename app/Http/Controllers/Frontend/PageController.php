@@ -103,9 +103,18 @@ class PageController extends BaseController
 
         //add or update product item to bag
         if ($request->isMethod('post')) {
-            $this->validate($request, [
+
+            $rules = [
                 'size' => 'required|string|max:255'
-            ]);
+            ];
+
+            $validation = $this->validRequest($request, $rules);
+            if ($validation->fails()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $validation->errors()
+                ]);
+            }
 
             $stock = (new ProductStockRepository)->getStockBySku($request->input('size'));
 
@@ -169,6 +178,95 @@ class PageController extends BaseController
         $subtotal = $bag->subtotal();
 
         return view('pages.bag', compact('bags', 'subtotal'));
+    }
+
+    public function persistBag(Request $request)
+    {
+        try {
+
+            $bag = new BagService;
+            //add or update product item to bag
+            if ($request->isMethod('post')) {
+
+                $rules = [
+                    'size' => 'required|string|max:255'
+                ];
+
+                $validation = $this->validRequest($request, $rules);
+                if ($validation->fails()) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => $validation->errors()
+                    ]);
+                }
+
+                $stock = (new ProductStockRepository)->getStockBySku($request->input('size'));
+
+                $product = [
+                    'id' => $stock->sku,
+                    'name' => $stock->product->name,
+                    'qty' => $request->has('qty') ? $request->input('qty') : 1,
+                    'price' => $stock->product->sell_price,
+                    'options' => [
+                        'size' => $stock->size,
+                        'color' => $stock->product->color,
+                        'photo' => $stock->product->images->first()->photo,
+                        'description' => $stock->product->content,
+                        'currency' => $stock->product->currency,
+                    ]
+                ];
+
+                $bag->save($product, self::INSTANCE_SHOP);
+
+            }
+
+            //increment the quantity
+            if ($request->has('increment')) {
+
+                $rowId = $bag->search($request->input('increment'), self::INSTANCE_SHOP);
+
+                if ($rowId) {
+                    $item = $bag->getItemByRowId($rowId);
+
+                    $bag->update($rowId, $item->qty + 1);
+                }
+            }
+
+            //decrease the quantity
+            if ($request->has('decrease')) {
+                $rowId = $bag->search($request->input('decrease'), self::INSTANCE_SHOP);
+
+                if ($rowId) {
+                    $item = $bag->getItemByRowId($rowId);
+
+                    $bag->update($rowId, $item->qty - 1);
+                }
+            }
+
+            //remove the item
+            if ($request->has('remove')) {
+                $rowId = $bag->search($request->input('remove'), self::INSTANCE_SHOP);
+
+                if ($rowId) {
+                    $bag->remove($rowId);
+                }
+            }
+
+            //remove the item from wishlist
+            if ($request->has('move')) {
+                (new UserRepository)->wishlistDestroy($request->input('move'));
+            }
+
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 
 

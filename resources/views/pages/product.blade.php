@@ -71,35 +71,12 @@
 
         </li>
     </ul>
-    <div class="uk-child-width-1-2" uk-grid>
-      <div class="">
-        Color : {{ $product->color }}
-      </div>
-      <div class="">
-        <select class="uk-select {{ $errors->has('size') ? ' uk-form-danger' : '' }}" id="size">
-          <option value="">Select Size</option>
-          @foreach($product->stocks as $stock)
-            <option value="{{ $stock->sku }}">{{ $stock->size }}</option>
-          @endforeach
-        </select>
-      </div>
-    </div>
-    <div class="uk-child-width-1-2 uk-margin-small-top" uk-grid>
-      <div class="">
-        <form action="{{ route('bag') }}" method="POST">
-          {{ csrf_field() }}
-          <input type="hidden" name="size" id="bag">
-          <button class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right"><span class="uk-margin-small-right uk-icon" uk-icon="icon: cart; ratio:0.8"></span> ADD TO BAG </button>
-        </form>
-      </div>
-      <div class="">
-        <form action="{{ route('user.wishlist') }}" method="POST">
-          {{ csrf_field() }}
-          <input type="hidden" name="size" id="wishlist">
-        <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right">ADD TO WISHLIST</button>
-        </form>
-      </div>
-    </div>
+    <button-buy 
+      api_bag="{{ route('persist.bag') }}"
+      api_wishlist="{{ route('user.wishlist') }}"
+      color="{{ $product->color }}"
+      sizes="{{ $product->stocks }}"
+    ></button-buy>
     <hr>
     <p class="uk-margin-remove uk-text-meta">
       <ul class="uk-grid-small uk-flex-middle uk-flex-center" uk-grid>
@@ -144,15 +121,3 @@
 </div>
 @endsection
 
-@section('footer_scripts')
-
-<script type="text/javascript">
-  $(function () {
-      $('#size').on('change', function () {
-        var size = this.value;
-        $('#bag').val(size);
-        $('#wishlist').val(size);
-      });
-  });
-</script>
-@endsection

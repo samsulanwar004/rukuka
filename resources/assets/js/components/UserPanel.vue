@@ -75,7 +75,7 @@
         self.accounts = this.account ? JSON.parse(this.account) : {};
       },
 
-      data() {
+      data () {
         return {
           profileLink: this.profile_link,
           wishlistLink: this.wishlist_link,
