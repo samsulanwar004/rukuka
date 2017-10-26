@@ -50,6 +50,9 @@
 
             url: '{{ route('user.upload.profile') }}',
             multiple: true,
+            params: {
+              _token : getTokenValue(),
+            },
 
             loadStart: function (e) {
 
@@ -66,9 +69,14 @@
             },
 
             loadEnd: function (e) {
-                console.log(e.currentTarget.response);
                 try {
-                  var response = JSON.parse(e.currentTarget.response); 
+                  var response = JSON.parse(e.currentTarget.response);
+                  var msg = response['files.0'];
+                  if (typeof msg !== 'undefined') {
+                    UIkit.notification(msg.toString().replace(".0", ""), {
+                      status:'danger'
+                    });
+                  }
                   // this is how you parse a string into JSON 
                   $("#photo-profile").attr("src",response.data);
                 } catch (ex) {
