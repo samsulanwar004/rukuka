@@ -9,16 +9,16 @@
             </div>
           </div>
           @if($user->avatar)
-            <img src="{{ $user->avatar }}" alt="" id="photo-profile">
+            <img src="{{ $user->avatar }}" alt="" id="photo-profile" width="50%">
           @else
             @if($user->gender == 'm')
-              <img src="/images/men_profile.jpg" alt="" id="photo-profile">
+              <img src="/images/men_profile.jpg" alt="" id="photo-profile" width="50%">
             @else
-              <img src="/images/women_profile.jpg" alt="" id="photo-profile">
+              <img src="/images/women_profile.jpg" alt="" id="photo-profile" width="50%">
             @endif
           @endif
-          
-      </div>      
+
+      </div>
       <div class="uk-card-body">
           <h3 class="uk-card-title uk-margin-small">{{ ucfirst($user->first_name).' '.ucfirst($user->last_name) }}</h3>
           <hr>
@@ -77,7 +77,7 @@
                       status:'danger'
                     });
                   }
-                  // this is how you parse a string into JSON 
+                  // this is how you parse a string into JSON
                   $("#photo-profile").attr("src",response.data);
                 } catch (ex) {
                   console.error(ex);
