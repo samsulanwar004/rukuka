@@ -20,24 +20,27 @@ Vue.config.silent = true
 Vue.use(VueResource);
 Vue.use(VeeValidate);
 
-Vue.component('user-panel', UserPanel);
-Vue.component('navigation', Navigation);
-
-var bus = new Vue({
-    el: '#vue-menu'
+new Vue({
+    el: '#vue-menu',
+    components: {
+	    'user-panel': UserPanel,
+	    'navigation': Navigation
+  	}
 });
-
-Vue.component('popular', Popular);
-Vue.component('related', Related);
-Vue.component('categories', Categories);
-Vue.component('button-buy', ButtonBuy);
-
-var busy = new Vue({
-    el: '#vue-content'
-});
-
-Vue.component('subcriber', Subcriber);
 
 new Vue({
-    el: '#vue-footer'
+    el: '#vue-content',
+    components: {
+	    'popular': Popular,
+	    'related': Related,
+	    'categories': Categories,
+	    'button-buy': ButtonBuy
+  	}
+});
+
+new Vue({
+    el: '#vue-footer',
+    components: {
+	    'subcriber': Subcriber
+  	}
 });
