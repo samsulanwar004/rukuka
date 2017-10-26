@@ -1748,20 +1748,20 @@ select.uk-form-width-xsmall {
  * Secondary
  */
 .uk-button-secondary {
-  background-color: #222;
+  background-color: #000;
   color: #fff;
   border: 1px solid transparent;
 }
 /* Hover + Focus */
 .uk-button-secondary:hover,
 .uk-button-secondary:focus {
-  background-color: #151515;
+  background-color: #000000;
   color: #fff;
 }
 /* OnClick + Active */
 .uk-button-secondary:active,
 .uk-button-secondary.uk-active {
-  background-color: #080808;
+  background-color: #000000;
   color: #fff;
 }
 /*
@@ -2017,7 +2017,7 @@ select.uk-form-width-xsmall {
  * Secondary
  */
 .uk-section-secondary {
-  background: #222;
+  background: #000;
 }
 /*
  * Indicate that an image or video is used as background
@@ -2469,7 +2469,7 @@ select.uk-form-width-xsmall {
  * Secondary
  */
 .uk-tile-secondary {
-  background: #222;
+  background: #000;
 }
 /* ========================================================================
    Component: Card
@@ -2607,7 +2607,7 @@ select.uk-form-width-xsmall {
  * Secondary
  */
 .uk-card-secondary {
-  background: #222;
+  background: #000;
   color: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
@@ -2615,7 +2615,7 @@ select.uk-form-width-xsmall {
   color: #fff;
 }
 .uk-card-secondary.uk-card-hover:hover {
-  background-color: #222;
+  background-color: #000;
   box-shadow: 0 14px 25px rgba(0, 0, 0, 0.16);
 }
 /* Size modifier
@@ -2963,7 +2963,7 @@ select.uk-form-width-xsmall {
   border-radius: 500px;
   vertical-align: middle;
   /* 1 */
-  background: #1e87f0;
+  background: #000;
   color: #fff;
   font-size: 12px;
   /* 2 */
@@ -3050,7 +3050,7 @@ select.uk-form-width-xsmall {
  * Primary
  */
 .uk-overlay-primary {
-  background: rgba(34, 34, 34, 0.8);
+  background: rgba(0, 0, 0, 0.8);
 }
 /* ========================================================================
    Component: Article
@@ -3758,9 +3758,10 @@ ul.uk-nav-sub {
   /* 2 */
   box-sizing: border-box;
   height: 40px;
-  padding: 0 15px;
+  padding: 0 25px;
   /* 3 */
-  font-size: 12px;
+  font-size: 16px;
+  font-weight: 600;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   /* 4 */
   text-decoration: none;
@@ -3769,7 +3770,7 @@ ul.uk-nav-sub {
  * Nav items
  */
 .uk-navbar-nav > li > a {
-  color: #666;
+  color: #000;
   text-transform: uppercase;
   -webkit-transition: 0.1s ease-in-out;
   transition: 0.1s ease-in-out;
@@ -3783,7 +3784,7 @@ ul.uk-nav-sub {
 .uk-navbar-nav > li:hover > a,
 .uk-navbar-nav > li > a:focus,
 .uk-navbar-nav > li > a.uk-open {
-  color: #000;
+  color: #666;
   outline: none;
 }
 /* OnClick */
@@ -3918,22 +3919,26 @@ ul.uk-nav-sub {
  * Items
  */
 .uk-navbar-dropdown-nav > li > a {
-  color: #666;
+  font-size: 13px;
+  color: #000;
 }
 /* Hover + Focus */
 .uk-navbar-dropdown-nav > li > a:hover,
 .uk-navbar-dropdown-nav > li > a:focus {
-  color: #000;
+  color: #666;
 }
 /* Active */
 .uk-navbar-dropdown-nav > li.uk-active > a {
+  font-size: 13px;
+  font-weight: bold;
   color: #333;
 }
 /*
  * Header
  */
 .uk-navbar-dropdown-nav .uk-nav-header {
-  color: #333;
+  color: #000;
+  font-size: 13px;
 }
 /*
  * Divider
@@ -3974,11 +3979,11 @@ ul.uk-nav-sub {
      * Navbar
      */
 .uk-navbar-container > .uk-container .uk-navbar-left {
-  margin-left: -15px;
-  margin-right: -15px;
+  margin-left: -25px;
+  margin-right: -25px;
 }
 .uk-navbar-container > .uk-container .uk-navbar-right {
-  margin-right: -15px;
+  margin-right: -25px;
 }
 /*
      * Grid Divider
@@ -4176,7 +4181,7 @@ ul.uk-nav-sub {
 .uk-breadcrumb > :nth-child(n+2):not(.uk-first-column)::before {
   content: "/";
   display: inline-block;
-  margin: 0 20px;
+  margin: 0 2px;
   color: #666;
 }
 /* ========================================================================
@@ -5004,7 +5009,7 @@ ul.uk-nav-sub {
   box-sizing: border-box;
   width: 270px;
   padding: 20px 20px;
-  background: #222;
+  background: #000;
   /* 3 */
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -7179,7 +7184,7 @@ td.uk-text-break {
   background-color: #1e87f0;
 }
 .uk-background-secondary {
-  background-color: #222;
+  background-color: #000;
 }
 /* Size
  ========================================================================== */

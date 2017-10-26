@@ -43,7 +43,7 @@
 
 <div class="uk-grid-small uk-margin-top uk-margin-large-bottom" uk-grid>
 <div class="uk-width-1-4@m">
-  <div class="uk-card-border uk-card-small uk-panel uk-sticky uk-sticky-fixed uk-active" uk-sticky="offset: 115; bottom:#viewport">
+  <div class="uk-card-border uk-card-small uk-panel">
     <div class="uk-card-header uk-card-secondary">
 
 
@@ -65,24 +65,20 @@
 </div>
 <div class="uk-width-expand@m">
   <div class="uk-panel">
-    <div class="uk-grid-small uk-child-width-1-2@m uk-flex-center" uk-grid>
-      <div class="uk-text-left">
-        Sort by price: <a href="?price=desc" class="uk-text-muted">high</a> | <a href="?price=asc" class="uk-text-muted">low</a>
-        </div>
-        <div class="uk-text-right">
-          @include('pagination.default', ['paginator' => $products])
-        </div>
-      </div>
+
       <div class="uk-grid-small uk-child-width-1-3@m uk-flex-center" uk-grid>
       @forelse($products as $product)
+        <div class="uk-panel uk-visible-toggle">
+
+
         <!-- start product -->
         <div class="uk-panel uk-text-left">
-          <div class="uk-card uk-card-small uk-padding-remove">
+          <div class="uk-card uk-card-small uk-card-default">
               <div class="uk-card-media-top">
                   <img src="/{{ $product->images->first()->photo }}" alt="">
 
               </div>
-              <div class="uk-card-body uk-padding-remove uk-margin-small-top">
+              <div class="uk-card-body">
                   <a href="/product/{{ $product->slug }}" class="uk-text-muted">
                   	{{ $product->name }}
                   </a>
@@ -95,6 +91,30 @@
           </div>
         </div>
         <!-- end product single -->
+        <!-- start product -->
+        <div class="uk-panel uk-position-cover-card uk-invisible-hover">
+          <div class="uk-panel uk-text-left">
+            <div class="uk-card uk-card-small uk-card-default">
+                <div class="uk-card-media-top">
+                    <img src="/{{ $product->images->first()->photo }}" alt="">
+
+                </div>
+                <div class="uk-card-body">
+                    <a href="/product/{{ $product->slug }}" class="uk-text-muted">
+                    	{{ $product->name }}
+                    </a>
+                    <br>
+                    <span>{{ $product->currency }} {{ number_format($product->sell_price) }}</span>
+                </div>
+  {{--               <div class="uk-card-footer">
+                  <span class="uk-text-meta">Shirt<h4 class="uk-card-price">$400</h4></span>
+                </div> --}}
+            </div>
+          </div>
+        </div>
+        <!-- end product single -->
+        </div>
+
        @empty
           Product not available
        @endforelse
@@ -102,11 +122,13 @@
       <hr>
       <div class="uk-grid-small uk-child-width-1-2@m uk-flex-center" uk-grid>
         <div class="uk-text-left">
-          Sort by price: <a href="?price=desc" class="uk-text-muted">high</a> | <a href="?price=asc" class="uk-text-muted">low</a>
+          <span class="uk-text-meta">Sort by price : <a href="?price=desc">high</a> | <a href="?price=asc">low</a></span>
           </div>
-            <div class="uk-text-right">
-              @include('pagination.default', ['paginator' => $products])
-            </div>
+          <div class="uk-text-right">
+            <span class="uk-text-meta">
+            @include('pagination.default', ['paginator' => $products])
+            </span>
+          </div>
         </div>
 
   </div>

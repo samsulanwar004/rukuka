@@ -8,7 +8,7 @@
     </li>
     <li v-if="auth == 1"  class="uk-margin-right">
       <a class="uk-button uk-button-text uk-button-small" :href="wishlistLink"><b>L O V E</b></a>
-        <div class="uk-badge custom-badge" v-if="wishlistCount > 0">
+        <div class="uk-badge" v-if="wishlistCount > 0">
           {{ wishlistCount }}
         </div>
     </li>
@@ -32,7 +32,7 @@
               </div>
             </div>
         </div>
-        <div class="uk-badge custom-badge" v-if="bagCount > 0">
+        <div class="uk-badge" v-if="bagCount > 0">
           {{ bagCount }}
         </div>
     </li>

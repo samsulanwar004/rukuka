@@ -47,21 +47,30 @@
           <!-- <a class="uk-navbar-item uk-logo" href="#"><img src="images/logo.png" alt="" width="60"></a> -->
 
           <ul class="uk-navbar-nav">
-              <li><a href="#"><h5 class="uk-margin-remove">DESIGNERS</h5></a>
+              <li><a href="#">DESIGNERS</a>
                 <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                     <div class="uk-navbar-dropdown-grid" uk-grid>
                       <div class="uk-width-1-5@m">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                          <li>FILTER NAVIGATION</li>
+                        </ul>
+                        <hr class="uk-margin-small">
                           <ul class="uk-nav uk-navbar-dropdown-nav">
-                              <li class="uk-active">What's New</li>
-                              <li class="uk-parent"><a href="#">New Arrival</a></li>
-                              <li class="uk-nav-header">Featured Style Story</li>
-                              <li><img src="images/coll-women.jpg" alt=""></li>
-                              <li><a href="#" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
+                              <li class="uk-parent"><a href="#">Designers A-Z</a></li>
+                              <li class="uk-parent"><a href="#">New Designers</a></li>
+                              <li class="uk-parent"><a href="#">Clothings</a></li>
+                              <li class="uk-parent"><a href="#">Shoes & Accessories</a></li>
+
+                              <li><a href="#" class="uk-text-danger"><b>SEE ALL DESIGNERS</b></a></li>
                           </ul>
                       </div>
-                        <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
+                        <div class="uk-width-2-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
                           <div>
-                            <ul class="uk-list uk-column-1-3">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                              <li>DESIGNERS</li>
+                            </ul>
+                            <hr class="uk-margin-small">
+                            <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2">
                               <li class="uk-parent" v-for="design in designers">
                                   <a :href="'/shop/designers/'+ design.slug ">{{ design.name }}</a>
                               </li>
@@ -69,26 +78,20 @@
                           </div>
                       </div>
 
-                        <div class="uk-width-1-5@m uk-margin-remove">
-                          <ul class="uk-nav uk-navbar-dropdown-nav">
-                              <li class="uk-active">SPECIAL SIZE</li>
-                              <li class="uk-parent"><a href="#">Petite</a></li>
-                              <li class="uk-parent"><a href="#">Tall</a></li>
-                              <li class="uk-parent"><a href="#">Size 16</a></li>
-                              <li class="uk-nav-header">Our Shops</li>
-                              <li class="uk-parent"><a href="#">Mother's Day Shop</a></li>
-                              <li class="uk-parent"><a href="#">Ready-To-Party Collection</a></li>
-                              <li class="uk-parent"><a href="#">Wear-To-Work Shop</a></li>
-                              <li class="uk-parent"><a href="#">Garments For Good</a></li>
-                              <li class="uk-parent"><a href="#">Vacation Shop</a></li>
-                              <li class="uk-parent"><a href="#" class="uk-text-danger"><b>VISIT OUR SALE</b></a></li>
-                          </ul>
+                        <div class="uk-width-2-5@m uk-margin-remove">
+                          <img src="/images/designers.jpg" alt="">
+                          <div class="uk-position-medium uk-position-bottom-center">
+                            <div class="uk-panel uk-background-default">
+                              Let's see designers of the week November 2017 <br>
+                              <a href="#" class="uk-button-text">Shop Now</a>
+                            </div>
+                          </div>
                         </div>
                     </div>
                 </div>
               </li>
               <li>
-                  <a :href="womenLink"><h5 class="uk-margin-remove">WOMEN</h5></a>
+                  <a :href="womenLink">WOMEN</a>
                   <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                       <div class="uk-navbar-dropdown-grid" uk-grid>
                         <div class="uk-width-1-5@m">
@@ -149,7 +152,7 @@
                       </div>
                   </div>
               </li>
-              <li><a :href="menLink"><h5 class="uk-margin-remove">MEN</h5></a>
+              <li><a :href="menLink">MEN</a>
                 <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                     <div class="uk-navbar-dropdown-grid" uk-grid>
                       <div class="uk-width-1-5@m">
@@ -211,7 +214,7 @@
                     </div>
                 </div>
               </li>
-              <li><a :href="kidLink"><h5 class="uk-margin-remove">KIDS</h5></a>
+              <li><a :href="kidLink">KIDS</a>
                 <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                     <div class="uk-navbar-dropdown-grid" uk-grid>
                       <div class="uk-width-1-5@m">
@@ -260,11 +263,11 @@
                     </div>
                 </div>
               </li>
-              <li><a href="#"><h5 class="uk-margin-remove">ECO TRAVEL</h5></a>
+              <li><a href="#">ECO TRAVEL</a>
               </li>
-              <li><a href="#"><h5 class="uk-margin-remove">SALE</h5></a>
+              <li><a href="#">SALE</a>
               </li>
-              <li><a href="#"><h5 class="uk-margin-remove">BLOG</h5></a>
+              <li><a href="#">BLOG</a>
               </li>
           </ul>
       </div>
