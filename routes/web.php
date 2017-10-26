@@ -55,6 +55,11 @@ Route::get('/bag', [
     'uses' => 'Frontend\PageController@bag',
 ]);
 
+Route::post('/bag', [
+    'as'   => 'bag',
+    'uses' => 'Frontend\PageController@bag',
+]);
+
 Route::post('/persist-bag', [
     'as'   => 'persist.bag',
     'uses' => 'Frontend\PageController@persistBag',
