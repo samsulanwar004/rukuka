@@ -22,6 +22,21 @@ Vue.config.silent = true
 Vue.use(VueResource);
 Vue.use(VeeValidate);
 
+window.Event = new class {
+
+  constructor() {
+    this.vue = new Vue();
+  }
+
+  fire(event, data = null) {
+    this.vue.$emit(event, data);
+  }
+
+  listen(event, callback) {
+    this.vue.$on(event, callback);
+  }
+}
+
 new Vue({
   el: '#app',
   components: {

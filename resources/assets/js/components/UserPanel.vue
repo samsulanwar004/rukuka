@@ -85,15 +85,20 @@
 
       self.accounts = this.account ? JSON.parse(this.account) : {};
       
-      axios.get(this.bag_link, {
-      })
-      .then(function (response) {
-        self.bagCount = response.data.bagCount;
-        self.bags = response.data.bags;
-        self.subtotal = response.data.subtotal;
-      })
-      .catch(function (error) {
-        console.log(error);
+      this.addBag();
+
+      Event.listen('addBag', function (id) {
+        var link = 'http://kukaindonesia.local/bag';
+        axios.get(link, {
+        })
+        .then(function (response) {
+          self.bagCount = response.data.bagCount;
+          self.bags = response.data.bags;
+          self.subtotal = response.data.subtotal;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
       });
     },
 
@@ -114,6 +119,20 @@
           params: {
             remove: sku
           }
+        })
+        .then(function (response) {
+          self.bagCount = response.data.bagCount;
+          self.bags = response.data.bags;
+          self.subtotal = response.data.subtotal;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }, 
+
+      addBag: function () {
+        var self = this;
+        axios.get(this.bag_link, {
         })
         .then(function (response) {
           self.bagCount = response.data.bagCount;
