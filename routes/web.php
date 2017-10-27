@@ -30,7 +30,7 @@ Route::get('/shop/{categories}/{category}/{slug?}', [
     'uses' => 'Frontend\PageController@shop',
 ]);
 
-Route::get('/product/{slug}', [
+Route::get('/product/{slug?}', [
     'as'   => 'product',
     'uses' => 'Frontend\PageController@product',
 ]);

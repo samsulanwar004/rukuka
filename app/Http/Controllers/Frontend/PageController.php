@@ -129,6 +129,7 @@ class PageController extends BaseController
                     'photo' => $stock->product->images->first()->photo,
                     'description' => $stock->product->content,
                     'currency' => $stock->product->currency,
+                    'slug' => $stock->product->slug,
                 ]
             ];
 
@@ -177,6 +178,14 @@ class PageController extends BaseController
 
         $subtotal = $bag->subtotal();
 
+        if ($request->ajax() || $request->wantsJson()) {
+            return [
+                'bagCount' => count($bags),
+                'bags' => $bags,
+                'subtotal' => $subtotal
+            ];
+        }
+
         return view('pages.bag', compact('bags', 'subtotal'));
     }
 
@@ -213,6 +222,7 @@ class PageController extends BaseController
                         'photo' => $stock->product->images->first()->photo,
                         'description' => $stock->product->content,
                         'currency' => $stock->product->currency,
+                        'slug' => $stock->product->slug,
                     ]
                 ];
 
