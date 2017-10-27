@@ -11,6 +11,8 @@ import Categories from './components/Categories.vue';
 
 import Subcriber from './components/Subcriber.vue';
 
+import ButtonBuy from './components/ButtonBuy.vue';
+
 Vue.config.devtools = true
 Vue.config.debug = true
 Vue.config.silent = true
@@ -21,15 +23,16 @@ Vue.use(VeeValidate);
 Vue.component('user-panel', UserPanel);
 Vue.component('navigation', Navigation);
 
-new Vue({
+var bus = new Vue({
     el: '#vue-menu'
 });
 
 Vue.component('popular', Popular);
 Vue.component('related', Related);
 Vue.component('categories', Categories);
+Vue.component('button-buy', ButtonBuy);
 
-new Vue({
+var busy = new Vue({
     el: '#vue-content'
 });
 
