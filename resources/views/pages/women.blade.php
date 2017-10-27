@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+<div class="uk-container uk-container-small">
 <div class="uk-grid-small uk-margin-top" uk-grid>
 
     @php
@@ -30,7 +31,7 @@
                 <div class="uk-overlay uk-overlay-default uk-padding-remove uk-position-medium uk-position-bottom-left">
                   <button class="uk-button uk-button-small uk-button-default uk-padding-small-right">SHOP NOW</button>
                 </div>
-            </div>            
+            </div>
             <h3 class="uk-margin-remove">{{ $leftTitle[0] }}</h3>
             <a href="/{{ $women['left_link'] }}" class="uk-text-muted">
             {{ $leftTitle[1] }}<span uk-icon="icon: triangle-right"></span></a>
@@ -90,4 +91,5 @@
   </div>
   <h3 class="uk-text-center uk-heading-divider">TRENDING NOW</h3>
     <popular api="{{ route('populer')}}"></popular>
+</div>
 @endsection

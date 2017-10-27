@@ -19,7 +19,7 @@
     <div id="status">&nbsp;</div>
   </div>
   @include('partials.nav')
-    <div class="uk-container uk-container-small" id="vue-content">
+    <div id="vue-content">
        @yield('content')
     </div>
   @include('partials.footer')

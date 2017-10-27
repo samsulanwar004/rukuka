@@ -40,7 +40,7 @@
 </script>
 
 <template>
-    <nav class="uk-container uk-container-small uk-section-default" uk-navbar="dropbar: true; align: center; boundary-align: true; delay-hide: 100; duration:50">
+    <nav class="uk-container uk-container-small uk-section-default uk-background-default" uk-navbar="dropbar: true; align: center; boundary-align: true; delay-hide: 100; duration:50">
   <!-- <div uk-navbar> -->
       <div class="uk-navbar-center">
 
