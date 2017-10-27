@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueResource from 'vue-resource-2';
 import VeeValidate from 'vee-validate';
+import ES6Promise from 'es6-promise';
+ES6Promise.polyfill();
 
 import UserPanel from './components/UserPanel.vue';
 import Navigation from './components/Navigation.vue';
@@ -21,26 +23,26 @@ Vue.use(VueResource);
 Vue.use(VeeValidate);
 
 new Vue({
-    el: '#vue-menu',
-    components: {
-	    'user-panel': UserPanel,
-	    'navigation': Navigation
-  	}
+  el: '#vue-menu',
+  components: {
+    'user-panel': UserPanel,
+    'navigation': Navigation
+	}
 });
 
 new Vue({
-    el: '#vue-content',
-    components: {
-	    'popular': Popular,
-	    'related': Related,
-	    'categories': Categories,
-	    'button-buy': ButtonBuy
-  	}
+  el: '#vue-content',
+  components: {
+    'popular': Popular,
+    'related': Related,
+    'categories': Categories,
+    'button-buy': ButtonBuy
+	}
 });
 
 new Vue({
-    el: '#vue-footer',
-    components: {
-	    'subcriber': Subcriber
-  	}
+  el: '#vue-footer',
+  components: {
+    'subcriber': Subcriber
+	}
 });
