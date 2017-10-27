@@ -23,26 +23,14 @@ Vue.use(VueResource);
 Vue.use(VeeValidate);
 
 new Vue({
-  el: '#vue-menu',
+  el: '#app',
   components: {
     'user-panel': UserPanel,
-    'navigation': Navigation
-	}
-});
-
-new Vue({
-  el: '#vue-content',
-  components: {
+    'navigation': Navigation,
     'popular': Popular,
     'related': Related,
     'categories': Categories,
-    'button-buy': ButtonBuy
-	}
-});
-
-new Vue({
-  el: '#vue-footer',
-  components: {
+    'button-buy': ButtonBuy,
     'subcriber': Subcriber
 	}
 });

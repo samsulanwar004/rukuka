@@ -14,20 +14,20 @@
 
   </head>
   <body>
-  <!-- Preloader -->
-  <div id="preloader">
-    <div id="status">&nbsp;</div>
-  </div>
-  @include('partials.nav')
-    <div id="vue-content">
-       @yield('content')
+    <div id="app">
+      <!-- Preloader -->
+      <div id="preloader">
+        <div id="status">&nbsp;</div>
+      </div>
+      @include('partials.nav')
+      @yield('content')
+      @include('partials.footer')
     </div>
-  @include('partials.footer')
-  <script src="{{ elixir('js/vendor.js') }}"></script>
-  <script src="{{ elixir('js/custom.js') }}"></script>
-  <script src="{{ elixir('js/main.js') }}"></script>
-  <script src="{{ elixir('js/app.js') }}"></script>
-  @section('footer_scripts')
-  @show
+    <script src="{{ elixir('js/vendor.js') }}"></script>
+    <script src="{{ elixir('js/custom.js') }}"></script>
+    <script src="{{ elixir('js/main.js') }}"></script>
+    <script src="{{ elixir('js/app.js') }}"></script>
+    @section('footer_scripts')
+    @show
   </body>
 </html>

@@ -278,7 +278,8 @@ class UserController extends BaseController
                     'size' => $stock->size,
                     'color' => $stock->product->color,
                     'photo' => $stock->product->images->first()->photo,
-                    'description' => $stock->product->content
+                    'description' => $stock->product->content,
+                    'slug' => $stock->product->slug
                 ],
                 'product_stocks_id' => $stock->id
             ];
