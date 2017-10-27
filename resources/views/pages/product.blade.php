@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+<div class="uk-container uk-container-small">
 <div class="uk-grid-small uk-margin-top">
     @include('partials.alert')
 </div>
@@ -71,7 +72,7 @@
 
         </li>
     </ul>
-    <button-buy 
+    <button-buy
       api_bag="{{ route('persist.bag') }}"
       api_wishlist="{{ route('user.wishlist') }}"
       color="{{ $product->color }}"
@@ -119,5 +120,5 @@
     <button class="uk-button uk-button-secondary">SHOW ALL PRODUCT</button>
   </div>
 </div>
+</div>
 @endsection
-

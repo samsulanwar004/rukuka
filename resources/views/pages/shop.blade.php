@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-
+<div class="uk-container uk-container-small">
 <div class="uk-grid-small uk-margin-top">
 @if($categories == 'designers')
   @include('partials.breadcrumb', [
@@ -134,5 +134,6 @@
   </div>
 </div>
 
+</div>
 </div>
 @endsection

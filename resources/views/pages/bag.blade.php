@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+<div class="uk-container uk-container-small">
 <div class="uk-grid-small uk-margin-top">
     @include('partials.alert')
 </div>
@@ -52,7 +53,7 @@
               <button class="uk-button uk-button-small uk-button-default uk-padding-small-right uk-margin-remove">MOVE TO WISHLIST</button>
               <a class="uk-button uk-button-small uk-button-default uk-padding-small-right uk-text-right" href="{{ url("bag?remove=$item->id") }}">REMOVE FROM BAG</a></form>
             </td>
-          </tr>  
+          </tr>
           @empty
             <tr><td colspan="6" align="center"><p>You have no items in the shopping bag</p></td></tr>
           @endforelse
@@ -91,5 +92,6 @@
   <div class="uk-panel uk-text-center">
     <button class="uk-button uk-button-secondary">SHOW ALL PRODUCT</button>
   </div>
+</div>
 </div>
 @endsection

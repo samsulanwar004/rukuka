@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="uk-grid-small uk-margin-top" uk-grid>
+{{-- <div class="uk-grid-small uk-margin-top" uk-grid> --}}
 
     @php
       $leftTitle = explode('|', $home['left_title']);
@@ -12,15 +12,59 @@
       $kidTitle = explode('|', $home['kid_title']);
     @endphp
     <div class="uk-text-center">
-      <div class="uk-inline-clip uk-transition-toggle uk-dark">
+      <div class="uk-container uk-container-small">
+        <div class="uk-panel uk-padding-small">
+          <h4 class="uk-padding-remove">Now Open Ku Ka Indonesia, which serve many various style cloth and stuff. <a href="#">Search Promo Sale</a></h4>
+        </div>
+      </div>
+      <div class="uk-inline">
           <img src="/{{ $home['main_banner'] }}" alt="">
-          <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
+          {{-- <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div> --}}
           <!-- <div class="uk-overlay uk-overlay-default uk-padding-small uk-position-medium uk-position-bottom-right">HOT DEALS THIS WEEKEND, WITH 50% DISCOUNT, <br>
             SIGN UP NOW, ON KUKAINDONESIA.COM
           </div> -->
+          <div class="uk-width-2-4@m" uk-grid>
+            <div class="uk-position-medium uk-position-center">
+              <div class="uk-card-border-light uk-width-2-4@m">
+                <div class="uk-card-body">
+                  <h1 class="uk-light">
+                    Welcome To Ku Ka Indonesia
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
+  {{-- </div> --}}
+  <div class="uk-container uk-container-small">
+    <div class="uk-card-border uk-card-small uk-margin-top">
+    <div class="uk-card-body">
+    <div class="uk-grid-small" uk-grid>
+
+        <div class="uk-width-1-5@m uk-flex uk-flex-middle">
+
+
+              <h3 class="uk-margin-remove">New Arrival</h3>
+
+        </div>
+        <div class="uk-width-2-5@m uk-inline uk-flex uk-flex-middle">
+
+
+            <h3 class="uk-margin-remove">For <a href="#">Men,</a> <a href="#">Women,</a> <a href="#">Kids</a></h3>
+
+
+        </div>
+        <div class="uk-width-2-5@m uk-inline">
+
+            <h3 class="uk-margin-remove uk-text-danger">Lets See On The Blog</h3>
+            <a href="#" class="uk-text-muted">Inspiration and Interesting People Out There,<span uk-icon="icon: triangle-right"></span></a>
+
+        </div>
+    </div>
+    </div>
   </div>
+
   <div class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
       <div class="uk-width-1-3@m">
 
@@ -58,35 +102,7 @@
   <!-- <div class="uk-text-left">
   <h2><span><b>Shop New Arrivals</b></span></h2>
   </div> -->
-  <div class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
-      <div class="uk-width-1-5@m">
-
-            <h5 class="uk-margin-remove">New Arrival</h5>
-            <h3 class="uk-margin-remove">For Women</h3>
-            <a href="#" class="uk-text-muted">Shop Now<span uk-icon="icon: triangle-right"></span></a>
-      </div>
-      <div class="uk-width-1-5@m uk-inline">
-
-          <h5 class="uk-margin-remove">New Arrival</h5>
-          <h3 class="uk-margin-remove">For Men</h3>
-          <a href="#" class="uk-text-muted">Shop Now<span uk-icon="icon: triangle-right"></span></a>
-
-      </div>
-      <div class="uk-width-1-5@m uk-inline">
-          <h5 class="uk-margin-remove">New Arrival</h5>
-          <h3 class="uk-margin-remove">For Kids</h3>
-          <a href="#" class="uk-text-muted">Shop NOw<span uk-icon="icon: triangle-right"></span></a>
-
-      </div>
-      <div class="uk-width-2-5@m uk-inline">
-
-          <h3 class="uk-margin-remove uk-text-danger">Lets See On The Blog</h3>
-          <a href="#" class="uk-text-muted">Inspiration and Interesting People Out There,<span uk-icon="icon: triangle-right"></span></a>
-
-      </div>
-  </div>
-  <hr>
-  <div class="uk-text-left">
+  {{-- <div class="uk-text-left">
   <h2><span><b>Shop & Collection</b></span></h2>
   </div>
   <div class="uk-grid-small uk-margin-top uk-margin-bottom uk-child-width-1-2@m" uk-grid>
@@ -114,7 +130,7 @@
           <a href="/{{ $home['right_link'] }}" class="uk-text-muted">{{ $rightTitle[1] }}<span uk-icon="icon: triangle-right"></span></a>
       </div>
   </div>
-  <hr>
+  <hr> --}}
   <div class="uk-text-left">
   	<h2><span>Most Popular</span></h2>
   </div>
@@ -152,4 +168,6 @@
 
       </div>
   </div>
+
+    </div>
 @endsection
