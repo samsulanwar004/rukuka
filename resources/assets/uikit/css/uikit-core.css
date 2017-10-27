@@ -238,7 +238,7 @@ h6,
   margin: 0 0 20px 0;
   font-family: 'Cormorant Garamond', serif;
   font-weight: normal;
-  color: #333;
+  color: #000;
   text-transform: none;
 }
 /* Add margin if adjacent element */
@@ -261,17 +261,17 @@ h6,
  */
 h1,
 .uk-h1 {
-  font-size: 40px;
+  font-size: 60px;
   line-height: 1.2;
 }
 h2,
 .uk-h2 {
-  font-size: 30px;
+  font-size: 45px;
   line-height: 1.3;
 }
 h3,
 .uk-h3 {
-  font-size: 22px;
+  font-size: 35px;
   line-height: 1.4;
 }
 h4,
@@ -499,7 +499,7 @@ a.uk-link-reset:focus,
 /* Primary
  ========================================================================== */
 .uk-heading-primary {
-  font-size: 40px;
+  font-size: 60px;
   line-height: 1.2;
 }
 /* Tablet landscape and bigger */
@@ -1431,7 +1431,7 @@ select.uk-form-width-xsmall {
   /* 3 */
   padding: 0;
   /* 4 */
-  font-size: 22px;
+  font-size: 35px;
   line-height: 1.4;
 }
 /* Custom controls
@@ -2371,6 +2371,10 @@ select.uk-form-width-xsmall {
   position: relative;
   border: solid 1px #e5e5e5;
 }
+.uk-card-border-light {
+  position: relative;
+  border: solid 1px #fff;
+}
 /* Sections
  ========================================================================== */
 .uk-card-body {
@@ -2428,7 +2432,7 @@ select.uk-form-width-xsmall {
 /* Title
  ========================================================================== */
 .uk-card-title {
-  font-size: 22px;
+  font-size: 35px;
   line-height: 1.4;
 }
 /* Badge
@@ -2854,7 +2858,7 @@ select.uk-form-width-xsmall {
 /* Title
  ========================================================================== */
 .uk-article-title {
-  font-size: 40px;
+  font-size: 60px;
   line-height: 1.2;
 }
 /* Meta
@@ -3147,7 +3151,7 @@ select.uk-form-width-xsmall {
 .uk-search-navbar .uk-search-input {
   height: 40px;
   background: transparent;
-  font-size: 22px;
+  font-size: 35px;
 }
 /*
  * Icon
@@ -3172,7 +3176,7 @@ select.uk-form-width-xsmall {
 .uk-search-large .uk-search-input {
   height: 80px;
   background: transparent;
-  font-size: 40px;
+  font-size: 60px;
 }
 /*
  * Icon
@@ -3326,7 +3330,7 @@ ul.uk-nav-sub {
  * Items
  */
 .uk-nav-primary > li > a {
-  font-size: 22px;
+  font-size: 35px;
   line-height: 1.5;
   color: #666;
 }
@@ -4246,7 +4250,7 @@ ul.uk-nav-sub {
   margin-top: -20px;
 }
 [class*='uk-drop-bottom'] {
-  margin-top: 20px;
+  margin-top: 0px;
 }
 [class*='uk-drop-left'] {
   margin-left: -20px;
@@ -4525,7 +4529,7 @@ ul.uk-nav-sub {
 /* Title
  ========================================================================== */
 .uk-modal-title {
-  font-size: 30px;
+  font-size: 45px;
   line-height: 1.3;
 }
 /* Close
@@ -6369,7 +6373,7 @@ ul.uk-nav-sub {
 /* Style modifiers
  ========================================================================== */
 .uk-text-lead {
-  font-size: 22px;
+  font-size: 35px;
   line-height: 1.5;
   color: #333;
 }
@@ -6385,7 +6389,7 @@ ul.uk-nav-sub {
   line-height: 1.5;
 }
 .uk-text-large {
-  font-size: 22px;
+  font-size: 35px;
   line-height: 1.5;
 }
 /* Weight modifier
@@ -6808,6 +6812,15 @@ td.uk-text-break {
 }
 .uk-background-secondary {
   background-color: #000;
+}
+.uk-background-deep-green-background {
+  background-color: #276357;
+}
+.uk-background-deep-red-background {
+  background-color: #a02d2e;
+}
+.uk-background-deep-blue-background {
+  background-color: #044c85;
 }
 /* Size
  ========================================================================== */
@@ -7377,7 +7390,7 @@ td.uk-text-break {
  * 1. Required for `a`
  */
 .uk-logo {
-  font-size: 22px;
+  font-size: 35px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color: #000;
   /* 1 */
