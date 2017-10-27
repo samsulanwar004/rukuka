@@ -30,7 +30,7 @@ Route::get('/shop/{categories}/{category}/{slug?}', [
     'uses' => 'Frontend\PageController@shop',
 ]);
 
-Route::get('/product/{slug}', [
+Route::get('/product/{slug?}', [
     'as'   => 'product',
     'uses' => 'Frontend\PageController@product',
 ]);
@@ -58,6 +58,11 @@ Route::get('/bag', [
 Route::post('/bag', [
     'as'   => 'bag',
     'uses' => 'Frontend\PageController@bag',
+]);
+
+Route::post('/persist-bag', [
+    'as'   => 'persist.bag',
+    'uses' => 'Frontend\PageController@persistBag',
 ]);
 
 Route::middleware(['guest'])->group(function () {

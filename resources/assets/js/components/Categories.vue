@@ -16,6 +16,12 @@
             return {
                 categories: {}
             }
+        },
+
+        methods: {
+            someParentMethod: function () {
+                console.log('-->');
+            }
         }
     }
 </script>
