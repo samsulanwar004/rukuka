@@ -15,6 +15,8 @@ import Subcriber from './components/Subcriber.vue';
 
 import ButtonBuy from './components/ButtonBuy.vue';
 
+import Bag from './components/Bag.vue';
+
 Vue.config.devtools = true
 Vue.config.debug = true
 Vue.config.silent = true
@@ -46,6 +48,7 @@ new Vue({
     'related': Related,
     'categories': Categories,
     'button-buy': ButtonBuy,
-    'subcriber': Subcriber
+    'subcriber': Subcriber,
+    'bag': Bag
 	}
 });
