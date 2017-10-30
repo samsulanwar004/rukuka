@@ -39,9 +39,9 @@
                     </td>
                 </tr>
             </tbody>
-<!--             <tbody>
+            <tbody v-if="bags == 0">
                 <tr><td colspan="6" align="center"><p>You have no items in the shopping bag</p></td></tr>
-            </tbody> -->
+            </tbody>
         </table>
     </div>
 </template>
