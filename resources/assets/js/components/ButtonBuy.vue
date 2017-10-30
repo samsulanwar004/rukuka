@@ -35,7 +35,7 @@
         },
 
         methods: {
-            bag: function (event) {
+            bag: function (event) {                
                 this.$validator.validateAll().then((result) => {});
                 var size = this.size;
                 axios.post(this.api_bag, {
@@ -52,6 +52,8 @@
                             UIkit.notification("<span uk-icon='icon: check'></span> Add product successfully", {
                                 status:'success'
                             });
+
+                            Event.fire('addBag');
                         }
                     }
                 })
