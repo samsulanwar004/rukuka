@@ -60,11 +60,6 @@ Route::post('/bag', [
     'uses' => 'Frontend\PageController@bag',
 ]);
 
-Route::post('/persist-bag', [
-    'as'   => 'persist.bag',
-    'uses' => 'Frontend\PageController@persistBag',
-]);
-
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [
         'as'   => 'login',

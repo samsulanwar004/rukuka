@@ -53,7 +53,7 @@
                                 status:'success'
                             });
 
-                            Event.fire('addBag');
+                            Event.fire('addBag', response);
                         }
                     }
                 })

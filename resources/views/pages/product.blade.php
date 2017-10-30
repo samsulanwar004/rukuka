@@ -73,7 +73,7 @@
         </li>
     </ul>
     <button-buy
-      api_bag="{{ route('persist.bag') }}"
+      api_bag="{{ route('bag') }}"
       api_wishlist="{{ route('user.wishlist') }}"
       color="{{ $product->color }}"
       sizes="{{ $product->stocks }}"

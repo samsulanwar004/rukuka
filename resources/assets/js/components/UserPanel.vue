@@ -85,20 +85,18 @@
 
       self.accounts = this.account ? JSON.parse(this.account) : {};
       
-      this.addBag();
+      self.addBag();
 
-      Event.listen('addBag', function (id) {
-        var link = 'http://kukaindonesia.local/bag';
-        axios.get(link, {
-        })
-        .then(function (response) {
-          self.bagCount = response.data.bagCount;
-          self.bags = response.data.bags;
-          self.subtotal = response.data.subtotal;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      Event.listen('addBag', function (response) {
+        self.bagCount = response.data.bagCount;
+        self.bags = response.data.bags;
+        self.subtotal = response.data.subtotal;
+      });
+
+      Event.listen('removePopUp', function (response) {
+        self.bagCount = response.data.bagCount;
+        self.bags = response.data.bags;
+        self.subtotal = response.data.subtotal;
       });
     },
 
@@ -124,6 +122,8 @@
           self.bagCount = response.data.bagCount;
           self.bags = response.data.bags;
           self.subtotal = response.data.subtotal;
+
+          Event.fire('removeBag', response);
         })
         .catch(function (error) {
           console.log(error);
@@ -138,6 +138,8 @@
           self.bagCount = response.data.bagCount;
           self.bags = response.data.bags;
           self.subtotal = response.data.subtotal;
+
+          Event.fire('bags', response);
         })
         .catch(function (error) {
           console.log(error);
