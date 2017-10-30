@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+<div class="uk-container uk-container-small">
 <div class="uk-grid-small uk-margin-top">
 	@include('partials.alert')
 </div>
@@ -22,7 +23,7 @@
                             <th class="uk-width-medium">Expired Date</th>
                             <th class="uk-width-medium">Name Card</th>
                         </tr>
-                    </thead>                    
+                    </thead>
                     <tbody>
                         @forelse($cards as $card)
                         	<tr>
@@ -37,7 +38,7 @@
 	                    	<tr><td colspan="5"><center>no card</center></td></tr>
                         @endforelse
                     </tbody>
-                    
+
                 </table>
                 <button type="submit" id="default-submit" style="display: none;"></button>
                 </form>
@@ -90,7 +91,7 @@
                           <option value="{{ $add->id }}">{{ $add->address_line }}</option>
                         @endforeach
                       </select>
-                      
+
                   </div>
               </div>
               <div class="uk-margin-small uk-grid-small" uk-grid>
@@ -103,6 +104,7 @@
           </p>
       </p>
     </div>
+</div>
 </div>
 @endsection
 

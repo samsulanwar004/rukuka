@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+<div class="uk-container uk-container-small">
     <div class="uk-grid-small uk-margin-top">
         @include('partials.alert')
         <div class="uk-panel uk-text-center">
@@ -173,5 +174,5 @@
 
     </div>
   </div>
+</div>
 @endsection
-

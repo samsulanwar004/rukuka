@@ -15,6 +15,7 @@ use App\Wishlist;
 use App\Libraries\ImageFile;
 use Storage;
 use Image;
+use App\Subcriber;
 
 class UserRepository
 {
@@ -94,6 +95,8 @@ class UserRepository
 			$emailService->sendPersonalInformation($user);
 			$emailService->sendActivationCode($user);
 		}
+
+		$this->subcriber($user);
 
 		return $user;
 
@@ -486,8 +489,10 @@ class UserRepository
             })->save($path));
 
         $oldFile = $this->linkMergeOrUnMerge($link, $user->avatar);
-
-        Storage::delete($link . $oldFile);
+		
+		if ($oldFile) {
+			Storage::delete($link . $oldFile);
+		}
 
         $link = $this->linkMergeOrUnMerge($link.$filename);
 
@@ -506,5 +511,33 @@ class UserRepository
 			$link
 		) :
 		explode(route(self::HOME_PAGE).'/'.$link, $name)[1];
+	}
+
+	public function subcriber($user = null)
+	{
+		if (!is_null($user)) {
+			if ($subcriber = $this->getSubcriberByEmail($user->email)) {
+				$subcriber->user()->associate($user);
+				$subcriber->save();
+			} else {
+				$subcriber = new Subcriber;
+				$subcriber->email = $user->email;
+				$subcriber->user()->associate($user);
+				$subcriber->save();
+			}
+			
+		} else {
+			$subcriber = new Subcriber;
+			$subcriber->email = $this->getEmail();
+			$subcriber->save();
+		}
+
+		return $subcriber;
+	}
+
+	public function getSubcriberByEmail($email)
+	{
+		return Subcriber::where('email', $email)
+			->first();
 	}
 }

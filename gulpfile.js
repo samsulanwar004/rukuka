@@ -14,11 +14,13 @@ elixir(function(mix) {
     ], 'public/js/vendor.js');
 
     mix.scripts([
-        assetPath + 'uikit/js/uikit-core.min.js',
-        assetPath + 'uikit/js/uikit-icons.min.js',
         assetPath + 'uikit/js/uikit.min.js',
-        assetPath + 'js/custom.js',
+        assetPath + 'uikit/js/uikit-icons.min.js',
     ], 'public/js/app.js');
+
+    mix.scripts([
+        assetPath + 'js/custom.js',
+    ], 'public/js/custom.js');
 
     mix.styles([
         assetPath + 'uikit/css/uikit.min.css',
@@ -28,7 +30,8 @@ elixir(function(mix) {
     mix.version([
         'js/vendor.js',
     	'js/app.js',
-    	'js/main.js',
-    	'css/app.css'
+        'js/main.js',
+    	'js/custom.js',
+        'css/app.css'
     ]);
 });

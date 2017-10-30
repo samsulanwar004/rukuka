@@ -8,12 +8,14 @@ use App\Repositories\CategoryRepository;
 class ProductRepository
 {
 
+	public $designer;
+
 	public function getProductBySlugCategory($request, $slug)
 	{
 		$query = Product::whereHas('category', function ($query) use ($slug) {
             $query->where('slug', '=', $slug);
         });
-        
+
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
         } else {
@@ -86,7 +88,20 @@ class ProductRepository
         } else {
         	$query->orderBy('id', 'desc');
         }
+				$this->setDesigner($query->first()->designer);
 
         return $query->paginate(30);
+	}
+
+	public function setDesigner($value)
+	{
+		$this->designer = $value;
+
+		return $this;
+	}
+
+	public function getDesigner()
+	{
+		return $this->designer;
 	}
 }

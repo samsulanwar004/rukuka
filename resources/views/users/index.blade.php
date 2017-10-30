@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+<div class="uk-container uk-container-small">
 <div class="uk-grid-small uk-margin-top">
 	@include('partials.alert')
 </div>
@@ -10,5 +11,6 @@
 	  <h3 class="uk-margin-remove uk-padding-remove">PERSONAL INFORMATION</h3>
 	  <p>Welcome <b>{{ ucfirst($user->first_name).' '.ucfirst($user->last_name) }}</b></p>
 	</div>
+</div>
 </div>
 @endsection

@@ -4,13 +4,17 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+	use App\Blog;
+	use App\BlogCategory;
 
-	class AdminProductDesignersController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminBlogsController extends \crocodicstudio\crudbooster\controllers\CBController {
+
+        private $categoryId;
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "name";
+			$this->title_field = "title";
 			$this->limit = "20";
 			$this->orderby = "id,desc";
 			$this->global_privilege = false;
@@ -25,31 +29,36 @@
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "product_designers";
+			$this->table = "blogs";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Name","name"=>"name"];
-			$this->col[] = ["label"=>"Content","name"=>"content"];
-			$this->col[] = ["label"=>"Banner","name"=>"banner","image"=>true];
-			$this->col[] = ["label"=>"Photo","name"=>"photo","image"=>true];
+			$this->col[] = ["label"=>"Title","name"=>"title"];
+            $this->col[] = ["label"=>"Category","name"=>"blog_categories_id","join"=>"blog_categories,name"];
+            $this->col[] = ["label"=>"Create At","name"=>"created_at"];
+            $this->col[] = ["label"=>"Status","name"=>"is_publish"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
-			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Banner','name'=>'banner','type'=>'upload','validation'=>'required|min:1|max:1024','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'required|image|max:3000','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Categories','name'=>'blog_categories_id','type'=>'custom','validation'=>'required','width'=>'col-sm-8','html' => $this->categories()];
+            $this->form[] = ['label'=>'Photo 1','name'=>'photo_1','type'=>'upload','width'=>'col-sm-10'];
+            $this->form[] = ['label'=>'Photo 2','name'=>'photo_2','type'=>'upload','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Title','name'=>'title','type'=>'text','validation'=>'required|string','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'wysiwyg','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Tags','name'=>'tags','type'=>'multitext','width'=>'col-sm-8'];
+			$this->form[] = ['label'=>'Publish','name'=>'is_publish','type'=>'radio','validation'=>'required|integer','width'=>'col-sm-10','dataenum'=>'0|Unpublished;1|Publish'];
+
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
-			//$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Banner','name'=>'banner','type'=>'upload','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'required|image|max:3000','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Categories','name'=>'blog_categories_id','type'=>'custom','validation'=>'required','width'=>'col-sm-8'];
+			//$this->form[] = ['label'=>'Title','name'=>'title','type'=>'text','validation'=>'required|string','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Content','name'=>'content','type'=>'wysiwyg','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Tags','name'=>'tags','type'=>'multitext','width'=>'col-sm-8'];
+			//$this->form[] = ['label'=>'Publish','name'=>'is_publish','type'=>'radio','validation'=>'required|integer','width'=>'col-sm-10','dataenum'=>'0|Unpublished;1|Publish'];
 			# OLD END FORM
 
 			/* 
@@ -248,6 +257,13 @@
 	    */    
 	    public function hook_row_index($column_index,&$column_value) {	        
 	    	//Your code here
+            if($column_index==4) {
+                if ($column_value == '0') {
+                    $column_value = '<span class="label label-warning">Unpublish</span>';
+                } else {
+                    $column_value = '<span class="label label-success">Publish</span>';
+                }
+            }
 	    }
 
 	    /*
@@ -259,8 +275,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-	        $postdata['slug'] = str_slug($postdata['name']);
-
+            $postdata['cms_users_id'] = CRUDBooster::myId();
 	    }
 
 	    /* 
@@ -272,6 +287,10 @@
 	    */
 	    public function hook_after_add($id) {        
 	        //Your code here
+            $blogs = DB::table('blogs');
+            $blog = $blogs->where('id', $id)->first();
+            $postdata['slug'] = str_slug($blog->title.' '.$blog->id);
+            $blogs->update($postdata);
 
 	    }
 
@@ -285,7 +304,6 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
 	        //Your code here
-	        $postdata['slug'] = str_slug($postdata['name']);
 
 	    }
 
@@ -298,6 +316,10 @@
 	    */
 	    public function hook_after_edit($id) {
 	        //Your code here 
+            $blogs = DB::table('blogs');
+            $blog = $blogs->where('id', $id)->first();
+            $postdata['slug'] = str_slug($blog->title.' '.$blog->id);
+            $blogs->update($postdata);
 
 	    }
 
@@ -329,5 +351,77 @@
 
 	    //By the way, you can still create your own method in here... :) 
 
+        public function getEdit($id)
+        {
+            $this->setCategoryId($id);
+            $this->cbLoader();
+            $row = \DB::table($this->table)->where($this->primary_key,$id)->first();
 
+            if(!CRUDBooster::isRead() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {
+                CRUDBooster::insertLog(trans("crudbooster.log_try_edit",['name'=>$row->{$this->title_field},'module'=>CRUDBooster::getCurrentModule()->name]));
+                CRUDBooster::redirect(CRUDBooster::adminPath(),trans('crudbooster.denied_access'));
+            }
+            $page_menu       = \Route::getCurrentRoute()->getActionName();
+            $page_title 	 = trans("crudbooster.edit_data_page_title",['module'=>CRUDBooster::getCurrentModule()->name,'name'=>$row->{$this->title_field}]);
+            $command 		 = 'edit';
+            Session::put('current_row_id',$id);
+            return view('crudbooster::default.form',compact('id','row','page_menu','page_title','command'));
+        }
+
+        private function categories()
+        {
+            $id = $this->getCategoryId();
+
+            $blog = $this->getBlogById($id);
+
+            $this->configNestableBlog();
+
+            return BlogCategory::attr([
+                'name' => 'blog_categories_id',
+                'class' => 'form-control'
+            ])
+                ->selected($blog->blog_categories_id)
+                ->renderAsDropdown();
+        }
+
+        private function getBlogById($id)
+        {
+            return Blog::where('id', $id)->first();
+        }
+
+        private function setCategoryId($value)
+        {
+            $this->categoryId = $value;
+            return $this;
+        }
+
+        private function getCategoryId()
+        {
+            return $this->categoryId;
+        }
+
+        private function configNestableBlog(){
+            \Config::set([
+                'nestable' => [
+                    'parent'=> 'parent_blog_categories_id',
+                    'primary_key' => 'id',
+                    'generate_url'   => true,
+                    'childNode' => 'child',
+                    'body' => [
+                        'id',
+                        'name',
+                        'slug',
+                    ],
+                    'html' => [
+                        'label' => 'name',
+                        'href'  => 'slug'
+                    ],
+                    'dropdown' => [
+                        'prefix' => '',
+                        'label' => 'name',
+                        'value' => 'id'
+                    ]
+                ]
+            ]);
+        }
 	}

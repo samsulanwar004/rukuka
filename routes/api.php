@@ -23,6 +23,8 @@ Route::get('v1/popular', 'Api\PageController@popular')->name('populer');
 
 Route::get('v1/related/{categoryId}', 'Api\PageController@related')->name('related');
 
+Route::post('v1/subcriber', 'Api\UserController@subcriber')->name('subcriber');
+
 Route::group([
 	'prefix' => 'v1', 
 	'middleware' => 'auth:api'

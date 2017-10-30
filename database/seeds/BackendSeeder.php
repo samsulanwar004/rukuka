@@ -132,8 +132,28 @@ class CmsModulsSeeder extends Seeder {
             'controller'=>'AdminHomestayAmenitiesController',
             'is_protected'=>0,                                
             'is_active'=>0
-        ]       
-            ];
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Blogs',
+            'icon'=>'fa fa-circle-o',
+            'path'=>'blogs',
+            'table_name'=>'blogs',
+            'controller'=>'AdminBlogsController',
+            'is_protected'=>0,
+            'is_active'=>0
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Blog Categories',
+            'icon'=>'fa fa-circle-o',
+            'path'=>'blog-categories',
+            'table_name'=>'blog_categories',
+            'controller'=>'AdminBlogCategoriesController',
+            'is_protected'=>0,
+            'is_active'=>0
+            ]
+        ];
 
 
         foreach($data as $k=>$d) {
@@ -330,8 +350,47 @@ class CmsMenusSeeder extends Seeder {
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 5
-        ]       
-            ];
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Blogs',
+            'type'=>'Route',
+            'path'=>'blogs',
+            'color' => null,
+            'icon'=>'fa fa-edit',
+            'parent_id'=>0,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 3
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Blogs',
+            'type'=>'Route',
+            'path'=>'AdminBlogsControllerGetIndex',
+            'color' => null,
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>13,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 1
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Categories',
+            'type'=>'Route',
+            'path'=>'AdminBlogCategoriesControllerGetIndex',
+            'color' => null,
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>13,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 2
+        ]
+    ];
 
 
         $menu->insert($data);

@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+<div class="uk-container uk-container-small">
   	<div class="uk-grid-small uk-margin-top">
     	@include('partials.alert')
   	</div>
@@ -11,7 +12,7 @@
           	<input type="hidden" name="token" value="{{ old('email', $code) }}">
 
             <li>
-                <input name="password" class="uk-input uk-form-width-medium {{ $errors->has('password') ? ' uk-form-danger' : '' }}" id="password" type="password" placeholder="*PASSWORD" required="required">              
+                <input name="password" class="uk-input uk-form-width-medium {{ $errors->has('password') ? ' uk-form-danger' : '' }}" id="password" type="password" placeholder="*PASSWORD" required="required">
             </li>
 
             <li>
@@ -28,6 +29,5 @@
 	    <a href="{{ route('index') }}"><button class="uk-button uk-button-secondary">Back To Home</button></a>
 	  </div>
 	</div>
+</div>
 @endsection
-
-

@@ -10,23 +10,24 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- jQuery is required -->
-
     <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
-    
-    
+
   </head>
   <body>
-
-  @include('partials.nav')
-    <div class="uk-container uk-container-small" id="content">
-       @yield('content')
+    <div id="app">
+      <!-- Preloader -->
+      <div id="preloader">
+        <div id="status">&nbsp;</div>
+      </div>
+      @include('partials.nav')
+      @yield('content')
+      @include('partials.footer')
     </div>
-  @include('partials.footer')
-  <script src="{{ elixir('js/vendor.js') }}"></script>
-  <script src="{{ elixir('js/main.js') }}"></script>
-  <script src="{{ elixir('js/app.js') }}"></script>
-
-  @section('footer_scripts')
-  @show
+    <script src="{{ elixir('js/vendor.js') }}"></script>
+    <script src="{{ elixir('js/custom.js') }}"></script>
+    <script src="{{ elixir('js/main.js') }}"></script>
+    <script src="{{ elixir('js/app.js') }}"></script>
+    @section('footer_scripts')
+    @show
   </body>
 </html>

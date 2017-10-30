@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/blog', [
+    'as'   => 'blog-index',
+    'uses' => 'Frontend\BlogController@index',
+]);
 
 Route::get('/', [
     'as'   => 'index',
@@ -26,7 +30,7 @@ Route::get('/shop/{categories}/{category}/{slug?}', [
     'uses' => 'Frontend\PageController@shop',
 ]);
 
-Route::get('/product/{slug}', [
+Route::get('/product/{slug?}', [
     'as'   => 'product',
     'uses' => 'Frontend\PageController@product',
 ]);

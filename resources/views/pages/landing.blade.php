@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+<div class="uk-container uk-container-small">
   	<div class="uk-grid-small uk-margin-top">
     	@include('partials.alert')
   	</div>
@@ -9,5 +10,5 @@
 	    <a href="{{ route('index') }}"><button class="uk-button uk-button-secondary">Back To Home</button></a>
 	  </div>
 	</div>
+</div>
 @endsection
-
