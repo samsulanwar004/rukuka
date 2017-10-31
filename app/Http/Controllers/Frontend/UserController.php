@@ -252,9 +252,17 @@ class UserController extends BaseController
 
     public function wishlist(Request $request)
     {
-        $this->validate($request, [
+        $rules = [
             'size' => 'required|string|max:255'
-        ]);
+        ];
+
+        $validation = $this->validRequest($request, $rules);
+        if ($validation->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $validation->errors()
+            ]);
+        }
 
         try {
             DB::beginTransaction();
@@ -300,11 +308,18 @@ class UserController extends BaseController
 
             DB::commit();
 
-            return redirect($this->redirectAfterAddWishlist)->with(['success' => 'Add wishlist successfully!']);
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'wishlistCount' => count($user->wishlists)
+            ]);
         } catch (Exception $e) {
             DB::rollBack();
 
-            return back()->withErrors($e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
         }
     }
 

@@ -77,6 +77,7 @@
       api_wishlist="{{ route('user.wishlist') }}"
       color="{{ $product->color }}"
       sizes="{{ $product->stocks }}"
+      auth="{{ Auth::check() ? 1 : 0 }}"
     ></button-buy>
     <hr>
     <p class="uk-margin-remove uk-text-meta">

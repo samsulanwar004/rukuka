@@ -73,14 +73,9 @@
 
     created () {
       var self = this;
-      var wishlist_api = this.wishlist_api;
-
+      
       if (this.auth == 1) {
-        $.get(wishlist_api, function(wishlist) {
-          if (typeof wishlist.data !== 'undefined') {
-            self.wishlistCount = wishlist.data.length;
-          }
-        });
+        self.getWishlist();
       }
 
       self.accounts = this.account ? JSON.parse(this.account) : {};
@@ -98,6 +93,12 @@
         self.bags = response.data.bags;
         self.subtotal = response.data.subtotal;
       });
+
+      Event.listen('addWishlist', function (response) {
+        self.wishlistCount = response.data.wishlistCount;
+      });
+
+      Event.fire('user', this.accounts);
     },
 
     data () {
@@ -143,6 +144,16 @@
         })
         .catch(function (error) {
           console.log(error);
+        });
+      },
+
+      getWishlist: function () {
+        var self = this;
+        var wishlist_api = this.wishlist_api;
+        $.get(wishlist_api, function(wishlist) {
+          if (typeof wishlist.data !== 'undefined') {
+            self.wishlistCount = wishlist.data.length;
+          }
         });
       }
     }

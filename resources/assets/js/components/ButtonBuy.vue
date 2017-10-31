@@ -21,7 +21,7 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['api_bag', 'api_wishlist', 'color', 'sizes'],
+        props: ['api_bag', 'api_wishlist', 'color', 'sizes', 'auth'],
         created () {
             var self = this;
             self.stocks = this.sizes ? JSON.parse(this.sizes) : {};
@@ -36,33 +36,91 @@
 
         methods: {
             bag: function (event) {                
-                this.$validator.validateAll().then((result) => {});
-                var size = this.size;
-                axios.post(this.api_bag, {
-                    size: size
-                })
-                .then(function (response) {
-                    if (typeof response.data.message !== 'undefined') {
-                        if (response.data.status.toLowerCase() == 'error') {
-                            UIkit.notification(response.data.message.size[0], {
+                this.$validator.validateAll().then((result) => {
+                    if (result) {
+                        
+                        var size = this.size;
+                        axios.post(this.api_bag, {
+                            size: size
+                        })
+                        .then(function (response) {
+                            if (typeof response.data.message !== 'undefined') {
+                                if (response.data.status.toLowerCase() == 'error') {
+                                    UIkit.notification(response.data.message.size[0], {
+                                        status:'danger'
+                                    });
+                                }
+                                if (response.data.status.toLowerCase() == 'ok') {
+                                    UIkit.notification("<span uk-icon='icon: check'></span> Add product to bag successfully", {
+                                        status:'success'
+                                    });
+
+                                    Event.fire('addBag', response);
+                                }
+                            }
+                        })
+                        .catch(function (error) {
+                            var error = JSON.parse(JSON.stringify(error));
+                            UIkit.notification(error.response.data.message, {
                                 status:'danger'
                             });
-                        }
-                        if (response.data.status.toLowerCase() == 'ok') {
-                            UIkit.notification("<span uk-icon='icon: check'></span> Add product successfully", {
-                                status:'success'
+                        });
+                        
+                    } else {
+                        var items = this.errors.items;
+                        $.each(items, function (index, item) {
+                            UIkit.notification(item.msg, {
+                                status:'danger'
                             });
-
-                            Event.fire('addBag', response);
-                        }
+                        });
                     }
-                })
-                .catch(function (error) {
-                    console.log(error);
                 });
             },
             wishlist: function  (event) {
-                console.log(event);
+                this.$validator.validateAll().then((result) => {
+                    if(result) {
+                        if (this.auth == 1) {
+                            var size = this.size;
+
+                            axios.post(this.api_wishlist, {
+                                size: size
+                            })
+                            .then(function (response) {
+                                if (typeof response.data.message !== 'undefined') {
+                                    if (response.data.status.toLowerCase() == 'error') {
+                                        UIkit.notification(response.data.message.size[0], {
+                                            status:'danger'
+                                        });
+                                    }
+                                    if (response.data.status.toLowerCase() == 'ok') {
+                                        UIkit.notification("<span uk-icon='icon: check'></span> Add product to wishlist successfully", {
+                                            status:'success'
+                                        });
+
+                                        Event.fire('addWishlist', response);
+                                    }
+                                }
+                            })
+                            .catch(function (error) {
+                                var error = JSON.parse(JSON.stringify(error));
+                                UIkit.notification(error.response.data.message, {
+                                    status:'danger'
+                                });
+                            });
+                        } else {
+                            UIkit.notification("Please login!", {
+                                status:'danger'
+                            });
+                        }
+                    } else {
+                        var items = this.errors.items;
+                        $.each(items, function (index, item) {
+                            UIkit.notification(item.msg, {
+                                status:'danger'
+                            });
+                        });
+                    }
+                });
             }
         }
     }

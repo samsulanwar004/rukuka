@@ -191,7 +191,7 @@ class PageController extends BaseController
                 return response()->json([
                     'status' => 'error',
                     'message' => $e->getMessage()
-                ]);
+                ], 400);
             }
         }
 
