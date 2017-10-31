@@ -42,9 +42,18 @@
             <tbody v-if="bags == 0">
                 <tr><td colspan="6" align="center"><p>You have no items in the shopping bag</p></td></tr>
             </tbody>
+            <tbody>
+              <tr>
+                <td colspan="6" class="uk-text-right">SUB TOTAL: {{ subtotal }}</td>
+              </tr>
+              <tr>
+                <td colspan="6" class="uk-text-right">SHIPPING COST: FREE</td>
+              </tr>
+            </tbody>
         </table>
     </div>
 </template>
+
 
 <script>
     import axios from 'axios';
