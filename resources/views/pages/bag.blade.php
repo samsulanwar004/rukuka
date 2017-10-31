@@ -12,28 +12,10 @@
     <hr>
     <p class="uk-text-right"><button class="uk-button uk-button-secondary uk-text-bold uk-padding-small-right">PROCEED TO PURCHASE</button></p>
   </div>
-  <bag 
+  <bag
     bag_link="{{ route('bag') }}"
   ></bag>
-  <hr>
-  <div class="uk-flex uk-flex-right uk-child-width-1-6">
-    <div class="">
-      ITEM TOTAL
-      <br>
-      SHIPPING
-      <p>
-      <b>TOTAL</b>
-      </p>
-    </div>
-    <div class="uk-text-right">
-      123
-      <br>
-      free
-      <p>
-      123
-      </p>
-    </div>
-  </div>
+
   <p class="uk-text-right"><button class="uk-button uk-button-secondary uk-text-bold uk-padding-small-right">PROCEED TO PURCHASE</button></p>
   <hr>
   <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
