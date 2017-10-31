@@ -50,14 +50,19 @@ Route::get('/landing/kids', [
     'uses' => 'Frontend\PageController@kids',
 ]);
 
-Route::get('/bag', [
-    'as'   => 'bag',
+Route::get('/persist-bag', [
+    'as'   => 'persist.bag',
     'uses' => 'Frontend\PageController@bag',
 ]);
 
-Route::post('/bag', [
-    'as'   => 'bag',
+Route::post('/persist-bag', [
+    'as'   => 'persist.bag',
     'uses' => 'Frontend\PageController@bag',
+]);
+
+Route::get('/bag', [
+    'as'   => 'bag',
+    'uses' => 'Frontend\PageController@showBagPage',
 ]);
 
 Route::middleware(['guest'])->group(function () {
@@ -185,9 +190,14 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@showWishlistPage',
     ]);
 
-    Route::post('/account/wishlist', [
-        'as'   => 'user.wishlist',
-        'uses' => 'Frontend\UserController@wishlist',
+    Route::post('/account/persist-wishlist', [
+        'as'   => 'persist.wishlist',
+        'uses' => 'Frontend\UserController@postWishlist',
+    ]);
+
+    Route::get('/account/persist-wishlist', [
+        'as'   => 'persist.wishlist',
+        'uses' => 'Frontend\UserController@getWishlist',
     ]);
 
     Route::delete('/account/wishlist/{id}/destroy', [

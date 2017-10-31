@@ -229,28 +229,10 @@ class UserController extends BaseController
 
     public function showWishlistPage()
     {
-        $user = $this->getUserActive();
-
-        $wishlists = collect($user->wishlists)->map(function($entry) {
-
-            return [
-                'id' => $entry->id,
-                'sku' => $entry->stock->sku,
-                'name' => $entry->stock->product->name,
-                'slug' => $entry->stock->product->slug,
-                'price' => $entry->stock->product->sell_price,
-                'currency' => $entry->stock->product->currency,
-                'size' => $entry->content['options']['size'],
-                'color' => $entry->content['options']['color'],
-                'photo' => $entry->content['options']['photo'],
-                'qty' => $entry->content['qty'],
-            ];
-        });
-
-        return view('users.wishlist', compact('user', 'wishlists'));
+        return view('users.wishlist');
     }
 
-    public function wishlist(Request $request)
+    public function postWishlist(Request $request)
     {
         $rules = [
             'size' => 'required|string|max:255'
@@ -362,6 +344,40 @@ class UserController extends BaseController
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
+        }
+    }
+
+    public function getWishlist()
+    {
+        try {
+            $user = $this->getUserActive();
+            $wishlists = collect($user->wishlists)->map(function($entry) {
+
+                return [
+                    'id' => $entry->id,
+                    'sku' => $entry->stock->sku,
+                    'name' => $entry->stock->product->name,
+                    'slug' => $entry->stock->product->slug,
+                    'price' => $entry->stock->product->sell_price,
+                    'currency' => $entry->stock->product->currency,
+                    'size' => $entry->content['options']['size'],
+                    'color' => $entry->content['options']['color'],
+                    'photo' => $entry->content['options']['photo'],
+                    'qty' => $entry->content['qty'],
+                ];
+            });
+
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'wishlists' => $wishlists
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
         }
     }
 

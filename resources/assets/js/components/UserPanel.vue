@@ -67,6 +67,7 @@
       'login_link',
       'auth',
       'wishlist_api',
+      'bag_api',
       'account',
       'product_link'
     ],
@@ -114,7 +115,7 @@
     methods: {
       removeBag: function (sku) {
         var self = this;
-        axios.get(this.bag_link, {
+        axios.get(this.bag_api, {
           params: {
             remove: sku
           }
@@ -133,7 +134,7 @@
 
       addBag: function () {
         var self = this;
-        axios.get(this.bag_link, {
+        axios.get(this.bag_api, {
         })
         .then(function (response) {
           self.bagCount = response.data.bagCount;
@@ -149,11 +150,15 @@
 
       getWishlist: function () {
         var self = this;
-        var wishlist_api = this.wishlist_api;
-        $.get(wishlist_api, function(wishlist) {
-          if (typeof wishlist.data !== 'undefined') {
-            self.wishlistCount = wishlist.data.length;
+        axios.get(this.wishlist_api, {
+        })
+        .then(function (response) {
+          if (typeof response.data.data !== 'undefined') {
+            self.wishlistCount = response.data.data.length;
           }
+        })
+        .catch(function (error) {
+          console.log(error);
         });
       }
     }

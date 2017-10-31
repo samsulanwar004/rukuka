@@ -13,7 +13,7 @@
     <p class="uk-text-right"><button class="uk-button uk-button-secondary uk-text-bold uk-padding-small-right">PROCEED TO PURCHASE</button></p>
   </div>
   <bag
-    bag_link="{{ route('bag') }}"
+    bag_link="{{ route('persist.bag') }}"
   ></bag>
 
   <p class="uk-text-right"><button class="uk-button uk-button-secondary uk-text-bold uk-padding-small-right">PROCEED TO PURCHASE</button></p>

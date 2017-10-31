@@ -61,9 +61,11 @@
                         })
                         .catch(function (error) {
                             var error = JSON.parse(JSON.stringify(error));
-                            UIkit.notification(error.response.data.message, {
-                                status:'danger'
-                            });
+                            if (typeof error.response.data.message !== 'undefined') {
+                                UIkit.notification(error.response.data.message, {
+                                    status:'danger'
+                                });
+                            }
                         });
                         
                     } else {
@@ -103,9 +105,11 @@
                             })
                             .catch(function (error) {
                                 var error = JSON.parse(JSON.stringify(error));
-                                UIkit.notification(error.response.data.message, {
-                                    status:'danger'
-                                });
+                                if (typeof error.response.data.message !== 'undefined') {
+                                    UIkit.notification(error.response.data.message, {
+                                        status:'danger'
+                                    });
+                                }
                             });
                         } else {
                             UIkit.notification("Please login!", {
