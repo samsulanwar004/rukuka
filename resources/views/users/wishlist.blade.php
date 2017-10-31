@@ -5,9 +5,13 @@
 <div class="uk-grid-small uk-margin-top">
 	@include('partials.alert')
 </div>
+
 <div class="uk-grid uk-margin-top" uk-grid>
+
 	@include('partials.user_menu')
 	<div class="uk-width-3-4@m">
+			<h4>WISHLIST</h4>
+
       <div class="uk-grid-small uk-child-width-1-3@m uk-flex-left" uk-grid>
 
         @forelse($wishlists as $wish)

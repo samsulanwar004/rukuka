@@ -1,7 +1,7 @@
 <progress id="progressbar" class="uk-progress" value="0" max="100" hidden></progress>
 <div class="uk-width-1-4@m">
   <div class="uk-card uk-card-default uk-card-small uk-box-shadow-small">
-      <div class="uk-card-media-top uk-inline">
+      {{-- <div class="uk-card-media-top uk-inline">
           <div class="uk-position-top-right">
             <div class="profile-upload" uk-form-custom>
               <input type="file">
@@ -18,7 +18,7 @@
             @endif
           @endif
 
-      </div>
+      </div> --}}
       <div class="uk-card-body">
           <h3 class="uk-card-title uk-margin-small">{{ ucfirst($user->first_name).' '.ucfirst($user->last_name) }}</h3>
           <hr>
