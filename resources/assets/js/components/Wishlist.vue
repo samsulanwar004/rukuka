@@ -1,93 +1,77 @@
 <template>
-    <div class="uk-grid-small uk-child-width-1-3@m uk-flex-left" uk-grid>
-        <div class="uk-panel uk-visible-toggle" v-for="wish in wishlists">
+  <div class="uk-grid-small uk-child-width-1-3@m uk-flex-left" uk-grid>
+    <div class="uk-panel uk-visible-toggle list-item" v-for="wish in wishlists" v-bind:key="wish">
 
-            <!-- start product -->
-            <div class="uk-card uk-card-small uk-padding-remove">
-                <div class="uk-card-media-top">
-                    <img :src="'/'+wish.photo" :alt="wish.name">
+        <!-- start product -->
+        <div class="uk-card uk-card-small uk-padding-remove">
+            <div class="uk-card-media-top">
+                <img :src="'/'+wish.photo" :alt="wish.name">
 
+            </div>
+            <div class="uk-card-body uk-padding-remove uk-margin-small-top">
+
+            </div>
+            <!-- <div class="uk-card-footer">
+              <span class="uk-text-meta">Shirt<h4 class="uk-card-price">$400</h4></span>
+            </div> -->
+        </div>
+        <!-- end product single -->
+        <div class="uk-panel uk-position-cover-card uk-invisible-hover">
+          <!-- start product -->
+            <div class="uk-box-shadow-large uk-padding-remove">
+                <div class="uk-card-media-top uk-inline">
+                  <div class="uk-position-small uk-position-top-right">
+                    <a href="#" class="uk-icon-button"  uk-icon="icon: triangle-down" title="Manage Your Cart" uk-tooltip="pos: right"></a>
+                    <div id="parent-drop-click" uk-drop="mode: click">
+                        <div id="parent-drop-card-click">
+                          <ul class="uk-list">
+                            <li><a :href="'/product/'+wish.slug" class="uk-icon-button"  uk-icon="icon: pencil"></a></li>
+                            <li>
+                              <a v-on:click.prevent="removeWishlist(wish.id)" class="uk-icon-button"  uk-icon="icon: trash"></a>
+                            </li>
+
+                          </ul>
+                        </div>
+                    </div>
+                  </div>
+                    <img :src="'/'+wish.photo" :alt="wish.photo">
                 </div>
-                <div class="uk-card-body uk-padding-remove uk-margin-small-top">
-
+                <div class="uk-card-body uk-background-default uk-padding-small uk-margin-small-top">
+                    <a :href="'/product/'+wish.slug">{{ wish.name }}</a>
+                    <br>
+                    <span></span>
+                    <br>
+                    <form v-on:submit.prevent="addBag">
+                      <input type="hidden" name="size" :value="wish.sku">
+                      <input type="hidden" name="qty" :value="wish.qty">
+                      <input type="hidden" name="move" :value="wish.id">
+                      <button type="submit" class="uk-button uk-button-secondary uk-button-small uk-width-1-1">Add to cart</button>
+                    </form>
+                </div>
+                <hr class="uk-margin-remove">
+                <div class="uk-card-footer uk-background-default uk-remove-padding-vertical uk-text-meta uk-padding-small">
+                    <div class="uk-child-width-1-3" uk-grid>
+                      <div class="">
+                        color: <br> {{ wish.color }}
+                      </div>
+                      <div class="">
+                        size: <br> {{ wish.size }}
+                      </div>
+                      <div class="">
+                        Qty: <br> {{ wish.qty }}
+                      </div>
+                    </div>
                 </div>
                 <!-- <div class="uk-card-footer">
                   <span class="uk-text-meta">Shirt<h4 class="uk-card-price">$400</h4></span>
                 </div> -->
             </div>
-            <!-- end product single -->
-            <div class="uk-panel uk-position-cover-card uk-invisible-hover">
-              <!-- start product -->
-                <div class="uk-box-shadow-large uk-padding-remove">
-                    <div class="uk-card-media-top uk-inline">
-                      <div class="uk-position-small uk-position-top-right">
-                        <a href="#" class="uk-icon-button"  uk-icon="icon: triangle-down" title="Manage Your Cart" uk-tooltip="pos: right"></a>
-                        <div id="parent-drop-click" uk-drop="mode: click">
-                            <div id="parent-drop-card-click">
-                              <ul class="uk-list">
-                                <li><a :href="'/product/'+wish.slug" class="uk-icon-button"  uk-icon="icon: pencil"></a></li>
-                                <li>
-                                  <a href="#destroy" class="uk-icon-button"  uk-icon="icon: trash" uk-toggle></a>
-                                  <!-- This is the modal -->
-                                  <div id="destroy" uk-modal>
-                                      <div class="uk-modal-dialog uk-modal-body">
-                                          <h2 class="uk-modal-title">Confirmation</h2>
-                                          <p>Delete {{ wish.name }} from wishlist ?{{wish.size}}</p>
-                                          <form v-on:submit.prevent="removeWishlist">
-                                            <input type="hidden" name="id" :value="wish.id">
-                                            <p class="uk-text-right">
-                                                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-                                                <button class="uk-button uk-button-primary" type="submit">Save</button>
-                                            </p>
-                                          </form>
 
-                                      </div>
-                                  </div>
-                                </li>
-
-                              </ul>
-                            </div>
-                        </div>
-                      </div>
-                        <img :src="'/'+wish.photo" :alt="wish.photo">
-                    </div>
-                    <div class="uk-card-body uk-background-default uk-padding-small uk-margin-small-top">
-                        <a :href="'/product/'+wish.slug">{{ wish.name }}</a>
-                        <br>
-                        <span></span>
-                        <br>
-                        <form v-on:submit.prevent="addBag">
-                          <input type="hidden" name="size" :value="wish.sku">
-                          <input type="hidden" name="qty" :value="wish.qty">
-                          <input type="hidden" name="move" :value="wish.id">
-                          <button type="submit" class="uk-button uk-button-secondary uk-button-small uk-width-1-1">Add to cart</button>
-                        </form>
-                    </div>
-                    <hr class="uk-margin-remove">
-                    <div class="uk-card-footer uk-background-default uk-remove-padding-vertical uk-text-meta uk-padding-small">
-                        <div class="uk-child-width-1-3" uk-grid>
-                          <div class="">
-                            color: <br> {{ wish.color }}
-                          </div>
-                          <div class="">
-                            size: <br> {{ wish.size }}
-                          </div>
-                          <div class="">
-                            Qty: <br> {{ wish.qty }}
-                          </div>
-                        </div>
-                    </div>
-                    <!-- <div class="uk-card-footer">
-                      <span class="uk-text-meta">Shirt<h4 class="uk-card-price">$400</h4></span>
-                    </div> -->
-                </div>
-
-              <!-- end product single -->
-            </div>
+          <!-- end product single -->
         </div>
-
-        <center v-if="wishlists == 0">wishlist not found</center>
     </div>
+      <center v-if="wishlists == 0">wishlist not found</center>
+  </div>
 </template>
 
 <script>
@@ -153,9 +137,9 @@
         });
       },
 
-      removeWishlist: function (event) {
+      removeWishlist: function (id) {
         var self = this;
-        var id = event.target.elements.id.value;
+        var id = id;
 
         axios.post(this.wishlist_delete, {
             _method: 'DELETE',
@@ -182,10 +166,6 @@
               });
             }
         });
-
-        setTimeout(function () {
-          $('.uk-modal-close').click();
-        },1000);
       }
     }
   }
