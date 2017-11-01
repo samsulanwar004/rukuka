@@ -305,16 +305,24 @@ class UserController extends BaseController
         }
     }
 
-    public function wishlistDestroy($id)
+    public function wishlistDestroy(Request $request)
     {
         try {
+            $user = $this->getUserActive();
             $this->user
-                ->wishlistDestroy($id);
+                ->wishlistDestroy($request->input('id'));
 
-            return redirect($this->redirectAfterAddWishlist)->with(['success' => 'Delete wishlist successfully!']);
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'wishlistCount' => count($user->wishlists)
+            ]);
 
         } catch (Exception $e) {
-            return back()->withErrors($e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
         }
     }
 

@@ -25,16 +25,16 @@
                         <div id="parent-drop-click" uk-drop="mode: click">
                             <div id="parent-drop-card-click">
                               <ul class="uk-list">
-                                <li><a href="/account/wishlist" class="uk-icon-button"  uk-icon="icon: pencil"></a></li>
+                                <li><a :href="'/product/'+wish.slug" class="uk-icon-button"  uk-icon="icon: pencil"></a></li>
                                 <li>
-                                  <a href="#destroy-" class="uk-icon-button"  uk-icon="icon: trash" uk-toggle></a>
+                                  <a href="#destroy" class="uk-icon-button"  uk-icon="icon: trash" uk-toggle></a>
                                   <!-- This is the modal -->
-                                  <div id="destroy-" uk-modal>
+                                  <div id="destroy" uk-modal>
                                       <div class="uk-modal-dialog uk-modal-body">
                                           <h2 class="uk-modal-title">Confirmation</h2>
-                                          <p>Delete your wishlist ?</p>
-                                          <form action="" method="POST">
-                                            <input type="hidden" name="_method" value="DELETE">
+                                          <p>Delete {{ wish.name }} from wishlist ?{{wish.size}}</p>
+                                          <form v-on:submit.prevent="removeWishlist">
+                                            <input type="hidden" name="id" :value="wish.id">
                                             <p class="uk-text-right">
                                                 <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
                                                 <button class="uk-button uk-button-primary" type="submit">Save</button>
@@ -93,7 +93,7 @@
 <script>
   import axios from 'axios';
   export default {
-    props: ['wishlist_api', 'bag_api'],
+    props: ['wishlist_api', 'bag_api', 'wishlist_delete'],
     created () {
       var self = this;
       self.getWishlist();
@@ -130,11 +130,6 @@
         })
         .then(function (response) {
             if (typeof response.data.message !== 'undefined') {
-                if (response.data.status.toLowerCase() == 'error') {
-                    UIkit.notification(response.data.message.size[0], {
-                        status:'danger'
-                    });
-                }
                 if (response.data.status.toLowerCase() == 'ok') {
                     UIkit.notification("<span uk-icon='icon: check'></span> Add product to bag successfully", {
                         status:'success'
@@ -156,6 +151,41 @@
               });
             }
         });
+      },
+
+      removeWishlist: function (event) {
+        var self = this;
+        var id = event.target.elements.id.value;
+
+        axios.post(this.wishlist_delete, {
+            _method: 'DELETE',
+            id: id,
+        })
+        .then(function (response) {
+            if (typeof response.data.message !== 'undefined') {
+                if (response.data.status.toLowerCase() == 'ok') {
+                    UIkit.notification("<span uk-icon='icon: check'></span> Delete product from wishlist successfully", {
+                        status:'success'
+                    });
+
+                    self.getWishlist(); 
+
+                    Event.fire('addWishlist', response);
+                }
+            }
+        })
+        .catch(function (error) {
+            var error = JSON.parse(JSON.stringify(error));
+            if (typeof error.response.data.message !== 'undefined') {
+              UIkit.notification(error.response.data.message, {
+                  status:'danger'
+              });
+            }
+        });
+
+        setTimeout(function () {
+          $('.uk-modal-close').click();
+        },1000);
       }
     }
   }
