@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:600');
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:400');
 /* ========================================================================
    Component: Base
  ========================================================================== */
@@ -8749,7 +8749,7 @@ td.uk-text-break {
  * Slide
  */
 [class*='uk-transition-slide'] {
-  opacity: 0;
+  opacity: 50;
 }
 .uk-transition-slide-top {
   -webkit-transform: translateY(-100%);

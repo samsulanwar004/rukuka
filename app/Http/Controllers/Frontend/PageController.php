@@ -99,101 +99,9 @@ class PageController extends BaseController
     public function bag(Request $request)
     {
 
-        $bag = new BagService;
-
-        //add or update product item to bag
-        if ($request->isMethod('post')) {
-
-            $rules = [
-                'size' => 'required|string|max:255'
-            ];
-
-            $validation = $this->validRequest($request, $rules);
-            if ($validation->fails()) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => $validation->errors()
-                ]);
-            }
-
-            $stock = (new ProductStockRepository)->getStockBySku($request->input('size'));
-
-            $product = [
-                'id' => $stock->sku,
-                'name' => $stock->product->name,
-                'qty' => $request->has('qty') ? $request->input('qty') : 1,
-                'price' => $stock->product->sell_price,
-                'options' => [
-                    'size' => $stock->size,
-                    'color' => $stock->product->color,
-                    'photo' => $stock->product->images->first()->photo,
-                    'description' => $stock->product->content,
-                    'currency' => $stock->product->currency,
-                    'slug' => $stock->product->slug,
-                ]
-            ];
-
-            $bag->save($product, self::INSTANCE_SHOP);
-
-        }
-
-        //increment the quantity
-        if ($request->has('increment')) {
-
-            $rowId = $bag->search($request->input('increment'), self::INSTANCE_SHOP);
-
-            if ($rowId) {
-                $item = $bag->getItemByRowId($rowId);
-
-                $bag->update($rowId, $item->qty + 1);
-            }
-        }
-
-        //decrease the quantity
-        if ($request->has('decrease')) {
-            $rowId = $bag->search($request->input('decrease'), self::INSTANCE_SHOP);
-
-            if ($rowId) {
-                $item = $bag->getItemByRowId($rowId);
-
-                $bag->update($rowId, $item->qty - 1);
-            }
-        }
-
-        //remove the item
-        if ($request->has('remove')) {
-            $rowId = $bag->search($request->input('remove'), self::INSTANCE_SHOP);
-
-            if ($rowId) {
-                $bag->remove($rowId);
-            }
-        }
-
-        //remove the item from wishlist
-        if ($request->has('move')) {
-            (new UserRepository)->wishlistDestroy($request->input('move'));
-        }
-
-        $bags = $bag->get(self::INSTANCE_SHOP);
-
-        $subtotal = $bag->subtotal();
-
-        if ($request->ajax() || $request->wantsJson()) {
-            return [
-                'bagCount' => count($bags),
-                'bags' => $bags,
-                'subtotal' => $subtotal
-            ];
-        }
-
-        return view('pages.bag', compact('bags', 'subtotal'));
-    }
-
-    public function persistBag(Request $request)
-    {
         try {
-
             $bag = new BagService;
+
             //add or update product item to bag
             if ($request->isMethod('post')) {
 
@@ -265,19 +173,35 @@ class PageController extends BaseController
             //remove the item from wishlist
             if ($request->has('move')) {
                 (new UserRepository)->wishlistDestroy($request->input('move'));
+                $user = $this->getUserActive();
+                $wishlistCount = count($user->wishlists);
             }
+
+            $bags = $bag->get(self::INSTANCE_SHOP);
+
+            $subtotal = $bag->subtotal();
 
             return response()->json([
                 'status' => 'ok',
-                'message' => 'success'
+                'message' => 'success',
+                'bagCount' => count($bags),
+                'bags' => $bags,
+                'subtotal' => $subtotal,
+                'wishlistCount' => isset($wishlistCount) ? $wishlistCount : null
             ]);
+
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
-            ]);
+            ], 400);
         }
     }
 
+    public function showBagPage()
+    {
+        return view('pages.bag');
+    }
 
 }
+

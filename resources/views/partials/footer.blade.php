@@ -1,4 +1,4 @@
-<div class="uk-section uk-section-muted uk-section-xsmall" id="vue-footer">
+<div class="uk-section uk-section-muted uk-section-xsmall">
         <div class="uk-container uk-container-small">
           <div class="uk-panel uk-grid" uk-grid>
             <div class="uk-width-1-5@m">

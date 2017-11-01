@@ -1,4 +1,4 @@
-<div class="uk-section-xsmall uk-box-shadow-medium uk-background-default uk-margin-remove uk-padding-remove" uk-sticky="bottom: #hash; animation: uk-animation-slide-top;" id="vue-menu">
+<div class="uk-section-xsmall uk-box-shadow-medium uk-background-default uk-margin-remove uk-padding-remove" uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
     <div class="uk-section uk-section-default uk-section-xsmall uk-padding-small">
         <div class="uk-container uk-container-small">
           <div class="uk-grid-small" uk-grid>
@@ -23,6 +23,7 @@
                 auth="{{ Auth::check() ? 1 : 0 }}"
                 account="{{ Auth::user('web') }}"
                 wishlist_api="{{ route('wishlist', ['api_token' => Auth::user('web')->api_token]) }}"
+                bag_api="{{ route('persist.bag') }}"
                 product_link="{{ route('product') }}"
               ></user-panel>
           </div>

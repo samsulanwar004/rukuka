@@ -15,6 +15,10 @@ import Subcriber from './components/Subcriber.vue';
 
 import ButtonBuy from './components/ButtonBuy.vue';
 
+import Bag from './components/Bag.vue';
+
+import Wishlist from './components/Wishlist.vue';
+
 Vue.config.devtools = true
 Vue.config.debug = true
 Vue.config.silent = true
@@ -22,27 +26,32 @@ Vue.config.silent = true
 Vue.use(VueResource);
 Vue.use(VeeValidate);
 
-new Vue({
-  el: '#vue-menu',
-  components: {
-    'user-panel': UserPanel,
-    'navigation': Navigation
-	}
-});
+window.Event = new class {
+
+  constructor() {
+    this.vue = new Vue();
+  }
+
+  fire(event, data = null) {
+    this.vue.$emit(event, data);
+  }
+
+  listen(event, callback) {
+    this.vue.$on(event, callback);
+  }
+}
 
 new Vue({
-  el: '#vue-content',
+  el: '#app',
   components: {
+    'user-panel': UserPanel,
+    'navigation': Navigation,
     'popular': Popular,
     'related': Related,
     'categories': Categories,
-    'button-buy': ButtonBuy
-	}
-});
-
-new Vue({
-  el: '#vue-footer',
-  components: {
-    'subcriber': Subcriber
+    'button-buy': ButtonBuy,
+    'subcriber': Subcriber,
+    'bag': Bag,
+    'wishlist': Wishlist
 	}
 });

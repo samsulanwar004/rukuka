@@ -67,34 +67,39 @@
       'login_link',
       'auth',
       'wishlist_api',
+      'bag_api',
       'account',
       'product_link'
     ],
 
     created () {
       var self = this;
-      var wishlist_api = this.wishlist_api;
-
+      
       if (this.auth == 1) {
-        $.get(wishlist_api, function(wishlist) {
-          if (typeof wishlist.data !== 'undefined') {
-            self.wishlistCount = wishlist.data.length;
-          }
-        });
+        self.getWishlist();
       }
 
       self.accounts = this.account ? JSON.parse(this.account) : {};
       
-      axios.get(this.bag_link, {
-      })
-      .then(function (response) {
+      self.addBag();
+
+      Event.listen('addBag', function (response) {
         self.bagCount = response.data.bagCount;
         self.bags = response.data.bags;
         self.subtotal = response.data.subtotal;
-      })
-      .catch(function (error) {
-        console.log(error);
       });
+
+      Event.listen('removePopUp', function (response) {
+        self.bagCount = response.data.bagCount;
+        self.bags = response.data.bags;
+        self.subtotal = response.data.subtotal;
+      });
+
+      Event.listen('addWishlist', function (response) {
+        self.wishlistCount = response.data.wishlistCount;
+      });
+
+      Event.fire('user', this.accounts);
     },
 
     data () {
@@ -110,7 +115,7 @@
     methods: {
       removeBag: function (sku) {
         var self = this;
-        axios.get(this.bag_link, {
+        axios.get(this.bag_api, {
           params: {
             remove: sku
           }
@@ -119,6 +124,38 @@
           self.bagCount = response.data.bagCount;
           self.bags = response.data.bags;
           self.subtotal = response.data.subtotal;
+
+          Event.fire('removeBag', response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }, 
+
+      addBag: function () {
+        var self = this;
+        axios.get(this.bag_api, {
+        })
+        .then(function (response) {
+          self.bagCount = response.data.bagCount;
+          self.bags = response.data.bags;
+          self.subtotal = response.data.subtotal;
+
+          Event.fire('bags', response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      },
+
+      getWishlist: function () {
+        var self = this;
+        axios.get(this.wishlist_api, {
+        })
+        .then(function (response) {
+          if (typeof response.data.data !== 'undefined') {
+            self.wishlistCount = response.data.data.length;
+          }
         })
         .catch(function (error) {
           console.log(error);

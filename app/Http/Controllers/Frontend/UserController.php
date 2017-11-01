@@ -229,32 +229,22 @@ class UserController extends BaseController
 
     public function showWishlistPage()
     {
-        $user = $this->getUserActive();
-
-        $wishlists = collect($user->wishlists)->map(function($entry) {
-
-            return [
-                'id' => $entry->id,
-                'sku' => $entry->stock->sku,
-                'name' => $entry->stock->product->name,
-                'slug' => $entry->stock->product->slug,
-                'price' => $entry->stock->product->sell_price,
-                'currency' => $entry->stock->product->currency,
-                'size' => $entry->content['options']['size'],
-                'color' => $entry->content['options']['color'],
-                'photo' => $entry->content['options']['photo'],
-                'qty' => $entry->content['qty'],
-            ];
-        });
-
-        return view('users.wishlist', compact('user', 'wishlists'));
+        return view('users.wishlist');
     }
 
-    public function wishlist(Request $request)
+    public function postWishlist(Request $request)
     {
-        $this->validate($request, [
+        $rules = [
             'size' => 'required|string|max:255'
-        ]);
+        ];
+
+        $validation = $this->validRequest($request, $rules);
+        if ($validation->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $validation->errors()
+            ]);
+        }
 
         try {
             DB::beginTransaction();
@@ -278,7 +268,8 @@ class UserController extends BaseController
                     'size' => $stock->size,
                     'color' => $stock->product->color,
                     'photo' => $stock->product->images->first()->photo,
-                    'description' => $stock->product->content
+                    'description' => $stock->product->content,
+                    'slug' => $stock->product->slug
                 ],
                 'product_stocks_id' => $stock->id
             ];
@@ -299,11 +290,18 @@ class UserController extends BaseController
 
             DB::commit();
 
-            return redirect($this->redirectAfterAddWishlist)->with(['success' => 'Add wishlist successfully!']);
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'wishlistCount' => count($user->wishlists)
+            ]);
         } catch (Exception $e) {
             DB::rollBack();
 
-            return back()->withErrors($e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
         }
     }
 
@@ -346,6 +344,40 @@ class UserController extends BaseController
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
+        }
+    }
+
+    public function getWishlist()
+    {
+        try {
+            $user = $this->getUserActive();
+            $wishlists = collect($user->wishlists)->map(function($entry) {
+
+                return [
+                    'id' => $entry->id,
+                    'sku' => $entry->stock->sku,
+                    'name' => $entry->stock->product->name,
+                    'slug' => $entry->stock->product->slug,
+                    'price' => $entry->stock->product->sell_price,
+                    'currency' => $entry->stock->product->currency,
+                    'size' => $entry->content['options']['size'],
+                    'color' => $entry->content['options']['color'],
+                    'photo' => $entry->content['options']['photo'],
+                    'qty' => $entry->content['qty'],
+                ];
+            });
+
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'wishlists' => $wishlists
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
         }
     }
 
