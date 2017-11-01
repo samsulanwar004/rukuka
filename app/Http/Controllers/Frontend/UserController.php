@@ -229,7 +229,9 @@ class UserController extends BaseController
 
     public function showWishlistPage()
     {
-        return view('users.wishlist');
+        $user = $this->getUserActive();
+
+        return view('users.wishlist', compact('user'));
     }
 
     public function postWishlist(Request $request)
