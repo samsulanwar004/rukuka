@@ -288,6 +288,10 @@ class UserController extends BaseController
                 if ($rowId) {
                     $bag->remove($rowId);
                 }
+
+                $bags = $bag->get(self::INSTANCE_SHOP);
+
+                $subtotal = $bag->subtotal();
             }
 
             DB::commit();
@@ -295,6 +299,9 @@ class UserController extends BaseController
             return response()->json([
                 'status' => 'ok',
                 'message' => 'success',
+                'bagCount' => isset($bags) ? count($bags) : null,
+                'bags' => isset($bags) ? $bags : null,
+                'subtotal' => isset($subtotal) ? $subtotal : null,
                 'wishlistCount' => count($user->wishlists)
             ]);
         } catch (Exception $e) {
