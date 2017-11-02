@@ -161,6 +161,17 @@ class PageController extends BaseController
                 }
             }
 
+            //decrease the quantity
+            if ($request->has('count')) {
+                $rowId = $bag->search($request->input('count'), self::INSTANCE_SHOP);
+
+                if ($rowId) {
+                    $item = $bag->getItemByRowId($rowId);
+
+                    $bag->update($rowId, $request->input('qty'));
+                }
+            }
+
             //remove the item
             if ($request->has('remove')) {
                 $rowId = $bag->search($request->input('remove'), self::INSTANCE_SHOP);

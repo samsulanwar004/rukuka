@@ -21,9 +21,9 @@
                     <td class="uk-text-truncate">{{ bag.options.size }}</td>
                     <td class="uk-text-nowrap">
                     <ul class="uk-grid-small uk-flex-middle" uk-grid>
-                      <li><a class="uk-icon-button" uk-icon="icon: minus" href=""></a></li>
-                      <li><input type="text" class="uk-input uk-form-width-xsmall uk-form-small" :value="bag.qty"></li>
-                      <li><a class="uk-icon-button" uk-icon="icon: plus" href=""></a></li>
+                      <li><a class="uk-icon-button" uk-icon="icon: minus" v-on:click.prevent="min(bag.id)"></a></li>
+                      <li><input type="text" name="qty" class="uk-input uk-form-width-xsmall uk-form-small" :value="bag.qty" v-on:keyup="countQty(bag.id, $event)"></li>
+                      <li><a class="uk-icon-button" uk-icon="icon: plus" v-on:click.prevent="plus(bag.id)"></a></li>
                     </ul>
                     </td>
                     <td class="uk-text-nowrap">{{ bag.price }}</td>
@@ -70,6 +70,7 @@
                 self.bags = response.data.bags;
                 self.subtotal = response.data.subtotal;
             });
+
         },
 
         data () {
@@ -91,6 +92,53 @@
                   self.bags = response.data.bags;
                   self.subtotal = response.data.subtotal;
 
+                  Event.fire('removePopUp', response);
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+            },
+
+            min: function (sku) {
+                axios.get(this.bag_link, {
+                  params: {
+                    decrease: sku
+                  }
+                })
+                .then(function (response) {
+                  Event.fire('bags', response);
+                  Event.fire('removePopUp', response);
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+            },
+
+            plus: function (sku) {
+                axios.get(this.bag_link, {
+                  params: {
+                    increment: sku
+                  }
+                })
+                .then(function (response) {
+                  Event.fire('bags', response);
+                  Event.fire('removePopUp', response);
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+            }, 
+
+            countQty: function (sku, event) {
+                var qty = event.target.value;
+                axios.get(this.bag_link, {
+                  params: {
+                    count: sku,
+                    qty: qty
+                  }
+                })
+                .then(function (response) {
+                  Event.fire('bags', response);
                   Event.fire('removePopUp', response);
                 })
                 .catch(function (error) {
