@@ -188,12 +188,12 @@ class PageController extends BaseController
                 $wishlistCount = count($user->wishlists);
             }
 
-            $bags = $bag->get(self::INSTANCE_SHOP);
+            $getBags = $bag->get(self::INSTANCE_SHOP);
 
             $index = 0;
-            $getBags = [];
-            foreach ($bags as $value) {
-                $getBags[$index] = $value;
+            $bags = [];
+            foreach ($getBags as $value) {
+                $bags[$index] = $value;
                 $index++;
             }
 
@@ -202,8 +202,8 @@ class PageController extends BaseController
             return response()->json([
                 'status' => 'ok',
                 'message' => 'success',
-                'bagCount' => count($getBags),
-                'bags' => $getBags,
+                'bagCount' => count($bags),
+                'bags' => $bags,
                 'subtotal' => $subtotal,
                 'wishlistCount' => isset($wishlistCount) ? $wishlistCount : null
             ]);

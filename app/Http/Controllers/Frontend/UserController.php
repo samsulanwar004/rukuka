@@ -289,9 +289,16 @@ class UserController extends BaseController
                     $bag->remove($rowId);
                 }
 
-                $bags = $bag->get(self::INSTANCE_SHOP);
+                $getBags = $bag->get(self::INSTANCE_SHOP);
 
                 $subtotal = $bag->subtotal();
+
+                $index = 0;
+                $bags = [];
+                foreach ($getBags as $value) {
+                    $bags[$index] = $value;
+                    $index++;
+                }
             }
 
             DB::commit();
