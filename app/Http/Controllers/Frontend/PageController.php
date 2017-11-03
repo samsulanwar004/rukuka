@@ -190,13 +190,20 @@ class PageController extends BaseController
 
             $bags = $bag->get(self::INSTANCE_SHOP);
 
+            $index = 0;
+            $getBags = [];
+            foreach ($bags as $value) {
+                $getBags[$index] = $value;
+                $index++;
+            }
+
             $subtotal = $bag->subtotal();
 
             return response()->json([
                 'status' => 'ok',
                 'message' => 'success',
-                'bagCount' => count($bags),
-                'bags' => $bags,
+                'bagCount' => count($getBags),
+                'bags' => $getBags,
                 'subtotal' => $subtotal,
                 'wishlistCount' => isset($wishlistCount) ? $wishlistCount : null
             ]);

@@ -17,7 +17,7 @@
       <a class="uk-button uk-button-text uk-button-small" :href="bag_link"> <b>B A G</b></a>
       <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" v-if="bagCount > 0">
             <div class="uk-card-body uk-card-small ">
-              <div class="uk-grid-small" uk-grid v-for="bag in bags">
+              <div class="uk-grid-small" uk-grid v-for="bag in filteredBags">
                 <div class="uk-width-1-3">
                   <img :src="'/'+bag.options.photo" :alt="bag.name">
                 </div>
@@ -81,7 +81,7 @@
 
       self.accounts = this.account ? JSON.parse(this.account) : {};
       
-      self.addBag();
+      self.getBag();
 
       Event.listen('addBag', function (response) {
         self.bagCount = response.data.bagCount;
@@ -132,7 +132,7 @@
         });
       }, 
 
-      addBag: function () {
+      getBag: function () {
         var self = this;
         axios.get(this.bag_api, {
         })
@@ -160,6 +160,12 @@
         .catch(function (error) {
           console.log(error);
         });
+      }
+    },
+
+    computed: {
+      filteredBags: function () {
+        return this.bags.slice(0,2);
       }
     }
   }
