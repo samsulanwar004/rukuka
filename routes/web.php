@@ -11,10 +11,14 @@
 |
 */
 Route::get('/blog', [
-    'as'   => 'blog-index',
+    'as'   => 'blog-get-index',
     'uses' => 'Frontend\BlogController@index',
 ]);
 
+Route::post('/blog', [
+    'as'   => 'blog-post-index',
+    'uses' => 'Frontend\BlogController@indexAjax',
+]);
 Route::get('/', [
     'as'   => 'index',
     'uses' => 'Frontend\PageController@index',
