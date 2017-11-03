@@ -200,7 +200,7 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@getWishlist',
     ]);
 
-    Route::delete('/account/wishlist/{id}/destroy', [
+    Route::delete('/account/wishlist/destroy', [
         'as'   => 'user.wishlist.destroy',
         'uses' => 'Frontend\UserController@wishlistDestroy',
     ]);

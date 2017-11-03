@@ -14,6 +14,7 @@
       <wishlist
         wishlist_api="{{ route('persist.wishlist') }}"
         bag_api="{{ route('persist.bag') }}"
+     	wishlist_delete="{{ route('user.wishlist.destroy') }}"
       ></wishlist>
   </div>
 </div>

@@ -14,6 +14,8 @@
   </div>
   <bag
     bag_link="{{ route('persist.bag') }}"
+    wishlist_link="{{ route('persist.wishlist') }}"
+    auth="{{ Auth::check() ? 1 : 0 }}"
   ></bag>
 
   <p class="uk-text-right"><button class="uk-button uk-button-secondary uk-text-bold uk-padding-small-right">PROCEED TO PURCHASE</button></p>

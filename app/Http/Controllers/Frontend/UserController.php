@@ -229,7 +229,9 @@ class UserController extends BaseController
 
     public function showWishlistPage()
     {
-        return view('users.wishlist');
+        $user = $this->getUserActive();
+
+        return view('users.wishlist', compact('user'));
     }
 
     public function postWishlist(Request $request)
@@ -286,6 +288,10 @@ class UserController extends BaseController
                 if ($rowId) {
                     $bag->remove($rowId);
                 }
+
+                $bags = $bag->get(self::INSTANCE_SHOP);
+
+                $subtotal = $bag->subtotal();
             }
 
             DB::commit();
@@ -293,6 +299,9 @@ class UserController extends BaseController
             return response()->json([
                 'status' => 'ok',
                 'message' => 'success',
+                'bagCount' => isset($bags) ? count($bags) : null,
+                'bags' => isset($bags) ? $bags : null,
+                'subtotal' => isset($subtotal) ? $subtotal : null,
                 'wishlistCount' => count($user->wishlists)
             ]);
         } catch (Exception $e) {
@@ -305,16 +314,24 @@ class UserController extends BaseController
         }
     }
 
-    public function wishlistDestroy($id)
+    public function wishlistDestroy(Request $request)
     {
         try {
+            $user = $this->getUserActive();
             $this->user
-                ->wishlistDestroy($id);
+                ->wishlistDestroy($request->input('id'));
 
-            return redirect($this->redirectAfterAddWishlist)->with(['success' => 'Delete wishlist successfully!']);
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'wishlistCount' => count($user->wishlists)
+            ]);
 
         } catch (Exception $e) {
-            return back()->withErrors($e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
         }
     }
 
