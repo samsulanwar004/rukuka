@@ -254,17 +254,16 @@ class UserController extends BaseController
             $user = $this->getUserActive();
 
             $stock = (new ProductStockRepository)->getStockBySku($request->input('size'));
-
+            $id = null;
             //remove the item from wishlist
             if ($request->has('update')) {
                 $id = $request->input('update');
-            } else {
-                $id = null;
-                $wishlistExist = $this->user->checkWishlistExist($user->id, $stock->id);
+            }
 
-                if ($wishlistExist) {
-                    $id = $wishlistExist->id;
-                }
+            $wishlistExist = $this->user->checkWishlistExist($user->id, $stock->id);
+
+            if ($wishlistExist) {
+                $id = $wishlistExist->id;
             }
 
             $product = [
