@@ -15,8 +15,8 @@
 
     <li>
       <a class="uk-button uk-button-text uk-button-small" :href="bag_link"> <b>B A G</b></a>
-      <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" v-show="openBag">
-            <div class="uk-card-body uk-card-small ">
+      <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" v-if="bagCount > 0">
+            <div class="uk-card-body uk-card-small">
               <div class="uk-grid-small" uk-grid v-for="bag in filteredBags">
                 <div class="uk-width-1-3">
                   <img :src="'/'+bag.options.photo" :alt="bag.name">
@@ -45,6 +45,7 @@
               </div>
             </div>
         </div>
+        <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" id="bag-hidden" v-else></div>
         <div class="uk-badge" v-if="bagCount > 0">
           {{ bagCount }}
         </div>
@@ -56,6 +57,12 @@
 
 </div>
 </template>
+
+<style>
+  #bag-hidden {
+    display: none;
+  }
+</style>
 
 <script>
   import axios from 'axios';
@@ -126,6 +133,10 @@
           self.subtotal = response.data.subtotal;
 
           Event.fire('removeBag', response);
+
+          // if(response.data.bags <= 0) {
+          //     location.reload();
+          // }
         })
         .catch(function (error) {
           console.log(error);
@@ -165,11 +176,7 @@
 
     computed: {
       filteredBags: function () {
-        return this.bags.slice(0,2);
-      },
-
-      openBag: function () {
-        return this.bagCount > 0 ? true : false;
+        return typeof this.bags[0] !== 'undefined' ? this.bags.slice(0,2) : {};
       }
     }
   }
