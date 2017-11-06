@@ -25,7 +25,7 @@
                     <div id="parent-drop-click" uk-drop="mode: click">
                         <div id="parent-drop-card-click">
                           <ul class="uk-list">
-                            <li><a :href="'/product/'+wish.slug" class="uk-icon-button"  uk-icon="icon: pencil"></a></li>
+                            <li><a :href="product_link+'/'+wish.slug+'/wishlist/'+wish.id" class="uk-icon-button"  uk-icon="icon: pencil"></a></li>
                             <li>
                               <a v-on:click.prevent="removeWishlist(wish.id)" class="uk-icon-button"  uk-icon="icon: trash"></a>
                             </li>
@@ -77,7 +77,7 @@
 <script>
   import axios from 'axios';
   export default {
-    props: ['wishlist_api', 'bag_api', 'wishlist_delete'],
+    props: ['wishlist_api', 'bag_api', 'wishlist_delete', 'product_link'],
     created () {
       var self = this;
       self.getWishlist();

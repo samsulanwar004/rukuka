@@ -255,10 +255,16 @@ class UserController extends BaseController
 
             $stock = (new ProductStockRepository)->getStockBySku($request->input('size'));
 
-            $wishlistExist = $this->user->checkWishlistExist($user->id, $stock->id);
+            //remove the item from wishlist
+            if ($request->has('update')) {
+                $id = $request->input('update');
+            } else {
+                $id = null;
+                $wishlistExist = $this->user->checkWishlistExist($user->id, $stock->id);
 
-            if ($wishlistExist) {
-                throw new Exception("Item have been added", 1);
+                if ($wishlistExist) {
+                    $id = $wishlistExist->id;
+                }
             }
 
             $product = [
@@ -278,7 +284,7 @@ class UserController extends BaseController
 
             $this->user
                 ->setUser($user)
-                ->persistWishlist($product);
+                ->persistWishlist($product, $id);
 
             //remove the item
             if ($request->has('move')) {

@@ -78,6 +78,8 @@
       color="{{ $product->color }}"
       sizes="{{ $product->stocks }}"
       auth="{{ Auth::check() ? 1 : 0 }}"
+      method="{{ $method }}"
+      sku="{{ $id }}"
     ></button-buy>
     <hr>
     <p class="uk-margin-remove uk-text-meta">

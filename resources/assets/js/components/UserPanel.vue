@@ -27,7 +27,7 @@
                     <span class="uk-text-small">{{ bag.options.currency }} {{ bag.price }} </span><br>
                     <span class="uk-text-meta">color : {{ bag.options.color }}</span><br>
                     <span class="uk-text-meta">size  : {{ bag.options.size }}</span><br>
-                    <a :href="product_link+'/'+bag.options.slug" class="uk-button uk-button-text uk-button-small" name="button"><span class="uk-icon" uk-icon="icon: pencil; ratio: 0.8"></span>edit</a>
+                    <a :href="product_link+'/'+bag.options.slug+'/bag/'+bag.id" class="uk-button uk-button-text uk-button-small" name="button"><span class="uk-icon" uk-icon="icon: pencil; ratio: 0.8"></span>edit</a>
                     <button type="button" class="uk-button uk-button-text uk-button-small" name="button" v-on:click="removeBag(bag.id)"><span class="uk-icon" uk-icon="icon: trash; ratio: 0.8"></span>remove</button>
                   </div>
                 </div>

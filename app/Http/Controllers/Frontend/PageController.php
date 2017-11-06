@@ -56,11 +56,11 @@ class PageController extends BaseController
 
     }
 
-    public function product($slug)
+    public function product($slug, $method = null, $id = null)
     {
     	$product = (new ProductRepository)->getProductBySlug($slug);
 
-    	return view('pages.product', compact('product'));
+    	return view('pages.product', compact('product', 'method', 'id'));
     }
 
     public function women()
@@ -115,6 +115,15 @@ class PageController extends BaseController
                         'status' => 'error',
                         'message' => $validation->errors()
                     ]);
+                }
+
+                //remove the item
+                if ($request->has('update')) {
+                    $rowId = $bag->search($request->input('update'), self::INSTANCE_SHOP);
+
+                    if ($rowId) {
+                        $bag->remove($rowId);
+                    }
                 }
 
                 $stock = (new ProductStockRepository)->getStockBySku($request->input('size'));
