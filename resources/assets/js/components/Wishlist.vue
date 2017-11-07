@@ -25,7 +25,7 @@
                     <div id="parent-drop-click" uk-drop="mode: click">
                         <div id="parent-drop-card-click">
                           <ul class="uk-list">
-                            <li><a :href="product_link+'/'+wish.slug+'/wishlist/'+wish.id" class="uk-icon-button"  uk-icon="icon: pencil"></a></li>
+                            <li><a :href="product_link+'/'+wish.slug+'/wishlist/'+wish.sku+'/'+wish.id" class="uk-icon-button"  uk-icon="icon: pencil"></a></li>
                             <li>
                               <a v-on:click.prevent="removeWishlist(wish.id)" class="uk-icon-button"  uk-icon="icon: trash"></a>
                             </li>

@@ -16,7 +16,7 @@
           <button class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right" v-on:click="bag"><span class="uk-margin-small-right uk-icon" uk-icon="icon: cart; ratio:0.8"></span> ADD TO BAG </button>
         </div>
         <div class="" v-if="method == 'wishlist'">
-            <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right" v-on:click="updateWishlist(sku)">UPDATE WISHLIST</button>
+            <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right" v-on:click="updateWishlist(id)">UPDATE WISHLIST</button>
         </div>
         <div class="" v-else>
             <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right" v-on:click="wishlist">ADD TO WISHLIST</button>
@@ -27,7 +27,17 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['api_bag', 'api_wishlist', 'color', 'sizes', 'auth', 'method', 'sku'],
+        props: [
+            'api_bag', 
+            'api_wishlist', 
+            'color', 
+            'sizes', 
+            'auth', 
+            'method', 
+            'sku',
+            'id'
+        ],
+
         created () {
             var self = this;
             self.stocks = this.sizes ? JSON.parse(this.sizes) : {};
@@ -156,6 +166,8 @@
                                     });
 
                                     Event.fire('addBag', response);
+
+                                    window.location.href = '/bag';
                                 }
                             }
                         })
@@ -203,6 +215,8 @@
                                         });
 
                                         Event.fire('addWishlist', response);
+
+                                        window.location.href = '/account/wishlist';
                                     }
                                 }
                             })

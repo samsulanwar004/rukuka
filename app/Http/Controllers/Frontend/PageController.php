@@ -56,11 +56,11 @@ class PageController extends BaseController
 
     }
 
-    public function product($slug, $method = null, $id = null)
+    public function product($slug, $method = null, $sku = null, $id = null)
     {
     	$product = (new ProductRepository)->getProductBySlug($slug);
 
-    	return view('pages.product', compact('product', 'method', 'id'));
+    	return view('pages.product', compact('product', 'method', 'sku', 'id'));
     }
 
     public function women()
