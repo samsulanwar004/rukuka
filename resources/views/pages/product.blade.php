@@ -81,6 +81,8 @@
       method="{{ $method }}"
       sku="{{ $sku }}"
       id="{{ $id }}"
+      bag_link="{{ route('bag') }}"
+      wishlist_link="{{ route('user.wishlist') }}"
     ></button-buy>
     <hr>
     <p class="uk-margin-remove uk-text-meta">

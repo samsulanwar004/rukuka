@@ -35,7 +35,9 @@
             'auth', 
             'method', 
             'sku',
-            'id'
+            'id',
+            'bag_link',
+            'wishlist_link',
         ],
 
         created () {
@@ -145,6 +147,7 @@
 
             updateBag: function (update) {
                 this.method = 'none';
+                let afterUpdateBag = this.bag_link;
                 this.$validator.validateAll().then((result) => {
                     if (result) {
                         
@@ -167,7 +170,7 @@
 
                                     Event.fire('addBag', response);
 
-                                    window.location.href = '/bag';
+                                    window.location.href = afterUpdateBag;
                                 }
                             }
                         })
@@ -193,6 +196,7 @@
 
             updateWishlist: function (update) {
                 this.method = 'none';
+                let afterUpdateWishlist = this.wishlist_link;
                 this.$validator.validateAll().then((result) => {
                     if(result) {
                         if (this.auth == 1) {
@@ -216,7 +220,7 @@
 
                                         Event.fire('addWishlist', response);
 
-                                        window.location.href = '/account/wishlist';
+                                        window.location.href = afterUpdateWishlist;
                                     }
                                 }
                             })
