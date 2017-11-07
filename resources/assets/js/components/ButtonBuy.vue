@@ -6,7 +6,7 @@
         <div class="">
             <select :class="{'uk-select': true, 'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
               <option :value="null" disabled>Select Size</option>
-              <option v-for="stock in stocks" :value="stock.sku">{{ stock.size }}</option>
+              <option v-for="stock in stocks" :value="stock.sku" :selected="sku ==  stock.sku">{{ stock.size }}</option>
             </select>
         </div>
         <div class="" v-if="method == 'bag'">
@@ -36,7 +36,7 @@
         data () {
             return {
                 stocks: {},
-                size: null
+                size: this.sku ? this.sku : null
             }
         },
 
