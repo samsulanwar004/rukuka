@@ -3,10 +3,6 @@
 	margin-top: -40px!important;
 }
 
-body {
-	overflow: hidden;
-}
-
 /* Preloader */
 #preloader {
 	position: fixed;
