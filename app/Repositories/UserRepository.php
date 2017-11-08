@@ -443,6 +443,8 @@ class UserRepository
 		if (is_null($id)) {
 			$wishlist->user()->associate($this->getUser());
 			$wishlist->stock()->associate($product['product_stocks_id']);
+		} else {
+			$wishlist->stock()->associate($product['product_stocks_id']);
 		}
 
 		$wishlist->save();

@@ -16,8 +16,8 @@
     <li>
       <a class="uk-button uk-button-text uk-button-small" :href="bag_link"> <b>B A G</b></a>
       <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" v-if="bagCount > 0">
-            <div class="uk-card-body uk-card-small ">
-              <div class="uk-grid-small" uk-grid v-for="bag in bags">
+            <div class="uk-card-body uk-card-small">
+              <div class="uk-grid-small" uk-grid v-for="bag in filteredBags">
                 <div class="uk-width-1-3">
                   <img :src="'/'+bag.options.photo" :alt="bag.name">
                 </div>
@@ -27,7 +27,7 @@
                     <span class="uk-text-small">{{ bag.options.currency }} {{ bag.price }} </span><br>
                     <span class="uk-text-meta">color : {{ bag.options.color }}</span><br>
                     <span class="uk-text-meta">size  : {{ bag.options.size }}</span><br>
-                    <a :href="product_link+'/'+bag.options.slug" class="uk-button uk-button-text uk-button-small" name="button"><span class="uk-icon" uk-icon="icon: pencil; ratio: 0.8"></span>edit</a>
+                    <a :href="product_link+'/'+bag.options.slug+'/bag/'+bag.id" class="uk-button uk-button-text uk-button-small" name="button"><span class="uk-icon" uk-icon="icon: pencil; ratio: 0.8"></span>edit</a>
                     <button type="button" class="uk-button uk-button-text uk-button-small" name="button" v-on:click="removeBag(bag.id)"><span class="uk-icon" uk-icon="icon: trash; ratio: 0.8"></span>remove</button>
                   </div>
                 </div>
@@ -45,6 +45,7 @@
               </div>
             </div>
         </div>
+        <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" id="bag-hidden" v-else></div>
         <div class="uk-badge" v-if="bagCount > 0">
           {{ bagCount }}
         </div>
@@ -56,6 +57,12 @@
 
 </div>
 </template>
+
+<style>
+  #bag-hidden {
+    display: none;
+  }
+</style>
 
 <script>
   import axios from 'axios';
@@ -81,7 +88,7 @@
 
       self.accounts = this.account ? JSON.parse(this.account) : {};
       
-      self.addBag();
+      self.getBag();
 
       Event.listen('addBag', function (response) {
         self.bagCount = response.data.bagCount;
@@ -126,13 +133,17 @@
           self.subtotal = response.data.subtotal;
 
           Event.fire('removeBag', response);
+
+          // if(response.data.bags <= 0) {
+          //     location.reload();
+          // }
         })
         .catch(function (error) {
           console.log(error);
         });
       }, 
 
-      addBag: function () {
+      getBag: function () {
         var self = this;
         axios.get(this.bag_api, {
         })
@@ -160,6 +171,12 @@
         .catch(function (error) {
           console.log(error);
         });
+      }
+    },
+
+    computed: {
+      filteredBags: function () {
+        return typeof this.bags[0] !== 'undefined' ? this.bags.slice(0,2) : {};
       }
     }
   }

@@ -254,11 +254,16 @@ class UserController extends BaseController
             $user = $this->getUserActive();
 
             $stock = (new ProductStockRepository)->getStockBySku($request->input('size'));
+            $id = null;
+            //remove the item from wishlist
+            if ($request->has('update')) {
+                $id = $request->input('update');
+            }
 
             $wishlistExist = $this->user->checkWishlistExist($user->id, $stock->id);
 
             if ($wishlistExist) {
-                throw new Exception("Item have been added", 1);
+                $id = $wishlistExist->id;
             }
 
             $product = [
@@ -278,7 +283,7 @@ class UserController extends BaseController
 
             $this->user
                 ->setUser($user)
-                ->persistWishlist($product);
+                ->persistWishlist($product, $id);
 
             //remove the item
             if ($request->has('move')) {
@@ -289,9 +294,16 @@ class UserController extends BaseController
                     $bag->remove($rowId);
                 }
 
-                $bags = $bag->get(self::INSTANCE_SHOP);
+                $getBags = $bag->get(self::INSTANCE_SHOP);
 
                 $subtotal = $bag->subtotal();
+
+                $index = 0;
+                $bags = [];
+                foreach ($getBags as $value) {
+                    $bags[$index] = $value;
+                    $index++;
+                }
             }
 
             DB::commit();
