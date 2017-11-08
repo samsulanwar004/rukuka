@@ -10,6 +10,7 @@ use App\Repositories\ProductStockRepository;
 use Exception;
 use Carbon\Carbon;
 use App\Services\BagService;
+use Share;
 
 class PageController extends BaseController
 {
@@ -59,8 +60,24 @@ class PageController extends BaseController
     public function product($slug, $method = null, $sku = null, $id = null)
     {
     	$product = (new ProductRepository)->getProductBySlug($slug);
+        
+        $share = Share::load(route('product', ['slug' => $slug]), $product->name, route('index').'/'.$product->images->first()->photo)
+            ->services(
+                'facebook', 
+                'gplus', 
+                'twitter',
+                'gmail',
+                'pinterest',
+                'tumblr'
+            );
 
-    	return view('pages.product', compact('product', 'method', 'sku', 'id'));
+    	return view('pages.product', compact(
+            'product', 
+            'method', 
+            'sku', 
+            'id', 
+            'share'
+        ));
     }
 
     public function women()
