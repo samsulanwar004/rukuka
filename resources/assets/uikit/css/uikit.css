@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:400');
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400');
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond');
 /* ========================================================================
    Component: Base
  ========================================================================== */
@@ -263,17 +266,17 @@ h6,
  */
 h1,
 .uk-h1 {
-  font-size: 60px;
+  font-size: 50px;
   line-height: 1.2;
 }
 h2,
 .uk-h2 {
-  font-size: 45px;
+  font-size: 40px;
   line-height: 1.3;
 }
 h3,
 .uk-h3 {
-  font-size: 35px;
+  font-size: 30px;
   line-height: 1.4;
 }
 h4,
@@ -510,7 +513,7 @@ a.uk-link-reset:focus,
 /* Primary
  ========================================================================== */
 .uk-heading-primary {
-  font-size: 60px;
+  font-size: 50px;
   line-height: 1.2;
 }
 /* Tablet landscape and bigger */
@@ -1486,7 +1489,7 @@ select.uk-form-width-xsmall {
   /* 3 */
   padding: 0;
   /* 4 */
-  font-size: 35px;
+  font-size: 30px;
   line-height: 1.4;
 }
 /* Custom controls
@@ -2545,7 +2548,7 @@ select.uk-form-width-xsmall {
 /* Title
  ========================================================================== */
 .uk-card-title {
-  font-size: 35px;
+  font-size: 30px;
   line-height: 1.4;
 }
 /* Badge
@@ -3084,7 +3087,7 @@ select.uk-form-width-xsmall {
 /* Title
  ========================================================================== */
 .uk-article-title {
-  font-size: 60px;
+  font-size: 50px;
   line-height: 1.2;
 }
 /* Meta
@@ -3389,7 +3392,7 @@ select.uk-form-width-xsmall {
 .uk-search-navbar .uk-search-input {
   height: 40px;
   background: transparent;
-  font-size: 35px;
+  font-size: 30px;
 }
 /*
  * Icon
@@ -3414,7 +3417,7 @@ select.uk-form-width-xsmall {
 .uk-search-large .uk-search-input {
   height: 80px;
   background: transparent;
-  font-size: 60px;
+  font-size: 50px;
 }
 /*
  * Icon
@@ -3571,7 +3574,7 @@ ul.uk-nav-sub {
  * Items
  */
 .uk-nav-primary > li > a {
-  font-size: 35px;
+  font-size: 30px;
   line-height: 1.5;
   color: #666;
 }
@@ -3764,8 +3767,7 @@ ul.uk-nav-sub {
   height: 40px;
   padding: 0 25px;
   /* 3 */
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 14px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   /* 4 */
   text-decoration: none;
@@ -3774,7 +3776,7 @@ ul.uk-nav-sub {
  * Nav items
  */
 .uk-navbar-nav > li > a {
-  color: #000;
+  color: #666;
   text-transform: uppercase;
   -webkit-transition: 0.1s ease-in-out;
   transition: 0.1s ease-in-out;
@@ -3788,7 +3790,7 @@ ul.uk-nav-sub {
 .uk-navbar-nav > li:hover > a,
 .uk-navbar-nav > li > a:focus,
 .uk-navbar-nav > li > a.uk-open {
-  color: #666;
+  color: #999;
   outline: none;
 }
 /* OnClick */
@@ -4818,6 +4820,9 @@ ul.uk-nav-sub {
 .uk-modal-container .uk-modal-dialog {
   width: 1200px;
 }
+.uk-modal-container-small .uk-modal-dialog {
+  width: 800px;
+}
 /*
  * Full size
  * 1. Remove padding and background from modal
@@ -4888,7 +4893,7 @@ ul.uk-nav-sub {
 /* Title
  ========================================================================== */
 .uk-modal-title {
-  font-size: 45px;
+  font-size: 40px;
   line-height: 1.3;
 }
 /* Close
@@ -4900,6 +4905,7 @@ ul.uk-nav-sub {
   top: 10px;
   right: 10px;
   padding: 5px;
+  overflow: visible;
 }
 /*
  * Remove margin from adjacent element
@@ -5344,9 +5350,10 @@ ul.uk-nav-sub {
   position: relative;
   margin-bottom: 10px;
   padding: 15px;
-  background: #f8f8f8;
+  background: #276357;
+  border: 1px solid #e5e5e5;
   color: #000;
-  font-size: 18px;
+  font-size: 14px;
   line-height: 1.4;
   cursor: pointer;
 }
@@ -6743,7 +6750,7 @@ ul.uk-nav-sub {
 /* Style modifiers
  ========================================================================== */
 .uk-text-lead {
-  font-size: 35px;
+  font-size: 30px;
   line-height: 1.5;
   color: #333;
 }
@@ -6766,7 +6773,7 @@ ul.uk-nav-sub {
   line-height: 1.5;
 }
 .uk-text-large {
-  font-size: 35px;
+  font-size: 30px;
   line-height: 1.5;
 }
 /* Weight modifier
@@ -7768,7 +7775,7 @@ td.uk-text-break {
  * 1. Required for `a`
  */
 .uk-logo {
-  font-size: 35px;
+  font-size: 30px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color: #000;
   /* 1 */
