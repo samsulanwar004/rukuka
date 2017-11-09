@@ -133,19 +133,21 @@
 
             countQty: function (sku, event) {
                 var qty = event.target.value;
-                axios.get(this.bag_link, {
-                  params: {
-                    count: sku,
-                    qty: qty
-                  }
-                })
-                .then(function (response) {
-                  Event.fire('bags', response);
-                  Event.fire('removePopUp', response);
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
+                if (qty !== '') {
+                    axios.get(this.bag_link, {
+                      params: {
+                        count: sku,
+                        qty: qty
+                      }
+                    })
+                    .then(function (response) {
+                      Event.fire('bags', response);
+                      Event.fire('removePopUp', response);
+                    })
+                    .catch(function (error) {
+                      console.log(error);
+                    });
+                }                
             },
 
             moveWishlist: function (event) {
