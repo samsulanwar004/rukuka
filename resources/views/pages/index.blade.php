@@ -147,7 +147,13 @@
   <div class="uk-text-left">
   	<h4><span>Most Popular</span></h4>
   </div>
-  	<popular api="{{ route('populer')}}"></popular>
+  	<popular 
+      api="{{ route('populer')}}" 
+      product_api="{{ route('product.api') }}"
+      bag_api="{{ route('persist.bag') }}"
+      wishlist_api="{{ route('persist.wishlist') }}"
+      auth="{{ Auth::check() ? 1 : 0 }}"
+    ></popular>
 
 
     </div>
