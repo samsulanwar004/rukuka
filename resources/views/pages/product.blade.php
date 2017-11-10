@@ -26,9 +26,9 @@
     </div>
   </div>
   <div class="uk-width-2-5@m">
-    <h4 class="uk-margin-remove"><a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}" class="uk-text-muted">{{ $product->designer->name }}</a></h4>
+    <a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}">{{ $product->designer->name }}</a>
     <h3 class="uk-margin-remove">{{ $product->name }}</h3>
-    <h3 class="uk-margin-remove">{{ $product->currency }} {{ number_format($product->sell_price) }}</h3>
+    <b>{{ $product->currency }} {{ number_format($product->sell_price) }} </b><br>
     <span class="uk-text-meta uk-text-bold">
       <span uk-icon="icon: star"></span>
       <span uk-icon="icon: star"></span>
@@ -40,32 +40,32 @@
     <ul uk-accordion="animation: true; multiple: false">
         <li class="uk-open">
 
-            <h5 class="uk-accordion-title">EDITORS NOTES</h5>
-            <div class="uk-accordion-content uk-text-small">
+            <h5 class="uk-accordion-title"><b>EDITORS NOTES</b></h5>
+            <div class="uk-accordion-content">
               {{ $product->content }}
             </div>
 
         </li>
         <li>
 
-            <h5 class="uk-accordion-title">SIZE & FIT</h5>
-            <div class="uk-accordion-content uk-text-small">
+            <h5 class="uk-accordion-title"><b>SIZE & FIT</b></h5>
+            <div class="uk-accordion-content">
               {{ $product->size_and_fit }}
             </div>
 
         </li>
         <li>
 
-            <h5 class="uk-accordion-title">DETAILS & CARE</h5>
-            <div class="uk-accordion-content uk-text-small">
+            <h5 class="uk-accordion-title"><b>DETAILS & CARE</b></h5>
+            <div class="uk-accordion-content">
               {{ $product->detail_and_care }}
             </div>
 
         </li>
         <li>
 
-            <h5 class="uk-accordion-title">DELIVERY & FREE RETURNS</h5>
-            <div class="uk-accordion-content uk-text-small">
+            <h5 class="uk-accordion-title"><b>DELIVERY & FREE RETURNS</b></h5>
+            <div class="uk-accordion-content">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </div>

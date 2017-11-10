@@ -1,5 +1,5 @@
 <template>
-    <div class="uk-child-width-1-2 uk-margin-small-top" uk-grid>
+    <div class="uk-child-width-1-2 uk-grid-small uk-margin-small-top" uk-grid>
         <div class="">
             Color : {{ color }}
         </div>
@@ -10,10 +10,10 @@
             </select>
         </div>
         <div class="" v-if="method == 'bag'">
-          <button class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right" v-on:click="updateBag(sku)"><span class="uk-margin-small-right uk-icon" uk-icon="icon: cart; ratio:0.8"></span> UPDATE BAG </button>
+          <button class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right" v-on:click="updateBag(sku)"> UPDATE BAG </button>
         </div>
         <div class="" v-else>
-          <button class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right" v-on:click="bag"><span class="uk-margin-small-right uk-icon" uk-icon="icon: cart; ratio:0.8"></span> ADD TO BAG </button>
+          <button class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right" v-on:click="bag"> ADD TO BAG </button>
         </div>
         <div class="" v-if="method == 'wishlist'">
             <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right" v-on:click="updateWishlist(id)">UPDATE WISHLIST</button>
@@ -28,12 +28,12 @@
     import axios from 'axios';
     export default {
         props: [
-            'api_bag', 
-            'api_wishlist', 
-            'color', 
-            'sizes', 
-            'auth', 
-            'method', 
+            'api_bag',
+            'api_wishlist',
+            'color',
+            'sizes',
+            'auth',
+            'method',
             'sku',
             'id',
             'bag_link',
@@ -53,10 +53,10 @@
         },
 
         methods: {
-            bag: function (event) {                
+            bag: function (event) {
                 this.$validator.validateAll().then((result) => {
                     if (result) {
-                        
+
                         var size = this.size;
                         axios.post(this.api_bag, {
                             size: size
@@ -85,7 +85,7 @@
                                 });
                             }
                         });
-                        
+
                     } else {
                         var items = this.errors.items;
                         $.each(items, function (index, item) {
@@ -150,7 +150,7 @@
                 let afterUpdateBag = this.bag_link;
                 this.$validator.validateAll().then((result) => {
                     if (result) {
-                        
+
                         var size = this.size;
                         axios.post(this.api_bag, {
                             size: size,
@@ -182,7 +182,7 @@
                                 });
                             }
                         });
-                        
+
                     } else {
                         var items = this.errors.items;
                         $.each(items, function (index, item) {

@@ -2,25 +2,8 @@
 
 @section('content')
 <div class="uk-container uk-container-small">
-<div class="uk-grid-small uk-margin-top">
 @if($categories == 'designers')
-  @include('partials.breadcrumb', [
-      'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => 'categories']
-  ])
-@else
-  @if($category == 'all')
-    @include('partials.breadcrumb', [
-      'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => 'categories']
-    ])
-  @else
-    @include('partials.breadcrumb', [
-        'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false, isset($products->first()->category->name) ? $products->first()->category->name : 'Product not available' => 'categories']
-    ])
-  @endif
-@endif
-</div>
-@if($categories == 'designers')
-  <div class="uk-grid-small uk-section-muted" uk-grid>
+  <div class="uk-grid-small uk-margin-top uk-section-muted" uk-grid>
     <div class="uk-panel uk-width-1-5@m uk-flex uk-flex-middle uk-flex-center">
 
         <img src="/{{ $designer->photo }}" width="120" alt="" class="uk-box-shadow-medium">
@@ -40,18 +23,36 @@
 @else
 
 @endif
+<div class="uk-grid-small uk-margin-top">
+@if($categories == 'designers')
+  @include('partials.breadcrumb', [
+      'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => 'categories']
+  ])
+@else
+  @if($category == 'all')
+    @include('partials.breadcrumb', [
+      'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => 'categories']
+    ])
+  @else
+    @include('partials.breadcrumb', [
+        'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false, isset($products->first()->category->name) ? $products->first()->category->name : 'Product not available' => 'categories']
+    ])
+  @endif
+@endif
+</div>
+
 
 <div class="uk-grid-small uk-margin-top uk-margin-large-bottom" uk-grid>
 <div class="uk-width-1-4@m">
-  <div class="uk-card-border uk-card-small uk-panel">
-    <div class="uk-card-header uk-card-secondary">
+  <div class="uk-card uk-card-default uk-card-border uk-card-small uk-panel">
+    <div class="uk-card-header">
 
 
       @if($categories == 'designers')
         {{ ucfirst($category) }}
       @else
         @if($category == 'all')
-          All
+          <b>ALL</b>
         @else
           {{ isset($products->first()->category->name) ? $products->first()->category->name : 'Product not available' }}
         @endif
@@ -95,9 +96,11 @@
         <div class="uk-panel uk-position-cover-card uk-invisible-hover">
           <div class="uk-panel uk-text-left">
             <div class="uk-card uk-card-small uk-card-default">
-                <div class="uk-card-media-top">
+                <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
                     <img src="/{{ $product->images->first()->photo }}" alt="">
-
+                    <div class="uk-position-bottom-center uk-position-medium">
+                      <a href="#" class="uk-button uk-button-small uk-button-secondary">QUICK SHOP</a>
+                    </div>
                 </div>
                 <div class="uk-card-body">
                     <a href="/product/{{ $product->slug }}" class="uk-text-muted">
