@@ -53,7 +53,25 @@ class PageController extends BaseController
             $products->appends($key, $value);
         }
 
-        return view('pages.shop', compact('products', 'categories', 'category', 'slug', 'designer'));
+        $shops = $products->map(function ($entry) {
+            return [
+                'id' => $entry->id,
+                'name' => $entry->name,
+                'slug' => $entry->slug,
+                'price' => $entry->sell_price,
+                'currency' => $entry->currency,
+                'photo' => $entry->images->first()->photo,
+            ];
+        });
+
+        return view('pages.shop', compact(
+            'products', 
+            'categories', 
+            'category', 
+            'slug', 
+            'designer', 
+            'shops'
+        ));
 
     }
 

@@ -13,7 +13,7 @@
             </div>
           </div>
         </div>
-        <div class="uk-card-body uk-padding-remove uk-margin-small-top">
+        <div class="uk-card-body uk-padding-remove uk-margin-small-top uk-text-center">
           <a :href="'/product/'+ product.slug" class="uk-text-muted">{{ product.name }}</a>
           <br>
           {{ product.currency }} {{ product.price }}

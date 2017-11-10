@@ -15,16 +15,4 @@
       @endforeach
     </ul>
   </div>
-  <div class="uk-width-3-4@m">
-    <div class="uk-grid-small uk-child-width-1-2@m uk-flex-center" uk-grid>
-      <div class="uk-text-left">
-        <span class="uk-text-meta">Sort by price : <a href="?price=desc">high</a> | <a href="?price=asc">low</a></span>
-        </div>
-        <div class="uk-text-right">
-          <span class="uk-text-meta">
-          @include('pagination.default', ['paginator' => $products])
-          </span>
-        </div>
-      </div>
-  </div>
 </div>
