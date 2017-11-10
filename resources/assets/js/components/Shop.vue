@@ -1,29 +1,46 @@
 <template>
     <div class="uk-grid-small uk-child-width-1-3@m uk-flex-center" uk-grid>
+        <div class="uk-panel uk-visible-toggle" v-for="product in products">
         <!-- start product -->
-        <div class="uk-panel uk-text-left" v-for="product in products">
-            <div class="uk-card uk-card-small uk-padding-remove">
-                <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
-                  <a :href="'/product/'+ product.slug">
-                    <img :src="'/'+ product.photo" :alt="product.name">
+        <div class="uk-panel uk-text-left">
+          <div class="uk-card uk-card-small uk-card-default">
+              <div class="uk-card-media-top">
+                  <img :src="'/'+product.photo" :alt="product.name">
+              </div>
+              <div class="uk-card-body uk-text-center">
+                  <a :href="'/product/'+product.slug" class="uk-text-muted">
+                    {{ product.name }}
                   </a>
-                  <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default">
-                    <div class="uk-text-center">
-                      <a href="#modal-overflow" class="uk-button uk-button-small uk-button-secondary" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="uk-card-body uk-padding-remove uk-margin-small-top uk-text-center">
-                  <a :href="'/product/'+ product.slug" class="uk-text-muted">{{ product.name }}</a>
                   <br>
-                  {{ product.currency }} {{ product.price }}
-                </div>
-<!--                 <div class="uk-card-footer">
-                  <span class="uk-text-meta">Shirt<h4 class="uk-card-price">$400</h4></span>
-                </div> -->
-            </div>
+                  <span>{{ product.currency }} {{ product.price }}</span>
+              </div>
+          </div>
         </div>
         <!-- end product single -->
+        <!-- start product -->
+        <div class="uk-panel uk-position-cover-card uk-invisible-hover">
+          <div class="uk-panel uk-text-left">
+            <div class="uk-card uk-card-small uk-card-default">
+                <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
+                    <a :href="'/product/'+product.slug">
+                        <img :src="'/'+product.photo" :alt="product.name">
+                    </a>
+                    <div class="uk-position-bottom-center uk-position-medium">
+                      <a href="#modal-overflow" class="uk-button uk-button-small uk-button-secondary" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
+                    </div>
+                </div>
+                <div class="uk-card-body uk-text-center">
+                    <a :href="'/product/'+product.slug" class="uk-text-muted">
+                      {{ product.name }}
+                    </a>
+                    <br>
+                    <span>{{ product.currency }} {{ product.price }}</span>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!-- end product single -->
+        </div>
         <div id="modal-overflow" class="uk-modal-container-small" uk-modal="center: true">
             <div class="uk-modal-dialog">
 
