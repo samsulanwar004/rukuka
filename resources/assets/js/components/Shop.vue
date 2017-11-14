@@ -1,33 +1,11 @@
 <template>
     <div class="uk-grid-small uk-child-width-1-3@m uk-flex-center" uk-grid>
         <div class="uk-panel uk-visible-toggle" v-for="product in products">
-        <!-- start product -->
-        <div class="uk-panel uk-text-left">
-          <div class="uk-card uk-card-small uk-card-default">
-              <div class="uk-card-media-top">
-                  <img :src="'/'+product.photo" :alt="product.name">
-              </div>
-              <div class="uk-card-body uk-text-center">
-                  <a :href="'/product/'+product.slug" class="uk-text-muted">
-                    {{ product.name }}
-                  </a>
-                  <br>
-                  <span>{{ product.currency }} {{ product.price }}</span>
-              </div>
-          </div>
-        </div>
-        <!-- end product single -->
-        <!-- start product -->
-        <div class="uk-panel uk-position-cover-card uk-invisible-hover">
+          <!-- start product -->
           <div class="uk-panel uk-text-left">
             <div class="uk-card uk-card-small uk-card-default">
-                <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
-                    <a :href="'/product/'+product.slug">
-                        <img :src="'/'+product.photo" :alt="product.name">
-                    </a>
-                    <div class="uk-position-bottom-center uk-position-medium">
-                      <a href="#modal-overflow" class="uk-button uk-button-small uk-button-secondary" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
-                    </div>
+                <div class="uk-card-media-top">
+                    <img :src="'/'+product.photo" :alt="product.name">
                 </div>
                 <div class="uk-card-body uk-text-center">
                     <a :href="'/product/'+product.slug" class="uk-text-muted">
@@ -38,9 +16,32 @@
                 </div>
             </div>
           </div>
+          <!-- end product single -->
+          <!-- start product -->
+          <div class="uk-panel uk-position-cover-card uk-invisible-hover">
+            <div class="uk-panel uk-text-left">
+              <div class="uk-card uk-card-small uk-card-default">
+                  <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
+                      <a :href="'/product/'+product.slug">
+                          <img :src="'/'+product.photo" :alt="product.name">
+                      </a>
+                      <div class="uk-position-bottom-center uk-position-medium">
+                        <a href="#modal-overflow" class="uk-button uk-button-small uk-button-secondary" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
+                      </div>
+                  </div>
+                  <div class="uk-card-body uk-text-center">
+                      <a :href="'/product/'+product.slug" class="uk-text-muted">
+                        {{ product.name }}
+                      </a>
+                      <br>
+                      <span>{{ product.currency }} {{ product.price }}</span>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <!-- end product single -->
         </div>
-        <!-- end product single -->
-        </div>
+        <div v-if="products == 0">Product not available</div>
         <div id="modal-overflow" class="uk-modal-container-small" uk-modal="center: true">
             <div class="uk-modal-dialog">
 

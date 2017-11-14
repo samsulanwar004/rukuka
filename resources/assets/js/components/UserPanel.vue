@@ -14,7 +14,7 @@
     </li>
 
     <li>
-      <a class="uk-button uk-button-text uk-button-small" :href="bag_link"> <b>B A G</b></a>
+      <a class="uk-button uk-button-text uk-button-small" v-on:click.prevent="goBag"> <b>B A G</b></a>
       <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" v-if="bagCount > 0">
             <div class="uk-card-body uk-card-small">
               <div class="uk-grid-small" uk-grid v-for="bag in filteredBags">
@@ -171,6 +171,10 @@
         .catch(function (error) {
           console.log(error);
         });
+      },
+
+      goBag: function () {
+        window.location.href = this.bag_link;
       }
     },
 
