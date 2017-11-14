@@ -5,7 +5,7 @@
         <table class="uk-table uk-table-divider">
           <thead>
               <tr>
-                  <th class="uk-table-shrink" colspan="4"><b>Y O U R &nbsp;&nbsp; B A G (4) </b></th>
+                  <th class="uk-table-shrink" colspan="4"><b>Y O U R &nbsp;&nbsp; B A G ({{ bags.length }}) </b></th>
               </tr>
           </thead>
             <thead>
