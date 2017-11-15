@@ -133,10 +133,6 @@
           self.subtotal = response.data.subtotal;
 
           Event.fire('removeBag', response);
-
-          // if(response.data.bags <= 0) {
-          //     location.reload();
-          // }
         })
         .catch(function (error) {
           console.log(error);

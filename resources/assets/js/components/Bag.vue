@@ -30,12 +30,12 @@
                           <input type="hidden" name="qty" :value="bag.qty">
                           <input type="hidden" name="move" :value="bag.id">
                           <button class="uk-button uk-button-small uk-button-default uk-padding-small-right uk-margin-remove" type="submit">MOVE TO WISHLIST</button>
-                    <a class="uk-button uk-button-small uk-button-default uk-padding-small-right uk-text-right" v-on:click="removeBag(bag.id)">REMOVE</a>
+                    <a class="uk-button uk-button-small uk-button-default uk-padding-small-right uk-text-right" v-on:click="removeBag(bag.id, bag.name)">REMOVE</a>
                     </form>
                     </td>
                     <td class="uk-text-nowrap">
                     <ul class="uk-grid-small uk-flex-middle" uk-grid>
-                      <li><a class="uk-icon-link" uk-icon="icon: minus" v-on:click.prevent="min(bag.id)"></a></li>
+                      <li><a class="uk-icon-link" uk-icon="icon: minus" v-on:click.prevent="min(bag.id, bag.qty, bag.name)"></a></li>
                       <li><input type="text" name="qty" class="uk-input uk-form-width-xsmall uk-form-small" :value="bag.qty" v-on:keyup="countQty(bag.id, $event)"></li>
                       <li><a class="uk-icon-link" uk-icon="icon: plus" v-on:click.prevent="plus(bag.id)"></a></li>
                     </ul>
@@ -119,37 +119,60 @@
         },
 
         methods: {
-            removeBag: function (sku) {
-                var self = this;
-                axios.get(this.bag_link, {
-                  params: {
-                    remove: sku
-                  }
-                })
-                .then(function (response) {
-                  self.bags = response.data.bags;
-                  self.subtotal = response.data.subtotal;
-
-                  Event.fire('removePopUp', response);
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
+            removeBag: function (sku, name) {
+              let bag_link = this.bag_link;
+              UIkit.modal.confirm('Do you remove '+ name +' from your bag?').then(function() {
+                  axios.get(bag_link, {
+                    params: {
+                      remove: sku
+                    }
+                  })
+                  .then(function (response) {
+                    Event.fire('bags', response);
+                    Event.fire('removePopUp', response);
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+              }, function () {
+                  console.log('Rejected.')
+              });
             },
 
-            min: function (sku) {
-                axios.get(this.bag_link, {
-                  params: {
-                    decrease: sku
-                  }
-                })
-                .then(function (response) {
-                  Event.fire('bags', response);
-                  Event.fire('removePopUp', response);
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
+            min: function (sku, qty, name) {
+                let bag_link = this.bag_link;
+                if (qty <= 1) {
+                  UIkit.modal.confirm('Do you remove '+ name +' from your bag?').then(function() {
+                      axios.get(bag_link, {
+                        params: {
+                          decrease: sku
+                        }
+                      })
+                      .then(function (response) {
+                        Event.fire('bags', response);
+                        Event.fire('removePopUp', response);
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+                  }, function () {
+                      console.log('Rejected.')
+                  });
+                } else {
+                  axios.get(bag_link, {
+                    params: {
+                      decrease: sku
+                    }
+                  })
+                  .then(function (response) {
+                    Event.fire('bags', response);
+                    Event.fire('removePopUp', response);
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+                }
+                
             },
 
             plus: function (sku) {
