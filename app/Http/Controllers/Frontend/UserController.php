@@ -410,4 +410,9 @@ class UserController extends BaseController
         }
     }
 
+    public function showCheckoutPage()
+    {
+      return view('pages.checkout');
+    }
+
 }

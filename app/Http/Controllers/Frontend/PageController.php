@@ -265,9 +265,4 @@ class PageController extends BaseController
         return view('pages.bag');
     }
 
-    public function checkout()
-    {
-      return view('pages.checkout');
-    }
-
 }

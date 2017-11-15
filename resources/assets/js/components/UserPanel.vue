@@ -41,7 +41,7 @@
             <div class="uk-card-footer uk-padding-small">
               <div class="uk-text-center">
                 <b>SUB TOTAL: {{ subtotal }}</b>
-                <input type="submit" class="uk-button-secondary uk-button uk-button-small uk-width-1-1" name="" value="CHECKOUT NOW">
+                <a :href="checkout_link" class="uk-button-secondary uk-button uk-button-small uk-width-1-1">CHECKOUT NOW</a>
               </div>
             </div>
         </div>
@@ -76,7 +76,8 @@
       'wishlist_api',
       'bag_api',
       'account',
-      'product_link'
+      'product_link',
+      'checkout_link'
     ],
 
     created () {

@@ -67,7 +67,7 @@
                 </div>
                 <div>
                   <div uk-form-custom="target: > * > span:first">
-                      <select :class="{'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
+                      <select name="size" v-model="size" v-validate="'required'">
                           <option :value="null" disabled>Choose Size</option>
                           <option v-for="stock in stocks" :value="stock.sku">
                             {{ stock.size }}

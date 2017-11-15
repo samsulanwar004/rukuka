@@ -74,7 +74,9 @@
             </div>
           </div>
           <div class="uk-card-footer">
-            <input type="submit" class="uk-button uk-button-small uk-button-danger uk-width-1-1" name="checkout" value="c h e c k o u t">
+            <a :href="checkout_link" class="uk-button uk-button-small uk-button-danger uk-width-1-1">
+              c h e c k o u t
+            </a>
           </div>
           </div>
           <hr>
@@ -96,7 +98,7 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['bag_link', 'wishlist_link', 'auth'],
+        props: ['bag_link', 'wishlist_link', 'auth', 'checkout_link'],
         created () {
             var self = this;
             Event.listen('bags', function (response) {
