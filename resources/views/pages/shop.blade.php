@@ -19,22 +19,37 @@
 @else
 
 @endif
-<div class="uk-grid-small uk-margin-top">
-@if($categories == 'designers')
-  @include('partials.breadcrumb', [
-      'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => 'categories']
-  ])
-@else
-  @if($category == 'all')
-    @include('partials.breadcrumb', [
-      'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => 'categories']
-    ])
-  @else
-    @include('partials.breadcrumb', [
-        'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false, isset($products->first()->category->name) ? $products->first()->category->name : 'Product not available' => 'categories']
-    ])
-  @endif
-@endif
+<div class="uk-grid-small uk-margin-top" uk-grid>
+  <div class="uk-width-1-4@m">
+    @if($categories == 'designers')
+      @include('partials.breadcrumb', [
+          'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => 'categories']
+      ])
+    @else
+      @if($category == 'all')
+        @include('partials.breadcrumb', [
+          'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => 'categories']
+        ])
+      @else
+        @include('partials.breadcrumb', [
+            'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false, isset($products->first()->category->name) ? $products->first()->category->name : 'Product not available' => 'categories']
+        ])
+      @endif
+    @endif
+  </div>
+  <div class="uk-width-3-4@m">
+    <div class="uk-grid-small uk-child-width-1-2@m uk-flex-center" uk-grid>
+      <div class="uk-text-left">
+        <span class="uk-text-meta">Sort by price : <a href="?price=desc">high</a> | <a href="?price=asc">low</a></span>
+        </div>
+        <div class="uk-text-right">
+          <span class="uk-text-meta">
+          @include('pagination.default', ['paginator' => $products])
+          </span>
+        </div>
+      </div>
+  </div>
+
 </div>
 
 
@@ -61,19 +76,6 @@
   </div>
 </div>
 <div class="uk-width-expand@m">
-  <div class="uk-panel">
-    <div class="uk-grid-small uk-child-width-1-2@m uk-flex-center" uk-grid>
-      <div class="uk-text-left">
-        <span class="uk-text-meta">Sort by price : <a href="?price=desc">high</a> | <a href="?price=asc">low</a></span>
-        </div>
-        <div class="uk-text-right">
-          <span class="uk-text-meta">
-          @include('pagination.default', ['paginator' => $products])
-          </span>
-        </div>
-      </div>
-    </div>
-    <hr>
     <shop
       shops ="{{ $shops }}"
       product_api="{{ route('product.api') }}"
