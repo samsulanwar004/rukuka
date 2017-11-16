@@ -28,7 +28,23 @@
         <span class="uk-text-meta">SELECT YOUR SHIPPING ADDRESS:</span>
         <hr class="uk-margin-small">
         @foreach($address as $add)
-          <input type="radio"> {{ $add->first_name }} <br>
+          <div class="uk-grid" uk-grid>
+            <div class="uk-width-1-3">
+              <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
+                <div class="uk-card-body">
+                  <input type="radio"> {{ $add->first_name }}
+                </div>
+              </div>
+            </div>
+            <div class="uk-width-1-3">
+              <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
+                <div class="uk-card-body">
+                  <a href="#" class="uk-text-meta"> <span class="uk-icon" uk-icon="icon: plus"></span> ADD YOUR SHIPPING OPTION </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
         @endforeach
       @else
         <span class="uk-text-meta">YOUR SHIPPING INFORMATION</span>
