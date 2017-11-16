@@ -219,4 +219,8 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@showCheckoutPage',
     ]);
 
+    Route::get('/checkout/shipping', function () {
+        echo 'shipping';
+    });
+
 });
