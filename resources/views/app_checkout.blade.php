@@ -19,7 +19,6 @@
       <div id="preloader">
         <div id="status">&nbsp;</div>
       </div>
-      @include('partials.nav')
       @yield('content')
       @include('partials.footer')
     </div>
@@ -27,8 +26,6 @@
     <script src="{{ elixir('js/custom.js') }}"></script>
     <script src="{{ elixir('js/main.js') }}"></script>
     <script src="{{ elixir('js/app.js') }}"></script>
-    @section('upload_scripts')
-    @show
     @section('footer_scripts')
     @show
   </body>

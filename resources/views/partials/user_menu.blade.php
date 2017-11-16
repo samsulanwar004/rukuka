@@ -39,7 +39,7 @@
   </div>
 </div>
 
-@section('footer_scripts')
+@section('upload_scripts')
 <script>
 
     (function ($) {
