@@ -440,4 +440,9 @@ class UserController extends BaseController
         return view('pages.checkout.shipping_option');
     }
 
+    public function showShippingBillingPage()
+    {
+      return view('pages.checkout.shipping_billing');
+    }
+
 }

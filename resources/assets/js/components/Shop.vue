@@ -7,7 +7,7 @@
                 <div class="uk-card-media-top">
                     <img :src="'/'+product.photo" :alt="product.name">
                 </div>
-                <div class="uk-card-body uk-text-center">
+                <div class="uk-card-body">
                     <a :href="'/product/'+product.slug" class="uk-text-muted">
                       {{ product.name }}
                     </a>
@@ -29,7 +29,7 @@
                         <a href="#modal-overflow" class="uk-button uk-button-small uk-button-secondary" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
                       </div>
                   </div>
-                  <div class="uk-card-body uk-text-center">
+                  <div class="uk-card-body">
                       <a :href="'/product/'+product.slug" class="uk-text-muted">
                         {{ product.name }}
                       </a>
@@ -200,7 +200,7 @@
             bag: function (event) {
                 this.$validator.validateAll().then((result) => {
                   if (result) {
-                      
+
                       var size = this.size;
                       axios.post(this.bag_api, {
                         size: size
@@ -229,7 +229,7 @@
                               });
                           }
                       });
-                      
+
                   } else {
                       var items = this.errors.items;
                       $.each(items, function (index, item) {

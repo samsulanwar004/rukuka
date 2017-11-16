@@ -1,4 +1,4 @@
-@extends('app_checkout')
+@extends('app')
 
 @section('content')
 <div class="uk-container uk-container-small">
@@ -11,7 +11,7 @@
       <hr class="uk-margin-remove-vertical"></hr>
       <div class="uk-grid uk-grid-divider uk-child-width-1-4@m uk-margin-small" uk-grid>
         <div>
-          <button class="uk-button uk-button-text" disabled><b>SHIPPING ADDRESS</b></button>
+          <a href="#" class="uk-button uk-button-text"><b>SHIPPING ADDRESS</b></a>
         </div>
         <div class="uk-text-center">
           <button class="uk-button uk-button-text" disabled>SHIPPING OPTION</button>
@@ -27,58 +27,15 @@
       @if (count($address))
         <span class="uk-text-meta">SELECT YOUR SHIPPING ADDRESS:</span>
         <hr class="uk-margin-small">
-        <form action="{{ route('user.address.default') }}" method="post">
-                {{ csrf_field() }}
+        @foreach($address as $add)
           <div class="uk-grid" uk-grid>
-            @foreach($address as $add)
-              <div class="uk-width-1-3">
-                <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
-                  <div class="uk-card-body">
-                    <table>
-                      <tr>
-                        <td>
-                          <input class="uk-checkbox" type="checkbox" name="default[{{$add->id}}]" {{ (bool)$add->is_default ? 'checked disabled' : '' }}>
-                        </td>
-                        <td>
-                          {{ $add->first_name }} {{ $add->last_name }}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-
-                        </td>
-                        <td>{{ $add->address_line }}</td>
-                      </tr>
-                      <tr>
-                        <td>
-
-                        </td>
-                        <td>
-                          {{ $add->city }}, {{ $add->province }} {{ $add->postal }}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-
-                        </td>
-                        <td>
-                          {{ $add->country }}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-
-                        </td>
-                        <td>
-                          {{ $add->phone_number }}
-                        </td>
-                      </tr>
-                    </table>
-
-                  </div>
+            <div class="uk-width-1-3">
+              <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
+                <div class="uk-card-body">
+                  <input type="radio"> {{ $add->first_name }}
                 </div>
               </div>
-            @endforeach
+            </div>
             <div class="uk-width-1-3">
               <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
                 <div class="uk-card-body">
@@ -87,9 +44,8 @@
               </div>
             </div>
           </div>
-          <input type="hidden" name="shipping" value="ok">
-          <button type="submit" id="default-submit" style="display: none;"></button>
-        </form>
+
+        @endforeach
       @else
         <span class="uk-text-meta">YOUR SHIPPING INFORMATION</span>
         <hr class="uk-margin-small">
@@ -141,7 +97,7 @@
             <p> <b>* Required</b> </p>
           </div>
           <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
-            <input type="submit" name="submit" id="submit" value="C O N T I N U E" class="uk-button-danger uk-button uk-button-small uk-width-1-1">
+            <input type="submit" name="submit" value="C O N T I N U E" class="uk-button-danger uk-button uk-button-small uk-width-1-1">
           </div>
           </form>
         </div>
@@ -175,7 +131,7 @@
 
         </div>
         <div class="uk-panel uk-margin-small-top">
-          <a href="#" class="uk-button uk-button-small uk-button-danger uk-width-1-1" id="continue">C O N T I N U E</a>
+          <input type="submit" class="uk-button uk-button-small uk-button-danger uk-width-1-1" name="checkout" value="C O N T I N U E">
         </div>
         <hr>
         <div class="uk-card uk-card-default uk-card-border uk-card-small">
@@ -190,42 +146,18 @@
     </div>
 
   </div>
+
+  <hr>
+  <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
+    <div class="uk-panel uk-text-center">
+      <h3>RELATED PRODUCTS</h3>
+    </div>
+  </div>
+  <related api="{{ route('related', ['categoryId' => '2']) }}"></related>
+  <div class="uk-grid-small uk-margin-small-bottom uk-margin-medium-top uk-margin-xlarge-bottom">
+    <div class="uk-panel uk-text-center">
+      <button class="uk-button uk-button-secondary">SHOW ALL PRODUCT</button>
+    </div>
+  </div>
 </div>
-@endsection
-
-@section('footer_scripts')
-
-<script type="text/javascript">
-  $(function () {
-    $("input:checkbox").on('click', function () {
-      // in the handler, 'this' refers to the box clicked on
-      var $box = $(this);
-      if ($box.is(":checked")) {
-        // the name of the box is retrieved using the .attr() method
-        // as it is assumed and expected to be immutable
-        var group = "input:checkbox[name='" + $box.attr("name") + "']";
-        // the checked state of the group/box on the other hand will change
-        // and the current value is retrieved using .prop() method
-        $(group).prop("checked", false);
-        $box.prop("checked", true);
-      } else {
-        $box.prop("checked", false);
-      }
-
-      $('#default-submit').click();
-    });
-
-    $("#continue").on('click', function (e) {
-      e.preventDefault();
-      var submit = $('#submit').val();
-      var url = '{{ route('checkout.shipping') }}';
-      if (submit == 'C O N T I N U E') {
-        $('#submit').click();
-      } else {
-        window.location.href = url;
-      }
-
-    });
-  })
-</script>
 @endsection

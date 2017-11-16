@@ -4,9 +4,6 @@
 <div class="uk-container uk-container-small">
     <div class="uk-grid-small uk-margin-top">
         @include('partials.alert')
-        <div class="uk-panel uk-text-center">
-          <h2>PLEASE LOGIN OR REGISTER</h2>
-        </div>
     </div>
   <div class="uk-grid-small uk-grid-divider uk-margin-top uk-margin-xlarge-bottom" uk-grid>
     <div class="uk-width-1-2@m">
