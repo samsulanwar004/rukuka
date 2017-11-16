@@ -548,7 +548,9 @@ class UserRepository
 
 	public function getAddress()
 	{
+		$user = $this->getUser();
 		return Address::orderBy('is_default', 'DESC')
+			->where('users_id', $user->id)
 			->get();
 	}
 
@@ -562,5 +564,13 @@ class UserRepository
 	public function getDefault()
 	{
 		return $this->default;
+	}
+
+	public function getAddressDefault()
+	{
+		$user = $this->getUser();
+		return Address::where('is_default', 1)
+			->where('users_id', $user->id)
+			->first();
 	}
 }

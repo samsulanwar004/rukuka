@@ -4,7 +4,7 @@
           <div class="uk-grid-small" uk-grid>
               <div class="uk-width-1-3@m uk-flex uk-flex-middle">
                 <div class="uk-panel">
-                  <a href="#" class="uk-button uk-button-small uk-button-default">BACK TO SHOPPING BAG</a>
+                  <a href="{{ route('bag') }}" class="uk-button uk-button-small uk-button-default">BACK TO SHOPPING BAG</a>
                 </div>
               </div>
               <div class="uk-width-1-3@m">

@@ -429,7 +429,9 @@ class UserController extends BaseController
 
     public function showShippingAddressPage()
     {
+        $user = $this->getUserActive();
         $address = $this->user
+            ->setUser($user)
             ->getAddress();
 
         return view('pages.checkout.shipping_address', compact('address'));
@@ -437,12 +439,22 @@ class UserController extends BaseController
 
     public function showShippingOptionPage()
     {
-        return view('pages.checkout.shipping_option');
+        $user = $this->getUserActive();
+        $address = $this->user
+            ->setUser($user)
+            ->getAddressDefault();
+
+        return view('pages.checkout.shipping_option', compact('address'));
     }
 
     public function showShippingBillingPage()
     {
-      return view('pages.checkout.shipping_billing');
+        $user = $this->getUserActive();
+        $address = $this->user
+            ->setUser($user)
+            ->getAddress();
+
+      return view('pages.checkout.shipping_billing', compact('address'));
     }
 
 }
