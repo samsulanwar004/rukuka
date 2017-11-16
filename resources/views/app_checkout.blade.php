@@ -19,8 +19,9 @@
       <div id="preloader">
         <div id="status">&nbsp;</div>
       </div>
+      @include('partials.header_checkout')
       @yield('content')
-      @include('partials.footer')
+      @include('partials.footer_checkout')
     </div>
     <script src="{{ elixir('js/vendor.js') }}"></script>
     <script src="{{ elixir('js/custom.js') }}"></script>

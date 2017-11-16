@@ -69,6 +69,8 @@ Route::get('/bag', [
     'uses' => 'Frontend\PageController@showBagPage',
 ]);
 
+
+
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [
         'as'   => 'login',
@@ -222,6 +224,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/checkout/shipping', [
         'as'   => 'checkout.shipping',
         'uses' => 'Frontend\UserController@showShippingOptionPage',
+    ]);
+
+    Route::get('/checkout/billing', [
+        'as'   => 'checkout.billing',
+        'uses' => 'Frontend\UserController@showShippingBillingPage',
     ]);
 
 });
