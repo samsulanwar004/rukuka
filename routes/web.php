@@ -216,11 +216,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/checkout', [
         'as'   => 'checkout',
-        'uses' => 'Frontend\UserController@showCheckoutPage',
+        'uses' => 'Frontend\UserController@showShippingAddressPage',
     ]);
 
-    Route::get('/checkout/shipping', function () {
-        echo 'shipping';
-    });
+    Route::get('/checkout/shipping', [
+        'as'   => 'checkout.shipping',
+        'uses' => 'Frontend\UserController@showShippingOptionPage',
+    ]);
 
 });

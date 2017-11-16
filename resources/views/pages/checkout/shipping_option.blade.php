@@ -1,4 +1,4 @@
-@extends('app')
+@extends('app_checkout')
 
 @section('content')
 <div class="uk-container uk-container-small">
@@ -11,10 +11,10 @@
       <hr class="uk-margin-remove-vertical"></hr>
       <div class="uk-grid uk-grid-divider uk-child-width-1-4@m uk-margin-small" uk-grid>
         <div>
-          <a href="#" class="uk-button uk-button-text"><b>SHIPPING ADDRESS</b></a>
+          <a href="{{ route('checkout') }}" class="uk-button uk-button-text">SHIPPING ADDRESS</a>
         </div>
         <div class="uk-text-center">
-          <button class="uk-button uk-button-text" disabled>SHIPPING OPTION</button>
+          <button class="uk-button uk-button-text" disabled><b>SHIPPING OPTION</b></button>
         </div>
         <div class="uk-text-center">
           <button class="uk-button uk-button-text" disabled>BILLING</button>
@@ -71,7 +71,7 @@
 
         </div>
         <div class="uk-panel uk-margin-small-top">
-          <input type="submit" class="uk-button uk-button-small uk-button-danger uk-width-1-1" name="checkout" value="C O N T I N U E">
+          <a href="{{ route('checkout.shipping') }}" class="uk-button uk-button-small uk-button-danger uk-width-1-1">C O N T I N U E</a>
         </div>
         <hr>
         <div class="uk-card uk-card-default uk-card-border uk-card-small">
@@ -84,20 +84,5 @@
         </div>
       </div>
     </div>
-
-  </div>
-
-  <hr>
-  <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
-    <div class="uk-panel uk-text-center">
-      <h3>RELATED PRODUCTS</h3>
-    </div>
-  </div>
-  <related api="{{ route('related', ['categoryId' => '2']) }}"></related>
-  <div class="uk-grid-small uk-margin-small-bottom uk-margin-medium-top uk-margin-xlarge-bottom">
-    <div class="uk-panel uk-text-center">
-      <button class="uk-button uk-button-secondary">SHOW ALL PRODUCT</button>
-    </div>
-  </div>
 </div>
 @endsection

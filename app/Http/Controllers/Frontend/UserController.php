@@ -18,6 +18,7 @@ class UserController extends BaseController
     protected $redirectAfterSaveAddress = '/account/address';
     protected $redirectAfterSavePassword = '/account/reset-password';
     protected $redirectAfterAddWishlist = '/account/wishlist';
+    protected $redirectAfterSaveShippingAddress = '/checkout/shipping';
     private $user;
 
     public function __construct(UserRepository $user)
@@ -146,6 +147,10 @@ class UserController extends BaseController
 
     		DB::commit();
 
+            if ($request->has('shipping')) {
+                return redirect($this->redirectAfterSaveShippingAddress);
+            }
+
     		return redirect($this->redirectAfterSaveAddress)->with(['success' => 'Save address book successfully!']);
 
         } catch (Exception $e) {
@@ -191,6 +196,10 @@ class UserController extends BaseController
     			->defaultAddress($request);
 
     		DB::commit();
+
+            if ($request->has('shipping')) {
+                return redirect($this->redirectAfterSaveShippingAddress);
+            }
 
     		return redirect($this->redirectAfterSaveAddress)->with(['success' => 'Save default address successfully!']);
 
@@ -418,12 +427,17 @@ class UserController extends BaseController
         }
     }
 
-    public function showCheckoutPage()
+    public function showShippingAddressPage()
     {
         $address = $this->user
             ->getAddress();
 
-        return view('pages.checkout', compact('address'));
+        return view('pages.checkout.shipping_address', compact('address'));
+    }
+
+    public function showShippingOptionPage()
+    {
+        return view('pages.checkout.shipping_option');
     }
 
 }
