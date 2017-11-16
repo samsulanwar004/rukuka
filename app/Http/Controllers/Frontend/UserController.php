@@ -147,7 +147,7 @@ class UserController extends BaseController
 
     		DB::commit();
 
-            if ($request->has('shipping')) {
+            if ($request->has('checkout')) {
                 return redirect($this->redirectAfterSaveShippingAddress);
             }
 
@@ -197,7 +197,7 @@ class UserController extends BaseController
 
     		DB::commit();
 
-            if ($request->has('shipping')) {
+            if ($request->has('checkout')) {
                 return redirect($this->redirectAfterSaveShippingAddress);
             }
 
