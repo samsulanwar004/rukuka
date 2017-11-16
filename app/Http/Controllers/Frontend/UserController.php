@@ -132,8 +132,16 @@ class UserController extends BaseController
 
     		$user = $this->getUserActive();
 
+            $checkAddressFound = $this->user->getAddress();
+
+            $default = 0;
+            if(!count($checkAddressFound)) {
+                $default = 1;
+            }
+
     		$this->user
     			->setUser($user)
+                ->setDefault($default)
     			->persistAddress($request);
 
     		DB::commit();
@@ -408,6 +416,14 @@ class UserController extends BaseController
                 'message' => $e->getMessage()
             ],400);
         }
+    }
+
+    public function showCheckoutPage()
+    {
+        $address = $this->user
+            ->getAddress();
+
+        return view('pages.checkout', compact('address'));
     }
 
 }

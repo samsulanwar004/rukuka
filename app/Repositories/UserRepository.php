@@ -50,6 +50,8 @@ class UserRepository
 
 	private $user;
 
+	private $default = 0;
+
 	const EXPIRED_VERIFICATION_TOKEN_IN = 2;
 
 	public function __construct()
@@ -365,6 +367,7 @@ class UserRepository
 		$address->postal = $request->input('postal');
 		$address->country = $request->input('country');
 		$address->phone_number = $request->input('phone_number');
+		$address->is_default = $this->getDefault();
 
 		if (is_null($id)) {
 			$address->user()->associate($this->getUser());
@@ -541,5 +544,23 @@ class UserRepository
 	{
 		return Subcriber::where('email', $email)
 			->first();
+	}
+
+	public function getAddress()
+	{
+		return Address::orderBy('is_default', 'DESC')
+			->get();
+	}
+
+	public function setDefault($value)
+	{
+		$this->default = $value;
+
+		return $this;
+	}
+
+	public function getDefault()
+	{
+		return $this->default;
 	}
 }

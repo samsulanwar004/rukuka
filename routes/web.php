@@ -69,11 +69,6 @@ Route::get('/bag', [
     'uses' => 'Frontend\PageController@showBagPage',
 ]);
 
-Route::get('/checkout', [
-    'as'   => 'checkout',
-    'uses' => 'Frontend\PageController@checkout',
-]);
-
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [
         'as'   => 'login',
@@ -218,5 +213,14 @@ Route::middleware(['auth'])->group(function () {
         'as'   => 'user.upload.profile',
         'uses' => 'Frontend\UserController@uploadProfile',
     ]);
+
+    Route::get('/checkout', [
+        'as'   => 'checkout',
+        'uses' => 'Frontend\UserController@showCheckoutPage',
+    ]);
+
+    Route::get('/checkout/shipping', function () {
+        echo 'shipping';
+    });
 
 });

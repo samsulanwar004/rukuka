@@ -9,6 +9,7 @@
     bag_link="{{ route('persist.bag') }}"
     wishlist_link="{{ route('persist.wishlist') }}"
     auth="{{ Auth::check() ? 1 : 0 }}"
+    checkout_link="{{ route('checkout') }}"
   ></bag>
 
   
