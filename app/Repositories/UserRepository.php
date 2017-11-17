@@ -328,6 +328,7 @@ class UserRepository
 		$cc->card_number = $request->input('card_number');
 		$cc->expired_date = $request->input('expired_date');
 		$cc->name_card = $request->input('name_card');
+		$cc->is_default = $this->getDefault();
 
 		if (is_null($id)) {
 			$cc->user()->associate($this->getUser());
@@ -544,14 +545,6 @@ class UserRepository
 	{
 		return Subcriber::where('email', $email)
 			->first();
-	}
-
-	public function getAddress()
-	{
-		$user = $this->getUser();
-		return Address::orderBy('is_default', 'DESC')
-			->where('users_id', $user->id)
-			->get();
 	}
 
 	public function setDefault($value)
