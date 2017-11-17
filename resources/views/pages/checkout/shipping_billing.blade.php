@@ -187,8 +187,8 @@
             </div>
           </div>
         </div>
-        <hr class="uk-margin-small">
       @endif
+        <hr class="uk-margin-small">
         <span class="uk-text-meta"><b>SHIPPING DETAILS</b></span>
         <hr class="uk-margin-small">
         <div>
