@@ -8,7 +8,8 @@
 <div class="uk-grid uk-margin-top" uk-grid>
 	@include('partials.user_menu')
 	<div class="uk-width-3-4@m">
-      <h3>EDIT PERSONAL PASSWORD</h3>
+      <b>EDIT PERSONAL PASSWORD</b>
+			<hr class="uk-margin-small">
       <div class="uk-grid-small" uk-grid>
           <div class="uk-panel">
           <!-- <h3>SIGN IN</h3> -->
