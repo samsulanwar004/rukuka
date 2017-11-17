@@ -231,4 +231,9 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@showShippingBillingPage',
     ]);
 
+    Route::post('/checkout/shipping', [
+        'as'   => 'checkout.shipping',
+        'uses' => 'Frontend\UserController@postShippingOption',
+    ]);
+
 });

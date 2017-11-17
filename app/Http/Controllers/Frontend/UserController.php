@@ -19,6 +19,8 @@ class UserController extends BaseController
     protected $redirectAfterSavePassword = '/account/reset-password';
     protected $redirectAfterAddWishlist = '/account/wishlist';
     protected $redirectAfterSaveShippingAddress = '/checkout/shipping';
+    protected $redirectAfterSaveShippingOption = '/checkout/billing';
+    protected $redirectAfterSaveBilling = '/checkout/billing';
     private $user;
 
     public function __construct(UserRepository $user)
@@ -95,11 +97,23 @@ class UserController extends BaseController
 
     		$user = $this->getUserActive();
 
+            $checkCreditCardFound = $user->creditCards;
+
+            $default = 0;
+            if(!count($checkCreditCardFound)) {
+                $default = 1;
+            }
+
     		$this->user
     			->setUser($user)
+                ->setDefault($default)
     			->persistCreditCard($request);
 
     		DB::commit();
+
+            if ($request->has('checkout')) {
+                return redirect($this->redirectAfterSaveBilling);
+            }
 
     		return redirect($this->redirectAfterSaveCC)->with(['success' => 'Save credit card successfully!']);
     	} catch (Exception $e) {
@@ -133,7 +147,7 @@ class UserController extends BaseController
 
     		$user = $this->getUserActive();
 
-            $checkAddressFound = $this->user->getAddress();
+            $checkAddressFound = $user->address;
 
             $default = 0;
             if(!count($checkAddressFound)) {
@@ -173,6 +187,10 @@ class UserController extends BaseController
     			->defaultCreditCard($request);
 
     		DB::commit();
+
+            if ($request->has('checkout')) {
+                return redirect($this->redirectAfterSaveBilling);
+            }
 
     		return redirect($this->redirectAfterSaveCC)->with(['success' => 'Save default credit card successfully!']);
 
@@ -430,9 +448,7 @@ class UserController extends BaseController
     public function showShippingAddressPage()
     {
         $user = $this->getUserActive();
-        $address = $this->user
-            ->setUser($user)
-            ->getAddress();
+        $address = $user->address;
 
         return view('pages.checkout.shipping_address', compact('address'));
     }
@@ -450,11 +466,22 @@ class UserController extends BaseController
     public function showShippingBillingPage()
     {
         $user = $this->getUserActive();
-        $address = $this->user
+        $creditcards = $user->creditcards;
+        $address = $user->address;
+        $defaultAddress = $this->user
             ->setUser($user)
-            ->getAddress();
+            ->getAddressDefault();
 
-      return view('pages.checkout.shipping_billing', compact('address'));
+      return view('pages.checkout.shipping_billing', compact(
+            'creditcards',
+            'address', 
+            'defaultAddress'
+        ));
+    }
+
+    public function postShippingOption(Request $request)
+    {
+        return redirect($this->redirectAfterSaveShippingOption);
     }
 
 }
