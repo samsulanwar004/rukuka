@@ -50,7 +50,7 @@
           		{{ csrf_field() }}
               <div class="uk-margin-small uk-grid-small" uk-grid>
                   <div>
-                    Credit or debit card number
+                    Credit or debit card number <span id="card"></span>
                       <input class="uk-input uk-input-small" name="card_number" id="card-number" type="text" required="required" value="{{ old('card_number') }}">
                   </div>
                   <div class="uk-inline">
@@ -110,9 +110,14 @@
 
 @section('footer_scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
-
+<script src="{{ elixir('js/creditcard.js') }}"></script>
 <script type="text/javascript">
 	$(function () {
+
+      $('#card-number').validateCreditCard(function(result) {
+        $('#card').html(result.card_type == null ? '' : result.card_type.name);
+      });
+
       $('#card-number').mask("9999-9999-9999-9999");
       $('#expired-date').mask("99/99");
 
