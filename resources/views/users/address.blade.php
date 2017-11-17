@@ -8,11 +8,12 @@
 <div class="uk-grid uk-margin-top" uk-grid>
 	@include('partials.user_menu')
 	<div class="uk-width-3-4@m">
-      <h3 class="uk-margin-remove uk-padding-remove">MY ADDRESS</h3>
+      <b>MY ADDRESS</b>
+			<hr class="uk-margin-small">
       <p>Hi, <b>{{ ucfirst($user->first_name).' '.ucfirst($user->last_name) }}</b>, create your address by input and save. <br>
       </p>
       <p>
-        @if (count($address))        
+        @if (count($address))
         <div class="uk-overflow-auto">
           <a class="uk-button uk-button-secondary uk-button-small" href="#modal-sections" uk-toggle>ADD NEW CARD</a>
 
@@ -77,14 +78,14 @@
                       Phone number
                       <input class="uk-input uk-input-small" name="phone_number" id="form-s-tel" type="text" value="{{ old('phone_number') }}" required="required">
                     </div>
-                  </div>  
+                  </div>
                   <input type="submit" id="submit" style="display: none">
-                  </form>                 
+                  </form>
               </div>
               <div class="uk-modal-footer uk-text-right">
                   <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-                  <button class="uk-button uk-button-secondary" id="modal-submit">Save</button>                  
-              </div>                  
+                  <button class="uk-button uk-button-secondary" id="modal-submit">Save</button>
+              </div>
             </div>
           </div>
           <form action="{{ route('user.address.default') }}" method="post">
@@ -119,7 +120,7 @@
             </form>
         </div>
 
-        @else 
+        @else
           <h4>ADD A NEW ADDRESS</h4>
          	<form class="uk-form-stacked" action="{{ route('user.address') }}" method="post">
           		{{ csrf_field() }}
