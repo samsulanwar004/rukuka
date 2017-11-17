@@ -14,7 +14,7 @@
           <a href="{{ route('checkout') }}" class="uk-button uk-button-text">SHIPPING ADDRESS</a>
         </div>
         <div class="uk-text-center">
-          <a href="#" class="uk-button uk-button-text">SHIPPING ADDRESS</a>
+          <a href="{{ route('checkout.shipping') }}" class="uk-button uk-button-text">SHIPPING ADDRESS</a>
         </div>
         <div class="uk-text-center">
           <button class="uk-button uk-button-text" disabled><b>BILLING</b></button>
@@ -24,7 +24,7 @@
         </div>
       </div>
       <hr class="uk-margin-small">
-      <span class="uk-text-meta"><b>CHOOSE A PAYMENT METHOD:</b></span>
+      {{-- <span class="uk-text-meta"><b>CHOOSE A PAYMENT METHOD:</b></span>
       <hr class="uk-margin-small">
       <div class="uk-grid" uk-grid>
         <div class="uk-width-1-3">
@@ -42,7 +42,7 @@
           </div>
         </div>
       </div>
-      <hr class="uk-margin-small">
+      <hr class="uk-margin-small"> --}}
       <span class="uk-text-meta"><b>ENTER YOUR CARD DETAILS:</b></span>
       <hr class="uk-margin-small">
       <div class="uk-text-meta">
@@ -79,14 +79,14 @@
       <form action="{{ route('user.address.default') }}" method="post">
               {{ csrf_field() }}
         <div class="uk-grid" uk-grid>
-          {{-- @foreach($address as $add) --}}
+          @foreach($address as $add)
             <div class="uk-width-1-3">
-              <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
+              <div id="uk-card" class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
                 <div class="uk-card-body">
                   <table>
                     <tr>
                       <td>
-                        <input class="uk-checkbox" type="checkbox" name="default[{{$add->id}}]" {{ (bool)$add->is_default ? 'checked disabled' : '' }}>
+                        <input class="uk-checkbox" type="checkbox" name="billing" {{ (bool)$add->is_default ? 'checked' : '' }} value="{{ $add->id }}">
                       </td>
                       <td>
                         {{ $add->first_name }} {{ $add->last_name }}
@@ -122,12 +122,20 @@
                         {{ $add->phone_number }}
                       </td>
                     </tr>
+                    <tr>
+                      <td>
+
+                      </td>
+                      <td>
+                        {{ (bool)$add->is_default ? 'Same as shipping address' : '' }}
+                      </td>
+                    </tr>
                   </table>
 
                 </div>
               </div>
             </div>
-          {{-- @endforeach --}}
+          @endforeach
           <div class="uk-width-1-3">
             <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
               <div class="uk-card-body">
@@ -199,4 +207,28 @@
       </div>
     </div>
 </div>
+@endsection
+
+@section('footer_scripts')
+
+<script type="text/javascript">
+  $(function () {
+    $("input:checkbox").on('click', function() {
+      // in the handler, 'this' refers to the box clicked on
+      var $box = $(this);
+      if ($box.is(":checked")) {
+        // the name of the box is retrieved using the .attr() method
+        // as it is assumed and expected to be immutable
+        var group = "input:checkbox[name='" + $box.attr("name") + "']";
+        // the checked state of the group/box on the other hand will change
+        // and the current value is retrieved using .prop() method
+        $(group).prop("checked", false);
+
+        $box.prop("checked", true);
+      } else {
+        $box.prop("checked", false);
+      }
+    });
+  });
+</script>
 @endsection

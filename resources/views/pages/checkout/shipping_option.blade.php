@@ -42,6 +42,22 @@
           </tr>
         </tbody>
       </table>
+      <hr class="uk-margin-small">
+      <span class="uk-text-meta"><b>SHIPPING DETAILS</b></span>
+      <hr class="uk-margin-small">
+      <div>
+        <ul class="uk-list uk-text-meta">
+          <li>{{ $address->first_name }} {{ $address->last_name}}</li>
+          <li>{{ $address->address_line }}</li>
+          <li>{{ $address->city }}</li>
+          <li>{{ $address->city }}, {{ $address->country }} {{ $address->postal }}</li>
+          <li>{{ $address->country }}</li>
+          <li>{{ $address->phone_number }}</li>
+        </ul>
+      </div>
+      <hr class="uk-margin-small">
+      <span class="uk-text-meta"><b>ITEMS (3)</b></span>
+      <hr class="uk-margin-small">
     </div>
     <div class="uk-width-1-4@m">
       <div class="uk-card uk-card-border uk-card-default uk-card-small">
@@ -71,7 +87,7 @@
 
         </div>
         <div class="uk-panel uk-margin-small-top">
-          <a href="{{ route('checkout.shipping') }}" class="uk-button uk-button-small uk-button-danger uk-width-1-1">C O N T I N U E</a>
+          <a href="{{ route('checkout.billing') }}" class="uk-button uk-button-small uk-button-danger uk-width-1-1">C O N T I N U E</a>
         </div>
         <hr>
         <div class="uk-card uk-card-default uk-card-border uk-card-small">

@@ -87,7 +87,7 @@
               </div>
             </div>
           </div>
-          <input type="hidden" name="shipping" value="ok">
+          <input type="hidden" name="checkout" value="ok">
           <button type="submit" id="default-submit" style="display: none;"></button>
         </form>
       @else
@@ -96,7 +96,7 @@
         <div class="uk-grid uk-width-1-2@m">
           <form action="{{ route('user.address') }}" method="post">
             {{ csrf_field() }}
-            <input type="hidden" name="shipping" value="ok">
+            <input type="hidden" name="checkout" value="ok">
           <div class="uk-grid uk-grid-small uk-child-width-1-2@m uk-text-meta" uk-grid>
             <div>
               First Name *
