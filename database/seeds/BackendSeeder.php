@@ -934,7 +934,15 @@ class CmsSettingSeeder extends Seeder
             "created_at" => date('Y-m-d H:i:s'),
             "group_setting" => "Home Page",
             "label" => "Right Link",
-        ]       
+        ],[
+            "name" => "header_banner",
+            "content_input_type" => "upload_image",
+            "dataenum" => null,
+            "helper" => null,
+            "created_at" => date('Y-m-d H:i:s'),
+            "group_setting" => "Blog Page",
+            "label" => "Header Image",
+        ]
             ];
 
 
