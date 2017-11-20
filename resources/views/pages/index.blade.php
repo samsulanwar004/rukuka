@@ -14,7 +14,7 @@
     <div class="uk-text-center">
       <div class="uk-container uk-container-small">
         <div class="uk-panel uk-padding-small">
-          <h4 class="uk-padding-remove">Now Open Ku Ka Indonesia, which serve many various style cloth and stuff. <a href="#">Search Promo Sale</a></h4>
+          <span class="uk-text-lead">Now Open Ku Ka Indonesia, which serve many various style cloth and stuff.</span>
         </div>
       </div>
       <div class="uk-inline">
@@ -43,13 +43,13 @@
         <div class="uk-width-1-5@m uk-flex uk-flex-middle">
 
 
-              <h3 class="uk-margin-remove">New Arrival</h3>
+              <span class="uk-text-lead">New Arrival</span>
 
         </div>
         <div class="uk-width-2-5@m uk-inline uk-flex uk-flex-middle">
 
 
-            <h3 class="uk-margin-remove"><a href="#">Men,</a> <a href="#">Women,</a> <a href="#">Kids</a></h3>
+            <span class="uk-text-lead"><a href="#">Men,</a> <a href="#">Women,</a> <a href="#">Kids</a></span>
 
 
         </div>
@@ -145,10 +145,11 @@
   </div>
   <hr> --}}
   <div class="uk-text-left">
-  	<h4><span>Most Popular</span></h4>
+  	<span class="uk-text-lead">MOST POPULAR</span>
+
   </div>
-  	<popular 
-      api="{{ route('populer')}}" 
+  	<popular
+      api="{{ route('populer')}}"
       product_api="{{ route('product.api') }}"
       bag_api="{{ route('persist.bag') }}"
       wishlist_api="{{ route('persist.wishlist') }}"

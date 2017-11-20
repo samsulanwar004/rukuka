@@ -19,7 +19,7 @@
             <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right" v-on:click="updateWishlist(id)">UPDATE WISHLIST</button>
         </div>
         <div class="" v-else>
-            <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right" v-on:click="wishlist">ADD TO WISHLIST</button>
+            <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right" v-on:click="wishlist">WISHLIST</button>
         </div>
     </div>
 </template>
