@@ -26,8 +26,8 @@
     </div>
   </div>
   <div class="uk-width-2-5@m">
-    <a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}">{{ $product->designer->name }}</a>
-    <h3 class="uk-margin-remove">{{ $product->name }}</h3>
+    <a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}">{{ $product->designer->name }}</a><br>
+    <span class="uk-text-lead">{{ $product->name }}</span><br>
     <b>{{ $product->currency }} {{ number_format($product->sell_price) }} </b><br>
     <span class="uk-text-meta uk-text-bold">
       <span uk-icon="icon: star"></span>
@@ -40,7 +40,7 @@
     <ul uk-accordion="animation: true; multiple: false">
         <li class="uk-open">
 
-            <h5 class="uk-accordion-title"><b>EDITORS NOTES</b></h5>
+            <h5 class="uk-accordion-title">EDITORS NOTES</h5>
             <div class="uk-accordion-content">
               {{ $product->content }}
             </div>
@@ -48,7 +48,7 @@
         </li>
         <li>
 
-            <h5 class="uk-accordion-title"><b>SIZE & FIT</b></h5>
+            <h5 class="uk-accordion-title">SIZE & FIT</h5>
             <div class="uk-accordion-content">
               {{ $product->size_and_fit }}
             </div>
@@ -56,7 +56,7 @@
         </li>
         <li>
 
-            <h5 class="uk-accordion-title"><b>DETAILS & CARE</b></h5>
+            <h5 class="uk-accordion-title">DETAILS & CARE</h5>
             <div class="uk-accordion-content">
               {{ $product->detail_and_care }}
             </div>
@@ -64,7 +64,7 @@
         </li>
         <li>
 
-            <h5 class="uk-accordion-title"><b>DELIVERY & FREE RETURNS</b></h5>
+            <h5 class="uk-accordion-title">DELIVERY & FREE RETURNS</h5>
             <div class="uk-accordion-content">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -108,18 +108,58 @@
         <a href="#" class="uk-text-muted">{{ $product->designer->name }}</a>
       </div>
       <div class="uk-text-center">
-        <a href="#" class="uk-text-muted">  Contact Us </a>
+        <a href="#" class="uk-text-muted"> Contact Us </a>
         <a href="#" class="uk-text-muted">Give Feedback </a>
       </div>
     </div>
   </div>
 </div>
 <hr>
-<div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
-  <div class="uk-panel uk-text-center">
-    <h3>RELATED PRODUCTS</h3>
+<div class="uk-panel uk-grid" uk-grid>
+  <div class="uk-width-1-3@m">
+    <a href="#" class="uk-button uk-button-default">WRITE A REVIEW</a>
+  </div>
+  <div class="uk-width-2-3@m">
+    RATING FOR THIS PRODUCT : 3.5
   </div>
 </div>
+<div class="uk-grid" uk-grid>
+  <div class="uk-width-1-3@m">
+    <div class="uk-card uk-card-border uk-card-small">
+      <div class="uk-card-body">
+        <div class="uk-text-center">
+          This Absolutely Gorgeous!
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="uk-width-1-3@m">
+    <div class="uk-card uk-card-border uk-card-small">
+      <div class="uk-card-body">
+        <div class="uk-text-center">
+          This Absolutely Gorgeous!
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="uk-width-1-3@m">
+    <div class="uk-card uk-card-border uk-card-small">
+      <div class="uk-card-body">
+        <div class="uk-text-center">
+          This Absolutely Gorgeous! <br>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
+  <div class="uk-panel">
+    <span class="uk-text-lead">RELATED PRODUCT</span>
+  </div>
+</div>
+
 <related api="{{ route('related', ['categoryId' => $product->product_categories_id]) }}"></related>
 <div class="uk-grid-small uk-margin-small-bottom uk-margin-medium-top uk-margin-xlarge-bottom">
   <div class="uk-panel uk-text-center">
