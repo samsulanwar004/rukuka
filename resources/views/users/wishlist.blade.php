@@ -10,7 +10,8 @@
 
 	@include('partials.user_menu')
 	<div class="uk-width-3-4@m">
-			<h4>WISHLIST</h4>
+			<b>WISHLIST</b>
+			<hr class="uk-margin-small">
       <wishlist
         wishlist_api="{{ route('persist.wishlist') }}"
         bag_api="{{ route('persist.bag') }}"

@@ -14,7 +14,7 @@
     </li>
 
     <li>
-      <a class="uk-button uk-button-text uk-button-small" :href="bag_link"> <b>B A G</b></a>
+      <a class="uk-button uk-button-text uk-button-small" v-on:click.prevent="goBag"> <b>B A G</b></a>
       <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" v-if="bagCount > 0">
             <div class="uk-card-body uk-card-small">
               <div class="uk-grid-small" uk-grid v-for="bag in filteredBags">
@@ -41,7 +41,7 @@
             <div class="uk-card-footer uk-padding-small">
               <div class="uk-text-center">
                 <b>SUB TOTAL: {{ subtotal }}</b>
-                <input type="submit" class="uk-button-secondary uk-button uk-button-small uk-width-1-1" name="" value="CHECKOUT NOW">
+                <a :href="checkout_link" class="uk-button-secondary uk-button uk-button-small uk-width-1-1">CHECKOUT NOW</a>
               </div>
             </div>
         </div>
@@ -76,7 +76,8 @@
       'wishlist_api',
       'bag_api',
       'account',
-      'product_link'
+      'product_link',
+      'checkout_link'
     ],
 
     created () {
@@ -133,10 +134,6 @@
           self.subtotal = response.data.subtotal;
 
           Event.fire('removeBag', response);
-
-          // if(response.data.bags <= 0) {
-          //     location.reload();
-          // }
         })
         .catch(function (error) {
           console.log(error);
@@ -171,6 +168,10 @@
         .catch(function (error) {
           console.log(error);
         });
+      },
+
+      goBag: function () {
+        window.location.href = this.bag_link;
       }
     },
 

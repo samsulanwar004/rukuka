@@ -13,7 +13,7 @@
             </div>
           </div>
         </div>
-        <div class="uk-card-body uk-padding-remove uk-margin-small-top uk-text-center">
+        <div class="uk-card-body uk-padding-remove uk-margin-small-top">
           <a :href="'/product/'+ product.slug" class="uk-text-muted">{{ product.name }}</a>
           <br>
           {{ product.currency }} {{ product.price }}
@@ -67,7 +67,7 @@
                 </div>
                 <div>
                   <div uk-form-custom="target: > * > span:first">
-                      <select :class="{'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
+                      <select name="size" v-model="size" v-validate="'required'">
                           <option :value="null" disabled>Choose Size</option>
                           <option v-for="stock in stocks" :value="stock.sku">
                             {{ stock.size }}
@@ -131,7 +131,7 @@
 </template>
 
 <script>
-  import axios from 'axios'; 
+  import axios from 'axios';
   export default {
     props: ['api', 'product_api', 'bag_api', 'wishlist_api', 'auth'],
     created() {
@@ -191,7 +191,7 @@
       bag: function (event) {
         this.$validator.validateAll().then((result) => {
           if (result) {
-              
+
               var size = this.size;
               axios.post(this.bag_api, {
                 size: size
@@ -220,7 +220,7 @@
                       });
                   }
               });
-              
+
           } else {
               var items = this.errors.items;
               $.each(items, function (index, item) {

@@ -21,6 +21,10 @@ import Wishlist from './components/Wishlist.vue';
 
 import Shop from './components/Shop.vue';
 
+import Item from './components/ItemCheckout.vue';
+
+import Summary from './components/Summary.vue';
+
 Vue.config.devtools = true
 Vue.config.debug = true
 Vue.config.silent = true
@@ -55,6 +59,8 @@ new Vue({
     'subcriber': Subcriber,
     'bag': Bag,
     'wishlist': Wishlist,
-    'shop': Shop
+    'shop': Shop,
+    'item-checkout' : Item,
+    'summary-checkout' : Summary
 	}
 });

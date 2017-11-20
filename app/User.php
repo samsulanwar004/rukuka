@@ -34,12 +34,12 @@ class User extends Authenticatable
 
     public function creditCards()
     {
-        return $this->hasMany(CreditCard::class, 'users_id', 'id')->orderBy('id', 'DESC');
+        return $this->hasMany(CreditCard::class, 'users_id', 'id')->orderBy('is_default', 'DESC');
     }
 
     public function address()
     {
-        return $this->hasMany(Address::class, 'users_id', 'id')->orderBy('id', 'DESC');
+        return $this->hasMany(Address::class, 'users_id', 'id')->orderBy('is_default', 'DESC');
     }
 
     public function wishlists()

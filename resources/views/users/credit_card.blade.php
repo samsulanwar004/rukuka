@@ -8,7 +8,8 @@
 <div class="uk-grid uk-margin-top" uk-grid>
 	@include('partials.user_menu')
 	<div class="uk-width-3-4@m">
-      <h3 class="uk-margin-remove uk-padding-remove">MY PAYMENT METHOD</h3>
+      <b>MY PAYMENT METHOD</b>
+			<hr class="uk-margin-small">
       <p>Hi, <b>{{ ucfirst($user->first_name).' '.ucfirst($user->last_name) }}</b>, create your payment method by input and save. <br>
       </p>
       <p>
@@ -43,14 +44,15 @@
                 <button type="submit" id="default-submit" style="display: none;"></button>
                 </form>
             </div>
-            <h4>ADD A NEW PAYMENT METHOD</h4>
-            <p>Please note: We only accept Visa and MasterCard for international orders shipping</p>
-            <p><img src="/images/sprite-payment.png" alt=""><br>
+            <span class="uk-text-meta"><b>ADD A NEW PAYMENT METHOD</b></span>
+						<hr class="uk-margin-small">
+            <p class="uk-text-meta"><b>Please Note : </b> We only accept Visa and MasterCard for international orders shipping</p>
+            <p><img src="/images/sprite-payment.png" alt="" width="300"><br>
          	<form class="uk-form-stacked" action="{{ route('user.cc') }}" method="post">
           		{{ csrf_field() }}
               <div class="uk-margin-small uk-grid-small" uk-grid>
                   <div>
-                    Credit or debit card number
+                    Credit or debit card number <span id="card"></span>
                       <input class="uk-input uk-input-small" name="card_number" id="card-number" type="text" required="required" value="{{ old('card_number') }}">
                   </div>
                   <div class="uk-inline">
@@ -110,9 +112,14 @@
 
 @section('footer_scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
-
+<script src="{{ elixir('js/creditcard.js') }}"></script>
 <script type="text/javascript">
 	$(function () {
+
+      $('#card-number').validateCreditCard(function(result) {
+        $('#card').html(result.card_type == null ? '' : result.card_type.name);
+      });
+
       $('#card-number').mask("9999-9999-9999-9999");
       $('#expired-date').mask("99/99");
 

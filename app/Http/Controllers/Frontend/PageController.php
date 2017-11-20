@@ -65,11 +65,11 @@ class PageController extends BaseController
         });
 
         return view('pages.shop', compact(
-            'products', 
-            'categories', 
-            'category', 
-            'slug', 
-            'designer', 
+            'products',
+            'categories',
+            'category',
+            'slug',
+            'designer',
             'shops'
         ));
 
@@ -78,11 +78,11 @@ class PageController extends BaseController
     public function product($slug, $method = null, $sku = null, $id = null)
     {
     	$product = (new ProductRepository)->getProductBySlug($slug);
-        
+
         $share = Share::load(route('product', ['slug' => $slug]), $product->name, route('index').'/'.$product->images->first()->photo)
             ->services(
-                'facebook', 
-                'gplus', 
+                'facebook',
+                'gplus',
                 'twitter',
                 'gmail',
                 'pinterest',
@@ -90,10 +90,10 @@ class PageController extends BaseController
             );
 
     	return view('pages.product', compact(
-            'product', 
-            'method', 
-            'sku', 
-            'id', 
+            'product',
+            'method',
+            'sku',
+            'id',
             'share'
         ));
     }
@@ -266,4 +266,3 @@ class PageController extends BaseController
     }
 
 }
-

@@ -50,6 +50,8 @@ class UserRepository
 
 	private $user;
 
+	private $default = 0;
+
 	const EXPIRED_VERIFICATION_TOKEN_IN = 2;
 
 	public function __construct()
@@ -326,6 +328,7 @@ class UserRepository
 		$cc->card_number = $request->input('card_number');
 		$cc->expired_date = $request->input('expired_date');
 		$cc->name_card = $request->input('name_card');
+		$cc->is_default = $this->getDefault();
 
 		if (is_null($id)) {
 			$cc->user()->associate($this->getUser());
@@ -365,6 +368,7 @@ class UserRepository
 		$address->postal = $request->input('postal');
 		$address->country = $request->input('country');
 		$address->phone_number = $request->input('phone_number');
+		$address->is_default = $this->getDefault();
 
 		if (is_null($id)) {
 			$address->user()->associate($this->getUser());
@@ -540,6 +544,26 @@ class UserRepository
 	public function getSubcriberByEmail($email)
 	{
 		return Subcriber::where('email', $email)
+			->first();
+	}
+
+	public function setDefault($value)
+	{
+		$this->default = $value;
+
+		return $this;
+	}
+
+	public function getDefault()
+	{
+		return $this->default;
+	}
+
+	public function getAddressDefault()
+	{
+		$user = $this->getUser();
+		return Address::where('is_default', 1)
+			->where('users_id', $user->id)
 			->first();
 	}
 }

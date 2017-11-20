@@ -1,5 +1,5 @@
-<div class="uk-panel uk-grid" uk-grid>
-  <div class="uk-width-1-4@m">
+<div class="uk-panel">
+
     <ul class="uk-breadcrumb">
       <li><a href="/">Home</a></li>
       @foreach($breadcrumbs as $key => $b)
@@ -14,5 +14,5 @@
           @endif
       @endforeach
     </ul>
-  </div>
+
 </div>
