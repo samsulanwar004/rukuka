@@ -256,4 +256,9 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@ccDestroy',
     ]);
 
+    Route::get('/account/address/destroy', [
+        'as'   => 'user.address.destroy',
+        'uses' => 'Frontend\UserController@addressDestroy',
+    ]);
+
 });

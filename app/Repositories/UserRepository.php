@@ -572,4 +572,10 @@ class UserRepository
 		return $this->getCreditCardById($id)
 			->delete();
 	}
+
+	public function addressDestroy($id)
+	{
+		return $this->getAddressById($id)
+			->delete();
+	}
 }

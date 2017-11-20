@@ -98,6 +98,7 @@
                         <th class="uk-width-medium">Last Name</th>
                         <th class="uk-width-medium">Address Line</th>
                         <th class="uk-width-medium">Phone Number</th>
+                        <th class="uk-width-medium"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -110,6 +111,11 @@
                           <td>{{ $add->last_name }}</td>
                           <td>{{ $add->address_line }}</td>
                           <td>{{ $add->phone_number }}</td>
+                          <td>
+                            <a href="#" class="uk-icon-link" uk-icon="icon: file-edit"></a> | 
+                            <a href="{{ route('user.address.destroy', ['id' => $add->id]) }}" class="uk-icon-link" uk-icon="icon: trash">
+                            </a>
+                          </td>
                       </tr>
                   @empty
                     <tr><td colspan="5"><center>no address</center></td></tr>

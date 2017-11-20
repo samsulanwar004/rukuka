@@ -508,4 +508,18 @@ class UserController extends BaseController
         }
     }
 
+    public function addressDestroy(Request $request)
+    {
+        try {
+            $user = $this->getUserActive();
+            $this->user
+                ->addressDestroy($request->input('id'));
+
+            return redirect($this->redirectAfterSaveAddress)->with(['success' => 'Delete address successfully!']);
+
+        } catch (Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
+    }
+
 }
