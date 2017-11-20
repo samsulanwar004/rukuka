@@ -25,7 +25,7 @@
                       <a :href="'/product/'+product.slug">
                           <img :src="'/'+product.photo" :alt="product.name">
                       </a>
-                      <div class="uk-position-bottom-center uk-position-medium">
+                      <div class="uk-position-bottom-center uk-position-small">
                         <a href="#modal-overflow" class="uk-button uk-button-small uk-button-secondary" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
                       </div>
                   </div>
