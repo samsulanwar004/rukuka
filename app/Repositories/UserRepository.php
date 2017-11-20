@@ -566,4 +566,10 @@ class UserRepository
 			->where('users_id', $user->id)
 			->first();
 	}
+
+	public function ccDestroy($id)
+	{
+		return $this->getCreditCardById($id)
+			->delete();
+	}
 }

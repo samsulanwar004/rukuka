@@ -494,4 +494,18 @@ class UserController extends BaseController
         return redirect($this->redirectAfterSaveShippingOption);
     }
 
+    public function ccDestroy(Request $request)
+    {
+        try {
+            $user = $this->getUserActive();
+            $this->user
+                ->ccDestroy($request->input('id'));
+
+            return redirect($this->redirectAfterSaveCC)->with(['success' => 'Delete credit card successfully!']);
+
+        } catch (Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
+    }
+
 }

@@ -23,6 +23,7 @@
                             <th class="uk-width-medium">Card Number</th>
                             <th class="uk-width-medium">Expired Date</th>
                             <th class="uk-width-medium">Name Card</th>
+                            <th class="uk-width-medium"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,7 +34,12 @@
 	                                <a class="uk-link-reset" href="">{{ $card->card_number }}</a>
 	                            </td>
 	                            <td>{{ $card->expired_date }}</td>
-	                            <td>{{ $card->name_card }}</td>
+                              <td>{{ $card->name_card }}</td>
+	                            <td>
+                                <a href="#" class="uk-icon-link" uk-icon="icon: file-edit"></a> | 
+                                <a href="{{ route('user.cc.destroy', ['id' => $card->id]) }}" class="uk-icon-link" uk-icon="icon: trash">
+                                </a>
+                              </td>
 	                        </tr>
 	                    @empty
 	                    	<tr><td colspan="5"><center>no card</center></td></tr>

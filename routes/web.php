@@ -251,4 +251,9 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@postShippingOption',
     ]);
 
+    Route::get('/account/cc/destroy', [
+        'as'   => 'user.cc.destroy',
+        'uses' => 'Frontend\UserController@ccDestroy',
+    ]);
+
 });
