@@ -21,6 +21,7 @@ class UserController extends BaseController
     protected $redirectAfterSaveShippingAddress = '/checkout/shipping';
     protected $redirectAfterSaveShippingOption = '/checkout/billing';
     protected $redirectAfterSaveBilling = '/checkout/billing';
+    protected $redirectAfterNewShippingAddress = '/checkout';
     private $user;
 
     public function __construct(UserRepository $user)
@@ -163,6 +164,10 @@ class UserController extends BaseController
 
             if ($request->has('checkout')) {
                 return redirect($this->redirectAfterSaveShippingAddress);
+            }
+
+            if ($request->has('checkout_new_address')) {
+                return redirect($this->redirectAfterNewShippingAddress);
             }
 
     		return redirect($this->redirectAfterSaveAddress)->with(['success' => 'Save address book successfully!']);
