@@ -22,6 +22,10 @@ elixir(function(mix) {
         assetPath + 'js/custom.js',
     ], 'public/js/custom.js');
 
+    mix.scripts([
+        assetPath + 'js/jquery.creditCardValidator.js',
+    ], 'public/js/creditcard.js');
+
     mix.styles([
         assetPath + 'uikit/css/uikit.min.css',
         assetPath + 'css/custom.css',
@@ -32,6 +36,7 @@ elixir(function(mix) {
     	'js/app.js',
         'js/main.js',
     	'js/custom.js',
-        'css/app.css'
+        'css/app.css',
+        'js/creditcard.js'
     ]);
 });

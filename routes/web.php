@@ -16,8 +16,23 @@ Route::get('/blog', [
 ]);
 
 Route::post('/blog', [
-    'as'   => 'blog-post-index',
-    'uses' => 'Frontend\BlogController@indexAjax',
+    'as'   => 'blog-post-ajax',
+    'uses' => 'Frontend\BlogController@getBlogAjax',
+]);
+
+Route::get('/blog/category/{slug}', [
+    'as'   => 'blog-get-category',
+    'uses' => 'Frontend\BlogController@category',
+]);
+
+Route::get('/blog/{slug}', [
+    'as'   => 'blog-get-read',
+    'uses' => 'Frontend\BlogController@blogRead',
+]);
+
+Route::post('/blog/search', [
+    'as'   => 'blog-get-search',
+    'uses' => 'Frontend\BlogController@search',
 ]);
 Route::get('/', [
     'as'   => 'index',
