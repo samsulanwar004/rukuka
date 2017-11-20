@@ -1,7 +1,7 @@
 <progress id="progressbar" class="uk-progress" value="0" max="100" hidden></progress>
 <div class="uk-width-1-4@m">
-  <div class="uk-card uk-card-default uk-card-small uk-box-shadow-small">
-      <div class="uk-card-media-top uk-inline">
+  <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-small">
+      {{-- <div class="uk-card-media-top uk-inline">
           <div class="uk-position-top-right">
             <div class="profile-upload" uk-form-custom>
               <input type="file">
@@ -18,28 +18,29 @@
             @endif
           @endif
 
+      </div> --}}
+      <div class="uk-card-header">
+          <h3 class="uk-margin-small"><b>{{ ucfirst($user->first_name).' '.ucfirst($user->last_name) }}</b></h3>
       </div>
       <div class="uk-card-body">
-          <h3 class="uk-card-title uk-margin-small">{{ ucfirst($user->first_name).' '.ucfirst($user->last_name) }}</h3>
-          <hr>
-          <p class="uk-margin-small"><strong>My Account</strong></p>
-          <ul class="uk-list">
-            <li><a href="{{ route('user') }}" class="uk-text-small">Home</a></li>
-            <li><a href="{{ route('user.detail') }}" class="uk-text-small">My Details</a></li>
-            <li><a href="{{ route('user.address') }}" class="uk-text-small">Address Books</a></li>
-            <li><a href="{{ route('user.cc') }}" class="uk-text-small">Payment Methods</a></li>
-            <li><a href="#" class="uk-text-small">Order History</a></li>
-            <li><a href="{{ route('user.wishlist') }}" class="uk-text-small">My Wishlist</a></li>
-            <li><a href="{{ route('user.reset.password') }}" class="uk-text-small">Reset Password</a></li>
-            <li><a href="{{ route('logout') }}" class="uk-text-small">Sign Out</a></li>
+        <strong>MY ACCOUNT</strong>
+        <ul class="uk-nav uk-navbar-dropdown-nav">
+          <li><a href="{{ route('user') }}" class="uk-text-small">Home</a></li>
+          <li><a href="{{ route('user.detail') }}" class="uk-text-small">My Details</a></li>
+          <li><a href="{{ route('user.address') }}" class="uk-text-small">Address Books</a></li>
+          <li><a href="{{ route('user.cc') }}" class="uk-text-small">Payment Methods</a></li>
+          <li><a href="#" class="uk-text-small">Order History</a></li>
+          <li><a href="{{ route('user.wishlist') }}" class="uk-text-small">My Wishlist</a></li>
+          <li><a href="{{ route('user.reset.password') }}" class="uk-text-small">Reset Password</a></li>
+          <li><a href="{{ route('logout') }}" class="uk-text-small">Sign Out</a></li>
 
-          </ul>
+        </ul>
 
       </div>
   </div>
 </div>
 
-@section('footer_scripts')
+@section('upload_scripts')
 <script>
 
     (function ($) {

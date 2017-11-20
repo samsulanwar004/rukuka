@@ -26,9 +26,9 @@
     </div>
   </div>
   <div class="uk-width-2-5@m">
-    <h4 class="uk-margin-remove"><a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}" class="uk-text-muted">{{ $product->designer->name }}</a></h4>
+    <a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}">{{ $product->designer->name }}</a>
     <h3 class="uk-margin-remove">{{ $product->name }}</h3>
-    <h3 class="uk-margin-remove">{{ $product->currency }} {{ number_format($product->sell_price) }}</h3>
+    <b>{{ $product->currency }} {{ number_format($product->sell_price) }} </b><br>
     <span class="uk-text-meta uk-text-bold">
       <span uk-icon="icon: star"></span>
       <span uk-icon="icon: star"></span>
@@ -40,32 +40,32 @@
     <ul uk-accordion="animation: true; multiple: false">
         <li class="uk-open">
 
-            <h5 class="uk-accordion-title">EDITORS NOTES</h5>
-            <div class="uk-accordion-content uk-text-small">
+            <h5 class="uk-accordion-title"><b>EDITORS NOTES</b></h5>
+            <div class="uk-accordion-content">
               {{ $product->content }}
             </div>
 
         </li>
         <li>
 
-            <h5 class="uk-accordion-title">SIZE & FIT</h5>
-            <div class="uk-accordion-content uk-text-small">
+            <h5 class="uk-accordion-title"><b>SIZE & FIT</b></h5>
+            <div class="uk-accordion-content">
               {{ $product->size_and_fit }}
             </div>
 
         </li>
         <li>
 
-            <h5 class="uk-accordion-title">DETAILS & CARE</h5>
-            <div class="uk-accordion-content uk-text-small">
+            <h5 class="uk-accordion-title"><b>DETAILS & CARE</b></h5>
+            <div class="uk-accordion-content">
               {{ $product->detail_and_care }}
             </div>
 
         </li>
         <li>
 
-            <h5 class="uk-accordion-title">DELIVERY & FREE RETURNS</h5>
-            <div class="uk-accordion-content uk-text-small">
+            <h5 class="uk-accordion-title"><b>DELIVERY & FREE RETURNS</b></h5>
+            <div class="uk-accordion-content">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </div>
@@ -73,21 +73,27 @@
         </li>
     </ul>
     <button-buy
-      api_bag="{{ route('bag') }}"
-      api_wishlist="{{ route('user.wishlist') }}"
+      api_bag="{{ route('persist.bag') }}"
+      api_wishlist="{{ route('persist.wishlist') }}"
       color="{{ $product->color }}"
       sizes="{{ $product->stocks }}"
+      auth="{{ Auth::check() ? 1 : 0 }}"
+      method="{{ $method }}"
+      sku="{{ $sku }}"
+      id="{{ $id }}"
+      bag_link="{{ route('bag') }}"
+      wishlist_link="{{ route('user.wishlist') }}"
     ></button-buy>
     <hr>
     <p class="uk-margin-remove uk-text-meta">
       <ul class="uk-grid-small uk-flex-middle uk-flex-center" uk-grid>
-        <li><a class="uk-icon-link" uk-icon="icon: twitter"></a></li>
-        <li><a class="uk-icon-link" uk-icon="icon: pinterest"></a></li>
-        <li><a class="uk-icon-link" uk-icon="icon: facebook"></a></li>
-        <li><a class="uk-icon-link" uk-icon="icon: google-plus"></a></li>
+        <li><a class="uk-icon-link" uk-icon="icon: twitter" target="_blank" href="{{ $share['twitter']}}"></a></li>
+        <li><a class="uk-icon-link" uk-icon="icon: pinterest" target="_blank" href="{{ $share['pinterest']}}"></a></li>
+        <li><a class="uk-icon-link" uk-icon="icon: facebook" target="_blank" href="{{ $share['facebook']}}"></a></li>
+        <li><a class="uk-icon-link" uk-icon="icon: google-plus" target="_blank" href="{{ $share['gplus']}}"></a></li>
         <li><a class="uk-icon-link" uk-icon="icon: instagram"></a></li>
-        <li><a class="uk-icon-link" uk-icon="icon: tumblr"></a></li>
-        <li><a class="uk-icon-link" uk-icon="icon: mail"></a></li>
+        <li><a class="uk-icon-link" uk-icon="icon: tumblr" target="_blank" href="{{ $share['tumblr']}}"></a></li>
+        <li><a class="uk-icon-link" uk-icon="icon: mail" target="_blank" href="{{ $share['gmail']}}"></a></li>
       </ul>
     </p>
     <hr class="uk-margin-small">

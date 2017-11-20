@@ -18,6 +18,9 @@ class UserController extends BaseController
     protected $redirectAfterSaveAddress = '/account/address';
     protected $redirectAfterSavePassword = '/account/reset-password';
     protected $redirectAfterAddWishlist = '/account/wishlist';
+    protected $redirectAfterSaveShippingAddress = '/checkout/shipping';
+    protected $redirectAfterSaveShippingOption = '/checkout/billing';
+    protected $redirectAfterSaveBilling = '/checkout/billing';
     private $user;
 
     public function __construct(UserRepository $user)
@@ -94,11 +97,23 @@ class UserController extends BaseController
 
     		$user = $this->getUserActive();
 
+            $checkCreditCardFound = $user->creditCards;
+
+            $default = 0;
+            if(!count($checkCreditCardFound)) {
+                $default = 1;
+            }
+
     		$this->user
     			->setUser($user)
+                ->setDefault($default)
     			->persistCreditCard($request);
 
     		DB::commit();
+
+            if ($request->has('checkout')) {
+                return redirect($this->redirectAfterSaveBilling);
+            }
 
     		return redirect($this->redirectAfterSaveCC)->with(['success' => 'Save credit card successfully!']);
     	} catch (Exception $e) {
@@ -132,11 +147,23 @@ class UserController extends BaseController
 
     		$user = $this->getUserActive();
 
+            $checkAddressFound = $user->address;
+
+            $default = 0;
+            if(!count($checkAddressFound)) {
+                $default = 1;
+            }
+
     		$this->user
     			->setUser($user)
+                ->setDefault($default)
     			->persistAddress($request);
 
     		DB::commit();
+
+            if ($request->has('checkout')) {
+                return redirect($this->redirectAfterSaveShippingAddress);
+            }
 
     		return redirect($this->redirectAfterSaveAddress)->with(['success' => 'Save address book successfully!']);
 
@@ -161,6 +188,10 @@ class UserController extends BaseController
 
     		DB::commit();
 
+            if ($request->has('checkout')) {
+                return redirect($this->redirectAfterSaveBilling);
+            }
+
     		return redirect($this->redirectAfterSaveCC)->with(['success' => 'Save default credit card successfully!']);
 
         } catch (Exception $e) {
@@ -183,6 +214,10 @@ class UserController extends BaseController
     			->defaultAddress($request);
 
     		DB::commit();
+
+            if ($request->has('checkout')) {
+                return redirect($this->redirectAfterSaveShippingAddress);
+            }
 
     		return redirect($this->redirectAfterSaveAddress)->with(['success' => 'Save default address successfully!']);
 
@@ -231,30 +266,22 @@ class UserController extends BaseController
     {
         $user = $this->getUserActive();
 
-        $wishlists = collect($user->wishlists)->map(function($entry) {
-
-            return [
-                'id' => $entry->id,
-                'sku' => $entry->stock->sku,
-                'name' => $entry->stock->product->name,
-                'slug' => $entry->stock->product->slug,
-                'price' => $entry->stock->product->sell_price,
-                'currency' => $entry->stock->product->currency,
-                'size' => $entry->content['options']['size'],
-                'color' => $entry->content['options']['color'],
-                'photo' => $entry->content['options']['photo'],
-                'qty' => $entry->content['qty'],
-            ];
-        });
-
-        return view('users.wishlist', compact('user', 'wishlists'));
+        return view('users.wishlist', compact('user'));
     }
 
-    public function wishlist(Request $request)
+    public function postWishlist(Request $request)
     {
-        $this->validate($request, [
+        $rules = [
             'size' => 'required|string|max:255'
-        ]);
+        ];
+
+        $validation = $this->validRequest($request, $rules);
+        if ($validation->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $validation->errors()
+            ]);
+        }
 
         try {
             DB::beginTransaction();
@@ -262,11 +289,16 @@ class UserController extends BaseController
             $user = $this->getUserActive();
 
             $stock = (new ProductStockRepository)->getStockBySku($request->input('size'));
+            $id = null;
+            //remove the item from wishlist
+            if ($request->has('update')) {
+                $id = $request->input('update');
+            }
 
             $wishlistExist = $this->user->checkWishlistExist($user->id, $stock->id);
 
             if ($wishlistExist) {
-                throw new Exception("Item have been added", 1);
+                $id = $wishlistExist->id;
             }
 
             $product = [
@@ -286,7 +318,7 @@ class UserController extends BaseController
 
             $this->user
                 ->setUser($user)
-                ->persistWishlist($product);
+                ->persistWishlist($product, $id);
 
             //remove the item
             if ($request->has('move')) {
@@ -296,28 +328,57 @@ class UserController extends BaseController
                 if ($rowId) {
                     $bag->remove($rowId);
                 }
+
+                $getBags = $bag->get(self::INSTANCE_SHOP);
+
+                $subtotal = $bag->subtotal();
+
+                $index = 0;
+                $bags = [];
+                foreach ($getBags as $value) {
+                    $bags[$index] = $value;
+                    $index++;
+                }
             }
 
             DB::commit();
 
-            return redirect($this->redirectAfterAddWishlist)->with(['success' => 'Add wishlist successfully!']);
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'bagCount' => isset($bags) ? count($bags) : null,
+                'bags' => isset($bags) ? $bags : null,
+                'subtotal' => isset($subtotal) ? $subtotal : null,
+                'wishlistCount' => count($user->wishlists)
+            ]);
         } catch (Exception $e) {
             DB::rollBack();
 
-            return back()->withErrors($e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
         }
     }
 
-    public function wishlistDestroy($id)
+    public function wishlistDestroy(Request $request)
     {
         try {
+            $user = $this->getUserActive();
             $this->user
-                ->wishlistDestroy($id);
+                ->wishlistDestroy($request->input('id'));
 
-            return redirect($this->redirectAfterAddWishlist)->with(['success' => 'Delete wishlist successfully!']);
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'wishlistCount' => count($user->wishlists)
+            ]);
 
         } catch (Exception $e) {
-            return back()->withErrors($e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
         }
     }
 
@@ -348,6 +409,79 @@ class UserController extends BaseController
                 'message' => $e->getMessage()
             ]);
         }
+    }
+
+    public function getWishlist()
+    {
+        try {
+            $user = $this->getUserActive();
+            $wishlists = collect($user->wishlists)->map(function($entry) {
+
+                return [
+                    'id' => $entry->id,
+                    'sku' => $entry->stock->sku,
+                    'name' => $entry->stock->product->name,
+                    'slug' => $entry->stock->product->slug,
+                    'price' => $entry->stock->product->sell_price,
+                    'currency' => $entry->stock->product->currency,
+                    'size' => $entry->content['options']['size'],
+                    'color' => $entry->content['options']['color'],
+                    'photo' => $entry->content['options']['photo'],
+                    'qty' => $entry->content['qty'],
+                ];
+            });
+
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'wishlists' => $wishlists
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
+        }
+    }
+
+    public function showShippingAddressPage()
+    {
+        $user = $this->getUserActive();
+        $address = $user->address;
+
+        return view('pages.checkout.shipping_address', compact('address'));
+    }
+
+    public function showShippingOptionPage()
+    {
+        $user = $this->getUserActive();
+        $address = $this->user
+            ->setUser($user)
+            ->getAddressDefault();
+
+        return view('pages.checkout.shipping_option', compact('address'));
+    }
+
+    public function showShippingBillingPage()
+    {
+        $user = $this->getUserActive();
+        $creditcards = $user->creditcards;
+        $address = $user->address;
+        $defaultAddress = $this->user
+            ->setUser($user)
+            ->getAddressDefault();
+
+      return view('pages.checkout.shipping_billing', compact(
+            'creditcards',
+            'address', 
+            'defaultAddress'
+        ));
+    }
+
+    public function postShippingOption(Request $request)
+    {
+        return redirect($this->redirectAfterSaveShippingOption);
     }
 
 }

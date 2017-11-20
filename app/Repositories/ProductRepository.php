@@ -10,11 +10,17 @@ class ProductRepository
 
 	public $designer;
 
+	public function model()
+	{
+		return new Product;
+	}
+
 	public function getProductBySlugCategory($request, $slug)
 	{
-		$query = Product::whereHas('category', function ($query) use ($slug) {
-            $query->where('slug', '=', $slug);
-        });
+		$query = $this->model()
+			->whereHas('category', function ($query) use ($slug) {
+	            $query->where('slug', '=', $slug);
+	        });
 
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
@@ -27,13 +33,15 @@ class ProductRepository
 
 	public function getProductBySlug($slug)
 	{
-		return Product::where('slug', $slug)
+		return $this->model()
+			->where('slug', $slug)
     		->first();
 	}
 
 	public function getMostProduct()
 	{
-		return Product::take(4)
+		return $this->model()
+			->take(4)
 			->get();
 	}
 
@@ -50,9 +58,10 @@ class ProductRepository
 			}
 		}
 
-		$query = Product::whereHas('category', function ($query) use ($ids) {
-            $query->whereIn('id', $ids);
-        });
+		$query = $this->model()
+			->whereHas('category', function ($query) use ($ids) {
+	            $query->whereIn('id', $ids);
+	        });
 
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
@@ -66,22 +75,24 @@ class ProductRepository
 
 	public function getRelatedProduct($categoryId)
 	{
-		return Product::whereHas('category', function ($query) use ($categoryId) {
-            $query->where('product_categories_id', '=', $categoryId);
-        })
-        ->inRandomOrder()
-        ->take(4)
-        ->get();
+		return $this->model()
+			->whereHas('category', function ($query) use ($categoryId) {
+	            $query->where('product_categories_id', '=', $categoryId);
+	        })
+	        ->inRandomOrder()
+	        ->take(4)
+	        ->get();
 	}
 
 	public function getProductByDesigner($request, $category)
 	{
 
-		$query = Product::whereHas('designer', function ($query) use ($category) {
-            if ($category != 'all') {
-            	$query->where('slug', $category);
-            }
-        });
+		$query = $this->model()
+			->whereHas('designer', function ($query) use ($category) {
+	            if ($category != 'all') {
+	            	$query->where('slug', $category);
+	            }
+	        });
 
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
@@ -103,5 +114,12 @@ class ProductRepository
 	public function getDesigner()
 	{
 		return $this->designer;
+	}
+
+	public function getProductById($id)
+	{
+		return $this->model()
+			->where('id', $id)
+			->first();
 	}
 }

@@ -1,122 +1,83 @@
-@extends('app')
+@extends('app-blog')
 
 @section('content')
-    <div class="uk-margin-top uk-margin-bottom">
-        {{ Html::image('http://iscaprobus.co.uk/wp-content/uploads/2016/05/book.jpg','alt_image', array( 'width' => 1200, 'height' => 300 )) }}
-    </div>
 
-    <div class="uk-grid-small uk-grid-match uk-child-width-expand@s uk-text-justify" uk-grid>
-        <div>
-            <ul class="uk-nav uk-navbar-dropdown-nav">
-                <li class="uk-text-lead"><a href="#">Content</a></li>
-                <li class="uk-nav-divider"></li>
-                <li><a href="#">Item</a></li>
-                <li><a href="#">Item</a></li>
-                <li><a href="#">Item</a></li>
-                <li><a href="#">Item</a></li>
-            </ul>
+    @if($status['code'] == '000')
+    <div class="uk-container uk-container-small">
+        <div class="uk-heading-line uk-text-lead uk-text-center uk-margin-medium-top uk-margin-medium-bottom "><span>{{$title}}</span></div>
+        <div id="blog" class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
+            @foreach($posts as $post)
+                <div class="uk-width-1-3@m uk-width-1-2@s uk-inline">
+                    <div class="uk-inline">
+                        <div class="uk-inline-clip uk-transition-toggle uk-light">
+                            <a href="{{ URL::to('blog/'.$post->slug)}}" class="uk-link-reset">
+                                <div style="background: rgba(0,0,0,.2);" class="uk-position-cover"></div>
+                                @if(count($post->photo_1))
+                                    <img src="/{{ $post->photo_1 }}" alt="{{$post->title}}">
+                                @else
+                                    {{ Html::image("images/blog-default.jpg") }}
+                                @endif
+                                <div class="uk-card uk-position-bottom-left uk-card-small">
+                                    <div class="uk-card-body">
+                                        <div class="uk-transition-slide-left-small">
+                                            <h1 class="uk-margin-remove uk-text-bold blog-subtitle">{{$post->title}}</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
-        <div>
-            <ul class="uk-nav uk-navbar-dropdown-nav">
-                <li class="uk-text-lead"><a href="#">Features</a></li>
-                <li class="uk-nav-divider"></li>
-                <li><a href="#">Item</a></li>
-                <li><a href="#">Item</a></li>
-                <li><a href="#">Item</a></li>
-                <li><a href="#">Item</a></li>
-            </ul>
-        </div>
-        <div>
-            <ul class="uk-nav uk-navbar-dropdown-nav">
-                <li class="uk-text-lead"><a href="#">Discover</a></li>
-                <li class="uk-nav-divider"></li>
-                <li><a href="#">Item</a></li>
-                <li><a href="#">Item</a></li>
-                <li><a href="#">Item</a></li>
-                <li><a href="#">Item</a></li>
-            </ul>
-        </div>
-        <div>
-            <ul class="uk-nav uk-navbar-dropdown-nav">
-                <li class="uk-text-lead"><a href="#">Tags</a></li>
-                <li class="uk-nav-divider"></li>
-                <li><a href="#">Item</a></li>
-                <li><a href="#">Item</a></li>
-                <li><a href="#">Item</a></li>
-                <li><a href="#">Item</a></li>
-            </ul>
+        <div id="loader" class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
+            <div id="remove-row" class="uk-align-center">
+                <h2>
+                    @if(count($posts) <= 9)
+                        <a onclick="myFunction({{ $post->id }})" id="btn-more" class="uk-margin-remove uk-text-bold blog-loadmore" > Load More </a>
+                    @endif
+                </h2>
+            </div>
         </div>
     </div>
 
-    <h2 class="uk-heading-line uk-text-center"><span>Top Stories</span></h2>
-
-    <div class="uk-grid uk-grid-small uk-child-width-1-3@m uk-child-width-1-2@s">
-        <div class="uk-text-center uk-margin-bottom">
-            <a href="">
-                <div class="uk-inline-clip uk-transition-toggle">
-                    <img class="uk-transition-scale-up uk-transition-opaque" src="https://www.w3schools.com/howto/img_avatar.png" alt="">
-                    <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle">
-                        <li class="uk-text-large uk-text-muted uk-text-uppercase">Quis nulla et eiusmod aut distinctio Illum pariatur Nemo deleniti officiis ipsam cupidatat</li>
-                    </div>
-                </div>
-            </a>
+    @else
+        <div class="uk-container uk-container-small">
+            <div class="uk-section uk-section-default uk-section-xlarge uk-text-center">
+                <h1>No Content</h1>
+            </div>
         </div>
-        <div class="uk-text-center uk-margin-bottom">
-            <a href="">
-                <div class="uk-inline-clip uk-transition-toggle">
-                    <img class="uk-transition-scale-up uk-transition-opaque" src="https://www.w3schools.com/howto/img_avatar.png" alt="">
-                    <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle">
-                        <li class="uk-text-large uk-text-muted uk-text-uppercase">Quis nulla et eiusmod aut distinctio Illum pariatur Nemo deleniti officiis ipsam cupidatat</li>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="uk-text-center uk-margin-bottom">
-            <a href="">
-                <div class="uk-inline-clip uk-transition-toggle">
-                    <img class="uk-transition-scale-up uk-transition-opaque" src="https://www.w3schools.com/howto/img_avatar.png" alt="">
-                    <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle">
-                        <li class="uk-text-large uk-text-muted uk-text-uppercase">Quis nulla et eiusmod aut distinctio Illum pariatur Nemo deleniti officiis ipsam cupidatat</li>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="uk-text-center uk-margin-bottom">
-            <a href="">
-                <div class="uk-inline-clip uk-transition-toggle">
-                    <img class="uk-transition-scale-up uk-transition-opaque" src="https://www.w3schools.com/howto/img_avatar.png" alt="">
-                    <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle">
-                        <li class="uk-text-large uk-text-muted uk-text-uppercase">Quis nulla et eiusmod aut distinctio Illum pariatur Nemo deleniti officiis ipsam cupidatat</li>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="uk-text-center uk-margin-bottom">
-            <a href="">
-                <div class="uk-inline-clip uk-transition-toggle">
-                    <img class="uk-transition-scale-up uk-transition-opaque" src="https://www.w3schools.com/howto/img_avatar.png" alt="">
-                    <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle">
-                        <li class="uk-text-large uk-text-muted uk-text-uppercase">Quis nulla et eiusmod aut distinctio Illum pariatur Nemo deleniti officiis ipsam cupidatat</li>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="uk-text-center uk-margin-bottom">
-            <a href="">
-                <div class="uk-inline-clip uk-transition-toggle">
-                    <img class="uk-transition-scale-up uk-transition-opaque" src="https://www.w3schools.com/howto/img_avatar.png" alt="">
-                    <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle">
-                        <li class="uk-text-large uk-text-muted uk-text-uppercase">Quis nulla et eiusmod aut distinctio Illum pariatur Nemo deleniti officiis ipsam cupidatat</li>
-                    </div>
-                </div>
-            </a>
-        </div>
+    @endif
+    <script type="text/javascript">
 
+        function myFunction(id) {
+                $("#btn-more").html("Loading....");
+                var pathArray = window.location.pathname.split( '/' );
+                var segment_3 = pathArray[3];
+                $.ajax({
+                    url : '{{ url("blog") }}',
+                    method : "POST",
+                    data : {id:id,slug:segment_3,_token:"{{csrf_token()}}"},
+                    dataType : "text",
+                    success : function (data)
+                    {
+                        if(data != '')
+                        {
+                            var result = JSON.parse(data);
+                            $('#remove-row').remove();
+                            $('#blog').append(result.blog);
+                            $('#loader').append(result.loader);
+                        }
+                        else
+                        {
+                            $('#remove-row').remove();
+                        }
+                    }
+                });
+            }
 
+    </script>
 
-
-
-    </div>
 
 @endsection
 

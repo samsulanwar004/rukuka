@@ -11,10 +11,29 @@
 |
 */
 Route::get('/blog', [
-    'as'   => 'blog-index',
+    'as'   => 'blog-get-index',
     'uses' => 'Frontend\BlogController@index',
 ]);
 
+Route::post('/blog', [
+    'as'   => 'blog-post-ajax',
+    'uses' => 'Frontend\BlogController@getBlogAjax',
+]);
+
+Route::get('/blog/category/{slug}', [
+    'as'   => 'blog-get-category',
+    'uses' => 'Frontend\BlogController@category',
+]);
+
+Route::get('/blog/{slug}', [
+    'as'   => 'blog-get-read',
+    'uses' => 'Frontend\BlogController@blogRead',
+]);
+
+Route::post('/blog/search', [
+    'as'   => 'blog-get-search',
+    'uses' => 'Frontend\BlogController@search',
+]);
 Route::get('/', [
     'as'   => 'index',
     'uses' => 'Frontend\PageController@index',
@@ -30,7 +49,7 @@ Route::get('/shop/{categories}/{category}/{slug?}', [
     'uses' => 'Frontend\PageController@shop',
 ]);
 
-Route::get('/product/{slug?}', [
+Route::get('/product/{slug?}/{method?}/{sku?}/{id?}', [
     'as'   => 'product',
     'uses' => 'Frontend\PageController@product',
 ]);
@@ -50,15 +69,22 @@ Route::get('/landing/kids', [
     'uses' => 'Frontend\PageController@kids',
 ]);
 
-Route::get('/bag', [
-    'as'   => 'bag',
+Route::get('/persist-bag', [
+    'as'   => 'persist.bag',
     'uses' => 'Frontend\PageController@bag',
 ]);
 
-Route::post('/bag', [
-    'as'   => 'bag',
+Route::post('/persist-bag', [
+    'as'   => 'persist.bag',
     'uses' => 'Frontend\PageController@bag',
 ]);
+
+Route::get('/bag', [
+    'as'   => 'bag',
+    'uses' => 'Frontend\PageController@showBagPage',
+]);
+
+
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [
@@ -185,12 +211,17 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@showWishlistPage',
     ]);
 
-    Route::post('/account/wishlist', [
-        'as'   => 'user.wishlist',
-        'uses' => 'Frontend\UserController@wishlist',
+    Route::post('/account/persist-wishlist', [
+        'as'   => 'persist.wishlist',
+        'uses' => 'Frontend\UserController@postWishlist',
     ]);
 
-    Route::delete('/account/wishlist/{id}/destroy', [
+    Route::get('/account/persist-wishlist', [
+        'as'   => 'persist.wishlist',
+        'uses' => 'Frontend\UserController@getWishlist',
+    ]);
+
+    Route::delete('/account/wishlist/destroy', [
         'as'   => 'user.wishlist.destroy',
         'uses' => 'Frontend\UserController@wishlistDestroy',
     ]);
@@ -200,6 +231,24 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@uploadProfile',
     ]);
 
+    Route::get('/checkout', [
+        'as'   => 'checkout',
+        'uses' => 'Frontend\UserController@showShippingAddressPage',
+    ]);
+
+    Route::get('/checkout/shipping', [
+        'as'   => 'checkout.shipping',
+        'uses' => 'Frontend\UserController@showShippingOptionPage',
+    ]);
+
+    Route::get('/checkout/billing', [
+        'as'   => 'checkout.billing',
+        'uses' => 'Frontend\UserController@showShippingBillingPage',
+    ]);
+
+    Route::post('/checkout/shipping', [
+        'as'   => 'checkout.shipping',
+        'uses' => 'Frontend\UserController@postShippingOption',
+    ]);
+
 });
-
-

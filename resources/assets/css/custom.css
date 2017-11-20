@@ -3,10 +3,6 @@
 	margin-top: -40px!important;
 }
 
-body {
-	overflow: hidden;
-}
-
 /* Preloader */
 #preloader {
 	position: fixed;
@@ -29,3 +25,37 @@ body {
 	background-position:center;
 	margin:-100px 0 0 -100px; /* is width and height divided by two */
 }
+
+.blog-title {
+	font-size: 40px !important;
+}
+
+.blog-subtitle {
+	font-size: 28px !important;
+}
+
+.blog-loadmore {
+	font-size: 24px !important;
+}
+
+.blog-nav-background{
+	background: rgba(248,248,248,1)
+}
+
+.blog-sticky-background{
+	 background: rgba(248,248,248,.9)
+}
+
+.blog-black-text{
+	color: #505050;
+}
+.blog-white-text{
+	color: #FFFFFF;
+}
+
+.blog-grey-text{
+	color: #B4B4B4;
+}
+
+
+

@@ -5,36 +5,14 @@
   <div class="uk-grid-small uk-margin-top">
       @include('partials.alert')
   </div>
-  <div class="uk-grid-small uk-margin-top">
-    <h2 class="uk-text-center">SHOPPING BAG</h2>
-    <p class="uk-text-center">NEED HELP?  CALL US: +44 (0)20 3471 4090 |  <a href="#" class="uk-text-muted">EMAIL CUSTOMER CARE</a> |
-      <a href="#" class="uk-text-muted">SHIPPING INFORMATION</a>  |  <a href="#" class="uk-text-muted">RETURNS & EXCHANGES</a></p>
-    <hr>
-    <p class="uk-text-right"><button class="uk-button uk-button-secondary uk-text-bold uk-padding-small-right">PROCEED TO PURCHASE</button></p>
-  </div>
-  <bag 
-    bag_link="{{ route('bag') }}"
+  <bag
+    bag_link="{{ route('persist.bag') }}"
+    wishlist_link="{{ route('persist.wishlist') }}"
+    auth="{{ Auth::check() ? 1 : 0 }}"
+    checkout_link="{{ route('checkout') }}"
   ></bag>
-  <hr>
-  <div class="uk-flex uk-flex-right uk-child-width-1-6">
-    <div class="">
-      ITEM TOTAL
-      <br>
-      SHIPPING
-      <p>
-      <b>TOTAL</b>
-      </p>
-    </div>
-    <div class="uk-text-right">
-      123
-      <br>
-      free
-      <p>
-      123
-      </p>
-    </div>
-  </div>
-  <p class="uk-text-right"><button class="uk-button uk-button-secondary uk-text-bold uk-padding-small-right">PROCEED TO PURCHASE</button></p>
+
+  
   <hr>
   <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
     <div class="uk-panel uk-text-center">

@@ -192,6 +192,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Chencha\Share\ShareServiceProvider::class,
 
     ],
 
@@ -248,6 +249,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Share' => Chencha\Share\ShareFacade::class,
 
     ],
 

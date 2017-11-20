@@ -31,20 +31,17 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"Name","name"=>"name"];
-            $this->col[] = ["label"=>"Slug","name"=>"slug"];
             # END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-            $this->form[] = ['label'=>'Category','name'=>'parent_blog_categories_id','type'=>'select2','validation'=>'integer|min:0','width'=>'col-sm-9','datatable'=>'blog_categories,name'];
-			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
+			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|unique:blog_categories','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ["label"=>"Parent Blog Categories Id","name"=>"parent_blog_categories_id","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"parent_blog_categories,id"];
-			//$this->form[] = ["label"=>"Name","name"=>"name","type"=>"text","required"=>TRUE,"validation"=>"required|string|min:3|max:70","placeholder"=>"You can only enter the letter only"];
-			//$this->form[] = ["label"=>"Slug","name"=>"slug","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ['label'=>'Category','name'=>'parent_blog_categories_id','type'=>'select2','validation'=>'integer|min:0','width'=>'col-sm-9','datatable'=>'blog_categories,name'];
+			//$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
 			# OLD END FORM
 
 			/* 
@@ -60,7 +57,7 @@
 	        | 
 	        */
 	        $this->sub_module = array();
-            $this->sub_module[] = ['label'=>'Sub Category','path'=>'blog-categories','foreign_key'=>'parent_blog_categories_id','button_color'=>'warning','button_icon'=>'fa fa-circle-o','parent_columns'=>'name'];
+//            $this->sub_module[] = ['label'=>'Sub Category','path'=>'blog-categories','foreign_key'=>'parent_blog_categories_id','button_color'=>'warning','button_icon'=>'fa fa-circle-o','parent_columns'=>'name'];
 
 
             /*
@@ -271,7 +268,7 @@
 	        //Your code here
             $categories = DB::table('blog_categories');
             $category = $categories->where('id', $id)->first();
-            $postdata['slug'] = str_slug($category->name.' '.$category->id);
+            $postdata['slug'] = str_slug($category->name);
             $categories->update($postdata);
 	    }
 
@@ -299,7 +296,7 @@
 	        //Your code here
             $categories = DB::table('blog_categories');
             $category = $categories->where('id', $id)->first();
-            $postdata['slug'] = str_slug($category->name.' '.$category->id);
+            $postdata['slug'] = str_slug($category->name);
             $categories->update($postdata);
 	    }
 

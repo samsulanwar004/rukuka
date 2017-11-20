@@ -14,10 +14,10 @@
     </li>
 
     <li>
-      <a class="uk-button uk-button-text uk-button-small" :href="bag_link"> <b>B A G</b></a>
+      <a class="uk-button uk-button-text uk-button-small" v-on:click.prevent="goBag"> <b>B A G</b></a>
       <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" v-if="bagCount > 0">
-            <div class="uk-card-body uk-card-small ">
-              <div class="uk-grid-small" uk-grid v-for="bag in bags">
+            <div class="uk-card-body uk-card-small">
+              <div class="uk-grid-small" uk-grid v-for="bag in filteredBags">
                 <div class="uk-width-1-3">
                   <img :src="'/'+bag.options.photo" :alt="bag.name">
                 </div>
@@ -27,7 +27,7 @@
                     <span class="uk-text-small">{{ bag.options.currency }} {{ bag.price }} </span><br>
                     <span class="uk-text-meta">color : {{ bag.options.color }}</span><br>
                     <span class="uk-text-meta">size  : {{ bag.options.size }}</span><br>
-                    <a :href="product_link+'/'+bag.options.slug" class="uk-button uk-button-text uk-button-small" name="button"><span class="uk-icon" uk-icon="icon: pencil; ratio: 0.8"></span>edit</a>
+                    <a :href="product_link+'/'+bag.options.slug+'/bag/'+bag.id" class="uk-button uk-button-text uk-button-small" name="button"><span class="uk-icon" uk-icon="icon: pencil; ratio: 0.8"></span>edit</a>
                     <button type="button" class="uk-button uk-button-text uk-button-small" name="button" v-on:click="removeBag(bag.id)"><span class="uk-icon" uk-icon="icon: trash; ratio: 0.8"></span>remove</button>
                   </div>
                 </div>
@@ -41,10 +41,11 @@
             <div class="uk-card-footer uk-padding-small">
               <div class="uk-text-center">
                 <b>SUB TOTAL: {{ subtotal }}</b>
-                <input type="submit" class="uk-button-secondary uk-button uk-button-small uk-width-1-1" name="" value="CHECKOUT NOW">
+                <a :href="checkout_link" class="uk-button-secondary uk-button uk-button-small uk-width-1-1">CHECKOUT NOW</a>
               </div>
             </div>
         </div>
+        <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" id="bag-hidden" v-else></div>
         <div class="uk-badge" v-if="bagCount > 0">
           {{ bagCount }}
         </div>
@@ -57,6 +58,12 @@
 </div>
 </template>
 
+<style>
+  #bag-hidden {
+    display: none;
+  }
+</style>
+
 <script>
   import axios from 'axios';
   export default {
@@ -67,25 +74,22 @@
       'login_link',
       'auth',
       'wishlist_api',
+      'bag_api',
       'account',
-      'product_link'
+      'product_link',
+      'checkout_link'
     ],
 
     created () {
       var self = this;
-      var wishlist_api = this.wishlist_api;
-
+      
       if (this.auth == 1) {
-        $.get(wishlist_api, function(wishlist) {
-          if (typeof wishlist.data !== 'undefined') {
-            self.wishlistCount = wishlist.data.length;
-          }
-        });
+        self.getWishlist();
       }
 
       self.accounts = this.account ? JSON.parse(this.account) : {};
       
-      self.addBag();
+      self.getBag();
 
       Event.listen('addBag', function (response) {
         self.bagCount = response.data.bagCount;
@@ -98,6 +102,12 @@
         self.bags = response.data.bags;
         self.subtotal = response.data.subtotal;
       });
+
+      Event.listen('addWishlist', function (response) {
+        self.wishlistCount = response.data.wishlistCount;
+      });
+
+      Event.fire('user', this.accounts);
     },
 
     data () {
@@ -113,7 +123,7 @@
     methods: {
       removeBag: function (sku) {
         var self = this;
-        axios.get(this.bag_link, {
+        axios.get(this.bag_api, {
           params: {
             remove: sku
           }
@@ -130,9 +140,9 @@
         });
       }, 
 
-      addBag: function () {
+      getBag: function () {
         var self = this;
-        axios.get(this.bag_link, {
+        axios.get(this.bag_api, {
         })
         .then(function (response) {
           self.bagCount = response.data.bagCount;
@@ -144,6 +154,30 @@
         .catch(function (error) {
           console.log(error);
         });
+      },
+
+      getWishlist: function () {
+        var self = this;
+        axios.get(this.wishlist_api, {
+        })
+        .then(function (response) {
+          if (typeof response.data.data !== 'undefined') {
+            self.wishlistCount = response.data.data.length;
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      },
+
+      goBag: function () {
+        window.location.href = this.bag_link;
+      }
+    },
+
+    computed: {
+      filteredBags: function () {
+        return typeof this.bags[0] !== 'undefined' ? this.bags.slice(0,2) : {};
       }
     }
   }

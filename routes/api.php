@@ -25,6 +25,8 @@ Route::get('v1/related/{categoryId}', 'Api\PageController@related')->name('relat
 
 Route::post('v1/subcriber', 'Api\UserController@subcriber')->name('subcriber');
 
+Route::get('v1/product/{id?}', 'Api\PageController@product')->name('product.api');
+
 Route::group([
 	'prefix' => 'v1', 
 	'middleware' => 'auth:api'

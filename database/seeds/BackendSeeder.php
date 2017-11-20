@@ -17,7 +17,7 @@ class BackendSeeder extends Seeder
         $this->call('CmsMenusSeeder');
         $this->call('CmsSettingSeeder');
 
-        $this->command->info('Inserting the data completed !');
+        $this->command->info('Inserting the data completed :) !');
     }
 }
 
@@ -416,9 +416,9 @@ class CmsSettingSeeder extends Seeder
     public function run()
     {
 
-        $settings = DB::table('cms_settings');
+        // $settings = DB::table('cms_settings');
 
-        $settings->truncate();
+        // $settings->truncate();
 
 
         $data = [
@@ -934,11 +934,25 @@ class CmsSettingSeeder extends Seeder
             "created_at" => date('Y-m-d H:i:s'),
             "group_setting" => "Home Page",
             "label" => "Right Link",
-        ]       
-            ];
+        ],[
+            "name" => "header_banner",
+            "content_input_type" => "upload_image",
+            "dataenum" => null,
+            "helper" => null,
+            "created_at" => date('Y-m-d H:i:s'),
+            "group_setting" => "Blog Page",
+            "label" => "Header Image",
+        ]
+        ];
 
 
-        $settings->insert($data);
+        foreach($data as $k=>$d) {
+            if(DB::table('cms_settings')->where('name',$d['name'])->count()) {
+                unset($data[$k]);
+            }
+        }
+
+        DB::table('cms_settings')->insert($data);
     }
 }
 

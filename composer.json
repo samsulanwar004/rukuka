@@ -8,6 +8,7 @@
         "php": ">=5.6.4",
         "atayahmet/laravel-nestable": "^0.8.1",
         "barryvdh/laravel-debugbar": "~2.4",
+        "chencha/share": "^5.2",
         "crocodicstudio/crudbooster": "v5.4.0.8",
         "gloudemans/shoppingcart": "^2.4",
         "intervention/image": "^2.3",

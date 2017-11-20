@@ -10,6 +10,7 @@ use App\Repositories\ProductStockRepository;
 use Exception;
 use Carbon\Carbon;
 use App\Services\BagService;
+use Share;
 
 class PageController extends BaseController
 {
@@ -52,15 +53,49 @@ class PageController extends BaseController
             $products->appends($key, $value);
         }
 
-        return view('pages.shop', compact('products', 'categories', 'category', 'slug', 'designer'));
+        $shops = $products->map(function ($entry) {
+            return [
+                'id' => $entry->id,
+                'name' => $entry->name,
+                'slug' => $entry->slug,
+                'price' => $entry->sell_price,
+                'currency' => $entry->currency,
+                'photo' => $entry->images->first()->photo,
+            ];
+        });
+
+        return view('pages.shop', compact(
+            'products',
+            'categories',
+            'category',
+            'slug',
+            'designer',
+            'shops'
+        ));
 
     }
 
-    public function product($slug)
+    public function product($slug, $method = null, $sku = null, $id = null)
     {
     	$product = (new ProductRepository)->getProductBySlug($slug);
 
-    	return view('pages.product', compact('product'));
+        $share = Share::load(route('product', ['slug' => $slug]), $product->name, route('index').'/'.$product->images->first()->photo)
+            ->services(
+                'facebook',
+                'gplus',
+                'twitter',
+                'gmail',
+                'pinterest',
+                'tumblr'
+            );
+
+    	return view('pages.product', compact(
+            'product',
+            'method',
+            'sku',
+            'id',
+            'share'
+        ));
     }
 
     public function women()
@@ -98,105 +133,136 @@ class PageController extends BaseController
 
     public function bag(Request $request)
     {
-        if ($request->ajax() || $request->wantsJson()) {
-            try {
-                $bag = new BagService;
 
-                //add or update product item to bag
-                if ($request->isMethod('post')) {
+        try {
+            $bag = new BagService;
 
-                    $rules = [
-                        'size' => 'required|string|max:255'
-                    ];
+            //add or update product item to bag
+            if ($request->isMethod('post')) {
 
-                    $validation = $this->validRequest($request, $rules);
-                    if ($validation->fails()) {
-                        return response()->json([
-                            'status' => 'error',
-                            'message' => $validation->errors()
-                        ]);
-                    }
+                $rules = [
+                    'size' => 'required|string|max:255'
+                ];
 
-                    $stock = (new ProductStockRepository)->getStockBySku($request->input('size'));
-
-                    $product = [
-                        'id' => $stock->sku,
-                        'name' => $stock->product->name,
-                        'qty' => $request->has('qty') ? $request->input('qty') : 1,
-                        'price' => $stock->product->sell_price,
-                        'options' => [
-                            'size' => $stock->size,
-                            'color' => $stock->product->color,
-                            'photo' => $stock->product->images->first()->photo,
-                            'description' => $stock->product->content,
-                            'currency' => $stock->product->currency,
-                            'slug' => $stock->product->slug,
-                        ]
-                    ];
-
-                    $bag->save($product, self::INSTANCE_SHOP);
-
-                }
-
-                //increment the quantity
-                if ($request->has('increment')) {
-
-                    $rowId = $bag->search($request->input('increment'), self::INSTANCE_SHOP);
-
-                    if ($rowId) {
-                        $item = $bag->getItemByRowId($rowId);
-
-                        $bag->update($rowId, $item->qty + 1);
-                    }
-                }
-
-                //decrease the quantity
-                if ($request->has('decrease')) {
-                    $rowId = $bag->search($request->input('decrease'), self::INSTANCE_SHOP);
-
-                    if ($rowId) {
-                        $item = $bag->getItemByRowId($rowId);
-
-                        $bag->update($rowId, $item->qty - 1);
-                    }
+                $validation = $this->validRequest($request, $rules);
+                if ($validation->fails()) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => $validation->errors()
+                    ]);
                 }
 
                 //remove the item
-                if ($request->has('remove')) {
-                    $rowId = $bag->search($request->input('remove'), self::INSTANCE_SHOP);
+                if ($request->has('update')) {
+                    $rowId = $bag->search($request->input('update'), self::INSTANCE_SHOP);
 
                     if ($rowId) {
                         $bag->remove($rowId);
                     }
                 }
 
-                //remove the item from wishlist
-                if ($request->has('move')) {
-                    (new UserRepository)->wishlistDestroy($request->input('move'));
-                }
+                $stock = (new ProductStockRepository)->getStockBySku($request->input('size'));
 
-                $bags = $bag->get(self::INSTANCE_SHOP);
+                $product = [
+                    'id' => $stock->sku,
+                    'name' => $stock->product->name,
+                    'qty' => $request->has('qty') ? $request->input('qty') : 1,
+                    'price' => $stock->product->sell_price,
+                    'options' => [
+                        'size' => $stock->size,
+                        'color' => $stock->product->color,
+                        'photo' => $stock->product->images->first()->photo,
+                        'description' => $stock->product->content,
+                        'currency' => $stock->product->currency,
+                        'slug' => $stock->product->slug,
+                    ]
+                ];
 
-                $subtotal = $bag->subtotal();
+                $bag->save($product, self::INSTANCE_SHOP);
 
-                return response()->json([
-                    'status' => 'ok',
-                    'message' => 'success',
-                    'bagCount' => count($bags),
-                    'bags' => $bags,
-                    'subtotal' => $subtotal
-                ]);
-
-            } catch (Exception $e) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => $e->getMessage()
-                ]);
             }
-        }
 
-        return view('pages.bag');
+            //increment the quantity
+            if ($request->has('increment')) {
+
+                $rowId = $bag->search($request->input('increment'), self::INSTANCE_SHOP);
+
+                if ($rowId) {
+                    $item = $bag->getItemByRowId($rowId);
+
+                    $bag->update($rowId, $item->qty + 1);
+                }
+            }
+
+            //decrease the quantity
+            if ($request->has('decrease')) {
+                $rowId = $bag->search($request->input('decrease'), self::INSTANCE_SHOP);
+
+                if ($rowId) {
+                    $item = $bag->getItemByRowId($rowId);
+
+                    $bag->update($rowId, $item->qty - 1);
+                }
+            }
+
+            //decrease the quantity
+            if ($request->has('count')) {
+                $rowId = $bag->search($request->input('count'), self::INSTANCE_SHOP);
+
+                if ($rowId) {
+                    $item = $bag->getItemByRowId($rowId);
+
+                    $bag->update($rowId, $request->input('qty'));
+                }
+            }
+
+            //remove the item
+            if ($request->has('remove')) {
+                $rowId = $bag->search($request->input('remove'), self::INSTANCE_SHOP);
+
+                if ($rowId) {
+                    $bag->remove($rowId);
+                }
+            }
+
+            //remove the item from wishlist
+            if ($request->has('move')) {
+                (new UserRepository)->wishlistDestroy($request->input('move'));
+                $user = $this->getUserActive();
+                $wishlistCount = count($user->wishlists);
+            }
+
+            $getBags = $bag->get(self::INSTANCE_SHOP);
+
+            $index = 0;
+            $bags = [];
+            foreach ($getBags as $value) {
+                $bags[$index] = $value;
+                $index++;
+            }
+
+            $subtotal = $bag->subtotal();
+
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'bagCount' => count($bags),
+                'bags' => $bags,
+                'subtotal' => $subtotal,
+                'wishlistCount' => isset($wishlistCount) ? $wishlistCount : null
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 400);
+        }
     }
 
+    public function showBagPage()
+    {
+        return view('pages.bag');
+    }
 
 }

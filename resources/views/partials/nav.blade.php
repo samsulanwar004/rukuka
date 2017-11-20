@@ -23,7 +23,9 @@
                 auth="{{ Auth::check() ? 1 : 0 }}"
                 account="{{ Auth::user('web') }}"
                 wishlist_api="{{ route('wishlist', ['api_token' => Auth::user('web')->api_token]) }}"
+                bag_api="{{ route('persist.bag') }}"
                 product_link="{{ route('product') }}"
+                checkout_link="{{ route('checkout') }}"
               ></user-panel>
           </div>
 

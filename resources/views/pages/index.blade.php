@@ -18,22 +18,20 @@
         </div>
       </div>
       <div class="uk-inline">
-          <img src="/{{ $home['main_banner'] }}" alt="">
-          {{-- <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div> --}}
-          <!-- <div class="uk-overlay uk-overlay-default uk-padding-small uk-position-medium uk-position-bottom-right">HOT DEALS THIS WEEKEND, WITH 50% DISCOUNT, <br>
-            SIGN UP NOW, ON KUKAINDONESIA.COM
-          </div> -->
-          <div class="uk-width-2-4@m" uk-grid>
-            <div class="uk-position-medium uk-position-center">
-              <div class="uk-card-border-light uk-width-2-4@m">
-                <div class="uk-card-body">
-                  <h1 class="uk-light">
-                    Welcome To Ku Ka Indonesia
-                  </h1>
-                </div>
-              </div>
-            </div>
+        <div class="uk-inline-clip uk-transition-toggle uk-light">
+        <a href="#/{{ $home['women_link'] }}" class="uk-link-reset">
+        <img src="/{{ $home['main_banner'] }}" alt="">
+        <div class="uk-width-2-6@m" uk-grid>
+
+          <div class="uk-card uk-position-center uk-position-medium uk-card-small ">
+            <div class="uk-card-body">
+            <div class="uk-transition-slide-left-small"><h2 class="uk-margin-remove">Prepare for your summer season</h2></div>
+            <div class="uk-transition-slide-right-small"><h4 class="uk-margin-remove"><a href="/{{ $home['women_link'] }}">{{ $womenTitle[1] }}<span uk-icon="icon: triangle-right"></span></a></h4></div>
           </div>
+        </div>
+      </div>
+      </a>
+      </div>
       </div>
     </div>
   {{-- </div> --}}
@@ -51,7 +49,7 @@
         <div class="uk-width-2-5@m uk-inline uk-flex uk-flex-middle">
 
 
-            <h3 class="uk-margin-remove">For <a href="#">Men,</a> <a href="#">Women,</a> <a href="#">Kids</a></h3>
+            <h3 class="uk-margin-remove"><a href="#">Men,</a> <a href="#">Women,</a> <a href="#">Kids</a></h3>
 
 
         </div>
@@ -68,35 +66,50 @@
   <div class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
       <div class="uk-width-1-3@m">
 
-            <div class="uk-inline-clip uk-transition-toggle uk-dark">
+            <div class="uk-inline">
+              <div class="uk-inline-clip uk-transition-toggle uk-light">
+                <a href="#/{{ $home['women_link'] }}" class="uk-link-reset">
                 <img src="/{{ $home['women_banner'] }}" alt="">
-                <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
-
+                  <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
+                    <div class="uk-card-body">
+                    <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $womenTitle[0] }}</h3></div>
+                    <div class="uk-transition-slide-right-small"><h4 class="uk-margin-remove"><a href="/{{ $home['women_link'] }}">{{ $womenTitle[1] }}<span uk-icon="icon: triangle-right"></span></a></h4></div>
+                  </div>
+                </div>
+                </a>
+              </div>
             </div>
-            <h3 class="uk-margin-remove">{{ $womenTitle[0] }}</h3>
-            <a href="/{{ $home['women_link'] }}" class="uk-text-muted">{{ $womenTitle[1] }}<span uk-icon="icon: triangle-right"></span></a>
+
       </div>
       <div class="uk-width-1-3@m uk-inline">
 
-          <div class="uk-inline-clip uk-transition-toggle uk-dark">
+          <div class="uk-inline">
+            <div class="uk-inline-clip uk-transition-toggle uk-light">
+              <a href="#/{{ $home['men_link'] }}" class="uk-link-reset">
               <img src="/{{ $home['men_banner'] }}" alt="">
-              <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
-
+                <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
+                  <div class="uk-card-body">
+                    <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $menTitle[0] }}</h3></div>
+                    <div class="uk-transition-slide-right-small"><h4 class="uk-margin-remove"><a href="/{{ $home['men_link'] }}">{{ $menTitle[1] }}<span uk-icon="icon: triangle-right"></span></a></h4></div>
+                  </div>
+                </div>
+              </div>
           </div>
-          <h3 class="uk-margin-remove">{{ $menTitle[0] }}</h3>
-          <a href="/{{ $home['men_link'] }}" class="uk-text-muted">{{ $menTitle[1] }}<span uk-icon="icon: triangle-right"></span></a>
-
       </div>
       <div class="uk-width-1-3@m uk-inline">
-
-          <div class="uk-inline-clip uk-transition-toggle uk-dark">
+          <div class="uk-inline">
+            <div class="uk-inline-clip uk-transition-toggle uk-light">
+              <a href="#/{{ $home['kid_link'] }}" class="uk-link-reset">
               <img src="/{{ $home['kid_banner'] }}" alt="">
-              <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
+              <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
+                <div class="uk-card-body">
+                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove"><h3 class="uk-margin-remove">{{ $kidTitle[0] }}</h3></div>
+                  <div class="uk-transition-slide-right-small"><h4 class="uk-margin-remove"><a href="/{{ $home['kid_link'] }}">{{ $kidTitle[1] }}<span uk-icon="icon: triangle-right"></span></a></h4></div>
+                </div>
+              </div>
           </div>
-          <h3 class="uk-margin-remove">{{ $kidTitle[0] }}</h3>
-          <a href="/{{ $home['kid_link'] }}" class="uk-text-muted">{{ $kidTitle[1] }}<span uk-icon="icon: triangle-right"></span></a>
-
       </div>
+    </div>
   </div>
   <hr>
   <!-- <div class="uk-text-left">
@@ -132,42 +145,16 @@
   </div>
   <hr> --}}
   <div class="uk-text-left">
-  	<h2><span>Most Popular</span></h2>
+  	<h4><span>Most Popular</span></h4>
   </div>
-  	<popular api="{{ route('populer')}}"></popular>
-  <hr>
-  <div class="uk-text-left">
-  <h2><span><b>KuKa <i>Stories</i>: The Blog</b></span></h2>
-  </div>
+  	<popular 
+      api="{{ route('populer')}}" 
+      product_api="{{ route('product.api') }}"
+      bag_api="{{ route('persist.bag') }}"
+      wishlist_api="{{ route('persist.wishlist') }}"
+      auth="{{ Auth::check() ? 1 : 0 }}"
+    ></popular>
 
-  <div class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
-      <div class="uk-width-3-4@m">
-
-            <div class="uk-inline-clip uk-transition-toggle uk-dark">
-                <img src="images/pak_denny_jpeg.jpg" alt="">
-                <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
-                <div class="uk-overlay uk-overlay-default uk-position-medium uk-position-bottom-left">
-                  <h2><a href="#">What are the rules of party dressing?</a></h2>
-                  <a href="#">See all the Story from KuKa Blog<span uk-icon="icon: triangle-right" class="uk-icon"></span></a>
-                  <!-- <button class="uk-button uk-button-small uk-button-default uk-padding-small-right">SHOP NOW FOR WOMEN</button> -->
-                </div>
-            </div>
-            <!-- <h3 class="uk-margin-remove">2017: Women in Style</h3>
-            <a href="#" class="uk-text-muted">Shop all this amazing outfit now<span uk-icon="icon: triangle-right"></span></a> -->
-      </div>
-      <div class="uk-width-1-4@m uk-inline">
-
-          <h3 class="uk-margin-remove">How can we help?</h3>
-          <ul class="uk-list">
-            <li><a href="#">Find my nearest store</a></li>
-            <li><a href="#">Track my order </a></li>
-            <li><a href="#">See the latest Style Guide on Pinterest </a></li>
-            <li><a href="#">Sign in to My Account </a></li>
-            <li><a href="#">Share how great our product </a></li>
-          </ul>
-
-      </div>
-  </div>
 
     </div>
 @endsection
