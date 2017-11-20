@@ -265,4 +265,9 @@ class PageController extends BaseController
         return view('pages.bag');
     }
 
+    public function review()
+    {
+      return view('pages.add_review');
+    }
+
 }
