@@ -239,9 +239,10 @@ h5,
 h6,
 .uk-h6 {
   margin: 0 0 20px 0;
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: normal;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 300;
   color: #000;
+  letter-spacing: 2px;
   text-transform: none;
 }
 /* Add margin if adjacent element */
@@ -4992,8 +4993,8 @@ ul.uk-nav-sub {
   position: relative;
   margin-bottom: 10px;
   padding: 15px;
-  background: #276357;
-  border: 1px solid #e5e5e5;
+  background: #fff;
+  border: 1px solid #000;
   color: #000;
   font-size: 14px;
   line-height: 1.4;

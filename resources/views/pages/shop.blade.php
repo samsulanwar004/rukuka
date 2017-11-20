@@ -3,19 +3,16 @@
 @section('content')
 <div class="uk-container uk-container-small">
 @if($categories == 'designers')
-  <div class="uk-grid-small uk-margin-top uk-section-muted" uk-grid>
-    <div class="uk-panel uk-width-1-5@m uk-flex uk-flex-middle uk-flex-center">
-      <img src="/{{ $designer->photo }}" width="120" alt="" class="uk-box-shadow-medium">
+  <div class="uk-grid-small uk-margin-top" uk-grid>
+    <div class="uk-panel uk-width-1-4@m uk-flex uk-flex-middle uk-flex-center">
+      <img src="/{{ $designer->photo }}" width="60" alt="" class="uk-box-shadow-medium">
     </div>
-    <div class="uk-panel uk-width-2-5@m">
-      <h2 class="uk-margin-small">{{ $designer->name }}</h2>
-      <h3 class="uk-margin-small">{{ $designer->content }}</h3>
-    </div>
-    <div class="uk-panel uk-width-2-5@m">
-      <img src="/{{ $designer->banner }}" width="200" alt="">
+    <div class="uk-panel uk-width-3-4@m">
+      <span class="uk-text-lead">{{ $designer->name }}</span><br>
+      {{ $designer->content }}
     </div>
   </div>
-
+  <hr class="uk-margin-small">
 @else
 
 @endif
