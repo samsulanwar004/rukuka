@@ -405,10 +405,7 @@ class UserRepository
 
 	public function defaultAddress($request)
 	{
-		$ids = [];
-		foreach ($request->input('default') as $key => $value) {
-    		$ids[] = isset($key) ? $key : 0;
-    	}
+		$ids = array($request->input('default'));
 
     	$user = $this->getUser();
 

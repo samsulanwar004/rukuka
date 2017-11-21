@@ -18,7 +18,6 @@ class UserController extends BaseController
     protected $redirectAfterSaveAddress = '/account/address';
     protected $redirectAfterSavePassword = '/account/reset-password';
     protected $redirectAfterAddWishlist = '/account/wishlist';
-    protected $redirectAfterSaveShippingAddress = '/checkout/shipping';
     protected $redirectAfterSaveShippingOption = '/checkout/billing';
     protected $redirectAfterSaveBilling = '/checkout/billing';
     protected $redirectAfterNewShippingAddress = '/checkout';
@@ -225,16 +224,19 @@ class UserController extends BaseController
 
     		DB::commit();
 
-            if ($request->has('checkout')) {
-                return redirect($this->redirectAfterSaveShippingAddress);
-            }
-
-    		return redirect($this->redirectAfterSaveAddress)->with(['success' => 'Save default address successfully!']);
+    		return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'address' => $user->address
+            ]);
 
         } catch (Exception $e) {
         	DB::rollBack();
 
-        	return back()->withErrors($e->getMessage());
+        	return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
         }
     }
 
@@ -515,10 +517,17 @@ class UserController extends BaseController
             $this->user
                 ->addressDestroy($request->input('id'));
 
-            return redirect($this->redirectAfterSaveAddress)->with(['success' => 'Delete address successfully!']);
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'address' => $user->address
+            ]);
 
         } catch (Exception $e) {
-            return back()->withErrors($e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
         }
     }
 

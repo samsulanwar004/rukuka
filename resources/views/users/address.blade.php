@@ -15,8 +15,6 @@
       <p>
         @if (count($address))
         <div class="uk-overflow-auto">
-          <a class="uk-button uk-button-secondary uk-button-small" href="#modal-sections" uk-toggle>ADD NEW CARD</a>
-
           <div id="modal-sections" uk-modal>
             <div class="uk-modal-dialog">
               <button class="uk-modal-close-default" type="button" uk-close></button>
@@ -88,44 +86,12 @@
               </div>
             </div>
           </div>
-          <form action="{{ route('user.address.default') }}" method="post">
-            {{ csrf_field() }}
-            <table class="uk-table uk-table-divider uk-table-hover uk-table-responsive uk-table-small">
-                <thead>
-                    <tr>
-                        <th class="uk-table-shrink">Default</th>
-                        <th class="uk-width-medium">First Name</th>
-                        <th class="uk-width-medium">Last Name</th>
-                        <th class="uk-width-medium">Address Line</th>
-                        <th class="uk-width-medium">Phone Number</th>
-                        <th class="uk-width-medium"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($address as $add)
-                      <tr>
-                          <td><input class="uk-checkbox" type="checkbox" name="default[{{$add->id}}]" {{ (bool)$add->is_default ? 'checked disabled' : '' }}></td>
-                          <td class="uk-table-link">
-                              <a class="uk-link-reset" href="">{{ $add->first_name }}</a>
-                          </td>
-                          <td>{{ $add->last_name }}</td>
-                          <td>{{ $add->address_line }}</td>
-                          <td>{{ $add->phone_number }}</td>
-                          <td>
-                            <a href="#" class="uk-icon-link" uk-icon="icon: file-edit"></a> | 
-                            <a href="{{ route('user.address.destroy', ['id' => $add->id]) }}" class="uk-icon-link" uk-icon="icon: trash">
-                            </a>
-                          </td>
-                      </tr>
-                  @empty
-                    <tr><td colspan="5"><center>no address</center></td></tr>
-                    @endforelse
-                </tbody>
-            </table>
-            <button type="submit" id="default-submit" style="display: none;"></button>
-            </form>
-        </div>
-
+          <address-list
+            address="{{ $address }}"
+            address_default="{{ route('user.address.default') }}"
+            address_destroy="{{ route('user.address.destroy') }}"
+          ></address-list>
+        </div>        
         @else
           <h4>ADD A NEW ADDRESS</h4>
          	<form class="uk-form-stacked" action="{{ route('user.address') }}" method="post">
@@ -224,5 +190,6 @@
       $('#submit').click();
     });
 	});
+
 </script>
 @endsection
