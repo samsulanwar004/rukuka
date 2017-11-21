@@ -486,7 +486,7 @@ class UserController extends BaseController
 
       return view('pages.checkout.shipping_billing', compact(
             'creditcards',
-            'address', 
+            'address',
             'defaultAddress'
         ));
     }
@@ -529,6 +529,11 @@ class UserController extends BaseController
                 'message' => $e->getMessage()
             ],400);
         }
+    }
+
+    public function preview()
+    {
+      return view('pages.checkout.shipping_preview');
     }
 
 }

@@ -264,5 +264,10 @@ Route::middleware(['auth'])->group(function () {
         'as'   => 'user.address.destroy',
         'uses' => 'Frontend\UserController@addressDestroy',
     ]);
+    
+    Route::get('/checkout/preview', [
+        'as'   => 'checkout.preview',
+        'uses' => 'Frontend\UserController@preview',
+    ]);
 
 });
