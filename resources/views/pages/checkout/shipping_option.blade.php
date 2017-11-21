@@ -1,4 +1,4 @@
-@extends('app_checkout') 
+@extends('app_checkout')
 @section('content')
 <div class="uk-container uk-container-small">
     <div class="uk-grid-small uk-margin-top">
@@ -76,7 +76,7 @@
 @section('footer_scripts')
 <script type="text/javascript">
    $(function () {
-   
+
      $("#continue").on('click', function (e) {
        e.preventDefault();
        var submit = $('#submit').val();
@@ -86,7 +86,7 @@
        } else {
          window.location.href = url;
        }
-   
+
      });
    })
 </script>
