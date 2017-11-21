@@ -1,7 +1,7 @@
 <template>
     <div class="uk-grid" uk-grid>
        <div class="uk-width-1-3" v-for="add in data">
-          <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
+          <div :class="{'uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large': true, 'uk-background-muted': add.is_default }">            
              <div class="uk-card-body">
                 <table>
                    <tr>
@@ -128,7 +128,7 @@
                             status:'danger'
                         });
                     }
-                });
+                });              
             }
         }
     }
