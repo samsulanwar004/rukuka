@@ -84,6 +84,10 @@ Route::get('/bag', [
     'uses' => 'Frontend\PageController@showBagPage',
 ]);
 
+Route::get('/review', [
+    'as'   => 'review',
+    'uses' => 'Frontend\PageController@review',
+]);
 
 
 Route::middleware(['guest'])->group(function () {

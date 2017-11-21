@@ -12,11 +12,11 @@
     checkout_link="{{ route('checkout') }}"
   ></bag>
 
-  
+
   <hr>
   <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
-    <div class="uk-panel uk-text-center">
-      <h3>RELATED PRODUCTS</h3>
+    <div class="uk-panel">
+      <span class="uk-text-lead">RELATED PRODUCTS</span>
     </div>
   </div>
   <related api="{{ route('related', ['categoryId' => '2']) }}"></related>
