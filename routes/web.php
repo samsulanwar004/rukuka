@@ -255,4 +255,9 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@postShippingOption',
     ]);
 
+    Route::get('/checkout/preview', [
+        'as'   => 'checkout.preview',
+        'uses' => 'Frontend\UserController@preview',
+    ]);
+
 });

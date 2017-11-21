@@ -484,7 +484,7 @@ class UserController extends BaseController
 
       return view('pages.checkout.shipping_billing', compact(
             'creditcards',
-            'address', 
+            'address',
             'defaultAddress'
         ));
     }
@@ -492,6 +492,11 @@ class UserController extends BaseController
     public function postShippingOption(Request $request)
     {
         return redirect($this->redirectAfterSaveShippingOption);
+    }
+
+    public function preview()
+    {
+      return view('pages.checkout.shipping_preview');
     }
 
 }
