@@ -137,13 +137,17 @@ class UserController extends BaseController
     	return view('users.address', compact('user', 'address'));
     }
 
-    public function saveAddress(Request $request)
+    public function addressSave(Request $request)
     {
     	$this->validate($request, [
     		'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'phone_number' => 'required|numeric',
             'postal' => 'required|numeric',
+            'address_line' => 'required',
+            'city' => 'required',
+            'province' => 'required',
+            'country' => 'required',
         ]);
 
         try {
@@ -516,6 +520,59 @@ class UserController extends BaseController
             $user = $this->getUserActive();
             $this->user
                 ->addressDestroy($request->input('id'));
+
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'address' => $user->address
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
+        }
+    }
+
+    public function addressEdit($id)
+    {
+        try {
+            $user = $this->getUserActive();
+            $address = $this->user
+                ->getAddressById($id);
+
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'address' => $address
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
+        }
+    }
+
+    public function addressUpdate(Request $request, $id)
+    {
+        $this->validate($request, [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone_number' => 'required|numeric',
+            'postal' => 'required|numeric',
+            'address_line' => 'required',
+            'city' => 'required',
+            'province' => 'required',
+            'country' => 'required',
+        ]);
+        
+        try {
+            $user = $this->getUserActive();
+            $address = $this->user
+                ->persistAddress($request, $id);
 
             return response()->json([
                 'status' => 'ok',

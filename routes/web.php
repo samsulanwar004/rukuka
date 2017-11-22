@@ -180,16 +180,6 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@saveCreditCard',
     ]);
 
-    Route::get('/account/address', [
-        'as'   => 'user.address',
-        'uses' => 'Frontend\UserController@showAddressPage',
-    ]);
-
-    Route::post('/account/address', [
-        'as'   => 'user.address',
-        'uses' => 'Frontend\UserController@saveAddress',
-    ]);
-
     Route::post('/account/cc-default', [
         'as'   => 'user.cc.default',
         'uses' => 'Frontend\UserController@defaultCreditCard',
@@ -260,11 +250,33 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@ccDestroy',
     ]);
 
+    // Route Address module
+
+    Route::get('/account/address', [
+        'as'   => 'user.address',
+        'uses' => 'Frontend\UserController@showAddressPage',
+    ]);
+
+    Route::post('/account/address', [
+        'as'   => 'user.address',
+        'uses' => 'Frontend\UserController@addressSave',
+    ]);
+
     Route::delete('/account/address/destroy', [
         'as'   => 'user.address.destroy',
         'uses' => 'Frontend\UserController@addressDestroy',
     ]);
-    
+
+    Route::get('/account/address/edit/{id?}', [
+        'as'   => 'user.address.edit',
+        'uses' => 'Frontend\UserController@addressEdit',
+    ]);
+
+    Route::post('/account/address/update/{id?}', [
+        'as'   => 'user.address.update',
+        'uses' => 'Frontend\UserController@addressUpdate',
+    ]);
+
     Route::get('/checkout/preview', [
         'as'   => 'checkout.preview',
         'uses' => 'Frontend\UserController@preview',

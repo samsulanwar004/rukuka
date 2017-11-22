@@ -90,6 +90,8 @@
             address="{{ $address }}"
             address_default="{{ route('user.address.default') }}"
             address_destroy="{{ route('user.address.destroy') }}"
+            address_edit="{{ route('user.address.edit') }}"
+            address_update="{{ route('user.address.update') }}"
           ></address-list>
         </div>        
         @else
