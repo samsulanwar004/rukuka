@@ -20,7 +20,7 @@ class UserController extends BaseController
     protected $redirectAfterAddWishlist = '/account/wishlist';
     protected $redirectAfterSaveShippingOption = '/checkout/billing';
     protected $redirectAfterSaveBilling = '/checkout/billing';
-    protected $redirectAfterNewShippingAddress = '/checkout';
+    protected $redirectAfterNewShippingAddress = '/checkout/shipping';
     protected $redirectAfterNewCC = '/checkout/billing';
     private $user;
 
@@ -171,10 +171,6 @@ class UserController extends BaseController
     		DB::commit();
 
             if ($request->has('checkout')) {
-                return redirect($this->redirectAfterSaveShippingAddress);
-            }
-
-            if ($request->has('checkout_new_address')) {
                 return redirect($this->redirectAfterNewShippingAddress);
             }
 
@@ -568,7 +564,7 @@ class UserController extends BaseController
             'province' => 'required',
             'country' => 'required',
         ]);
-        
+
         try {
             $user = $this->getUserActive();
             $address = $this->user

@@ -101,13 +101,13 @@
               <div class="uk-margin-small uk-grid-small" uk-grid>
               	<div>
               		First name
-              		<input class="uk-input uk-input-small" name="first_name" id="form-s-tel" type="text" value="{{ old('first_name') }}" required="required">
+              		<input class="uk-input uk-input-small {{ $errors->has('first_name') ? ' uk-form-danger' : '' }}" name="first_name" id="form-s-tel" type="text" value="{{ old('first_name') }}" required="required">
               	</div>
               </div>
               <div class="uk-margin-small uk-grid-small" uk-grid>
               	<div>
               		Last name
-              		<input class="uk-input uk-input-small" name="last_name" id="form-s-tel" type="text" value="{{ old('last_name') }}" required="required">
+              		<input class="uk-input uk-input-small {{ $errors->has('last_name') ? ' uk-form-danger' : '' }}" name="last_name" id="form-s-tel" type="text" value="{{ old('last_name') }}" required="required">
               	</div>
               </div>
               <div class="uk-margin-small uk-grid-small" uk-grid>
@@ -118,7 +118,7 @@
               	<div class="uk-margin-small uk-grid-small" uk-grid>
               		<div>
               			Address line
-              			<input class="uk-input uk-input-small" name="address_line" id="form-s-tel" type="text" value="{{ old('address_line') }}" required="required">
+              			<input class="uk-input uk-input-small {{ $errors->has('address_line') ? ' uk-form-danger' : '' }}" name="address_line" id="form-s-tel" type="text" value="{{ old('address_line') }}" required="required">
               		</div>
               	</div>
               	<div class="uk-margin-small uk-grid-small" uk-grid>
@@ -136,7 +136,7 @@
               	<div class="uk-margin-small uk-grid-small" uk-grid>
               		<div>
               			Postal
-              			<input class="uk-input uk-input-small" name="postal" id="form-s-tel" type="text" value="{{ old('postal') }}" required="required">
+              			<input class="uk-input uk-input-small {{ $errors->has('postal') ? ' uk-form-danger' : '' }}" name="postal" id="form-s-tel" type="text" value="{{ old('postal') }}" required="required">
               		</div>
               	</div>
               	<div class="uk-margin-small uk-grid-small" uk-grid>
@@ -148,7 +148,7 @@
               	<div class="uk-margin-small uk-grid-small" uk-grid>
               		<div>
               			Phone number
-              			<input class="uk-input uk-input-small" name="phone_number" id="form-s-tel" type="text" value="{{ old('phone_number') }}" required="required">
+              			<input class="uk-input uk-input-small {{ $errors->has('phone_number') ? ' uk-form-danger' : '' }}" name="phone_number" id="form-s-tel" type="text" value="{{ old('phone_number') }}" required="required">
               		</div>
               	</div>
               	<div class="uk-margin-small uk-grid-small" uk-grid>

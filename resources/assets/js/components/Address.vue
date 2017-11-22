@@ -196,6 +196,10 @@
                             });
 
                             self.data = response.data.address;
+
+                            if (response.data.address.length <= 0) {
+                              location.reload(true);
+                            }
                         }
                     }
                 })
