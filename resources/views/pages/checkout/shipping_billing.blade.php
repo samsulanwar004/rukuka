@@ -46,50 +46,78 @@
       @if (count($creditcards))
       <span class="uk-text-meta">CHOOSE A CREDIT OR DEBIT CARD:</span>
        <hr class="uk-margin-small">
-       <form action="{{ route('user.cc.default') }}" method="post">
-          {{ csrf_field() }}
-          <div class="uk-grid" uk-grid>
-             @foreach($creditcards as $card)
-             <div class="uk-width-1-3">
-                <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
-                   <div class="uk-card-body">
-                      <table>
-                         <tr>
-                            <td>
-                               <input class="uk-checkbox" type="checkbox" name="default[{{$card->id}}]" {{ (bool)$card->is_default ? 'checked disabled' : '' }}>
-                            </td>
-                            <td>
-                               {{ $card->card_number }}
-                            </td>
-                         </tr>
-                         <tr>
-                            <td>
-                            </td>
-                            <td>{{ $card->expired_date }}</td>
-                         </tr>
-                         <tr>
-                            <td>
-                            </td>
-                            <td>
-                               {{ $card->name_card }}
-                            </td>
-                         </tr>
-                      </table>
-                   </div>
-                </div>
-             </div>
-             @endforeach
-             <div class="uk-width-1-3">
-                <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
-                   <div class="uk-card-body">
-                      <a href="#" class="uk-text-meta"> <span class="uk-icon" uk-icon="icon: plus"></span> ADD NEW CARD </a>
-                   </div>
-                </div>
-             </div>
+        <credit-card
+          credits="{{ $creditcards }}"
+          credit_default="{{ route('user.cc.default') }}"
+          credit_destroy="{{ route('user.cc.destroy') }}"
+          credit_edit="{{ route('user.cc.edit') }}"
+          credit_update="{{ route('user.cc.update') }}"
+          address="{{ $address }}"
+        ></credit-card>
+       <div id="modal-sections" uk-modal>
+        <div class="uk-modal-dialog">
+          <button class="uk-modal-close-default" type="button" uk-close></button>
+          <div class="uk-modal-header">
+              <h4 class="uk-modal-title">ADD A NEW CARD</h4>
           </div>
-          <input type="hidden" name="checkout" value="ok">
-          <button type="submit" id="default-submit" style="display: none;"></button>
-       </form>
+          <div class="uk-modal-body">
+            <form class="uk-form-stacked" action="{{ route('user.cc') }}" method="post">
+            {{ csrf_field() }}
+            <input type="hidden" name="checkout_new_card" value="ok">
+            <div class="uk-margin-small uk-grid-small" uk-grid>
+                <div>
+                  Credit or debit card number <span id="card"></span>
+                    <input class="uk-input uk-input-small" name="card_number" id="card-number" type="text" required="required" value="{{ old('card_number') }}">
+                </div>
+                <div class="uk-inline">
+                  <a class="uk-icon-link" uk-icon="icon: question"></a>
+                  <div uk-drop="pos: right-center">
+                      <div class="uk-card uk-card-body uk-card-default uk-padding-small uk-text-small">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                      </div>
+                  </div>
+                </div>
+            </div>
+            <div class="uk-margin-small uk-grid-small" uk-grid>
+                <div>
+                  expired date
+                    <input class="uk-input uk-input-small" name="expired_date" id="expired-date" type="text" value="{{ old('expired_date') }}" required="required">
+                </div>
+                <div class="uk-inline">
+                  <a class="uk-icon-link" uk-icon="icon: question"></a>
+                  <div uk-drop="pos: right-center">
+                      <div class="uk-card uk-card-body uk-card-default uk-padding-small uk-text-small">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                      </div>
+                  </div>
+                </div>
+            </div>
+            <div class="uk-margin-small uk-grid-small" uk-grid>
+                <div>
+                  name on card
+                    <input class="uk-input uk-input-small" name="name_card" id="form-s-tel" type="text" value="{{ old('name_card') }}" required="required">
+                </div>
+            </div>
+            <div class="uk-margin-small uk-grid-small" uk-grid>
+                <div>
+                  enter a billing address
+                  <select class="uk-input uk-input-small" name="address" id="address" required="required">
+                    <option value="">Select Address</option>
+                    @foreach($address as $add)
+                      <option value="{{ $add->id }}">{{ $add->address_line }}</option>
+                    @endforeach
+                  </select>
+                </div>
+            </div>
+            <input type="submit" id="new-card" style="display: none">
+            </form>
+          </div>
+          <div class="uk-modal-footer uk-text-right">
+              <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+              <button class="uk-button uk-button-secondary" id="modal-submit">Save</button>
+          </div>
+        </div>
+      </div>
       @else
       <span class="uk-text-meta"><b>ENTER YOUR CARD DETAILS:</b></span>
       <hr class="uk-margin-small">
@@ -128,7 +156,7 @@
                   <table>
                     <tr>
                       <td>
-                        <input class="uk-checkbox" type="checkbox" name="address" {{ (bool)$add->is_default ? 'checked' : '' }} value="{{ $add->id }}">
+                        <input class="uk-radio" type="radio" name="address" {{ (bool)$add->is_default ? 'checked' : '' }} value="{{ $add->id }}">
                       </td>
                       <td>
                         {{ $add->first_name }} {{ $add->last_name }}
@@ -249,7 +277,11 @@
          window.location.href = url;
        }
    
-     });
+    });
+
+    $('#modal-submit').on('click', function () {
+      $('#new-card').click();
+    });
   });
 </script>
 @endsection

@@ -239,9 +239,10 @@ h5,
 h6,
 .uk-h6 {
   margin: 0 0 20px 0;
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: normal;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 300;
   color: #000;
+  letter-spacing: 2px;
   text-transform: none;
 }
 /* Add margin if adjacent element */
@@ -264,17 +265,17 @@ h6,
  */
 h1,
 .uk-h1 {
-  font-size: 50px;
+  font-size: 45px;
   line-height: 1.2;
 }
 h2,
 .uk-h2 {
-  font-size: 40px;
+  font-size: 35px;
   line-height: 1.3;
 }
 h3,
 .uk-h3 {
-  font-size: 30px;
+  font-size: 25px;
   line-height: 1.4;
 }
 h4,
@@ -284,6 +285,7 @@ h4,
 }
 h5,
 .uk-h5 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 14px;
   line-height: 1.4;
 }
@@ -502,7 +504,7 @@ a.uk-link-reset:focus,
 /* Primary
  ========================================================================== */
 .uk-heading-primary {
-  font-size: 50px;
+  font-size: 45px;
   line-height: 1.2;
 }
 /* Tablet landscape and bigger */
@@ -1434,7 +1436,7 @@ select.uk-form-width-xsmall {
   /* 3 */
   padding: 0;
   /* 4 */
-  font-size: 30px;
+  font-size: 25px;
   line-height: 1.4;
 }
 /* Custom controls
@@ -1618,6 +1620,8 @@ select.uk-form-width-xsmall {
   text-align: center;
   /* 9 */
   text-decoration: none;
+  /* 10 */
+  letter-spacing: 2px;
 }
 .uk-button:not(:disabled) {
   cursor: pointer;
@@ -1645,19 +1649,20 @@ select.uk-form-width-xsmall {
  * Default
  */
 .uk-button-default {
-  background-color: #f8f8f8;
-  color: #333;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
 }
 /* Hover + Focus */
 .uk-button-default:hover,
 .uk-button-default:focus {
-  background-color: #ebebeb;
+  background-color: #f2f2f2;
   color: #333;
 }
 /* OnClick + Active */
 .uk-button-default:active,
 .uk-button-default.uk-active {
-  background-color: #dfdfdf;
+  background-color: #e6e6e6;
   color: #333;
 }
 /*
@@ -2435,7 +2440,7 @@ select.uk-form-width-xsmall {
 /* Title
  ========================================================================== */
 .uk-card-title {
-  font-size: 30px;
+  font-size: 25px;
   line-height: 1.4;
 }
 /* Badge
@@ -2861,7 +2866,7 @@ select.uk-form-width-xsmall {
 /* Title
  ========================================================================== */
 .uk-article-title {
-  font-size: 50px;
+  font-size: 45px;
   line-height: 1.2;
 }
 /* Meta
@@ -3154,7 +3159,7 @@ select.uk-form-width-xsmall {
 .uk-search-navbar .uk-search-input {
   height: 40px;
   background: transparent;
-  font-size: 30px;
+  font-size: 25px;
 }
 /*
  * Icon
@@ -3179,7 +3184,7 @@ select.uk-form-width-xsmall {
 .uk-search-large .uk-search-input {
   height: 80px;
   background: transparent;
-  font-size: 50px;
+  font-size: 45px;
 }
 /*
  * Icon
@@ -3333,7 +3338,7 @@ ul.uk-nav-sub {
  * Items
  */
 .uk-nav-primary > li > a {
-  font-size: 30px;
+  font-size: 25px;
   line-height: 1.5;
   color: #666;
 }
@@ -3530,6 +3535,8 @@ ul.uk-nav-sub {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   /* 4 */
   text-decoration: none;
+  /* 5 */
+  letter-spacing: 2px;
 }
 /*
  * Nav items
@@ -4199,6 +4206,7 @@ ul.uk-nav-sub {
   line-height: 1.4;
   border-top: 1px solid #e5e5e5;
   padding-top: 3px;
+  letter-spacing: 2px;
   cursor: pointer;
 }
 /* Content
@@ -4534,7 +4542,7 @@ ul.uk-nav-sub {
 /* Title
  ========================================================================== */
 .uk-modal-title {
-  font-size: 40px;
+  font-size: 35px;
   line-height: 1.3;
 }
 /* Close
@@ -4985,8 +4993,8 @@ ul.uk-nav-sub {
   position: relative;
   margin-bottom: 10px;
   padding: 15px;
-  background: #276357;
-  border: 1px solid #e5e5e5;
+  background: #fff;
+  border: 1px solid #000;
   color: #000;
   font-size: 14px;
   line-height: 1.4;
@@ -6380,9 +6388,11 @@ ul.uk-nav-sub {
 /* Style modifiers
  ========================================================================== */
 .uk-text-lead {
-  font-size: 30px;
+  font-size: 22px;
   line-height: 1.5;
-  color: #333;
+  color: #000;
+  letter-spacing: 2px;
+  font-weight: 300;
 }
 .uk-text-meta {
   font-size: 12px;
@@ -6396,7 +6406,7 @@ ul.uk-nav-sub {
   line-height: 1.5;
 }
 .uk-text-large {
-  font-size: 30px;
+  font-size: 25px;
   line-height: 1.5;
 }
 /* Weight modifier
@@ -7397,7 +7407,7 @@ td.uk-text-break {
  * 1. Required for `a`
  */
 .uk-logo {
-  font-size: 30px;
+  font-size: 25px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color: #000;
   /* 1 */

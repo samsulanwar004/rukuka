@@ -34,6 +34,17 @@ Route::post('/blog/search', [
     'as'   => 'blog-get-search',
     'uses' => 'Frontend\BlogController@search',
 ]);
+
+Route::get('/help/{slug}', [
+    'as'   => 'get-help',
+    'uses' => 'Frontend\PageController@help',
+]);
+
+Route::get('/', [
+    'as'   => 'index',
+    'uses' => 'Frontend\PageController@index',
+]);
+
 Route::get('/', [
     'as'   => 'index',
     'uses' => 'Frontend\PageController@index',
@@ -84,6 +95,10 @@ Route::get('/bag', [
     'uses' => 'Frontend\PageController@showBagPage',
 ]);
 
+Route::get('/review', [
+    'as'   => 'review',
+    'uses' => 'Frontend\PageController@review',
+]);
 
 
 Route::middleware(['guest'])->group(function () {
@@ -166,36 +181,6 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\LoginController@logout',
     ]);
 
-    Route::get('/account/cc', [
-        'as'   => 'user.cc',
-        'uses' => 'Frontend\UserController@showCreditCardPage',
-    ]);
-
-    Route::post('/account/cc', [
-        'as'   => 'user.cc',
-        'uses' => 'Frontend\UserController@saveCreditCard',
-    ]);
-
-    Route::get('/account/address', [
-        'as'   => 'user.address',
-        'uses' => 'Frontend\UserController@showAddressPage',
-    ]);
-
-    Route::post('/account/address', [
-        'as'   => 'user.address',
-        'uses' => 'Frontend\UserController@saveAddress',
-    ]);
-
-    Route::post('/account/cc-default', [
-        'as'   => 'user.cc.default',
-        'uses' => 'Frontend\UserController@defaultCreditCard',
-    ]);
-
-    Route::post('/account/address-default', [
-        'as'   => 'user.address.default',
-        'uses' => 'Frontend\UserController@defaultAddress',
-    ]);
-
     Route::get('/account/reset-password', [
         'as'   => 'user.reset.password',
         'uses' => 'Frontend\UserController@showResetPasswordPage',
@@ -231,6 +216,7 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@uploadProfile',
     ]);
 
+    // Route checkout module
     Route::get('/checkout', [
         'as'   => 'checkout',
         'uses' => 'Frontend\UserController@showShippingAddressPage',
@@ -250,5 +236,73 @@ Route::middleware(['auth'])->group(function () {
         'as'   => 'checkout.shipping',
         'uses' => 'Frontend\UserController@postShippingOption',
     ]);
+
+    Route::get('/checkout/preview', [
+        'as'   => 'checkout.preview',
+        'uses' => 'Frontend\UserController@preview',
+    ]);
+    
+
+    // Route Address module
+    Route::get('/account/address', [
+        'as'   => 'user.address',
+        'uses' => 'Frontend\UserController@showAddressPage',
+    ]);
+
+    Route::post('/account/address', [
+        'as'   => 'user.address',
+        'uses' => 'Frontend\UserController@addressSave',
+    ]);
+
+    Route::post('/account/address-default', [
+        'as'   => 'user.address.default',
+        'uses' => 'Frontend\UserController@defaultAddress',
+    ]);
+
+    Route::delete('/account/address/destroy', [
+        'as'   => 'user.address.destroy',
+        'uses' => 'Frontend\UserController@addressDestroy',
+    ]);
+
+    Route::get('/account/address/edit/{id?}', [
+        'as'   => 'user.address.edit',
+        'uses' => 'Frontend\UserController@addressEdit',
+    ]);
+
+    Route::post('/account/address/update/{id?}', [
+        'as'   => 'user.address.update',
+        'uses' => 'Frontend\UserController@addressUpdate',
+    ]);
+
+    // Route Credit Card module
+    Route::get('/account/cc', [
+        'as'   => 'user.cc',
+        'uses' => 'Frontend\UserController@showCreditCardPage',
+    ]);
+
+    Route::post('/account/cc', [
+        'as'   => 'user.cc',
+        'uses' => 'Frontend\UserController@creditCardSave',
+    ]);
+
+    Route::post('/account/cc-default', [
+        'as'   => 'user.cc.default',
+        'uses' => 'Frontend\UserController@defaultCreditCard',
+    ]);
+
+    Route::delete('/account/cc/destroy', [
+        'as'   => 'user.cc.destroy',
+        'uses' => 'Frontend\UserController@ccDestroy',
+    ]);
+
+    Route::get('/account/cc/edit/{id?}', [
+        'as'   => 'user.cc.edit',
+        'uses' => 'Frontend\UserController@ccEdit',
+    ]);
+
+    Route::post('/account/cc/update/{id?}', [
+        'as'   => 'user.cc.update',
+        'uses' => 'Frontend\UserController@ccUpdate',
+    ]);    
 
 });
