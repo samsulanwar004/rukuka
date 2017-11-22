@@ -34,6 +34,17 @@ Route::post('/blog/search', [
     'as'   => 'blog-get-search',
     'uses' => 'Frontend\BlogController@search',
 ]);
+
+Route::get('/help/{slug}', [
+    'as'   => 'get-help',
+    'uses' => 'Frontend\PageController@help',
+]);
+
+Route::get('/', [
+    'as'   => 'index',
+    'uses' => 'Frontend\PageController@index',
+]);
+
 Route::get('/', [
     'as'   => 'index',
     'uses' => 'Frontend\PageController@index',
