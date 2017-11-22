@@ -25,6 +25,10 @@ import Item from './components/ItemCheckout.vue';
 
 import Summary from './components/Summary.vue';
 
+import Address from './components/Address.vue';
+
+import CreditCard from './components/CreditCard.vue';
+
 Vue.config.devtools = true
 Vue.config.debug = true
 Vue.config.silent = true
@@ -61,6 +65,8 @@ new Vue({
     'wishlist': Wishlist,
     'shop': Shop,
     'item-checkout' : Item,
-    'summary-checkout' : Summary
+    'summary-checkout' : Summary,
+    'address-list' : Address,
+    'credit-card' : CreditCard
 	}
 });
