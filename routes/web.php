@@ -40,6 +40,11 @@ Route::get('/help/{slug}', [
     'uses' => 'Frontend\PageController@help',
 ]);
 
+Route::get('/page/{slug}', [
+    'as'   => 'get-page',
+    'uses' => 'Frontend\PageController@page',
+]);
+
 Route::get('/', [
     'as'   => 'index',
     'uses' => 'Frontend\PageController@index',
