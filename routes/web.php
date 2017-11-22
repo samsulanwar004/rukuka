@@ -170,26 +170,6 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\LoginController@logout',
     ]);
 
-    Route::get('/account/cc', [
-        'as'   => 'user.cc',
-        'uses' => 'Frontend\UserController@showCreditCardPage',
-    ]);
-
-    Route::post('/account/cc', [
-        'as'   => 'user.cc',
-        'uses' => 'Frontend\UserController@saveCreditCard',
-    ]);
-
-    Route::post('/account/cc-default', [
-        'as'   => 'user.cc.default',
-        'uses' => 'Frontend\UserController@defaultCreditCard',
-    ]);
-
-    Route::post('/account/address-default', [
-        'as'   => 'user.address.default',
-        'uses' => 'Frontend\UserController@defaultAddress',
-    ]);
-
     Route::get('/account/reset-password', [
         'as'   => 'user.reset.password',
         'uses' => 'Frontend\UserController@showResetPasswordPage',
@@ -225,6 +205,7 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@uploadProfile',
     ]);
 
+    // Route checkout module
     Route::get('/checkout', [
         'as'   => 'checkout',
         'uses' => 'Frontend\UserController@showShippingAddressPage',
@@ -245,13 +226,13 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@postShippingOption',
     ]);
 
-    Route::get('/account/cc/destroy', [
-        'as'   => 'user.cc.destroy',
-        'uses' => 'Frontend\UserController@ccDestroy',
+    Route::get('/checkout/preview', [
+        'as'   => 'checkout.preview',
+        'uses' => 'Frontend\UserController@preview',
     ]);
+    
 
     // Route Address module
-
     Route::get('/account/address', [
         'as'   => 'user.address',
         'uses' => 'Frontend\UserController@showAddressPage',
@@ -260,6 +241,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/account/address', [
         'as'   => 'user.address',
         'uses' => 'Frontend\UserController@addressSave',
+    ]);
+
+    Route::post('/account/address-default', [
+        'as'   => 'user.address.default',
+        'uses' => 'Frontend\UserController@defaultAddress',
     ]);
 
     Route::delete('/account/address/destroy', [
@@ -277,9 +263,35 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@addressUpdate',
     ]);
 
-    Route::get('/checkout/preview', [
-        'as'   => 'checkout.preview',
-        'uses' => 'Frontend\UserController@preview',
+    // Route Credit Card module
+    Route::get('/account/cc', [
+        'as'   => 'user.cc',
+        'uses' => 'Frontend\UserController@showCreditCardPage',
     ]);
+
+    Route::post('/account/cc', [
+        'as'   => 'user.cc',
+        'uses' => 'Frontend\UserController@creditCardSave',
+    ]);
+
+    Route::post('/account/cc-default', [
+        'as'   => 'user.cc.default',
+        'uses' => 'Frontend\UserController@defaultCreditCard',
+    ]);
+
+    Route::delete('/account/cc/destroy', [
+        'as'   => 'user.cc.destroy',
+        'uses' => 'Frontend\UserController@ccDestroy',
+    ]);
+
+    Route::get('/account/cc/edit/{id?}', [
+        'as'   => 'user.cc.edit',
+        'uses' => 'Frontend\UserController@ccEdit',
+    ]);
+
+    Route::post('/account/cc/update/{id?}', [
+        'as'   => 'user.cc.update',
+        'uses' => 'Frontend\UserController@ccUpdate',
+    ]);    
 
 });

@@ -95,7 +95,6 @@
           ></address-list>
         </div>        
         @else
-          <h4>ADD A NEW ADDRESS</h4>
          	<form class="uk-form-stacked" action="{{ route('user.address') }}" method="post">
           		{{ csrf_field() }}
               <div class="uk-margin-small uk-grid-small" uk-grid>

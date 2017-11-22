@@ -85,12 +85,13 @@ class UserController extends BaseController
     	return view('users.credit_card', compact('user', 'cards', 'address'));
     }
 
-    public function saveCreditCard(Request $request)
+    public function creditCardSave(Request $request)
     {
     	$this->validate($request, [
     		'card_number' => 'required',
     		'expired_date' => 'required',
-    		'name_card' => 'required|min:2|max:255'
+    		'name_card' => 'required|min:2|max:255',
+            'address' => 'required'
     	]);
 
     	try {
@@ -197,16 +198,19 @@ class UserController extends BaseController
 
     		DB::commit();
 
-            if ($request->has('checkout')) {
-                return redirect($this->redirectAfterSaveBilling);
-            }
-
-    		return redirect($this->redirectAfterSaveCC)->with(['success' => 'Save default credit card successfully!']);
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'credits' => $user->creditCards
+            ]);
 
         } catch (Exception $e) {
         	DB::rollBack();
 
-        	return back()->withErrors($e->getMessage());
+        	return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
         }
     }
 
@@ -503,10 +507,17 @@ class UserController extends BaseController
             $this->user
                 ->ccDestroy($request->input('id'));
 
-            return redirect($this->redirectAfterSaveCC)->with(['success' => 'Delete credit card successfully!']);
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'credits' => $user->creditCards
+            ]);
 
         } catch (Exception $e) {
-            return back()->withErrors($e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
         }
     }
 
@@ -567,13 +578,62 @@ class UserController extends BaseController
 
         try {
             $user = $this->getUserActive();
-            $address = $this->user
+            $this->user
                 ->persistAddress($request, $id);
 
             return response()->json([
                 'status' => 'ok',
                 'message' => 'success',
                 'address' => $user->address
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
+        }
+    }
+
+    public function ccEdit($id)
+    {
+        try {
+            $user = $this->getUserActive();
+            $credit = $this->user
+                ->getCreditCardById($id);
+
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'credit' => $credit
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
+        }
+    }
+
+    public function ccUpdate(Request $request, $id)
+    {
+        $this->validate($request, [
+            'card_number' => 'required',
+            'expired_date' => 'required',
+            'name_card' => 'required|min:2|max:255',
+            'address' => 'required'
+        ]);
+
+        try {
+            $user = $this->getUserActive();
+            $this->user
+                ->persistCreditCard($request, $id);
+
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'credits' => $user->creditCards
             ]);
 
         } catch (Exception $e) {

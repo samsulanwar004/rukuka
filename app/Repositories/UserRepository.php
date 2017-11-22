@@ -328,7 +328,7 @@ class UserRepository
 		$cc->card_number = $request->input('card_number');
 		$cc->expired_date = $request->input('expired_date');
 		$cc->name_card = $request->input('name_card');
-		$cc->is_default = $this->getDefault();
+		$cc->is_default = is_null($id) ? $this->getDefault() : $cc->is_default;
 
 		if (is_null($id)) {
 			$cc->user()->associate($this->getUser());
@@ -385,10 +385,7 @@ class UserRepository
 
 	public function defaultCreditCard($request)
 	{
-		$ids = [];
-		foreach ($request->input('default') as $key => $value) {
-    		$ids[] = isset($key) ? $key : 0;
-    	}
+		$ids = array($request->input('default'));
 
     	$user = $this->getUser();
 
