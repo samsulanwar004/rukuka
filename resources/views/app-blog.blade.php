@@ -20,9 +20,9 @@
         <div id="status">&nbsp;</div>
       </div>
       <div class="uk-offcanvas-content">
-      @include('partials.nav-blog')
+      @include('partials.nav')
         @yield('content')
-      @include('partials.footer-blog')
+      @include('partials.footer')
       </div>
     </div>
     <script src="{{ elixir('js/vendor.js') }}"></script>

@@ -70,10 +70,10 @@ class BlogController extends Controller
                             </div>';
             }
             $loader .= '
-                      
+
                             <div id="remove-row" class="uk-align-center">
                                 <h2>
-                                    <a onclick="myFunction('. $post->id .')" id="btn-more" class="uk-margin-remove uk-text-bold blog-loadmore" > Load More </a>
+                                    <a onclick="myFunction('. $post->id .')" id="btn-more" class="uk-button uk-button-default" > Load More </a>
                                 </h2>
                             </div>
                         ';
