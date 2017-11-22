@@ -34,6 +34,17 @@ Route::post('/blog/search', [
     'as'   => 'blog-get-search',
     'uses' => 'Frontend\BlogController@search',
 ]);
+
+Route::get('/help/{slug}', [
+    'as'   => 'get-help',
+    'uses' => 'Frontend\PageController@help',
+]);
+
+Route::get('/', [
+    'as'   => 'index',
+    'uses' => 'Frontend\PageController@index',
+]);
+
 Route::get('/', [
     'as'   => 'index',
     'uses' => 'Frontend\PageController@index',
@@ -84,6 +95,10 @@ Route::get('/bag', [
     'uses' => 'Frontend\PageController@showBagPage',
 ]);
 
+Route::get('/review', [
+    'as'   => 'review',
+    'uses' => 'Frontend\PageController@review',
+]);
 
 
 Route::middleware(['guest'])->group(function () {
@@ -249,6 +264,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/checkout/shipping', [
         'as'   => 'checkout.shipping',
         'uses' => 'Frontend\UserController@postShippingOption',
+    ]);
+
+    Route::get('/checkout/preview', [
+        'as'   => 'checkout.preview',
+        'uses' => 'Frontend\UserController@preview',
     ]);
 
 });

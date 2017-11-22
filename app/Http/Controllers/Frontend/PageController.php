@@ -7,6 +7,7 @@ use App\Repositories\ProductRepository;
 use App\Repositories\SettingRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\ProductStockRepository;
+use App\Repositories\PageRepository;
 use Exception;
 use Carbon\Carbon;
 use App\Services\BagService;
@@ -263,6 +264,31 @@ class PageController extends BaseController
     public function showBagPage()
     {
         return view('pages.bag');
+    }
+
+    public function review()
+    {
+      return view('pages.add_review');
+    }
+
+    public function page($slug){
+        $PageRepository = new PageRepository();
+
+        $result= $PageRepository->getPage($slug);
+        $page = $result['page'];
+        $status= $result['status'];
+        return view('pages.page', compact('page','status'));
+
+    }
+
+    public function help($slug){
+        $PageRepository = new PageRepository();
+
+        $result= $PageRepository->getHelp($slug);
+        $page = $result['page'];
+        $status= $result['status'];
+        return view('pages.help', compact('page','status'));
+
     }
 
 }
