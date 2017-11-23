@@ -10,6 +10,39 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// this route for testing pos indonesia courier service
+use App\Services\PosIndonesiaCourierService;
+
+Route::get('/posindonesia', function () {
+    //init object
+    $posIndonesia = new PosIndonesiaCourierService;
+    
+    //create request
+    $requestToPosIndonesia = [
+                                [
+                                    'userId'            => config('common.username_pos_indonesia'),
+                                    'password'          => config('common.password_pos_indonesia'),
+                                    'customerId'        => '0',
+                                    'isDomestic'        => '0',
+                                    'senderPosCode'     => '13210',
+                                    'receiverPosCode'   => 'SG',
+                                    'weight'            => '1000',
+                                    'length'            => '0',
+                                    'width'             => '100',
+                                    'height'            => '100',
+                                    'diameter'          => '0',
+                                    'itemValue'         => '900000'
+                                ]
+                            ];
+    
+    //send request
+    $resultFee = $posIndonesia->get('getFee', $requestToPosIndonesia);
+    
+    //result
+    var_dump($resultFee);
+});
+
 Route::get('/blog', [
     'as'   => 'blog-get-index',
     'uses' => 'Frontend\BlogController@index',
