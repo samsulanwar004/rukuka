@@ -54,20 +54,20 @@
           credit_update="{{ route('user.cc.update') }}"
           address="{{ $address }}"
         ></credit-card>
-       <div id="modal-sections" uk-modal>
-        <div class="uk-modal-dialog">
-          <button class="uk-modal-close-default" type="button" uk-close></button>
-          <div class="uk-modal-header">
-              <h4 class="uk-modal-title">ADD A NEW CARD</h4>
-          </div>
-          <div class="uk-modal-body">
-            <form class="uk-form-stacked" action="{{ route('user.cc') }}" method="post">
-            {{ csrf_field() }}
-            <input type="hidden" name="checkout_new_card" value="ok">
-            <div class="uk-margin-small uk-grid-small" uk-grid>
+        <div id="modal-sections" uk-modal>
+          <div class="uk-modal-dialog">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-header">
+                <h4 class="uk-modal-title">ADD A NEW CARD</h4>
+            </div>
+            <div class="uk-modal-body">
+              <form class="uk-form-stacked" action="{{ route('user.cc') }}" method="post">
+                {{ csrf_field() }}
+                <input type="hidden" name="checkout_new_card" value="ok">
+                <div class="uk-margin-small uk-grid-small" uk-grid>
                 <div>
                   Credit or debit card number <span id="card"></span>
-                    <input class="uk-input uk-input-small" name="card_number" id="card-number" type="text" required="required" value="{{ old('card_number') }}">
+                    <input class="uk-input uk-input-small" name="card_number" id="card-number-modal" type="text" required="required">
                 </div>
                 <div class="uk-inline">
                   <a class="uk-icon-link" uk-icon="icon: question"></a>
@@ -81,7 +81,7 @@
             <div class="uk-margin-small uk-grid-small" uk-grid>
                 <div>
                   expired date
-                    <input class="uk-input uk-input-small" name="expired_date" id="expired-date" type="text" value="{{ old('expired_date') }}" required="required">
+                    <input class="uk-input uk-input-small" name="expired_date" id="expired-date-modal" type="text" required="required">
                 </div>
                 <div class="uk-inline">
                   <a class="uk-icon-link" uk-icon="icon: question"></a>
@@ -95,29 +95,30 @@
             <div class="uk-margin-small uk-grid-small" uk-grid>
                 <div>
                   name on card
-                    <input class="uk-input uk-input-small" name="name_card" id="form-s-tel" type="text" value="{{ old('name_card') }}" required="required">
+                    <input class="uk-input uk-input-small" name="name_card" id="form-s-tel" type="text" required="required">
                 </div>
             </div>
             <div class="uk-margin-small uk-grid-small" uk-grid>
                 <div>
                   enter a billing address
-                  <select class="uk-input uk-input-small" name="address" id="address" required="required">
-                    <option value="">Select Address</option>
-                    @foreach($address as $add)
-                      <option value="{{ $add->id }}">{{ $add->address_line }}</option>
-                    @endforeach
-                  </select>
+                    <select class="uk-input uk-input-small" name="address" id="address" required="required">
+                      <option value="">Select Address</option>
+                      @foreach($address as $add)
+                        <option value="{{ $add->id }}">{{ $add->address_line }}</option>
+                      @endforeach
+                    </select>
+
                 </div>
             </div>
-            <input type="submit" id="new-card" style="display: none">
-            </form>
-          </div>
-          <div class="uk-modal-footer uk-text-right">
-              <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-              <button class="uk-button uk-button-secondary" id="modal-submit">Save</button>
+                <input type="submit" id="submit" style="display: none">
+                </form>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                <button class="uk-button uk-button-secondary" id="modal-submit">Save</button>
+            </div>
           </div>
         </div>
-      </div>
       @else
       <span class="uk-text-meta"><b>ENTER YOUR CARD DETAILS:</b></span>
       <hr class="uk-margin-small">
@@ -210,7 +211,79 @@
           <div class="uk-width-1-3">
             <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
               <div class="uk-card-body">
-                <a href="#" class="uk-text-meta"> <span class="uk-icon" uk-icon="icon: plus"></span> ADD YOUR SHIPPING OPTION </a>
+                <a href="#modal-address" class="uk-text-meta" uk-toggle> <span class="uk-icon" uk-icon="icon: plus"></span> ADD YOUR SHIPPING OPTION </a>
+              </div>
+            </div>
+          </div>
+          <div id="modal-address" uk-modal>
+            <div class="uk-modal-dialog">
+              <button class="uk-modal-close-default" type="button" uk-close></button>
+              <div class="uk-modal-header">
+                  <h4 class="uk-modal-title">ADD A NEW ADDRESS</h4>
+              </div>
+              <div class="uk-modal-body">
+                <form class="uk-form-stacked" action="{{ route('user.address') }}" method="post">
+                  {{ csrf_field() }}
+                  <input type="hidden" name="checkout_address_billing" value="ok">
+                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                    <div>
+                      First name
+                      <input class="uk-input uk-input-small" name="first_name" id="form-s-tel" type="text" value="{{ old('first_name') }}" required="required">
+                    </div>
+                  </div>
+                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                    <div>
+                      Last name
+                      <input class="uk-input uk-input-small" name="last_name" id="form-s-tel" type="text" value="{{ old('last_name') }}" required="required">
+                    </div>
+                  </div>
+                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                  <div>
+                    Company
+                    <input class="uk-input uk-input-small" name="company" id="form-s-tel" type="text" value="{{ old('company') }}"></div>
+                  </div>
+                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                    <div>
+                      Address line
+                      <input class="uk-input uk-input-small" name="address_line" id="form-s-tel" type="text" value="{{ old('address_line') }}" required="required">
+                    </div>
+                  </div>
+                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                    <div>
+                      City
+                      <input class="uk-input uk-input-small" name="city" id="form-s-tel" type="text" value="{{ old('city') }}" required="required">
+                    </div>
+                  </div>
+                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                    <div>
+                      Province
+                      <input class="uk-input uk-input-small" name="province" id="form-s-tel" type="text" value="{{ old('province') }}" required="required">
+                    </div>
+                  </div>
+                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                    <div>
+                      Postal
+                      <input class="uk-input uk-input-small" name="postal" id="form-s-tel" type="text" value="{{ old('postal') }}" required="required">
+                    </div>
+                  </div>
+                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                    <div>
+                      Country
+                      <input class="uk-input uk-input-small" name="country" id="form-s-tel" type="text" value="{{ old('country') }}" required="required">
+                    </div>
+                  </div>
+                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                    <div>
+                      Phone number
+                      <input class="uk-input uk-input-small" name="phone_number" id="form-s-tel" type="text" value="{{ old('phone_number') }}" required="required">
+                    </div>
+                  </div>
+                  <input type="submit" id="submit-address" style="display: none">
+                  </form>
+              </div>
+              <div class="uk-modal-footer uk-text-right">
+                  <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                  <button class="uk-button uk-button-secondary" id="modal-submit-address">Save</button>
               </div>
             </div>
           </div>
@@ -247,25 +320,9 @@
   $(function () {
 
     $('#card-number').mask("9999-9999-9999-9999");
+    $('#card-number-modal').mask("9999-9999-9999-9999");
     $('#expired-date').mask("99/99");
-
-    $("input:checkbox").on('click', function () {
-       // in the handler, 'this' refers to the box clicked on
-       var $box = $(this);
-       if ($box.is(":checked")) {
-         // the name of the box is retrieved using the .attr() method
-         // as it is assumed and expected to be immutable
-         var group = "input:checkbox[name='" + $box.attr("name") + "']";
-         // the checked state of the group/box on the other hand will change
-         // and the current value is retrieved using .prop() method
-         $(group).prop("checked", false);
-         $box.prop("checked", true);
-       } else {
-         $box.prop("checked", false);
-       }
-
-       $('#default-submit').click();
-     });
+    $('#expired-date-modal').mask("99/99");
 
     $("#continue").on('click', function (e) {
        e.preventDefault();
@@ -280,7 +337,11 @@
     });
 
     $('#modal-submit').on('click', function () {
-      $('#new-card').click();
+      $('#submit').click();
+    });
+
+    $('#modal-submit-address').on('click', function () {
+      $('#submit-address').click();
     });
   });
 </script>

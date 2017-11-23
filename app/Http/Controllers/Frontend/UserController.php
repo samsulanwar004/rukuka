@@ -22,6 +22,7 @@ class UserController extends BaseController
     protected $redirectAfterSaveBilling = '/checkout/billing';
     protected $redirectAfterNewShippingAddress = '/checkout/shipping';
     protected $redirectAfterNewCC = '/checkout/billing';
+    protected $redirectAfterNewBillingAddress = '/checkout/billing';
     private $user;
 
     public function __construct(UserRepository $user)
@@ -119,7 +120,7 @@ class UserController extends BaseController
 
             if ($request->has('checkout_new_card')) {
                 return redirect($this->redirectAfterNewCC);
-            }
+            }            
 
     		return redirect($this->redirectAfterSaveCC)->with(['success' => 'Save credit card successfully!']);
     	} catch (Exception $e) {
@@ -173,6 +174,10 @@ class UserController extends BaseController
 
             if ($request->has('checkout')) {
                 return redirect($this->redirectAfterNewShippingAddress);
+            }
+
+            if ($request->has('checkout_address_billing')) {
+                return redirect($this->redirectAfterNewBillingAddress);
             }
 
     		return redirect($this->redirectAfterSaveAddress)->with(['success' => 'Save address book successfully!']);

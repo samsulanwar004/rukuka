@@ -129,7 +129,7 @@
               </div>
               <div class="uk-margin-small uk-grid-small" uk-grid>
                   <div>
-                    <b>enter a billing address</b>
+                    enter a billing address
                       <select class="uk-input uk-input-small" name="address" id="address" required="required">
                       	<option value="">Select Address</option>
                         @foreach($address as $add)
