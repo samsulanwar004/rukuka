@@ -1,5 +1,5 @@
 <template>
-  <div class="uk-grid-small uk-child-width-1-4@m uk-margin-large-bottom" uk-grid>
+  <div class="uk-grid-small uk-child-width-1-4@m uk-child-width-1-2 uk-margin-large-bottom" uk-grid>
     <!-- start product -->
     <div class="uk-panel uk-text-left" v-for="product in products">
       <div class="uk-card uk-card-small uk-padding-remove">
