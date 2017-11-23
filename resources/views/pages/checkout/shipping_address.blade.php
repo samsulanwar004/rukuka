@@ -27,64 +27,13 @@
          @if (count($address))
          <span class="uk-text-meta">SELECT YOUR SHIPPING ADDRESS:</span>
          <hr class="uk-margin-small">
-         <form action="{{ route('user.address.default') }}" method="post">
-            {{ csrf_field() }}
-            <div class="uk-grid" uk-grid>
-               @foreach($address as $add)
-               <div class="uk-width-1-3">
-                  <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
-                     <div class="uk-card-body">
-                        <table>
-                           <tr>
-                              <td>
-                                 <input class="uk-checkbox" type="checkbox" name="default[{{$add->id}}]" {{ (bool)$add->is_default ? 'checked disabled' : '' }}>
-                              </td>
-                              <td>
-                                 {{ $add->first_name }} {{ $add->last_name }}
-                              </td>
-                           </tr>
-                           <tr>
-                              <td>
-                              </td>
-                              <td>{{ $add->address_line }}</td>
-                           </tr>
-                           <tr>
-                              <td>
-                              </td>
-                              <td>
-                                 {{ $add->city }}, {{ $add->province }} {{ $add->postal }}
-                              </td>
-                           </tr>
-                           <tr>
-                              <td>
-                              </td>
-                              <td>
-                                 {{ $add->country }}
-                              </td>
-                           </tr>
-                           <tr>
-                              <td>
-                              </td>
-                              <td>
-                                 {{ $add->phone_number }}
-                              </td>
-                           </tr>
-                        </table>
-                     </div>
-                  </div>
-               </div>
-               @endforeach
-               <div class="uk-width-1-3">
-                  <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
-                     <div class="uk-card-body">
-                        <a href="#modal-sections" class="uk-text-meta" uk-toggle> <span class="uk-icon" uk-icon="icon: plus"></span> ADD NEW SHIPPING ADDRESS </a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <input type="hidden" name="checkout" value="ok">
-            <button type="submit" id="default-submit" style="display: none;"></button>
-         </form>
+          <address-list
+            address="{{ $address }}"
+            address_default="{{ route('user.address.default') }}"
+            address_destroy="{{ route('user.address.destroy') }}"
+            address_edit="{{ route('user.address.edit') }}"
+            address_update="{{ route('user.address.update') }}"
+          ></address-list>
          <div id="modal-sections" uk-modal>
             <div class="uk-modal-dialog">
               <button class="uk-modal-close-default" type="button" uk-close></button>
@@ -94,7 +43,7 @@
               <div class="uk-modal-body">
                 <form class="uk-form-stacked" action="{{ route('user.address') }}" method="post">
                   {{ csrf_field() }}
-                  <input type="hidden" name="checkout_new_address" value="ok">
+                  <input type="hidden" name="checkout" value="ok">
                   <div class="uk-margin-small uk-grid-small" uk-grid>
                     <div>
                       First name
@@ -167,11 +116,11 @@
                <div class="uk-grid uk-grid-small uk-child-width-1-2@m uk-text-meta" uk-grid>
                   <div>
                      First Name *
-                     <input type="text" name="first_name" value="{{ old('first_name') }}" class="uk-input uk-form-small">
+                     <input type="text" name="first_name" value="{{ old('first_name') }}" class="uk-input uk-form-small {{ $errors->has('first_name') ? ' uk-form-danger' : '' }}" required="required">
                   </div>
                   <div>
                      Last Name *
-                     <input type="text" name="last_name" value="{{ old('last_name') }}" class="uk-input uk-form-small">
+                     <input type="text" name="last_name" value="{{ old('last_name') }}" class="uk-input uk-form-small {{ $errors->has('last_name') ? ' uk-form-danger' : '' }}" required="required">
                   </div>
                </div>
                <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
@@ -180,11 +129,11 @@
                </div>
                <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
                   Address *
-                  <input type="text" name="address_line" value="{{ old('address_line') }}" class="uk-input uk-form-small">
+                  <input type="text" name="address_line" value="{{ old('address_line') }}" class="uk-input uk-form-small {{ $errors->has('address_line') ? ' uk-form-danger' : '' }}" required="required">
                </div>
                <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
                   Town / City *
-                  <input type="text" name="city" value="{{ old('city') }}" class="uk-input uk-form-small">
+                  <input type="text" name="city" value="{{ old('city') }}" class="uk-input uk-form-small" required="required">
                </div>
                <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
                   Province / State / Country *
@@ -192,11 +141,11 @@
                </div>
                <div class="uk-text-meta uk-margin-small-top">
                   Postal Code *
-                  <input type="text" name="postal" value="{{ old('postal') }}" class="uk-input uk-form-small uk-from-width-small">
+                  <input type="text" name="postal" value="{{ old('postal') }}" class="uk-input uk-form-small uk-from-width-small {{ $errors->has('postal') ? ' uk-form-danger' : '' }}" required="required">
                </div>
                <div class="uk-text-meta uk-margin-small-top">
                   Phone Number *
-                  <input type="text" name="phone_number" value="{{ old('phone_number') }}" class="uk-input uk-form-small uk-from-width-small">
+                  <input type="text" name="phone_number" value="{{ old('phone_number') }}" class="uk-input uk-form-small uk-from-width-small {{ $errors->has('phone_number') ? ' uk-form-danger' : '' }}" required="required">
                </div>
                <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
                   Country *
@@ -226,23 +175,6 @@
 @section('footer_scripts')
 <script type="text/javascript">
    $(function () {
-     $("input:checkbox").on('click', function () {
-       // in the handler, 'this' refers to the box clicked on
-       var $box = $(this);
-       if ($box.is(":checked")) {
-         // the name of the box is retrieved using the .attr() method
-         // as it is assumed and expected to be immutable
-         var group = "input:checkbox[name='" + $box.attr("name") + "']";
-         // the checked state of the group/box on the other hand will change
-         // and the current value is retrieved using .prop() method
-         $(group).prop("checked", false);
-         $box.prop("checked", true);
-       } else {
-         $box.prop("checked", false);
-       }
-   
-       $('#default-submit').click();
-     });
    
      $("#continue").on('click', function (e) {
        e.preventDefault();

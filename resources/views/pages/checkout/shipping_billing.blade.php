@@ -46,50 +46,14 @@
       @if (count($creditcards))
       <span class="uk-text-meta">CHOOSE A CREDIT OR DEBIT CARD:</span>
        <hr class="uk-margin-small">
-       <form action="{{ route('user.cc.default') }}" method="post">
-          {{ csrf_field() }}
-          <div class="uk-grid" uk-grid>
-             @foreach($creditcards as $card)
-             <div class="uk-width-1-3">
-                <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
-                   <div class="uk-card-body">
-                      <table>
-                         <tr>
-                            <td>
-                               <input class="uk-checkbox" type="checkbox" name="default[{{$card->id}}]" {{ (bool)$card->is_default ? 'checked disabled' : '' }}>
-                            </td>
-                            <td>
-                               {{ $card->card_number }}
-                            </td>
-                         </tr>
-                         <tr>
-                            <td>
-                            </td>
-                            <td>{{ $card->expired_date }}</td>
-                         </tr>
-                         <tr>
-                            <td>
-                            </td>
-                            <td>
-                               {{ $card->name_card }}
-                            </td>
-                         </tr>
-                      </table>
-                   </div>
-                </div>
-             </div>
-             @endforeach
-             <div class="uk-width-1-3">
-                <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
-                   <div class="uk-card-body">
-                      <a href="#modal-sections" class="uk-text-meta" uk-toggle> <span class="uk-icon" uk-icon="icon: plus"></span> ADD NEW CARD </a>
-                   </div>
-                </div>
-             </div>
-          </div>
-          <input type="hidden" name="checkout" value="ok">
-          <button type="submit" id="default-submit" style="display: none;"></button>
-       </form>
+        <credit-card
+          credits="{{ $creditcards }}"
+          credit_default="{{ route('user.cc.default') }}"
+          credit_destroy="{{ route('user.cc.destroy') }}"
+          credit_edit="{{ route('user.cc.edit') }}"
+          credit_update="{{ route('user.cc.update') }}"
+          address="{{ $address }}"
+        ></credit-card>
        <div id="modal-sections" uk-modal>
         <div class="uk-modal-dialog">
           <button class="uk-modal-close-default" type="button" uk-close></button>
@@ -192,7 +156,7 @@
                   <table>
                     <tr>
                       <td>
-                        <input class="uk-checkbox" type="checkbox" name="address" {{ (bool)$add->is_default ? 'checked' : '' }} value="{{ $add->id }}">
+                        <input class="uk-radio" type="radio" name="address" {{ (bool)$add->is_default ? 'checked' : '' }} value="{{ $add->id }}">
                       </td>
                       <td>
                         {{ $add->first_name }} {{ $add->last_name }}
