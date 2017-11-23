@@ -7,21 +7,16 @@
     </div>
   <div class="uk-grid-small uk-grid-divider uk-margin-top uk-margin-xlarge-bottom" uk-grid>
     <div class="uk-width-1-2@m">
-
-      <div class="uk-panel uk-text-right">
-
-
+      <div class="uk-panel uk-text-right uk-visible@m">
       <h3>SIGN IN</h3>
         <form class="form-horizontal" method="POST" action="{{ route('authenticate') }}">
             {{ csrf_field() }}
           <ul class="uk-list">
             <li>
                 <input class="uk-input uk-form-width-medium {{ $errors->has('email_login') ? ' uk-form-danger' : '' }}" id="form-s-email" type="email" placeholder="*Email" required="required" name="email_login" value="{{ old('email_login') }}">
-
             </li>
             <li>
                 <input class="uk-input uk-form-width-medium" id="form-s-password" type="password" placeholder="*Password" required="required" name="password_login">
-
             </li>
             <li>
                 <div class="checkbox">
@@ -43,6 +38,37 @@
           </ul>
         </form>
     </div>
+    <div class="uk-panel uk-text-right uk-hidden@m">
+    <h3>SIGN IN</h3>
+      <form class="form-horizontal" method="POST" action="{{ route('authenticate') }}">
+          {{ csrf_field() }}
+        <ul class="uk-list">
+          <li>
+              <input class="uk-input uk-form-width-medium {{ $errors->has('email_login') ? ' uk-form-danger' : '' }}" id="form-s-email" type="email" placeholder="*Email" required="required" name="email_login" value="{{ old('email_login') }}">
+          </li>
+          <li>
+              <input class="uk-input uk-form-width-medium" id="form-s-password" type="password" placeholder="*Password" required="required" name="password_login">
+          </li>
+          <li>
+              <div class="checkbox">
+                  <label>
+                      <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                  </label>
+              </div>
+          </li>
+          <li>
+              <button class="uk-button uk-button-secondary" type="submit">SIGN IN</button>
+          </li>
+          <li>
+              <a href="{{ route('page.forgot') }}">forgot your password?</a>
+          </li>
+          <li>
+            <a href="{{ route('social.login', ['provider' => 'facebook']) }}" class="uk-button uk-button-primary">
+              <span class="uk-margin-small-right uk-icon" uk-icon="icon: facebook"></span>Login with Facebook</a>
+          </li>
+        </ul>
+      </form>
+  </div>
 
 
     </div>
