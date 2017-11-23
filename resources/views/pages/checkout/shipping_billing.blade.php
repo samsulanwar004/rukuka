@@ -295,6 +295,7 @@
         <div>
           <ul class="uk-list uk-text-meta">
             <li>{{ $defaultAddress->first_name }} {{ $defaultAddress->last_name}}</li>
+            <li>{{ $defaultAddress->company }}</li>
             <li>{{ $defaultAddress->address_line }}</li>
             <li>{{ $defaultAddress->city }}</li>
             <li>{{ $defaultAddress->city }}, {{ $defaultAddress->country }} {{ $defaultAddress->postal }}</li>
@@ -327,7 +328,7 @@
     $("#continue").on('click', function (e) {
        e.preventDefault();
        var submit = $('#submit').val();
-       var url = '{{ route('checkout.billing') }}';
+       var url = '{{ route('checkout.review') }}';
        if (submit == 'C O N T I N U E') {
          $('#submit').click();
        } else {

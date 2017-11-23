@@ -19,7 +19,7 @@ class UserController extends BaseController
     protected $redirectAfterSavePassword = '/account/reset-password';
     protected $redirectAfterAddWishlist = '/account/wishlist';
     protected $redirectAfterSaveShippingOption = '/checkout/billing';
-    protected $redirectAfterSaveBilling = '/checkout/billing';
+    protected $redirectAfterSaveBilling = '/checkout/review';
     protected $redirectAfterNewShippingAddress = '/checkout/shipping';
     protected $redirectAfterNewCC = '/checkout/billing';
     protected $redirectAfterNewBillingAddress = '/checkout/billing';
@@ -97,6 +97,20 @@ class UserController extends BaseController
 
     	try {
     		DB::beginTransaction();
+
+            if ($request->has('security_code')) {
+                $cardNumber = $request->input('card_number');
+                $secureCode = $request->input('security_code');
+
+                $cardNumberArr = explode('-', $cardNumber);
+
+                $cardCode = substr($cardNumberArr[3], 1, 3);
+
+                if ($secureCode != $cardCode) {
+                    throw new Exception("Security code invalid!", 1);
+                }
+                
+            }
 
     		$user = $this->getUserActive();
 
@@ -477,11 +491,11 @@ class UserController extends BaseController
     public function showShippingOptionPage()
     {
         $user = $this->getUserActive();
-        $address = $this->user
+        $defaultAddress = $this->user
             ->setUser($user)
             ->getAddressDefault();
 
-        return view('pages.checkout.shipping_option', compact('address'));
+        return view('pages.checkout.shipping_option', compact('defaultAddress'));
     }
 
     public function showShippingBillingPage()
@@ -649,9 +663,26 @@ class UserController extends BaseController
         }
     }
 
-    public function preview()
+    public function showReviewPage()
     {
-      return view('pages.checkout.shipping_preview');
+        $user = $this->getUserActive();
+        $bag = new BagService;
+        $defaultCreditcard = $this->user
+            ->setUser($user)
+            ->getCreditCardDefault();
+
+        $defaultAddress = $this->user
+            ->setUser($user)
+            ->getAddressDefault();
+        $bag->get(self::INSTANCE_SHOP);
+
+        $total = $bag->subtotal();
+
+        return view('pages.checkout.shipping_preview', compact(
+            'defaultCreditcard',
+            'defaultAddress',
+            'total'
+        ));
     }
 
 }
