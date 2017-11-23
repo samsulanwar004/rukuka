@@ -328,7 +328,7 @@ class UserRepository
 		$cc->card_number = $request->input('card_number');
 		$cc->expired_date = $request->input('expired_date');
 		$cc->name_card = $request->input('name_card');
-		$cc->is_default = $this->getDefault();
+		$cc->is_default = is_null($id) ? $this->getDefault() : $cc->is_default;
 
 		if (is_null($id)) {
 			$cc->user()->associate($this->getUser());
@@ -368,7 +368,7 @@ class UserRepository
 		$address->postal = $request->input('postal');
 		$address->country = $request->input('country');
 		$address->phone_number = $request->input('phone_number');
-		$address->is_default = $this->getDefault();
+		$address->is_default = is_null($id) ? $this->getDefault() : $address->is_default;
 
 		if (is_null($id)) {
 			$address->user()->associate($this->getUser());
@@ -385,10 +385,7 @@ class UserRepository
 
 	public function defaultCreditCard($request)
 	{
-		$ids = [];
-		foreach ($request->input('default') as $key => $value) {
-    		$ids[] = isset($key) ? $key : 0;
-    	}
+		$ids = array($request->input('default'));
 
     	$user = $this->getUser();
 
@@ -405,10 +402,7 @@ class UserRepository
 
 	public function defaultAddress($request)
 	{
-		$ids = [];
-		foreach ($request->input('default') as $key => $value) {
-    		$ids[] = isset($key) ? $key : 0;
-    	}
+		$ids = array($request->input('default'));
 
     	$user = $this->getUser();
 
@@ -566,4 +560,17 @@ class UserRepository
 			->where('users_id', $user->id)
 			->first();
 	}
+
+	public function ccDestroy($id)
+	{
+		return $this->getCreditCardById($id)
+			->delete();
+	}
+
+	public function addressDestroy($id)
+	{
+		return $this->getAddressById($id)
+			->delete();
+	}
+
 }

@@ -4,7 +4,24 @@
 
     @if($status['code'] == '000')
     <div class="uk-container uk-container-small">
-        <div class="uk-heading-line uk-text-lead uk-text-center uk-margin-medium-top uk-margin-medium-bottom "><span>{{$title}}</span></div>
+      {{-- <h4 class="uk-margin-top">CATEGORIES!</h4> --}}
+      <div class="uk-panel uk-margin-top">
+        <div class="uk-card uk-card-border uk-card-small">
+          <div class="uk-card-body">
+            <ul class="uk-grid" uk-grid>
+            @foreach($category as $value)
+              <li><a href="{{ URL::to('blog/category/'.$value->slug)}}"><h3>{{$value->name}}</h3></a></li>
+            @endforeach
+            <li> <a href="#"> <h3>Winter</h3></a></li>
+            <li> <a href="#"> <h3>Daily</h3> </a> </li>
+            <li> <a href="#"> <h3>Party</h3> </a> </li>
+            <li> <a href="#"> <h3>Beach</h3> </a> </li>
+            <li> <a href="#"> <h3>Outdoor</h3> </a> </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+        <h3 class="uk-margin-small">{{$title}}</h3>
         <div id="blog" class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
             @foreach($posts as $post)
                 <div class="uk-width-1-3@m uk-width-1-2@s uk-inline">
@@ -34,7 +51,7 @@
             <div id="remove-row" class="uk-align-center">
                 <h2>
                     @if(count($posts) <= 9)
-                        <a onclick="myFunction({{ $post->id }})" id="btn-more" class="uk-margin-remove uk-text-bold blog-loadmore" > Load More </a>
+                        <a onclick="myFunction({{ $post->id }})" id="btn-more" class="uk-button uk-button-default" > LOAD MORE </a>
                     @endif
                 </h2>
             </div>
@@ -80,4 +97,3 @@
 
 
 @endsection
-

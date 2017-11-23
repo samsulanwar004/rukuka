@@ -7,14 +7,14 @@
       </a>
     </li>
     <li v-if="auth == 1"  class="uk-margin-right">
-      <a class="uk-button uk-button-text uk-button-small" :href="wishlist_link"><b>L O V E</b></a>
+      <a class="uk-button uk-button-text uk-button-small" :href="wishlist_link"><b>LOVE</b></a>
         <div class="uk-badge" v-if="wishlistCount > 0">
           {{ wishlistCount }}
         </div>
     </li>
 
     <li>
-      <a class="uk-button uk-button-text uk-button-small" v-on:click.prevent="goBag"> <b>B A G</b></a>
+      <a class="uk-button uk-button-text uk-button-small" v-on:click.prevent="goBag"> <b>BAG</b></a>
       <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" v-if="bagCount > 0">
             <div class="uk-card-body uk-card-small">
               <div class="uk-grid-small" uk-grid v-for="bag in filteredBags">
@@ -82,13 +82,13 @@
 
     created () {
       var self = this;
-      
+
       if (this.auth == 1) {
         self.getWishlist();
       }
 
       self.accounts = this.account ? JSON.parse(this.account) : {};
-      
+
       self.getBag();
 
       Event.listen('addBag', function (response) {
@@ -138,7 +138,7 @@
         .catch(function (error) {
           console.log(error);
         });
-      }, 
+      },
 
       getBag: function () {
         var self = this;

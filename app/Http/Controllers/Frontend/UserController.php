@@ -18,10 +18,9 @@ class UserController extends BaseController
     protected $redirectAfterSaveAddress = '/account/address';
     protected $redirectAfterSavePassword = '/account/reset-password';
     protected $redirectAfterAddWishlist = '/account/wishlist';
-    protected $redirectAfterSaveShippingAddress = '/checkout/shipping';
     protected $redirectAfterSaveShippingOption = '/checkout/billing';
     protected $redirectAfterSaveBilling = '/checkout/billing';
-    protected $redirectAfterNewShippingAddress = '/checkout';
+    protected $redirectAfterNewShippingAddress = '/checkout/shipping';
     protected $redirectAfterNewCC = '/checkout/billing';
     private $user;
 
@@ -86,12 +85,13 @@ class UserController extends BaseController
     	return view('users.credit_card', compact('user', 'cards', 'address'));
     }
 
-    public function saveCreditCard(Request $request)
+    public function creditCardSave(Request $request)
     {
     	$this->validate($request, [
     		'card_number' => 'required',
     		'expired_date' => 'required',
-    		'name_card' => 'required|min:2|max:255'
+    		'name_card' => 'required|min:2|max:255',
+            'address' => 'required'
     	]);
 
     	try {
@@ -138,13 +138,17 @@ class UserController extends BaseController
     	return view('users.address', compact('user', 'address'));
     }
 
-    public function saveAddress(Request $request)
+    public function addressSave(Request $request)
     {
     	$this->validate($request, [
     		'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'phone_number' => 'required|numeric',
             'postal' => 'required|numeric',
+            'address_line' => 'required',
+            'city' => 'required',
+            'province' => 'required',
+            'country' => 'required',
         ]);
 
         try {
@@ -168,10 +172,6 @@ class UserController extends BaseController
     		DB::commit();
 
             if ($request->has('checkout')) {
-                return redirect($this->redirectAfterSaveShippingAddress);
-            }
-
-            if ($request->has('checkout_new_address')) {
                 return redirect($this->redirectAfterNewShippingAddress);
             }
 
@@ -198,16 +198,19 @@ class UserController extends BaseController
 
     		DB::commit();
 
-            if ($request->has('checkout')) {
-                return redirect($this->redirectAfterSaveBilling);
-            }
-
-    		return redirect($this->redirectAfterSaveCC)->with(['success' => 'Save default credit card successfully!']);
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'credits' => $user->creditCards
+            ]);
 
         } catch (Exception $e) {
         	DB::rollBack();
 
-        	return back()->withErrors($e->getMessage());
+        	return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
         }
     }
 
@@ -225,16 +228,19 @@ class UserController extends BaseController
 
     		DB::commit();
 
-            if ($request->has('checkout')) {
-                return redirect($this->redirectAfterSaveShippingAddress);
-            }
-
-    		return redirect($this->redirectAfterSaveAddress)->with(['success' => 'Save default address successfully!']);
+    		return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'address' => $user->address
+            ]);
 
         } catch (Exception $e) {
         	DB::rollBack();
 
-        	return back()->withErrors($e->getMessage());
+        	return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
         }
     }
 
@@ -492,6 +498,150 @@ class UserController extends BaseController
     public function postShippingOption(Request $request)
     {
         return redirect($this->redirectAfterSaveShippingOption);
+    }
+
+    public function ccDestroy(Request $request)
+    {
+        try {
+            $user = $this->getUserActive();
+            $this->user
+                ->ccDestroy($request->input('id'));
+
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'credits' => $user->creditCards
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
+        }
+    }
+
+    public function addressDestroy(Request $request)
+    {
+        try {
+            $user = $this->getUserActive();
+            $this->user
+                ->addressDestroy($request->input('id'));
+
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'address' => $user->address
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
+        }
+    }
+
+    public function addressEdit($id)
+    {
+        try {
+            $user = $this->getUserActive();
+            $address = $this->user
+                ->getAddressById($id);
+
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'address' => $address
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
+        }
+    }
+
+    public function addressUpdate(Request $request, $id)
+    {
+        $this->validate($request, [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone_number' => 'required|numeric',
+            'postal' => 'required|numeric',
+            'address_line' => 'required',
+            'city' => 'required',
+            'province' => 'required',
+            'country' => 'required',
+        ]);
+
+        try {
+            $user = $this->getUserActive();
+            $this->user
+                ->persistAddress($request, $id);
+
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'address' => $user->address
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
+        }
+    }
+
+    public function ccEdit($id)
+    {
+        try {
+            $user = $this->getUserActive();
+            $credit = $this->user
+                ->getCreditCardById($id);
+
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'credit' => $credit
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
+        }
+    }
+
+    public function ccUpdate(Request $request, $id)
+    {
+        $this->validate($request, [
+            'card_number' => 'required',
+            'expired_date' => 'required',
+            'name_card' => 'required|min:2|max:255',
+            'address' => 'required'
+        ]);
+
+        try {
+            $user = $this->getUserActive();
+            $this->user
+                ->persistCreditCard($request, $id);
+
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'credits' => $user->creditCards
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],400);
+        }
     }
 
     public function preview()
