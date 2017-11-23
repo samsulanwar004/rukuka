@@ -89,7 +89,7 @@ class UserController extends BaseController
     public function creditCardSave(Request $request)
     {
     	$this->validate($request, [
-    		'card_number' => 'required',
+    		'card_number' => 'required|numeric',
     		'expired_date' => 'required',
     		'name_card' => 'required|min:2|max:255',
             'address' => 'required'
@@ -102,9 +102,7 @@ class UserController extends BaseController
                 $cardNumber = $request->input('card_number');
                 $secureCode = $request->input('security_code');
 
-                $cardNumberArr = explode('-', $cardNumber);
-
-                $cardCode = substr($cardNumberArr[3], 1, 3);
+                $cardCode = substr($cardNumber, 13, 3);
 
                 if ($secureCode != $cardCode) {
                     throw new Exception("Security code invalid!", 1);

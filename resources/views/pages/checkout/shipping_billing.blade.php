@@ -320,8 +320,6 @@
 <script type="text/javascript">
   $(function () {
 
-    $('#card-number').mask("9999-9999-9999-9999");
-    $('#card-number-modal').mask("9999-9999-9999-9999");
     $('#expired-date').mask("99/99");
     $('#expired-date-modal').mask("99/99");
 

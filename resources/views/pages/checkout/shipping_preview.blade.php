@@ -114,9 +114,9 @@
 
       var card = $('#card-number-hidden').val();
 
-      var cardNumber = card.substring(16);
+      var cardNumber = card.substring(13);
 
-      $('#card-number').html('****-****-****-*'+cardNumber);
+      $('#card-number').html('*************'+cardNumber);
 
      $("#continue").on('click', function (e) {
        e.preventDefault();

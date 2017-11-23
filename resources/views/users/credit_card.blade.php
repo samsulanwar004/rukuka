@@ -26,8 +26,11 @@
                   {{ csrf_field() }}
                   <div class="uk-margin-small uk-grid-small" uk-grid>
                   <div>
-                    Credit or debit card number <span id="card"></span>
+                    Credit or debit card number <br>
+                    <div class="uk-inline">
+                      <span class="uk-form-icon uk-form-icon-flip"><img src="/images/default_card.png" id="card-img"></span>
                       <input class="uk-input uk-input-small" name="card_number" id="card-number" type="text" required="required">
+                    </div>
                   </div>
                   <div class="uk-inline">
                     <a class="uk-icon-link" uk-icon="icon: question"></a>
@@ -75,7 +78,7 @@
               </div>
               <div class="uk-modal-footer uk-text-right">
                   <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-                  <button class="uk-button uk-button-secondary" id="modal-submit">Save</button>
+                  <button class="uk-button uk-button-secondary" id="modal-submit" disabled="disabled">Save</button>
               </div>
             </div>
           </div>
@@ -95,8 +98,11 @@
           		{{ csrf_field() }}
               <div class="uk-margin-small uk-grid-small" uk-grid>
                   <div>
-                    Credit or debit card number <span id="card"></span>
+                    Credit or debit card number <br>
+                    <div class="uk-inline">
+                      <span class="uk-form-icon uk-form-icon-flip"><img src="/images/default_card.png" id="card-img"></span>
                       <input class="uk-input uk-input-small" name="card_number" id="card-number" type="text" required="required" value="{{ old('card_number') }}">
+                    </div>                      
                   </div>
                   <div class="uk-inline">
                     <a class="uk-icon-link" uk-icon="icon: question"></a>
@@ -141,7 +147,7 @@
               </div>
               <div class="uk-margin-small uk-grid-small" uk-grid>
                   <div>
-                      <input type="submit" name="save" class="uk-button uk-button-secondary" value="save"> <a href="{{ route('user.address') }}" class="uk-button uk-button-default">New Address</a>
+                      <input type="submit" name="save" class="uk-button uk-button-secondary" value="save" disabled="disabled" id="submit"> <a href="{{ route('user.address') }}" class="uk-button uk-button-default">New Address</a>
                   </div>
               </div>
             </form>
@@ -161,10 +167,26 @@
 	$(function () {
 
       $('#card-number').validateCreditCard(function(result) {
-        $('#card').html(result.card_type == null ? '' : result.card_type.name);
+        var card = result.card_type == null ? '' : result.card_type.name;
+        if (result.valid) {
+          $('#submit').removeAttr('disabled');
+          $('#modal-submit').removeAttr('disabled');
+        } else {
+          $('#submit').attr('disabled', 'disabled');
+          $('#modal-submit').attr('disabled', 'disabled');
+        }
+
+        if (card == 'visa') {
+          $('#card-img').attr('src', '/images/visa.png');
+        } else if (card == 'mastercard') {
+          $('#card-img').attr('src', '/images/mastercard.png');
+        } else if (card == 'discover') {
+          $('#card-img').attr('src', '/images/discover.png');
+        } else {
+          $('#card-img').attr('src', '/images/default_card.png');
+        }
       });
 
-      $('#card-number').mask("9999-9999-9999-9999");
       $('#expired-date').mask("99/99");
 
       $('#modal-submit').on('click',  function () {
