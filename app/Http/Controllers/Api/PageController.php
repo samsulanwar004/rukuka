@@ -14,18 +14,45 @@ class PageController extends BaseApiController
     {
     	try {
     		if ($parent == 'designers') {
-	    		$desingers = (new DesignerRepository)->getDesigners();
+	    		$designers = (new DesignerRepository)->getDesigners();
 
-	    		return $this->success($desingers,200, true);
+	    		return $this->success($designers,200, true);
 	    	} else {
 	    		if ($parent == null) {
+	    		    //Designer List
                     $categories = (new CategoryRepository)->getCategories();
-
                     $categories = collect($categories)->mapWithKeys(function ($item) {
                         return [strtolower($item['name']) => $item['child']];
                     })->toArray();
-
                     $categories['designers'] = (new DesignerRepository)->getDesigners();
+
+                    //Designer Navigation
+                    $designersResult = (new DesignerRepository)->getDesignersNav();
+                    $designersResult = collect($designersResult)->mapWithKeys(function ($item) {
+                        return [strtolower($item['name']) => $item['content']];
+                    })->toArray();
+                    $categories['designers_nav'] = $designersResult;
+
+                    //Women Navigation
+                    $womensResult = (new DesignerRepository)->getWomensNav();
+                    $womensResult = collect($womensResult)->mapWithKeys(function ($item) {
+                        return [strtolower($item['name']) => $item['content']];
+                    })->toArray();
+                    $categories['womens_nav'] = $womensResult;
+
+                    //Men Navigation
+                    $MensResult = (new DesignerRepository)->getMensNav();
+                    $MensResult = collect($MensResult)->mapWithKeys(function ($item) {
+                        return [strtolower($item['name']) => $item['content']];
+                    })->toArray();
+                    $categories['mens_nav'] = $MensResult;
+
+                    //Kid Navigation
+                    $KidsResult = (new DesignerRepository)->getKidsNav();
+                    $KidsResult = collect($KidsResult)->mapWithKeys(function ($item) {
+                        return [strtolower($item['name']) => $item['content']];
+                    })->toArray();
+                    $categories['kids_nav'] = $KidsResult;
 
                     return $this->success($categories, 200, true);
                 } else {
