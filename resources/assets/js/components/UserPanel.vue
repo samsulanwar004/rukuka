@@ -77,7 +77,8 @@
       'bag_api',
       'account',
       'product_link',
-      'checkout_link'
+      'checkout_link',
+      'api_token'
     ],
 
     created () {
@@ -158,7 +159,9 @@
 
       getWishlist: function () {
         var self = this;
-        axios.get(this.wishlist_api, {
+        var api_token = this.api_token;
+        axios.post(this.wishlist_api, {
+          api_token: api_token
         })
         .then(function (response) {
           if (typeof response.data.data !== 'undefined') {

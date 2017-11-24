@@ -153,7 +153,7 @@ class NavContentSeeder extends Seeder
                 "dataenum" => null,
                 "helper" => null,
                 "created_at" => date('Y-m-d H:i:s'),
-                "group_setting" => "Mmen Navigation",
+                "group_setting" => "Men Navigation",
                 "label" => "Men - Blog Image",
             ],
             [
@@ -262,7 +262,7 @@ class NavContentSeeder extends Seeder
                 "helper" => null,
                 "created_at" => date('Y-m-d H:i:s'),
                 "group_setting" => "Kids Navigation",
-                "label" => "Women - Blog Image",
+                "label" => "Kid - Blog Image",
             ],
             [
                 "name" => "kid_blog_url",

@@ -26,7 +26,7 @@
     </div>
  </div>
  <div class="uk-panel uk-margin-small-top">
-    <a href="#" class="uk-button uk-button-small uk-button-danger uk-width-1-1" id="continue">C O N T I N U E</a>
+    <button class="uk-button uk-button-small uk-button-danger uk-width-1-1" id="continue">C O N T I N U E</button>
  </div>
  <hr>
  <div class="uk-card uk-card-default uk-card-border uk-card-small">

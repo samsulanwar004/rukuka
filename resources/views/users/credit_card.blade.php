@@ -187,7 +187,7 @@
         }
       });
 
-      $('#expired-date').mask("99/99");
+      $('#expired-date').mask("99/9999");
 
       $('#modal-submit').on('click',  function () {
         $('#submit').click();
