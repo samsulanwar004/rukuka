@@ -12,7 +12,9 @@
           <hr>
         </div>
         <div class="uk-width-1-3@m uk-margin-top uk-margin-bottom">
-          <h4>Other people also read</h4>
+          <div class="uk-hidden@m">
+            <h4>Other people also read</h4>
+          </div>
           <div class="uk-grid-small" uk-grid>
             <div class="uk-width-1-1@m uk-width-1-3 uk-inline">
                 <div class="uk-inline">
