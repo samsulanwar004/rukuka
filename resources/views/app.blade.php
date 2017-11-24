@@ -19,7 +19,13 @@
       <div id="preloader">
         <div id="status">&nbsp;</div>
       </div>
-      @include('partials.nav')
+      <div class="uk-visible@m">
+        @include('partials.nav')
+      </div>
+      <div class="uk-hidden@m">
+        @include('partials.mobile_nav')
+      </div>
+
       @yield('content')
       @include('partials.footer')
     </div>
