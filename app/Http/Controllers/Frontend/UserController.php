@@ -81,6 +81,7 @@ class UserController extends BaseController
 
     	$cards = $user->creditCards->map(function ($entry) {
             return [
+                'id' => $entry->id,
                 'card_number' => $this->user->decryptCreditCard($entry->card_number),
                 'expired_date' => $entry->expired_date,
                 'name_card' => $entry->name_card,
@@ -507,6 +508,7 @@ class UserController extends BaseController
         $user = $this->getUserActive();
         $creditcards = $user->creditcards->map(function ($entry) {
             return [
+                'id' => $entry->id,
                 'card_number' => $this->user->decryptCreditCard($entry->card_number),
                 'expired_date' => $entry->expired_date,
                 'name_card' => $entry->name_card,
@@ -629,8 +631,15 @@ class UserController extends BaseController
     {
         try {
             $user = $this->getUserActive();
-            $credit = $this->user
+            $creditCard = $this->user
                 ->getCreditCardById($id);
+
+            $credit = new \stdClass;
+            $credit->id = $creditCard->id;
+            $credit->card_number = $this->user->decryptCreditCard($creditCard->card_number);
+            $credit->expired_date = $creditCard->expired_date;
+            $credit->name_card = $creditCard->name_card;
+            $credit->address_id = $creditCard->address_id;
 
             return response()->json([
                 'status' => 'ok',
@@ -683,6 +692,7 @@ class UserController extends BaseController
             ->getCreditCardDefault();
 
         $defaultCreditcard = new \stdClass;
+        $defaultCreditcard->id = $creditCard->id;
         $defaultCreditcard->card_number = $this->user->decryptCreditCard($creditCard->card_number);
         $defaultCreditcard->expired_date = $creditCard->expired_date;
         $defaultCreditcard->name_card = $creditCard->name_card;
