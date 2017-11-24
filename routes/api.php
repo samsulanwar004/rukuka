@@ -33,3 +33,7 @@ Route::group([
 ], function () {
 	Route::post('wishlist/', 'Api\UserController@wishlist')->name('wishlist');
 });
+
+// start local address
+Route::get('v1/countries', 'Api\LocalAddressController@getAllCountry')->name('get.all.country');
+// end local address

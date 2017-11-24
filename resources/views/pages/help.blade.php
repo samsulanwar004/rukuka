@@ -16,9 +16,9 @@
             <div class="uk-width-4-5@m">
 
               <div class="uk-text-justify uk-navbar-dropdown-grid uk-child-width-1-2" uk-grid>
-                  <div class="uk-width-1-4">
+                  <div class="uk-width-1-4@m">
 
-                      <ul class="uk-nav uk-navbar-dropdown-nav uk-text-uppercase">
+                      <ul class="uk-list uk-text-uppercase uk-text-meta">
                           <li><h4>Lets us help you</h4></li>
                           <li><a href="{{ URL::to('help/order-status') }}">Order Status</a></li>
                           <li><a href="{{ URL::to('help/registration-qa') }}">Registration Q & A</a></li>
@@ -39,7 +39,7 @@
                           <li><a href="{{ URL::to('help/size-charts') }}">Size Charts</a></li>
                       </ul>
                   </div>
-                  <div class="uk-width-3-4">
+                  <div class="uk-width-3-4@m">
                       <div class="scroll">
                           <h3>{!! $page[0]['title'] !!}</h3>
                           {!! $page[0]['content']!!}
