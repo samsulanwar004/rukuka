@@ -12,7 +12,7 @@
               </div>
               <div class="uk-width-1-3@m">
                 <div class="uk-panel uk-text-center">
-                  <a href="/" class="uk-link-reset"><img src="/images/logo-kukaindonesia.jpg" alt="" width="90"></a>
+                  <a href="/" class="uk-link-reset"><img src="/images/logo-kukaindonesia.png" alt="" width="90"></a>
                 </div>
               </div>
               <user-panel
