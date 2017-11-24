@@ -31,5 +31,5 @@ Route::group([
 	'prefix' => 'v1', 
 	'middleware' => 'auth:api'
 ], function () {
-	Route::get('wishlist/', 'Api\UserController@wishlist')->name('wishlist');
+	Route::post('wishlist/', 'Api\UserController@wishlist')->name('wishlist');
 });
