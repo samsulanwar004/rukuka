@@ -8,16 +8,21 @@
       <div class="uk-panel uk-margin-top">
         <div class="uk-card uk-card-border uk-card-small">
           <div class="uk-card-body">
-            <ul class="uk-grid" uk-grid>
-            @foreach($category as $value)
-              <li><a href="{{ URL::to('blog/category/'.$value->slug)}}"><h3>{{$value->name}}</h3></a></li>
-            @endforeach
-            <li> <a href="#"> <h3>Winter</h3></a></li>
-            <li> <a href="#"> <h3>Daily</h3> </a> </li>
-            <li> <a href="#"> <h3>Party</h3> </a> </li>
-            <li> <a href="#"> <h3>Beach</h3> </a> </li>
-            <li> <a href="#"> <h3>Outdoor</h3> </a> </li>
-            </ul>
+            <div class="uk-visible@m">
+              <ul class="uk-grid" uk-grid>
+              @foreach($category as $value)
+                <li><a href="{{ URL::to('blog/category/'.$value->slug)}}"><h3>{{$value->name}}</h3></a></li>
+              @endforeach
+              </ul>
+            </div>
+            <div class="uk-hidden@m">
+              <ul class="uk-grid" uk-grid>
+              @foreach($category as $value)
+                <li><a href="{{ URL::to('blog/category/'.$value->slug)}}"><h5>{{$value->name}}</h5></a></li>
+              @endforeach
+              </ul>
+            </div>
+
           </div>
         </div>
       </div>
