@@ -19,9 +19,10 @@ class UserController extends BaseController
     protected $redirectAfterSavePassword = '/account/reset-password';
     protected $redirectAfterAddWishlist = '/account/wishlist';
     protected $redirectAfterSaveShippingOption = '/checkout/billing';
-    protected $redirectAfterSaveBilling = '/checkout/billing';
+    protected $redirectAfterSaveBilling = '/checkout/review';
     protected $redirectAfterNewShippingAddress = '/checkout/shipping';
     protected $redirectAfterNewCC = '/checkout/billing';
+    protected $redirectAfterNewBillingAddress = '/checkout/billing';
     private $user;
 
     public function __construct(UserRepository $user)
@@ -88,7 +89,7 @@ class UserController extends BaseController
     public function creditCardSave(Request $request)
     {
     	$this->validate($request, [
-    		'card_number' => 'required',
+    		'card_number' => 'required|numeric',
     		'expired_date' => 'required',
     		'name_card' => 'required|min:2|max:255',
             'address' => 'required'
@@ -96,6 +97,18 @@ class UserController extends BaseController
 
     	try {
     		DB::beginTransaction();
+
+            if ($request->has('security_code')) {
+                $cardNumber = $request->input('card_number');
+                $secureCode = $request->input('security_code');
+
+                $cardCode = substr($cardNumber, 13, 3);
+
+                if ($secureCode != $cardCode) {
+                    throw new Exception("Security code invalid!", 1);
+                }
+                
+            }
 
     		$user = $this->getUserActive();
 
@@ -119,7 +132,7 @@ class UserController extends BaseController
 
             if ($request->has('checkout_new_card')) {
                 return redirect($this->redirectAfterNewCC);
-            }
+            }            
 
     		return redirect($this->redirectAfterSaveCC)->with(['success' => 'Save credit card successfully!']);
     	} catch (Exception $e) {
@@ -173,6 +186,10 @@ class UserController extends BaseController
 
             if ($request->has('checkout')) {
                 return redirect($this->redirectAfterNewShippingAddress);
+            }
+
+            if ($request->has('checkout_address_billing')) {
+                return redirect($this->redirectAfterNewBillingAddress);
             }
 
     		return redirect($this->redirectAfterSaveAddress)->with(['success' => 'Save address book successfully!']);
@@ -472,11 +489,11 @@ class UserController extends BaseController
     public function showShippingOptionPage()
     {
         $user = $this->getUserActive();
-        $address = $this->user
+        $defaultAddress = $this->user
             ->setUser($user)
             ->getAddressDefault();
 
-        return view('pages.checkout.shipping_option', compact('address'));
+        return view('pages.checkout.shipping_option', compact('defaultAddress'));
     }
 
     public function showShippingBillingPage()
@@ -644,9 +661,26 @@ class UserController extends BaseController
         }
     }
 
-    public function preview()
+    public function showReviewPage()
     {
-      return view('pages.checkout.shipping_preview');
+        $user = $this->getUserActive();
+        $bag = new BagService;
+        $defaultCreditcard = $this->user
+            ->setUser($user)
+            ->getCreditCardDefault();
+
+        $defaultAddress = $this->user
+            ->setUser($user)
+            ->getAddressDefault();
+        $bag->get(self::INSTANCE_SHOP);
+
+        $total = $bag->subtotal();
+
+        return view('pages.checkout.shipping_preview', compact(
+            'defaultCreditcard',
+            'defaultAddress',
+            'total'
+        ));
     }
 
 }
