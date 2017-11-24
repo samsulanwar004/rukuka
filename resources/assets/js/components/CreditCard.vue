@@ -9,8 +9,13 @@
                          <input class="uk-radio" type="radio" name="default" :checked="credit.is_default ? true : false" v-on:click="changeDefault(credit.id)">
                       </td>
                       <td>
-                         {{ credit.card_number | mask}}
+                         {{ credit.card_number | card }}
                       </td>
+                   </tr>
+                   <tr>
+                      <td>
+                      </td>
+                      <td>{{ credit.card_number | mask}}</td>
                    </tr>
                    <tr>
                       <td>
@@ -55,8 +60,11 @@
               <input type="hidden" name="id" :value="credit.id">
               <div class="uk-margin-small uk-grid-small" uk-grid>
                   <div>
-                    Credit or debit card number <span id="card"></span>
+                    Credit or debit card number <br>
+                    <div class="uk-inline">
+                      <span class="uk-form-icon uk-form-icon-flip"><img src="/images/default_card.png" id="card-img"></span>
                       <input class="uk-input uk-input-small" name="card_number" id="card-number" type="text" :value="credit.card_number" required="required">
+                    </div>
                   </div>
                   <div class="uk-inline">
                     <a class="uk-icon-link" uk-icon="icon: question"></a>
@@ -110,6 +118,7 @@
 </template>
 
 <script>
+    require('../jquery.creditCardValidator');
     import axios from 'axios';
     export default {
         props: [
@@ -255,7 +264,75 @@
             var code = value.substring(13);
 
             return '*************'+code;
+          },
+
+          card: function (number) {
+            // visa
+            var re = new RegExp("^4");
+            if (number.match(re) != null)
+                return "Visa";
+
+            // Mastercard 
+            // Updated for Mastercard 2017 BINs expansion
+             if (/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/.test(number)) 
+                return "Mastercard";
+
+            // AMEX
+            re = new RegExp("^3[47]");
+            if (number.match(re) != null)
+                return "AMEX";
+
+            // Discover
+            re = new RegExp("^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)");
+            if (number.match(re) != null)
+                return "Discover";
+
+            // Diners
+            re = new RegExp("^36");
+            if (number.match(re) != null)
+                return "Diners";
+
+            // Diners - Carte Blanche
+            re = new RegExp("^30[0-5]");
+            if (number.match(re) != null)
+                return "Diners - Carte Blanche";
+
+            // JCB
+            re = new RegExp("^35(2[89]|[3-8][0-9])");
+            if (number.match(re) != null)
+                return "JCB";
+
+            // Visa Electron
+            re = new RegExp("^(4026|417500|4508|4844|491(3|7))");
+            if (number.match(re) != null)
+                return "Visa Electron";
+
+            return "";
           }
+        },
+
+        mounted () {
+          $('#card-number').validateCreditCard(function(result) {
+            var card = result.card_type == null ? '' : result.card_type.name;
+            if (result.valid) {
+              $('#submit').removeAttr('disabled');
+              $('#modal-submit').removeAttr('disabled');
+            } else {
+              $('#submit').attr('disabled', 'disabled');
+              $('#modal-submit').attr('disabled', 'disabled');
+            }
+
+            if (card == 'visa') {
+              $('#card-img').attr('src', '/images/visa.png');
+            } else if (card == 'mastercard') {
+              $('#card-img').attr('src', '/images/mastercard.png');
+            } else if (card == 'discover') {
+              $('#card-img').attr('src', '/images/discover.png');
+            } else {
+              $('#card-img').attr('src', '/images/default_card.png');
+            }
+          });
         }
     }
+
 </script>

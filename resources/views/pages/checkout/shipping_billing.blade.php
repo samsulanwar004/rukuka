@@ -66,8 +66,11 @@
                 <input type="hidden" name="checkout_new_card" value="ok">
                 <div class="uk-margin-small uk-grid-small" uk-grid>
                 <div>
-                  Credit or debit card number <span id="card"></span>
-                    <input class="uk-input uk-input-small" name="card_number" id="card-number-modal" type="text" required="required">
+                  Credit or debit card number <br>
+                    <div class="uk-inline">
+                      <span class="uk-form-icon uk-form-icon-flip"><img src="/images/default_card.png" id="card-img-modal"></span>
+                      <input class="uk-input uk-input-small" name="card_number" id="card-number-modal" type="text" required="required">
+                    </div>
                 </div>
                 <div class="uk-inline">
                   <a class="uk-icon-link" uk-icon="icon: question"></a>
@@ -317,11 +320,33 @@
 
 @section('footer_scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+<script src="{{ elixir('js/creditcard.js') }}"></script>
 <script type="text/javascript">
   $(function () {
 
     $('#expired-date').mask("99/99");
     $('#expired-date-modal').mask("99/99");
+
+    $('#card-number-modal').validateCreditCard(function(result) {
+      var card = result.card_type == null ? '' : result.card_type.name;
+      if (result.valid) {
+        $('#submit').removeAttr('disabled');
+        $('#modal-submit').removeAttr('disabled');
+      } else {
+        $('#submit').attr('disabled', 'disabled');
+        $('#modal-submit').attr('disabled', 'disabled');
+      }
+
+      if (card == 'visa') {
+        $('#card-img-modal').attr('src', '/images/visa.png');
+      } else if (card == 'mastercard') {
+        $('#card-img-modal').attr('src', '/images/mastercard.png');
+      } else if (card == 'discover') {
+        $('#card-img-modal').attr('src', '/images/discover.png');
+      } else {
+        $('#card-img-modal').attr('src', '/images/default_card.png');
+      }
+    });
 
     $("#continue").on('click', function (e) {
        e.preventDefault();
