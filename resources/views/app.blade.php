@@ -24,6 +24,9 @@
       </div>
       <div class="uk-hidden@m">
         @include('partials.mobile_nav')
+        <div id="offcanvas-overlay-slide" uk-offcanvas="overlay: true">
+          @include('partials.off_canvas')
+        </div>
       </div>
 
       @yield('content')
