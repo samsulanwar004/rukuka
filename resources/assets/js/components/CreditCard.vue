@@ -9,7 +9,7 @@
                          <input class="uk-radio" type="radio" name="default" :checked="credit.is_default ? true : false" v-on:click="changeDefault(credit.id)">
                       </td>
                       <td>
-                         {{ credit.card_number }}
+                         {{ credit.card_number | mask}}
                       </td>
                    </tr>
                    <tr>
@@ -248,6 +248,14 @@
             submitUpdate: function () {
               $('#submit-edit').click();
             }
+        },
+
+        filters: {
+          mask: function (value) {
+            var code = value.substring(13);
+
+            return '*************'+code;
+          }
         }
     }
 </script>

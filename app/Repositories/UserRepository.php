@@ -573,4 +573,12 @@ class UserRepository
 			->delete();
 	}
 
+	public function getCreditCardDefault()
+	{
+		$user = $this->getUser();
+		return CreditCard::where('is_default', 1)
+			->where('users_id', $user->id)
+			->first();
+	}
+
 }

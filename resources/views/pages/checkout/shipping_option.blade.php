@@ -54,12 +54,13 @@
             <hr class="uk-margin-small">
             <div>
                 <ul class="uk-list uk-text-meta">
-                    <li>{{ $address->first_name }} {{ $address->last_name}}</li>
-                    <li>{{ $address->address_line }}</li>
-                    <li>{{ $address->city }}</li>
-                    <li>{{ $address->city }}, {{ $address->country }} {{ $address->postal }}</li>
-                    <li>{{ $address->country }}</li>
-                    <li>{{ $address->phone_number }}</li>
+                    <li>{{ $defaultAddress->first_name }} {{ $defaultAddress->last_name}}</li>
+                    <li>{{ $defaultAddress->company }}</li>
+                    <li>{{ $defaultAddress->address_line }}</li>
+                    <li>{{ $defaultAddress->city }}</li>
+                    <li>{{ $defaultAddress->city }}, {{ $defaultAddress->country }} {{ $defaultAddress->postal }}</li>
+                    <li>{{ $defaultAddress->country }}</li>
+                    <li>{{ $defaultAddress->phone_number }}</li>
                 </ul>
             </div>
             <hr class="uk-margin-small">
