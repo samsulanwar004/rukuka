@@ -12,7 +12,7 @@
               </div>
               <div class="uk-width-1-3@m">
                 <div class="uk-panel uk-text-center">
-                  <a href="/" class="uk-link-reset"><img src="/images/logo-kukaindonesia.png" alt="" width="90"></a>
+                  <a href="/" class="uk-link-reset"><img src="/images/logo-kukaindonesia.jpg" alt="" width="90"></a>
                 </div>
               </div>
               <user-panel
@@ -22,10 +22,11 @@
                 login_link="{{ route('login') }}"
                 auth="{{ Auth::check() ? 1 : 0 }}"
                 account="{{ Auth::user('web') }}"
-                wishlist_api="{{ route('wishlist', ['api_token' => Auth::user('web')->api_token]) }}"
+                wishlist_api="{{ route('wishlist') }}"
                 bag_api="{{ route('persist.bag') }}"
                 product_link="{{ route('product') }}"
                 checkout_link="{{ route('checkout') }}"
+                api_token="{{ Auth::user('web')->api_token }}"
               ></user-panel>
           </div>
 

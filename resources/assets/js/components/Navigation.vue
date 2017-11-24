@@ -92,7 +92,7 @@
                             </ul>
                             <hr class="uk-margin-small">
                             <a :href="designersNav.designer_designer_of_the_week_url">
-                              <img style="height: 150px" :src="'/'+designersNav.designer_of_the_week" :alt="designersNav.designer_designer_of_the_week_text">
+                              <img v-if="designersNav.designer_of_the_week != null" style="height: 150px" :src="'/'+designersNav.designer_of_the_week" :alt="designersNav.designer_designer_of_the_week_text">
                             </a>
                         </div>
                     </div>
@@ -109,7 +109,7 @@
                                 <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                                 <li>
                                     <a :href="womensNav.women_blog_url">
-                                        <img style="height: 150px" :src="'/'+womensNav.women_blog_image" :alt="Rukuka">
+                                        <img v-if="womensNav.women_blog_image != null" style="height: 150px" :src="'/'+womensNav.women_blog_image" :alt="Rukuka">
                                     </a>
                                 </li>
                                 <li><a href="#" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
@@ -170,7 +170,7 @@
                               <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                               <li>
                                   <a :href="mensNav.men_blog_url">
-                                      <img style="height: 150px" :src="'/'+mensNav.men_blog_image" :alt="Rukuka">
+                                      <img v-if="mensNav.men_blog_image != null" style="height: 150px" :src="'/'+mensNav.men_blog_image" :alt="Rukuka">
                                   </a>
                               </li>
                               <li><a href="#" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
@@ -232,7 +232,7 @@
                                   <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                                   <li>
                                       <a :href="kidsNav.kid_blog_url">
-                                          <img style="height: 150px" :src="'/'+kidsNav.kid_blog_image" :alt="Rukuka">
+                                          <img v-if="kidsNav.kid_blog_image != null" style="height: 150px" :src="'/'+kidsNav.kid_blog_image" :alt="Rukuka">
                                       </a>
                                   </li>
                                   <li><a href="#" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
