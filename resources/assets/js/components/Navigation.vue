@@ -21,6 +21,22 @@
                 if (typeof navigations.data.designers !== 'undefined') {
                    self.designers = navigations.data.designers;
                 }
+
+                if (typeof navigations.data.designers_nav !== 'undefined') {
+                   self.designersNav = navigations.data.designers_nav;
+                }
+
+                if (typeof navigations.data.womens_nav !== 'undefined') {
+                   self.womensNav = navigations.data.womens_nav;
+                }
+
+                if (typeof navigations.data.mens_nav !== 'undefined') {
+                  self.mensNav = navigations.data.mens_nav;
+                }
+
+                if (typeof navigations.data.kids_nav !== 'undefined') {
+                  self.kidsNav = navigations.data.kids_nav;
+                }
               }
             });
         },
@@ -34,6 +50,10 @@
                 menLink: this.men_link,
                 womenLink: this.women_link,
                 kidLink: this.kid_link,
+                designersNav: {},
+                womensNav: {},
+                mensNav: {},
+                kidsNav: {},
             }
         }
     }
@@ -50,42 +70,30 @@
               <li><a href="#">DESIGNERS</a>
                 <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                     <div class="uk-navbar-dropdown-grid" uk-grid>
-                      <div class="uk-width-1-5@m">
-                        <ul class="uk-nav uk-navbar-dropdown-nav">
-                          <li>FILTER NAVIGATION</li>
-                        </ul>
-                        <hr class="uk-margin-small">
-                          <ul class="uk-nav uk-navbar-dropdown-nav">
-                              <li class="uk-parent"><a href="#">Designers A-Z</a></li>
-                              <li class="uk-parent"><a href="#">New Designers</a></li>
-                              <li class="uk-parent"><a href="#">Clothings</a></li>
-                              <li class="uk-parent"><a href="#">Shoes & Accessories</a></li>
-
-                              <li><a href="#" class="uk-text-danger"><b>SEE ALL DESIGNERS</b></a></li>
-                          </ul>
-                      </div>
-                        <div class="uk-width-2-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
+                        <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
                           <div>
                             <ul class="uk-nav uk-navbar-dropdown-nav">
-                              <li>DESIGNERS</li>
+                              <li class="uk-text-bold">DESIGNERS</li>
                             </ul>
                             <hr class="uk-margin-small">
-                            <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2">
+                            <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-3">
+                                <li class="uk-parent uk-active">
+                                    <a href="/shop/designers/all">All</a>
+                                </li>
                               <li class="uk-parent" v-for="design in designers">
                                   <a :href="'/shop/designers/'+ design.slug ">{{ design.name }}</a>
                               </li>
                             </ul>
                           </div>
                       </div>
-
                         <div class="uk-width-2-5@m uk-margin-remove">
-                          <img src="/images/designers.jpg" alt="">
-                          <div class="uk-position-medium uk-position-bottom-center">
-                            <div class="uk-panel uk-background-default">
-                              Let's see designers of the week November 2017 <br>
-                              <a href="#" class="uk-button-text">Shop Now</a>
-                            </div>
-                          </div>
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li class="uk-text-bold">{{designersNav.designer_designer_of_the_week_text}}</li>
+                            </ul>
+                            <hr class="uk-margin-small">
+                            <a :href="designersNav.designer_designer_of_the_week_url">
+                              <img style="height: 150px" :src="'/'+designersNav.designer_of_the_week" :alt="designersNav.designer_designer_of_the_week_text">
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -96,17 +104,21 @@
                       <div class="uk-navbar-dropdown-grid" uk-grid>
                         <div class="uk-width-1-5@m">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li class="uk-active">What's New</li>
+                                <li class="uk-nav-header uk-text-bold">What's New</li>
                                 <li class="uk-parent"><a href="#">New Arrival</a></li>
-                                <li class="uk-nav-header">Featured Style Story</li>
-                                <li><img src="images/coll-women.jpg" alt=""></li>
+                                <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
+                                <li>
+                                    <a :href="womensNav.women_blog_url">
+                                        <img style="height: 150px" :src="'/'+womensNav.women_blog_image" :alt="Rukuka">
+                                    </a>
+                                </li>
                                 <li><a href="#" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
                             </ul>
                         </div>
                           <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
                             <div class="uk-width-2-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'">{{ cloth.name.toUpperCase() }}</li>
+                                <li v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'" class="uk-text-bold" >{{ cloth.name.toUpperCase() }}</li>
                               </ul>
                               <hr class="uk-margin-small">
                               <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
@@ -120,10 +132,10 @@
                             </div>
                             <div class="uk-width-1-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'shoes & accessories'">{{ cloth.name.toUpperCase() }}</li>
+                                <li v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'accessories'" class="uk-text-bold">{{ cloth.name.toUpperCase() }}</li>
                               </ul>
                               <hr class="uk-margin-small">
-                              <ul class="uk-nav uk-navbar-dropdown-nav" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'shoes & accessories'">
+                              <ul class="uk-nav uk-navbar-dropdown-nav" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
                                 <li class="uk-parent uk-active">
                                   <a href="/shop/womens/all">All</a>
                                 </li>
@@ -136,17 +148,13 @@
 
                           <div class="uk-width-1-5@m uk-margin-remove">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li class="uk-active">SPECIAL SIZE</li>
-                                <li class="uk-parent"><a href="#">Petite</a></li>
-                                <li class="uk-parent"><a href="#">Tall</a></li>
-                                <li class="uk-parent"><a href="#">Size 16</a></li>
-                                <li class="uk-nav-header">Our Shops</li>
-                                <li class="uk-parent"><a href="#">Mother's Day Shop</a></li>
-                                <li class="uk-parent"><a href="#">Ready-To-Party Collection</a></li>
-                                <li class="uk-parent"><a href="#">Wear-To-Work Shop</a></li>
-                                <li class="uk-parent"><a href="#">Garments For Good</a></li>
-                                <li class="uk-parent"><a href="#">Vacation Shop</a></li>
-                                <li class="uk-parent"><a href="#" class="uk-text-danger"><b>VISIT OUR SALE</b></a></li>
+                                <li class="uk-nav-header uk-text-bold">Our Designers</li>
+                                <li class="uk-parent"><a :href="womensNav.women_designer_1_url" >{{womensNav.women_designer_1_text}}</a></li>
+                                <li class="uk-parent"><a :href="womensNav.women_designer_2_url" >{{womensNav.women_designer_2_text}}</a></li>
+                                <li class="uk-parent"><a :href="womensNav.women_designer_3_url" >{{womensNav.women_designer_3_text}}</a></li>
+                                <li class="uk-parent"><a :href="womensNav.women_designer_4_url" >{{womensNav.women_designer_4_text}}</a></li>
+                                <li class="uk-parent"><a :href="womensNav.women_designer_5_url" >{{womensNav.women_designer_5_text}}</a></li>
+                                <li class="uk-parent"><a href="#" class="uk-text-danger"><b>ALL WOMEN'S SALE</b></a></li>
                             </ul>
                           </div>
                       </div>
@@ -157,10 +165,14 @@
                     <div class="uk-navbar-dropdown-grid" uk-grid>
                       <div class="uk-width-1-5@m">
                           <ul class="uk-nav uk-navbar-dropdown-nav">
-                              <li class="uk-active">What's New</li>
+                              <li class="uk-nav-header uk-text-bold">What's New</li>
                               <li class="uk-parent"><a href="#">New Arrival</a></li>
-                              <li class="uk-nav-header">Featured Style Story</li>
-                              <li><img src="images/coll-women.jpg" alt=""></li>
+                              <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
+                              <li>
+                                  <a :href="mensNav.men_blog_url">
+                                      <img style="height: 150px" :src="'/'+mensNav.men_blog_image" :alt="Rukuka">
+                                  </a>
+                              </li>
                               <li><a href="#" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
                           </ul>
                       </div>
@@ -168,7 +180,7 @@
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
                             <div class="uk-width-2-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'">{{ cloth.name.toUpperCase() }}</li>
+                                <li v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'" class="uk-text-bold">{{ cloth.name.toUpperCase() }}</li>
                               </ul>
                               <hr class="uk-margin-small">
                               <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2" v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
@@ -182,10 +194,10 @@
                             </div>
                             <div class="uk-width-1-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'shoes & accessories'">{{ cloth.name.toUpperCase() }}</li>
+                                <li v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'accessories'" class="uk-text-bold">{{ cloth.name.toUpperCase() }}</li>
                               </ul>
                               <hr class="uk-margin-small">
-                              <ul class="uk-nav uk-navbar-dropdown-nav" v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'shoes & accessories'">
+                              <ul class="uk-nav uk-navbar-dropdown-nav" v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
                                 <li class="uk-parent uk-active">
                                   <a href="/shop/mens/all">All</a>
                                 </li>
@@ -197,77 +209,85 @@
                           </div>
 
                         <div class="uk-width-1-5@m uk-margin-remove">
-                          <ul class="uk-nav uk-navbar-dropdown-nav">
-                              <li class="uk-active">SPECIAL SIZE</li>
-                              <li class="uk-parent"><a href="#">Petite</a></li>
-                              <li class="uk-parent"><a href="#">Tall</a></li>
-                              <li class="uk-parent"><a href="#">Size 16</a></li>
-                              <li class="uk-nav-header">Our Shops</li>
-                              <li class="uk-parent"><a href="#">Mother's Day Shop</a></li>
-                              <li class="uk-parent"><a href="#">Ready-To-Party Collection</a></li>
-                              <li class="uk-parent"><a href="#">Wear-To-Work Shop</a></li>
-                              <li class="uk-parent"><a href="#">Garments For Good</a></li>
-                              <li class="uk-parent"><a href="#">Vacation Shop</a></li>
-                              <li class="uk-parent"><a href="#" class="uk-text-danger"><b>VISIT OUR SALE</b></a></li>
-                          </ul>
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li class="uk-nav-header uk-text-bold">Our Designers</li>
+                                <li class="uk-parent"><a :href="mensNav.men_designer_1_url" >{{mensNav.men_designer_1_text}}</a></li>
+                                <li class="uk-parent"><a :href="mensNav.men_designer_2_url" >{{mensNav.men_designer_2_text}}</a></li>
+                                <li class="uk-parent"><a :href="mensNav.men_designer_3_url" >{{mensNav.men_designer_3_text}}</a></li>
+                                <li class="uk-parent"><a :href="mensNav.men_designer_4_url" >{{mensNav.men_designer_4_text}}</a></li>
+                                <li class="uk-parent"><a :href="mensNav.men_designer_5_url" >{{mensNav.men_designer_5_text}}</a></li>
+                                <li class="uk-parent"><a href="#" class="uk-text-danger"><b>ALL MEN'S SALE</b></a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
               </li>
               <li><a :href="kidLink">KIDS</a>
-                <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
-                    <div class="uk-navbar-dropdown-grid" uk-grid>
-                      <div class="uk-width-1-5@m">
-                          <ul class="uk-nav uk-navbar-dropdown-nav">
-                              <li class="uk-active">What's New</li>
-                              <li class="uk-parent"><a href="#">New Arrival</a></li>
-                              <li class="uk-nav-header">Featured Style Story</li>
-                              <li><img src="images/coll-women.jpg" alt=""></li>
-                              <li><a href="#" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
-                          </ul>
-                      </div>
-
-                        <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
-                            <div class="uk-width-2-3">
-                              <span v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'clothing'">{{ cloth.name }}</span>
-                              <hr class="uk-padding-remove">
-                              <ul class="uk-list uk-column-1-2" v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
-                                <li class="uk-parent uk-active">
-                                  <a href="/shop/kids/all">All</a>
-                                </li>
-                                <li class="uk-parent" v-for="cat in cloth.child">
-                                    <a :href="'/shop/kids/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
-                                </li>
+                  <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
+                      <div class="uk-navbar-dropdown-grid" uk-grid>
+                          <div class="uk-width-1-5@m">
+                              <ul class="uk-nav uk-navbar-dropdown-nav">
+                                  <li class="uk-nav-header uk-text-bold">What's New</li>
+                                  <li class="uk-parent"><a href="#">New Arrival</a></li>
+                                  <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
+                                  <li>
+                                      <a :href="kidsNav.kid_blog_url">
+                                          <img style="height: 150px" :src="'/'+kidsNav.kid_blog_image" :alt="Rukuka">
+                                      </a>
+                                  </li>
+                                  <li><a href="#" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
                               </ul>
-                            </div>
-                            <div class="uk-width-1-3">
+                          </div>
 
-                            </div>
-                        </div>
+                          <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
+                              <div class="uk-width-2-3">
+                                  <ul class="uk-nav uk-navbar-dropdown-nav">
+                                      <li v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'clothing'" class="uk-text-bold">{{ cloth.name.toUpperCase() }}</li>
+                                  </ul>
+                                  <hr class="uk-margin-small">
+                                  <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2" v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
+                                      <li class="uk-parent uk-active">
+                                          <a href="/shop/kids/all">All</a>
+                                      </li>
+                                      <li class="uk-parent" v-for="cat in cloth.child">
+                                          <a :href="'/shop/kids/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
+                                      </li>
+                                  </ul>
+                              </div>
+                              <div class="uk-width-1-3">
+                                  <ul class="uk-nav uk-navbar-dropdown-nav">
+                                      <li v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'accessories'" class="uk-text-bold">{{ cloth.name.toUpperCase() }}</li>
+                                  </ul>
+                                  <hr class="uk-margin-small">
+                                  <ul class="uk-nav uk-navbar-dropdown-nav" v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
+                                      <li class="uk-parent uk-active">
+                                          <a href="/shop/kids/all">All</a>
+                                      </li>
+                                      <li class="uk-parent" v-for="cat in cloth.child">
+                                          <a :href="'/shop/kids/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
 
-                        <div class="uk-width-1-5@m uk-margin-remove">
-                          <ul class="uk-nav uk-navbar-dropdown-nav">
-                              <li class="uk-active">SPECIAL SIZE</li>
-                              <li class="uk-parent"><a href="#">Petite</a></li>
-                              <li class="uk-parent"><a href="#">Tall</a></li>
-                              <li class="uk-parent"><a href="#">Size 16</a></li>
-                              <li class="uk-nav-header">Our Shops</li>
-                              <li class="uk-parent"><a href="#">Mother's Day Shop</a></li>
-                              <li class="uk-parent"><a href="#">Ready-To-Party Collection</a></li>
-                              <li class="uk-parent"><a href="#">Wear-To-Work Shop</a></li>
-                              <li class="uk-parent"><a href="#">Garments For Good</a></li>
-                              <li class="uk-parent"><a href="#">Vacation Shop</a></li>
-                              <li class="uk-parent"><a href="#" class="uk-text-danger"><b>VISIT OUR SALE</b></a></li>
-                          </ul>
-                        </div>
-                    </div>
-                </div>
+                          <div class="uk-width-1-5@m uk-margin-remove">
+                              <ul class="uk-nav uk-navbar-dropdown-nav">
+                                  <li class="uk-nav-header uk-text-bold">Our Designers</li>
+                                  <li class="uk-parent"><a :href="kidsNav.kid_designer_1_url" >{{kidsNav.kid_designer_1_text}}</a></li>
+                                  <li class="uk-parent"><a :href="kidsNav.kid_designer_2_url" >{{kidsNav.kid_designer_2_text}}</a></li>
+                                  <li class="uk-parent"><a :href="kidsNav.kid_designer_3_url" >{{kidsNav.kid_designer_3_text}}</a></li>
+                                  <li class="uk-parent"><a :href="kidsNav.kid_designer_4_url" >{{kidsNav.kid_designer_4_text}}</a></li>
+                                  <li class="uk-parent"><a :href="kidsNav.kid_designer_5_url" >{{kidsNav.kid_designer_5_text}}</a></li>
+                                  <li class="uk-parent"><a href="#" class="uk-text-danger"><b>ALL KID'S SALE</b></a></li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
               </li>
-              <li><a href="#">ECO TRAVEL</a>
               </li>
-              <li><a href="#">SALE</a>
+              <li><a href="">SALE</a>
               </li>
-              <li><a href="#">BLOG</a>
+              <li><a href="/blog">BLOG</a>
               </li>
           </ul>
       </div>
