@@ -8,7 +8,7 @@
 <div class="uk-grid-small uk-margin-top" uk-grid>
   <div class="uk-width-3-5@m">
     <div uk-grid>
-        <div class="uk-width-auto@m">
+        <div class="uk-width-auto@m uk-visible@m">
             <ul class="uk-tab-left" uk-tab="connect: #component-tab-left; animation: uk-animation-fade">
                 @foreach($product->images as $image)
                   <li><a href="#"><img src="/{{ $image->photo }}" alt="" width="80"></a></li>
@@ -22,6 +22,14 @@
                   <li><a href="#"><img src="/{{ $image->photo }}" alt="" width="450"></a></li>
                 @endforeach
             </ul>
+        </div>
+        <div class="uk-width-auto@m uk-hidden@m uk-margin-small">
+            <ul class="uk-margin-remove uk-padding-remove" uk-tab="connect: #component-tab-left; animation: uk-animation-fade">
+                @foreach($product->images as $image)
+                  <li><a href="#"><img src="/{{ $image->photo }}" alt="" width="50"></a></li>
+                @endforeach
+            </ul>
+
         </div>
     </div>
   </div>
@@ -123,7 +131,7 @@
     RATING FOR THIS PRODUCT : 3.5
   </div>
 </div>
-<div class="uk-grid" uk-grid>
+<div class="uk-grid uk-visible@m" uk-grid>
   <div class="uk-width-1-3@m">
     <div class="uk-card uk-card-border uk-card-small">
       <div class="uk-card-body">

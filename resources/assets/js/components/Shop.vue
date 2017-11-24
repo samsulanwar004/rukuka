@@ -1,5 +1,5 @@
 <template>
-    <div class="uk-grid-small uk-child-width-1-3@m uk-flex-center" uk-grid>
+    <div class="uk-grid-small uk-child-width-1-3@m uk-child-width-1-2 uk-flex-center" uk-grid>
         <div class="uk-panel uk-visible-toggle" v-for="product in products">
           <!-- start product -->
           <div class="uk-panel uk-text-left">
