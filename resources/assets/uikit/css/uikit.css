@@ -3578,8 +3578,9 @@ ul.uk-nav-sub {
  * Items
  */
 .uk-nav-primary > li > a {
-  font-size: 25px;
+  font-size: 18px;
   line-height: 1.5;
+  letter-spacing: 2px;
   color: #666;
 }
 /* Hover + Focus */
