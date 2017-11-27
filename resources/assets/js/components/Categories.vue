@@ -3,10 +3,10 @@
         <li class="uk-active">
           <a :href="'/shop/'+parent+'/all'">All</a>
         </li>
-        <li class="uk-parent">
+        <li :class="{'uk-parent':true, 'uk-parent uk-open': slug != 'all'}">
             <a href="#">{{ parent.toUpperCase() }}</a>
-            <ul class="uk-nav-sub">
-                <li v-for="category in categories">
+            <ul class="uk-nav-sub ">
+                <li v-for="category in categories" :class="{'uk-text-bold': slug == category.slug}">
                   <a :href="'/shop/'+parent+'/'+ category.slug ">{{ category.name }}</a>
                 </li>
             </ul>
@@ -16,10 +16,10 @@
         <li class="uk-active">
           <a :href="'/shop/'+parent+'/all'">All</a>
         </li>
-        <li class="uk-parent" v-for="category in categories">
+        <li :class="{'uk-parent':true, 'uk-parent uk-open': category_slug == category.name.toLowerCase() }" v-for="category in categories">
             <a href="#">{{ category.name.toUpperCase() }}</a>
             <ul class="uk-nav-sub">
-                <li v-for="cat in category.child">
+                <li v-for="cat in category.child" :class="{'uk-text-bold': slug == cat.slug}">
                   <a :href="'/shop/'+parent+'/'+ category.name.toLowerCase() +'/'+ cat.slug ">{{ cat.name }}</a>
                 </li>
             </ul>
@@ -29,7 +29,7 @@
 
 <script>
     export default {
-        props: ['api', 'parent'],
+        props: ['api', 'parent', 'category_slug', 'slug'],
         created() {
             var self = this;
             var api = this.api;
@@ -46,5 +46,7 @@
                 categories: {}
             }
         }
+
+
     }
 </script>
