@@ -167,8 +167,13 @@
     <span class="uk-text-lead">RELATED PRODUCT</span>
   </div>
 </div>
-
-<related api="{{ route('related', ['categoryId' => $product->product_categories_id]) }}"></related>
+<related 
+  api="{{ route('related', ['categoryId' => $product->product_categories_id]) }}"
+  product_api="{{ route('product.api') }}"
+  bag_api="{{ route('persist.bag') }}"
+  wishlist_api="{{ route('persist.wishlist') }}"
+  auth="{{ Auth::check() ? 1 : 0 }}"
+></related>
 <div class="uk-grid-small uk-margin-small-bottom uk-margin-medium-top uk-margin-xlarge-bottom">
   <div class="uk-panel uk-text-center">
     <button class="uk-button uk-button-secondary">SHOW ALL PRODUCT</button>
