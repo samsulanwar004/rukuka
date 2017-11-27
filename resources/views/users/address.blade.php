@@ -49,6 +49,13 @@
                   </div>
                   <div class="uk-margin-small uk-grid-small" uk-grid>
                     <div>
+                      country 
+                      <select id="form-country-empty" name="country" class="uk-input uk-input-small {{ $errors->has('country') ? ' uk-form-danger' : '' }}">  
+                      </select>
+                    </div>
+                  </div>
+                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                    <div>
                       City
                       <input class="uk-input uk-input-small" name="city" id="form-s-tel" type="text" value="{{ old('city') }}" required="required">
                     </div>
@@ -63,12 +70,6 @@
                     <div>
                       Postal
                       <input class="uk-input uk-input-small" name="postal" id="form-s-tel" type="text" value="{{ old('postal') }}" required="required">
-                    </div>
-                  </div>
-                  <div class="uk-margin-small uk-grid-small" uk-grid>
-                    <div>
-                      Country
-                      <input class="uk-input uk-input-small" name="country" id="form-s-tel" type="text" value="{{ old('country') }}" required="required">
                     </div>
                   </div>
                   <div class="uk-margin-small uk-grid-small" uk-grid>
@@ -120,6 +121,13 @@
               			<input class="uk-input uk-input-small {{ $errors->has('address_line') ? ' uk-form-danger' : '' }}" name="address_line" id="form-s-tel" type="text" value="{{ old('address_line') }}" required="required">
               		</div>
               	</div>
+                <div class="uk-margin-small uk-grid-small" uk-grid>
+                  <div>
+                    Country
+                    <select id="form-country-empty" name="country" class="uk-input uk-input-small {{ $errors->has('country') ? ' uk-form-danger' : '' }}">  
+                    </select>
+                  </div>
+                </div>
               	<div class="uk-margin-small uk-grid-small" uk-grid>
               		<div>
               			City
@@ -136,12 +144,6 @@
               		<div>
               			Postal
               			<input class="uk-input uk-input-small {{ $errors->has('postal') ? ' uk-form-danger' : '' }}" name="postal" id="form-s-tel" type="text" value="{{ old('postal') }}" required="required">
-              		</div>
-              	</div>
-              	<div class="uk-margin-small uk-grid-small" uk-grid>
-              		<div>
-              			Country
-              			<input class="uk-input uk-input-small" name="country" id="form-s-tel" type="text" value="{{ old('country') }}" required="required">
               		</div>
               	</div>
               	<div class="uk-margin-small uk-grid-small" uk-grid>
@@ -168,11 +170,59 @@
 @section('footer_scripts')
 
 <script type="text/javascript">
+
 	$(function () {
     $('#modal-submit').on('click', function () {
       $('#submit').click();
     });
 	});
 
+  $(document).ready(function(){
+      showListCountries();
+  });
+
+  function showListCountries(){
+    
+    var allOptionsCountry = '';
+    var selectedAlreadyExist = false;
+    var jqxhr = $.get( "/api/v1/countries", function(response) {
+      
+      if (response.error == '000') {
+
+        $.each(response.data, function( index, value ) {
+          
+          if ("{{old('country')}}" == value.countries_code) {
+
+            selectedAlreadyExist = true;
+            allOptionsCountry += '<option selected value="' + value.countries_code + '">'+ value.countries_name +'</option>'
+          
+          }else{
+
+            allOptionsCountry += '<option value="' + value.countries_code + '">'+ value.countries_name +'</option>'
+
+          }
+      
+        });
+
+      }else{
+
+        allOptionsCountry += '<option>'+ value.message +'</option>'
+      
+      }
+
+      if (selectedAlreadyExist == false) {
+
+        allOptionsCountry = '<option selected>Please select your country</option>' + allOptionsCountry;
+      
+      }
+
+      $('#form-country-empty').append(allOptionsCountry);
+
+    }).fail(function(xhr, status, error) {
+      
+      alert(error + ' (when load countries)');
+
+    });
+  }
 </script>
 @endsection
