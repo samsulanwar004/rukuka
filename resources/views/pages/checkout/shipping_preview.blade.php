@@ -31,13 +31,13 @@
               <div class="uk-grid uk-grid-small" grid>
                 <div class="uk-width-1-3@m">
                   <ul class="uk-list uk-text-meta">
-                      <li>{{ $defaultCreditcard->address->first_name }}</li>
-                      <li>{{ $defaultCreditcard->address->company }}</li>
-                      <li>{{ $defaultCreditcard->address->address_line }}</li>
-                      <li>{{ $defaultCreditcard->address->city }}</li>
-                      <li>{{ $defaultCreditcard->address->city }}, {{ $defaultCreditcard->address->country }} {{ $defaultCreditcard->address->postal }}</li>
-                      <li>{{ $defaultCreditcard->address->country }}</li>
-                      <li>{{ $defaultCreditcard->address->phone_number }}</li>
+                      <li>{{ $defaultCreditcard->first_name }}</li>
+                      <li>{{ $defaultCreditcard->company }}</li>
+                      <li>{{ $defaultCreditcard->address_line }}</li>
+                      <li>{{ $defaultCreditcard->city }}</li>
+                      <li>{{ $defaultCreditcard->city }}, {{ $defaultCreditcard->country }} {{ $defaultCreditcard->postal }}</li>
+                      <li>{{ $defaultCreditcard->country }}</li>
+                      <li>{{ $defaultCreditcard->phone_number }}</li>
                   </ul>
                 </div>
                 <div class="uk-width-1-3@m">
