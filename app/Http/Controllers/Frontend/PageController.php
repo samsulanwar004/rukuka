@@ -101,7 +101,7 @@ class PageController extends BaseController
 
     public function women()
     {
-        $settings = (new SettingRepository)->getSettingByGroup('Women Landing Page');
+        $settings = (new SettingRepository)->getSettingByGroup('Women Page');
 
         $women = collect($settings)->mapWithKeys(function ($item) {
             return [$item['name'] => $item['content']];
@@ -112,7 +112,7 @@ class PageController extends BaseController
 
     public function men()
     {
-        $settings = (new SettingRepository)->getSettingByGroup('Men Landing Page');
+        $settings = (new SettingRepository)->getSettingByGroup('Men Page');
 
         $men = collect($settings)->mapWithKeys(function ($item) {
             return [$item['name'] => $item['content']];
@@ -123,7 +123,7 @@ class PageController extends BaseController
 
     public function kids()
     {
-        $settings = (new SettingRepository)->getSettingByGroup('Kids Landing Page');
+        $settings = (new SettingRepository)->getSettingByGroup('Kids Page');
 
         $kids = collect($settings)->mapWithKeys(function ($item) {
             return [$item['name'] => $item['content']];
