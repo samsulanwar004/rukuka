@@ -10,7 +10,7 @@ class DesignerRepository
 
 	public function getDesigners()
 	{
-		return Designer::get()->toArray();
+		return Designer::whereNull('deleted_at')->get()->toArray();
 	}
 
     public function getDesignersNav()

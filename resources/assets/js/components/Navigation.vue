@@ -82,7 +82,7 @@
           <!-- <a class="uk-navbar-item uk-logo" href="#"><img src="images/logo.png" alt="" width="60"></a> -->
 
           <ul class="uk-navbar-nav">
-              <li><a href="#">DESIGNERS</a>
+              <li><a href="/shop/designers/all">DESIGNERS</a>
                 <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                     <div class="uk-navbar-dropdown-grid" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
