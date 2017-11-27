@@ -95,6 +95,7 @@ class PageController extends BaseApiController
 
             $related = $related->map(function ($entry) {
                 return [
+                    'id' => $entry->id,
                     'name' => $entry->name,
                     'slug' => $entry->slug,
                     'price' => $entry->sell_price,
