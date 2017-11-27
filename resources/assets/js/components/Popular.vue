@@ -18,9 +18,6 @@
           <br>
           {{ product.currency }} {{ product.price }}
         </div>
-        <!-- <div class="uk-card-footer">
-          <span class="uk-text-meta">Shirt<h4 class="uk-card-price">$400</h4></span>
-        </div> -->
       </div>
     </div>
     <!-- end product single -->
