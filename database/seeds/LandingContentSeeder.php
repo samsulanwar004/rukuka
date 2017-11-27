@@ -376,6 +376,7 @@ class LandingContentSeeder extends Seeder
             //WOMEN SEEDER
             [
                 "name" => "women_main_banner",
+                "helper" => 'Height: 600px, Width: 2000px',
                 "content_input_type" => "upload_image",
                 "dataenum" => null,
                 "helper" => null,
@@ -585,6 +586,7 @@ class LandingContentSeeder extends Seeder
             // MEN SEEDER
             [
                 "name" => "men_main_banner",
+                "helper" => 'Height: 600px, Width: 2000px',
                 "content_input_type" => "upload_image",
                 "dataenum" => null,
                 "helper" => null,
@@ -794,6 +796,7 @@ class LandingContentSeeder extends Seeder
             // KIDS SEEDER
             [
                 "name" => "kids_main_banner",
+                "helper" => 'Height: 600px, Width: 2000px',
                 "content_input_type" => "upload_image",
                 "dataenum" => null,
                 "helper" => null,
@@ -1000,7 +1003,7 @@ class LandingContentSeeder extends Seeder
                 "group_setting" => "Kids Page",
                 "label" => "Kids URL 5",
             ],
-            
+
         ];
 
         foreach($data as $k=>$d) {
