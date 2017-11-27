@@ -112,7 +112,7 @@
       </div>
       <div class="uk-text-center">
         View More
-        Pyjamas
+        <a href="{{ route('shop', ['categories' => strtolower($product->category->parent->parent->name) ,'category' => strtolower($product->category->parent->name), 'slug' => $product->category->slug]) }}">{{ $product->category->name }}</a>
         <a href="#" class="uk-text-muted">{{ $product->designer->name }}</a>
       </div>
       <div class="uk-text-center">
