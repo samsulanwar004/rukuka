@@ -33,13 +33,28 @@
         created() {
             var self = this;
             var api = this.api;
+            var sort_by = function(field, reverse, primer){
+
+                var key = primer ?
+                    function(x) {return primer(x[field])} :
+                    function(x) {return x[field]};
+
+                reverse = !reverse ? 1 : -1;
+
+                return function (a, b) {
+                    return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
+                }
+            };
             self.parent = this.parent;
             $.get(api, function(categories) {
               if (typeof categories.data !== 'undefined') {
-                self.categories = categories.data;
+                self.categories = categories.data.sort(sort_by('name', false, function(result){
+                    return result;
+                }));
               }
             });
         },
+
 
         data() {
             return {

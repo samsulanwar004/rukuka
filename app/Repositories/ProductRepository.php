@@ -29,7 +29,7 @@ class ProductRepository
         	$query->orderBy('id', 'desc');
         }
 
-        return $query->paginate(30);
+        return $query->paginate(12);
 	}
 
 	public function getProductBySlug($slug)
@@ -42,6 +42,7 @@ class ProductRepository
 	public function getMostProduct()
 	{
 		return $this->model()
+            ->inRandomOrder()
 			->take(4)
 			->get();
 	}
@@ -70,7 +71,7 @@ class ProductRepository
         	$query->orderBy('id', 'desc');
         }
 
-        return $query->paginate(30);
+        return $query->paginate(12);
 
 	}
 
@@ -108,7 +109,7 @@ class ProductRepository
             $this->setDesigner($this->getDesignerBySlug($category));
         }
 
-        return $query->paginate(30);
+        return $query->paginate(12);
 	}
 
 	public function setDesigner($value)
