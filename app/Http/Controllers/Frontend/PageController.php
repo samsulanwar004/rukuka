@@ -176,6 +176,7 @@ class PageController extends BaseController
                         'description' => $stock->product->content,
                         'currency' => $stock->product->currency,
                         'slug' => $stock->product->slug,
+                        'category_id' => $stock->product->category->id
                     ]
                 ];
 
@@ -263,7 +264,15 @@ class PageController extends BaseController
 
     public function showBagPage()
     {
-        return view('pages.bag');
+        $getBags = (new BagService)->get(self::INSTANCE_SHOP);
+        $categoryId = [];
+        foreach ($getBags as $bag) {
+            $categoryId[] = $bag->options->category_id;
+        }
+
+        $categoryId = $categoryId[array_rand($categoryId)];
+
+        return view('pages.bag', compact('categoryId'));
     }
 
     public function review()

@@ -55,6 +55,11 @@
 			$this->form[] = ['label'=>'Price','name'=>'price','type'=>'money','validation'=>'required|min:1|max:9','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'money','validation'=>'required|min:1|max:9','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Diskon','name'=>'diskon','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'gram'];
+			$this->form[] = ['label'=>'Length','name'=>'length','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
+			$this->form[] = ['label'=>'Width','name'=>'width','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
+			$this->form[] = ['label'=>'Height','name'=>'height','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
+			$this->form[] = ['label'=>'Diameter','name'=>'diameter','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
 			$this->form[] = ['label'=>'Is Active','name'=>'is_active','type'=>'checkbox','width'=>'col-sm-10','dataenum'=>'Active'];
 			$this->form[] = ['label'=>'Tags','name'=>'tags','type'=>'multitext','validation'=>'min:1|max:20','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
