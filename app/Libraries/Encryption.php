@@ -25,7 +25,7 @@ class Encryption
         $ciphertext = base64_decode($ciphertext);
         $ivSize = mcrypt_get_iv_size(self::CIPHER, self::MODE);
         if (strlen($ciphertext) < $ivSize) {
-            throw new Exception('Missing initialization vector');
+            throw new \Exception('Missing initialization vector');
         }
 
         $iv = substr($ciphertext, 0, $ivSize);
