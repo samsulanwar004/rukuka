@@ -102,7 +102,7 @@ Route::get('/home', [
     'uses' => 'Frontend\PageController@index',
 ]);
 
-Route::get('/shop/{categories}/{category}/{slug?}/{sale}', [
+Route::get('/shop/{categories}/{category}/{slug?}/{sale?}', [
     'as'   => 'shop',
     'uses' => 'Frontend\PageController@shop',
 ]);
