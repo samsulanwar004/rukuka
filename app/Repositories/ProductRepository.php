@@ -26,6 +26,7 @@ class ProductRepository
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
         } else {
+            $query->orderBy('updated_at', 'desc');
         	$query->orderBy('id', 'desc');
         }
 
@@ -42,6 +43,7 @@ class ProductRepository
         if ($request->has('price')) {
             $query->orderBy('sell_price', $request->input('price'));
         } else {
+            $query->orderBy('updated_at', 'desc');
             $query->orderBy('id', 'desc');
         }
 
@@ -69,6 +71,7 @@ class ProductRepository
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
         } else {
+        	$query->orderBy('updated_at', 'desc');
         	$query->orderBy('id', 'desc');
         }
 
@@ -97,6 +100,7 @@ class ProductRepository
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
         } else {
+            $query->orderBy('updated_at', 'desc');
         	$query->orderBy('id', 'desc');
         }
 
@@ -110,13 +114,14 @@ class ProductRepository
 		$query = $this->model()
 			->whereHas('designer', function ($query) use ($category) {
 	            if ($category != 'all') {
-	            	$query->where('slug', $category);
+	            	$query->where('slug', $category)->where('price_before_discount','>',0);
 	            }
 	        });
 
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
         } else {
+            $query->orderBy('updated_at', 'desc');
         	$query->orderBy('id', 'desc');
         }
 
@@ -130,23 +135,40 @@ class ProductRepository
         return $query->paginate(12);
 	}
 
-	public function setDesigner($value)
-	{
-		$this->designer = $value;
-
-		return $this;
-	}
-
-	public function getDesigner()
-	{
-		return $this->designer;
-	}
-
     public function getProductBySlug($slug)
     {
         return $this->model()
             ->where('slug', $slug)
             ->first();
+    }
+
+    public function getProductById($id)
+    {
+        return $this->model()
+            ->where('id', $id)
+            ->first();
+    }
+
+    public function setDesigner($value)
+    {
+        $this->designer = $value;
+
+        return $this;
+    }
+
+    public function getDesigner()
+    {
+        return $this->designer;
+    }
+
+	public function getDesignerBySlug($slug)
+    {
+        return Designer::where('slug',$slug)->first();
+    }
+
+    public function getDesignerById($id)
+    {
+        return Designer::where('id',$id)->first();
     }
 
     public function getMostProduct()
@@ -158,13 +180,6 @@ class ProductRepository
             ->get();
     }
 
-	public function getProductById($id)
-	{
-		return $this->model()
-			->where('id', $id)
-			->first();
-	}
-
     public function getRelatedProduct($categoryId)
     {
         return $this->model()
@@ -175,15 +190,5 @@ class ProductRepository
             ->whereNull('deleted_at')
             ->take(4)
             ->get();
-    }
-
-	public function getDesignerBySlug($slug)
-    {
-        return Designer::where('slug',$slug)->first();
-    }
-
-    public function getDesignerById($id)
-    {
-        return Designer::where('id',$id)->first();
     }
 }
