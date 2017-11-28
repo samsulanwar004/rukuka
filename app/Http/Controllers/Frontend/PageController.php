@@ -60,6 +60,7 @@ class PageController extends BaseController
                 'name' => $entry->name,
                 'slug' => $entry->slug,
                 'price' => $entry->sell_price,
+                'price_before_discount' => $entry->price_before_discount,
                 'currency' => $entry->currency,
                 'photo' => $entry->images->first()->photo,
             ];
