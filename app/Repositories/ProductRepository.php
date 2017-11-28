@@ -32,6 +32,22 @@ class ProductRepository
         return $query->paginate(12);
 	}
 
+    public function getProductBySlugCategorySale($request, $slug)
+    {
+        $query = $this->model()
+            ->whereHas('category', function ($query) use ($slug) {
+                $query->where('slug', '=', $slug);
+            })->where('price_before_discount','>',0);
+
+        if ($request->has('price')) {
+            $query->orderBy('sell_price', $request->input('price'));
+        } else {
+            $query->orderBy('id', 'desc');
+        }
+
+        return $query->paginate(12);
+    }
+
 	public function getProductBySlug($slug)
 	{
 		return $this->model()
@@ -64,6 +80,34 @@ class ProductRepository
 			->whereHas('category', function ($query) use ($ids) {
 	            $query->whereIn('id', $ids);
 	        });
+
+        if ($request->has('price')) {
+        	$query->orderBy('sell_price', $request->input('price'));
+        } else {
+        	$query->orderBy('id', 'desc');
+        }
+
+        return $query->paginate(12);
+
+	}
+
+	public function getProductByCategorySale($request, $category)
+	{
+		$parents = (new CategoryRepository)->getCategoryByParent($category);
+
+		$ids = [];
+		if($parents) {
+			foreach ($parents as $value) {
+				foreach ($value['child'] as $value) {
+					$ids[] = $value['id'];
+				}
+			}
+		}
+
+		$query = $this->model()
+			->whereHas('category', function ($query) use ($ids) {
+	            $query->whereIn('id', $ids);
+	        })->where('price_before_discount','>',0);
 
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));

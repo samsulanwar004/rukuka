@@ -35,7 +35,7 @@ class PageController extends BaseController
     	return view('pages.index', compact('home'));
     }
 
-    public function shop(Request $request, $categories, $category, $slug = null)
+    public function shop(Request $request, $categories, $category, $slug = null, $sale = null)
     {
 
         if ($categories == 'designers') {
@@ -45,8 +45,15 @@ class PageController extends BaseController
         } else {
             if ($category == 'all') {
                 $products = (new ProductRepository)->getProductByCategory($request, $categories);
+            }else if($category == 'sale'){
+                $products = (new ProductRepository)->getProductByCategorySale($request, $categories);
             } else {
+                if($sale == 'sale'){
+                    $products = (new ProductRepository)->getProductBySlugCategorySale($request, $slug);
+                }
+                else{
                 $products = (new ProductRepository)->getProductBySlugCategory($request, $slug);
+                }
             }
         }
 
@@ -72,7 +79,8 @@ class PageController extends BaseController
             'category',
             'slug',
             'designer',
-            'shops'
+            'shops',
+            'sale'
         ));
 
     }

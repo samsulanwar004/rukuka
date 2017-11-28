@@ -88,7 +88,8 @@ class SeederCountries extends Seeder
 						["countries_name" => "Turkey", "countries_code" => "TR"],
 						["countries_name" => "Venezuela", "countries_code" => "VE"],
 						["countries_name" => "Yemen Arab Rep", "countries_code" => "YE"],
-						["countries_name" => "Zambia", "countries_code" => "ZM"]
+						["countries_name" => "Zambia", "countries_code" => "ZM"],
+						["countries_name" => "Indonesia", "countries_code" => "ID"]
 					];
         foreach($countries as $k=>$d) {
             if(DB::table('countries')->where('countries_name',$d['countries_name'])->count()) {
