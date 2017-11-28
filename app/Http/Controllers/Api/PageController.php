@@ -54,6 +54,13 @@ class PageController extends BaseApiController
                     })->toArray();
                     $categories['kids_nav'] = $KidsResult;
 
+                    //Sale Navigation
+                    $SaleResult = (new DesignerRepository)->getSalesNav();
+                    $SaleResult = collect($SaleResult)->mapWithKeys(function ($item) {
+                        return [strtolower($item['name']) => $item['content']];
+                    })->toArray();
+                    $categories['sales_nav'] = $SaleResult;
+
                     return $this->success($categories, 200, true);
                 } else {
                     $categories = (new CategoryRepository)->getCategoryByParent($parent);
