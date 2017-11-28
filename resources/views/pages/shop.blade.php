@@ -50,41 +50,19 @@
                       <a href="#modal" class="uk-button uk-button-default uk-button-small" uk-toggle>Filter</a>
                       <div id="modal" uk-modal>
                         <div class="uk-modal-dialog uk-modal-body">
-                          <button class="uk-modal-close-default" type="button" uk-close></button>
-                          <h3>Filter what you want</h3>
-                          <div class="uk-panel">
-                            Keyword
-                            <input type="text" name="key" value="" class="uk-form uk-input" placeholder="Type your keyword">
-                          </div>
-                          <div class="uk-panel uk-margin-bottom">
-                            Categories
-                            <select class="uk-select uk-form" name="categories">
-                              <option value="all">A L L</option>
-                              <option value="">Clothing</option>
-                              <option value="">Bag</option>
-                            </select>
-                          </div>
-                          <div class="uk-panel">
-                            <select class="uk-select uk-form" name="categories2">
-                              <option value="all">A L L</option>
-                              <option value="">Shoes</option>
-                              <option value="">Bag</option>
-                            </select>
-                          </div>
-                          <p class="uk-text-right">
-                            <button class="uk-button uk-button-default uk-button-small uk-modal-close" type="button">Cancel</button>
-                            <button class="uk-button uk-button-secondary uk-button-small" type="button">FILTER</button>
-                          </p>
+                            <categories
+                                    api="{{ route('menu', ['parent' => $categories]) }}"
+                                    parent="{{ $categories }}"
+                                    slug="{{ $slug == null ? $category:$slug }}"
+                                    category_slug="{{ $category }}"
+                                    sale="{{ $sale == null ? $category:$sale }}"
+                            ></categories>
                         </div>
                       </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
-
-
         <div class="uk-grid-small uk-margin-top uk-margin-large-bottom" uk-grid>
             <div class="uk-width-1-4@m uk-visible@m">
                 <div class="uk-card uk-card-default uk-card-border uk-card-small uk-panel">
@@ -100,8 +78,13 @@
                         @endif
                     </div>
                     <div class="uk-card-body">
-                        <categories api="{{ route('menu', ['parent' => $categories]) }}" parent="{{ $categories }}" slug="{{ $slug == null ? $category:$slug }}" category_slug="{{ $category }}">
-                        </categories>
+                        <categories
+                                api="{{ route('menu', ['parent' => $categories]) }}"
+                                parent="{{ $categories }}"
+                                slug="{{ $slug == null ? $category:$slug }}"
+                                category_slug="{{ $category }}"
+                                sale="{{ $sale == null ? $category:$sale }}"
+                        ></categories>
                     </div>
                 </div>
             </div>
@@ -123,7 +106,5 @@
                 </div>
             </div>
         </div>
-
-    </div>
     </div>
 @endsection

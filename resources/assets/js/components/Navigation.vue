@@ -52,6 +52,10 @@
                 if (typeof navigations.data.kids_nav !== 'undefined') {
                   self.kidsNav = navigations.data.kids_nav;
                 }
+
+                if (typeof navigations.data.sales_nav !== 'undefined') {
+                  self.salesNav = navigations.data.sales_nav;
+                }
               }
             });
         },
@@ -69,6 +73,7 @@
                 womensNav: {},
                 mensNav: {},
                 kidsNav: {},
+                salesNav: {},
             }
         }
     }
@@ -169,7 +174,7 @@
                                 <li class="uk-parent"><a :href="womensNav.women_designer_3_url" >{{womensNav.women_designer_3_text}}</a></li>
                                 <li class="uk-parent"><a :href="womensNav.women_designer_4_url" >{{womensNav.women_designer_4_text}}</a></li>
                                 <li class="uk-parent"><a :href="womensNav.women_designer_5_url" >{{womensNav.women_designer_5_text}}</a></li>
-                                <li class="uk-parent"><a href="#" class="uk-text-danger"><b>ALL WOMEN'S SALE</b></a></li>
+                                <li class="uk-parent"><a href="/shop/womens/sale" class="uk-text-danger"><b>ALL WOMEN'S SALE</b></a></li>
                             </ul>
                           </div>
                       </div>
@@ -231,7 +236,7 @@
                                 <li class="uk-parent"><a :href="mensNav.men_designer_3_url" >{{mensNav.men_designer_3_text}}</a></li>
                                 <li class="uk-parent"><a :href="mensNav.men_designer_4_url" >{{mensNav.men_designer_4_text}}</a></li>
                                 <li class="uk-parent"><a :href="mensNav.men_designer_5_url" >{{mensNav.men_designer_5_text}}</a></li>
-                                <li class="uk-parent"><a href="#" class="uk-text-danger"><b>ALL MEN'S SALE</b></a></li>
+                                <li class="uk-parent"><a href="/shop/mens/sale" class="uk-text-danger"><b>ALL MEN'S SALE</b></a></li>
                             </ul>
                         </div>
                     </div>
@@ -293,7 +298,7 @@
                                   <li class="uk-parent"><a :href="kidsNav.kid_designer_3_url" >{{kidsNav.kid_designer_3_text}}</a></li>
                                   <li class="uk-parent"><a :href="kidsNav.kid_designer_4_url" >{{kidsNav.kid_designer_4_text}}</a></li>
                                   <li class="uk-parent"><a :href="kidsNav.kid_designer_5_url" >{{kidsNav.kid_designer_5_text}}</a></li>
-                                  <li class="uk-parent"><a href="#" class="uk-text-danger"><b>ALL KID'S SALE</b></a></li>
+                                  <li class="uk-parent"><a href="/shop/kids/sale" class="uk-text-danger"><b>ALL KID'S SALE</b></a></li>
                               </ul>
                           </div>
                       </div>
@@ -301,6 +306,35 @@
               </li>
               </li>
               <li><a href="">SALE</a>
+                  <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
+                      <div class="uk-navbar-dropdown-grid" uk-grid>
+                          <div class="uk-width-4-5@m uk-margin-remove">
+                              <ul class="uk-nav uk-navbar-dropdown-nav">
+                                  <li class="uk-text-bold">{{salesNav.sale_text}}</li>
+                              </ul>
+                              <hr class="uk-margin-small">
+                              <a :href="salesNav.sale_url">
+                                  <img v-if="salesNav.sale_image != null" style="height: 100px; width: 800px" :src="'/'+salesNav.sale_image" :alt="salesNav.sale_text">
+                              </a>
+                          </div>
+                          <div class="uk-width-1-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
+                              <div>
+                                  <ul class="uk-nav uk-navbar-dropdown-nav">
+                                      <li class="uk-text-bold">ON SALE</li>
+                                  </ul>
+                                  <hr class="uk-margin-small">
+
+                                  <ul class="uk-nav uk-navbar-dropdown-nav">
+                                      <li>
+                                          <a href="/shop/womens/sale">Womens</a>
+                                          <a href="/shop/mens/sale">Mens</a>
+                                          <a href="/shop/kids/sale">Kids</a>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
               </li>
               <li><a href="/blog">BLOG</a>
               </li>

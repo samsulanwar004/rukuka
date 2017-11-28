@@ -32,4 +32,9 @@ class DesignerRepository
     {
         return Setting::where('group_setting','Kids Navigation')->get()->toArray();
     }
+
+    public function getSalesNav()
+    {
+        return Setting::where('group_setting','Sale Navigation')->get()->toArray();
+    }
 }
