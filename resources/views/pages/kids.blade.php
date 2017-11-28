@@ -20,7 +20,7 @@
 
         {{--2 ROW BANNER  --}}
         <div class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
-            <div class="uk-width-1-2@m">
+            <div class="uk-width-1-2">
                 <a href="/{{ $kids['kids_url_1'] }}" class="uk-text-muted">
                     <div class="uk-inline-clip uk-transition-toggle uk-dark uk-margin-small-bottom">
                         <img src="/{{ $kids['kids_banner_1'] }}" alt="{{ $leftTitle[0] }}">
@@ -35,7 +35,7 @@
                     {{ $kids['kids_text_1_2'] }}<span uk-icon="icon: triangle-right"></span>
                 </a>
             </div>
-            <div class="uk-width-1-2@m">
+            <div class="uk-width-1-2">
                 <a href="/{{ $kids['kids_url_2'] }}" class="uk-text-muted">
                     <div class="uk-inline-clip uk-transition-toggle uk-dark uk-margin-small-bottom">
                         <img src="/{{ $kids['kids_banner_2'] }}" alt="{{ $leftTitle[0] }}">
@@ -56,7 +56,7 @@
 
         {{--3 ROW BANNER--}}
         <div class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
-            <div class="uk-width-1-3@m">
+            <div class="uk-width-1-3">
                 <a href="/{{ $kids['kids_url_3'] }}" class="uk-text-muted">
                     <div class="uk-inline-clip uk-transition-toggle uk-dark uk-margin-small-bottom">
                         <img src="/{{ $kids['kids_banner_3'] }}" alt="{{ $leftTitle[0] }}">
@@ -71,7 +71,7 @@
                     {{ $kids['kids_text_3_2'] }}<span uk-icon="icon: triangle-right"></span>
                 </a>
             </div>
-            <div class="uk-width-1-3@m">
+            <div class="uk-width-1-3">
                 <a href="/{{ $kids['kids_url_4'] }}" class="uk-text-muted">
                     <div class="uk-inline-clip uk-transition-toggle uk-dark uk-margin-small-bottom">
                         <img src="/{{ $kids['kids_banner_4'] }}" alt="{{ $leftTitle[0] }}">
@@ -86,7 +86,7 @@
                     {{ $kids['kids_text_4_2'] }}<span uk-icon="icon: triangle-right"></span>
                 </a>
             </div>
-            <div class="uk-width-1-3@m">
+            <div class="uk-width-1-3">
                 <a href="/{{ $kids['kids_url_5'] }}" class="uk-text-muted">
                     <div class="uk-inline-clip uk-transition-toggle uk-dark uk-margin-small-bottom">
                         <img src="/{{ $kids['kids_banner_5'] }}" alt="{{ $leftTitle[0] }}">
