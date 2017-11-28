@@ -21,7 +21,7 @@ class ProductRepository
 		$query = $this->model()
 			->whereHas('category', function ($query) use ($slug) {
 	            $query->where('slug', '=', $slug);
-	        });
+	        })->whereNull('deleted_at');
 
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
@@ -37,7 +37,7 @@ class ProductRepository
         $query = $this->model()
             ->whereHas('category', function ($query) use ($slug) {
                 $query->where('slug', '=', $slug);
-            })->where('price_before_discount','>',0);
+            })->where('price_before_discount','>',0)->whereNull('deleted_at');
 
         if ($request->has('price')) {
             $query->orderBy('sell_price', $request->input('price'));
@@ -47,21 +47,6 @@ class ProductRepository
 
         return $query->paginate(12);
     }
-
-	public function getProductBySlug($slug)
-	{
-		return $this->model()
-			->where('slug', $slug)
-    		->first();
-	}
-
-	public function getMostProduct()
-	{
-		return $this->model()
-            ->inRandomOrder()
-			->take(4)
-			->get();
-	}
 
 	public function getProductByCategory($request, $category)
 	{
@@ -79,7 +64,7 @@ class ProductRepository
 		$query = $this->model()
 			->whereHas('category', function ($query) use ($ids) {
 	            $query->whereIn('id', $ids);
-	        });
+	        })->whereNull('deleted_at');
 
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
@@ -107,7 +92,7 @@ class ProductRepository
 		$query = $this->model()
 			->whereHas('category', function ($query) use ($ids) {
 	            $query->whereIn('id', $ids);
-	        })->where('price_before_discount','>',0);
+	        })->where('price_before_discount','>',0)->whereNull('deleted_at');
 
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
@@ -117,17 +102,6 @@ class ProductRepository
 
         return $query->paginate(12);
 
-	}
-
-	public function getRelatedProduct($categoryId)
-	{
-		return $this->model()
-			->whereHas('category', function ($query) use ($categoryId) {
-	            $query->where('product_categories_id', '=', $categoryId);
-	        })
-	        ->inRandomOrder()
-	        ->take(4)
-	        ->get();
 	}
 
 	public function getProductByDesigner($request, $category)
@@ -168,6 +142,22 @@ class ProductRepository
 		return $this->designer;
 	}
 
+    public function getProductBySlug($slug)
+    {
+        return $this->model()
+            ->where('slug', $slug)
+            ->first();
+    }
+
+    public function getMostProduct()
+    {
+        return $this->model()
+            ->whereNull('deleted_at')
+            ->inRandomOrder()
+            ->take(4)
+            ->get();
+    }
+
 	public function getProductById($id)
 	{
 		return $this->model()
@@ -175,8 +165,25 @@ class ProductRepository
 			->first();
 	}
 
+    public function getRelatedProduct($categoryId)
+    {
+        return $this->model()
+            ->whereHas('category', function ($query) use ($categoryId) {
+                $query->where('product_categories_id', '=', $categoryId);
+            })
+            ->inRandomOrder()
+            ->whereNull('deleted_at')
+            ->take(4)
+            ->get();
+    }
+
 	public function getDesignerBySlug($slug)
     {
         return Designer::where('slug',$slug)->first();
+    }
+
+    public function getDesignerById($id)
+    {
+        return Designer::where('id',$id)->first();
     }
 }

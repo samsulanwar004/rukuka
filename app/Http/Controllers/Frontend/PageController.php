@@ -39,16 +39,24 @@ class PageController extends BaseController
     {
 
         if ($categories == 'designers') {
-            $product = (new ProductRepository);
-            $products = $product->getProductByDesigner($request, $category);
-            $designer = $product->getDesigner();
+            try{
+                $product = (new ProductRepository);
+                $products = $product->getProductByDesigner($request, $category);
+                $designer = $product->getDesigner();
+
+                //Validate Deleted
+                $this->validDelete($designer);
+            }
+            catch (Exception $e) {
+                return view('pages.not_found')->withErrors($e->getMessage());
+            }
         } else {
             if ($category == 'all') {
                 $products = (new ProductRepository)->getProductByCategory($request, $categories);
             }else if($category == 'sale'){
                 $products = (new ProductRepository)->getProductByCategorySale($request, $categories);
             } else {
-                if($sale == 'sale'){
+                if($sale = 'sale'){
                     $products = (new ProductRepository)->getProductBySlugCategorySale($request, $slug);
                 }
                 else{
@@ -87,7 +95,11 @@ class PageController extends BaseController
 
     public function product($slug, $method = null, $sku = null, $id = null)
     {
-    	$product = (new ProductRepository)->getProductBySlug($slug);
+    try {
+        $product = (new ProductRepository)->getProductBySlug($slug);
+
+        //Validate Product Deleted
+        $this->validDelete($product);
 
         $share = Share::load(route('product', ['slug' => $slug]), $product->name, route('index').'/'.$product->images->first()->photo)
             ->services(
@@ -98,6 +110,19 @@ class PageController extends BaseController
                 'pinterest',
                 'tumblr'
             );
+
+    } catch (Exception $e) {
+        return view('pages.not_found')->withErrors($e->getMessage());
+    }
+
+    // Validate Designer Deleted
+    try{
+        $Designer = (new ProductRepository)->getDesignerById($product->product_designers_id);
+        $this->validDelete($Designer);
+
+    } catch (Exception $e) {
+        return view('pages.not_found')->withErrors($e->getMessage());
+    }
 
     	return view('pages.product', compact(
             'product',
