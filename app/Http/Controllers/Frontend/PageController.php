@@ -101,7 +101,7 @@ class PageController extends BaseController
 
     public function women()
     {
-        $settings = (new SettingRepository)->getSettingByGroup('Women Landing Page');
+        $settings = (new SettingRepository)->getSettingByGroup('Women Page');
 
         $women = collect($settings)->mapWithKeys(function ($item) {
             return [$item['name'] => $item['content']];
@@ -112,7 +112,7 @@ class PageController extends BaseController
 
     public function men()
     {
-        $settings = (new SettingRepository)->getSettingByGroup('Men Landing Page');
+        $settings = (new SettingRepository)->getSettingByGroup('Men Page');
 
         $men = collect($settings)->mapWithKeys(function ($item) {
             return [$item['name'] => $item['content']];
@@ -123,7 +123,7 @@ class PageController extends BaseController
 
     public function kids()
     {
-        $settings = (new SettingRepository)->getSettingByGroup('Kids Landing Page');
+        $settings = (new SettingRepository)->getSettingByGroup('Kids Page');
 
         $kids = collect($settings)->mapWithKeys(function ($item) {
             return [$item['name'] => $item['content']];
@@ -176,6 +176,7 @@ class PageController extends BaseController
                         'description' => $stock->product->content,
                         'currency' => $stock->product->currency,
                         'slug' => $stock->product->slug,
+                        'category_id' => $stock->product->category->id
                     ]
                 ];
 
@@ -263,7 +264,15 @@ class PageController extends BaseController
 
     public function showBagPage()
     {
-        return view('pages.bag');
+        $getBags = (new BagService)->get(self::INSTANCE_SHOP);
+        $categoryId = [];
+        foreach ($getBags as $bag) {
+            $categoryId[] = $bag->options->category_id;
+        }
+
+        $categoryId = $categoryId[array_rand($categoryId)];
+
+        return view('pages.bag', compact('categoryId'));
     }
 
     public function review()

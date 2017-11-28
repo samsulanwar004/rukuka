@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Product;
 use App\Repositories\CategoryRepository;
+use App\Designer;
 
 class ProductRepository
 {
@@ -28,7 +29,7 @@ class ProductRepository
         	$query->orderBy('id', 'desc');
         }
 
-        return $query->paginate(30);
+        return $query->paginate(12);
 	}
 
 	public function getProductBySlug($slug)
@@ -41,6 +42,7 @@ class ProductRepository
 	public function getMostProduct()
 	{
 		return $this->model()
+            ->inRandomOrder()
 			->take(4)
 			->get();
 	}
@@ -69,7 +71,7 @@ class ProductRepository
         	$query->orderBy('id', 'desc');
         }
 
-        return $query->paginate(30);
+        return $query->paginate(12);
 
 	}
 
@@ -99,9 +101,15 @@ class ProductRepository
         } else {
         	$query->orderBy('id', 'desc');
         }
-				$this->setDesigner($query->first()->designer);
 
-        return $query->paginate(30);
+        if(count($query->get())){
+            $this->setDesigner($query->first()->designer);
+        }
+        else{
+            $this->setDesigner($this->getDesignerBySlug($category));
+        }
+
+        return $query->paginate(12);
 	}
 
 	public function setDesigner($value)
@@ -122,4 +130,9 @@ class ProductRepository
 			->where('id', $id)
 			->first();
 	}
+
+	public function getDesignerBySlug($slug)
+    {
+        return Designer::where('slug',$slug)->first();
+    }
 }
