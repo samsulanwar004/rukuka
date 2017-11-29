@@ -1,60 +1,75 @@
 <template>
-<div class="uk-width-1-3@m uk-flex uk-flex-right">
-  <ul class="uk-grid-small uk-flex-middle" uk-grid>
+<div class="uk-width-1-3@m uk-flex uk-flex-middle">
+  <div class="uk-width-1-1 uk-flex uk-flex-middle uk-flex-right uk-visible@m">
+    <ul class="uk-grid-small " uk-grid>
+      <li v-if="auth == 1" class="uk-margin-right">
+        <a class="uk-button uk-button-text uk-button-small" :href="profile_link"> Hallo, <b>{{ accounts.first_name }}</b></a>
+        </a>
+      </li>
+      <li v-if="auth == 1"  class="uk-margin-right">
+        <a class="uk-button uk-button-text uk-button-small" :href="wishlist_link"><b>LOVE</b></a>
+          <div class="uk-badge" v-if="wishlistCount > 0">
+            {{ wishlistCount }}
+          </div>
+      </li>
 
-    <li v-if="auth == 1" class="uk-margin-right">
-      <a class="uk-button uk-button-text uk-button-small" :href="profile_link"> Hallo, <b>{{ accounts.first_name }}</b></a>
-      </a>
-    </li>
-    <li v-if="auth == 1"  class="uk-margin-right">
-      <a class="uk-button uk-button-text uk-button-small" :href="wishlist_link"><b>LOVE</b></a>
-        <div class="uk-badge" v-if="wishlistCount > 0">
-          {{ wishlistCount }}
-        </div>
-    </li>
-
-    <li>
-      <a class="uk-button uk-button-text uk-button-small" v-on:click.prevent="goBag"> <b>BAG</b></a>
-      <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" v-if="bagCount > 0">
-            <div class="uk-card-body uk-card-small">
-              <div class="uk-grid-small" uk-grid v-for="bag in filteredBags">
-                <div class="uk-width-1-3">
-                  <img :src="'/'+bag.options.photo" :alt="bag.name">
-                </div>
-                <div class="uk-width-2-3">
-                  <div class="uk-panel">
-                    <span class="uk-text-small"><b>{{ bag.name }}</b></span><br>
-                    <span class="uk-text-small">{{ bag.options.currency }} {{ bag.price }} </span><br>
-                    <span class="uk-text-meta">color : {{ bag.options.color }}</span><br>
-                    <span class="uk-text-meta">size  : {{ bag.options.size }}</span><br>
-                    <a :href="product_link+'/'+bag.options.slug+'/bag/'+bag.id" class="uk-button uk-button-text uk-button-small" name="button"><span class="uk-icon" uk-icon="icon: pencil; ratio: 0.8"></span>edit</a>
-                    <button type="button" class="uk-button uk-button-text uk-button-small" name="button" v-on:click="removeBag(bag.id)"><span class="uk-icon" uk-icon="icon: trash; ratio: 0.8"></span>remove</button>
+      <li>
+        <a class="uk-button uk-button-text uk-button-small" v-on:click.prevent="goBag"> <b>BAG</b></a>
+        <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" v-if="bagCount > 0">
+              <div class="uk-card-body uk-card-small">
+                <div class="uk-grid-small" uk-grid v-for="bag in filteredBags">
+                  <div class="uk-width-1-3">
+                    <img :src="'/'+bag.options.photo" :alt="bag.name">
+                  </div>
+                  <div class="uk-width-2-3">
+                    <div class="uk-panel">
+                      <span class="uk-text-small"><b>{{ bag.name }}</b></span><br>
+                      <span class="uk-text-small">{{ bag.options.currency }} {{ bag.price }} </span><br>
+                      <span class="uk-text-meta">color : {{ bag.options.color }}</span><br>
+                      <span class="uk-text-meta">size  : {{ bag.options.size }}</span><br>
+                      <a :href="product_link+'/'+bag.options.slug+'/bag/'+bag.id" class="uk-button uk-button-text uk-button-small" name="button"><span class="uk-icon" uk-icon="icon: pencil; ratio: 0.8"></span>edit</a>
+                      <button type="button" class="uk-button uk-button-text uk-button-small" name="button" v-on:click="removeBag(bag.id)"><span class="uk-icon" uk-icon="icon: trash; ratio: 0.8"></span>remove</button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="uk-card-footer uk-padding-remove uk-background-muted">
-              <div class="uk-text-center">
-                <a :href="bag_link">see all your shop</a>
+              <div class="uk-card-footer uk-padding-remove uk-background-muted">
+                <div class="uk-text-center">
+                  <a :href="bag_link">see all your shop</a>
+                </div>
               </div>
-            </div>
-            <div class="uk-card-footer uk-padding-small">
-              <div class="uk-text-center">
-                <b>SUB TOTAL: {{ subtotal }}</b>
-                <a :href="checkout_link" class="uk-button-secondary uk-button uk-button-small uk-width-1-1">CHECKOUT NOW</a>
+              <div class="uk-card-footer uk-padding-small">
+                <div class="uk-text-center">
+                  <b>SUB TOTAL: {{ subtotal }}</b>
+                  <a :href="checkout_link" class="uk-button-secondary uk-button uk-button-small uk-width-1-1">CHECKOUT NOW</a>
+                </div>
               </div>
-            </div>
-        </div>
-        <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" id="bag-hidden" v-else></div>
+          </div>
+          <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" id="bag-hidden" v-else></div>
+          <div class="uk-badge" v-if="bagCount > 0">
+            {{ bagCount }}
+          </div>
+      </li>
+      <li v-if="auth == 0" class="uk-margin-left">
+        <a class="uk-button uk-button-text uk-button-small" :href="login_link"><b>L O G I N</b></a>
+      </li>
+    </ul>
+  </div>
+    <ul class="uk-grid-small uk-width-1-1 uk-flex-between uk-hidden@m" uk-grid>
+      <li><a class="uk-icon-link" uk-icon="icon: more" href="#offcanvas-overlay-slide" uk-toggle></a></li>
+      <li><a class="uk-icon-link" uk-icon="icon: search" uk-toggle="target: .test-overlay; animation: uk-animation-fade" href="#"></a></li>
+      <li><a class="uk-icon-link" uk-icon="icon: cart" href="/bag"></a>
         <div class="uk-badge" v-if="bagCount > 0">
           {{ bagCount }}
         </div>
-    </li>
-    <li v-if="auth == 0" class="uk-margin-left">
-      <a class="uk-button uk-button-text uk-button-small" :href="login_link"><b>L O G I N</b></a>
-    </li>
-  </ul>
-
+      </li>
+      <li v-if="auth == 0"><a class="uk-icon-link" uk-icon="icon: user" href="/login"></a></li>
+      <li v-if="auth == 1" ><a class="uk-icon-link" uk-icon="icon: user" :href="wishlist_link"></a>
+        <div class="uk-badge" v-if="wishlistCount > 0">
+        {{ wishlistCount }}
+        </div>
+      </li>
+    </ul>
 </div>
 </template>
 

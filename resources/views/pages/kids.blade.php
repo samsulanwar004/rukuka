@@ -28,12 +28,21 @@
                         <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
                     </div>
                 </a>
-                <a href="/{{ $kids['kids_url_1'] }}" class="uk-text-muted">
-                    <h3 class="uk-margin-remove">{{ $kids['kids_text_1_1'] }}</h3>
-                </a>
-                <a href="/{{ $kids['kids_url_1'] }}" class="uk-text-muted uk-link">
-                    {{ $kids['kids_text_1_2'] }}<span uk-icon="icon: triangle-right"></span>
-                </a>
+                <div class="uk-visible@m">
+                  <a href="/{{ $kids['kids_url_1'] }}" class="uk-text-muted">
+                      <h3 class="uk-margin-remove">{{ $kids['kids_text_1_1'] }}</h3>
+                  </a>
+                </div>
+                <div class="uk-hidden@m">
+                  <a href="/{{ $kids['kids_url_1'] }}" class="uk-text-muted">
+                      <h5 class="uk-margin-remove">{{ $kids['kids_text_1_1'] }}</h5>
+                  </a>
+                </div>
+                <div class="uk-visible@m">
+                  <a href="/{{ $kids['kids_url_1'] }}" class="uk-text-muted uk-link">
+                      {{ $kids['kids_text_1_2'] }}<span uk-icon="icon: triangle-right"></span>
+                  </a>
+                </div>
             </div>
             <div class="uk-width-1-2">
                 <a href="/{{ $kids['kids_url_2'] }}" class="uk-text-muted">
@@ -43,12 +52,22 @@
                         <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
                     </div>
                 </a>
-                <a href="/{{ $kids['kids_url_2'] }}" class="uk-text-muted">
-                    <h3 class="uk-margin-remove">{{ $kids['kids_text_2_1'] }}</h3>
-                </a>
-                <a href="/{{ $kids['kids_url_2'] }}" class="uk-text-muted uk-link">
-                    {{ $kids['kids_text_2_2'] }}<span uk-icon="icon: triangle-right"></span>
-                </a>
+                <div class="uk-visible@m">
+                  <a href="/{{ $kids['kids_url_2'] }}" class="uk-text-muted">
+                      <h3 class="uk-margin-remove">{{ $kids['kids_text_2_1'] }}</h3>
+                  </a>
+                </div>
+                <div class="uk-hidden@m">
+                  <a href="/{{ $kids['kids_url_2'] }}" class="uk-text-muted">
+                      <h5 class="uk-margin-remove">{{ $kids['kids_text_2_1'] }}</h5>
+                  </a>
+                </div>
+                <div class="uk-visible@m">
+                  <a href="/{{ $kids['kids_url_2'] }}" class="uk-text-muted uk-link">
+                      {{ $kids['kids_text_2_2'] }}<span uk-icon="icon: triangle-right"></span>
+                  </a>
+                </div>
+
             </div>
 
         </div>
@@ -64,12 +83,22 @@
                         <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
                     </div>
                 </a>
-                <a href="/{{ $kids['kids_url_3'] }}" class="uk-text-muted">
-                    <h3 class="uk-margin-remove">{{ $kids['kids_text_3_1'] }}</h3>
-                </a>
-                <a href="/{{ $kids['kids_url_3'] }}" class="uk-text-muted uk-link">
-                    {{ $kids['kids_text_3_2'] }}<span uk-icon="icon: triangle-right"></span>
-                </a>
+                <div class="uk-visible@m">
+                  <a href="/{{ $kids['kids_url_3'] }}" class="uk-text-muted">
+                      <h3 class="uk-margin-remove">{{ $kids['kids_text_3_1'] }}</h3>
+                  </a>
+                </div>
+                <div class="uk-hidden@m">
+                  <a href="/{{ $kids['kids_url_3'] }}" class="uk-text-muted">
+                      <h5 class="uk-margin-remove">{{ $kids['kids_text_3_1'] }}</h5>
+                  </a>
+                </div>
+                <div class="uk-visible@m">
+                  <a href="/{{ $kids['kids_url_3'] }}" class="uk-text-muted uk-link">
+                      {{ $kids['kids_text_3_2'] }}<span uk-icon="icon: triangle-right"></span>
+                  </a>
+                </div>
+
             </div>
             <div class="uk-width-1-3">
                 <a href="/{{ $kids['kids_url_4'] }}" class="uk-text-muted">
@@ -79,12 +108,22 @@
                         <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
                     </div>
                 </a>
-                <a href="/{{ $kids['kids_url_4'] }}" class="uk-text-muted">
-                    <h3 class="uk-margin-remove">{{ $kids['kids_text_4_1'] }}</h3>
-                </a>
-                <a href="/{{ $kids['kids_url_4'] }}" class="uk-text-muted uk-link">
-                    {{ $kids['kids_text_4_2'] }}<span uk-icon="icon: triangle-right"></span>
-                </a>
+                <div class="uk-visible@m">
+                  <a href="/{{ $kids['kids_url_4'] }}" class="uk-text-muted">
+                      <h3 class="uk-margin-remove">{{ $kids['kids_text_4_1'] }}</h3>
+                  </a>
+                </div>
+                <div class="uk-hidden@m">
+                  <a href="/{{ $kids['kids_url_4'] }}" class="uk-text-muted">
+                      <h5 class="uk-margin-remove">{{ $kids['kids_text_4_1'] }}</h5>
+                  </a>
+                </div>
+                <div class="uk-visible@m">
+                  <a href="/{{ $kids['kids_url_4'] }}" class="uk-text-muted uk-link">
+                      {{ $kids['kids_text_4_2'] }}<span uk-icon="icon: triangle-right"></span>
+                  </a>
+                </div>
+
             </div>
             <div class="uk-width-1-3">
                 <a href="/{{ $kids['kids_url_5'] }}" class="uk-text-muted">
@@ -94,12 +133,22 @@
                         <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
                     </div>
                 </a>
-                <a href="/{{ $kids['kids_url_5'] }}" class="uk-text-muted">
-                    <h3 class="uk-margin-remove">{{ $kids['kids_text_5_1'] }}</h3>
-                </a>
-                <a href="/{{ $kids['kids_url_5'] }}" class="uk-text-muted uk-link">
-                    {{ $kids['kids_text_5_2'] }}<span uk-icon="icon: triangle-right"></span>
-                </a>
+                <div class="uk-visible@m">
+                  <a href="/{{ $kids['kids_url_5'] }}" class="uk-text-muted">
+                      <h3 class="uk-margin-remove">{{ $kids['kids_text_5_1'] }}</h3>
+                  </a>
+                </div>
+                <div class="uk-hidden@m">
+                  <a href="/{{ $kids['kids_url_5'] }}" class="uk-text-muted">
+                      <h5 class="uk-margin-remove">{{ $kids['kids_text_5_1'] }}</h5>
+                  </a>
+                </div>
+                <div class="uk-visible@m">
+                  <a href="/{{ $kids['kids_url_5'] }}" class="uk-text-muted uk-link">
+                      {{ $kids['kids_text_5_2'] }}<span uk-icon="icon: triangle-right"></span>
+                  </a>
+                </div>
+
             </div>
         </div>
         {{--END 3 ROW BANNER--}}
