@@ -78,6 +78,11 @@
                         </tr>
                     </tbody>
                 </table>
+                <form action="{{ route('order') }}" method="POST">
+                  {{ csrf_field() }}
+                  <input type="hidden" name="order" value="ok">
+                  <input type="submit" name="submit" id="submit" style="display: none;">
+                </form>
               </div>
             </div>
             <hr class="uk-margin-small">
@@ -119,15 +124,8 @@
       $('#card-number').html('*************'+cardNumber);
 
      $("#continue").on('click', function (e) {
-       e.preventDefault();
-       var submit = $('#submit').val();
-       var url = '{{ route('checkout.billing') }}';
-       if (submit == 'C O N T I N U E') {
-         $('#submit').click();
-       } else {
-         window.location.href = url;
-       }
-
+        e.preventDefault();
+        $('#submit').click();
      });
    })
 </script>
