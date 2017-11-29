@@ -307,7 +307,7 @@ class PageController extends BaseController
             $categoryId[] = $bag->options->category_id;
         }
 
-        $categoryId = $categoryId[array_rand($categoryId)];
+        $categoryId = $categoryId == null ? null : $categoryId[array_rand($categoryId)];
 
         return view('pages.bag', compact('categoryId'));
     }
