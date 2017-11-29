@@ -210,7 +210,10 @@ class PageController extends BaseController
                         'description' => $stock->product->content,
                         'currency' => $stock->product->currency,
                         'slug' => $stock->product->slug,
-                        'category_id' => $stock->product->category->id
+                        'product_id' => $stock->product->id,
+                        'category_id' => $stock->product->category->id,
+                        'product_code' => $stock->product->product_code,
+                        'product_stocks_id' => $stock->id
                     ]
                 ];
 
