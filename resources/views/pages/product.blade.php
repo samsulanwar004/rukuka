@@ -36,7 +36,16 @@
   <div class="uk-width-2-5@m">
     <a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}">{{ $product->designer->name }}</a><br>
     <span class="uk-text-lead">{{ $product->name }}</span><br>
-    <b>{{ $product->currency }} {{ number_format($product->sell_price) }} </b><br>
+      @if($product->price_before_discount > 0)
+          <b>
+              <span style="text-decoration: line-through;">{{ $product->currency }} {{ number_format($product->price_before_discount) }}</span>
+              <span class="uk-text-danger">{{ $product->currency }} {{ number_format($product->sell_price) }}</span>
+          </b>
+          @else
+          <b>{{ $product->currency }} {{ number_format($product->sell_price) }} </b>
+      @endif
+
+      <br>
     <span class="uk-text-meta uk-text-bold">
       <span uk-icon="icon: star"></span>
       <span uk-icon="icon: star"></span>
