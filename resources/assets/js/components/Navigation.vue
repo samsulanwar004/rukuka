@@ -125,14 +125,14 @@
                         <div class="uk-width-1-5@m">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li class="uk-nav-header uk-text-bold">What's New</li>
-                                <li class="uk-parent"><a href="#">New Arrival</a></li>
+                                <li class="uk-parent"><a href="/landing/women">New Arrival</a></li>
                                 <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                                 <li>
                                     <a :href="womensNav.women_blog_url">
                                         <img v-if="womensNav.women_blog_image != null" style="height: 150px" :src="'/'+womensNav.women_blog_image" :alt="Rukuka">
                                     </a>
                                 </li>
-                                <li><a href="#" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
+                                <li><a href="/blog" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
                             </ul>
                         </div>
                           <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
@@ -186,14 +186,14 @@
                       <div class="uk-width-1-5@m">
                           <ul class="uk-nav uk-navbar-dropdown-nav">
                               <li class="uk-nav-header uk-text-bold">What's New</li>
-                              <li class="uk-parent"><a href="#">New Arrival</a></li>
+                              <li class="uk-parent"><a href="/landing/men">New Arrival</a></li>
                               <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                               <li>
                                   <a :href="mensNav.men_blog_url">
                                       <img v-if="mensNav.men_blog_image != null" style="height: 150px" :src="'/'+mensNav.men_blog_image" :alt="Rukuka">
                                   </a>
                               </li>
-                              <li><a href="#" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
+                              <li><a href="/blog" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
                           </ul>
                       </div>
 
@@ -248,14 +248,14 @@
                           <div class="uk-width-1-5@m">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
                                   <li class="uk-nav-header uk-text-bold">What's New</li>
-                                  <li class="uk-parent"><a href="#">New Arrival</a></li>
+                                  <li class="uk-parent"><a href="/landing/kids">New Arrival</a></li>
                                   <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                                   <li>
                                       <a :href="kidsNav.kid_blog_url">
                                           <img v-if="kidsNav.kid_blog_image != null" style="height: 150px" :src="'/'+kidsNav.kid_blog_image" :alt="Rukuka">
                                       </a>
                                   </li>
-                                  <li><a href="#" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
+                                  <li><a href="/blog" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
                               </ul>
                           </div>
 
