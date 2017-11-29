@@ -350,6 +350,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/account/cc/update/{id?}', [
         'as'   => 'user.cc.update',
         'uses' => 'Frontend\UserController@ccUpdate',
-    ]);    
+    ]);
+
+    Route::post('/order', [
+        'as'   => 'order',
+        'uses' => 'Frontend\OrderController@store',
+    ]);  
 
 });
