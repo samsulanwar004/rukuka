@@ -91,7 +91,8 @@ class BlogController extends Controller
         $posts = $result['post'];
         $status= $result['status'];
         $category = $this->getCategory();
-        return view('blogs.read', compact('posts','category','status'));
+        $postsRandom = $BlogRepository->getPostRandom();
+        return view('blogs.read', compact('posts','category','postsRandom','status'));
     }
 
     public function category($slug)

@@ -1,9 +1,6 @@
 @extends('app')
 
 @section('content')
-
-{{-- <div class="uk-grid-small uk-margin-top" uk-grid> --}}
-
     @php
       $leftTitle = explode('|', $home['left_title']);
       $rightTitle = explode('|', $home['right_title']);
@@ -13,137 +10,267 @@
     @endphp
     <div class="uk-text-center">
       <div class="uk-container uk-container-small">
-        <div class="uk-panel uk-padding-small">
-          <span class="uk-text-lead">Now Open Ku Ka Indonesia, which serve many various style cloth and stuff.</span>
+        <div class="uk-panel uk-padding-small uk-visible@m">
+          <span class="uk-text-lead">{{$home['homepage_main_title']}}</span>
+        </div>
+        <div class="uk-panel uk-padding-small uk-hidden@m">
+            <h4>{{$home['homepage_main_title']}}</h4>
         </div>
       </div>
       <div class="uk-inline">
-        <div class="uk-inline-clip uk-transition-toggle uk-light">
-        <a href="#/{{ $home['women_link'] }}" class="uk-link-reset">
-        <img src="/{{ $home['main_banner'] }}" alt="">
-        <div class="uk-width-2-6@m" uk-grid>
-
-          <div class="uk-card uk-position-center uk-position-medium uk-card-small ">
-            <div class="uk-card-body">
-            <div class="uk-transition-slide-left-small"><h2 class="uk-margin-remove">Prepare for your summer season</h2></div>
-            <div class="uk-transition-slide-right-small"><h4 class="uk-margin-remove"><a href="/{{ $home['women_link'] }}">{{ $womenTitle[1] }}<span uk-icon="icon: triangle-right"></span></a></h4></div>
-          </div>
-        </div>
-      </div>
-      </a>
-      </div>
+          <a href="{{ $home['homepage_main_url'] }}" class="uk-link-reset">
+            <div class="uk-inline-clip uk-transition-toggle uk-light">
+                    {{ Html::image("/".$home['homepage_main_banner'], "rukuka", array()) }}
+                <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
+            </div>
+          </a>
       </div>
     </div>
-  {{-- </div> --}}
   <div class="uk-container uk-container-small">
+      {{--BLOG--}}
     <div class="uk-card-border uk-card-small uk-margin-top">
     <div class="uk-card-body">
     <div class="uk-grid-small" uk-grid>
 
-        <div class="uk-width-1-5@m uk-flex uk-flex-middle">
-
-
-              <span class="uk-text-lead">New Arrival</span>
-
+        <div class="uk-width-1-5@m uk-width-1-3 uk-flex uk-flex-middle">
+          <div class="uk-visible@m">
+            <span class="uk-text-lead">New Arrival</span>
+          </div>
+          <div class="uk-hidden@m">
+            <h5>New Arrival</h5>
+          </div>
         </div>
-        <div class="uk-width-2-5@m uk-inline uk-flex uk-flex-middle">
-
-
-            <span class="uk-text-lead"><a href="#">Men,</a> <a href="#">Women,</a> <a href="#">Kids</a></span>
-
-
+        <div class="uk-width-2-5@m uk-width-2-3 uk-inline uk-flex uk-flex-middle">
+          <div class="uk-visible@m">
+            <span class="uk-text-lead">
+                <a href="{{ $home['homepage_content_url_1'] }}">{{$home['homepage_content_text_1']}}</a>
+                <a href="{{ $home['homepage_content_url_2'] }}">{{$home['homepage_content_text_2']}}</a>
+                <a href="{{ $home['homepage_content_url_3'] }}">{{$home['homepage_content_text_3']}}</a>
+            </span>
+          </div>
+          <div class="uk-hidden@m">
+            <h4>
+                <a href="{{ $home['homepage_content_url_1'] }}">{{$home['homepage_content_text_1']}}</a>
+                <a href="{{ $home['homepage_content_url_2'] }}">{{$home['homepage_content_text_2']}}</a>
+                <a href="{{ $home['homepage_content_url_3'] }}">{{$home['homepage_content_text_3']}}</a>
+            </h4>
+          </div>
         </div>
         <div class="uk-width-2-5@m uk-inline">
-
-            <h3 class="uk-margin-remove uk-text-danger">Lets See On The Blog</h3>
-            <a href="#" class="uk-text-muted">Inspiration and Interesting People Out There,<span uk-icon="icon: triangle-right"></span></a>
-
+          <div class="uk-visible@m">
+            <h3 class="uk-margin-remove uk-text-danger">{{$home['homepage_text_blog_1']}}</h3>
+            <a href="/blog" class="uk-text-muted">{{$home['homepage_text_blog_2']}}<span uk-icon="icon: triangle-right"></span></a>
+          </div>
+          <div class="uk-hidden@m">
+            <h4 class="uk-margin-remove uk-text-danger">{{$home['homepage_text_blog_1']}}</h4>
+            <a href="/blog" class="uk-text-muted">{{$home['homepage_text_blog_2']}}<span uk-icon="icon: triangle-right"></span></a>
+          </div>
         </div>
     </div>
     </div>
   </div>
-
-  <div class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
-      <div class="uk-width-1-3@m">
-
-            <div class="uk-inline">
-              <div class="uk-inline-clip uk-transition-toggle uk-light">
-                <a href="#/{{ $home['women_link'] }}" class="uk-link-reset">
-                <img src="/{{ $home['women_banner'] }}" alt="">
-                  <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
-                    <div class="uk-card-body">
-                    <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $womenTitle[0] }}</h3></div>
-                    <div class="uk-transition-slide-right-small"><h4 class="uk-margin-remove"><a href="/{{ $home['women_link'] }}">{{ $womenTitle[1] }}<span uk-icon="icon: triangle-right"></span></a></h4></div>
+{{--END BLOG--}}
+      <div class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
+          <div class="uk-width-1-3 uk-inline">
+              <div class="uk-inline uk-visible@m">
+                  <div class="uk-inline-clip uk-transition-toggle uk-light">
+                      <a href="{{ $home['homepage_url_1'] }}" class="uk-link-reset">
+                          <img src="{{ $home['homepage_banner_1'] }}" alt="">
+                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          </div>
+                          <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
+                              <div class="uk-card-body">
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_1'] }}</h3></div>
+                              </div>
+                          </div>
+                      </a>
                   </div>
-                </div>
-                </a>
               </div>
-            </div>
-
-      </div>
-      <div class="uk-width-1-3@m uk-inline">
-
-          <div class="uk-inline">
-            <div class="uk-inline-clip uk-transition-toggle uk-light">
-              <a href="#/{{ $home['men_link'] }}" class="uk-link-reset">
-              <img src="/{{ $home['men_banner'] }}" alt="">
-                <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
-                  <div class="uk-card-body">
-                    <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $menTitle[0] }}</h3></div>
-                    <div class="uk-transition-slide-right-small"><h4 class="uk-margin-remove"><a href="/{{ $home['men_link'] }}">{{ $menTitle[1] }}<span uk-icon="icon: triangle-right"></span></a></h4></div>
+              <div class="uk-inline uk-hidden@m">
+                  <a href="{{ $home['homepage_url_1'] }}" class="uk-link-reset">
+                      <img src="/{{ $home['homepage_banner_1'] }}" alt="">
+                      <h5 class="uk-margin-remove">{{ $home['homepage_text_1'] }}</h5>
+                  </a>
+              </div>
+          </div>
+          <div class="uk-width-1-3 uk-inline">
+              <div class="uk-inline uk-visible@m">
+                  <div class="uk-inline-clip uk-transition-toggle uk-light">
+                      <a href="{{ $home['homepage_url_2'] }}" class="uk-link-reset">
+                          <img src="{{ $home['homepage_banner_2'] }}" alt="">
+                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          </div>
+                          <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
+                              <div class="uk-card-body">
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_2'] }}</h3></div>
+                              </div>
+                          </div>
+                      </a>
                   </div>
-                </div>
+              </div>
+              <div class="uk-inline uk-hidden@m">
+                  <a href="{{ $home['homepage_url_2'] }}" class="uk-link-reset">
+                      <img src="/{{ $home['homepage_banner_2'] }}" alt="">
+                      <h5 class="uk-margin-remove">{{ $home['homepage_text_2'] }}</h5>
+                  </a>
+              </div>
+          </div>
+          <div class="uk-width-1-3 uk-inline">
+              <div class="uk-inline uk-visible@m">
+                  <div class="uk-inline-clip uk-transition-toggle uk-light">
+                      <a href="{{ $home['homepage_url_3'] }}" class="uk-link-reset">
+                          <img src="{{ $home['homepage_banner_3'] }}" alt="">
+                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          </div>
+                          <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
+                              <div class="uk-card-body">
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_3'] }}</h3></div>
+                              </div>
+                          </div>
+                      </a>
+                  </div>
+              </div>
+              <div class="uk-inline uk-hidden@m">
+                  <a href="{{ $home['homepage_url_3'] }}" class="uk-link-reset">
+                      <img src="/{{ $home['homepage_banner_3'] }}" alt="">
+                      <h5 class="uk-margin-remove">{{ $home['homepage_text_3'] }}</h5>
+                  </a>
+              </div>
+          </div>
+          <div class="uk-width-1-3 uk-inline">
+              <div class="uk-inline uk-visible@m">
+                  <div class="uk-inline-clip uk-transition-toggle uk-light">
+                      <a href="{{ $home['homepage_url_4'] }}" class="uk-link-reset">
+                          <img src="{{ $home['homepage_banner_4'] }}" alt="">
+                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          </div>
+                          <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
+                              <div class="uk-card-body">
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_4'] }}</h3></div>
+                              </div>
+                          </div>
+                      </a>
+                  </div>
+              </div>
+              <div class="uk-inline uk-hidden@m">
+                  <a href="{{ $home['homepage_url_4'] }}" class="uk-link-reset">
+                      <img src="/{{ $home['homepage_banner_4'] }}" alt="">
+                      <h5 class="uk-margin-remove">{{ $home['homepage_text_4'] }}</h5>
+                  </a>
+              </div>
+          </div>
+          <div class="uk-width-1-3 uk-inline">
+              <div class="uk-inline uk-visible@m">
+                  <div class="uk-inline-clip uk-transition-toggle uk-light">
+                      <a href="{{ $home['homepage_url_5'] }}" class="uk-link-reset">
+                          <img src="{{ $home['homepage_banner_5'] }}" alt="">
+                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          </div>
+                          <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
+                              <div class="uk-card-body">
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_5'] }}</h3></div>
+                              </div>
+                          </div>
+                      </a>
+                  </div>
+              </div>
+              <div class="uk-inline uk-hidden@m">
+                  <a href="{{ $home['homepage_url_5'] }}" class="uk-link-reset">
+                      <img src="/{{ $home['homepage_banner_5'] }}" alt="">
+                      <h5 class="uk-margin-remove">{{ $home['homepage_text_5'] }}</h5>
+                  </a>
+              </div>
+          </div>
+          <div class="uk-width-1-3 uk-inline">
+              <div class="uk-inline uk-visible@m">
+                  <div class="uk-inline-clip uk-transition-toggle uk-light">
+                      <a href="{{ $home['homepage_url_6'] }}" class="uk-link-reset">
+                          <img src="{{ $home['homepage_banner_6'] }}" alt="">
+                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          </div>
+                          <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
+                              <div class="uk-card-body">
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_6'] }}</h3></div>
+                              </div>
+                          </div>
+                      </a>
+                  </div>
+              </div>
+              <div class="uk-inline uk-hidden@m">
+                  <a href="{{ $home['homepage_url_6'] }}" class="uk-link-reset">
+                      <img src="/{{ $home['homepage_banner_6'] }}" alt="">
+                      <h5 class="uk-margin-remove">{{ $home['homepage_text_6'] }}</h5>
+                  </a>
+              </div>
+          </div>
+          <div class="uk-width-1-3 uk-inline">
+              <div class="uk-inline uk-visible@m">
+                  <div class="uk-inline-clip uk-transition-toggle uk-light">
+                      <a href="{{ $home['homepage_url_7'] }}" class="uk-link-reset">
+                          <img src="{{ $home['homepage_banner_7'] }}" alt="">
+                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          </div>
+                          <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
+                              <div class="uk-card-body">
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_7'] }}</h3></div>
+                              </div>
+                          </div>
+                      </a>
+                  </div>
+              </div>
+              <div class="uk-inline uk-hidden@m">
+                  <a href="{{ $home['homepage_url_7'] }}" class="uk-link-reset">
+                      <img src="/{{ $home['homepage_banner_7'] }}" alt="">
+                      <h5 class="uk-margin-remove">{{ $home['homepage_text_7'] }}</h5>
+                  </a>
+              </div>
+          </div>
+          <div class="uk-width-1-3 uk-inline">
+              <div class="uk-inline uk-visible@m">
+                  <div class="uk-inline-clip uk-transition-toggle uk-light">
+                      <a href="{{ $home['homepage_url_8'] }}" class="uk-link-reset">
+                          <img src="{{ $home['homepage_banner_8'] }}" alt="">
+                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          </div>
+                          <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
+                              <div class="uk-card-body">
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_8'] }}</h3></div>
+                              </div>
+                          </div>
+                      </a>
+                  </div>
+              </div>
+              <div class="uk-inline uk-hidden@m">
+                  <a href="{{ $home['homepage_url_8'] }}" class="uk-link-reset">
+                      <img src="/{{ $home['homepage_banner_8'] }}" alt="">
+                      <h5 class="uk-margin-remove">{{ $home['homepage_text_8'] }}</h5>
+                  </a>
+              </div>
+          </div>
+          <div class="uk-width-1-3 uk-inline">
+              <div class="uk-inline uk-visible@m">
+                  <div class="uk-inline-clip uk-transition-toggle uk-light">
+                      <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
+                          <img src="{{ $home['homepage_banner_9'] }}" alt="">
+                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          </div>
+                          <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
+                              <div class="uk-card-body">
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_9'] }}</h3></div>
+                              </div>
+                          </div>
+                      </a>
+                  </div>
+              </div>
+              <div class="uk-inline uk-hidden@m">
+                  <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
+                      <img src="/{{ $home['homepage_banner_9'] }}" alt="">
+                      <h5 class="uk-margin-remove">{{ $home['homepage_text_9'] }}</h5>
+                  </a>
               </div>
           </div>
       </div>
-      <div class="uk-width-1-3@m uk-inline">
-          <div class="uk-inline">
-            <div class="uk-inline-clip uk-transition-toggle uk-light">
-              <a href="#/{{ $home['kid_link'] }}" class="uk-link-reset">
-              <img src="/{{ $home['kid_banner'] }}" alt="">
-              <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
-                <div class="uk-card-body">
-                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove"><h3 class="uk-margin-remove">{{ $kidTitle[0] }}</h3></div>
-                  <div class="uk-transition-slide-right-small"><h4 class="uk-margin-remove"><a href="/{{ $home['kid_link'] }}">{{ $kidTitle[1] }}<span uk-icon="icon: triangle-right"></span></a></h4></div>
-                </div>
-              </div>
-          </div>
-      </div>
-    </div>
-  </div>
   <hr>
-  <!-- <div class="uk-text-left">
-  <h2><span><b>Shop New Arrivals</b></span></h2>
-  </div> -->
-  {{-- <div class="uk-text-left">
-  <h2><span><b>Shop & Collection</b></span></h2>
-  </div>
-  <div class="uk-grid-small uk-margin-top uk-margin-bottom uk-child-width-1-2@m" uk-grid>
-      <div class="uk-panel">
-
-            <div class="uk-inline-clip uk-transition-toggle uk-dark">
-                <img src="/{{ $home['left_banner'] }}" alt="">
-                <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
-                <div class="uk-overlay uk-overlay-default uk-padding-small uk-position-medium uk-position-bottom-left"><b>FOR WOMEN</b> <br>Our Clothes, Your Style
-                </div>
-
-            </div>
-            <h3 class="uk-margin-remove">{{ $leftTitle[0] }}</h3>
-            <a href="/{{ $home['left_link'] }}" class="uk-text-muted">{{ $leftTitle[1] }}<span uk-icon="icon: triangle-right"></span></a>
-      </div>
-      <div class="uk-panel">
-
-          <div class="uk-inline-clip uk-transition-toggle uk-dark">
-              <img src="/{{ $home['right_banner'] }}" alt="">
-              <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
-              <div class="uk-overlay uk-overlay-default uk-padding-small uk-position-medium uk-position-bottom-right"><b>FOR MEN</b> <br>Our broken-in tees
-              </div>
-          </div>
-          <h3 class="uk-margin-remove">{{ $rightTitle[0] }}</h3>
-          <a href="/{{ $home['right_link'] }}" class="uk-text-muted">{{ $rightTitle[1] }}<span uk-icon="icon: triangle-right"></span></a>
-      </div>
-  </div>
-  <hr> --}}
   <div class="uk-text-left">
   	<span class="uk-text-lead">MOST POPULAR</span>
 

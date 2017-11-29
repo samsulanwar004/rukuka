@@ -10,6 +10,48 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// this route for testing pos indonesia courier service
+use App\Services\PosIndonesiaCourierService;
+
+Route::get('/posindonesia', function () {
+    //init object
+    $posIndonesia = new PosIndonesiaCourierService;
+    
+    //create request getfee
+    // $requestToPosIndonesia = [
+    //                             [
+    //                                 'userId'            => config('common.username_pos_indonesia'),
+    //                                 'password'          => config('common.password_pos_indonesia'),
+    //                                 'customerId'        => '0',
+    //                                 'isDomestic'        => '0',
+    //                                 'senderPosCode'     => '13210',
+    //                                 'receiverPosCode'   => 'SG',
+    //                                 'weight'            => '1000',
+    //                                 'length'            => '0',
+    //                                 'width'             => '100',
+    //                                 'height'            => '100',
+    //                                 'diameter'          => '0',
+    //                                 'itemValue'         => '900000'
+    //                             ]
+    //                         ];
+
+    $requestToPosIndonesia = [
+                                [
+                                    'userId'            => config('common.username_pos_indonesia'),
+                                    'password'          => config('common.password_pos_indonesia'),
+                                    'city'        => '',
+                                    'address'        => ''
+                                ]
+                            ];
+    
+    //send request
+    $resultFee = $posIndonesia->callMethod('getPosCodeByaddrAndCity', $requestToPosIndonesia);
+    
+    //result
+    var_dump($resultFee);
+});
+
 Route::get('/blog', [
     'as'   => 'blog-get-index',
     'uses' => 'Frontend\BlogController@index',
@@ -60,7 +102,7 @@ Route::get('/home', [
     'uses' => 'Frontend\PageController@index',
 ]);
 
-Route::get('/shop/{categories}/{category}/{slug?}', [
+Route::get('/shop/{categories}/{category}/{slug?}/{sale?}', [
     'as'   => 'shop',
     'uses' => 'Frontend\PageController@shop',
 ]);
@@ -242,9 +284,9 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@postShippingOption',
     ]);
 
-    Route::get('/checkout/preview', [
-        'as'   => 'checkout.preview',
-        'uses' => 'Frontend\UserController@preview',
+    Route::get('/checkout/review', [
+        'as'   => 'checkout.review',
+        'uses' => 'Frontend\UserController@showReviewPage',
     ]);
     
 
@@ -308,6 +350,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/account/cc/update/{id?}', [
         'as'   => 'user.cc.update',
         'uses' => 'Frontend\UserController@ccUpdate',
-    ]);    
+    ]);
+
+    Route::post('/order', [
+        'as'   => 'order',
+        'uses' => 'Frontend\OrderController@store',
+    ]);  
 
 });

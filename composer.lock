@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d6040121de8d3264555051f9602f2b09",
-    "content-hash": "b03b25e8c845f50864ebb90acf4fba47",
+    "content-hash": "3f8e9896ba8d5ea2cacf770c7dfbf9e4",
     "packages": [
         {
             "name": "atayahmet/laravel-nestable",
@@ -882,7 +881,8 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2017-11-14 20:44:03"
+
+            "time": "2017-11-14T20:44:03+00:00"
         },
         {
             "name": "gloudemans/shoppingcart",
@@ -1582,7 +1582,7 @@
                 "laravel",
                 "oauth"
             ],
-            "time": "2017-11-06 16:02:48"
+            "time": "2017-11-06T16:02:48+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1987,6 +1987,182 @@
             "time": "2017-01-05 08:46:19"
         },
         {
+            "name": "meng-tian/async-soap-guzzle",
+            "version": "v0.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/meng-tian/async-soap-guzzle.git",
+                "reference": "0b88d00f81bdbeb2d9089670163260e63e8812b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/meng-tian/async-soap-guzzle/zipball/0b88d00f81bdbeb2d9089670163260e63e8812b9",
+                "reference": "0b88d00f81bdbeb2d9089670163260e63e8812b9",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.1",
+                "meng-tian/php-async-soap": "~1.0",
+                "meng-tian/soap-http-binding": "~0.2.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Meng\\AsyncSoap\\Guzzle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Meng Tian",
+                    "email": "tianmeng94@hotmail.com"
+                }
+            ],
+            "description": "An asynchronous SOAP client build on top of Guzzle.",
+            "keywords": [
+                "Guzzle",
+                "asynchronous",
+                "soap"
+            ],
+            "time": "2016-12-03T16:54:21+00:00"
+        },
+        {
+            "name": "meng-tian/php-async-soap",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/meng-tian/php-async-soap.git",
+                "reference": "7ad271a18b7a6be099b6ef64cf8c0575267c75d3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/meng-tian/php-async-soap/zipball/7ad271a18b7a6be099b6ef64cf8c0575267c75d3",
+                "reference": "7ad271a18b7a6be099b6ef64cf8c0575267c75d3",
+                "shasum": ""
+            },
+            "suggest": {
+                "meng-tian/async-soap-artax": "A Artax implementation of meng-tian/php-async-soap.",
+                "meng-tian/async-soap-guzzle": "A Guzzle implementation of meng-tian/php-async-soap."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Meng\\AsyncSoap\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Meng Tian",
+                    "email": "tianmeng94@hotmail.com"
+                }
+            ],
+            "description": "Interface for asynchronous SOAP client.",
+            "keywords": [
+                "asynchronous",
+                "soap"
+            ],
+            "time": "2016-05-21T12:54:23+00:00"
+        },
+        {
+            "name": "meng-tian/php-soap-interpreter",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/meng-tian/php-soap-interpreter.git",
+                "reference": "e7a0c588af9e0076d89dc1e7c03206b27e9d1f3a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/meng-tian/php-soap-interpreter/zipball/e7a0c588af9e0076d89dc1e7c03206b27e9d1f3a",
+                "reference": "e7a0c588af9e0076d89dc1e7c03206b27e9d1f3a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Meng\\Soap\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Meng Tian",
+                    "email": "tianmeng94@hotmail.com"
+                }
+            ],
+            "description": "A PHP library for interpreting SOAP messages.",
+            "keywords": [
+                "soap"
+            ],
+            "time": "2016-05-21T13:19:43+00:00"
+        },
+        {
+            "name": "meng-tian/soap-http-binding",
+            "version": "0.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/meng-tian/soap-http-binding.git",
+                "reference": "82144ced11ad66ec030f6e964799e667972b6a1b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/meng-tian/soap-http-binding/zipball/82144ced11ad66ec030f6e964799e667972b6a1b",
+                "reference": "82144ced11ad66ec030f6e964799e667972b6a1b",
+                "shasum": ""
+            },
+            "require": {
+                "meng-tian/php-soap-interpreter": "~1.0",
+                "php": ">=5.4.0",
+                "zendframework/zend-diactoros": "~1.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Meng\\Soap\\HttpBinding\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Meng Tian",
+                    "email": "tianmeng94@hotmail.com"
+                }
+            ],
+            "description": "A PHP library for binding SOAP messages to PSR-7 HTTP messages.",
+            "keywords": [
+                "http",
+                "psr-7",
+                "soap"
+            ],
+            "time": "2016-05-21T14:04:22+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.23.0",
             "source": {
@@ -2210,7 +2386,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2017-11-04 11:48:34"
+            "time": "2017-11-04T11:48:34+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -2562,7 +2738,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2017-11-16 14:29:51"
+            "time": "2017-11-16T14:29:51+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -2810,7 +2986,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-16 15:24:32"
+            "time": "2017-11-16T15:24:32+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -2863,7 +3039,7 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-05 15:47:03"
+            "time": "2017-11-05T15:47:03+00:00"
         },
         {
             "name": "symfony/debug",
@@ -2919,7 +3095,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-10 16:38:39"
+            "time": "2017-11-10T16:38:39+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -2982,7 +3158,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-05 15:47:03"
+            "time": "2017-11-05T15:47:03+00:00"
         },
         {
             "name": "symfony/finder",
@@ -3031,7 +3207,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-05 15:47:03"
+            "time": "2017-11-05T15:47:03+00:00"
         },
         {
             "name": "symfony/http-foundation",
@@ -3084,7 +3260,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-13 18:13:16"
+            "time": "2017-11-13T18:13:16+00:00"
         },
         {
             "name": "symfony/http-kernel",
@@ -3170,7 +3346,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-16 18:14:43"
+            "time": "2017-11-16T18:14:43+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -3386,7 +3562,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-13 15:31:11"
+            "time": "2017-11-13T15:31:11+00:00"
         },
         {
             "name": "symfony/routing",
@@ -3464,7 +3640,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2017-11-07 14:16:22"
+            "time": "2017-11-07T14:16:22+00:00"
         },
         {
             "name": "symfony/translation",
@@ -3529,7 +3705,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-07 14:12:55"
+            "time": "2017-11-07T14:12:55+00:00"
         },
         {
             "name": "symfony/var-dumper",
@@ -3597,7 +3773,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2017-11-07 14:16:22"
+            "time": "2017-11-07T14:16:22+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -3758,7 +3934,60 @@
                 "env",
                 "environment"
             ],
-            "time": "2016-09-01 10:05:43"
+            "time": "2016-09-01T10:05:43+00:00"
+        },
+        {
+            "name": "zendframework/zend-diactoros",
+            "version": "1.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-diactoros.git",
+                "reference": "c8664b92a6d5bc229e48b0923486c097e45a7877"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/c8664b92a6d5bc229e48b0923486c097e45a7877",
+                "reference": "c8664b92a6d5bc229e48b0923486c097e45a7877",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0",
+                "psr/http-message": "^1.0"
+            },
+            "provide": {
+                "psr/http-message-implementation": "1.0"
+            },
+            "require-dev": {
+                "ext-dom": "*",
+                "ext-libxml": "*",
+                "phpunit/phpunit": "^5.7.16 || ^6.0.8",
+                "zendframework/zend-coding-standard": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.6-dev",
+                    "dev-develop": "1.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Diactoros\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "description": "PSR HTTP Message implementations",
+            "homepage": "https://github.com/zendframework/zend-diactoros",
+            "keywords": [
+                "http",
+                "psr",
+                "psr-7"
+            ],
+            "time": "2017-10-12T15:24:51+00:00"
+>>>>>>> 75bc11e2dc0c31667b64930db8607690078a3995
         }
     ],
     "packages-dev": [
@@ -4118,7 +4347,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2017-11-10 14:09:06"
+            "time": "2017-11-10T14:09:06+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -4165,7 +4394,7 @@
                     "email": "me@mikevanriel.com"
                 }
             ],
-            "time": "2017-07-14 14:27:02"
+            "time": "2017-07-14T14:27:02+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -4559,7 +4788,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-11-14 14:50:51"
+            "time": "2017-11-14T14:50:51+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -5186,7 +5415,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-10 18:26:04"
+            "time": "2017-11-10T18:26:04+00:00"
         },
         {
             "name": "webmozart/assert",

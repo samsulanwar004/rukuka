@@ -3338,8 +3338,9 @@ ul.uk-nav-sub {
  * Items
  */
 .uk-nav-primary > li > a {
-  font-size: 25px;
+  font-size: 18px;
   line-height: 1.5;
+  letter-spacing: 2px;
   color: #666;
 }
 /* Hover + Focus */
@@ -3987,7 +3988,7 @@ ul.uk-nav-sub {
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   /* 2 */
-  margin-left: -20px;
+  margin-left: 0px;
   /* 3 */
   padding: 0;
   list-style: none;
@@ -4003,7 +4004,7 @@ ul.uk-nav-sub {
   -webkit-flex: none;
   flex: none;
   /* 2 */
-  padding-left: 20px;
+  padding-left: 0px;
   /* 3 */
   position: relative;
 }
@@ -4019,7 +4020,7 @@ ul.uk-nav-sub {
   display: block;
   text-align: center;
   /* 2 */
-  padding: 5px 10px;
+  padding: 0px 0px;
   color: #666;
 }
 /* Hover + Focus */

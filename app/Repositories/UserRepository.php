@@ -16,6 +16,7 @@ use App\Libraries\ImageFile;
 use Storage;
 use Image;
 use App\Subcriber;
+use App\Libraries\Encryption;
 
 class UserRepository
 {
@@ -325,7 +326,7 @@ class UserRepository
 	public function persistCreditCard($request, $id = null)
 	{
 		$cc = is_null($id) ? new CreditCard : $this->getCreditCardById($id);
-		$cc->card_number = $request->input('card_number');
+		$cc->card_number = $this->encryptCreditCard($request->input('card_number'));
 		$cc->expired_date = $request->input('expired_date');
 		$cc->name_card = $request->input('name_card');
 		$cc->is_default = is_null($id) ? $this->getDefault() : $cc->is_default;
@@ -571,6 +572,30 @@ class UserRepository
 	{
 		return $this->getAddressById($id)
 			->delete();
+	}
+
+	public function getCreditCardDefault()
+	{
+		$user = $this->getUser();
+		return CreditCard::where('is_default', 1)
+			->where('users_id', $user->id)
+			->first();
+	}
+
+	public function encryptCreditCard($cardNumber)
+	{
+		$key = config('common.encryption.key');
+        $crypt = new Encryption($key);
+
+        return $crypt->encrypt($cardNumber);
+	}
+
+	public function decryptCreditCard($cardNumber)
+	{
+		$key = config('common.encryption.key');
+        $crypt = new Encryption($key);
+
+        return $crypt->decrypt($cardNumber);
 	}
 
 }

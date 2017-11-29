@@ -13,10 +13,10 @@
                     <a href="{{ route('checkout') }}" class="uk-button uk-button-text">SHIPPING ADDRESS</a>
                 </div>
                 <div class="uk-text-center">
-                    <a href="{{ route('checkout') }}" class="uk-button uk-button-text">SHIPPING OPTION</a>
+                    <a href="{{ route('checkout.shipping') }}" class="uk-button uk-button-text">SHIPPING OPTION</a>
                 </div>
                 <div class="uk-text-center">
-                    <a href="{{ route('checkout') }}" class="uk-button uk-button-text">BILLING</a>
+                    <a href="{{ route('checkout.billing') }}" class="uk-button uk-button-text">BILLING</a>
                 </div>
                 <div class="uk-text-center">
                     <button class="uk-button uk-button-text" disabled><b>REVIEW</b></button>
@@ -31,22 +31,23 @@
               <div class="uk-grid uk-grid-small" grid>
                 <div class="uk-width-1-3@m">
                   <ul class="uk-list uk-text-meta">
-                      <li>Joko Susilo</li>
-                      <li>Ku Ka</li>
-                      <li>Yogyakarta</li>
-                      <li>Kota Gede</li>
-                      <li>Yogyakarta, Indonesia 55872</li>
-                      <li>Indonesia</li>
-                      <li>6287839525707</li>
+                      <li>{{ $defaultCreditcard->first_name }}</li>
+                      <li>{{ $defaultCreditcard->company }}</li>
+                      <li>{{ $defaultCreditcard->address_line }}</li>
+                      <li>{{ $defaultCreditcard->city }}</li>
+                      <li>{{ $defaultCreditcard->city }}, {{ $defaultCreditcard->country }} {{ $defaultCreditcard->postal }}</li>
+                      <li>{{ $defaultCreditcard->country }}</li>
+                      <li>{{ $defaultCreditcard->phone_number }}</li>
                   </ul>
                 </div>
                 <div class="uk-width-1-3@m">
+                  <input type="hidden" name="card_number" value="{{ $defaultCreditcard->card_number }}" id="card-number-hidden">
                   <ul class="uk-list uk-text-meta">
-                      <li>Master Card</li>
-                      <li>*** *** *** *** 213</li>
-                      <li>logo master card</li>
-                      <li>kak emma</li>
-                      <li>IDR 4939200.00</li>
+                      <li><span id="card"></span></li>
+                      <li><span id="card-number"></span></li>
+                      <li><img src="#" id="card_img" width="50px"></li>
+                      <li>{{ $defaultCreditcard->name }}</li>
+                      <li>IDR {{ $total }}</li>
                   </ul>
                 </div>
               </div>
@@ -56,27 +57,32 @@
             <div class="uk-grid uk-grid-small" grid>
               <div class="uk-width-1-3@m">
                 <ul class="uk-list uk-text-meta">
-                    <li>Joko Susilo</li>
-                    <li>Ku Ka</li>
-                    <li>Yogyakarta</li>
-                    <li>Kota Gede</li>
-                    <li>Yogyakarta, Indonesia 55872</li>
-                    <li>Indonesia</li>
-                    <li>6287839525707</li>
+                  <li>{{ $defaultAddress->first_name }} {{ $defaultAddress->last_name}}</li>
+                  <li>{{ $defaultAddress->company }}</li>
+                  <li>{{ $defaultAddress->address_line }}</li>
+                  <li>{{ $defaultAddress->city }}</li>
+                  <li>{{ $defaultAddress->city }}, {{ $defaultAddress->country }} {{ $defaultAddress->postal }}</li>
+                  <li>{{ $defaultAddress->country }}</li>
+                  <li>{{ $defaultAddress->phone_number }}</li>
                 </ul>
               </div>
               <div class="uk-width-2-3@m">
-                TODAY: Monday, November 20th
+                TODAY: {{ \Carbon\Carbon::now()->toDayDateTimeString() }}
                 <table class="uk-table uk-table-divider uk-table-hover">
                     <tbody>
                         <tr class="uk-active">
                             <td>
                                 <input type="radio" class="uk-radio" name="shipping" value="1" required="required" checked> </td>
                             <td> DHL Express (3 - 6 Ekonomi Days) </td>
-                            <td> IDR 300000,00</td>
+                            <td> IDR 500.000</td>
                         </tr>
                     </tbody>
                 </table>
+                <form action="{{ route('order') }}" method="POST">
+                  {{ csrf_field() }}
+                  <input type="hidden" name="order" value="ok">
+                  <input type="submit" name="submit" id="submit" style="display: none;">
+                </form>
               </div>
             </div>
             <hr class="uk-margin-small">
@@ -91,19 +97,35 @@
 @endsection
 
 @section('footer_scripts')
+<script src="{{ elixir('js/creditcard.js') }}"></script>
 <script type="text/javascript">
    $(function () {
 
-     $("#continue").on('click', function (e) {
-       e.preventDefault();
-       var submit = $('#submit').val();
-       var url = '{{ route('checkout.billing') }}';
-       if (submit == 'C O N T I N U E') {
-         $('#submit').click();
-       } else {
-         window.location.href = url;
-       }
+      $('#card-number-hidden').validateCreditCard(function(result) {
+        var card = result.card_type == null ? '' : result.card_type.name;
+        $('#card').html(card.toUpperCase());
 
+        if (card == 'visa') {
+          $('#card_img').attr('src', '/images/visa.png');
+        } else if (card == 'mastercard') {
+          $('#card_img').attr('src', '/images/mastercard.png');
+        } else if (card == 'discover') {
+          $('#card_img').attr('src', '/images/discover.png');
+        } else {
+          $('#card_img').attr('src', '/images/default_card.png');
+        }
+        
+      });
+
+      var card = $('#card-number-hidden').val();
+
+      var cardNumber = card.substring(13);
+
+      $('#card-number').html('*************'+cardNumber);
+
+     $("#continue").on('click', function (e) {
+        e.preventDefault();
+        $('#submit').click();
      });
    })
 </script>

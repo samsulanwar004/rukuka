@@ -91,4 +91,11 @@ class BlogRepository
     {
         return Setting::where('name','header_image' )->get();
     }
+
+    public function getPostRandom()
+    {
+        $result = Blog::where('is_publish', 1)->take(3) ->inRandomOrder()->get();
+
+        return $result;
+    }
 }

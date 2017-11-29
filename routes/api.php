@@ -31,5 +31,19 @@ Route::group([
 	'prefix' => 'v1', 
 	'middleware' => 'auth:api'
 ], function () {
-	Route::get('wishlist/', 'Api\UserController@wishlist')->name('wishlist');
+	Route::post('wishlist/', 'Api\UserController@wishlist')->name('wishlist');
 });
+
+// start local address
+
+Route::get('v1/countries', 'Api\LocalAddressController@getAllCountry')->name('get-all-country');
+
+Route::get('v1/provinces', 'Api\LocalAddressController@getAllProvince')->name('get-all-province');
+
+Route::get('v1/cities/{byProvince}', 'Api\LocalAddressController@getAllCity')->name('get-all-province');
+
+Route::get('v1/sub-district/{byCity}', 'Api\LocalAddressController@getSubDistrict')->name('get-sub-district');
+
+Route::get('v1/villages/{bySubDistrict}', 'Api\LocalAddressController@getVillage')->name('get-village');
+
+// end local address

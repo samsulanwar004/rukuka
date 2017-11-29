@@ -1,5 +1,5 @@
 <template>
-  <div class="uk-grid-small uk-child-width-1-4@m uk-margin-large-bottom" uk-grid>
+  <div class="uk-grid-small uk-child-width-1-4@m uk-child-width-1-2 uk-margin-large-bottom" uk-grid>
     <!-- start product -->
     <div class="uk-panel uk-text-left" v-for="product in products">
       <div class="uk-card uk-card-small uk-padding-remove">
@@ -16,11 +16,18 @@
         <div class="uk-card-body uk-padding-remove uk-margin-small-top">
           <a :href="'/product/'+ product.slug" class="uk-text-muted">{{ product.name }}</a>
           <br>
-          {{ product.currency }} {{ product.price }}
+            <span v-if="product.price_before_discount > 0 ">
+                <span style="text-decoration: line-through;">
+                    {{ product.currency }} {{ product.price_before_discount }}
+                </span>
+            </span>
+            <span class="uk-text-danger" v-if="product.price_before_discount > 0 ">
+               &nbsp;{{ product.currency }} {{ product.price }}
+            </span>
+            <span v-else>
+                {{ product.currency }} {{ product.price }}
+            </span>
         </div>
-        <!-- <div class="uk-card-footer">
-          <span class="uk-text-meta">Shirt<h4 class="uk-card-price">$400</h4></span>
-        </div> -->
       </div>
     </div>
     <!-- end product single -->
@@ -31,7 +38,17 @@
 
         <div class="uk-modal-header">
           <h3 class="uk-margin-remove">{{ name }}</h3>
-          <span>{{ currency }} {{ price }}</span>
+            <span v-if="priceBeforeDiscount > 0 ">
+                <span style="text-decoration: line-through;">
+                    {{ currency }} {{ priceBeforeDiscount }}
+                </span>
+            </span>
+            <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
+                &nbsp; {{ currency }} {{ price }}
+            </span>
+            <span v-else>
+                {{ currency }} {{ price }}
+            </span>
         </div>
 
         <div class="uk-modal-body" uk-overflow-auto>
@@ -66,17 +83,17 @@
                     <b>Color :</b> {{ color }}
                 </div>
                 <div>
-                  <div uk-form-custom="target: > * > span:first">
-                      <select name="size" v-model="size" v-validate="'required'">
+                  <!-- <div uk-form-custom="target: > * > span:first"> -->
+                      <select name="size" v-model="size" v-validate="'required'" class="uk-select">
                           <option :value="null" disabled>Choose Size</option>
                           <option v-for="stock in stocks" :value="stock.sku">
                             {{ stock.size }}
                           </option>
                       </select>
-                      <button class="uk-button uk-button-default" type="button" tabindex="-1">
+                      <!-- <button class="uk-button uk-button-default" type="button" tabindex="-1">
                           <span uk-icon="icon: chevron-down"></span>
                       </button>
-                  </div>
+                  </div> -->
 
                 </div>
               </div>
@@ -154,6 +171,7 @@
             name: {},
             currency: {},
             price: {},
+            priceBeforeDiscount: {},
             color: {},
             images: {},
             stocks: {},
@@ -175,6 +193,7 @@
             self.name = data.name;
             self.currency = data.currency;
             self.price = data.sell_price;
+            self.priceBeforeDiscount = data.price_before_discount;
             self.color = data.color;
             self.images = data.images;
             self.stocks = data.stocks;
