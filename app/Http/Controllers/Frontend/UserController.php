@@ -79,7 +79,15 @@ class UserController extends BaseController
     {
     	$user = $this->getUserActive();
 
-    	$cards = $user->creditCards;
+    	$cards = $user->creditCards->map(function ($entry) {
+            return [
+                'id' => $entry->id,
+                'card_number' => $this->user->decryptCreditCard($entry->card_number),
+                'expired_date' => $entry->expired_date,
+                'name_card' => $entry->name_card,
+                'is_default' => $entry->is_default,
+            ];
+        });
 
     	$address = $user->address;
 
@@ -107,7 +115,6 @@ class UserController extends BaseController
                 if ($secureCode != $cardCode) {
                     throw new Exception("Security code invalid!", 1);
                 }
-                
             }
 
     		$user = $this->getUserActive();
@@ -132,7 +139,7 @@ class UserController extends BaseController
 
             if ($request->has('checkout_new_card')) {
                 return redirect($this->redirectAfterNewCC);
-            }            
+            }
 
     		return redirect($this->redirectAfterSaveCC)->with(['success' => 'Save credit card successfully!']);
     	} catch (Exception $e) {
@@ -498,12 +505,25 @@ class UserController extends BaseController
 
     public function showShippingBillingPage()
     {
-        $user = $this->getUserActive();
-        $creditcards = $user->creditcards;
-        $address = $user->address;
-        $defaultAddress = $this->user
-            ->setUser($user)
-            ->getAddressDefault();
+        try {
+          $user = $this->getUserActive();
+          $creditcards = $user->creditcards->map(function ($entry) {
+              return [
+                  'id' => $entry->id,
+                  'card_number' => $this->user->decryptCreditCard($entry->card_number),
+                  'expired_date' => $entry->expired_date,
+                  'name_card' => $entry->name_card,
+                  'is_default' => $entry->is_default,
+              ];
+          });
+          $address = $user->address;
+          $defaultAddress = $this->user
+              ->setUser($user)
+              ->getAddressDefault();
+        } catch (Exception $e) {
+          return back()->withErrors($e->getMessage());
+        }
+
 
       return view('pages.checkout.shipping_billing', compact(
             'creditcards',
@@ -616,8 +636,15 @@ class UserController extends BaseController
     {
         try {
             $user = $this->getUserActive();
-            $credit = $this->user
+            $creditCard = $this->user
                 ->getCreditCardById($id);
+
+            $credit = new \stdClass;
+            $credit->id = $creditCard->id;
+            $credit->card_number = $this->user->decryptCreditCard($creditCard->card_number);
+            $credit->expired_date = $creditCard->expired_date;
+            $credit->name_card = $creditCard->name_card;
+            $credit->address_id = $creditCard->address_id;
 
             return response()->json([
                 'status' => 'ok',
@@ -665,9 +692,22 @@ class UserController extends BaseController
     {
         $user = $this->getUserActive();
         $bag = new BagService;
-        $defaultCreditcard = $this->user
+        $creditCard = $this->user
             ->setUser($user)
             ->getCreditCardDefault();
+
+        $defaultCreditcard = new \stdClass;
+        $defaultCreditcard->id = $creditCard->id;
+        $defaultCreditcard->card_number = $this->user->decryptCreditCard($creditCard->card_number);
+        $defaultCreditcard->expired_date = $creditCard->expired_date;
+        $defaultCreditcard->name_card = $creditCard->name_card;
+        $defaultCreditcard->first_name = $creditCard->address->first_name;
+        $defaultCreditcard->company = $creditCard->address->company;
+        $defaultCreditcard->address_line = $creditCard->address->address_line;
+        $defaultCreditcard->city = $creditCard->address->city;
+        $defaultCreditcard->postal = $creditCard->address->postal;
+        $defaultCreditcard->country = $creditCard->address->country;
+        $defaultCreditcard->phone_number = $creditCard->address->phone_number;
 
         $defaultAddress = $this->user
             ->setUser($user)

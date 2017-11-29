@@ -54,6 +54,13 @@ class PageController extends BaseApiController
                     })->toArray();
                     $categories['kids_nav'] = $KidsResult;
 
+                    //Sale Navigation
+                    $SaleResult = (new DesignerRepository)->getSalesNav();
+                    $SaleResult = collect($SaleResult)->mapWithKeys(function ($item) {
+                        return [strtolower($item['name']) => $item['content']];
+                    })->toArray();
+                    $categories['sales_nav'] = $SaleResult;
+
                     return $this->success($categories, 200, true);
                 } else {
                     $categories = (new CategoryRepository)->getCategoryByParent($parent);
@@ -77,6 +84,7 @@ class PageController extends BaseApiController
                     'name' => $entry->name,
                     'slug' => $entry->slug,
                     'price' => $entry->sell_price,
+                    'price_before_discount' => $entry->price_before_discount,
                     'currency' => $entry->currency,
                     'photo' => $entry->images->first()->photo,
                 ];
@@ -95,6 +103,7 @@ class PageController extends BaseApiController
 
             $related = $related->map(function ($entry) {
                 return [
+                    'id' => $entry->id,
                     'name' => $entry->name,
                     'slug' => $entry->slug,
                     'price' => $entry->sell_price,

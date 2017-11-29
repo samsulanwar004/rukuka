@@ -3578,8 +3578,9 @@ ul.uk-nav-sub {
  * Items
  */
 .uk-nav-primary > li > a {
-  font-size: 25px;
+  font-size: 18px;
   line-height: 1.5;
+  letter-spacing: 2px;
   color: #666;
 }
 /* Hover + Focus */
@@ -4278,7 +4279,7 @@ ul.uk-nav-sub {
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   /* 2 */
-  margin-left: -20px;
+  margin-left: 0px;
   /* 3 */
   padding: 0;
   list-style: none;
@@ -4288,7 +4289,7 @@ ul.uk-nav-sub {
   content: "";
   position: absolute;
   bottom: 0;
-  left: 20px;
+  left: 0px;
   right: 0;
   border-bottom: 1px solid #e5e5e5;
 }
@@ -4303,7 +4304,7 @@ ul.uk-nav-sub {
   -webkit-flex: none;
   flex: none;
   /* 2 */
-  padding-left: 20px;
+  padding-left: 0px;
   /* 3 */
   position: relative;
 }
@@ -4319,7 +4320,7 @@ ul.uk-nav-sub {
   display: block;
   text-align: center;
   /* 2 */
-  padding: 5px 10px;
+  padding: 0px 0px;
   color: #666;
   border-bottom: 1px solid transparent;
   font-size: 12px;
@@ -4399,7 +4400,7 @@ ul.uk-nav-sub {
   border-bottom: none;
 }
 .uk-tab .uk-dropdown {
-  margin-left: 30px;
+  margin-left: 0px;
 }
 /* ========================================================================
    Component: Slidenav

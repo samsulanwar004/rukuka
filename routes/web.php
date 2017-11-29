@@ -18,26 +18,35 @@ Route::get('/posindonesia', function () {
     //init object
     $posIndonesia = new PosIndonesiaCourierService;
     
-    //create request
+    //create request getfee
+    // $requestToPosIndonesia = [
+    //                             [
+    //                                 'userId'            => config('common.username_pos_indonesia'),
+    //                                 'password'          => config('common.password_pos_indonesia'),
+    //                                 'customerId'        => '0',
+    //                                 'isDomestic'        => '0',
+    //                                 'senderPosCode'     => '13210',
+    //                                 'receiverPosCode'   => 'SG',
+    //                                 'weight'            => '1000',
+    //                                 'length'            => '0',
+    //                                 'width'             => '100',
+    //                                 'height'            => '100',
+    //                                 'diameter'          => '0',
+    //                                 'itemValue'         => '900000'
+    //                             ]
+    //                         ];
+
     $requestToPosIndonesia = [
                                 [
                                     'userId'            => config('common.username_pos_indonesia'),
                                     'password'          => config('common.password_pos_indonesia'),
-                                    'customerId'        => '0',
-                                    'isDomestic'        => '0',
-                                    'senderPosCode'     => '13210',
-                                    'receiverPosCode'   => 'SG',
-                                    'weight'            => '1000',
-                                    'length'            => '0',
-                                    'width'             => '100',
-                                    'height'            => '100',
-                                    'diameter'          => '0',
-                                    'itemValue'         => '900000'
+                                    'city'        => '',
+                                    'address'        => ''
                                 ]
                             ];
     
     //send request
-    $resultFee = $posIndonesia->get('getFee', $requestToPosIndonesia);
+    $resultFee = $posIndonesia->callMethod('getPosCodeByaddrAndCity', $requestToPosIndonesia);
     
     //result
     var_dump($resultFee);
@@ -93,7 +102,7 @@ Route::get('/home', [
     'uses' => 'Frontend\PageController@index',
 ]);
 
-Route::get('/shop/{categories}/{category}/{slug?}', [
+Route::get('/shop/{categories}/{category}/{slug?}/{sale?}', [
     'as'   => 'shop',
     'uses' => 'Frontend\PageController@shop',
 ]);

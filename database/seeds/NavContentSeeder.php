@@ -153,7 +153,7 @@ class NavContentSeeder extends Seeder
                 "dataenum" => null,
                 "helper" => null,
                 "created_at" => date('Y-m-d H:i:s'),
-                "group_setting" => "Mmen Navigation",
+                "group_setting" => "Men Navigation",
                 "label" => "Men - Blog Image",
             ],
             [
@@ -262,7 +262,7 @@ class NavContentSeeder extends Seeder
                 "helper" => null,
                 "created_at" => date('Y-m-d H:i:s'),
                 "group_setting" => "Kids Navigation",
-                "label" => "Women - Blog Image",
+                "label" => "Kid - Blog Image",
             ],
             [
                 "name" => "kid_blog_url",
@@ -362,6 +362,33 @@ class NavContentSeeder extends Seeder
                 "created_at" => date('Y-m-d H:i:s'),
                 "group_setting" => "Kids Navigation",
                 "label" => "Kid - Designer 5 URL",
+            ],
+            [
+                "name" => "sale_image",
+                "content_input_type" => "upload_image",
+                "dataenum" => null,
+                "helper" => null,
+                "created_at" => date('Y-m-d H:i:s'),
+                "group_setting" => "Sale Navigation",
+                "label" => "Sale - Image",
+            ],
+            [
+                "name" => "sale_url",
+                "content_input_type" => "text",
+                "dataenum" => null,
+                "helper" => null,
+                "created_at" => date('Y-m-d H:i:s'),
+                "group_setting" => "Sale Navigation",
+                "label" => "Sale - URL",
+            ],
+            [
+                "name" => "sale_text",
+                "content_input_type" => "text",
+                "dataenum" => null,
+                "helper" => null,
+                "created_at" => date('Y-m-d H:i:s'),
+                "group_setting" => "Sale Navigation",
+                "label" => "Sale - Text",
             ],
 
         ];
