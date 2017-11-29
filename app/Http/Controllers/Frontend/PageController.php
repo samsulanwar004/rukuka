@@ -35,18 +35,33 @@ class PageController extends BaseController
     	return view('pages.index', compact('home'));
     }
 
-    public function shop(Request $request, $categories, $category, $slug = null)
+    public function shop(Request $request, $categories, $category, $slug = null, $sale = null)
     {
 
         if ($categories == 'designers') {
-            $product = (new ProductRepository);
-            $products = $product->getProductByDesigner($request, $category);
-            $designer = $product->getDesigner();
+            try{
+                $product = (new ProductRepository);
+                $products = $product->getProductByDesigner($request, $category);
+                $designer = $product->getDesigner();
+
+                //Validate Deleted
+                $this->validDelete($designer);
+            }
+            catch (Exception $e) {
+                return view('pages.not_found')->withErrors($e->getMessage());
+            }
         } else {
             if ($category == 'all') {
                 $products = (new ProductRepository)->getProductByCategory($request, $categories);
+            }else if($category == 'sale'){
+                $products = (new ProductRepository)->getProductByCategorySale($request, $categories);
             } else {
+                if($sale = 'sale'){
+                    $products = (new ProductRepository)->getProductBySlugCategorySale($request, $slug);
+                }
+                else{
                 $products = (new ProductRepository)->getProductBySlugCategory($request, $slug);
+                }
             }
         }
 
@@ -60,6 +75,7 @@ class PageController extends BaseController
                 'name' => $entry->name,
                 'slug' => $entry->slug,
                 'price' => $entry->sell_price,
+                'price_before_discount' => $entry->price_before_discount,
                 'currency' => $entry->currency,
                 'photo' => $entry->images->first()->photo,
             ];
@@ -71,14 +87,19 @@ class PageController extends BaseController
             'category',
             'slug',
             'designer',
-            'shops'
+            'shops',
+            'sale'
         ));
 
     }
 
     public function product($slug, $method = null, $sku = null, $id = null)
     {
-    	$product = (new ProductRepository)->getProductBySlug($slug);
+    try {
+        $product = (new ProductRepository)->getProductBySlug($slug);
+
+        //Validate Product Deleted
+        $this->validDelete($product);
 
         $share = Share::load(route('product', ['slug' => $slug]), $product->name, route('index').'/'.$product->images->first()->photo)
             ->services(
@@ -89,6 +110,19 @@ class PageController extends BaseController
                 'pinterest',
                 'tumblr'
             );
+
+    } catch (Exception $e) {
+        return view('pages.not_found')->withErrors($e->getMessage());
+    }
+
+    // Validate Designer Deleted
+    try{
+        $Designer = (new ProductRepository)->getDesignerById($product->product_designers_id);
+        $this->validDelete($Designer);
+
+    } catch (Exception $e) {
+        return view('pages.not_found')->withErrors($e->getMessage());
+    }
 
     	return view('pages.product', compact(
             'product',

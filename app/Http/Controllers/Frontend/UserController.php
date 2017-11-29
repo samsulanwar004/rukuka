@@ -114,8 +114,8 @@ class UserController extends BaseController
 
                 if ($secureCode != $cardCode) {
                     throw new Exception("Security code invalid!", 1);
-                }     
-            }            
+                }
+            }
 
     		$user = $this->getUserActive();
 
@@ -139,7 +139,7 @@ class UserController extends BaseController
 
             if ($request->has('checkout_new_card')) {
                 return redirect($this->redirectAfterNewCC);
-            }            
+            }
 
     		return redirect($this->redirectAfterSaveCC)->with(['success' => 'Save credit card successfully!']);
     	} catch (Exception $e) {
@@ -505,20 +505,25 @@ class UserController extends BaseController
 
     public function showShippingBillingPage()
     {
-        $user = $this->getUserActive();
-        $creditcards = $user->creditcards->map(function ($entry) {
-            return [
-                'id' => $entry->id,
-                'card_number' => $this->user->decryptCreditCard($entry->card_number),
-                'expired_date' => $entry->expired_date,
-                'name_card' => $entry->name_card,
-                'is_default' => $entry->is_default,
-            ];
-        });
-        $address = $user->address;
-        $defaultAddress = $this->user
-            ->setUser($user)
-            ->getAddressDefault();
+        try {
+          $user = $this->getUserActive();
+          $creditcards = $user->creditcards->map(function ($entry) {
+              return [
+                  'id' => $entry->id,
+                  'card_number' => $this->user->decryptCreditCard($entry->card_number),
+                  'expired_date' => $entry->expired_date,
+                  'name_card' => $entry->name_card,
+                  'is_default' => $entry->is_default,
+              ];
+          });
+          $address = $user->address;
+          $defaultAddress = $this->user
+              ->setUser($user)
+              ->getAddressDefault();
+        } catch (Exception $e) {
+          return back()->withErrors($e->getMessage());
+        }
+
 
       return view('pages.checkout.shipping_billing', compact(
             'creditcards',
