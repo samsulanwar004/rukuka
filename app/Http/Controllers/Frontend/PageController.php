@@ -52,15 +52,18 @@ class PageController extends BaseController
             }
         } else {
             if ($category == 'all') {
-                $products = (new ProductRepository)->getProductByCategory($request, $categories);
-            }else if($category == 'sale'){
-                $products = (new ProductRepository)->getProductByCategorySale($request, $categories);
+                $products = (new ProductRepository)
+                    ->getProductByCategory($request, $categories);
+            }else if ($category == 'sale') {
+                $products = (new ProductRepository)
+                    ->getProductByCategorySale($request, $categories);
             } else {
-                if($sale = 'sale'){
-                    $products = (new ProductRepository)->getProductBySlugCategorySale($request, $slug);
-                }
-                else{
-                $products = (new ProductRepository)->getProductBySlugCategory($request, $slug);
+                if ($sale == 'sale') {
+                    $products = (new ProductRepository)
+                        ->getProductBySlugCategorySale($request, $slug);
+                } else {
+                    $products = (new ProductRepository)
+                        ->getProductBySlugCategory($request, $slug);                       
                 }
             }
         }
