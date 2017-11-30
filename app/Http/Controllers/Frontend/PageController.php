@@ -210,7 +210,10 @@ class PageController extends BaseController
                         'description' => $stock->product->content,
                         'currency' => $stock->product->currency,
                         'slug' => $stock->product->slug,
-                        'category_id' => $stock->product->category->id
+                        'product_id' => $stock->product->id,
+                        'category_id' => $stock->product->category->id,
+                        'product_code' => $stock->product->product_code,
+                        'product_stocks_id' => $stock->id
                     ]
                 ];
 
@@ -304,7 +307,7 @@ class PageController extends BaseController
             $categoryId[] = $bag->options->category_id;
         }
 
-        $categoryId = $categoryId[array_rand($categoryId)];
+        $categoryId = $categoryId == null ? null : $categoryId[array_rand($categoryId)];
 
         return view('pages.bag', compact('categoryId'));
     }
