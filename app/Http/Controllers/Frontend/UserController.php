@@ -723,4 +723,10 @@ class UserController extends BaseController
         ));
     }
 
+    public function history()
+    {
+      $user = $this->getUserActive();
+      return view('users.history', compact('user'));
+    }
+
 }
