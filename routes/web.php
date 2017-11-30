@@ -112,6 +112,11 @@ Route::get('/product/{slug?}/{method?}/{sku?}/{id?}', [
     'uses' => 'Frontend\PageController@product',
 ]);
 
+Route::get('/popup/{slug?}', [
+    'as'   => 'popup-product',
+    'uses' => 'Frontend\PageController@popup',
+]);
+
 Route::get('/landing/women', [
     'as'   => 'women',
     'uses' => 'Frontend\PageController@women',

@@ -152,6 +152,36 @@ class CmsModulsSeeder extends Seeder {
             'controller'=>'AdminBlogCategoriesController',
             'is_protected'=>0,
             'is_active'=>0
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Pages',
+            'icon'=>'fa fa-file-text-o',
+            'path'=>'pages',
+            'table_name'=>'pages',
+            'controller'=>'AdminPagesController',
+            'is_protected'=>0,
+            'is_active'=>0
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Helps',
+            'icon'=>'fa fa-file-text',
+            'path'=>'helps',
+            'table_name'=>'helps',
+            'controller'=>'AdminHelpsController',
+            'is_protected'=>0,
+            'is_active'=>0
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Popup Link',
+            'icon'=>'fa fa-external-link',
+            'path'=>'popups',
+            'table_name'=>'popups',
+            'controller'=>'AdminPopupsController',
+            'is_protected'=>0,
+            'is_active'=>0
             ]
         ];
 
@@ -389,6 +419,45 @@ class CmsMenusSeeder extends Seeder {
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 2
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Helps',
+            'type'=>'Route',
+            'path'=>'AdminHelpsControllerGetIndex',
+            'color' => null,
+            'icon'=>'fa fa-file-text',
+            'parent_id'=>0,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 5
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Pages',
+            'type'=>'Route',
+            'path'=>'AdminPagesControllerGetIndex',
+            'color' => null,
+            'icon'=>'fa fa-file-text-o',
+            'parent_id'=>0,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 4
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Popup Link',
+            'type'=>'Route',
+            'path'=>'AdminPopupsControllerGetIndex',
+            'color' => null,
+            'icon'=>'fa fa-external-link',
+            'parent_id'=>0,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 6
         ]
     ];
 
