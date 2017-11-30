@@ -1,7 +1,7 @@
 <template>
     <div class="uk-grid" uk-grid>
-       <div class="uk-width-1-3" v-for="add in data">
-          <div :class="{'uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large': true, 'uk-background-muted': add.is_default }">            
+       <div class="uk-width-1-3@m" v-for="add in data">
+          <div :class="{'uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large': true, 'uk-background-muted': add.is_default }">
              <div class="uk-card-body">
                 <table>
                    <tr>
@@ -51,7 +51,7 @@
              </div>
           </div>
        </div>
-       <div class="uk-width-1-3">
+       <div class="uk-width-1-3@m">
           <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
              <div class="uk-card-body">
                 <a href="#modal-sections" class="uk-text-meta" uk-toggle> <span class="uk-icon" uk-icon="icon: plus"></span> ADD NEW SHIPPING ADDRESS </a>
@@ -89,7 +89,7 @@
                   Address line
                   <input class="uk-input uk-input-small" name="address_line" id="form-s-tel" type="text" :value="add.address_line" required="required">
                 </div>
-              </div>         
+              </div>
               <div class="uk-margin-small uk-grid-small" uk-grid>
                 <div>
                   Country
@@ -125,14 +125,14 @@
                 </div>
               </div>
               <!-- end only indonesia's address-->
-              
+
               <div class="uk-margin-small uk-grid-small" uk-grid>
                 <div>
                   Postal
                   <input class="uk-input uk-input-small" name="postal" id="form-postal-vue" type="text" :value="add.postal" required="required">
                 </div>
               </div>
-                         
+
               <div class="uk-margin-small uk-grid-small" uk-grid>
                 <div>
                   Phone number
@@ -155,9 +155,9 @@
     import axios from 'axios';
     export default {
         props: [
-          'address', 
-          'address_default', 
-          'address_destroy', 
+          'address',
+          'address_default',
+          'address_destroy',
           'address_edit',
           'address_update'
         ],
@@ -229,7 +229,7 @@
                             status:'danger'
                         });
                     }
-                });              
+                });
             },
 
             editAddress: function (id) {
@@ -245,8 +245,8 @@
               .catch(function (error) {
                 console.log(error);
               });
-              
-              
+
+
             },
 
             updateAddress: function (e) {
@@ -301,14 +301,14 @@
             },
 
             initHandleAddressing: function(existAddress){
-              
+
               if (existAddress.country == 'ID') {
 
                 $('#form-province-vue').replaceWith('<select id="form-province-vue" onchange="showVueListCities()" name="province" class="uk-input uk-input-small " required><option>Select country first ya</option></select>');
                 $('#form-city-vue').replaceWith('<select id="form-city-vue" onchange="showListSubDistricts()" name="city" class="uk-input uk-input-small " required><option>Select province first</option></select>');
                 $('#form-subdistrict-vue').replaceWith('<select id="form-subdistrict-vue" onchange="showListVillages()" name="sub_district" class="uk-input uk-input-small " required><option>Select city first</option></select>');
                 $('#form-village-vue').replaceWith('<select id="form-village-vue" onchange="setPostalCode()" name="village" class="uk-input uk-input-small " required><option>Select sub district first</option></select>');
-                
+
                 $('#div-sub-district-vue').show();
                 $('#div-village-vue').show();
 
@@ -327,7 +327,7 @@
 
             handleAddressing: function(existAddress){
 
-              if (existAddress.country == 'ID') {  
+              if (existAddress.country == 'ID') {
 
                 this.showVueListCountries(existAddress);
                 this.showVueListProvinces(existAddress);
@@ -335,10 +335,10 @@
                 this.showVueListSubDistricts(existAddress);
                 this.showVueListVillages(existAddress);
 
-              }else{          
+              }else{
 
                 this.showVueListCountries(existAddress);
-              
+
               }
 
             },
@@ -348,21 +348,21 @@
               var allOptions;
 
               axios.get('/api/v1/countries').then(function (response) {
-                
+
                 if (response.data.error == '000') {
 
                   $.each(response.data.data, function( index, value ) {
-            
+
                     if (existAddress.country == value.countries_code) {
 
                       allOptions += '<option selected value="' + value.countries_code + '">'+ value.countries_name.toUpperCase() +'</option>'
-                    
+
                     }else{
 
                       allOptions += '<option value="' + value.countries_code + '">'+ value.countries_name.toUpperCase() +'</option>'
 
                     }
-                
+
                   });
 
                   $('#form-country-vue').append(allOptions);
@@ -371,12 +371,12 @@
 
                   console.log(response.data.message);
                   allOptions += '<option></option>';
-                
+
                 }
 
               })
               .catch(function (error) {
-                
+
                 console.log(error);
                 allOptions += '<option></option>';
 
@@ -388,28 +388,28 @@
               var allOptions;
 
               axios.get('/api/v1/provinces').then(function (response) {
-                
+
                 if (response.data.error == '000') {
 
                   $.each(response.data.data, function( index, value ) {
-            
+
                     if (existAddress.province == value.province) {
 
                       allOptions += '<option selected value="' + value.province + '">'+ value.province.toUpperCase() +'</option>'
-                    
+
                     }else{
 
                       allOptions += '<option value="' + value.province + '">'+ value.province.toUpperCase() +'</option>'
 
                     }
-                
+
                   });
 
                 }else{
 
                   console.log(response.data.message);
                   allOptions += '<option></option>';
-                
+
                 }
 
                 $('#form-province-vue').empty();
@@ -417,7 +417,7 @@
 
               })
               .catch(function (error) {
-                
+
                 console.log(error);
                 allOptions += '<option></option>';
 
@@ -430,28 +430,28 @@
               var allOptions;
 
               axios.get('/api/v1/cities/' + existAddress.province ).then(function (response) {
-                
+
                 if (response.data.error == '000') {
 
                   $.each(response.data.data, function( index, value ) {
-            
+
                     if (existAddress.city == value.city) {
 
                       allOptions += '<option selected value="' + value.city + '">'+ value.city.toUpperCase() +'</option>'
-                    
+
                     }else{
 
                       allOptions += '<option value="' + value.city + '">'+ value.city.toUpperCase() +'</option>'
 
                     }
-                
+
                   });
 
                 }else{
 
                   console.log(response.data.message);
                   allOptions += '<option></option>';
-                
+
                 }
 
                 $('#form-city-vue').empty();
@@ -459,7 +459,7 @@
 
               })
               .catch(function (error) {
-                
+
                 console.log(error);
                 allOptions += '<option></option>';
 
@@ -472,28 +472,28 @@
               var allOptions;
 
               axios.get('/api/v1/sub-district/' + existAddress.city ).then(function (response) {
-                
+
                 if (response.data.error == '000') {
 
                   $.each(response.data.data, function( index, value ) {
-                  
+
                     if (existAddress.sub_district == value.sub_district) {
 
                       allOptions += '<option selected value="' + value.sub_district + '">'+ value.sub_district.toUpperCase() +'</option>'
-                    
+
                     }else{
 
                       allOptions += '<option value="' + value.sub_district + '">'+ value.sub_district.toUpperCase() +'</option>'
 
                     }
-                
+
                   });
 
                 }else{
 
                   console.log(response.data.message);
                   allOptions += '<option></option>';
-                
+
                 }
 
                 $('#form-subdistrict-vue').empty();
@@ -501,7 +501,7 @@
 
               })
               .catch(function (error) {
-                
+
                 console.log(error);
                 allOptions += '<option></option>';
 
@@ -514,28 +514,28 @@
               var allOptions;
 
               axios.get('/api/v1/villages/' + existAddress.sub_district ).then(function (response) {
-                
+
                 if (response.data.error == '000') {
 
                   $.each(response.data.data, function( index, value ) {
-                  
+
                     if (existAddress.village == value.village) {
 
                       allOptions += '<option selected value="' + value.village + '">'+ value.village.toUpperCase() +'</option>'
-                    
+
                     }else{
 
                       allOptions += '<option value="' + value.village + '">'+ value.village.toUpperCase() +'</option>'
 
                     }
-                
+
                   });
 
                 }else{
 
                   console.log(response.data.message);
                   allOptions += '<option></option>';
-                
+
                 }
 
                 $('#form-village-vue').empty();
@@ -543,7 +543,7 @@
 
               })
               .catch(function (error) {
-                
+
                 console.log(error);
                 allOptions += '<option></option>';
 
