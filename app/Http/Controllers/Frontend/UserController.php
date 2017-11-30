@@ -160,16 +160,27 @@ class UserController extends BaseController
 
     public function addressSave(Request $request)
     {
-    	$this->validate($request, [
-    		'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'phone_number' => 'required|numeric',
-            'postal' => 'required|numeric',
-            'address_line' => 'required',
-            'city' => 'required',
-            'province' => 'required',
-            'country' => 'required',
-        ]);
+        $rules = [
+                    'first_name' => 'required|string|max:255',
+                    'last_name' => 'required|string|max:255',
+                    'phone_number' => 'required|numeric',
+                    'postal' => 'required|numeric',
+                    'address_line' => 'required',
+                    'city' => 'required',
+                    'province' => 'required',
+                    'country' => 'required',
+                ];
+
+        if ($request->input('country') == 'ID') {
+             
+             $rules =  $rules + [
+                                    'sub_district' => 'required|string|max:255',
+                                    'village' => 'required|string|max:255',
+                                ];
+
+        }
+
+    	$this->validate($request, $rules);
 
         try {
 
