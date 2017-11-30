@@ -340,4 +340,18 @@ class PageController extends BaseController
 
     }
 
+    public function popup($slug){
+        $PageRepository = new PageRepository();
+
+        $result= $PageRepository->getPopup($slug);
+
+        if($result['status']['code'] == '001')
+        {
+            return redirect('/');
+        }
+
+        return redirect($result['popup']->url);
+
+    }
+
 }

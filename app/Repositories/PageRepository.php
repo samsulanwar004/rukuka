@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Page;
 use App\Help;
+use App\Popup;
 
 class PageRepository extends Controller
 {
@@ -26,6 +27,18 @@ class PageRepository extends Controller
         $result['page'] = Help::where('slug',$slug)->get();
 
         if(count($result['page']) == 0 ){
+            $result['status'] = $this->status('001');
+            return $result;
+        }
+        $result['status'] = $result['status'] = $this->status('000');
+        return $result;
+    }
+
+    public function getPopup($slug)
+    {
+        $result['popup'] = Popup::where('slug',$slug)->get()->first();
+
+        if(count($result['popup']) == 0 ){
             $result['status'] = $this->status('001');
             return $result;
         }
