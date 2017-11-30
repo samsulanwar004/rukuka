@@ -725,8 +725,22 @@ class UserController extends BaseController
 
     public function history()
     {
-      $user = $this->getUserActive();
-      return view('users.history', compact('user'));
+        $user = $this->getUserActive();
+
+        $onPaid = $user->orders->filter(function ($entry) {
+            return $entry->payment_status == 0;
+        });
+
+        $onSent = $user->orders->filter(function ($entry) {
+            return $entry->payment_status == 1;
+        });
+
+        return view('users.history', compact(
+            'user',
+            'onPaid',
+            'onSent'
+
+        ));
     }
 
 }

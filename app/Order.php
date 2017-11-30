@@ -22,4 +22,9 @@ class Order extends Model
     {
     	return $this->belongsTo(CreditCard::class, 'payment_id');
     }
+
+    public function details()
+    {
+        return $this->hasMany(OrderDetail::class, 'orders_id', 'id');
+    }
 }
