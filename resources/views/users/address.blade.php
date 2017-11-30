@@ -210,8 +210,10 @@
     });
 	});
 
+  // start untuk addresing jika belum punya address
+
   $(document).ready(function(){
-      startLocalAddressing(); // untuk addresing
+      startLocalAddressing(); 
   });
 
   function startLocalAddressing() {
@@ -323,7 +325,6 @@
   function showListProvices(){
 
     var allOptionsProvince = null;
-    var selectedAlreadyExist = false;
 
     var jqxhr = $.get( "/api/v1/provinces", function(response) {
       
@@ -515,6 +516,91 @@
     $('#form-postal-empty').val(posCode);
 
   }
+
+  // punya vue ----------------------------------------
+
+  function showVueListCities() {
+
+    var allOptionsCity = '';
+    var byProvince = $('#form-province-vue').val();
+
+    var jqxhr = $.get( "/api/v1/cities/" + byProvince , function(response) {
+      
+      if (response.error == '000') {
+
+          $.each(response.data, function( index, value ) {
+      
+            if ("{{old('city')}}" == value.city) {
+
+              allOptionsCity += '<option selected value="' + value.city + '">'+ value.city +'</option>';
+            
+            }else{
+
+              allOptionsCity += '<option value="' + value.city + '">'+ value.city +'</option>';
+
+            }
+        
+          });
+
+      }else{
+
+        console.log(response.message);
+        allOptionsCity += '<option></option>';
+      
+      }
+
+      $('#form-city-vue').empty();
+      $('#form-city-vue').append('<option></option>'+allOptionsCity);
+
+    }).fail(function(xhr, status, error) {
+      
+      alert(error + ' when load city');
+
+    });
+
+  }
+
+  function showVueListSubDistricts() {
+    
+    var allOptionsSubDistrict = '';
+    var byCity = $('#form-city-vue').val();
+
+    var jqxhr = $.get( "/api/v1/sub-district/" + byCity , function(response) {
+
+      if (response.error == '000') {
+
+          $.each(response.data, function( index, value ) {
+      
+            if ("{{old('sub_district')}}" == value.sub_district) {
+
+              allOptionsSubDistrict += '<option selected value="' + value.sub_district + '">'+ value.sub_district +'</option>';
+            
+            }else{
+
+              allOptionsSubDistrict += '<option value="' + value.sub_district + '">'+ value.sub_district +'</option>';
+
+            }
+        
+          });
+
+      }else{
+
+        console.log(response.message);
+        allOptionsSubDistrict += '';
+      
+      }
+
+      $('#form-subdistrict-vue').empty();
+      $('#form-subdistrict-vue').append('<option></option>' + allOptionsSubDistrict);
+
+    }).fail(function(xhr, status, error) {
+      
+      alert(error + ' when load subdistrict');
+
+    });
+
+  }
+  // end untuk addresing jika belum punya address
 
 </script>
 @endsection
