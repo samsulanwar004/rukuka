@@ -46,11 +46,11 @@ class OrderController extends BaseController
 	        $total = $bag->subtotal();
 
 	        if (!count($bags)) {
-	        	throw new Exception("Bags is empty!", 1);	
+	        	throw new Exception("Bags is empty!", 1);
 	        }
 
 	        $detail = $bags->map(function ($entry) use ($bag){
-	        	$bag->remove($entry->rowId);
+	        	// $bag->remove($entry->rowId);
 	        	return [
 	        		'sku' => $entry->id,
 	        		'qty' => $entry->qty,
@@ -87,7 +87,7 @@ class OrderController extends BaseController
 			DB::commit();
 
 			return view('pages.checkout.checkout_finish', compact('order', 'detail', 'total', 'shipping'));
-			
+
 		} catch (Exception $e) {
 			DB::rollBack();
 
