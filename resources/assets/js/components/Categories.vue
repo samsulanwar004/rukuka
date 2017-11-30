@@ -20,7 +20,7 @@
             <a href="#">{{ category.name.toUpperCase() }}</a>
             <ul class="uk-nav-sub">
                 <li v-for="cat in category.child" :class="{'uk-text-bold': slug == cat.slug}">
-                  <a :href="'/shop/'+parent+'/'+ category.name.toLowerCase() +'/'+ cat.slug+'/'+ sales ">{{ cat.name }}</a>
+                  <a :href="'/shop/'+parent+'/'+ category.name.toLowerCase() +'/'+ cat.slug + sales">{{ cat.name }}</a>
                 </li>
             </ul>
         </li>
@@ -64,7 +64,7 @@
 
         computed: {
             sales: function () {
-                return this.sale == 'all' ? '' : this.sale;
+                return this.sale != 'sale' ? '' : '/'+this.sale;
             }
         }
 
