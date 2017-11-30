@@ -315,7 +315,7 @@
 
     }).fail(function(xhr, status, error) {
       
-      alert(error + ' (when load countries)');
+      alert(error + ' when load countries');
 
     });
   }
@@ -356,7 +356,7 @@
 
     }).fail(function(xhr, status, error) {
       
-      alert(error + ' (when load province)');
+      alert(error + ' when load province');
 
     });
   }
@@ -403,7 +403,7 @@
 
     }).fail(function(xhr, status, error) {
       
-      alert(error + ' (when load city)');
+      alert(error + ' when load city');
 
     });
 
@@ -450,7 +450,7 @@
 
     }).fail(function(xhr, status, error) {
       
-      alert(error + ' (when load subdistrict)');
+      alert(error + ' when load subdistrict');
 
     });
 
@@ -497,7 +497,7 @@
 
     }).fail(function(xhr, status, error) {
       
-      alert(error + ' (when load village)');
+      alert(error + ' when load village');
 
     });
 
