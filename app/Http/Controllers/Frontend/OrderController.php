@@ -50,7 +50,7 @@ class OrderController extends BaseController
 	        }
 
 	        $detail = $bags->map(function ($entry) use ($bag){
-	        	// $bag->remove($entry->rowId);
+	        	$bag->remove($entry->rowId);
 	        	return [
 	        		'sku' => $entry->id,
 	        		'qty' => $entry->qty,
@@ -62,13 +62,13 @@ class OrderController extends BaseController
 	        	];
 	        });
 
-	        $shipping = 3;
+	        $shipping = 50;
 
 	        $orderDate = Carbon::now();
 	        $expiredDate = Carbon::now()->addDay();
 
 	        $order = $this->order
-	        	->setOrderCode('ORDER'.date('Ymd').rand(0,99))
+	        	->setOrderCode('ON'.date('YmdHis').rand(000,999))
 	        	->setUser($user)
 	        	->setPaymentMethod('creditcard')
 	        	->setPaymentName($creditCard->name_card)
@@ -86,7 +86,12 @@ class OrderController extends BaseController
 
 			DB::commit();
 
-			return view('pages.checkout.checkout_finish', compact('order', 'detail', 'total', 'shipping'));
+			return view('pages.checkout.checkout_finish', compact(
+				'order', 
+				'detail', 
+				'total', 
+				'shipping'
+			));
 
 		} catch (Exception $e) {
 			DB::rollBack();
