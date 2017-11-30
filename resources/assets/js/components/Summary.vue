@@ -13,10 +13,6 @@
           <div class="uk-text-small">Shipping Cost</div>
           <div class="uk-text-right">FREE</div>
        </div>
-       <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
-          <div class="uk-text-small">Tax</div>
-          <div class="uk-text-right">FREE</div>
-       </div>
     </div>
     <div class="uk-card-footer">
        <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
@@ -29,13 +25,6 @@
     <button class="uk-button uk-button-small uk-button-danger uk-width-1-1" id="continue">C O N T I N U E</button>
  </div>
  <hr>
- <div class="uk-card uk-card-default uk-card-border uk-card-small">
-    <div class="uk-card-header">
-       PROMO CODE
-    </div>
-    <div class="uk-card-body">
-    </div>
- </div>
 </div>
 </template>
 
