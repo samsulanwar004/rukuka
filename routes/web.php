@@ -17,7 +17,7 @@ use App\Services\PosIndonesiaCourierService;
 Route::get('/posindonesia', function () {
     //init object
     $posIndonesia = new PosIndonesiaCourierService;
-    
+
     //create request getfee
     // $requestToPosIndonesia = [
     //                             [
@@ -44,10 +44,10 @@ Route::get('/posindonesia', function () {
                                     'address'        => ''
                                 ]
                             ];
-    
+
     //send request
     $resultFee = $posIndonesia->callMethod('getPosCodeByaddrAndCity', $requestToPosIndonesia);
-    
+
     //result
     var_dump($resultFee);
 });
@@ -263,6 +263,11 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@uploadProfile',
     ]);
 
+    Route::get('/account/history', [
+        'as'   => 'user.history',
+        'uses' => 'Frontend\UserController@history',
+    ]);
+
     // Route checkout module
     Route::get('/checkout', [
         'as'   => 'checkout',
@@ -288,7 +293,7 @@ Route::middleware(['auth'])->group(function () {
         'as'   => 'checkout.review',
         'uses' => 'Frontend\UserController@showReviewPage',
     ]);
-    
+
 
     // Route Address module
     Route::get('/account/address', [
@@ -355,6 +360,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/order', [
         'as'   => 'order',
         'uses' => 'Frontend\OrderController@store',
-    ]);  
+    ]);
 
 });

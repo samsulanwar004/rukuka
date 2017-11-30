@@ -121,7 +121,7 @@
 
                     Event.fire('addBag', response);
 
-                    self.getWishlist(); 
+                    self.getWishlist();
 
                     Event.fire('addWishlist', response);
                 }
@@ -152,7 +152,7 @@
                         status:'success'
                     });
 
-                    self.getWishlist(); 
+                    self.getWishlist();
 
                     Event.fire('addWishlist', response);
                 }
