@@ -41,7 +41,7 @@ class UserRepository
 
 	private $dob;
 
-	private $gender;
+	private $gender='m';
 
 	private $avatar;
 
