@@ -386,7 +386,6 @@ class LandingContentSeeder extends Seeder
             ],
             [
                 "name" => "women_main_title",
-                "content" => "WHAT IS NEW FOR WOMEN",
                 "content_input_type" => "text",
                 "dataenum" => null,
                 "helper" => null,
@@ -596,7 +595,6 @@ class LandingContentSeeder extends Seeder
             ],
             [
                 "name" => "men_main_title",
-                "content" => "WHAT IS NEW FOR MEN",
                 "content_input_type" => "text",
                 "dataenum" => null,
                 "helper" => null,
@@ -806,7 +804,6 @@ class LandingContentSeeder extends Seeder
             ],
             [
                 "name" => "kids_main_title",
-                "content" => "WHAT IS NEW FOR KIDS",
                 "content_input_type" => "text",
                 "dataenum" => null,
                 "helper" => null,
