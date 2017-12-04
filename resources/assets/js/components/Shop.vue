@@ -83,18 +83,12 @@
                                     <b>Color :</b> {{ color }}
                                 </div>
                                 <div>
-                                    <div uk-form-custom="target: > * > span:first">
-                                        <select name="size" v-model="size" v-validate="'required'">
-                                            <option :value="null" disabled>Choose Size</option>
-                                            <option v-for="stock in stocks" :value="stock.sku">
-                                                {{ stock.size }}
-                                            </option>
-                                        </select>
-                                        <button class="uk-button uk-button-default" type="button" tabindex="-1">
-                                            <span uk-icon="icon: chevron-down"></span>
-                                        </button>
-                                    </div>
-
+                                  <select name="size" v-model="size" v-validate="'required'" class="uk-select">
+                                      <option :value="null" disabled>Choose Size</option>
+                                      <option v-for="stock in stocks" :value="stock.sku">
+                                          {{ stock.size }}
+                                      </option>
+                                  </select>
                                 </div>
                             </div>
                             <ul uk-accordion="animation: true; multiple: false">

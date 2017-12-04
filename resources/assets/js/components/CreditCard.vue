@@ -1,7 +1,7 @@
 <template>
     <div class="uk-grid" uk-grid>
-       <div class="uk-width-1-3" v-for="credit in data">
-          <div :class="{'uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large': true, 'uk-background-muted': credit.is_default }">            
+       <div class="uk-width-1-3@m" v-for="credit in data">
+          <div :class="{'uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large': true, 'uk-background-muted': credit.is_default }">
              <div class="uk-card-body">
                 <table>
                    <tr>
@@ -42,7 +42,7 @@
              </div>
           </div>
        </div>
-       <div class="uk-width-1-3">
+       <div class="uk-width-1-3@m">
           <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
              <div class="uk-card-body">
                 <a href="#modal-sections" class="uk-text-meta" uk-toggle> <span class="uk-icon" uk-icon="icon: plus"></span> ADD NEW CARD </a>
@@ -122,9 +122,9 @@
     import axios from 'axios';
     export default {
         props: [
-          'credits', 
-          'credit_default', 
-          'credit_destroy', 
+          'credits',
+          'credit_default',
+          'credit_destroy',
           'credit_edit',
           'credit_update',
           'address'
@@ -199,7 +199,7 @@
                             status:'danger'
                         });
                     }
-                });              
+                });
             },
 
             editCredit: function (id) {
@@ -272,9 +272,9 @@
             if (number.match(re) != null)
                 return "Visa";
 
-            // Mastercard 
+            // Mastercard
             // Updated for Mastercard 2017 BINs expansion
-             if (/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/.test(number)) 
+             if (/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/.test(number))
                 return "Mastercard";
 
             // AMEX
