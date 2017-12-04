@@ -41,7 +41,7 @@
                               <tr>
                                   <td>{{ $detail->product_name }}</td>
                                   <td>{{ $detail->price }}</td>
-                                  <td>{{ $detail->qty }}</td>
+                                  <td>x {{ $detail->qty }}</td>
                                   <td>{{ $detail->subtotal }}</td>
                               </tr>
                               @php                                
@@ -87,7 +87,7 @@
                               <tr>
                                   <td>{{ $detail->product_name }}</td>
                                   <td>{{ $detail->price }}</td>
-                                  <td>{{ $detail->qty }}</td>
+                                  <td>x {{ $detail->qty }}</td>
                                   <td>{{ $detail->subtotal }}</td>
                               </tr>
                               @php                                
