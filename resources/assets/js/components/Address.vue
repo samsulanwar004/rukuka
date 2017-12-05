@@ -305,9 +305,11 @@
               if (existAddress.country == 'ID') {
 
                 $('#form-province-vue').replaceWith('<select id="form-province-vue" onchange="showVueListCities()" name="province" class="uk-input uk-input-small " required><option>Select country first ya</option></select>');
-                $('#form-city-vue').replaceWith('<select id="form-city-vue" onchange="showListSubDistricts()" name="city" class="uk-input uk-input-small " required><option>Select province first</option></select>');
-                $('#form-subdistrict-vue').replaceWith('<select id="form-subdistrict-vue" onchange="showListVillages()" name="sub_district" class="uk-input uk-input-small " required><option>Select city first</option></select>');
-                $('#form-village-vue').replaceWith('<select id="form-village-vue" onchange="setPostalCode()" name="village" class="uk-input uk-input-small " required><option>Select sub district first</option></select>');
+                $('#form-city-vue').replaceWith('<select id="form-city-vue" onchange="showVueListSubDistricts()" name="city" class="uk-input uk-input-small " required><option>Select province first</option></select>');
+                $('#form-subdistrict-vue').replaceWith('<select id="form-subdistrict-vue" onchange="showVueListVillages()" name="sub_district" class="uk-input uk-input-small " required><option>Select city first</option></select>');
+                $('#form-village-vue').replaceWith('<select id="form-village-vue" onchange="setVuePostalCode()" name="village" class="uk-input uk-input-small " required><option>Select sub district first</option></select>');
+
+                $('#form-postal-vue').val('');
 
                 $('#div-sub-district-vue').show();
                 $('#div-village-vue').show();
@@ -319,6 +321,8 @@
                 $('#form-subdistrict-vue').replaceWith('<span class="uk-input uk-input-small " name="sub_district" id="form-subdistrict-vue" type="text" value=""></span>');
                 $('#form-village-vue').replaceWith('<span class="uk-input uk-input-small " name="village" id="form-village-vue" type="text" value=""></span>');
 
+                $('#form-postal-vue').val('');
+                
                 $('#div-sub-district-vue').hide();
                 $('#div-village-vue').hide();
 
@@ -560,9 +564,16 @@
               existAddress.city = '';
 
               this.initHandleAddressing(existAddress);
-              this.handleAddressing(existAddress);
 
-            }
+              if (existAddress.country == 'ID') {
+                
+                this.showVueListProvinces(existAddress);
+
+              }
+              
+            },
+
+
         }
     }
 </script>

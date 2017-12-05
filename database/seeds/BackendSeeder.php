@@ -15,7 +15,6 @@ class BackendSeeder extends Seeder
 
         $this->call('CmsModulsSeeder');
         $this->call('CmsMenusSeeder');
-        $this->call('CmsSettingSeeder');
 
         $this->command->info('Inserting the data completed :) !');
     }
