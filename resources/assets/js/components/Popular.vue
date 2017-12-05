@@ -7,14 +7,14 @@
           <a :href="'/product/'+ product.slug">
             <img :src="'/'+ product.photo" :alt="product.name">
           </a>
-          <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default">
+          <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default uk-visible@m">
             <div class="uk-text-center">
               <a href="#modal-overflow" class="uk-button uk-button-small uk-button-secondary" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
             </div>
           </div>
         </div>
         <div class="uk-card-body uk-padding-remove uk-margin-small-top">
-          <a :href="'/product/'+ product.slug" class="uk-text-muted">{{ product.name }}</a>
+          <a :href="'/product/'+ product.slug" class="uk-text-meta">{{ product.name }}</a>
           <br>
             <span v-if="product.price_before_discount > 0 ">
                 <span style="text-decoration: line-through;">
@@ -27,6 +27,9 @@
             <span v-else>
                 {{ product.currency }} {{ product.price }}
             </span>
+            <div class="uk-hidden@m">
+              <a :href="'/product/'+ product.slug" class="uk-button uk-button-small uk-button-default uk-width-1-1">ADD TO BAG</a>
+            </div>
         </div>
       </div>
     </div>

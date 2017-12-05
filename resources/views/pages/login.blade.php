@@ -5,9 +5,9 @@
   <div class="uk-grid-small uk-margin-top">
       @include('partials.alert')
   </div>
-  <div class="uk-flex uk-flex">
+  <div class="uk-flex uk-flex uk-flex-center">
     <div class="uk-width-4-5@m">
-      <div class="uk-grid uk-margin-top uk-margin-xlarge-bottom" uk-grid>
+      <div class="uk-grid uk-margin-bottom" uk-grid>
         <div class="uk-width-1-2@m">
           <div class="uk-card uk-card-default">
             <div class="uk-card-body">
