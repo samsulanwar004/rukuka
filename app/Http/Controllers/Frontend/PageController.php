@@ -52,15 +52,18 @@ class PageController extends BaseController
             }
         } else {
             if ($category == 'all') {
-                $products = (new ProductRepository)->getProductByCategory($request, $categories);
-            }else if($category == 'sale'){
-                $products = (new ProductRepository)->getProductByCategorySale($request, $categories);
+                $products = (new ProductRepository)
+                    ->getProductByCategory($request, $categories);
+            }else if ($category == 'sale') {
+                $products = (new ProductRepository)
+                    ->getProductByCategorySale($request, $categories);
             } else {
-                if($sale = 'sale'){
-                    $products = (new ProductRepository)->getProductBySlugCategorySale($request, $slug);
-                }
-                else{
-                $products = (new ProductRepository)->getProductBySlugCategory($request, $slug);
+                if ($sale == 'sale') {
+                    $products = (new ProductRepository)
+                        ->getProductBySlugCategorySale($request, $slug);
+                } else {
+                    $products = (new ProductRepository)
+                        ->getProductBySlugCategory($request, $slug);                       
                 }
             }
         }
@@ -210,7 +213,10 @@ class PageController extends BaseController
                         'description' => $stock->product->content,
                         'currency' => $stock->product->currency,
                         'slug' => $stock->product->slug,
-                        'category_id' => $stock->product->category->id
+                        'product_id' => $stock->product->id,
+                        'category_id' => $stock->product->category->id,
+                        'product_code' => $stock->product->product_code,
+                        'product_stocks_id' => $stock->id
                     ]
                 ];
 
@@ -304,7 +310,7 @@ class PageController extends BaseController
             $categoryId[] = $bag->options->category_id;
         }
 
-        $categoryId = $categoryId[array_rand($categoryId)];
+        $categoryId = $categoryId == null ? null : $categoryId[array_rand($categoryId)];
 
         return view('pages.bag', compact('categoryId'));
     }
@@ -331,6 +337,20 @@ class PageController extends BaseController
         $page = $result['page'];
         $status= $result['status'];
         return view('pages.help', compact('page','status'));
+
+    }
+
+    public function popup($slug){
+        $PageRepository = new PageRepository();
+
+        $result= $PageRepository->getPopup($slug);
+
+        if($result['status']['code'] == '001')
+        {
+            return redirect('/');
+        }
+
+        return redirect($result['popup']->url);
 
     }
 

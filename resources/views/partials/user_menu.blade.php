@@ -11,7 +11,7 @@
           <li><a href="{{ route('user.detail') }}" class="uk-text-small">My Details</a></li>
           <li><a href="{{ route('user.address') }}" class="uk-text-small">Address Books</a></li>
           <li><a href="{{ route('user.cc') }}" class="uk-text-small">Payment Methods</a></li>
-          <li><a href="#" class="uk-text-small">Order History</a></li>
+          <li><a href="{{ route('user.history') }}" class="uk-text-small">Order History</a></li>
           <li><a href="{{ route('user.wishlist') }}" class="uk-text-small">My Wishlist</a></li>
           <li><a href="{{ route('user.reset.password') }}" class="uk-text-small">Reset Password</a></li>
           <li><a href="{{ route('logout') }}" class="uk-text-small">Sign Out</a></li>
@@ -31,7 +31,7 @@
             <li><a href="{{ route('user.detail') }}" class="uk-text-small">My Details</a></li>
             <li><a href="{{ route('user.address') }}" class="uk-text-small">Address Books</a></li>
             <li><a href="{{ route('user.cc') }}" class="uk-text-small">Payment Methods</a></li>
-            <li><a href="#" class="uk-text-small">Order History</a></li>
+            <li><a href="{{ route('user.history') }}" class="uk-text-small">Order History</a></li>
             <li><a href="{{ route('user.wishlist') }}" class="uk-text-small">My Wishlist</a></li>
             <li><a href="{{ route('user.reset.password') }}" class="uk-text-small">Reset Password</a></li>
             <li><a href="{{ route('logout') }}" class="uk-text-small">Sign Out</a></li>

@@ -14,5 +14,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         $this->call(BackendSeeder::class);
         $this->call(NavContentSeeder::class);
+        $this->call(LandingContentSeeder::class);
+        $this->call(SeederCountries::class);
     }
 }

@@ -41,7 +41,7 @@ class UserRepository
 
 	private $dob;
 
-	private $gender;
+	private $gender='m';
 
 	private $avatar;
 
@@ -369,6 +369,8 @@ class UserRepository
 		$address->postal = $request->input('postal');
 		$address->country = $request->input('country');
 		$address->phone_number = $request->input('phone_number');
+		$address->sub_district = $request->input('sub_district');
+		$address->village = $request->input('village');
 		$address->is_default = is_null($id) ? $this->getDefault() : $address->is_default;
 
 		if (is_null($id)) {

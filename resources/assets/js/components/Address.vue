@@ -1,7 +1,7 @@
 <template>
     <div class="uk-grid" uk-grid>
-       <div class="uk-width-1-3" v-for="add in data">
-          <div :class="{'uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large': true, 'uk-background-muted': add.is_default }">            
+       <div class="uk-width-1-3@m" v-for="add in data">
+          <div :class="{'uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large': true, 'uk-background-muted': add.is_default }">
              <div class="uk-card-body">
                 <table>
                    <tr>
@@ -51,7 +51,7 @@
              </div>
           </div>
        </div>
-       <div class="uk-width-1-3">
+       <div class="uk-width-1-3@m">
           <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
              <div class="uk-card-body">
                 <a href="#modal-sections" class="uk-text-meta" uk-toggle> <span class="uk-icon" uk-icon="icon: plus"></span> ADD NEW SHIPPING ADDRESS </a>
@@ -92,28 +92,47 @@
               </div>
               <div class="uk-margin-small uk-grid-small" uk-grid>
                 <div>
-                  City
-                  <input class="uk-input uk-input-small" name="city" id="form-s-tel" type="text" :value="add.city" required="required">
+                  Country
+                  <!-- <input class="uk-input uk-input-small" name="country" id="form-s-tel" type="text" :value="add.country" required="required"> -->
+                  <select class="uk-input uk-input-small" name="country" id="form-country-vue" type="text" required="required" @change="changeCountryAddress">
+                  </select>
                 </div>
               </div>
               <div class="uk-margin-small uk-grid-small" uk-grid>
                 <div>
                   Province
-                  <input class="uk-input uk-input-small" name="province" id="form-s-tel" type="text" :value="add.province" required="required">
+                  <input class="uk-input uk-input-small" name="province" id="form-province-vue" type="text" :value="add.province" required="required" @change="showVueListCities()">
                 </div>
               </div>
+              <div class="uk-margin-small uk-grid-small" uk-grid>
+                <div>
+                  City
+                  <input class="uk-input uk-input-small" name="city" id="form-city-vue" type="text" :value="add.city" required="required">
+                </div>
+              </div>
+
+              <!-- only indonesia's address-->
+              <div id="div-sub-district-vue" class="uk-margin-small uk-grid-small" uk-grid>
+                <div>
+                  Sub district
+                  <input class="uk-input uk-input-small " name="sub_district" id="form-subdistrict-vue" type="text" value="" required>
+                </div>
+              </div>
+              <div  id="div-village-vue" class="uk-margin-small uk-grid-small" uk-grid>
+                <div>
+                  Village
+                  <input class="uk-input uk-input-small " name="village" id="form-village-vue" type="text" value="" required>
+                </div>
+              </div>
+              <!-- end only indonesia's address-->
+
               <div class="uk-margin-small uk-grid-small" uk-grid>
                 <div>
                   Postal
-                  <input class="uk-input uk-input-small" name="postal" id="form-s-tel" type="text" :value="add.postal" required="required">
+                  <input class="uk-input uk-input-small" name="postal" id="form-postal-vue" type="text" :value="add.postal" required="required">
                 </div>
               </div>
-              <div class="uk-margin-small uk-grid-small" uk-grid>
-                <div>
-                  Country
-                  <input class="uk-input uk-input-small" name="country" id="form-s-tel" type="text" :value="add.country" required="required">
-                </div>
-              </div>
+
               <div class="uk-margin-small uk-grid-small" uk-grid>
                 <div>
                   Phone number
@@ -136,9 +155,9 @@
     import axios from 'axios';
     export default {
         props: [
-          'address', 
-          'address_default', 
-          'address_destroy', 
+          'address',
+          'address_default',
+          'address_destroy',
           'address_edit',
           'address_update'
         ],
@@ -146,7 +165,7 @@
         data () {
             return {
                 data: {},
-                add: {}
+                add: {},
             }
         },
 
@@ -210,20 +229,24 @@
                             status:'danger'
                         });
                     }
-                });              
+                });
             },
 
             editAddress: function (id) {
               var self = this;
-              axios.get(this.address_edit+'/'+id)
+              var responseEdit = axios.get(this.address_edit+'/'+id)
               .then(function (response) {
                 if (typeof response.data.address !== 'undefined') {
                   self.add = response.data.address;
+                  self.initHandleAddressing(self.add);
+                  self.handleAddressing(self.add);
                 }
               })
               .catch(function (error) {
                 console.log(error);
               });
+
+
             },
 
             updateAddress: function (e) {
@@ -275,6 +298,270 @@
 
             submitUpdate: function () {
               $('#submit-edit').click();
+            },
+
+            initHandleAddressing: function(existAddress){
+
+              if (existAddress.country == 'ID') {
+
+                $('#form-province-vue').replaceWith('<select id="form-province-vue" onchange="showVueListCities()" name="province" class="uk-input uk-input-small " required><option>Select country first ya</option></select>');
+                $('#form-city-vue').replaceWith('<select id="form-city-vue" onchange="showListSubDistricts()" name="city" class="uk-input uk-input-small " required><option>Select province first</option></select>');
+                $('#form-subdistrict-vue').replaceWith('<select id="form-subdistrict-vue" onchange="showListVillages()" name="sub_district" class="uk-input uk-input-small " required><option>Select city first</option></select>');
+                $('#form-village-vue').replaceWith('<select id="form-village-vue" onchange="setPostalCode()" name="village" class="uk-input uk-input-small " required><option>Select sub district first</option></select>');
+
+                $('#div-sub-district-vue').show();
+                $('#div-village-vue').show();
+
+              }else{
+
+                $('#form-province-vue').replaceWith('<input class="uk-input uk-input-small" name="province" id="form-province-vue" type="text" value="' + existAddress.province +'" required>');
+                $('#form-city-vue').replaceWith('<input class="uk-input uk-input-small" name="city" id="form-city-vue" type="text" value="' + existAddress.city +'" required>');
+                $('#form-subdistrict-vue').replaceWith('<span class="uk-input uk-input-small " name="sub_district" id="form-subdistrict-vue" type="text" value=""></span>');
+                $('#form-village-vue').replaceWith('<span class="uk-input uk-input-small " name="village" id="form-village-vue" type="text" value=""></span>');
+
+                $('#div-sub-district-vue').hide();
+                $('#div-village-vue').hide();
+
+              }
+            },
+
+            handleAddressing: function(existAddress){
+
+              if (existAddress.country == 'ID') {
+
+                this.showVueListCountries(existAddress);
+                this.showVueListProvinces(existAddress);
+                this.showVueListCities(existAddress);
+                this.showVueListSubDistricts(existAddress);
+                this.showVueListVillages(existAddress);
+
+              }else{
+
+                this.showVueListCountries(existAddress);
+
+              }
+
+            },
+
+            showVueListCountries: function (existAddress) {
+
+              var allOptions;
+
+              axios.get('/api/v1/countries').then(function (response) {
+
+                if (response.data.error == '000') {
+
+                  $.each(response.data.data, function( index, value ) {
+
+                    if (existAddress.country == value.countries_code) {
+
+                      allOptions += '<option selected value="' + value.countries_code + '">'+ value.countries_name.toUpperCase() +'</option>'
+
+                    }else{
+
+                      allOptions += '<option value="' + value.countries_code + '">'+ value.countries_name.toUpperCase() +'</option>'
+
+                    }
+
+                  });
+
+                  $('#form-country-vue').append(allOptions);
+
+                }else{
+
+                  console.log(response.data.message);
+                  allOptions += '<option></option>';
+
+                }
+
+              })
+              .catch(function (error) {
+
+                console.log(error);
+                allOptions += '<option></option>';
+
+              });
+            },
+
+            showVueListProvinces: function(existAddress){
+
+              var allOptions;
+
+              axios.get('/api/v1/provinces').then(function (response) {
+
+                if (response.data.error == '000') {
+
+                  $.each(response.data.data, function( index, value ) {
+
+                    if (existAddress.province == value.province) {
+
+                      allOptions += '<option selected value="' + value.province + '">'+ value.province.toUpperCase() +'</option>'
+
+                    }else{
+
+                      allOptions += '<option value="' + value.province + '">'+ value.province.toUpperCase() +'</option>'
+
+                    }
+
+                  });
+
+                }else{
+
+                  console.log(response.data.message);
+                  allOptions += '<option></option>';
+
+                }
+
+                $('#form-province-vue').empty();
+                $('#form-province-vue').append('<option></option>' + allOptions);
+
+              })
+              .catch(function (error) {
+
+                console.log(error);
+                allOptions += '<option></option>';
+
+              });
+
+            },
+
+            showVueListCities: function(existAddress){
+
+              var allOptions;
+
+              axios.get('/api/v1/cities/' + existAddress.province ).then(function (response) {
+
+                if (response.data.error == '000') {
+
+                  $.each(response.data.data, function( index, value ) {
+
+                    if (existAddress.city == value.city) {
+
+                      allOptions += '<option selected value="' + value.city + '">'+ value.city.toUpperCase() +'</option>'
+
+                    }else{
+
+                      allOptions += '<option value="' + value.city + '">'+ value.city.toUpperCase() +'</option>'
+
+                    }
+
+                  });
+
+                }else{
+
+                  console.log(response.data.message);
+                  allOptions += '<option></option>';
+
+                }
+
+                $('#form-city-vue').empty();
+                $('#form-city-vue').append(allOptions);
+
+              })
+              .catch(function (error) {
+
+                console.log(error);
+                allOptions += '<option></option>';
+
+              });
+
+            },
+
+            showVueListSubDistricts: function(existAddress){
+
+              var allOptions;
+
+              axios.get('/api/v1/sub-district/' + existAddress.city ).then(function (response) {
+
+                if (response.data.error == '000') {
+
+                  $.each(response.data.data, function( index, value ) {
+
+                    if (existAddress.sub_district == value.sub_district) {
+
+                      allOptions += '<option selected value="' + value.sub_district + '">'+ value.sub_district.toUpperCase() +'</option>'
+
+                    }else{
+
+                      allOptions += '<option value="' + value.sub_district + '">'+ value.sub_district.toUpperCase() +'</option>'
+
+                    }
+
+                  });
+
+                }else{
+
+                  console.log(response.data.message);
+                  allOptions += '<option></option>';
+
+                }
+
+                $('#form-subdistrict-vue').empty();
+                $('#form-subdistrict-vue').append(allOptions);
+
+              })
+              .catch(function (error) {
+
+                console.log(error);
+                allOptions += '<option></option>';
+
+              });
+
+            },
+
+            showVueListVillages: function(existAddress){
+
+              var allOptions;
+
+              axios.get('/api/v1/villages/' + existAddress.sub_district ).then(function (response) {
+
+                if (response.data.error == '000') {
+
+                  $.each(response.data.data, function( index, value ) {
+
+                    if (existAddress.village == value.village) {
+
+                      allOptions += '<option selected value="' + value.village + '">'+ value.village.toUpperCase() +'</option>'
+
+                    }else{
+
+                      allOptions += '<option value="' + value.village + '">'+ value.village.toUpperCase() +'</option>'
+
+                    }
+
+                  });
+
+                }else{
+
+                  console.log(response.data.message);
+                  allOptions += '<option></option>';
+
+                }
+
+                $('#form-village-vue').empty();
+                $('#form-village-vue').append(allOptions);
+
+              })
+              .catch(function (error) {
+
+                console.log(error);
+                allOptions += '<option></option>';
+
+              });
+
+            },
+
+            changeCountryAddress: function(e){
+
+              var existAddress = {};
+
+              existAddress.country = e.target.value;
+              existAddress.province = '';
+              existAddress.city = '';
+
+              this.initHandleAddressing(existAddress);
+              this.handleAddressing(existAddress);
+
             }
         }
     }

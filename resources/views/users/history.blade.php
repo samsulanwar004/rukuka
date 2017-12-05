@@ -1,0 +1,119 @@
+@extends('app')
+
+@section('content')
+<div class="uk-container uk-container-small">
+<div class="uk-grid-small uk-margin-top">
+	@include('partials.alert')
+</div>
+<div class="uk-grid uk-margin-top" uk-grid>
+	@include('partials.user_menu')
+	<div class="uk-width-3-4@m">
+	  <h3>Order History</h3>
+	  <ul class="uk-child-width-1-5 uk-margin" uk-tab="animation: uk-animation-slide-bottom">
+	    <li><a href="#"><b>NOT YET PAID</b> </a> </li>
+      <li><a href="#"><b>NOT YET SENT</b> </a> </li>
+      <li><a href="#"><b>NOT YET RECEIVED</b> </a> </li>
+      <li><a href="#"><b>DONE</b> </a> </li>
+      <li><a href="#"><b>CENCELED</b> </a> </li>
+	  </ul>
+    <ul class="uk-switcher">
+      <li>
+        @if (count($onPaid))
+        <table class="uk-table uk-table-middle uk-table-divider">
+            <thead>
+                <tr>
+                    <th class="uk-width-small">Order Number</th>
+                    <th>Details</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($onPaid as $item)
+                  <tr>
+                      <td><a href="#">#{{ $item->order_code }}</a></td>
+                      <td>
+                        <table class="uk-table uk-table-divider">
+                          <tbody>
+                            @php
+                              $total = null;
+                            @endphp
+                            @foreach($item->details as $detail)
+                              <tr>
+                                  <td>{{ $detail->product_name }}</td>
+                                  <td>{{ $detail->price }}</td>
+                                  <td>x {{ $detail->qty }}</td>
+                                  <td>{{ $detail->subtotal }}</td>
+                              </tr>
+                              @php                                
+                                $total += $detail->subtotal;
+                              @endphp
+                            @endforeach
+                              <tr>
+                                <td colspan="3">Total</td><td>{{ $total }}</td></tr>
+                              </tr>
+                          </tbody>
+                      </table>
+                      </td>
+                      <td><button class="uk-button uk-button-default" type="button">Pay</button></td>
+                  </tr>
+                @endforeach
+            </tbody>
+        </table>
+        @else
+          <center>No Data</center>
+        @endif
+      </li>
+      <li>
+        @if (count($onSent))
+        <table class="uk-table uk-table-middle uk-table-divider">
+            <thead>
+                <tr>
+                    <th class="uk-width-small">Order Number</th>
+                    <th>Details</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($onSent as $item)
+                  <tr>
+                      <td><a href="#">#{{ $item->order_code }}</a></td>
+                      <td>
+                        <table class="uk-table uk-table-divider">
+                          <tbody>
+                            @php
+                              $total = null;
+                            @endphp
+                            @foreach($item->details as $detail)
+                              <tr>
+                                  <td>{{ $detail->product_name }}</td>
+                                  <td>{{ $detail->price }}</td>
+                                  <td>x {{ $detail->qty }}</td>
+                                  <td>{{ $detail->subtotal }}</td>
+                              </tr>
+                              @php                                
+                                $total += $detail->subtotal;
+                              @endphp
+                            @endforeach
+                              <tr>
+                                <td colspan="3">Total</td><td>{{ $total }}</td></tr>
+                              </tr>
+                          </tbody>
+                      </table>
+                      </td>
+                      <td><button class="uk-button uk-button-default" type="button">Pay</button></td>
+                  </tr>
+                @endforeach
+            </tbody>
+        </table>
+        @else
+          <center>No Data</center>
+        @endif
+      </li>
+      <li> ketiga </li>
+      <li> keempat </li>
+      <li> kelima </li>
+    </ul>
+	</div>
+</div>
+</div>
+@endsection

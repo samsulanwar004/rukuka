@@ -17,7 +17,7 @@ use App\Services\PosIndonesiaCourierService;
 Route::get('/posindonesia', function () {
     //init object
     $posIndonesia = new PosIndonesiaCourierService;
-    
+
     //create request getfee
     // $requestToPosIndonesia = [
     //                             [
@@ -44,10 +44,10 @@ Route::get('/posindonesia', function () {
                                     'address'        => ''
                                 ]
                             ];
-    
+
     //send request
     $resultFee = $posIndonesia->callMethod('getPosCodeByaddrAndCity', $requestToPosIndonesia);
-    
+
     //result
     var_dump($resultFee);
 });
@@ -110,6 +110,11 @@ Route::get('/shop/{categories}/{category}/{slug?}/{sale?}', [
 Route::get('/product/{slug?}/{method?}/{sku?}/{id?}', [
     'as'   => 'product',
     'uses' => 'Frontend\PageController@product',
+]);
+
+Route::get('/popup/{slug?}', [
+    'as'   => 'popup-product',
+    'uses' => 'Frontend\PageController@popup',
 ]);
 
 Route::get('/landing/women', [
@@ -263,6 +268,11 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@uploadProfile',
     ]);
 
+    Route::get('/account/history', [
+        'as'   => 'user.history',
+        'uses' => 'Frontend\UserController@history',
+    ]);
+
     // Route checkout module
     Route::get('/checkout', [
         'as'   => 'checkout',
@@ -288,7 +298,7 @@ Route::middleware(['auth'])->group(function () {
         'as'   => 'checkout.review',
         'uses' => 'Frontend\UserController@showReviewPage',
     ]);
-    
+
 
     // Route Address module
     Route::get('/account/address', [
@@ -350,6 +360,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/account/cc/update/{id?}', [
         'as'   => 'user.cc.update',
         'uses' => 'Frontend\UserController@ccUpdate',
-    ]);    
+    ]);
+
+    Route::post('/order', [
+        'as'   => 'order',
+        'uses' => 'Frontend\OrderController@store',
+    ]);
 
 });
