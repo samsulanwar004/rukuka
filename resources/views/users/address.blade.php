@@ -369,7 +369,7 @@
 
     if (byProvince == null) {
 
-      byProvince = '{{old("province")}}';
+      byProvince = '{{ old("province") }}';
 
     }
 
@@ -524,7 +524,7 @@
     var allOptionsCity = '';
     var byProvince = $('#form-province-vue').val();
 
-    var jqxhr = $.get( "/api/v1/cities/" + byProvince , function(response) {
+    var jqxhr = $.get("/api/v1/cities/" + byProvince , function(response) {
       
       if (response.error == '000') {
 
@@ -598,6 +598,60 @@
       alert(error + ' when load subdistrict');
 
     });
+
+  }
+
+  function showVueListVillages() {
+    
+    var allOptionsVillage = '';
+    var bySubDistrict = $('#form-subdistrict-vue').val();
+
+    var jqxhr = $.get( "/api/v1/villages/" + bySubDistrict , function(response) {
+
+      if (response.error == '000') {
+
+          $.each(response.data, function( index, value ) {
+      
+            if ("{{old('village')}}" == value.village) {
+
+              allOptionsVillage += '<option selected value="' + value.village + '">'+ value.village + ' - ' + value.postal_code +'</option>';
+            
+            }else{
+
+              allOptionsVillage += '<option value="' + value.village + '">'+ value.village + ' - ' + value.postal_code +'</option>';
+
+            }
+        
+          });
+
+      }else{
+
+        console.log(response.message);
+        allOptionsVillage += '';
+      
+      }
+
+      $('#form-village-vue').empty();
+      $('#form-village-vue').append('<option></option>' + allOptionsVillage);
+
+    }).fail(function(xhr, status, error) {
+      
+      alert(error + ' when load subdistrict');
+
+    });
+
+  }
+
+  function setVuePostalCode() {
+
+    var villageLabel = $('#form-village-vue option:selected').text();
+    var posCode;
+
+    posCode = villageLabel.replace(' ','');
+    posCode = posCode.split('-');
+    posCode = posCode[1];
+
+    $('#form-postal-vue').val(posCode);
 
   }
   // end untuk addresing jika belum punya address
