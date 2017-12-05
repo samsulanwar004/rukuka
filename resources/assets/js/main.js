@@ -31,6 +31,9 @@ import CreditCard from './components/CreditCard.vue';
 
 import NavigationMobile from './components/NavigationMobile.vue';
 
+import Search from './components/Search.vue';
+
+
 Vue.config.devtools = true
 Vue.config.debug = true
 Vue.config.silent = true
@@ -70,6 +73,7 @@ new Vue({
     'summary-checkout' : Summary,
     'address-list' : Address,
     'credit-card' : CreditCard,
-    'navigation-mobile' : NavigationMobile
+    'navigation-mobile' : NavigationMobile,
+    'search' : Search
 	}
 });

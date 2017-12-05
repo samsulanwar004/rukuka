@@ -152,6 +152,10 @@ Route::get('/review', [
     'uses' => 'Frontend\PageController@review',
 ]);
 
+Route::get('/search', [
+    'as'   => 'search',
+    'uses' => 'Frontend\PageController@search',
+]);
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [
@@ -366,5 +370,4 @@ Route::middleware(['auth'])->group(function () {
         'as'   => 'order',
         'uses' => 'Frontend\OrderController@store',
     ]);
-
 });
