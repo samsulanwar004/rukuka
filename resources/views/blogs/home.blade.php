@@ -29,7 +29,7 @@
         <h3 class="uk-margin-small">{{$title}}</h3>
         <div id="blog" class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
             @foreach($posts as $post)
-                <div class="uk-width-1-3@m uk-width-1-2@s uk-inline">
+                <div class="uk-width-1-3@m uk-width-1-2 uk-inline">
                     <div class="uk-inline">
                         <div class="uk-inline-clip uk-transition-toggle uk-light">
                             <a href="{{ URL::to('blog/'.$post->slug)}}" class="uk-link-reset">
@@ -41,8 +41,11 @@
                                 @endif
                                 <div class="uk-card uk-position-bottom-left uk-card-small">
                                     <div class="uk-card-body">
-                                        <div class="uk-transition-slide-left-small">
+                                        <div class="uk-transition-slide-left-small uk-visible@m">
                                             <h1 class="uk-margin-remove uk-text-bold blog-subtitle">{{$post->title}}</h1>
+                                        </div>
+                                        <div class="uk-hidden@m">
+                                            <h4 class="uk-margin-remove">{{$post->title}}</h4>
                                         </div>
                                     </div>
                                 </div>

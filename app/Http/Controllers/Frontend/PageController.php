@@ -354,4 +354,36 @@ class PageController extends BaseController
 
     }
 
+    public function search(Request $request)
+    {
+        $product = (new ProductRepository);
+
+        $products = $product->getSearch($request);
+
+        foreach ($request->all() as $key => $value) {
+            $products->appends($key, $value);
+        }
+
+        $shops = $products->map(function ($entry) {
+            return [
+                'id' => $entry->id,
+                'name' => $entry->name,
+                'slug' => $entry->slug,
+                'price' => $entry->sell_price,
+                'price_before_discount' => $entry->price_before_discount,
+                'currency' => $entry->currency,
+                'photo' => $entry->images->first()->photo,
+            ];
+        });
+
+        $keyword = $request->input('keyword');
+
+        return view('pages.search', compact(
+            'products',
+            'shops',
+            'keyword'
+
+        ));
+    }
+
 }

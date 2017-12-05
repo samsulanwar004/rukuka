@@ -26,7 +26,7 @@
                         <div class="uk-hidden@m">
                             <ul class="uk-grid" uk-grid>
                                 @foreach($category as $value)
-                                    <a href="{{ URL::to('blog/category/'.$value->slug)}}"><h4>{{$value->name}}</h4></a>
+                                    <a href="{{ URL::to('blog/category/'.$value->slug)}}"><h5>{{$value->name}}</h5></a>
                                 @endforeach
                             </ul>
                         </div>
@@ -61,7 +61,7 @@
                                     </div>
                                   </div>
                                   <div class="uk-hidden@m">
-                                    <div class="uk-transition-slide-left-small">
+                                    <div>
                                         <span class="uk-margin-remove uk-text-small uk-light">{{$post->title}}</span>
                                     </div>
                                   </div>

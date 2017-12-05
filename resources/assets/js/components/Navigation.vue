@@ -305,7 +305,7 @@
                   </div>
               </li>
               </li>
-              <li><a href="">SALE</a>
+              <li><a>SALE</a>
                   <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                       <div class="uk-navbar-dropdown-grid" uk-grid>
                           <div class="uk-width-4-5@m uk-margin-remove">
