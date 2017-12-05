@@ -152,8 +152,8 @@
             </div>
         </div>
         {{--END 3 ROW BANNER--}}
-
-        <h3 class="uk-text-center uk-heading-divider">TRENDING NOW</h3>
+        <hr>
+        <h3 class="uk-margin-small">TRENDING NOW</h3>
         <popular api="{{ route('populer')}}"></popular>
     </div>
 @endsection
