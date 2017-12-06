@@ -54,7 +54,7 @@
 			$this->form[] = ['label'=>'Currency','name'=>'currency','type'=>'select2','validation'=>'required|min:1|max:4','width'=>'col-sm-10','dataenum'=>'IDR;USD;EUR'];
 			$this->form[] = ['label'=>'Price','name'=>'price','type'=>'money','validation'=>'required|min:1|max:9','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'money','validation'=>'required|min:1|max:9','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Diskon','name'=>'diskon','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Price before discount','name'=>'price_before_discount','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'gram'];
 			$this->form[] = ['label'=>'Length','name'=>'length','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
 			$this->form[] = ['label'=>'Width','name'=>'width','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
