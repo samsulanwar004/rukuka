@@ -281,4 +281,10 @@ class OrderRepository
 
     	return $order;
 	}
+
+	public function getOrderById($id)
+	{
+		return Order::where('id', $id)
+			->first();
+	}
 }

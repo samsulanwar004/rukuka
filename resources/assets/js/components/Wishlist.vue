@@ -84,7 +84,7 @@
                   <input type="hidden" name="size" :value="wish.sku">
                   <input type="hidden" name="qty" :value="wish.qty">
                   <input type="hidden" name="move" :value="wish.id">
-                  <button type="submit" class="uk-button uk-button-secondary uk-button-small uk-width-1-1">Add to cart</button>
+                  <button type="submit" class="uk-button uk-button-secondary uk-button-small uk-width-1-1"><span class="uk-icon" uk-icon="icon: cart"></span> cart</button>
                 </form>
             </div>
             <hr class="uk-margin-remove">

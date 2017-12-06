@@ -4,6 +4,7 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+	use Illuminate\Support\Facades\URL;
 
 	class AdminProductDesignersController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -31,25 +32,21 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"Name","name"=>"name"];
-			$this->col[] = ["label"=>"Content","name"=>"content"];
-			$this->col[] = ["label"=>"Banner","name"=>"banner","image"=>true];
-			$this->col[] = ["label"=>"Photo","name"=>"photo","image"=>true];
+			$this->col[] = ["label"=>"Photo","name"=>"photo"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
-			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Banner','name'=>'banner','type'=>'upload','validation'=>'min:1|max:1024','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'required|image|max:3000','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'image|max:2000','width'=>'col-sm-10','help'=>'Max Size 2 Mb, Recommendation Size 400px*400px'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
-			//$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Banner','name'=>'banner','type'=>'upload','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'required|image|max:3000','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'image|max:2000','width'=>'col-sm-10','help'=>'Max Size 2 Mb, Recommendation Size 400px*400px'];
 			# OLD END FORM
 
 			/*
@@ -65,7 +62,14 @@
 	        |
 	        */
 	        $this->sub_module = array();
-
+            $this->sub_module[] = [
+                'label'=>'Product',
+                'path'=>'products',
+                'parent_columns'=>'name',
+                'foreign_key'=>'product_designers_id',
+                'button_color'=>'success',
+                'button_icon'=>'fa fa-th-large'
+            ];
 
 	        /*
 	        | ----------------------------------------------------------------------
@@ -248,6 +252,9 @@
 	    */
 	    public function hook_row_index($column_index,&$column_value) {
 	    	//Your code here
+            if($column_index==2){
+                $column_value = '<img src="'.URL::to('/'.$column_value).'" alt="-" height="40">';
+            }
 	    }
 
 	    /*

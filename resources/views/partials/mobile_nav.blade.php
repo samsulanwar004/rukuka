@@ -35,9 +35,9 @@
             ></user-panel>
             <div class="uk-navbar-left uk-flex-1 test-overlay" hidden>
               <div class="uk-navbar-item uk-width-expand">
-                <form class="uk-search uk-search-navbar uk-width-1-1">
-                    <input class="uk-search-input" type="search" placeholder="find our product" autofocus>
-                </form>
+                {{ Form::open(array('url' => '/search', 'method' =>'get','files' => true,'class' => 'uk-search uk-search-navbar uk-width-1-1')) }}
+                <input class="uk-search-input" name="keyword" type="search" placeholder="find our product" autofocus>
+                {{ Form::close() }}
               </div>
               <a class="uk-navbar-toggle" uk-close uk-toggle="target: .test-overlay; animation: uk-animation-fade" href="#"></a>
             </div>

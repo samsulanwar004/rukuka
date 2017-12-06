@@ -73,6 +73,42 @@ class PageController extends BaseApiController
     	}
     }
 
+    public function search($keyword = null)
+    {
+        try {
+            $categories['designers'] = (new DesignerRepository)->getDesignersByKeyword($keyword);
+            $products = (new ProductRepository())->getProductByKeyword($keyword);
+
+           $product = $products->map(function ($entry) {
+               return [
+                   'category' => $entry->category->parent->parent->name
+               ];
+           });
+            $mens = 0;
+            $womens = 0;
+            $kids = 0;
+
+            foreach ($product as $prod) {
+                if ($prod['category'] == 'Mens') {
+                    $mens++;
+                } else if ($prod['category'] == 'Womens') {
+                    $womens++;
+                } else {
+                    $kids++;
+                }
+            }
+
+            $categories['mens'] = $mens;
+            $categories['womens'] = $womens;
+            $categories['kids'] = $kids;
+
+            return $this->success($categories, 200, true);
+
+        } catch (Exception $e) {
+            return $this->error($e, 400, true);
+        }
+    }
+
     public function popular()
     {
         try {
