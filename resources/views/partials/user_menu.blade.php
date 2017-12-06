@@ -25,17 +25,22 @@
     <div class="uk-width-1-5">
       <div class="uk-inline">
         <a href="#" class="uk-icon uk-icon-link" uk-icon="icon: more"></a>
-        <div class="uk-dropdown uk-dropdown-bottom-right" uk-dropdown="mode: click">
-          <ul class="uk-nav uk-navbar-dropdown-nav">
-            <li><a href="{{ route('user') }}" class="uk-text-small">Home</a></li>
-            <li><a href="{{ route('user.detail') }}" class="uk-text-small">My Details</a></li>
-            <li><a href="{{ route('user.address') }}" class="uk-text-small">Address Books</a></li>
-            <li><a href="{{ route('user.cc') }}" class="uk-text-small">Payment Methods</a></li>
-            <li><a href="{{ route('user.history') }}" class="uk-text-small">Order History</a></li>
-            <li><a href="{{ route('user.wishlist') }}" class="uk-text-small">My Wishlist</a></li>
-            <li><a href="{{ route('user.reset.password') }}" class="uk-text-small">Reset Password</a></li>
-            <li><a href="{{ route('logout') }}" class="uk-text-small">Sign Out</a></li>
-          </ul>
+        <div uk-drop="mode: click; pos: bottom-right" style="width: 150px">
+          <div class="uk-card uk-card-default uk-card-small">
+            <div class="uk-card-body">
+              <ul class="uk-nav uk-navbar-dropdown-nav">
+                <li><a href="{{ route('user') }}" class="uk-text-small">Home</a></li>
+                <li><a href="{{ route('user.detail') }}" class="uk-text-small">My Details</a></li>
+                <li><a href="{{ route('user.address') }}" class="uk-text-small">Address Books</a></li>
+                <li><a href="{{ route('user.cc') }}" class="uk-text-small">Payment Methods</a></li>
+                <li><a href="{{ route('user.history') }}" class="uk-text-small">Order History</a></li>
+                <li><a href="{{ route('user.wishlist') }}" class="uk-text-small">My Wishlist</a></li>
+                <li><a href="{{ route('user.reset.password') }}" class="uk-text-small">Reset Password</a></li>
+                <li><a href="{{ route('logout') }}" class="uk-text-small">Sign Out</a></li>
+              </ul>
+            </div>
+          </div>
+
         </div>
       </div>
 

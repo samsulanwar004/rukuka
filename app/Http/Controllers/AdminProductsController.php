@@ -38,28 +38,27 @@
 			$this->col[] = ["label"=>"Product Categories","name"=>"product_categories_id","join"=>"product_categories,name"];
 			$this->col[] = ["label"=>"Product Code","name"=>"product_code"];
 			$this->col[] = ["label"=>"Name","name"=>"name"];
-			$this->col[] = ["label"=>"Color","name"=>"color"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Product Designers','name'=>'product_designers_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_designers,name'];
-			$this->form[] = ['label'=>'Product Categories','name'=>'product_categories_id','type'=>'custom','validation'=>'required','width'=>'col-sm-10', 'html' => $this->categories()];
-			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Color','name'=>'color','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'Black;Red;White'];
-			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Detail And Care','name'=>'detail_and_care','type'=>'textarea','validation'=>'string|min:5|max:5000','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Size And Fit','name'=>'size_and_fit','type'=>'textarea','validation'=>'string|min:5|max:5000','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Technical Specification','name'=>'technical_specification','type'=>'textarea','validation'=>'string|min:5|max:5000','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Currency','name'=>'currency','type'=>'select2','validation'=>'required|min:1|max:4','width'=>'col-sm-10','dataenum'=>'IDR;USD;EUR'];
-			$this->form[] = ['label'=>'Price','name'=>'price','type'=>'money','validation'=>'required|min:1|max:9','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'money','validation'=>'required|min:1|max:9','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Price before discount','name'=>'price_before_discount','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'gram'];
-			$this->form[] = ['label'=>'Length','name'=>'length','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
-			$this->form[] = ['label'=>'Width','name'=>'width','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
-			$this->form[] = ['label'=>'Height','name'=>'height','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
-			$this->form[] = ['label'=>'Diameter','name'=>'diameter','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
+            $this->form[] = ['label'=>'Product Categories','name'=>'product_categories_id','type'=>'custom','validation'=>'required','width'=>'col-sm-10', 'html' => $this->categories()];
+            $this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Color','name'=>'color','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Detail And Care','name'=>'detail_and_care','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Size And Fit','name'=>'size_and_fit','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Technical Specification','name'=>'technical_specification','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Currency','name'=>'currency','type'=>'select2','validation'=>'required','width'=>'col-sm-10','dataenum'=>'USD'];
+			$this->form[] = ['label'=>'Price','name'=>'price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Starting Price'];
+			$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Selling Price'];
+			$this->form[] = ['label'=>'Price Before Discount','name'=>'price_before_discount','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10','help'=>'Discount (Price before Sell Price)'];
+			$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Gram','placeholder'=>'gram'];
+			$this->form[] = ['label'=>'Length','name'=>'length','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Cm','placeholder'=>'cm'];
+			$this->form[] = ['label'=>'Width','name'=>'width','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Cm','placeholder'=>'cm'];
+			$this->form[] = ['label'=>'Height','name'=>'height','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Cm','placeholder'=>'cm'];
+			$this->form[] = ['label'=>'Diameter','name'=>'diameter','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Cm','placeholder'=>'cm'];
 			$this->form[] = ['label'=>'Is Active','name'=>'is_active','type'=>'checkbox','width'=>'col-sm-10','dataenum'=>'Active'];
 			$this->form[] = ['label'=>'Tags','name'=>'tags','type'=>'multitext','validation'=>'min:1|max:20','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
@@ -67,16 +66,22 @@
 			# OLD START FORM
 			//$this->form = [];
 			//$this->form[] = ['label'=>'Product Designers','name'=>'product_designers_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_designers,name'];
+			//$this->form[] = ['label'=>'Product Categories','name'=>'product_categories_id','type'=>'custom','validation'=>'required','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Color','name'=>'color','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'Black;Red;White'];
-			//$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Detail And Care','name'=>'detail_and_care','type'=>'textarea','validation'=>'string|min:5|max:5000','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Size And Fit','name'=>'size_and_fit','type'=>'textarea','validation'=>'string|min:5|max:5000','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Technical Specification','name'=>'technical_specification','type'=>'textarea','validation'=>'string|min:5|max:5000','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Currency','name'=>'currency','type'=>'select2','validation'=>'required|min:1|max:4','width'=>'col-sm-10','dataenum'=>'IDR;USD;EUR'];
-			//$this->form[] = ['label'=>'Price','name'=>'price','type'=>'money','validation'=>'required|min:1|max:9','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'money','validation'=>'required|min:1|max:9','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Diskon','name'=>'diskon','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Color','name'=>'color','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'required|string','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Detail And Care','name'=>'detail_and_care','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Size And Fit','name'=>'size_and_fit','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Technical Specification','name'=>'technical_specification','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Currency','name'=>'currency','type'=>'select2','validation'=>'required','width'=>'col-sm-10','dataenum'=>'USD'];
+			//$this->form[] = ['label'=>'Price','name'=>'price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Starting Price'];
+			//$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Selling Price'];
+			//$this->form[] = ['label'=>'Price Before Discount','name'=>'price_before_discount','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10','help'=>'Discount (Price before Sell Price)'];
+			//$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'gram'];
+			//$this->form[] = ['label'=>'Length','name'=>'length','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
+			//$this->form[] = ['label'=>'Width','name'=>'width','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
+			//$this->form[] = ['label'=>'Height','name'=>'height','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
+			//$this->form[] = ['label'=>'Diameter','name'=>'diameter','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
 			//$this->form[] = ['label'=>'Is Active','name'=>'is_active','type'=>'checkbox','width'=>'col-sm-10','dataenum'=>'Active'];
 			//$this->form[] = ['label'=>'Tags','name'=>'tags','type'=>'multitext','validation'=>'min:1|max:20','width'=>'col-sm-10'];
 			# OLD END FORM
@@ -305,7 +310,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-	        $postdata['product_code'] = 'KP'.date('Ymd').rand(0,99);	        
+	        $postdata['product_code'] = 'P'.date('Ymd').rand(0,99);
 
 	    }
 

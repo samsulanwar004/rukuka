@@ -4,6 +4,7 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+	use Illuminate\Support\Facades\URL;
 
 	class AdminProductImagesController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -32,8 +33,8 @@
 			$this->col = [];
 			$this->col[] = ["label"=>"Product Code","name"=>"products_id","join"=>"products,product_code"];
 			$this->col[] = ["label"=>"Name","name"=>"name"];
-			$this->col[] = ["label"=>"Photo","name"=>"photo","image"=>true];
-			# END COLUMNS DO NOT REMOVE THIS LINE
+            $this->col[] = ["label"=>"Photo","name"=>"photo"];
+            # END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
@@ -234,7 +235,6 @@
 	    */
 	    public function hook_query_index(&$query) {
 	        //Your code here
-	            
 	    }
 
 	    /*
@@ -245,6 +245,9 @@
 	    */    
 	    public function hook_row_index($column_index,&$column_value) {	        
 	    	//Your code here
+            if($column_index==3){
+                $column_value = '<img src="'.URL::to('/'.$column_value).'" alt="-" height="40">';
+            }
 	    }
 
 	    /*
