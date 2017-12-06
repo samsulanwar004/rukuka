@@ -68,17 +68,17 @@
 </div>
 <div class="uk-section uk-section-default uk-section-xsmall uk-text-small uk-visible@m">
   <div class="uk-container uk-container-small uk-text-meta">
-    Copyright © 2017 kukaindonesia.com - All Rights Reseved.
+    Copyright © 2017 rukuka.com - All Rights Reseved.
   </div>
 </div>
 <div class="uk-section uk-section-muted uk-section-xsmall uk-text-small uk-hidden@m">
   <div class="uk-container uk-container-small uk-text-meta">
     <ul class="uk-grid" uk-grid>
-      <li><a href="{{ URL::to('help/need-some-help')}}">Let Us Help You!</a></li>
+      <li><a href="{{ URL::to('help/need-some-help')}}">Help!</a></li>
       <li><a href="{{ URL::to('page/terms-and-conditions')}}">Term & Conditions</a></li>
       <li><a href="{{ URL::to('page/privacy-policy')}}">Privacy & Policy</a></li>
     </ul>
 
-    <p>Copyright © 2017 kukaindonesia.com - All Rights Reseved.</p>
+    <p>Copyright © 2017 rukuka.com - All Rights Reseved.</p>
   </div>
 </div>
