@@ -5,6 +5,16 @@
       <li v-if="auth == 1" class="uk-margin-right">
         <a class="uk-button uk-button-text uk-button-small" :href="profile_link"> Hallo, <b>{{ accounts.first_name }}</b></a>
         </a>
+        <div class="uk-drop uk-drop-bottom-left" uk-drop="delay-hide:0" style="width: 150px">
+          <div class="uk-card uk-card-border uk-background-default uk-card-small">
+            <div class="uk-card-body">
+              <ul class="uk-list uk-text-meta">
+                <li><a :href="profile_link">MY ACCOUNT</a> </li>
+                <li><a href="{{ route('logout') }}">SIGN OUT</a> </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </li>
       <li v-if="auth == 1"  class="uk-margin-right">
         <a class="uk-button uk-button-text uk-button-small" :href="wishlist_link"><b>LOVE</b></a>
