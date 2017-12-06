@@ -62,15 +62,7 @@
           </ul>
         </p>
       </div>
-      <div class="uk-width-2-5@m">
-        <ul class="uk-nav uk-navbar-dropdown-nav">
-          <li>
-            <div class="uk-text-meta">
-            SHIPPING TO INDONESIA | <a href="#" class="uk-text-meta">CHANGE</a>
-          </div>
-         </li>
-        </ul>
-      </div>
+
     </div>
   </div>
 </div>
@@ -82,9 +74,9 @@
 <div class="uk-section uk-section-muted uk-section-xsmall uk-text-small uk-hidden@m">
   <div class="uk-container uk-container-small uk-text-meta">
     <ul class="uk-grid" uk-grid>
-      <li><a href="#">Let Us Help You!</a></li>
-      <li><a href="#">Term & Conditions</a></li>
-      <li><a href="#">Privacy & Policy</a></li>
+      <li><a href="{{ URL::to('help/need-some-help')}}">Let Us Help You!</a></li>
+      <li><a href="{{ URL::to('page/terms-and-conditions')}}">Term & Conditions</a></li>
+      <li><a href="{{ URL::to('page/privacy-policy')}}">Privacy & Policy</a></li>
     </ul>
 
     <p>Copyright © 2017 kukaindonesia.com - All Rights Reseved.</p>

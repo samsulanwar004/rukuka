@@ -181,6 +181,16 @@ class CmsModulsSeeder extends Seeder {
             'controller'=>'AdminPopupsController',
             'is_protected'=>0,
             'is_active'=>0
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Orders',
+            'icon'=>'fa fa-database',
+            'path'=>'orders',
+            'table_name'=>'orders',
+            'controller'=>'AdminOrdersController',
+            'is_protected'=>0,
+            'is_active'=>0
             ]
         ];
 
@@ -421,19 +431,6 @@ class CmsMenusSeeder extends Seeder {
         ],[
 
             'created_at'=>date('Y-m-d H:i:s'),
-            'name'=>'Helps',
-            'type'=>'Route',
-            'path'=>'AdminHelpsControllerGetIndex',
-            'color' => null,
-            'icon'=>'fa fa-file-text',
-            'parent_id'=>0,
-            'is_active'=>1,
-            'is_dashboard'=>0,
-            'id_cms_privileges' => 1,
-            'sorting' => 5
-        ],[
-
-            'created_at'=>date('Y-m-d H:i:s'),
             'name'=>'Pages',
             'type'=>'Route',
             'path'=>'AdminPagesControllerGetIndex',
@@ -447,6 +444,19 @@ class CmsMenusSeeder extends Seeder {
         ],[
 
             'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Helps',
+            'type'=>'Route',
+            'path'=>'AdminHelpsControllerGetIndex',
+            'color' => null,
+            'icon'=>'fa fa-file-text',
+            'parent_id'=>0,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 5
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
             'name'=>'Popup Link',
             'type'=>'Route',
             'path'=>'AdminPopupsControllerGetIndex',
@@ -457,6 +467,19 @@ class CmsMenusSeeder extends Seeder {
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 6
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Orders',
+            'type'=>'Route',
+            'path'=>'AdminOrdersControllerGetIndex',
+            'color' => null,
+            'icon'=>'fa fa-database',
+            'parent_id'=>0,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 7
         ]
     ];
 

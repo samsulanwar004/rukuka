@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta id="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>rukuka</title>
 
     <!-- jQuery is required -->
     <link rel="stylesheet" href="{{ elixir('css/app.css') }}">

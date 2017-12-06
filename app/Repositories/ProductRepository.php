@@ -114,9 +114,9 @@ class ProductRepository
 		$query = $this->model()
 			->whereHas('designer', function ($query) use ($category) {
 	            if ($category != 'all') {
-	            	$query->where('slug', $category)->where('price_before_discount','>',0);
+	            	$query->where('slug', $category);
 	            }
-	        });
+	        })->whereNull('deleted_at');
 
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
@@ -191,4 +191,47 @@ class ProductRepository
             ->take(4)
             ->get();
     }
+
+    public function getSearch($request )
+    {
+        if($request->has('category'))
+        {
+            $categories = (new CategoryRepository)->getCategoryByParent($request->input('category'));
+            $categoryArr=[];
+            foreach($categories as $category){
+                foreach($category['child'] as $cat){
+                    $categoryArr[] =  $cat['id'];
+                }
+            }
+
+            $query = $this->model()
+                ->where('name','like','%'.$request->input('keyword').'%')
+                ->whereIn('product_categories_id',$categoryArr)
+                ->whereNull('deleted_at');
+        }
+        else
+        {
+            $query = $this->model()
+                ->where('name','like','%'.$request->input('keyword').'%')
+                ->whereNull('deleted_at');
+        }
+
+        if ($request->has('price')) {
+            $query->orderBy('sell_price', $request->input('price'));
+        } else {
+            $query->orderBy('updated_at', 'desc');
+            $query->orderBy('id', 'desc');
+        }
+
+        return $query->paginate(12);
+    }
+
+    public function getProductByKeyword($keyword)
+    {
+        return $this->model($keyword)
+            ->where('name','LIKE','%'.$keyword.'%')
+            ->whereNull('deleted_at')
+            ->get();
+    }
+
 }

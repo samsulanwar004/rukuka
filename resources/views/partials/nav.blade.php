@@ -4,10 +4,10 @@
           <div class="uk-grid-small" uk-grid>
               <div class="uk-width-1-3@m uk-flex uk-flex-middle">
                 <div class="uk-panel">
-                  <form class="uk-search uk-form-width-medium uk-first-column" action="index.html" method="post">
-                    <button type="button" class="uk-search-icon-flip uk-search-icon uk-icon" uk-search-icon name="button"></button>
-                    <input type="search" class=" uk-search-input" name="" value="" placeholder="S E A R C H">
-                  </form>
+                    {{ Form::open(array('url' => '/search', 'method' =>'get','files' => true,'class' => 'uk-search uk-form-width-medium uk-first-column')) }}
+                    <button type="submit" class="uk-search-icon-flip uk-search-icon uk-icon" uk-search-icon></button>
+                    <input type="text" class=" uk-search-input" name="keyword"  placeholder="S E A R C H">
+                    {{ Form::close() }}
                 </div>
               </div>
               <div class="uk-width-1-3@m">
