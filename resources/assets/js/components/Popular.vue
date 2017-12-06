@@ -87,8 +87,8 @@
                 </div>
                 <div class="">
                 <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" uk-grid>
-                  <li class="uk-padding-remove" v-for="image in images"><a href="#"  class="uk-padding-remove">
-                    <img :src="'/'+image.photo" width="55"></a>
+                  <li class="uk-padding-remove" v-for="image in images">
+                      <a href="#"><img :src="'/'+image.photo" width="55"></a>
                   </li>
                 </ul>
               </div>
