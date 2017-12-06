@@ -6,8 +6,9 @@
 	use CRUDBooster;
 	use App\Blog;
 	use App\BlogCategory;
+    use Illuminate\Support\Facades\URL;
 
-	class AdminBlogsController extends \crocodicstudio\crudbooster\controllers\CBController {
+    class AdminBlogsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
         private $categoryId;
 
@@ -35,16 +36,18 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"Title","name"=>"title"];
-            $this->col[] = ["label"=>"Category","name"=>"blog_categories_id","join"=>"blog_categories,name"];
-            $this->col[] = ["label"=>"Create At","name"=>"created_at"];
-            $this->col[] = ["label"=>"Status","name"=>"is_publish"];
+			$this->col[] = ["label"=>"Category","name"=>"blog_categories_id","join"=>"blog_categories,name"];
+			$this->col[] = ["label"=>"Photo 1","name"=>"photo_1"];
+			$this->col[] = ["label"=>"Photo 2","name"=>"photo_2"];
+			$this->col[] = ["label"=>"Create At","name"=>"created_at"];
+			$this->col[] = ["label"=>"Status","name"=>"is_publish"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Categories','name'=>'blog_categories_id','type'=>'select2','validation'=>'required','width'=>'col-sm-6','datatable'=>'blog_categories,name'];
-			$this->form[] = ['label'=>'Photo 1','name'=>'photo_1','type'=>'upload','validation'=>'image|max:2000','width'=>'col-sm-10','help'=>'Max Size 2 Mb'];
-			$this->form[] = ['label'=>'Photo 2','name'=>'photo_2','type'=>'upload','validation'=>'image|max:2000','width'=>'col-sm-10','help'=>'Max Size 2 Mb'];
+			$this->form[] = ['label'=>'Photo 1','name'=>'photo_1','type'=>'upload','validation'=>'image|max:2000','width'=>'col-sm-10','help'=>'Max Size 2 Mb, Recommendation Size 400px*400px'];
+			$this->form[] = ['label'=>'Photo 2','name'=>'photo_2','type'=>'upload','validation'=>'image|max:2000','width'=>'col-sm-10','help'=>'Max Size 2 Mb,  Recommendation Size 2000px*600px'];
 			$this->form[] = ['label'=>'Title','name'=>'title','type'=>'text','validation'=>'required|string|unique:blogs','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'wysiwyg','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Tags','name'=>'tags','type'=>'multitext','width'=>'col-sm-8'];
@@ -53,10 +56,10 @@
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Categories','name'=>'blog_categories_id','type'=>'custom','validation'=>'required','width'=>'col-sm-6'];
-			//$this->form[] = ['label'=>'Photo 1','name'=>'photo_1','type'=>'upload','validation'=>'image|max:2000|dimensions:max_width=600,max_height=600','width'=>'col-sm-10','help'=>'Max Size 2 Mb, Max Width 600px, Max Height 600px'];
-			//$this->form[] = ['label'=>'Photo 2','name'=>'photo_2','type'=>'upload','validation'=>'image|max:2000|dimensions:max_width=1200,min_height=300','width'=>'col-sm-10','help'=>'Max Size 2 Mb, Max Width 1200px, Max Height 400px'];
-			//$this->form[] = ['label'=>'Title','name'=>'title','type'=>'text','validation'=>'required|string','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Categories','name'=>'blog_categories_id','type'=>'select2','validation'=>'required','width'=>'col-sm-6','datatable'=>'blog_categories,name'];
+			//$this->form[] = ['label'=>'Photo 1','name'=>'photo_1','type'=>'upload','validation'=>'image|max:2000','width'=>'col-sm-10','help'=>'Max Size 2 Mb, Recommendation Size 400px*400px'];
+			//$this->form[] = ['label'=>'Photo 2','name'=>'photo_2','type'=>'upload','validation'=>'image|max:2000','width'=>'col-sm-10','help'=>'Max Size 2 Mb'];
+			//$this->form[] = ['label'=>'Title','name'=>'title','type'=>'text','validation'=>'required|string|unique:blogs','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Content','name'=>'content','type'=>'wysiwyg','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Tags','name'=>'tags','type'=>'multitext','width'=>'col-sm-8'];
 			//$this->form[] = ['label'=>'Publish','name'=>'is_publish','type'=>'radio','validation'=>'required|integer','width'=>'col-sm-10','dataenum'=>'0|Unpublished;1|Publish'];
@@ -258,12 +261,18 @@
 	    */    
 	    public function hook_row_index($column_index,&$column_value) {	        
 	    	//Your code here
-            if($column_index==4) {
+            if($column_index==6) {
                 if ($column_value == '0') {
                     $column_value = '<span class="label label-warning">Unpublish</span>';
                 } else {
                     $column_value = '<span class="label label-success">Publish</span>';
                 }
+            }
+            if($column_index==3){
+                $column_value = '<img src="'.URL::to('/'.$column_value).'" alt="-" height="40">';
+            }
+            if($column_index==4){
+                $column_value = '<img src="'.URL::to('/'.$column_value).'" alt="-" height="40">';
             }
 	    }
 

@@ -279,17 +279,23 @@
 	    	//Your code here
 	    	if($column_index==2) {
                 if ($column_value == '0') {
-                    $column_value = '<span class="label label-warning">Payment Pending</span>';
-                } else {
+                    $column_value = '<span class="label label-primary">Payment Pending</span>';
+                } else if ($column_value == '1') {
                     $column_value = '<span class="label label-success">Payment Success</span>';
+                } else {
+                    $column_value = '<span class="label label-danger">Payment Expired</span>';
                 }
             }
 
             if($column_index==3) {
                 if ($column_value == '0') {
-                    $column_value = '<span class="label label-warning">Sent Pending</span>';
+                    $column_value = '<span class="label label-primary">Sent Pending</span>';
+                } else if ($column_value == '1') {
+                    $column_value = '<span class="label label-info">Sent Process</span>';
+                } else if ($column_value == '2') {
+                    $column_value = '<span class="label label-success">Sent Done</span>';
                 } else {
-                    $column_value = '<span class="label label-success">Sent Success</span>';
+                    $column_value = '<span class="label label-danger">Cancel</span>';
                 }
             }
 	    }

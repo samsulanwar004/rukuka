@@ -31,15 +31,15 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"Product Name","name"=>"products_id","join"=>"products,name"];
-			$this->col[] = ["label"=>"Sku","name"=>"sku"];
+			$this->col[] = ["label"=>"SKU","name"=>"sku"];
 			$this->col[] = ["label"=>"Size","name"=>"size"];
 			$this->col[] = ["label"=>"Unit","name"=>"unit"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Product Code','name'=>'products_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'products,product_code'];
-			$this->form[] = ['label'=>'Size','name'=>'size','type'=>'radio','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'S;M;L;XL;XL;ALL SIZE'];
+			$this->form[] = ['label'=>'Product Code','name'=>'products_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'products,product_code','datatable_format'=>"product_code,' - ',name"];
+			$this->form[] = ['label'=>'Size','name'=>'size','type'=>'radio','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'XS;S;M;L;XL;XXL;ALL SIZE'];
 			$this->form[] = ['label'=>'Unit','name'=>'unit','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 

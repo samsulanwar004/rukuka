@@ -74,7 +74,7 @@ class CmsModulsSeeder extends Seeder {
         ],[ 
             
             'created_at'=>date('Y-m-d H:i:s'),
-            'name'=>'Product Stocks',
+            'name'=>'Stocks',
             'icon'=>'fa fa-circle-o',
             'path'=>'product-stocks',
             'table_name'=>'product_stocks',
@@ -155,7 +155,7 @@ class CmsModulsSeeder extends Seeder {
 
             'created_at'=>date('Y-m-d H:i:s'),
             'name'=>'Pages',
-            'icon'=>'fa fa-file-text-o',
+            'icon'=>'fa fa-circle-o',
             'path'=>'pages',
             'table_name'=>'pages',
             'controller'=>'AdminPagesController',
@@ -165,7 +165,7 @@ class CmsModulsSeeder extends Seeder {
 
             'created_at'=>date('Y-m-d H:i:s'),
             'name'=>'Helps',
-            'icon'=>'fa fa-file-text',
+            'icon'=>'fa fa-circle-o',
             'path'=>'helps',
             'table_name'=>'helps',
             'controller'=>'AdminHelpsController',
@@ -175,7 +175,7 @@ class CmsModulsSeeder extends Seeder {
 
             'created_at'=>date('Y-m-d H:i:s'),
             'name'=>'Popup Link',
-            'icon'=>'fa fa-external-link',
+            'icon'=>'fa fa-circle-o',
             'path'=>'popups',
             'table_name'=>'popups',
             'controller'=>'AdminPopupsController',
@@ -234,38 +234,25 @@ class CmsMenusSeeder extends Seeder {
         
         $data = [
         [
-            
+
             'created_at'=>date('Y-m-d H:i:s'),
             'name'=>'Products',
             'type'=>'Route',
             'path'=>'products',
-            'color' => null,
+            'color' => 'normal',
             'icon'=>'fa fa-th-large',
             'parent_id'=>0,
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 1
+            'sorting' => 2
         ],[
             
             'created_at'=>date('Y-m-d H:i:s'),
             'name'=>'Products',
             'type'=>'Route',
             'path'=>'AdminProductsControllerGetIndex',
-            'color' => null,
-            'icon'=>'fa fa-circle-o',
-            'parent_id'=>1,
-            'is_active'=>1,
-            'is_dashboard'=>0,
-            'id_cms_privileges' => 1,
-            'sorting' => 1
-        ],[
-            
-            'created_at'=>date('Y-m-d H:i:s'),
-            'name'=>'Designers',
-            'type'=>'Route',
-            'path'=>'AdminProductDesignersControllerGetIndex',
-            'color' => null,
+            'color' => 'normal',
             'icon'=>'fa fa-circle-o',
             'parent_id'=>1,
             'is_active'=>1,
@@ -275,10 +262,23 @@ class CmsMenusSeeder extends Seeder {
         ],[
             
             'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Designers',
+            'type'=>'Route',
+            'path'=>'AdminProductDesignersControllerGetIndex',
+            'color' => 'normal',
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>1,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 1
+        ],[
+            
+            'created_at'=>date('Y-m-d H:i:s'),
             'name'=>'Categories',
             'type'=>'Route',
             'path'=>'AdminProductCategoriesControllerGetIndex',
-            'color' => null,
+            'color' => 'normal',
             'icon'=>'fa fa-circle-o',
             'parent_id'=>1,
             'is_active'=>1,
@@ -291,7 +291,7 @@ class CmsMenusSeeder extends Seeder {
             'name'=>'Product Stocks',
             'type'=>'Route',
             'path'=>'AdminProductStocksControllerGetIndex',
-            'color' => null,
+            'color' => 'normal',
             'icon'=>'fa fa-circle-o',
             'parent_id'=>1,
             'is_active'=>1,
@@ -304,23 +304,23 @@ class CmsMenusSeeder extends Seeder {
             'name'=>'Product Images',
             'type'=>'Route',
             'path'=>'AdminProductImagesControllerGetIndex',
-            'color' => null,
+            'color' => 'normal',
             'icon'=>'fa fa-circle-o',
-            'parent_id'=>1,
-            'is_active'=>1,
+            'parent_id'=>0,
+            'is_active'=>0,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 5
+            'sorting' => 1
         ],[
             
             'created_at'=>date('Y-m-d H:i:s'),
             'name'=>'Eco Toursim',
             'type'=>'Route',
             'path'=>'ecotoursim',
-            'color' => null,
+            'color' => 'normal',
             'icon'=>'fa fa-home',
             'parent_id'=>0,
-            'is_active'=>1,
+            'is_active'=>0,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 2
@@ -330,10 +330,10 @@ class CmsMenusSeeder extends Seeder {
             'name'=>'Homestay Owners',
             'type'=>'Route',
             'path'=>'AdminHomestayOwnersControllerGetIndex',
-            'color' => null,
+            'color' => 'normal',
             'icon'=>'fa fa-circle-o',
-            'parent_id'=>7,
-            'is_active'=>1,
+            'parent_id'=>0,
+            'is_active'=>0,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 1
@@ -343,10 +343,10 @@ class CmsMenusSeeder extends Seeder {
             'name'=>'Amenities',
             'type'=>'Route',
             'path'=>'AdminAmenitiesControllerGetIndex',
-            'color' => null,
+            'color' => 'normal',
             'icon'=>'fa fa-circle-o',
-            'parent_id'=>7,
-            'is_active'=>1,
+            'parent_id'=>0,
+            'is_active'=>0,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 2
@@ -356,10 +356,10 @@ class CmsMenusSeeder extends Seeder {
             'name'=>'Homestays',
             'type'=>'Route',
             'path'=>'AdminHomestaysControllerGetIndex',
-            'color' => null,
+            'color' => 'normal',
             'icon'=>'fa fa-circle-o',
-            'parent_id'=>7,
-            'is_active'=>1,
+            'parent_id'=>0,
+            'is_active'=>0,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 3
@@ -369,10 +369,10 @@ class CmsMenusSeeder extends Seeder {
             'name'=>'Homestay Images',
             'type'=>'Route',
             'path'=>'AdminHomestayImagesControllerGetIndex',
-            'color' => null,
+            'color' => 'normal',
             'icon'=>'fa fa-circle-o',
-            'parent_id'=>7,
-            'is_active'=>1,
+            'parent_id'=>0,
+            'is_active'=>0,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 4
@@ -382,10 +382,10 @@ class CmsMenusSeeder extends Seeder {
             'name'=>'Homestay Amenities',
             'type'=>'Route',
             'path'=>'AdminHomestayAmenitiesControllerGetIndex',
-            'color' => null,
+            'color' => 'normal',
             'icon'=>'fa fa-circle-o',
-            'parent_id'=>7,
-            'is_active'=>1,
+            'parent_id'=>0,
+            'is_active'=>0,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 5
@@ -395,20 +395,20 @@ class CmsMenusSeeder extends Seeder {
             'name'=>'Blogs',
             'type'=>'Route',
             'path'=>'blogs',
-            'color' => null,
+            'color' => 'normal',
             'icon'=>'fa fa-edit',
             'parent_id'=>0,
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 3
+            'sorting' => 1
         ],[
 
             'created_at'=>date('Y-m-d H:i:s'),
             'name'=>'Blogs',
             'type'=>'Route',
             'path'=>'AdminBlogsControllerGetIndex',
-            'color' => null,
+            'color' => 'normal',
             'icon'=>'fa fa-circle-o',
             'parent_id'=>13,
             'is_active'=>1,
@@ -421,7 +421,7 @@ class CmsMenusSeeder extends Seeder {
             'name'=>'Categories',
             'type'=>'Route',
             'path'=>'AdminBlogCategoriesControllerGetIndex',
-            'color' => null,
+            'color' => 'normal',
             'icon'=>'fa fa-circle-o',
             'parent_id'=>13,
             'is_active'=>1,
@@ -434,52 +434,66 @@ class CmsMenusSeeder extends Seeder {
             'name'=>'Pages',
             'type'=>'Route',
             'path'=>'AdminPagesControllerGetIndex',
-            'color' => null,
-            'icon'=>'fa fa-file-text-o',
-            'parent_id'=>0,
+            'color' => 'normal',
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>20,
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 4
+            'sorting' => 1
         ],[
 
             'created_at'=>date('Y-m-d H:i:s'),
             'name'=>'Helps',
             'type'=>'Route',
             'path'=>'AdminHelpsControllerGetIndex',
-            'color' => null,
-            'icon'=>'fa fa-file-text',
-            'parent_id'=>0,
+            'color' => 'normal',
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>20,
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 5
+            'sorting' => 2
         ],[
 
             'created_at'=>date('Y-m-d H:i:s'),
             'name'=>'Popup Link',
             'type'=>'Route',
             'path'=>'AdminPopupsControllerGetIndex',
-            'color' => null,
-            'icon'=>'fa fa-external-link',
-            'parent_id'=>0,
+            'color' => 'normal',
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>20,
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 6
+            'sorting' => 3
         ],[
 
             'created_at'=>date('Y-m-d H:i:s'),
             'name'=>'Orders',
             'type'=>'Route',
             'path'=>'AdminOrdersControllerGetIndex',
-            'color' => null,
+            'color' => 'normal',
             'icon'=>'fa fa-database',
             'parent_id'=>0,
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 7
+            'sorting' => 3
+        ]
+        ,[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Web Content',
+            'type'=>'Route',
+            'path'=>'webcontent',
+            'color' => 'normal',
+            'icon'=>'fa fa-file-text-o',
+            'parent_id'=>0,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 4
         ]
     ];
 

@@ -37,7 +37,7 @@
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Parent Category','name'=>'parent_product_categories_id','type'=>'select2','validation'=>'integer|min:0','width'=>'col-sm-9','datatable'=>'product_categories,name'];
+			$this->form[] = ['label'=>'Parent Category','name'=>'parent_product_categories_id','type'=>'hidden','validation'=>'integer|min:0','width'=>'col-sm-9','datatable'=>'product_categories,name'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
