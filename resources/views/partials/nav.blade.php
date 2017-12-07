@@ -27,6 +27,7 @@
                 product_link="{{ route('product') }}"
                 checkout_link="{{ route('checkout') }}"
                 api_token="{{ Auth::user('web')->api_token }}"
+                logout_link="{{ route('logout') }}"
               ></user-panel>
           </div>
 
