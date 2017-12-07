@@ -31,9 +31,7 @@
             <a href="#modal-overflow" class="uk-button uk-button-small uk-button-default uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">quick shop</a>
           </div>
         </div>
-        <!-- <div class="uk-card-footer">
-          <span class="uk-text-meta">Shirt<h4 class="uk-card-price">$400</h4></span>
-        </div> -->
+
       </div>
     </div>
     <!-- end product single -->
@@ -76,7 +74,7 @@
               </div>
               <div class="uk-inline">
                 <div class="">
-                <ul class="uk-switcher uk-margin" id="component-tab-left">
+                <ul class="uk-switcher uk-margin" id="component-tab-left-related">
                   <li v-for="image in images">
                     <img :src="'/'+image.photo" :alt="image.name">
                     <div class="uk-position uk-position-small uk-position-center-left">
@@ -89,9 +87,9 @@
                 </ul>
                 </div>
                 <div class="">
-                <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" uk-grid>
-                  <li class="uk-padding-remove" v-for="image in images"><a href="#"  class="uk-padding-remove">
-                    <img :src="'/'+image.photo" width="55"></a>
+                <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left-related; animation: uk-animation-fade" uk-grid>
+                  <li class="uk-padding-remove" v-for="image in images">
+                      <a href="#"><img :src="'/'+image.photo" width="55"></a>
                   </li>
                 </ul>
               </div>
@@ -103,18 +101,12 @@
                     <b>Color :</b> {{ color }}
                 </div>
                 <div>
-                  <!-- <div uk-form-custom="target: > * > span:first"> -->
                       <select name="size" v-model="size" v-validate="'required'" class="uk-select">
                           <option :value="null" disabled>Choose Size</option>
                           <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
                             {{ stock.size }} {{ stock.unit | unit }}
                           </option>
                       </select>
-                      <!-- <button class="uk-button uk-button-default" type="button" tabindex="-1">
-                          <span uk-icon="icon: chevron-down"></span>
-                      </button>
-                  </div> -->
-
                 </div>
               </div>
               <ul uk-accordion="animation: true; multiple: false">
@@ -195,6 +187,7 @@
             name: {},
             currency: {},
             price: {},
+            priceBeforeDiscount: {},
             color: {},
             images: {},
             stocks: {},
@@ -216,6 +209,7 @@
             self.name = data.name;
             self.currency = data.currency;
             self.price = data.sell_price;
+            self.priceBeforeDiscount = data.price_before_discount;
             self.color = data.color;
             self.images = data.images;
             self.stocks = data.stocks;
