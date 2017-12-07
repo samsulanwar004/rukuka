@@ -87,8 +87,8 @@
                 </div>
                 <div class="">
                 <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" uk-grid>
-                  <li class="uk-padding-remove" v-for="image in images"><a href="#"  class="uk-padding-remove">
-                    <img :src="'/'+image.photo" width="55"></a>
+                  <li class="uk-padding-remove" v-for="image in images">
+                      <a href="#"><img :src="'/'+image.photo" width="55"></a>
                   </li>
                 </ul>
               </div>
@@ -103,8 +103,8 @@
                   <!-- <div uk-form-custom="target: > * > span:first"> -->
                       <select name="size" v-model="size" v-validate="'required'" class="uk-select">
                           <option :value="null" disabled>Choose Size</option>
-                          <option v-for="stock in stocks" :value="stock.sku">
-                            {{ stock.size }}
+                          <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
+                            {{ stock.size }} {{ stock.unit | unit }}
                           </option>
                       </select>
                       <!-- <button class="uk-button uk-button-default" type="button" tabindex="-1">
@@ -319,6 +319,18 @@
               });
           }
         });
+      }
+    },
+
+    filters: {
+      unit: function (unit) {
+          if (unit < 10) {
+              if (unit <= 0) {
+                  return '(Sold Out)';
+              } else {
+                  return '(Only '+unit+' Left)';
+              }
+          }
       }
     }
   }

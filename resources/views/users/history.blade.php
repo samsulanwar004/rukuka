@@ -14,7 +14,7 @@
       <li><a href="#"><b>NOT YET SENT</b> </a> </li>
       <li><a href="#"><b>NOT YET RECEIVED</b> </a> </li>
       <li><a href="#"><b>DONE</b> </a> </li>
-      <li><a href="#"><b>CENCELED</b> </a> </li>
+      <li><a href="#"><b>CANCELED</b> </a> </li>
 	  </ul>
     <ul class="uk-switcher">
       <li>
@@ -109,9 +109,144 @@
           <center>No Data</center>
         @endif
       </li>
-      <li> ketiga </li>
-      <li> keempat </li>
-      <li> kelima </li>
+      <li>
+        @if (count($onReceived))
+        <table class="uk-table uk-table-middle uk-table-divider">
+            <thead>
+                <tr>
+                    <th class="uk-width-small">Order Number</th>
+                    <th>Details</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($onReceived as $item)
+                  <tr>
+                      <td><a href="#">#{{ $item->order_code }}</a></td>
+                      <td>
+                        <table class="uk-table uk-table-divider">
+                          <tbody>
+                            @php
+                              $total = null;
+                            @endphp
+                            @foreach($item->details as $detail)
+                              <tr>
+                                  <td>{{ $detail->product_name }}</td>
+                                  <td>{{ $detail->price }}</td>
+                                  <td>x {{ $detail->qty }}</td>
+                                  <td>{{ $detail->subtotal }}</td>
+                              </tr>
+                              @php                                
+                                $total += $detail->subtotal;
+                              @endphp
+                            @endforeach
+                              <tr>
+                                <td colspan="3">Total</td><td>{{ $total }}</td></tr>
+                              </tr>
+                          </tbody>
+                      </table>
+                      </td>
+                      <td><button class="uk-button uk-button-default" type="button">Pay</button></td>
+                  </tr>
+                @endforeach
+            </tbody>
+        </table>
+        @else
+          <center>No Data</center>
+        @endif
+      </li>
+      <li>
+        @if (count($onDone))
+        <table class="uk-table uk-table-middle uk-table-divider">
+            <thead>
+                <tr>
+                    <th class="uk-width-small">Order Number</th>
+                    <th>Details</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($onDone as $item)
+                  <tr>
+                      <td><a href="#">#{{ $item->order_code }}</a></td>
+                      <td>
+                        <table class="uk-table uk-table-divider">
+                          <tbody>
+                            @php
+                              $total = null;
+                            @endphp
+                            @foreach($item->details as $detail)
+                              <tr>
+                                  <td>{{ $detail->product_name }}</td>
+                                  <td>{{ $detail->price }}</td>
+                                  <td>x {{ $detail->qty }}</td>
+                                  <td>{{ $detail->subtotal }}</td>
+                              </tr>
+                              @php                                
+                                $total += $detail->subtotal;
+                              @endphp
+                            @endforeach
+                              <tr>
+                                <td colspan="3">Total</td><td>{{ $total }}</td></tr>
+                              </tr>
+                          </tbody>
+                      </table>
+                      </td>
+                      <td><button class="uk-button uk-button-default" type="button">Review</button></td>
+                  </tr>
+                @endforeach
+            </tbody>
+        </table>
+        @else
+          <center>No Data</center>
+        @endif
+      </li>
+      <li>
+        @if (count($onCanceled))
+        <table class="uk-table uk-table-middle uk-table-divider">
+            <thead>
+                <tr>
+                    <th class="uk-width-small">Order Number</th>
+                    <th>Details</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($onCanceled as $item)
+                  <tr>
+                      <td><a href="#">#{{ $item->order_code }}</a></td>
+                      <td>
+                        <table class="uk-table uk-table-divider">
+                          <tbody>
+                            @php
+                              $total = null;
+                            @endphp
+                            @foreach($item->details as $detail)
+                              <tr>
+                                  <td>{{ $detail->product_name }}</td>
+                                  <td>{{ $detail->price }}</td>
+                                  <td>x {{ $detail->qty }}</td>
+                                  <td>{{ $detail->subtotal }}</td>
+                              </tr>
+                              @php                                
+                                $total += $detail->subtotal;
+                              @endphp
+                            @endforeach
+                              <tr>
+                                <td colspan="3">Total</td><td>{{ $total }}</td></tr>
+                              </tr>
+                          </tbody>
+                      </table>
+                      </td>
+                      <td><button class="uk-button uk-button-default" type="button">Buy Again</button></td>
+                  </tr>
+                @endforeach
+            </tbody>
+        </table>
+        @else
+          <center>No Data</center>
+        @endif
+      </li>
     </ul>
 	</div>
 </div>

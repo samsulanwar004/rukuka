@@ -282,7 +282,5 @@
       wishlist_api="{{ route('persist.wishlist') }}"
       auth="{{ Auth::check() ? 1 : 0 }}"
     ></popular>
-
-
     </div>
 @endsection
