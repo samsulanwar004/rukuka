@@ -210,8 +210,6 @@
     });
 	});
 
-  // start untuk addresing jika belum punya address
-
   $(document).ready(function(){
       startLocalAddressing(); 
   });
@@ -273,6 +271,8 @@
 
       $('#form-province-empty').replaceWith('<input class="uk-input uk-input-small" name="province" id="form-province-empty" type="text" value="{{ old("province") }}" required>');
       $('#form-city-empty').replaceWith('<input class="uk-input uk-input-small" name="city" id="form-city-empty" type="text" value="{{ old("city") }}" required>');
+      $('#form-subdistrict-empty').replaceWith('<span class="uk-input uk-input-small " name="sub_district" id="form-subdistrict-empty" type="text" value=""></span>');
+      $('#form-village-empty').replaceWith('<span class="uk-input uk-input-small " name="village" id="form-village-empty" type="text" value=""></span>');
 
       $('#div-sub-district').hide();
       $('#div-village').hide();
@@ -517,7 +517,7 @@
 
   }
 
-  // punya vue ----------------------------------------
+  // --------- punya vue ----------------------------------------
 
   function showVueListCities() {
 
@@ -654,7 +654,7 @@
     $('#form-postal-vue').val(posCode);
 
   }
-  // end untuk addresing jika belum punya address
 
+  // --------- end punya vue ----------------------------------------
 </script>
 @endsection

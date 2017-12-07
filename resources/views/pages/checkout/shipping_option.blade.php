@@ -4,6 +4,7 @@
     <div class="uk-grid-small uk-margin-top">
         @include('partials.alert')
     </div>
+
     <div class="uk-grid-small uk-margin-top" uk-grid>
         <div class="uk-width-3-4@m">
             <b>C H E C K O U T</b>
@@ -31,7 +32,7 @@
               {{ csrf_field() }}
             <table class="uk-table uk-table-divider uk-table-hover">
                 <tbody>
-                    <tr class="uk-active">
+                    <!-- <tr class="uk-active">
                         <td>
                             <input type="radio" class="uk-radio" name="shipping" value="1" required="required"> </td>
                         <td> DHL Express (3 - 6 Ekonomi Days) </td>
@@ -42,7 +43,33 @@
                             <input type="radio" class="uk-radio" name="shipping" value="2" required=""> </td>
                         <td> DHL Express (3 - 6 Business Days) </td>
                         <td> IDR 500000,00</td>
-                    </tr>
+                    </tr> -->
+
+                    @foreach ($availableCouriersService['available_couriers'] as $availableCouriersService_key => $availableCouriersService_val)
+                        
+                        @if($availableCouriersService_val['error'] == '000')
+                        
+                          @foreach($availableCouriersService_val['data'] as $dataServices_key => $dataServices_val)
+
+                            <tr>
+                                <td>
+                                    <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{ $availableCouriersService_key }}-choose-{{ $dataServices_val->serviceCode }}" required="" onclick="getTotal({{ $dataServices_val->notes }})"> </td>
+                                <td> {{ $dataServices_val->serviceName }} </td>
+                                <td> $ {{ $dataServices_val->notes }} ( IDR {{ number_format($dataServices_val->totalFee) }} ) </td>
+                            </tr>
+
+                          @endforeach
+
+                        @else
+                          
+                          <tr>
+                              <td> {{ $availableCouriersService_val['message'] }} </td>
+                          </tr>
+
+                        @endif
+                        
+                    @endforeach
+
                 </tbody>
             </table>
             <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
@@ -76,6 +103,16 @@
 
 @section('footer_scripts')
 <script type="text/javascript">
+
+
+   function getTotal(shipingCost){
+    var subTotal = $('#sub_total').html();
+    var total = parseFloat(subTotal) + parseFloat(shipingCost);
+    
+    $('#shiping_fee').html(shipingCost);
+    $('#total_fee').html(total);
+   }
+
    $(function () {
 
      $("#continue").on('click', function (e) {
@@ -90,5 +127,7 @@
 
      });
    })
+
+
 </script>
 @endsection

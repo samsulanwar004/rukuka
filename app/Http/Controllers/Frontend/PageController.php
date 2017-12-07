@@ -217,14 +217,19 @@ class PageController extends BaseController
                             'product_id' => $stock->product->id,
                             'category_id' => $stock->product->category->id,
                             'product_code' => $stock->product->product_code,
-                            'product_stocks_id' => $stock->id
+                            'product_stocks_id' => $stock->id,
+                            'weight' =>  $stock->product->weight,
+                            'length' =>  $stock->product->length,
+                            'width' =>  $stock->product->width,
+                            'height' =>  $stock->product->height,
+                            'diameter' => $stock->product->diameter
                         ]
                     ];
-
-                    $bag->save($product, self::INSTANCE_SHOP);
+                $bag->save($product, self::INSTANCE_SHOP);
                 } else {
-                    throw new Exception("Stock not found!", 1);  
-                }
+-                    throw new Exception("Stock not found!", 1);  
+-               }
+                
 
             }
 
