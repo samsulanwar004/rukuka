@@ -173,6 +173,7 @@ class PageController extends BaseController
     {
 
         try {
+            
             $bag = new BagService;
 
             //add or update product item to bag
@@ -225,10 +226,10 @@ class PageController extends BaseController
                             'diameter' => $stock->product->diameter
                         ]
                     ];
-                $bag->save($product, self::INSTANCE_SHOP);
+                    $bag->save($product, self::INSTANCE_SHOP);
                 } else {
--                    throw new Exception("Stock not found!", 1);  
--               }
+                    throw new Exception("Stock not found!", 1);  
+                }
                 
 
             }
