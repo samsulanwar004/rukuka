@@ -100,6 +100,11 @@ class PageController extends BaseController
     {
     try {
         $product = (new ProductRepository)->getProductBySlug($slug);
+        $sumRating= collect($product->review)->sum('rating');
+
+        if($sumRating > 0){
+            $rating = round($sumRating/count($product->review));
+        }
 
         //Validate Product Deleted
         $this->validDelete($product);
@@ -132,7 +137,8 @@ class PageController extends BaseController
             'method',
             'sku',
             'id',
-            'share'
+            'share',
+            'rating'
         ));
     }
 
@@ -173,6 +179,7 @@ class PageController extends BaseController
     {
 
         try {
+            
             $bag = new BagService;
 
             //add or update product item to bag
@@ -217,14 +224,19 @@ class PageController extends BaseController
                             'product_id' => $stock->product->id,
                             'category_id' => $stock->product->category->id,
                             'product_code' => $stock->product->product_code,
-                            'product_stocks_id' => $stock->id
+                            'product_stocks_id' => $stock->id,
+                            'weight' =>  $stock->product->weight,
+                            'length' =>  $stock->product->length,
+                            'width' =>  $stock->product->width,
+                            'height' =>  $stock->product->height,
+                            'diameter' => $stock->product->diameter
                         ]
                     ];
-
                     $bag->save($product, self::INSTANCE_SHOP);
                 } else {
                     throw new Exception("Stock not found!", 1);  
                 }
+                
 
             }
 
@@ -317,11 +329,6 @@ class PageController extends BaseController
         $categoryId = $categoryId == null ? null : $categoryId[array_rand($categoryId)];
 
         return view('pages.bag', compact('categoryId'));
-    }
-
-    public function review()
-    {
-      return view('pages.add_review');
     }
 
     public function page($slug){
