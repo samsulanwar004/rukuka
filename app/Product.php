@@ -27,4 +27,9 @@ class Product extends Model
     {
     	return $this->hasMany(ProductStock::class, 'products_id', 'id');
     }
+
+    public function review()
+    {
+        return $this->hasMany(Review::class, 'products_id', 'id')->orderBy('id','DESC')->take(3);
+    }
 }

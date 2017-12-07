@@ -45,12 +45,19 @@
 
       <br>
     <span class="uk-text-meta uk-text-bold">
-      <span uk-icon="icon: star"></span>
-      <span uk-icon="icon: star"></span>
-      <span uk-icon="icon: star"></span>
-      <span uk-icon="icon: star"></span>
-      <span uk-icon="icon: star"></span>
-
+          <div class="stars-product uk-margin-remove-left">
+              <input type="radio" name="star-m" class="star-1" value="1" {{$rating == 1? 'checked':'' }}/>
+              <label for="star-1">1</label>
+              <input type="radio" name="star-m" class="star-2" value="2" {{$rating == 2? 'checked':'' }}/>
+              <label for="star-2">2</label>
+              <input type="radio" name="star-m" class="star-3"  value="3" {{$rating == 3? 'checked':'' }}/>
+              <label for="star-3">3</label>
+              <input type="radio" name="star-m" class="star-4" value="4" {{$rating == 4? 'checked':'' }}/>
+              <label for="star-4">4</label>
+              <input type="radio" name="star-m" class="star-5"  value="5" {{$rating == 5? 'checked':'' }}/>
+              <label for="star-5">5</label>
+              <span></span>
+          </div>
     </span>
     <ul uk-accordion="animation: true; multiple: false">
         <li class="uk-open">
@@ -123,41 +130,70 @@
 </div>
 <hr>
 <div class="uk-panel uk-grid" uk-grid>
-  <div class="uk-width-1-3@m">
-    <a href="#" class="uk-button uk-button-default">WRITE A REVIEW</a>
+  <div class="uk-width-1-4@m">
+    <a href="/{{'review/'.$product->slug}}" class="uk-button uk-button-default">WRITE A REVIEW</a>
   </div>
-  <div class="uk-width-2-3@m">
-    RATING FOR THIS PRODUCT : 3.5
-  </div>
+    @if($rating)
+        <div class="uk-width-1-4@m">
+          <span class="uk-margin-remove-right">RATING FOR THIS PRODUCT :</span>
+      </div>
+        <div class="uk-width-1-4@m">
+            <div class="stars-product uk-margin-remove">
+                <input type="radio" name="star" class="star-1" value="1" {{$rating == 1? 'checked':'' }}/>
+                <label for="star-1">1</label>
+                <input type="radio" name="star" class="star-2" value="2" {{$rating == 2? 'checked':'' }}/>
+                <label for="star-2">2</label>
+                <input type="radio" name="star" class="star-3"  value="3" {{$rating == 3? 'checked':'' }}/>
+                <label for="star-3">3</label>
+                <input type="radio" name="star" class="star-4" value="4" {{$rating == 4? 'checked':'' }}/>
+                <label for="star-4">4</label>
+                <input type="radio" name="star" class="star-5"  value="5" {{$rating == 5? 'checked':'' }}/>
+                <label for="star-5">5</label>
+                <span></span>
+            </div>
+        </div>
+    @else
+        WHAT OTHER SHOPPERS THINK: <br>
+        There are no reviews for this product. Be the first to comment.
+    @endif
 </div>
 <div class="uk-grid uk-visible@m" uk-grid>
-  <div class="uk-width-1-3@m">
-    <div class="uk-card uk-card-border uk-card-small">
-      <div class="uk-card-body">
-        <div class="uk-text-center">
-          This Absolutely Gorgeous!
+    @foreach($product->review as $review)
+      <div class="uk-width-1-3@m">
+        <div class="uk-card uk-card-border uk-card-small">
+          <div class="uk-card-body">
+                  <div class="stars-product uk-margin-remove">
+                      <input type="radio" name="star-{{$review->id}}" class="star-1" value="1" {{$review->rating == 1? 'checked':'' }}/>
+                      <label for="star-1">1</label>
+                      <input type="radio" name="star-{{$review->id}}" class="star-2" value="2" {{$review->rating == 2? 'checked':'' }}/>
+                      <label for="star-2">2</label>
+                      <input type="radio" name="star-{{$review->id}}" class="star-3"  value="3" {{$review->rating == 3? 'checked':'' }}/>
+                      <label for="star-3">3</label>
+                      <input type="radio" name="star-{{$review->id}}" class="star-4" value="4" {{$review->rating == 4? 'checked':'' }}/>
+                      <label for="star-4">4</label>
+                      <input type="radio" name="star-{{$review->id}}" class="star-5"  value="5" {{$review->rating == 5? 'checked':'' }}/>
+                      <label for="star-5">5</label>
+                      <span></span>
+                  </div>
+              <div class="uk-text-bold uk-text-center uk-margin-top-small">
+                  {{$review->title}}
+              </div>
+              <div class="uk-text-small uk-text-muted uk-text-center">
+                  {{date_format($review->created_at,"F j, Y")}}
+              </div>
+              <div class="uk-text-left uk-margin-small-top">
+                  "{{$review->review}}"
+              </div>
+              <div class="uk-text-small uk-text-left uk-margin-small-top">
+                  {{ ucfirst($review->user->first_name).' '.ucfirst($review->user->last_name) }}
+              </div>
+              <div class="uk-text-small uk-text-muted uk-text-left">
+                  {{$review->location}}
+              </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="uk-width-1-3@m">
-    <div class="uk-card uk-card-border uk-card-small">
-      <div class="uk-card-body">
-        <div class="uk-text-center">
-          This Absolutely Gorgeous!
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="uk-width-1-3@m">
-    <div class="uk-card uk-card-border uk-card-small">
-      <div class="uk-card-body">
-        <div class="uk-text-center">
-          This Absolutely Gorgeous! <br>
-        </div>
-      </div>
-    </div>
-  </div>
+    @endforeach
 </div>
 <hr>
 <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
@@ -174,7 +210,7 @@
 ></related>
 <div class="uk-grid-small uk-margin-small-bottom uk-margin-medium-top uk-margin-xlarge-bottom">
   <div class="uk-panel uk-text-center">
-    <button class="uk-button uk-button-secondary">SHOW ALL PRODUCT</button>
+    <a  href="{{route('search')}}" class="uk-button uk-button-secondary">SHOW ALL PRODUCT</a>
   </div>
 </div>
 </div>
