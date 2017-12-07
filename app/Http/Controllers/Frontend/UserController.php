@@ -8,6 +8,7 @@ use DB;
 use App\Repositories\UserRepository;
 use App\Repositories\ProductStockRepository;
 use App\Services\BagService;
+use App\Repositories\CourierRepository;
 
 class UserController extends BaseController
 {
@@ -505,13 +506,20 @@ class UserController extends BaseController
     }
 
     public function showShippingOptionPage()
-    {
+    {   
+        $bag = new BagService;
+        $courierServices = new CourierRepository;
+
         $user = $this->getUserActive();
         $defaultAddress = $this->user
             ->setUser($user)
             ->getAddressDefault();
 
-        return view('pages.checkout.shipping_option', compact('defaultAddress'));
+        $availableCouriersService = $courierServices->setCheckoutBag($bag->get(self::INSTANCE_SHOP))
+                        ->setDestinationAddress($defaultAddress)
+                        ->getAvailableCouriers();
+
+        return view('pages.checkout.shipping_option', compact('defaultAddress','availableCouriersService'));
     }
 
     public function showShippingBillingPage()
@@ -739,17 +747,32 @@ class UserController extends BaseController
         $user = $this->getUserActive();
 
         $onPaid = $user->orders->filter(function ($entry) {
-            return $entry->payment_status == 0;
+            return $entry->payment_status == 0 && $entry->order_status == 0;
         });
 
         $onSent = $user->orders->filter(function ($entry) {
-            return $entry->payment_status == 1;
+            return $entry->payment_status == 1 && $entry->order_status == 0;
+        });
+
+        $onReceived = $user->orders->filter(function ($entry) {
+            return $entry->order_status == 1;
+        });
+
+        $onDone = $user->orders->filter(function ($entry) {
+            return $entry->order_status == 2;
+        });
+
+        $onCanceled = $user->orders->filter(function ($entry) {
+            return $entry->order_status == 3;
         });
 
         return view('users.history', compact(
             'user',
             'onPaid',
-            'onSent'
+            'onSent',
+            'onReceived',
+            'onDone',
+            'onCanceled'
 
         ));
     }

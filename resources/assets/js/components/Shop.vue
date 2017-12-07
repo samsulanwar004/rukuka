@@ -125,8 +125,8 @@
                       <!-- <div uk-form-custom="target: > * > span:first"> -->
                           <select name="size" v-model="size" v-validate="'required'" class="uk-select">
                               <option :value="null" disabled>Choose Size</option>
-                              <option v-for="stock in stocks" :value="stock.sku">
-                                {{ stock.size }}
+                              <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
+                                {{ stock.size }} {{ stock.unit | unit }}
                               </option>
                           </select>
                           <!-- <button class="uk-button uk-button-default" type="button" tabindex="-1">
@@ -333,6 +333,18 @@
                     }
                 });
             }
+        },
+
+        filters: {
+          unit: function (unit) {
+              if (unit < 10) {
+                  if (unit <= 0) {
+                      return '(Sold Out)';
+                  } else {
+                      return '(Only '+unit+' Left)';
+                  }
+              }
+          }
         }
     }
 </script>
