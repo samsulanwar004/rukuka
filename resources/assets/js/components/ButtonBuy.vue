@@ -6,7 +6,7 @@
         <div class="">
             <select :class="{'uk-select': true, 'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
               <option :value="null" disabled>Select Size</option>
-              <option v-for="stock in stocks" :value="stock.sku" :selected="sku ==  stock.sku">{{ stock.size }}</option>
+              <option v-for="stock in stocks" :value="stock.sku" :selected="sku ==  stock.sku" :disabled="stock.unit <= 0">{{ stock.size }} {{ stock.unit | unit }}</option>
             </select>
         </div>
         <div class="" v-if="method == 'bag'">
@@ -246,6 +246,18 @@
                         });
                     }
                 });
+            }
+        },
+
+        filters: {
+            unit: function (unit) {
+                if (unit < 10) {
+                    if (unit <= 0) {
+                        return '(Sold Out)';
+                    } else {
+                        return '(Only '+unit+' Left)';
+                    }
+                }
             }
         }
     }

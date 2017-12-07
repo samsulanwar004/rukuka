@@ -10,7 +10,7 @@
             <div class="uk-card-body">
               <ul class="uk-list uk-text-meta">
                 <li><a :href="profile_link">MY ACCOUNT</a> </li>
-                <li><a href="{{ route('logout') }}">SIGN OUT</a> </li>
+                <li><a :href="logout_link">SIGN OUT</a> </li>
               </ul>
             </div>
           </div>
@@ -103,7 +103,8 @@
       'account',
       'product_link',
       'checkout_link',
-      'api_token'
+      'api_token',
+      'logout_link'
     ],
 
     created () {
