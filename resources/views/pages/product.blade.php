@@ -14,7 +14,6 @@
                   <li><a href="#"><img src="/{{ $image->photo }}" alt="" width="80"></a></li>
                 @endforeach
             </ul>
-
         </div>
         <div class="uk-width-expand@m">
             <ul id="component-tab-left" class="uk-switcher">
@@ -29,7 +28,6 @@
                   <li><a href="#"><img src="/{{ $image->photo }}" alt="" width="50"></a></li>
                 @endforeach
             </ul>
-
         </div>
     </div>
   </div>
@@ -56,37 +54,29 @@
     </span>
     <ul uk-accordion="animation: true; multiple: false">
         <li class="uk-open">
-
             <h5 class="uk-accordion-title">EDITORS NOTES</h5>
             <div class="uk-accordion-content">
               {{ $product->content }}
             </div>
-
         </li>
         <li>
-
             <h5 class="uk-accordion-title">SIZE & FIT</h5>
             <div class="uk-accordion-content">
               {{ $product->size_and_fit }}
             </div>
-
         </li>
         <li>
-
             <h5 class="uk-accordion-title">DETAILS & CARE</h5>
             <div class="uk-accordion-content">
               {{ $product->detail_and_care }}
             </div>
-
         </li>
         <li>
-
             <h5 class="uk-accordion-title">DELIVERY & FREE RETURNS</h5>
             <div class="uk-accordion-content">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </div>
-
         </li>
     </ul>
     <button-buy
@@ -122,7 +112,7 @@
       <div class="uk-text-center">
         View More
         <a href="{{ route('shop', ['categories' => strtolower($product->category->parent->parent->name) ,'category' => strtolower($product->category->parent->name), 'slug' => $product->category->slug]) }}">{{ $product->category->name }}</a>
-        <a href="#" class="uk-text-muted">{{ $product->designer->name }}</a>
+        <a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}" class="uk-text-muted">{{ $product->designer->name }}</a>
       </div>
       <div class="uk-text-center">
         <a href="#" class="uk-text-muted"> Contact Us </a>
@@ -164,7 +154,6 @@
       <div class="uk-card-body">
         <div class="uk-text-center">
           This Absolutely Gorgeous! <br>
-
         </div>
       </div>
     </div>
