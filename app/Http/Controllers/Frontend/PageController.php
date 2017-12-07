@@ -201,30 +201,31 @@ class PageController extends BaseController
 
                 $stock = (new ProductStockRepository)->getStockBySku($request->input('size'));
 
-                if ($stock && $stock->unit > 0) {
-                    $product = [
-                        'id' => $stock->sku,
-                        'name' => $stock->product->name,
-                        'qty' => $request->has('qty') ? $request->input('qty') : 1,
-                        'price' => $stock->product->sell_price,
-                        'options' => [
-                            'size' => $stock->size,
-                            'color' => $stock->product->color,
-                            'photo' => $stock->product->images->first()->photo,
-                            'description' => $stock->product->content,
-                            'currency' => $stock->product->currency,
-                            'slug' => $stock->product->slug,
-                            'product_id' => $stock->product->id,
-                            'category_id' => $stock->product->category->id,
-                            'product_code' => $stock->product->product_code,
-                            'product_stocks_id' => $stock->id
-                        ]
-                    ];
+                $product = [
+                    'id' => $stock->sku,
+                    'name' => $stock->product->name,
+                    'qty' => $request->has('qty') ? $request->input('qty') : 1,
+                    'price' => $stock->product->sell_price,
+                    'options' => [
+                        'size' => $stock->size,
+                        'color' => $stock->product->color,
+                        'photo' => $stock->product->images->first()->photo,
+                        'description' => $stock->product->content,
+                        'currency' => $stock->product->currency,
+                        'slug' => $stock->product->slug,
+                        'product_id' => $stock->product->id,
+                        'category_id' => $stock->product->category->id,
+                        'product_code' => $stock->product->product_code,
+                        'product_stocks_id' => $stock->id,
+                        'weight' =>  $stock->product->weight,
+                        'length' =>  $stock->product->length,
+                        'width' =>  $stock->product->width,
+                        'height' =>  $stock->product->height,
+                        'diameter' => $stock->product->diameter
+                    ]
+                ];
 
-                    $bag->save($product, self::INSTANCE_SHOP);
-                } else {
-                    throw new Exception("Stock not found!", 1);  
-                }
+                $bag->save($product, self::INSTANCE_SHOP);
 
             }
 

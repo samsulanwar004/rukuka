@@ -8,6 +8,7 @@ use DB;
 use App\Repositories\UserRepository;
 use App\Repositories\ProductStockRepository;
 use App\Services\BagService;
+use App\Repositories\CourierRepository;
 
 class UserController extends BaseController
 {
@@ -505,13 +506,20 @@ class UserController extends BaseController
     }
 
     public function showShippingOptionPage()
-    {
+    {   
+        $bag = new BagService;
+        $courierServices = new CourierRepository;
+
         $user = $this->getUserActive();
         $defaultAddress = $this->user
             ->setUser($user)
             ->getAddressDefault();
 
-        return view('pages.checkout.shipping_option', compact('defaultAddress'));
+        $availableCouriersService = $courierServices->setCheckoutBag($bag->get(self::INSTANCE_SHOP))
+                        ->setDestinationAddress($defaultAddress)
+                        ->getAvailableCouriers();
+
+        return view('pages.checkout.shipping_option', compact('defaultAddress','availableCouriersService'));
     }
 
     public function showShippingBillingPage()
