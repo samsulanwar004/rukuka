@@ -7,7 +7,7 @@
           <a :href="'/product/'+ product.slug">
             <img :src="'/'+ product.photo" :alt="product.name">
           </a>
-          <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default">
+          <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default uk-visible@m">
             <div class="uk-text-center">
               <a href="#modal-overflow" class="uk-button uk-button-small uk-button-secondary" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
             </div>
@@ -16,11 +16,22 @@
         <div class="uk-card-body uk-padding-remove uk-margin-small-top">
           <a :href="'/product/'+ product.slug" class="uk-text-muted">{{ product.name }}</a>
           <br>
-          {{ product.currency }} {{ product.price }}
+          <span v-if="product.price_before_discount > 0 ">
+              <span class="uk-text-small" style="text-decoration: line-through;">
+                  {{ product.currency }} {{ product.price_before_discount }}
+              </span>
+          </span>
+          <span class="uk-text-danger uk-text-small" v-if="product.price_before_discount > 0 ">
+             &nbsp;{{ product.currency }} {{ product.price }}
+          </span>
+          <span v-else class="uk-text-small">
+              {{ product.currency }} {{ product.price }}
+          </span>
+          <div class="uk-hidden@m">
+            <a href="#modal-overflow" class="uk-button uk-button-small uk-button-default uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">quick shop</a>
+          </div>
         </div>
-        <!-- <div class="uk-card-footer">
-          <span class="uk-text-meta">Shirt<h4 class="uk-card-price">$400</h4></span>
-        </div> -->
+
       </div>
     </div>
     <!-- end product single -->
@@ -29,14 +40,38 @@
 
         <button class="uk-modal-close-default" type="button" uk-close></button>
 
-        <div class="uk-modal-header">
+        <div class="uk-modal-header uk-visible@m">
           <h3 class="uk-margin-remove">{{ name }}</h3>
-          <span>{{ currency }} {{ price }}</span>
+            <span v-if="priceBeforeDiscount > 0 ">
+                <span style="text-decoration: line-through;">
+                    {{ currency }} {{ priceBeforeDiscount }}
+                </span>
+            </span>
+            <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
+                &nbsp; {{ currency }} {{ price }}
+            </span>
+            <span v-else>
+                {{ currency }} {{ price }}
+            </span>
         </div>
 
-        <div class="uk-modal-body" uk-overflow-auto>
+        <div class="uk-modal-body uk-padding-small" uk-overflow-auto>
           <div class="uk-grid" uk-grid>
             <div class="uk-width-1-2@m">
+              <div class="uk-hidden@m">
+                <h5 class="uk-margin-remove">{{ name }}</h5>
+                  <span v-if="priceBeforeDiscount > 0 ">
+                      <span style="text-decoration: line-through;">
+                          {{ currency }} {{ priceBeforeDiscount }}
+                      </span>
+                  </span>
+                  <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
+                      &nbsp; {{ currency }} {{ price }}
+                  </span>
+                  <span v-else>
+                      {{ currency }} {{ price }}
+                  </span>
+              </div>
               <div class="uk-inline">
                 <div class="">
                 <ul class="uk-switcher uk-margin" id="component-tab-left">
@@ -53,8 +88,8 @@
                 </div>
                 <div class="">
                 <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" uk-grid>
-                  <li class="uk-padding-remove" v-for="image in images"><a href="#"  class="uk-padding-remove">
-                    <img :src="'/'+image.photo" width="55"></a>
+                  <li class="uk-padding-remove" v-for="image in images">
+                      <a href="#"><img :src="'/'+image.photo" width="55"></a>
                   </li>
                 </ul>
               </div>
@@ -66,18 +101,12 @@
                     <b>Color :</b> {{ color }}
                 </div>
                 <div>
-                  <!-- <div uk-form-custom="target: > * > span:first"> -->
                       <select name="size" v-model="size" v-validate="'required'" class="uk-select">
                           <option :value="null" disabled>Choose Size</option>
                           <option v-for="stock in stocks" :value="stock.sku">
                             {{ stock.size }}
                           </option>
                       </select>
-                      <!-- <button class="uk-button uk-button-default" type="button" tabindex="-1">
-                          <span uk-icon="icon: chevron-down"></span>
-                      </button>
-                  </div> -->
-
                 </div>
               </div>
               <ul uk-accordion="animation: true; multiple: false">
@@ -120,9 +149,13 @@
           </div>
         </div>
 
-        <div class="uk-modal-footer uk-text-right">
+        <div class="uk-modal-footer uk-text-right uk-visible@m">
             <button class="uk-button uk-button-secondary" type="button" v-on:click="bag">ADD TO BAG</button>
             <button class="uk-button uk-button-default" type="button" v-on:click="wishlist">ADD TO WISHLIST</button>
+        </div>
+        <div class="uk-modal-footer uk-text-right uk-padding-small uk-hidden@m">
+            <button class="uk-button uk-button-secondary" type="button" v-on:click="bag">BAG <span class="uk-icon" uk-icon="icon:  chevron-right"></span></button>
+            <button class="uk-button uk-button-default" type="button" v-on:click="wishlist">WISHLIST <span class="uk-icon" uk-icon="icon:  chevron-right"></span></button>
         </div>
       </div>
     </div>
@@ -154,6 +187,7 @@
             name: {},
             currency: {},
             price: {},
+            priceBeforeDiscount: {},
             color: {},
             images: {},
             stocks: {},
@@ -175,6 +209,7 @@
             self.name = data.name;
             self.currency = data.currency;
             self.price = data.sell_price;
+            self.priceBeforeDiscount = data.price_before_discount;
             self.color = data.color;
             self.images = data.images;
             self.stocks = data.stocks;
