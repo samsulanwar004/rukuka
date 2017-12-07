@@ -739,17 +739,32 @@ class UserController extends BaseController
         $user = $this->getUserActive();
 
         $onPaid = $user->orders->filter(function ($entry) {
-            return $entry->payment_status == 0;
+            return $entry->payment_status == 0 && $entry->order_status == 0;
         });
 
         $onSent = $user->orders->filter(function ($entry) {
-            return $entry->payment_status == 1;
+            return $entry->payment_status == 1 && $entry->order_status == 0;
+        });
+
+        $onReceived = $user->orders->filter(function ($entry) {
+            return $entry->order_status == 1;
+        });
+
+        $onDone = $user->orders->filter(function ($entry) {
+            return $entry->order_status == 2;
+        });
+
+        $onCanceled = $user->orders->filter(function ($entry) {
+            return $entry->order_status == 3;
         });
 
         return view('users.history', compact(
             'user',
             'onPaid',
-            'onSent'
+            'onSent',
+            'onReceived',
+            'onDone',
+            'onCanceled'
 
         ));
     }
