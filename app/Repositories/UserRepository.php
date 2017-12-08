@@ -17,6 +17,7 @@ use Storage;
 use Image;
 use App\Subcriber;
 use App\Libraries\Encryption;
+use App\Review;
 
 class UserRepository
 {
@@ -599,5 +600,18 @@ class UserRepository
 
         return $crypt->decrypt($cardNumber);
 	}
+
+    public function saveReview($request){
+
+        $review = new Review;
+
+        $review->title =  $request->input('title');
+        $review->review =  $request->input('review');
+        $review->location =  $request->input('location');
+        $review->rating =  $request->input('star');
+        $review->user()->associate($this->getUser());
+        $review->product()->associate($request->input('products_id'));
+        $review->save();
+    }
 
 }

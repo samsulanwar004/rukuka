@@ -100,6 +100,11 @@ class PageController extends BaseController
     {
     try {
         $product = (new ProductRepository)->getProductBySlug($slug);
+        $sumRating= collect($product->review)->sum('rating');
+
+        if($sumRating > 0){
+            $rating = round($sumRating/count($product->review));
+        }
 
         //Validate Product Deleted
         $this->validDelete($product);
@@ -132,7 +137,8 @@ class PageController extends BaseController
             'method',
             'sku',
             'id',
-            'share'
+            'share',
+            'rating'
         ));
     }
 
@@ -323,11 +329,6 @@ class PageController extends BaseController
         $categoryId = $categoryId == null ? null : $categoryId[array_rand($categoryId)];
 
         return view('pages.bag', compact('categoryId'));
-    }
-
-    public function review()
-    {
-      return view('pages.add_review');
     }
 
     public function page($slug){
