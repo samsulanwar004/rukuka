@@ -147,11 +147,6 @@ Route::get('/bag', [
     'uses' => 'Frontend\PageController@showBagPage',
 ]);
 
-Route::get('/review', [
-    'as'   => 'review',
-    'uses' => 'Frontend\PageController@review',
-]);
-
 Route::get('/search', [
     'as'   => 'search',
     'uses' => 'Frontend\PageController@search',
@@ -275,6 +270,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/account/history', [
         'as'   => 'user.history',
         'uses' => 'Frontend\UserController@history',
+    ]);
+
+    Route::get('/review/{slug}', [
+        'as'   => 'review',
+        'uses' => 'Frontend\UserController@review',
+    ]);
+
+    Route::post('/review', [
+        'as'   => 'review-post',
+        'uses' => 'Frontend\UserController@postReview',
     ]);
 
     // Route checkout module

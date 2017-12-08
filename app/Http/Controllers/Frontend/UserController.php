@@ -9,6 +9,7 @@ use App\Repositories\UserRepository;
 use App\Repositories\ProductStockRepository;
 use App\Services\BagService;
 use App\Repositories\CourierRepository;
+use App\Repositories\ProductRepository;
 
 class UserController extends BaseController
 {
@@ -24,6 +25,7 @@ class UserController extends BaseController
     protected $redirectAfterNewShippingAddress = '/checkout/shipping';
     protected $redirectAfterNewCC = '/checkout/billing';
     protected $redirectAfterNewBillingAddress = '/checkout/billing';
+    protected $redirectAfterSubmitReview = '/product/';
     private $user;
 
     public function __construct(UserRepository $user)
@@ -630,6 +632,8 @@ class UserController extends BaseController
             'city' => 'required',
             'province' => 'required',
             'country' => 'required',
+            'sub_district' => 'required',
+            'village' => 'required',
         ]);
 
         try {
@@ -775,6 +779,35 @@ class UserController extends BaseController
             'onCanceled'
 
         ));
+    }
+
+    public function review($slug)
+    {
+        $user = $this->getUserActive();
+        $product = (new ProductRepository)->getProductBySlug($slug);
+        return view('pages.add_review',compact('user','product'));
+    }
+
+    public function postReview(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required|string',
+            'review' => 'required|string',
+            'location' => 'string|string',
+            'star' => 'required',
+        ]);
+
+        try {
+            $user = $this->getUserActive();
+            (new UserRepository)->setUser($user)->saveReview($request);
+
+            return redirect($this->redirectAfterSubmitReview.$request->input('slug'))->with(['success' => 'Thank you for submit your review']);
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return back()->withErrors($e->getMessage());
+        }
+
     }
 
 }

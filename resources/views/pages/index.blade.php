@@ -10,6 +10,9 @@
     @endphp
     <div class="uk-text-center">
       <div class="uk-container uk-container-small">
+        <div class="uk-grid-small uk-margin-top uk-text-left">
+            @include('partials.alert')
+        </div>
         <div class="uk-panel uk-padding-small uk-visible@m">
           <span class="uk-text-lead">{{$home['homepage_main_title']}}</span>
         </div>
