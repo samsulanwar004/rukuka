@@ -8,6 +8,7 @@ use DB;
 use App\Repositories\UserRepository;
 use App\Exceptions\SocialAuthException;
 use App\Services\SocialMediaService;
+use Session;
 
 class LoginController extends BaseController
 {
@@ -25,6 +26,15 @@ class LoginController extends BaseController
 
     public function showLoginPage()
     {
+        $ref = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+        $ref = rtrim($ref, '/');
+
+        if ($ref != url('logout')) {
+            Session::put('referrer', $ref);
+        } else {
+            Session::put('referrer', '/');
+        }
+
         return view('pages.login');
     }
 
@@ -84,7 +94,8 @@ class LoginController extends BaseController
             return back()->withErrors($e->getMessage());
         }
 
-        return redirect($this->redirectAfterLogin)->with('success', 'Login successfully!');
+        return redirect()->intended(Session::pull('referrer'))
+            ->with('success', 'Login successfully!');
     }
 
     public function logout()
@@ -102,11 +113,13 @@ class LoginController extends BaseController
     public function socialLoginCallback($provider)
     {
         try {
-            $this->social->login($provider);
-            return redirect($this->redirectAfterLogin)->with('success', 'Login successfully!');
+            $this->social->login($provider);            
         } catch (SocialAuthException $e) {
             return back()->withErrors($e->getMessage());
         }
+
+        return redirect()->intended(Session::pull('referrer'))
+            ->with('success', 'Login successfully!');
     }
 
     public function activation($code)
