@@ -259,6 +259,8 @@
               var country = e.target.elements.country.value;
               var phone_number = e.target.elements.phone_number.value;
               var id = e.target.elements.id.value;
+              var sub_district = e.target.elements.sub_district.value;
+              var village = e.target.elements.village.value;
 
               var self = this;
               axios.post(this.address_update+'/'+id, {
@@ -269,7 +271,9 @@
                 province : province,
                 postal : postal,
                 country : country,
-                phone_number : phone_number
+                phone_number : phone_number,
+                sub_district : sub_district,
+                village : village
               })
               .then(function (response) {
                   if (typeof response.data.message !== 'undefined') {
@@ -516,7 +520,7 @@
             showVueListVillages: function(existAddress){
 
               var allOptions;
-
+              
               axios.get('/api/v1/villages/' + existAddress.sub_district ).then(function (response) {
 
                 if (response.data.error == '000') {
@@ -525,11 +529,11 @@
 
                     if (existAddress.village == value.village) {
 
-                      allOptions += '<option selected value="' + value.village + '">'+ value.village.toUpperCase() +'</option>'
+                      allOptions += '<option selected value="' + value.village + '">'+ value.village.toUpperCase() + ' - ' + value.postal_code +'</option>'
 
                     }else{
 
-                      allOptions += '<option value="' + value.village + '">'+ value.village.toUpperCase() +'</option>'
+                      allOptions += '<option value="' + value.village + '">'+ value.village.toUpperCase() + ' - ' + value.postal_code +'</option>'
 
                     }
 
