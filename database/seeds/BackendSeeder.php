@@ -191,6 +191,16 @@ class CmsModulsSeeder extends Seeder {
             'controller'=>'AdminOrdersController',
             'is_protected'=>0,
             'is_active'=>0
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Reviews',
+            'icon'=>'fa fa-star',
+            'path'=>'reviews',
+            'table_name'=>'reviews',
+            'controller'=>'AdminReviewsController',
+            'is_protected'=>0,
+            'is_active'=>0
             ]
         ];
 
@@ -489,6 +499,20 @@ class CmsMenusSeeder extends Seeder {
             'path'=>'webcontent',
             'color' => 'normal',
             'icon'=>'fa fa-file-text-o',
+            'parent_id'=>0,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 5
+        ]
+        ,[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Reviews',
+            'type'=>'Route',
+            'path'=>'AdminReviewsControllerGetIndex',
+            'color' => 'normal',
+            'icon'=>'fa fa-star',
             'parent_id'=>0,
             'is_active'=>1,
             'is_dashboard'=>0,
