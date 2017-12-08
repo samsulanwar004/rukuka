@@ -15,7 +15,6 @@ class LoginController extends BaseController
 	private $social;
 	private $user;
     protected $redirectAfterRegister = '/login';
-    protected $redirectAfterLogin = '/account';
     protected $redirectAfterForgot = '/forgot';
 
     public function __construct(SocialMediaService $social, UserRepository $user)
