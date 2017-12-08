@@ -116,7 +116,7 @@ class CourierRepository{
 
 	    }else{
 	    	
-	    	return $this->formatResponse('999', 'error', $resultPosIndonesia);
+	    	return $this->formatResponse('999', 'Shiping services unavailable', $resultPosIndonesia);
 	    
 	    }
 

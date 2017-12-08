@@ -632,6 +632,8 @@ class UserController extends BaseController
             'city' => 'required',
             'province' => 'required',
             'country' => 'required',
+            'sub_district' => 'required',
+            'village' => 'required',
         ]);
 
         try {
