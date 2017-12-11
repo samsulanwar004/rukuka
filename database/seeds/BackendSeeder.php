@@ -201,7 +201,17 @@ class CmsModulsSeeder extends Seeder {
             'controller'=>'AdminReviewsController',
             'is_protected'=>0,
             'is_active'=>0
-            ]
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'User Accounts',
+            'icon'=>'fa fa-user',
+            'path'=>'user_accounts',
+            'table_name'=>'users',
+            'controller'=>'AdminUserAccountsController',
+            'is_protected'=>0,
+            'is_active'=>0
+        ]
         ];
 
 
@@ -503,7 +513,7 @@ class CmsMenusSeeder extends Seeder {
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 5
+            'sorting' => 6
         ]
         ,[
 
@@ -518,6 +528,20 @@ class CmsMenusSeeder extends Seeder {
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 4
+        ]
+        ,[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'User Accounts',
+            'type'=>'Route',
+            'path'=>'AdminUserAccountsControllerGetIndex',
+            'color' => 'normal',
+            'icon'=>'fa fa-user',
+            'parent_id'=>0,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 5
         ]
     ];
 
