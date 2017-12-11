@@ -250,6 +250,8 @@
             },
 
             updateAddress: function (e) {
+              var requestUpdate = null;
+
               var first_name = e.target.elements.first_name.value;
               var last_name = e.target.elements.last_name.value;
               var address_line = e.target.elements.address_line.value;
@@ -259,22 +261,42 @@
               var country = e.target.elements.country.value;
               var phone_number = e.target.elements.phone_number.value;
               var id = e.target.elements.id.value;
-              var sub_district = e.target.elements.sub_district.value;
-              var village = e.target.elements.village.value;
+
+              if (country == 'ID') {
+                  
+                  var sub_district = e.target.elements.sub_district.value;
+                  var village = e.target.elements.village.value;
+
+                  requestUpdate = {
+                                    first_name : first_name,
+                                    last_name : last_name,
+                                    address_line : address_line,
+                                    city : city,
+                                    province : province,
+                                    postal : postal,
+                                    country : country,
+                                    phone_number : phone_number,
+                                    sub_district : sub_district,
+                                    village : village
+                                  };
+              
+              }else{
+
+                requestUpdate = {
+                                    first_name : first_name,
+                                    last_name : last_name,
+                                    address_line : address_line,
+                                    city : city,
+                                    province : province,
+                                    postal : postal,
+                                    country : country,
+                                    phone_number : phone_number
+                                  };
+
+              }
 
               var self = this;
-              axios.post(this.address_update+'/'+id, {
-                first_name : first_name,
-                last_name : last_name,
-                address_line : address_line,
-                city : city,
-                province : province,
-                postal : postal,
-                country : country,
-                phone_number : phone_number,
-                sub_district : sub_district,
-                village : village
-              })
+              axios.post(this.address_update+'/'+id, requestUpdate)
               .then(function (response) {
                   if (typeof response.data.message !== 'undefined') {
                       if (response.data.status.toLowerCase() == 'ok') {
