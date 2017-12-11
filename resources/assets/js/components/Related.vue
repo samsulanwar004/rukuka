@@ -134,16 +134,14 @@
                       </div>
 
                   </li>
-                  <li>
 
-                      <h5 class="uk-accordion-title"><b>DELIVERY & FREE RETURNS</b></h5>
-                      <div class="uk-accordion-content uk-text-muted">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      </div>
-
-                  </li>
               </ul>
+              <div class="uk-card uk-card-small uk-card-border">
+                <div class="uk-card-body">
+                  <h4>DELIVERY & FREE RETURNS</h4>
+                  lorem ipsum dolor, lorem ipsum dolor, lorem ipsum dolor, lorem ipsum dolor set amet.
+                </div>
+              </div>
 
             </div>
           </div>
