@@ -218,8 +218,8 @@
 
 .stars-product label {
 	display: block;
-	width: 30px;
-	height: 30px;
+	width: 20px;
+	height: 20px;
 	margin: 0!important;
 	padding: 0!important;
 	text-indent: -999em;
@@ -230,8 +230,3 @@
 	cursor: pointer;
 }
  /*END PRODUCT STARS RATINGS CSS*/
-
-
-
-
-
