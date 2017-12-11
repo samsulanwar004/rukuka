@@ -52,7 +52,7 @@ class UserController extends BaseController
     	$this->validate($request, [
     		'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'phone_number' => 'required|numeric|max:255',
+            'phone_number' => 'required|numeric',
         ]);
 
         try {
@@ -70,7 +70,7 @@ class UserController extends BaseController
 
         	DB::commit();
 
-        	return redirect($this->redirectAfterSaveProfile)->with(['success' => 'Update successfully!']);
+        	return redirect($this->redirectAfterSaveProfile)->with(['success' => 'Update Successfully!']);
         } catch (Exception $e) {
         	DB::rollBack();
 
