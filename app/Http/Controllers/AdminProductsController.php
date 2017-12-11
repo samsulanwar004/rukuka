@@ -54,11 +54,11 @@
 			$this->form[] = ['label'=>'Price','name'=>'price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Starting Price'];
 			$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Selling Price'];
 			$this->form[] = ['label'=>'Price Before Discount','name'=>'price_before_discount','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10','help'=>'Discount (Price before Sell Price)'];
-			$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Gram','placeholder'=>'gram'];
-			$this->form[] = ['label'=>'Length','name'=>'length','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Cm','placeholder'=>'cm'];
-			$this->form[] = ['label'=>'Width','name'=>'width','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Cm','placeholder'=>'cm'];
-			$this->form[] = ['label'=>'Height','name'=>'height','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Cm','placeholder'=>'cm'];
-			$this->form[] = ['label'=>'Diameter','name'=>'diameter','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Cm','placeholder'=>'cm'];
+			$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-2','help'=>'on Gram, Min. 0','placeholder'=>'gram'];
+			$this->form[] = ['label'=>'Length','name'=>'length','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-2','help'=>'on Cm, Min. 0','placeholder'=>'cm'];
+			$this->form[] = ['label'=>'Width','name'=>'width','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-2','help'=>'on Cm, Min. 0','placeholder'=>'cm'];
+			$this->form[] = ['label'=>'Height','name'=>'height','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-2','help'=>'on Cm, Min. 0','placeholder'=>'cm'];
+			$this->form[] = ['label'=>'Diameter','name'=>'diameter','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-2','help'=>'on Cm, Min. 0','placeholder'=>'cm'];
 			$this->form[] = ['label'=>'Is Active','name'=>'is_active','type'=>'checkbox','width'=>'col-sm-10','dataenum'=>'Active'];
 			$this->form[] = ['label'=>'Tags','name'=>'tags','type'=>'multitext','validation'=>'min:1|max:20','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
