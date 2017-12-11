@@ -46,19 +46,32 @@
                     </tr> -->
 
                     @foreach ($availableCouriersService['available_couriers'] as $availableCouriersService_key => $availableCouriersService_val)
-                        
+   
                         @if($availableCouriersService_val['error'] == '000')
-                        
-                          @foreach($availableCouriersService_val['data'] as $dataServices_key => $dataServices_val)
+                          
+                          @if(count($availableCouriersService_val['data']) > 1 )
+
+                            @foreach($availableCouriersService_val['data'] as $dataServices_key => $dataServices_val)
+
+                              <tr>
+                                  <td>
+                                      <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{ $availableCouriersService_key }}-choose-{{ $dataServices_val->serviceCode }}" required="" onclick="getTotal({{ $dataServices_val->notes }})"> </td>
+                                  <td> {{ $dataServices_val->serviceName }} </td>
+                                  <td> $ {{ $dataServices_val->notes }} ( IDR {{ number_format($dataServices_val->totalFee) }} ) </td>
+                              </tr>
+
+                            @endforeach
+
+                          @else
 
                             <tr>
                                 <td>
                                     <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{ $availableCouriersService_key }}-choose-{{ $dataServices_val->serviceCode }}" required="" onclick="getTotal({{ $dataServices_val->notes }})"> </td>
-                                <td> {{ $dataServices_val->serviceName }} </td>
-                                <td> $ {{ $dataServices_val->notes }} ( IDR {{ number_format($dataServices_val->totalFee) }} ) </td>
+                                <td> {{ $availableCouriersService_val['data']->serviceName }} </td>
+                                <td> $ {{ $availableCouriersService_val['data']->notes }} ( IDR {{ number_format($availableCouriersService_val['data']->totalFee) }} ) </td>
                             </tr>
 
-                          @endforeach
+                          @endif
 
                         @else
                           
