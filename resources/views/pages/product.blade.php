@@ -78,13 +78,6 @@
               {{ $product->detail_and_care }}
             </div>
         </li>
-        <li>
-            <h5 class="uk-accordion-title">DELIVERY & FREE RETURNS</h5>
-            <div class="uk-accordion-content">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </div>
-        </li>
     </ul>
     <button-buy
       api_bag="{{ route('persist.bag') }}"
@@ -111,19 +104,22 @@
       </ul>
     </p>
     <hr class="uk-margin-small">
-    <div class="uk-child-width-1-3 uk-margin-top uk-grid-divider uk-flex-middle uk-flex-center" uk-grid>
+    <div class="uk-child-width-1-2 uk-margin-top uk-grid-divider uk-flex-middle uk-flex-center" uk-grid>
       <div class="uk-text-center">
         Product Code: <br>
-          <b>{{ $product->product_code }}</b>
+          <b class="uk-text-lead">{{ $product->product_code }}</b>
       </div>
       <div class="uk-text-center">
-        View More
         <a href="{{ route('shop', ['categories' => strtolower($product->category->parent->parent->name) ,'category' => strtolower($product->category->parent->name), 'slug' => $product->category->slug]) }}">{{ $product->category->name }}</a>
-        <a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}" class="uk-text-muted">{{ $product->designer->name }}</a>
+        <br>
+        <a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}" class="uk-text-lead">{{ $product->designer->name }}</a>
       </div>
-      <div class="uk-text-center">
-        <a href="#" class="uk-text-muted"> Contact Us </a>
-        <a href="#" class="uk-text-muted">Give Feedback </a>
+    </div>
+    <hr class="uk-margin-small">
+    <div class="uk-card uk-card-small uk-card-border">
+      <div class="uk-card-body">
+        <h4>DELIVERY & FREE RETURNS</h4>
+        lorem ipsum dolor, lorem ipsum dolor, lorem ipsum dolor, lorem ipsum dolor set amet.
       </div>
     </div>
   </div>
@@ -162,19 +158,22 @@
       <div class="uk-width-1-3@m">
         <div class="uk-card uk-card-border uk-card-small">
           <div class="uk-card-body">
-                  <div class="stars-product uk-margin-remove">
-                      <input type="radio" name="star-{{$review->id}}" class="star-1" value="1" {{$review->rating == 1? 'checked':'' }}/>
-                      <label for="star-1">1</label>
-                      <input type="radio" name="star-{{$review->id}}" class="star-2" value="2" {{$review->rating == 2? 'checked':'' }}/>
-                      <label for="star-2">2</label>
-                      <input type="radio" name="star-{{$review->id}}" class="star-3"  value="3" {{$review->rating == 3? 'checked':'' }}/>
-                      <label for="star-3">3</label>
-                      <input type="radio" name="star-{{$review->id}}" class="star-4" value="4" {{$review->rating == 4? 'checked':'' }}/>
-                      <label for="star-4">4</label>
-                      <input type="radio" name="star-{{$review->id}}" class="star-5"  value="5" {{$review->rating == 5? 'checked':'' }}/>
-                      <label for="star-5">5</label>
-                      <span></span>
-                  </div>
+            <div class="uk-flex uk-flex-center">
+              <div class="stars-product uk-margin-remove uk-text-center">
+                  <input type="radio" name="star-{{$review->id}}" class="star-1" value="1" {{$review->rating == 1? 'checked':'' }}/>
+                  <label for="star-1">1</label>
+                  <input type="radio" name="star-{{$review->id}}" class="star-2" value="2" {{$review->rating == 2? 'checked':'' }}/>
+                  <label for="star-2">2</label>
+                  <input type="radio" name="star-{{$review->id}}" class="star-3"  value="3" {{$review->rating == 3? 'checked':'' }}/>
+                  <label for="star-3">3</label>
+                  <input type="radio" name="star-{{$review->id}}" class="star-4" value="4" {{$review->rating == 4? 'checked':'' }}/>
+                  <label for="star-4">4</label>
+                  <input type="radio" name="star-{{$review->id}}" class="star-5"  value="5" {{$review->rating == 5? 'checked':'' }}/>
+                  <label for="star-5">5</label>
+                  <span></span>
+              </div>
+            </div>
+
               <div class="uk-text-bold uk-text-center uk-margin-top-small">
                   {{$review->title}}
               </div>
@@ -201,7 +200,7 @@
     <span class="uk-text-lead">RELATED PRODUCT</span>
   </div>
 </div>
-<related 
+<related
   api="{{ route('related', ['categoryId' => $product->product_categories_id]) }}"
   product_api="{{ route('product.api') }}"
   bag_api="{{ route('persist.bag') }}"

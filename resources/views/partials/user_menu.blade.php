@@ -22,7 +22,7 @@
     <div class="uk-width-4-5">
       <h4>{{ ucfirst($user->first_name).' '.ucfirst($user->last_name) }}</h4>
     </div>
-    <div class="uk-width-1-5">
+    <div class="uk-width-1-5 uk-flex uk-flex-right">
       <div class="uk-inline">
         <a href="#" class="uk-icon uk-icon-link" uk-icon="icon: more"></a>
         <div uk-drop="mode: click; pos: bottom-right" style="width: 150px">
