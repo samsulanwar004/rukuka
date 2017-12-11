@@ -85,6 +85,7 @@ class LoginController extends BaseController
             	->setPassword($request->input('password_login'))
             	->setRemember($request->input('remember'))
             	->auth();
+            (new UserRepository)->updateLastLogin($this->getUserActive()->id);
 
             if (!$auth) {
                 throw new Exception("Login failed!", 1);     

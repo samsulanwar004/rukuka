@@ -111,6 +111,7 @@
                 Payment Expired
               </option>
             </select>
+            <br>
             <label class="control-label">Order Status</label>
             <select class="form-control" name="order_status" style="width: 300px">
               <option value="0" {{ $row->order_status == 0 ? 'selected' : ''}}>
@@ -128,10 +129,12 @@
             </select>
           </div>
           <div class="col-sm-12" align="right">
-            <a href="{{ $return_url }}" class="btn btn-default"><i class="fa fa-chevron-circle-left"> Back</i></a>
+            <br>
+            <a href="{{ $return_url }}" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Back</a>
             <input type="submit" name="save" class="btn btn-success">
           </div>
         </div>
+      </div>
       </div>
         <!-- /.box-footer-->
     </form>
