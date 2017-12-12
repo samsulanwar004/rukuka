@@ -324,6 +324,14 @@ class UserRepository
 		$user->update();
 	}
 
+    public function updateLastLogin($id)
+    {
+        $user = $this->model()->where('id', $id)->first();
+        $user->last_login = $this->date;
+
+        $user->update();
+    }
+
 	public function persistCreditCard($request, $id = null)
 	{
 		$cc = is_null($id) ? new CreditCard : $this->getCreditCardById($id);
@@ -612,6 +620,12 @@ class UserRepository
         $review->user()->associate($this->getUser());
         $review->product()->associate($request->input('products_id'));
         $review->save();
+    }
+
+    public function getUserById($id)
+    {
+        return User::where('id', $id)
+            ->first();
     }
 
 }

@@ -44,7 +44,7 @@
                         <div class="uk-width-5-6 uk-text-left">
                           <h4>Let's us help you</h4>
                         </div>
-                        <div class="uk-width-1-6">
+                        <div class="uk-width-1-6 uk-flex uk-flex-right">
                           <a href="#" class="uk-icon uk-icon-link" uk-icon="icon: more"></a>
                           <div uk-drop="mode: click; pos: bottom-right" style="width: 200px">
                             <div class="uk-card uk-card-default uk-card-small">

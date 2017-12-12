@@ -4,86 +4,70 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
-	use App\Category;
-	use App\Product;
+	use App\Repositories\UserRepository;
 
-	class AdminProductsController extends \crocodicstudio\crudbooster\controllers\CBController {
-
-		private $categoryId;
+	class AdminUserAccountsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "name";
+			$this->title_field = "first_name";
 			$this->limit = "20";
 			$this->orderby = "id,desc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
 			$this->button_action_style = "button_icon";
-			$this->button_add = true;
-			$this->button_edit = true;
+			$this->button_add = false;
+			$this->button_edit = false;
 			$this->button_delete = true;
 			$this->button_detail = true;
 			$this->button_show = true;
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "products";
+			$this->table = "users";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Product Designers","name"=>"product_designers_id","join"=>"product_designers,name"];
-			$this->col[] = ["label"=>"Product Categories","name"=>"product_categories_id","join"=>"product_categories,name"];
-			$this->col[] = ["label"=>"Product Code","name"=>"product_code"];
-			$this->col[] = ["label"=>"Name","name"=>"name"];
+			$this->col[] = ["label"=>"First Name","name"=>"first_name"];
+			$this->col[] = ["label"=>"Last Name","name"=>"last_name"];
+			$this->col[] = ["label"=>"Email","name"=>"email"];
+			$this->col[] = ["label"=>"Email Verification","name"=>"is_verified"];
+			$this->col[] = ["label"=>"Status","name"=>"status"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Product Designers','name'=>'product_designers_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_designers,name'];
-            $this->form[] = ['label'=>'Product Categories','name'=>'product_categories_id','type'=>'custom','validation'=>'required','width'=>'col-sm-10', 'html' => $this->categories()];
-            $this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Color','name'=>'color','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Detail And Care','name'=>'detail_and_care','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Size And Fit','name'=>'size_and_fit','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Technical Specification','name'=>'technical_specification','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Currency','name'=>'currency','type'=>'select2','validation'=>'required','width'=>'col-sm-10','dataenum'=>'USD'];
-			$this->form[] = ['label'=>'Price','name'=>'price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Starting Price'];
-			$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Selling Price'];
-			$this->form[] = ['label'=>'Price Before Discount','name'=>'price_before_discount','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10','help'=>'Discount (Price before Sell Price)'];
-			$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-2','help'=>'on Gram, Min. 0','placeholder'=>'gram'];
-			$this->form[] = ['label'=>'Length','name'=>'length','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-2','help'=>'on Cm, Min. 0','placeholder'=>'cm'];
-			$this->form[] = ['label'=>'Width','name'=>'width','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-2','help'=>'on Cm, Min. 0','placeholder'=>'cm'];
-			$this->form[] = ['label'=>'Height','name'=>'height','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-2','help'=>'on Cm, Min. 0','placeholder'=>'cm'];
-			$this->form[] = ['label'=>'Diameter','name'=>'diameter','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-2','help'=>'on Cm, Min. 0','placeholder'=>'cm'];
-			$this->form[] = ['label'=>'Is Active','name'=>'is_active','type'=>'checkbox','width'=>'col-sm-10','dataenum'=>'Active'];
-			$this->form[] = ['label'=>'Tags','name'=>'tags','type'=>'multitext','validation'=>'min:1|max:20','width'=>'col-sm-10'];
-			# END FORM DO NOT REMOVE THIS LINE
+            $this->form[] = ["label"=>"Status","name"=>"status","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+            $this->form[] = ["label"=>"Is Verified","name"=>"is_verified","type"=>"radio","required"=>TRUE,"validation"=>"required|integer","dataenum"=>"Array"];
+
+            # END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Product Designers','name'=>'product_designers_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_designers,name'];
-			//$this->form[] = ['label'=>'Product Categories','name'=>'product_categories_id','type'=>'custom','validation'=>'required','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Color','name'=>'color','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'required|string','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Detail And Care','name'=>'detail_and_care','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Size And Fit','name'=>'size_and_fit','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Technical Specification','name'=>'technical_specification','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Currency','name'=>'currency','type'=>'select2','validation'=>'required','width'=>'col-sm-10','dataenum'=>'USD'];
-			//$this->form[] = ['label'=>'Price','name'=>'price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Starting Price'];
-			//$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Selling Price'];
-			//$this->form[] = ['label'=>'Price Before Discount','name'=>'price_before_discount','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10','help'=>'Discount (Price before Sell Price)'];
-			//$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'gram'];
-			//$this->form[] = ['label'=>'Length','name'=>'length','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
-			//$this->form[] = ['label'=>'Width','name'=>'width','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
-			//$this->form[] = ['label'=>'Height','name'=>'height','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
-			//$this->form[] = ['label'=>'Diameter','name'=>'diameter','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','placeholder'=>'cm'];
-			//$this->form[] = ['label'=>'Is Active','name'=>'is_active','type'=>'checkbox','width'=>'col-sm-10','dataenum'=>'Active'];
-			//$this->form[] = ['label'=>'Tags','name'=>'tags','type'=>'multitext','validation'=>'min:1|max:20','width'=>'col-sm-10'];
+			//$this->form[] = ["label"=>"Email","name"=>"email","type"=>"email","required"=>TRUE,"validation"=>"required|min:1|max:255|email|unique:users","placeholder"=>"Please enter a valid email address"];
+			//$this->form[] = ["label"=>"Password","name"=>"password","type"=>"password","required"=>TRUE,"validation"=>"min:3|max:32","help"=>"Minimum 5 characters. Please leave empty if you did not change the password."];
+			//$this->form[] = ["label"=>"First Name","name"=>"first_name","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Last Name","name"=>"last_name","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Avatar","name"=>"avatar","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Phone Number","name"=>"phone_number","type"=>"number","required"=>TRUE,"validation"=>"required|numeric","placeholder"=>"You can only enter the number only"];
+			//$this->form[] = ["label"=>"Dob","name"=>"dob","type"=>"date","required"=>TRUE,"validation"=>"required|date"];
+			//$this->form[] = ["label"=>"Gender","name"=>"gender","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Bank Name","name"=>"bank_name","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Bank Account Name","name"=>"bank_account_name","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Bank Account Number","name"=>"bank_account_number","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Bank Branch","name"=>"bank_branch","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Social Media Type","name"=>"social_media_type","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Social Media Id","name"=>"social_media_id","type"=>"select2","required"=>TRUE,"validation"=>"required|min:1|max:255","datatable"=>"social_media,id"];
+			//$this->form[] = ["label"=>"Remember Token","name"=>"remember_token","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Api Token","name"=>"api_token","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Status","name"=>"status","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Last Login","name"=>"last_login","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
+			//$this->form[] = ["label"=>"Is Verified","name"=>"is_verified","type"=>"radio","required"=>TRUE,"validation"=>"required|integer","dataenum"=>"Array"];
+			//$this->form[] = ["label"=>"Verification Token","name"=>"verification_token","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Verification Expired","name"=>"verification_expired","type"=>"datetime","required"=>TRUE,"validation"=>"required|date_format:Y-m-d H:i:s"];
 			# OLD END FORM
 
 			/* 
@@ -99,23 +83,6 @@
 	        | 
 	        */
 	        $this->sub_module = array();
-	        $this->sub_module[] = [
-	        	'label'=>'Photos',
-	        	'path'=>'product-images',
-	        	'parent_columns'=>'name',
-	        	'foreign_key'=>'products_id',
-	        	'button_color'=>'success',
-	        	'button_icon'=>'fa fa-picture-o'
-	        ];
-
-	        $this->sub_module[] = [
-	        	'label'=>'Stocks',
-	        	'path'=>'product-stocks',
-	        	'parent_columns'=>'name',
-	        	'foreign_key'=>'products_id',
-	        	'button_color'=>'success',
-	        	'button_icon'=>'fa fa-bars'
-	        ];
 
 
 	        /* 
@@ -275,7 +242,7 @@
 	    */
 	    public function actionButtonSelected($id_selected,$button_name) {
 	        //Your code here
-	   
+	            
 	    }
 
 
@@ -299,6 +266,22 @@
 	    */    
 	    public function hook_row_index($column_index,&$column_value) {	        
 	    	//Your code here
+            if($column_index==4) {
+                if ($column_value == '0') {
+                    $column_value = '<span class="label label-warning">Unverified</span>';
+                } else {
+                    $column_value = '<span class="label label-success">Verified</span>';
+                }
+            }
+            if($column_index==5) {
+                if ($column_value == '0') {
+                    $column_value = '<span class="label label-warning">Pending</span>';
+                } else if($column_value == '1'){
+                    $column_value = '<span class="label label-success">Active</span>';
+                } else {
+                    $column_value = '<span class="label label-danger">Unactive</span>';
+                }
+            }
 	    }
 
 	    /*
@@ -310,7 +293,6 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-	        $postdata['product_code'] = 'P'.date('Ymd').rand(0,99);
 
 	    }
 
@@ -323,10 +305,7 @@
 	    */
 	    public function hook_after_add($id) {        
 	        //Your code here
-	        $products = DB::table('products');
-	        $product = $products->where('id', $id)->first();
-	        $postdata['slug'] = str_slug($product->name.' '.$product->id);
-	        $products->update($postdata);
+
 	    }
 
 	    /* 
@@ -338,7 +317,8 @@
 	    | 
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
-	        //Your code here	  
+	        //Your code here
+
 	    }
 
 	    /* 
@@ -350,10 +330,7 @@
 	    */
 	    public function hook_after_edit($id) {
 	        //Your code here 
-	        $products = DB::table('products');
-	        $product = $products->where('id', $id)->first();
-	        $postdata['slug'] = str_slug($product->name.' '.$product->id);
-	        $products->update($postdata);
+
 	    }
 
 	    /* 
@@ -380,57 +357,23 @@
 
 	    }
 
+
+
 	    //By the way, you can still create your own method in here... :) 
 
-	    public function getEdit($id)
-	    {
-	    	$this->setCategoryId($id);
-	    	$this->cbLoader();
-	    	$row = \DB::table($this->table)->where($this->primary_key,$id)->first();
+        public function getDetail($id) {
+            //Create an Auth
+            if(!CRUDBooster::isRead() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {
+                CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
+            }
 
-			if(!CRUDBooster::isRead() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {
-				CRUDBooster::insertLog(trans("crudbooster.log_try_edit",['name'=>$row->{$this->title_field},'module'=>CRUDBooster::getCurrentModule()->name]));
-				CRUDBooster::redirect(CRUDBooster::adminPath(),trans('crudbooster.denied_access'));
-			}
+            $data = [];
+            $data['page_title'] = 'User Account Data';
+            $data['row'] = (new UserRepository)->getUserById($id);
+            $data['return_url'] = request()->input('return_url');
 
-
-			$page_menu       = \Route::getCurrentRoute()->getActionName();
-			$page_title 	 = trans("crudbooster.edit_data_page_title",['module'=>CRUDBooster::getCurrentModule()->name,'name'=>$row->{$this->title_field}]);
-			$command 		 = 'edit';
-			Session::put('current_row_id',$id);
-			return view('crudbooster::default.form',compact('id','row','page_menu','page_title','command'));
-	    }
-
-
-	    private function categories()
-	    {
-	    	$id = $this->getCategoryId();
-
-	    	$product = $this->getProductById($id);
-
-
-	    	return Category::attr([
-	    		'name' => 'product_categories_id',
-	    		'class' => 'form-control'
-	    	])
-		    ->selected($product->product_categories_id)
-		    ->renderAsDropdown();
-	    }
-
-	    private function getProductById($id)
-	    {
-	    	return Product::where('id', $id)->first();
-	    }
-
-	    private function setCategoryId($value)
-	    {
-	    	$this->categoryId = $value;
-	    	return $this;
-	    }
-
-	    private function getCategoryId()
-	    {
-	    	return $this->categoryId;
-	    }
+            //Please use cbView method instead view method from laravel
+            $this->cbView('admin.user_details',$data);
+        }
 
 	}

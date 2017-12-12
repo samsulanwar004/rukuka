@@ -6,15 +6,15 @@
             var api = this.api;
             var sort_by = function(field, reverse, primer){
 
-              var key = primer ? 
-              function(x) {return primer(x[field])} : 
+              var key = primer ?
+              function(x) {return primer(x[field])} :
               function(x) {return x[field]};
 
               reverse = !reverse ? 1 : -1;
 
              return function (a, b) {
               return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
-             } 
+             }
             }
 
             $.get(api, function(navigations) {
@@ -91,7 +91,7 @@
                 <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                     <div class="uk-navbar-dropdown-grid" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
-                          <div>
+                          <div class="uk-width-1-1">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                               <li class="uk-text-bold">DESIGNERS</li>
                             </ul>
@@ -112,7 +112,7 @@
                             </ul>
                             <hr class="uk-margin-small">
                             <a :href="designersNav.designer_designer_of_the_week_url">
-                              <img v-if="designersNav.designer_of_the_week != null" style="height: 150px" :src="'/'+designersNav.designer_of_the_week" :alt="designersNav.designer_designer_of_the_week_text">
+                              <img v-if="designersNav.designer_of_the_week != null" style="height: 180px" :src="'/'+designersNav.designer_of_the_week" :alt="designersNav.designer_designer_of_the_week_text">
                             </a>
                         </div>
                     </div>
@@ -326,9 +326,9 @@
 
                                   <ul class="uk-nav uk-navbar-dropdown-nav">
                                       <li>
-                                          <a href="/shop/womens/sale">Womens</a>
-                                          <a href="/shop/mens/sale">Mens</a>
-                                          <a href="/shop/kids/sale">Kids</a>
+                                          <a href="/shop/womens/sale" class="uk-text-danger">Womens</a>
+                                          <a href="/shop/mens/sale" class="uk-text-danger">Mens</a>
+                                          <a href="/shop/kids/sale" class="uk-text-danger">Kids</a>
                                       </li>
                                   </ul>
                               </div>
