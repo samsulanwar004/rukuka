@@ -157,7 +157,7 @@
     @foreach($product->review as $review)
       <div class="uk-width-1-3@m">
         <div class="uk-card uk-card-border uk-card-small">
-          <div class="uk-card-body">
+          <div class="uk-card-body" style="min-height: 250px">
             <div class="uk-flex uk-flex-center">
               <div class="stars-product uk-margin-remove uk-text-center">
                   <input type="radio" name="star-{{$review->id}}" class="star-1" value="1" {{$review->rating == 1? 'checked':'' }}/>
@@ -181,7 +181,14 @@
                   {{date_format($review->created_at,"F j, Y")}}
               </div>
               <div class="uk-text-left uk-margin-small-top">
-                  "{{$review->review}}"
+                  <p class="uk-hidden" id="more-{{$review->id}}">{{ $review->review}}
+                      <a onclick="more({{$review->id}})" class="uk-text-bold uk-text-small"> show less</a>
+                  </p>
+                  <p id="less-{{$review->id}}">{!! str_limit($review->review,120) !!}
+                      @if(strlen($review->review) > 120)
+                        <a onclick="less({{$review->id}})" class="uk-text-bold uk-text-small"> show more</a>
+                      @endif
+                  </p>
               </div>
               <div class="uk-text-small uk-text-left uk-margin-small-top">
                   {{ ucfirst($review->user->first_name).' '.ucfirst($review->user->last_name) }}
@@ -189,6 +196,16 @@
               <div class="uk-text-small uk-text-muted uk-text-left">
                   {{$review->location}}
               </div>
+              @if($review->comment)
+              <div class="uk-card uk-card-body uk-margin-small-top uk-text-small" style="background: #EEEEEE">
+                  <div class="uk-text-bold uk-text-center">
+                      Response From rukuka
+                  </div>
+                  <div class="uk-text-left uk-text-small uk-margin-small-top">
+                      {{$review->comment}}
+                  </div>
+              </div>
+              @endif
           </div>
         </div>
       </div>
@@ -214,3 +231,14 @@
 </div>
 </div>
 @endsection
+
+<script>
+    function less(id) {
+        $("#more-"+id).attr("class","");
+        $("#less-"+id).attr("class","uk-hidden");
+    }
+    function more(id) {
+        $("#more-"+id).attr("class","uk-hidden");
+        $("#less-"+id).attr("class","");
+    }
+</script>
