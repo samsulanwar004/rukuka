@@ -87,6 +87,11 @@ Route::get('/page/{slug}', [
     'uses' => 'Frontend\PageController@page',
 ]);
 
+Route::post('/review-ajax', [
+    'as'   => 'review-post-ajax',
+    'uses' => 'Frontend\UserController@getReviewAjax',
+]);
+
 Route::get('/', [
     'as'   => 'index',
     'uses' => 'Frontend\PageController@index',
