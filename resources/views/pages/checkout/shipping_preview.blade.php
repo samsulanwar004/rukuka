@@ -15,9 +15,9 @@
                 <div class="uk-text-center">
                     <a href="{{ route('checkout.shipping') }}" class="uk-button uk-button-text">SHIPPING OPTION</a>
                 </div>
-                <div class="uk-text-center">
+{{--                 <div class="uk-text-center">
                     <a href="{{ route('checkout.billing') }}" class="uk-button uk-button-text">BILLING</a>
-                </div>
+                </div> --}}
                 <div class="uk-text-center">
                     <button class="uk-button uk-button-text" disabled><b>REVIEW</b></button>
                 </div>
@@ -25,7 +25,7 @@
             <hr class="uk-margin-small">
             <h4 class="uk-margin-remove">PLEASE CONFIRM YOUR ORDER</h4>
 
-              <hr class="uk-margin-small">
+{{--               <hr class="uk-margin-small">
               <b>BILLING OPTION</b>
               <hr class="uk-margin-small">
               <div class="uk-grid uk-grid-small" grid>
@@ -50,7 +50,7 @@
                       <li>IDR {{ $total }}</li>
                   </ul>
                 </div>
-              </div>
+              </div> --}}
             <hr class="uk-margin-small">
             <b>SHIPPING DETAILS</b>
             <hr class="uk-margin-small">
@@ -97,31 +97,31 @@
 @endsection
 
 @section('footer_scripts')
-<script src="{{ elixir('js/creditcard.js') }}"></script>
+{{-- <script src="{{ elixir('js/creditcard.js') }}"></script> --}}
 <script type="text/javascript">
    $(function () {
 
-      $('#card-number-hidden').validateCreditCard(function(result) {
-        var card = result.card_type == null ? '' : result.card_type.name;
-        $('#card').html(card.toUpperCase());
+      // $('#card-number-hidden').validateCreditCard(function(result) {
+      //   var card = result.card_type == null ? '' : result.card_type.name;
+      //   $('#card').html(card.toUpperCase());
 
-        if (card == 'visa') {
-          $('#card_img').attr('src', '/images/visa.png');
-        } else if (card == 'mastercard') {
-          $('#card_img').attr('src', '/images/mastercard.png');
-        } else if (card == 'discover') {
-          $('#card_img').attr('src', '/images/discover.png');
-        } else {
-          $('#card_img').attr('src', '/images/default_card.png');
-        }
+      //   if (card == 'visa') {
+      //     $('#card_img').attr('src', '/images/visa.png');
+      //   } else if (card == 'mastercard') {
+      //     $('#card_img').attr('src', '/images/mastercard.png');
+      //   } else if (card == 'discover') {
+      //     $('#card_img').attr('src', '/images/discover.png');
+      //   } else {
+      //     $('#card_img').attr('src', '/images/default_card.png');
+      //   }
         
-      });
+      // });
 
-      var card = $('#card-number-hidden').val();
+      // var card = $('#card-number-hidden').val();
 
-      var cardNumber = card.substring(13);
+      // var cardNumber = card.substring(13);
 
-      $('#card-number').html('*************'+cardNumber);
+      // $('#card-number').html('*************'+cardNumber);
 
      $("#continue").on('click', function (e) {
         e.preventDefault();
