@@ -89,9 +89,19 @@
                         if(data != '')
                         {
                             var result = JSON.parse(data);
-                            $('#remove-row').remove();
-                            $('#blog').append(result.blog);
-                            $('#loader').append(result.loader);
+                            if(result.count < 9)
+                            {
+                                $('#remove-row').remove();
+                                $('#blog').append(result.blog);
+                                $('#loader').append(result.loader);
+                                $('#remove-row').remove();
+                            }
+                            else{
+                                $('#remove-row').remove();
+                                $('#blog').append(result.blog);
+                                $('#loader').append(result.loader);
+                            }
+
                         }
                         else
                         {

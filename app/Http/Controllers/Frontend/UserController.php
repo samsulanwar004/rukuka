@@ -10,6 +10,7 @@ use App\Repositories\ProductStockRepository;
 use App\Services\BagService;
 use App\Repositories\CourierRepository;
 use App\Repositories\ProductRepository;
+use App\Review;
 
 class UserController extends BaseController
 {
@@ -817,6 +818,100 @@ class UserController extends BaseController
             return back()->withErrors($e->getMessage());
         }
 
+    }
+
+    public function getReviewAjax(Request $request)
+    {
+
+        $review = '';
+        $loader = '';
+        $id_review = $request->id_review;
+        $id_product = $request->id_product;
+        $reviews = Review::select('reviews.*','users.first_name','users.last_name')
+            ->where('products_id',$id_product)
+            ->where('is_approved',1)
+            ->where('reviews.id','<',$id_review)
+            ->leftJoin('users', 'reviews.users_id', '=', 'users.id')
+            ->orderBy('id', 'desc')
+            ->take(3)->get()
+            ->toArray();
+        if(count($reviews))
+        {
+            foreach($reviews as $data)
+            {
+                if (strlen($data['review'])>120){
+                    $showless = '<a onclick="less('. $data['id'] .')" class="uk-text-bold uk-text-small"> show more</a>';
+                }
+
+                if ($data['comment']) {
+                    $comment = '
+                                <div class="uk-card uk-card-body uk-margin-small-top uk-text-small" style="background: #EEEEEE">
+                                    <div class="uk-text-bold uk-text-center">
+                                        Response From rukuka
+                                    </div>
+                                    <div class="uk-text-left uk-text-small uk-margin-small-top">
+                                      '. $data['review'].'
+                                    </div>
+                                </div>
+                    ';
+                }
+
+                $review .= '      
+                <div class="uk-width-1-3@m">
+                    <div class="uk-card uk-card-border uk-card-small">
+                        <div class="uk-card-body" style="min-height: 250px">
+                                <div class="uk-flex uk-flex-center">
+                                  <div class="stars-product uk-margin-remove uk-text-center">
+                                      <input type="radio" name="star-'. $data['id'] .'" class="star-1" value="1" '.($data['rating'] == 1 ? 'checked':'').'/>
+                                      <label for="star-1">1</label>
+                                      <input type="radio" name="star-'. $data['id'] .'" class="star-2" value="2" '.($data['rating'] == 2 ? 'checked':'').'/>
+                                      <label for="star-2">2</label>
+                                      <input type="radio" name="star-'. $data['id'] .'" class="star-3" value="3" '.($data['rating'] == 3 ? 'checked':'').'/>
+                                      <label for="star-3">3</label>
+                                      <input type="radio" name="star-'. $data['id'] .'" class="star-4" value="4" '.($data['rating'] == 4 ? 'checked':'').'/>
+                                      <label for="star-4">4</label>
+                                      <input type="radio" name="star-'. $data['id'] .'" class="star-5" value="5" '.($data['rating'] == 5 ? 'checked':'').'/>
+                                      <label for="star-5">5</label>
+                                      <span></span>
+                                  </div>
+                                </div>
+                                <div class="uk-text-bold uk-text-center uk-margin-top-small">
+                                    '. $data['title'] .'
+                                </div>
+                                <div class="uk-text-small uk-text-muted uk-text-center">
+                                    '.date("F j, Y", strtotime($data['created_at'])).'
+                                </div>
+                                    <div class="uk-text-left uk-margin-small-top">
+                                    <p class="uk-hidden" id=more-'. $data['id'] .'>'. $data['review'] .'
+                                        <a onclick="more('. $data['id'] .')" class="uk-text-bold uk-text-small"> show less</a>
+                                    </p>
+                                    <p id="less-'. $data['id'] .'">'. str_limit($data['review'],120) .' 
+                                        '.$showless.'
+                                    </p>
+                                </div>
+                                <div class="uk-text-small uk-text-left uk-margin-small-top">
+                                    '.ucfirst($data['first_name']).''." ".''.ucfirst($data['last_name']).' 
+                                </div>
+                                <div class="uk-text-small uk-text-muted uk-text-left">
+                                     '.$data['location'].'
+                                </div>
+                                '.$comment.'
+                        </div>
+                    </div>
+                </div>
+          ';
+            }
+            $loader .= '
+                            <div id="remove-row">
+                                <h2>
+                                        <a onclick="myFunction('. $reviews[count($reviews)-1]['id'] .','.$reviews[count($reviews)-1]['products_id'].')" id="btn-more" class="uk-button uk-button-default" > SEE MORE REVIEW </a>
+                                </h2>
+                            </div>
+                        ';
+
+            $response = array('review' => $review, 'loader' => $loader, 'count' => count($reviews));
+            echo json_encode($response);
+        }
     }
 
 }
