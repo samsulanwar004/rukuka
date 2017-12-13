@@ -16,9 +16,9 @@
                 <div class="uk-text-center">
                     <button class="uk-button uk-button-text" disabled><b>SHIPPING OPTION</b></button>
                 </div>
-                <div class="uk-text-center">
+{{--                 <div class="uk-text-center">
                     <button class="uk-button uk-button-text" disabled>BILLING</button>
-                </div>
+                </div> --}}
                 <div class="uk-text-center">
                     <button class="uk-button uk-button-text" disabled>REVIEW</button>
                 </div>
@@ -131,7 +131,7 @@
      $("#continue").on('click', function (e) {
        e.preventDefault();
        var submit = $('#submit').val();
-       var url = '{{ route('checkout.billing') }}';
+       var url = '{{ route('checkout.review') }}';
        if (submit == 'C O N T I N U E') {
          $('#submit').click();
        } else {

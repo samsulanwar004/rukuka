@@ -20,7 +20,7 @@ class UserController extends BaseController
     protected $redirectAfterSaveAddress = '/account/address';
     protected $redirectAfterSavePassword = '/account/reset-password';
     protected $redirectAfterAddWishlist = '/account/wishlist';
-    protected $redirectAfterSaveShippingOption = '/checkout/billing';
+    protected $redirectAfterSaveShippingOption = '/checkout/review';
     protected $redirectAfterSaveBilling = '/checkout/review';
     protected $redirectAfterNewShippingAddress = '/checkout/shipping';
     protected $redirectAfterNewCC = '/checkout/billing';
@@ -724,22 +724,22 @@ class UserController extends BaseController
     {
         $user = $this->getUserActive();
         $bag = new BagService;
-        $creditCard = $this->user
-            ->setUser($user)
-            ->getCreditCardDefault();
+        // $creditCard = $this->user
+        //     ->setUser($user)
+        //     ->getCreditCardDefault();
 
-        $defaultCreditcard = new \stdClass;
-        $defaultCreditcard->id = $creditCard->id;
-        $defaultCreditcard->card_number = $this->user->decryptCreditCard($creditCard->card_number);
-        $defaultCreditcard->expired_date = $creditCard->expired_date;
-        $defaultCreditcard->name_card = $creditCard->name_card;
-        $defaultCreditcard->first_name = $creditCard->address->first_name;
-        $defaultCreditcard->company = $creditCard->address->company;
-        $defaultCreditcard->address_line = $creditCard->address->address_line;
-        $defaultCreditcard->city = $creditCard->address->city;
-        $defaultCreditcard->postal = $creditCard->address->postal;
-        $defaultCreditcard->country = $creditCard->address->country;
-        $defaultCreditcard->phone_number = $creditCard->address->phone_number;
+        // $defaultCreditcard = new \stdClass;
+        // $defaultCreditcard->id = $creditCard->id;
+        // $defaultCreditcard->card_number = $this->user->decryptCreditCard($creditCard->card_number);
+        // $defaultCreditcard->expired_date = $creditCard->expired_date;
+        // $defaultCreditcard->name_card = $creditCard->name_card;
+        // $defaultCreditcard->first_name = $creditCard->address->first_name;
+        // $defaultCreditcard->company = $creditCard->address->company;
+        // $defaultCreditcard->address_line = $creditCard->address->address_line;
+        // $defaultCreditcard->city = $creditCard->address->city;
+        // $defaultCreditcard->postal = $creditCard->address->postal;
+        // $defaultCreditcard->country = $creditCard->address->country;
+        // $defaultCreditcard->phone_number = $creditCard->address->phone_number;
 
         $defaultAddress = $this->user
             ->setUser($user)
@@ -749,7 +749,7 @@ class UserController extends BaseController
         $total = $bag->subtotal();
 
         return view('pages.checkout.shipping_preview', compact(
-            'defaultCreditcard',
+            // 'defaultCreditcard',
             'defaultAddress',
             'total'
         ));
