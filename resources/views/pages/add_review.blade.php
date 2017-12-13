@@ -35,14 +35,7 @@
         <label class="star-5" for="star-5">5</label>
         <span></span>
       </div>
-    </div>
-  </div>
-  <hr>
-  <div class="uk-grid uk-margin-top" uk-grid>
-    <div class="uk-width-2-5@m">
       <h4>REVIEW YOUR PURCHASE</h4>
-    </div>
-    <div class="uk-width-3-5@m">
       <div class="uk-card uk-card-small uk-card-border">
         <div class="uk-card-body">
           <h5><b>WRITING GUIDLINES</b></h5>
@@ -55,7 +48,6 @@
           </ul>
         </div>
       </div>
-
       <div class="uk-panel uk-margin-top">
         <div class="uk-padding-small">
           <h4 class="uk-margin-remove"> <b>*Title your review:</b></h4>
@@ -79,10 +71,9 @@
       <div class="uk-margin-top uk-margin-bottom">
         <button type="submit" class="uk-button uk-button-secondary">PREVIEW AND SUBMIT</button>
       </div>
-
-
     </div>
   </div>
+  <hr>
 {{ Form::close() }}
 </div>
 @endsection
