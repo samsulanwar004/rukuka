@@ -102,21 +102,25 @@ class CourierRepository{
 	                                    'width'             => $requestWidth,
 	                                    'height'            => $requestHeight,
 	                                    'diameter'          => $requestDiameter,
-	                                    'itemValue'         => $requestItemValue * 10000
+	                                    'itemValue'         => $requestItemValue
 	                                ]
 	                            ];
 
 	    $resultPosIndonesia = $posIndonesia->callMethod('getFee', $requestToPosIndonesia);
 	    // $resultPosIndonesia = null;
 
-	    if ($resultPosIndonesia->r_fee->serviceCode == null) {
+	    if ($resultPosIndonesia->r_fee->serviceName == 'ERROR') {
+	    	
+	    	return $this->formatResponse('999', 'Shiping services unavailable', $resultPosIndonesia);
+	    
+	    }else if ($resultPosIndonesia->r_fee->serviceName == 'NOT FOUND'){
+	    	
+	    	return $this->formatResponse('999', 'Shiping services unavailable', $resultPosIndonesia);
+	    
+	    }else{
 
 	    	$this->saveResultShippingCostService(self::POS_INDONESIA, $resultPosIndonesia->r_fee);
 	    	return $this->formatResponse('000', 'success', $resultPosIndonesia->r_fee);
-
-	    }else{
-	    	
-	    	return $this->formatResponse('999', 'Shiping services unavailable', $resultPosIndonesia);
 	    
 	    }
 

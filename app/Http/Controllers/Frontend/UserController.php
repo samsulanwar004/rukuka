@@ -52,7 +52,7 @@ class UserController extends BaseController
     	$this->validate($request, [
     		'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'phone_number' => 'required|numeric|max:255',
+            'phone_number' => 'required|numeric',
         ]);
 
         try {
@@ -70,7 +70,7 @@ class UserController extends BaseController
 
         	DB::commit();
 
-        	return redirect($this->redirectAfterSaveProfile)->with(['success' => 'Update successfully!']);
+        	return redirect($this->redirectAfterSaveProfile)->with(['success' => 'Update Successfully!']);
         } catch (Exception $e) {
         	DB::rollBack();
 
@@ -623,7 +623,7 @@ class UserController extends BaseController
 
     public function addressUpdate(Request $request, $id)
     {
-        $this->validate($request, [
+        $rules = [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'phone_number' => 'required|numeric',
@@ -631,10 +631,19 @@ class UserController extends BaseController
             'address_line' => 'required',
             'city' => 'required',
             'province' => 'required',
-            'country' => 'required',
-            'sub_district' => 'required',
-            'village' => 'required',
-        ]);
+            'country' => 'required'
+        ];
+
+        if ($request->input('country') == 'ID') {
+            
+            $rules = $rules + [
+                        'sub_district' => 'required',
+                        'village' => 'required'
+                    ];
+
+        }
+
+        $this->validate($request, $rules);
 
         try {
             $user = $this->getUserActive();
