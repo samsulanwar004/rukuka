@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\DesignerRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
+use App\Repositories\PageRepository;
 
 class PageController extends BaseApiController
 {
@@ -164,6 +165,12 @@ class PageController extends BaseApiController
             $product->images->toArray();
 
             $product->stocks->toArray();
+
+            //get Delivery & Free Returns
+            $slug = 'delivery-free-returns';
+            $result = (new PageRepository)->getHelp($slug);
+            $deliveryReturns = $result['page'][0]['content'];
+            $product['delivery_returns'] = $deliveryReturns;
 
             $product = collect($product)->all();
 

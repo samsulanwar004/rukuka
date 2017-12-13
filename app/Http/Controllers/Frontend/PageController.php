@@ -125,12 +125,17 @@ class PageController extends BaseController
 
     // Validate Designer Deleted
     try{
-        $Designer = (new ProductRepository)->getDesignerById($product->product_designers_id);
-        $this->validDelete($Designer);
+        $designer = (new ProductRepository)->getDesignerById($product->product_designers_id);
+        $this->validDelete($designer);
 
     } catch (Exception $e) {
         return view('pages.not_found')->withErrors($e->getMessage());
     }
+
+    //get Delivery & Free Returns
+    $slug = 'delivery-free-returns';
+    $result = (new PageRepository)->getHelp($slug);
+    $deliveryReturns = $result['page'][0]['content'];
 
     	return view('pages.product', compact(
             'product',
@@ -138,7 +143,8 @@ class PageController extends BaseController
             'sku',
             'id',
             'share',
-            'rating'
+            'rating',
+            'deliveryReturns'
         ));
     }
 

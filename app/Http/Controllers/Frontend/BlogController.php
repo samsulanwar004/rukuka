@@ -78,7 +78,7 @@ class BlogController extends Controller
                             </div>
                         ';
 
-            $response = array('blog' => $blog, 'loader' => $loader);
+            $response = array('blog' => $blog, 'loader' => $loader, 'count' => count($posts));
             echo json_encode($response);
         }
     }

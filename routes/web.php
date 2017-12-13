@@ -87,6 +87,11 @@ Route::get('/page/{slug}', [
     'uses' => 'Frontend\PageController@page',
 ]);
 
+Route::post('/review-ajax', [
+    'as'   => 'review-post-ajax',
+    'uses' => 'Frontend\UserController@getReviewAjax',
+]);
+
 Route::get('/', [
     'as'   => 'index',
     'uses' => 'Frontend\PageController@index',
@@ -293,10 +298,10 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@showShippingOptionPage',
     ]);
 
-    Route::get('/checkout/billing', [
-        'as'   => 'checkout.billing',
-        'uses' => 'Frontend\UserController@showShippingBillingPage',
-    ]);
+    // Route::get('/checkout/billing', [
+    //     'as'   => 'checkout.billing',
+    //     'uses' => 'Frontend\UserController@showShippingBillingPage',
+    // ]);
 
     Route::post('/checkout/shipping', [
         'as'   => 'checkout.shipping',
@@ -341,35 +346,35 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
     // Route Credit Card module
-    Route::get('/account/cc', [
-        'as'   => 'user.cc',
-        'uses' => 'Frontend\UserController@showCreditCardPage',
-    ]);
+    // Route::get('/account/cc', [
+    //     'as'   => 'user.cc',
+    //     'uses' => 'Frontend\UserController@showCreditCardPage',
+    // ]);
 
-    Route::post('/account/cc', [
-        'as'   => 'user.cc',
-        'uses' => 'Frontend\UserController@creditCardSave',
-    ]);
+    // Route::post('/account/cc', [
+    //     'as'   => 'user.cc',
+    //     'uses' => 'Frontend\UserController@creditCardSave',
+    // ]);
 
-    Route::post('/account/cc-default', [
-        'as'   => 'user.cc.default',
-        'uses' => 'Frontend\UserController@defaultCreditCard',
-    ]);
+    // Route::post('/account/cc-default', [
+    //     'as'   => 'user.cc.default',
+    //     'uses' => 'Frontend\UserController@defaultCreditCard',
+    // ]);
 
-    Route::delete('/account/cc/destroy', [
-        'as'   => 'user.cc.destroy',
-        'uses' => 'Frontend\UserController@ccDestroy',
-    ]);
+    // Route::delete('/account/cc/destroy', [
+    //     'as'   => 'user.cc.destroy',
+    //     'uses' => 'Frontend\UserController@ccDestroy',
+    // ]);
 
-    Route::get('/account/cc/edit/{id?}', [
-        'as'   => 'user.cc.edit',
-        'uses' => 'Frontend\UserController@ccEdit',
-    ]);
+    // Route::get('/account/cc/edit/{id?}', [
+    //     'as'   => 'user.cc.edit',
+    //     'uses' => 'Frontend\UserController@ccEdit',
+    // ]);
 
-    Route::post('/account/cc/update/{id?}', [
-        'as'   => 'user.cc.update',
-        'uses' => 'Frontend\UserController@ccUpdate',
-    ]);
+    // Route::post('/account/cc/update/{id?}', [
+    //     'as'   => 'user.cc.update',
+    //     'uses' => 'Frontend\UserController@ccUpdate',
+    // ]);
 
     Route::post('/order', [
         'as'   => 'order',
