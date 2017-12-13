@@ -119,7 +119,7 @@
                 <div class="uk-card uk-card-small uk-card-border">
                     <div class="uk-card-body">
                         <h4>DELIVERY & FREE RETURNS</h4>
-                        lorem ipsum dolor, lorem ipsum dolor, lorem ipsum dolor, lorem ipsum dolor set amet.
+                        {!!  $deliveryReturns !!}
                     </div>
                 </div>
             </div>
@@ -210,6 +210,8 @@
                 </div>
             @endforeach
         </div>
+        
+        @if($rating)
         <div class="uk-grid uk-visible@m" uk-grid>
             <div id="loader" class="uk-grid-small uk-align-center">
                 <div id="remove-row">
@@ -221,6 +223,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
         <hr>
         <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">

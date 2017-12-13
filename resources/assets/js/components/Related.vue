@@ -111,42 +111,34 @@
               </div>
               <ul uk-accordion="animation: true; multiple: false">
                   <li class="uk-open">
-
                       <h5 class="uk-accordion-title"><b>EDITORS NOTES</b></h5>
                       <div class="uk-accordion-content uk-text-muted">
                         {{ content }}
                       </div>
-
                   </li>
                   <li>
-
                       <h5 class="uk-accordion-title"><b>SIZE & FIT</b></h5>
                       <div class="uk-accordion-content  uk-text-muted">
-                        {{ sizAndFit }}
+                        {{ sizeAndFit }}
                       </div>
 
                   </li>
                   <li>
-
                       <h5 class="uk-accordion-title"><b>DETAILS & CARE</b></h5>
                       <div class="uk-accordion-content uk-text-muted">
                         {{ detailAndCare }}
                       </div>
-
                   </li>
-
               </ul>
               <div class="uk-card uk-card-small uk-card-border">
                 <div class="uk-card-body">
                   <h4>DELIVERY & FREE RETURNS</h4>
-                  lorem ipsum dolor, lorem ipsum dolor, lorem ipsum dolor, lorem ipsum dolor set amet.
+                    <p v-html="deliveryReturns"></p>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
-
         <div class="uk-modal-footer uk-text-right uk-visible@m">
             <button class="uk-button uk-button-secondary" type="button" v-on:click="bag">ADD TO BAG</button>
             <button class="uk-button uk-button-default" type="button" v-on:click="wishlist">ADD TO WISHLIST</button>
@@ -192,7 +184,8 @@
             content: {},
             sizeAndFit: {},
             detailAndCare: {},
-            size: null
+            size: null,
+            deliveryReturns: null
         }
     },
 
@@ -214,6 +207,8 @@
             self.content = data.content;
             self.sizeAndFit = data.size_and_fit;
             self.detailAndCare = data.detail_and_care;
+            self.deliveryReturns = data.delivery_returns;
+
           }
         })
         .catch(function (error) {
