@@ -11,7 +11,10 @@ use Cache;
 
 class CourierRepository{
 
-	const POS_INDONESIA = 'posindonesiacourier';
+	const POS_INDONESIA 		 = 'pos_indonesia';
+	const CHOOSED_SEPARATOR 	 = '-choosed-';
+	const LAST_COURIER_AVAILABLE = 'last_courier_available';
+	const LAST_COURIER_CHOOSED 	 = 'last_courier_choosed';
 
 	private $checkoutBag;
 	private $destinationAddress;
@@ -49,11 +52,11 @@ class CourierRepository{
 		// simple validation bag and destination
 		if ($destinationAddress == null || count($destinationAddress) == 0) {
 
-			return $this->formatResponse('1', 'destination address is empty', null);
+			return $this->formatResponse('1', 'destination address is empty', null, null);
 
 		}else if($checkoutBag == null || count($checkoutBag) == 0){
 
-			return $this->formatResponse('2', 'checkout bag is empty', null);
+			return $this->formatResponse('2', 'checkout bag is empty', null, null);
 
 		}
 
@@ -111,41 +114,63 @@ class CourierRepository{
 
 	    if ($resultPosIndonesia->r_fee->serviceName == 'ERROR') {
 	    	
-	    	return $this->formatResponse('999', 'Shiping services unavailable', $resultPosIndonesia);
+	    	return $this->formatResponse('999', 'error shiping services unavailable', $resultPosIndonesia, null);
 	    
 	    }else if ($resultPosIndonesia->r_fee->serviceName == 'NOT FOUND'){
 	    	
-	    	return $this->formatResponse('999', 'Shiping services unavailable', $resultPosIndonesia);
+	    	return $this->formatResponse('999', 'error shiping services unavailable', $resultPosIndonesia, null);
 	    
 	    }else{
 
 	    	$this->saveResultShippingCostService(self::POS_INDONESIA, $resultPosIndonesia->r_fee);
-	    	return $this->formatResponse('000', 'success', $resultPosIndonesia->r_fee);
+	    	return $this->formatResponse('000', 'success', $resultPosIndonesia->r_fee, self::CHOOSED_SEPARATOR);
 	    
 	    }
 
 	}
 
+	//-------------------------------------------------------------------
+	// exmaple parameter for method : saveResultShippingCostService($courierName, $result)
+	//-------------------------------------------------------------------
+	// $result = [ 
+	//				0 => ['servinceName' => 's1', 'cost' => 5000],
+	//				1 => ['servinceName' => 's2', 'cost' => 6000], 
+	//			];
+	//
+	// $courierName is value of public const 
+	//
+	//-------------------------------------------------------------------
+
 	public function saveResultShippingCostService($courierName, $result){
 
 		$session = new Session();
 		
-		if ($session->has('last_courier_available') == false) {
+		if (is_array($result)) {
+
+			$result = $result;
+
+		}else{
+
+			$result = [$result];
+
+		}
+
+		if ($session->has(self::LAST_COURIER_AVAILABLE) == false) {
 
 			$add_courier_available[$courierName] = $result; 
-			$session->set('last_courier_available', $add_courier_available);
+			$session->set(self::LAST_COURIER_AVAILABLE, $add_courier_available);
 			
 			return true;
 
 		}else{
-			
-			$update_courier_available = $session->get('last_courier_available');
+
+			$update_courier_available = $session->get(self::LAST_COURIER_AVAILABLE);
 			
 			unset($update_courier_available[$courierName]);
 			$update_courier_available[$courierName] = $result;
 			
-			$session->remove('last_courier_available');
-			$session->set('last_courier_available', $update_courier_available);
+			$session->remove(self::LAST_COURIER_AVAILABLE);
+			$session->set(self::LAST_COURIER_AVAILABLE, $update_courier_available);
 
 			return true;
 		}
@@ -156,37 +181,131 @@ class CourierRepository{
 
 		$session = new Session();
 
-		$params = explode('-choose-', $valueChoosed);
+		$params = explode(self::CHOOSED_SEPARATOR, $valueChoosed);
 
 		$listCost = $session->get('last_courier_available')[ $params[0] ];
 
 		if ($params[0] == self::POS_INDONESIA) {
-
+			
 			foreach ($listCost as $listCostKey => $listCostValue) {
 				
 				if ($listCostValue->serviceCode == $params[1]) {
 
-					return $this->formatResponse('000', 'success , Courier name ' . $params[0] . ' and choose ' . $params[1] . ' shipping cost in data', $listCostValue);
+					return $this->formatResponse('000', 'success , Courier name ' . $params[0] . ' and choose ' . $params[1] . ' shipping cost in data', $listCostValue, null);
 
 				}
 
 			}
 
-			return $this->formatResponse('000', 'last courier avaiable not found', null);
+			return $this->formatResponse('998', 'error last courier avaiable not found in queue', null, null);
 
 		}else{
 
-			return $this->formatResponse('000', 'last courier avaiable not found', null);
+			return $this->formatResponse('999', 'error last courier avaiable not found', null, null);
 
 		}
 	}
 
-	public function formatResponse($erroCode, $message, $data){
+	public function saveShippingCostChoosed($valueChoosed){
+
+		if ($valueChoosed == null) {
+
+			return $this->formatResponse('997', 'error value choosed is null', null, null);
+		
+		}
+
+		$costChoosed = $this->getShippingCostChoosed($valueChoosed);
+
+		if ($costChoosed['error'] != '000') {
+
+			return $costChoosed;
+
+		}
+
+		$params = explode(self::CHOOSED_SEPARATOR, $valueChoosed);
+
+		if ($params[0] == self::POS_INDONESIA) {
+
+			$rebuildDataForSummary = $this->rebuildDataForSummary(self::POS_INDONESIA, $valueChoosed, $costChoosed);
+
+			return $this->saveToSessionShippingCostChoosed($rebuildDataForSummary);
+
+		}else{
+
+			return $this->formatResponse('994', 'error cant save shipping cost with value ' . $valueChoosed, null, null);
+		
+		}
+
+	}
+
+	public function saveToSessionShippingCostChoosed($rebuildDataForSummary){
+
+		$session = new Session();
+
+		if ($rebuildDataForSummary == null) {
+			
+			return $this->formatResponse('992', 'error rebuild data is null before saving to session', null, null);
+
+		}
+
+		$session->remove(self::LAST_COURIER_CHOOSED);
+		$session->set(self::LAST_COURIER_CHOOSED, $rebuildDataForSummary);
+		
+		return $this->formatResponse('000', 'saved ' . $valueChoosed . ' success', $costChoosed['data'], null, null); 
+	
+	}
+
+	public function getSavedSessionShippingChoosed(){
+
+		$session = new Session();
+
+		if ($session->has(self::LAST_COURIER_CHOOSED) == false) {
+
+			return $this->formatResponse('991', 'error shipping choosed in session not found', null, null);
+		
+		}
+
+		return $this->formatResponse('000', 'success shipping cost in data', $session->get('last_courier_choosed'), null, null); 
+
+	}
+
+	public function rebuildDataForSummary($constCourier, $valueChoosed, $costChoosed){
+
+		// NOTE : standar return array for this method follow pos indonesia bellow
+
+		if ($constCourier == self::POS_INDONESIA) {
+
+			if ($costChoosed['data']->totalFee <= 0) {
+
+				return $this->formatResponse('996', 'error shipping total', null, null);
+
+			}
+
+			$rebuildData = [
+					'courier_name' 		=> 'POS INDONESIA',
+					'total_fee_idr' 	=> $costChoosed['data']->totalFee,
+					'total_fee_usd' 	=> $costChoosed['data']->notes,
+					'value courier_selected' => $valueChoosed,
+					'origin' 			=> $costChoosed['data'],
+			];
+
+			return $rebuildData;
+
+		}else{
+
+			return $this->formatResponse('993','cannot rebuild not recognized courier service', null, null);
+		
+		}
+
+	}
+
+	public function formatResponse($erroCode, $message, $data, $separator){
 
 		return [
 			'error'	=>	$erroCode, 
 			'message' => $message,
-			'data' => $data
+			'data' => $data,
+			'separator' =>$separator,
 		];
 
 	}
