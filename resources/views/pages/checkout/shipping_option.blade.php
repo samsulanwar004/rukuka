@@ -55,7 +55,7 @@
 
                               <tr>
                                   <td>
-                                      <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{ $availableCouriersService_key }}-choose-{{ $dataServices_val->serviceCode }}" required="" onclick="getTotal({{ $dataServices_val->notes }})"> </td>
+                                      <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{ $availableCouriersService_key }}{{$availableCouriersService_val['separator']}}{{ $dataServices_val->serviceCode }}" required="" onclick="getTotal({{ $dataServices_val->notes }})"> </td>
                                   <td> {{ $dataServices_val->serviceName }} </td>
                                   <td> $ {{ $dataServices_val->notes }} ( IDR {{ number_format($dataServices_val->totalFee) }} ) </td>
                               </tr>
@@ -66,7 +66,7 @@
 
                             <tr>
                                 <td>
-                                    <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{ $availableCouriersService_key }}-choose-{{ $dataServices_val->serviceCode }}" required="" onclick="getTotal({{ $dataServices_val->notes }})"> </td>
+                                    <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{ $availableCouriersService_key }}-CHOOSE-{{ $availableCouriersService_val['data']->serviceCode }}" required="" onclick="getTotal({{ $availableCouriersService_val['data']->notes }})"> </td>
                                 <td> {{ $availableCouriersService_val['data']->serviceName }} </td>
                                 <td> $ {{ $availableCouriersService_val['data']->notes }} ( IDR {{ number_format($availableCouriersService_val['data']->totalFee) }} ) </td>
                             </tr>
