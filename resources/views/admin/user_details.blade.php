@@ -92,7 +92,7 @@
             <div class="col-md-12" align="right">
               <label class="control-label">Email Verification</label>
               <select class="form-control" name="is_verified" style="width: 300px">
-                <option value="0" {{ $row->is_verified == 0 ? 'selected' : ''}}>
+                <option disabled value="0" {{ $row->is_verified == 0 ? 'selected' : ''}}>
                   Unverified
                 </option>
                 <option value="1" {{ $row->is_verified == 1 ? 'selected' : ''}}>
