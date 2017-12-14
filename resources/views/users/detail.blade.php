@@ -37,14 +37,6 @@
                   <div>
                       <input class="uk-input {{ $errors->has('phone_number') ? ' uk-form-danger' : '' }}" name="phone_number" id="form-s-tel" type="tel" placeholder="*PHONE NUMBER" value="{{ $user->phone_number }}" required="required">
                   </div>
-                  <div class="uk-inline">
-                    <a class="uk-icon-link" uk-icon="icon: question"></a>
-                    <div uk-drop="pos: right-center">
-                        <div class="uk-card uk-card-body uk-card-default uk-padding-small uk-text-small">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </div>
-                    </div>
-                  </div>
               </div>
               DATE OF BIRTH
               <div class="uk-margin-small uk-grid-small" uk-grid>

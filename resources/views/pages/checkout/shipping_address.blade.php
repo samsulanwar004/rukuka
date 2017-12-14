@@ -16,9 +16,9 @@
             <div class="uk-text-center">
                <button class="uk-button uk-button-text" disabled>SHIPPING OPTION</button>
             </div>
-            <div class="uk-text-center">
+{{--             <div class="uk-text-center">
                <button class="uk-button uk-button-text" disabled>BILLING</button>
-            </div>
+            </div> --}}
             <div class="uk-text-center">
                <button class="uk-button uk-button-text" disabled>REVIEW</button>
             </div>
