@@ -46,7 +46,7 @@
                     </tr> -->
 
                     @foreach ($availableCouriersService['available_couriers'] as $availableCouriersService_key => $availableCouriersService_val)
-   
+                        
                         @if($availableCouriersService_val['error'] == '000')
                           
                           @if(count($availableCouriersService_val['data']) > 1 )
@@ -66,7 +66,7 @@
 
                             <tr>
                                 <td>
-                                    <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{ $availableCouriersService_key }}-CHOOSE-{{ $availableCouriersService_val['data']->serviceCode }}" required="" onclick="getTotal({{ $availableCouriersService_val['data']->notes }})"> </td>
+                                    <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{ $availableCouriersService_key }}{{ $availableCouriersService_val['separator'] }}{{ $availableCouriersService_val['data']->serviceCode }}" required="" onclick="getTotal({{ $availableCouriersService_val['data']->notes }})"> </td>
                                 <td> {{ $availableCouriersService_val['data']->serviceName }} </td>
                                 <td> $ {{ $availableCouriersService_val['data']->notes }} ( IDR {{ number_format($availableCouriersService_val['data']->totalFee) }} ) </td>
                             </tr>

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Services\PosIndonesiaCourierService;
+use App\Services\BagService;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 use DB;
@@ -15,6 +16,8 @@ class CourierRepository{
 	const CHOOSED_SEPARATOR 	 = '-choosed-';
 	const LAST_COURIER_AVAILABLE = 'last_courier_available';
 	const LAST_COURIER_CHOOSED 	 = 'last_courier_choosed';
+	const SIGNATURE_BAG			 = 'signature_bag';
+	const INSTANCE_SHOP 		 = 'shopping';
 
 	private $checkoutBag;
 	private $destinationAddress;
@@ -35,12 +38,104 @@ class CourierRepository{
 
 	public function getAvailableCouriers(){
 
+		$this->createSignatureBag();
+
 		return [
 				'available_couriers' => [
 					self::POS_INDONESIA => $this->getShippingServiceByPosIndonesia(),
 				]	
 		];
 
+	}
+
+	public function createSignatureBag(){
+
+		$session = new Session();
+
+		$checkoutBag = $this->checkoutBag;
+
+		if($checkoutBag == null || count($checkoutBag) == 0){
+
+			return $this->formatResponse('991', 'checkout bag is empty', null, null);
+
+		}
+
+		// init count dimension
+		$requestWeight 		= 0;
+		$requestLength 		= 0;
+		$requestWidth 		= 0;
+		$requestHeight 		= 0;
+		$requestDiameter 	= 0;
+		$requestItemValue	= 0;
+
+		foreach ($checkoutBag as $checkoutBag_key => $checkoutBag_value) {
+			
+			$requestWeight 		+= $checkoutBag_value->options->weight * $checkoutBag_value->qty;
+			$requestLength 		+= $checkoutBag_value->options->length * $checkoutBag_value->qty;
+			$requestWidth 		+= $checkoutBag_value->options->width * $checkoutBag_value->qty;
+			$requestHeight 		+= $checkoutBag_value->options->height * $checkoutBag_value->qty;
+			$requestDiameter 	+= $checkoutBag_value->options->diameter * $checkoutBag_value->qty;
+			$requestItemValue	+= $checkoutBag_value->price * $checkoutBag_value->qty;
+
+		}
+
+		$signature = $requestWeight . $requestLength . $requestWidth . $requestHeight . $requestItemValue;
+		$signatureResult = md5($signature);
+
+		$session->remove(self::SIGNATURE_BAG);
+		$session->set(self::SIGNATURE_BAG, $signatureResult);
+
+		return $this->formatResponse('000', 'signature bag created',  $signatureResult, null);
+	}
+
+	public function verifySignatureBag(){
+
+		$session = new Session();
+
+		$checkoutBag = $this->checkoutBag;
+
+		if($checkoutBag == null || count($checkoutBag) == 0){
+
+			return $this->formatResponse('991', 'checkout bag is empty', null, null);
+
+		}
+
+		// init count dimension
+		$requestWeight 		= 0;
+		$requestLength 		= 0;
+		$requestWidth 		= 0;
+		$requestHeight 		= 0;
+		$requestDiameter 	= 0;
+		$requestItemValue	= 0;
+
+		foreach ($checkoutBag as $checkoutBag_key => $checkoutBag_value) {
+			
+			$requestWeight 		+= $checkoutBag_value->options->weight * $checkoutBag_value->qty;
+			$requestLength 		+= $checkoutBag_value->options->length * $checkoutBag_value->qty;
+			$requestWidth 		+= $checkoutBag_value->options->width * $checkoutBag_value->qty;
+			$requestHeight 		+= $checkoutBag_value->options->height * $checkoutBag_value->qty;
+			$requestDiameter 	+= $checkoutBag_value->options->diameter * $checkoutBag_value->qty;
+			$requestItemValue	+= $checkoutBag_value->price * $checkoutBag_value->qty;
+
+		}
+
+		$signature = $requestWeight . $requestLength . $requestWidth . $requestHeight . $requestItemValue;
+		$signatureResult = md5($signature);
+
+		if ($session->get(self::SIGNATURE_BAG) == null) {
+
+			return $this->formatResponse('990', 'signature bag not found', null, null);
+		
+		}else if ($session->get(self::SIGNATURE_BAG) == $signatureResult) {
+
+			return $this->formatResponse('000', 'signature bag valid', null, null);
+		
+		}else{
+
+			return $this->formatResponse('989', 'signature invalid, bag already changed please reselect shipping cost', null, null);
+
+		}
+		
 	}
 
 	public function getShippingServiceByPosIndonesia(){
@@ -52,11 +147,11 @@ class CourierRepository{
 		// simple validation bag and destination
 		if ($destinationAddress == null || count($destinationAddress) == 0) {
 
-			return $this->formatResponse('1', 'destination address is empty', null, null);
+			return $this->formatResponse('990', 'destination address is empty', null, null);
 
 		}else if($checkoutBag == null || count($checkoutBag) == 0){
 
-			return $this->formatResponse('2', 'checkout bag is empty', null, null);
+			return $this->formatResponse('991', 'checkout bag is empty', null, null);
 
 		}
 
@@ -123,6 +218,7 @@ class CourierRepository{
 	    }else{
 
 	    	$this->saveResultShippingCostService(self::POS_INDONESIA, $resultPosIndonesia->r_fee);
+
 	    	return $this->formatResponse('000', 'success', $resultPosIndonesia->r_fee, self::CHOOSED_SEPARATOR);
 	    
 	    }
@@ -159,7 +255,7 @@ class CourierRepository{
 
 			$add_courier_available[$courierName] = $result; 
 			$session->set(self::LAST_COURIER_AVAILABLE, $add_courier_available);
-			
+
 			return true;
 
 		}else{
@@ -183,7 +279,7 @@ class CourierRepository{
 
 		$params = explode(self::CHOOSED_SEPARATOR, $valueChoosed);
 
-		$listCost = $session->get('last_courier_available')[ $params[0] ];
+		$listCost = $session->get(self::LAST_COURIER_AVAILABLE)[$params[0]];
 
 		if ($params[0] == self::POS_INDONESIA) {
 			
@@ -212,6 +308,13 @@ class CourierRepository{
 
 			return $this->formatResponse('997', 'error value choosed is null', null, null);
 		
+		}
+
+		$veryfiBag = $this->verifySignatureBag();
+
+		if ($veryfiBag['error'] != '000') {
+			
+			return $veryfiBag;
 		}
 
 		$costChoosed = $this->getShippingCostChoosed($valueChoosed);
@@ -251,7 +354,7 @@ class CourierRepository{
 		$session->remove(self::LAST_COURIER_CHOOSED);
 		$session->set(self::LAST_COURIER_CHOOSED, $rebuildDataForSummary);
 		
-		return $this->formatResponse('000', 'saved ' . $valueChoosed . ' success', $costChoosed['data'], null, null); 
+		return $this->formatResponse('000', 'saved success', $rebuildDataForSummary, null); 
 	
 	}
 
@@ -259,7 +362,7 @@ class CourierRepository{
 
 		$session = new Session();
 
-		if ($session->has(self::LAST_COURIER_CHOOSED) == false) {
+		if ($session->has(self::LAST_COURIER_CHOOSED) == null) {
 
 			return $this->formatResponse('991', 'error shipping choosed in session not found', null, null);
 		
