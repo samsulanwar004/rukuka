@@ -174,7 +174,7 @@ class CmsModulsSeeder extends Seeder {
         ],[
 
             'created_at'=>date('Y-m-d H:i:s'),
-            'name'=>'Popup Link',
+            'name'=>'Popup Links',
             'icon'=>'fa fa-circle-o',
             'path'=>'popups',
             'table_name'=>'popups',
@@ -209,6 +209,16 @@ class CmsModulsSeeder extends Seeder {
             'path'=>'user_accounts',
             'table_name'=>'users',
             'controller'=>'AdminUserAccountsController',
+            'is_protected'=>0,
+            'is_active'=>0
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Subscribers',
+            'icon'=>'fa fa-circle-o',
+            'path'=>'subcribers',
+            'table_name'=>'subcribers',
+            'controller'=>'AdminSubcribersController',
             'is_protected'=>0,
             'is_active'=>0
         ]
@@ -542,6 +552,19 @@ class CmsMenusSeeder extends Seeder {
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 5
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Subscribers',
+            'type'=>'Route',
+            'path'=>'AdminSubcribersControllerGetIndex',
+            'color' => 'normal',
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>20,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 4
         ]
     ];
 
