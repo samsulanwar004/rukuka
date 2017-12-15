@@ -10,7 +10,7 @@
     <title>rukuka</title>
 
     <!-- jQuery is required -->
-    <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
+    <link rel="stylesheet" href="{{ elixirCDN('css/app.css') }}">
 
   </head>
   <body>
@@ -37,10 +37,10 @@
       @yield('content')
       @include('partials.footer')
     </div>
-    <script src="{{ elixir('js/vendor.js') }}"></script>
-    <script src="{{ elixir('js/custom.js') }}"></script>
-    <script src="{{ elixir('js/main.js') }}"></script>
-    <script src="{{ elixir('js/app.js') }}"></script>
+    <script src="{{ elixirCDN('js/vendor.js') }}"></script>
+    <script src="{{ elixirCDN('js/custom.js') }}"></script>
+    <script src="{{ elixirCDN('js/main.js') }}"></script>
+    <script src="{{ elixirCDN('js/app.js') }}"></script>
     @section('upload_scripts')
     @show
     @section('footer_scripts')
