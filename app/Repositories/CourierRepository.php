@@ -17,7 +17,7 @@ class CourierRepository{
 	const LAST_COURIER_AVAILABLE = 'last_courier_available';
 	const LAST_COURIER_CHOOSED 	 = 'last_courier_choosed';
 	const SIGNATURE_BAG			 = 'signature_bag';
-	const INSTANCE_SHOP 		 = 'shopping';
+	const SIGNATURE_ADDRESS		 = 'signature_address';
 
 	private $checkoutBag;
 	private $destinationAddress;
@@ -39,6 +39,7 @@ class CourierRepository{
 	public function getAvailableCouriers(){
 
 		$this->createSignatureBag();
+		$this->createSignatureAddress();
 
 		return [
 				'available_couriers' => [
@@ -52,46 +53,50 @@ class CourierRepository{
 
 		$session = new Session();
 
-		$checkoutBag = $this->checkoutBag;
+		$signatureResult = $this->getSignatureBag();
 
-		if($checkoutBag == null || count($checkoutBag) == 0){
+		if ($signatureResult['error'] != '000') {
 
-			return $this->formatResponse('991', 'checkout bag is empty', null, null);
-
+			return $signatureResult;
+		
 		}
-
-		// init count dimension
-		$requestWeight 		= 0;
-		$requestLength 		= 0;
-		$requestWidth 		= 0;
-		$requestHeight 		= 0;
-		$requestDiameter 	= 0;
-		$requestItemValue	= 0;
-
-		foreach ($checkoutBag as $checkoutBag_key => $checkoutBag_value) {
-			
-			$requestWeight 		+= $checkoutBag_value->options->weight * $checkoutBag_value->qty;
-			$requestLength 		+= $checkoutBag_value->options->length * $checkoutBag_value->qty;
-			$requestWidth 		+= $checkoutBag_value->options->width * $checkoutBag_value->qty;
-			$requestHeight 		+= $checkoutBag_value->options->height * $checkoutBag_value->qty;
-			$requestDiameter 	+= $checkoutBag_value->options->diameter * $checkoutBag_value->qty;
-			$requestItemValue	+= $checkoutBag_value->price * $checkoutBag_value->qty;
-
-		}
-
-		$signature = $requestWeight . $requestLength . $requestWidth . $requestHeight . $requestItemValue;
-		$signatureResult = md5($signature);
 
 		$session->remove(self::SIGNATURE_BAG);
-		$session->set(self::SIGNATURE_BAG, $signatureResult);
+		$session->set(self::SIGNATURE_BAG, $signatureResult['data']);
 
-		return $this->formatResponse('000', 'signature bag created',  $signatureResult, null);
+		return $this->formatResponse('000', 'signature bag created',  $signatureResult['data'], null);
 	}
 
 	public function verifySignatureBag(){
 
 		$session = new Session();
 
+		$signatureResult = $this->getSignatureBag();
+
+		if ($signatureResult['error'] != '000') {
+
+			return $signatureResult;
+		
+		}
+
+		if ($session->get(self::SIGNATURE_BAG) == null) {
+
+			return $this->formatResponse('990', 'signature bag in session not found', null, null);
+		
+		}else if ($session->get(self::SIGNATURE_BAG) == $signatureResult['data']) {
+
+			return $this->formatResponse('000', 'success signature bag valid', null, null);
+		
+		}else{
+
+			return $this->formatResponse('989', 'error signature invalid, bag already changed please reselect shipping cost', null, null);
+
+		}
+		
+	}
+
+	public function getSignatureBag(){
+
 		$checkoutBag = $this->checkoutBag;
 
 		if($checkoutBag == null || count($checkoutBag) == 0){
@@ -101,41 +106,106 @@ class CourierRepository{
 		}
 
 		// init count dimension
-		$requestWeight 		= 0;
-		$requestLength 		= 0;
-		$requestWidth 		= 0;
-		$requestHeight 		= 0;
-		$requestDiameter 	= 0;
-		$requestItemValue	= 0;
+		$requestWeight 		= '';
+		$requestLength 		= '';
+		$requestWidth 		= '';
+		$requestHeight 		= '';
+		$requestDiameter 	= '';
+		$requestItemValue	= '';
 
 		foreach ($checkoutBag as $checkoutBag_key => $checkoutBag_value) {
 			
-			$requestWeight 		+= $checkoutBag_value->options->weight * $checkoutBag_value->qty;
-			$requestLength 		+= $checkoutBag_value->options->length * $checkoutBag_value->qty;
-			$requestWidth 		+= $checkoutBag_value->options->width * $checkoutBag_value->qty;
-			$requestHeight 		+= $checkoutBag_value->options->height * $checkoutBag_value->qty;
-			$requestDiameter 	+= $checkoutBag_value->options->diameter * $checkoutBag_value->qty;
-			$requestItemValue	+= $checkoutBag_value->price * $checkoutBag_value->qty;
+			$requestWeight 		.= $checkoutBag_value->options->weight . $checkoutBag_value->qty . $checkoutBag_value->id . $checkoutBag_value->rowId;
+			$requestLength 		.= $checkoutBag_value->options->length . $checkoutBag_value->qty . $checkoutBag_value->id . $checkoutBag_value->rowId;
+			$requestWidth 		.= $checkoutBag_value->options->width . $checkoutBag_value->qty . $checkoutBag_value->id . $checkoutBag_value->rowId;
+			$requestHeight 		.= $checkoutBag_value->options->height . $checkoutBag_value->qty . $checkoutBag_value->id . $checkoutBag_value->rowId;
+			$requestDiameter 	.= $checkoutBag_value->options->diameter . $checkoutBag_value->qty . $checkoutBag_value->id . $checkoutBag_value->rowId;
+			$requestItemValue	.= $checkoutBag_value->price . $checkoutBag_value->qty . $checkoutBag_value->id . $checkoutBag_value->rowId;
 
 		}
 
-		$signature = $requestWeight . $requestLength . $requestWidth . $requestHeight . $requestItemValue;
-		$signatureResult = md5($signature);
+		$signatureData = $requestWeight . $requestLength . $requestWidth . $requestHeight . $requestItemValue;
+		$signatureResult = md5($signatureData);
 
-		if ($session->get(self::SIGNATURE_BAG) == null) {
+		return $this->formatResponse('000', 'bring signature bag in data', $signatureResult, null);
+	}
 
-			return $this->formatResponse('990', 'signature bag not found', null, null);
+	public function createSignatureAddress(){
+
+		$session = new Session();
+
+		$signatureResult = $this->getSignatureAddress();
+
+		if ($signatureResult['error'] != '000') {
+
+			return $signatureResult;
 		
-		}else if ($session->get(self::SIGNATURE_BAG) == $signatureResult) {
+		}
 
-			return $this->formatResponse('000', 'signature bag valid', null, null);
+		$session->remove(self::SIGNATURE_ADDRESS);
+		$session->set(self::SIGNATURE_ADDRESS, $signatureResult['data']);
+
+		return $this->formatResponse('000', 'signature bag created',  $signatureResult['data'], null);
+
+	}
+
+	public function veryfySignatureAddress(){
+
+		$session = new Session();
+
+		$signatureResult = $this->getSignatureAddress();
+
+		if ($signatureResult['error'] != '000') {
+
+			return $signatureResult;
+		
+		}		
+
+		if ($session->get(self::SIGNATURE_ADDRESS) == null) {
+
+			return $this->formatResponse('990', 'signature address in session not found', null, null);
+		
+		}else if ($session->get(self::SIGNATURE_ADDRESS) == $signatureResult['data']) {
+
+			return $this->formatResponse('000', 'success signature address valid', null, null);
 		
 		}else{
 
-			return $this->formatResponse('989', 'signature invalid, bag already changed please reselect shipping cost', null, null);
+			return $this->formatResponse('989', 'error signature invalid, address already changed please reselect shipping cost', null, null);
 
 		}
-		
+	}
+
+	public function getSignatureAddress(){
+
+		$destinationAddress = $this->destinationAddress;
+
+		if ($destinationAddress == null || count($destinationAddress) == 0) {
+
+			return $this->formatResponse('990', 'destination address is empty', null, null);
+
+		}
+
+		$signatureData =  $destinationAddress->id .
+						  $destinationAddress->users_id .
+						  $destinationAddress->first_name .
+						  $destinationAddress->last_name .
+						  $destinationAddress->company .
+						  $destinationAddress->address_line .
+						  $destinationAddress->city .
+						  $destinationAddress->province .
+						  $destinationAddress->postal .
+						  $destinationAddress->country .
+						  $destinationAddress->phone_number .
+						  $destinationAddress->is_default .
+						  $destinationAddress->created_at .
+						  $destinationAddress->updated_at .
+						  $destinationAddress->sub_district .
+						  $destinationAddress->village;
+
+		$signatureResult = md5($signatureData);
+
+		return $this->formatResponse('000', 'bring signature address in data', $signatureResult, null);
 	}
 
 	public function getShippingServiceByPosIndonesia(){
@@ -205,7 +275,6 @@ class CourierRepository{
 	                            ];
 
 	    $resultPosIndonesia = $posIndonesia->callMethod('getFee', $requestToPosIndonesia);
-	    // $resultPosIndonesia = null;
 
 	    if ($resultPosIndonesia->r_fee->serviceName == 'ERROR') {
 	    	
@@ -217,14 +286,84 @@ class CourierRepository{
 	    
 	    }else{
 
-	    	$this->saveResultShippingCostService(self::POS_INDONESIA, $resultPosIndonesia->r_fee);
+	    	$rebuildResponse = $this->rebuildDataResponseFromProviderShipping(self::POS_INDONESIA, $resultPosIndonesia);
+	    	
+	    	if ($rebuildResponse['error'] != '000') {
+	    		
+	    		return $rebuildResponse;
 
-	    	return $this->formatResponse('000', 'success', $resultPosIndonesia->r_fee, self::CHOOSED_SEPARATOR);
+	    	}
+
+	    	$this->saveResultShippingCostService(self::POS_INDONESIA, $rebuildResponse['data']);
+
+	    	return $this->formatResponse('000', 'success', $rebuildResponse['data'], self::CHOOSED_SEPARATOR);
 	    
 	    }
 
 	}
 
+	public function rebuildDataResponseFromProviderShipping($courierName, $resultFromCourierProvider){
+
+		if ($courierName == self::POS_INDONESIA) {
+
+			if (is_array($resultFromCourierProvider->r_fee)) {
+				
+				foreach ($resultFromCourierProvider->r_fee as $resultFromCourierProviderKey => $resultFromCourierProviderValue) {
+				
+					$listServiceCost[] = $this->defaultTemplateResponseCourier(
+											$resultFromCourierProviderValue->serviceCode, 
+											$resultFromCourierProviderValue->serviceName, 
+											$resultFromCourierProviderValue->fee, 
+											$resultFromCourierProviderValue->feeTax, 
+											$resultFromCourierProviderValue->insurance, 
+											$resultFromCourierProviderValue->insuranceTax, 
+											$resultFromCourierProviderValue->totalFee, 
+											$resultFromCourierProviderValue->itemValue,
+											$resultFromCourierProviderValue->notes
+										);
+
+				}
+
+			}else{
+
+				$listServiceCost[] = $this->defaultTemplateResponseCourier(
+										$resultFromCourierProvider->r_fee->serviceCode, 
+										$resultFromCourierProvider->r_fee->serviceName, 
+										$resultFromCourierProvider->r_fee->fee, 
+										$resultFromCourierProvider->r_fee->feeTax, 
+										$resultFromCourierProvider->r_fee->insurance, 
+										$resultFromCourierProvider->r_fee->insuranceTax, 
+										$resultFromCourierProvider->r_fee->totalFee, 
+										$resultFromCourierProvider->r_fee->itemValue,
+										$resultFromCourierProviderValue->note
+									);
+
+			}
+
+			return $this->formatResponse('000', 'success rebuild data response from provider shipping', $listServiceCost, null);
+
+		}else{
+
+			return $this->formatResponse('998', 'error cannot rebuild data response from provider shipping', null, null);
+
+		}
+
+	}
+
+	public function defaultTemplateResponseCourier($serviceCode, $serviceName, $fee, $feeTax, $insurance, $insuranceTax, $totalFee, $itemValue, $notes){
+
+		return (object) [
+					'serviceCode' 	=> $serviceCode,
+					'serviceName' 	=> $serviceName,
+					'fee' 			=> $fee,
+					'feeTax' 		=> $feeTax,
+					'insurance' 	=> $insurance,
+					'insuranceTax' 	=> $insuranceTax,
+					'totalFee' 		=> $totalFee,
+					'itemValue' 	=> $itemValue,
+					'notes'			=> $notes
+				];
+	}
 	//-------------------------------------------------------------------
 	// exmaple parameter for method : saveResultShippingCostService($courierName, $result)
 	//-------------------------------------------------------------------
@@ -317,6 +456,13 @@ class CourierRepository{
 			return $veryfiBag;
 		}
 
+		$veryfiAddress = $this->veryfySignatureAddress();
+
+		if ($veryfiAddress['error'] != '000') {
+			
+			return $veryfiAddress;
+		}
+
 		$costChoosed = $this->getShippingCostChoosed($valueChoosed);
 
 		if ($costChoosed['error'] != '000') {
@@ -331,7 +477,13 @@ class CourierRepository{
 
 			$rebuildDataForSummary = $this->rebuildDataForSummary(self::POS_INDONESIA, $valueChoosed, $costChoosed);
 
-			return $this->saveToSessionShippingCostChoosed($rebuildDataForSummary);
+			if ($rebuildDataForSummary['error'] != '000') {
+				
+				return $rebuildDataForSummary;
+
+			}
+
+			return $this->saveToSessionShippingCostChoosed($rebuildDataForSummary['data']);
 
 		}else{
 
@@ -384,21 +536,33 @@ class CourierRepository{
 
 			}
 
-			$rebuildData = [
-					'courier_name' 		=> 'POS INDONESIA',
-					'total_fee_idr' 	=> $costChoosed['data']->totalFee,
-					'total_fee_usd' 	=> $costChoosed['data']->notes,
-					'value courier_selected' => $valueChoosed,
-					'origin' 			=> $costChoosed['data'],
-			];
+			$rebuildData = $this->defaultTemplateForSummary(
+								'POS INDONESIA', 
+								$costChoosed['data']->totalFee, 
+								$costChoosed['data']->notes, 
+								$valueChoosed, 
+								$costChoosed['data']
+							);
 
-			return $rebuildData;
+			return  $this->formatResponse('000', 'success rebuild data for summary', $rebuildData, null);
 
 		}else{
 
 			return $this->formatResponse('993','cannot rebuild not recognized courier service', null, null);
 		
 		}
+
+	}
+
+	public function defaultTemplateForSummary($courierName, $totalFeeIdr, $totalFeeUsd, $valueCourierSelected, $origin){
+
+		return (object) [
+							'courier_name' 			 => $courierName,
+							'total_fee_idr' 		 => $totalFeeIdr,
+							'total_fee_usd' 		 => $totalFeeUsd,
+							'value courier_selected' => $valueCourierSelected,
+							'origin' 				 => $origin,
+						];
 
 	}
 
