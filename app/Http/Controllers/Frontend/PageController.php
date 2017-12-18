@@ -138,6 +138,10 @@ class PageController extends BaseController
     $result = (new PageRepository)->getHelp($slug);
     $deliveryReturns = $result['page'][0]['content'];
 
+    //Count Product Categories For Popular Search
+    $idProductCategory = $product->product_categories_id;
+    (new ProductRepository)->updateCountProductCategory($idProductCategory);
+
     	return view('pages.product', compact(
             'product',
             'method',
