@@ -24,15 +24,9 @@
 
       </div>
       <div class="uk-width-1-5@m">
-        <ul class="uk-nav uk-navbar-dropdown-nav">
-          <li>POPULAR SEARCHES</li>
-          <li><a href="#">Cardigans</a></li>
-          <li><a href="#">Blazers</a></li>
-          <li><a href="#">Men's Sweaters</a></li>
-          <li><a href="#">Business Casual For Women</a></li>
-          <li><a href="#">Men's Suits</a></li>
-        </ul>
-
+          <popular-search
+          popular_search="{{ route('popular-search') }}"
+          ></popular-search>
       </div>
       <div class="uk-width-2-5@m">
         <subcriber api="{{ route('subcriber') }}"></subcriber>
