@@ -23,6 +23,8 @@ Route::get('v1/search/{keyword?}', 'Api\PageController@search')->name('search.ap
 
 Route::get('v1/popular', 'Api\PageController@popular')->name('populer');
 
+Route::get('v1/popular-search', 'Api\PageController@popularSearch')->name('popular-search');
+
 Route::get('v1/related/{categoryId}', 'Api\PageController@related')->name('related');
 
 Route::post('v1/subcriber', 'Api\UserController@subcriber')->name('subcriber');

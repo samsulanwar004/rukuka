@@ -33,6 +33,8 @@ import NavigationMobile from './components/NavigationMobile.vue';
 
 import Search from './components/Search.vue';
 
+import PopularSearch from './components/PopularSearch.vue';
+
 
 Vue.config.devtools = true
 Vue.config.debug = true
@@ -74,6 +76,7 @@ new Vue({
     'address-list' : Address,
     'credit-card' : CreditCard,
     'navigation-mobile' : NavigationMobile,
-    'search' : Search
+    'search' : Search,
+    'popular-search' : PopularSearch
 	}
 });
