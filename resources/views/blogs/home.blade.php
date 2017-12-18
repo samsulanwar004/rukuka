@@ -58,7 +58,7 @@
         <div id="loader" class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
             <div id="remove-row" class="uk-align-center">
                 <h2>
-                    @if(count($posts) <= 9)
+                    @if(count($posts) == 9)
                         <a onclick="myFunction({{ $post->id }})" id="btn-more" class="uk-button uk-button-default" > LOAD MORE </a>
                     @endif
                 </h2>
@@ -68,6 +68,28 @@
 
     @else
         <div class="uk-container uk-container-small">
+            <div class="uk-panel uk-margin-top">
+                <div class="uk-card uk-card-border uk-card-small">
+                    <div class="uk-card-body">
+                        <div class="uk-visible@m">
+                            <ul class="uk-grid" uk-grid>
+                                @foreach($category as $value)
+                                    <li><a href="{{ URL::to('blog/category/'.$value->slug)}}"><h3>{{$value->name}}</h3></a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="uk-hidden@m">
+                            <ul class="uk-grid" uk-grid>
+                                @foreach($category as $value)
+                                    <li><a href="{{ URL::to('blog/category/'.$value->slug)}}"><h5>{{$value->name}}</h5></a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <h3 class="uk-margin-small">{{$title}}</h3>
             <div class="uk-section uk-section-default uk-section-xlarge uk-text-center">
                 <h1>No Content</h1>
             </div>

@@ -862,16 +862,11 @@ class UserController extends BaseController
                         <div class="uk-card-body" style="min-height: 250px">
                                 <div class="uk-flex uk-flex-center">
                                   <div class="stars-product uk-margin-remove uk-text-center">
-                                      <input type="radio" name="star-'. $data['id'] .'" class="star-1" value="1" '.($data['rating'] == 1 ? 'checked':'').'/>
-                                      <label for="star-1">1</label>
-                                      <input type="radio" name="star-'. $data['id'] .'" class="star-2" value="2" '.($data['rating'] == 2 ? 'checked':'').'/>
-                                      <label for="star-2">2</label>
-                                      <input type="radio" name="star-'. $data['id'] .'" class="star-3" value="3" '.($data['rating'] == 3 ? 'checked':'').'/>
-                                      <label for="star-3">3</label>
-                                      <input type="radio" name="star-'. $data['id'] .'" class="star-4" value="4" '.($data['rating'] == 4 ? 'checked':'').'/>
-                                      <label for="star-4">4</label>
-                                      <input type="radio" name="star-'. $data['id'] .'" class="star-5" value="5" '.($data['rating'] == 5 ? 'checked':'').'/>
-                                      <label for="star-5">5</label>
+                                      <input disabled type="radio" name="star-'. $data['id'] .'" class="star-1" value="1" '.($data['rating'] == 1 ? 'checked':'').'/>
+                                      <input disabled type="radio" name="star-'. $data['id'] .'" class="star-2" value="2" '.($data['rating'] == 2 ? 'checked':'').'/>
+                                      <input disabled type="radio" name="star-'. $data['id'] .'" class="star-3" value="3" '.($data['rating'] == 3 ? 'checked':'').'/>
+                                      <input disabled type="radio" name="star-'. $data['id'] .'" class="star-4" value="4" '.($data['rating'] == 4 ? 'checked':'').'/>
+                                      <input disabled type="radio" name="star-'. $data['id'] .'" class="star-5" value="5" '.($data['rating'] == 5 ? 'checked':'').'/>
                                       <span></span>
                                   </div>
                                 </div>
