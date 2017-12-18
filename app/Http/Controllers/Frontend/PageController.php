@@ -101,6 +101,7 @@ class PageController extends BaseController
     try {
         $product = (new ProductRepository)->getProductBySlug($slug);
         $sumRating= collect($product->review)->sum('rating');
+        $reviews = collect($product->review)->take(3);
 
         if($sumRating > 0){
             $rating = round($sumRating/count($product->review));
@@ -144,7 +145,8 @@ class PageController extends BaseController
             'id',
             'share',
             'rating',
-            'deliveryReturns'
+            'deliveryReturns',
+            'reviews'
         ));
     }
 

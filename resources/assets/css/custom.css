@@ -20,7 +20,7 @@
 	position:absolute;
 	left:50%; /* centers the loading animation horizontally one the screen */
 	top:50%; /* centers the loading animation vertically one the screen */
-	background-image:url(../../../images/loading.gif); /* path to your loading animation */
+	background-image:url(https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/cdn/images/loading.gif); /* path to your loading animation */
 	background-repeat:no-repeat;
 	background-position:center;
 	margin:-100px 0 0 -100px; /* is width and height divided by two */
@@ -59,11 +59,10 @@
 
 /*START RATING CSS*/
 .stars {
-	background: url(../../../images/stars.png) repeat-x 0 0;
+	background: url(../../../images/stars-review.png) repeat-x 0 0;
 	width: 150px;
 	margin: 0 auto;
 }
-
 .stars input[type="radio"] {
 	position: absolute;
 	opacity: 0;
@@ -122,14 +121,13 @@
 	top: 0;
 	left: 0;
 	height: 30px;
- 	background: url(../../../images/stars.png) repeat-x 0 -60px;
+ 	background: url(../../../images/stars-review.png) repeat-x 0 -60px;
 	-webkit-transition: -webkit-width 0.5s;
 	-moz-transition: -moz-width 0.5s;
 	-ms-transition: -ms-width 0.5s;
 	-o-transition: -o-width 0.5s;
 	transition: width 0.5s;
 }
-
 .stars label {
 	display: block;
 	width: 30px;
@@ -147,11 +145,10 @@
 
 /*FOR PRODUCT STARS RATING CSS*/
 .stars-product {
-	background: url(../../../images/stars.png) repeat-x 0 0;
-	width: 150px;
+	background: url(../../../images/stars-product.png) repeat-x 0 0;
+	width: 105px;
 	margin: 0 auto;
 }
-
 .stars-product input[type="radio"] {
 	position: absolute;
 	opacity: 0;
@@ -172,35 +169,6 @@
 .stars-product input[type="radio"].star-1:checked ~ span {
 	width: 20%;
 }
-.stars-product label {
-	display: block;
-	width: 30px;
-	height: 30px;
-	margin: 0!important;
-	padding: 0!important;
-	text-indent: -999em;
-	float: left;
-	position: relative;
-	z-index: 10;
-	background: transparent!important;
-	cursor: pointer;
-}
-
-.stars-product label.star-5:hover ~ span {
-	width: 100% !important;
-}
-.stars-product label.star-4:hover ~ span {
-	width: 80% !important;
-}
-.stars-product label.star-3:hover ~ span {
-	width: 60% !important;
-}
-.stars-product label.star-2:hover ~ span {
-	width: 40% !important;
-}
-.stars-product label.star-1:hover ~ span {
-	width: 20% !important;
-}
 .stars-product span {
 	display: block;
 	width: 0;
@@ -208,7 +176,7 @@
 	top: 0;
 	left: 0;
 	height: 30px;
-	background: url(../../../images/stars.png) repeat-x 0 -60px;
+	background: url(../../../images/stars-product.png) repeat-x 0 -60px;
 	-webkit-transition: -webkit-width 0.5s;
 	-moz-transition: -moz-width 0.5s;
 	-ms-transition: -ms-width 0.5s;
@@ -216,17 +184,11 @@
 	transition: width 0.5s;
 }
 
-.stars-product label {
-	display: block;
-	width: 20px;
-	height: 20px;
-	margin: 0!important;
-	padding: 0!important;
-	text-indent: -999em;
-	float: left;
-	position: relative;
-	z-index: 10;
-	background: transparent!important;
-	cursor: pointer;
+.stars-position {
+	margin-top: -25px; margin-left: 200px;
 }
- /*END PRODUCT STARS RATINGS CSS*/
+.stars-count-position {
+	margin-top: -25px; margin-left: 310px
+}
+/*END PRODUCT STARS RATINGS CSS*/
+
