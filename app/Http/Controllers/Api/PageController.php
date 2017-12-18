@@ -179,4 +179,13 @@ class PageController extends BaseApiController
             return $this->error($e, 400, true);
         }
     }
+
+    public function popularSearch(){
+        try {
+            $popularSearch = (new ProductRepository)->getPopularSearch()->toArray();
+            return $this->success($popularSearch, 200, true);
+        } catch (Exception $e) {
+            return $this->error($e, 400, true);
+        }
+    }
 }
