@@ -44,21 +44,16 @@
                 @endif
 
                 <br>
-                <span class="uk-text-meta uk-text-bold">
-          <div class="stars-product uk-margin-remove-left">
-              <input type="radio" name="star-m" class="star-1" value="1" {{$rating == 1? 'checked':'' }}/>
-              <label for="star-1">1</label>
-              <input type="radio" name="star-m" class="star-2" value="2" {{$rating == 2? 'checked':'' }}/>
-              <label for="star-2">2</label>
-              <input type="radio" name="star-m" class="star-3"  value="3" {{$rating == 3? 'checked':'' }}/>
-              <label for="star-3">3</label>
-              <input type="radio" name="star-m" class="star-4" value="4" {{$rating == 4? 'checked':'' }}/>
-              <label for="star-4">4</label>
-              <input type="radio" name="star-m" class="star-5"  value="5" {{$rating == 5? 'checked':'' }}/>
-              <label for="star-5">5</label>
-              <span></span>
-          </div>
-    </span>
+                @if($rating)
+                  <div class="stars-product uk-margin-remove-left">
+                      <input disabled type="radio" name="star-m" class="star-1" value="1" {{$rating == 1? 'checked':'' }}/>
+                      <input disabled type="radio" name="star-m" class="star-2" value="2" {{$rating == 2? 'checked':'' }}/>
+                      <input disabled type="radio" name="star-m" class="star-3"  value="3" {{$rating == 3? 'checked':'' }}/>
+                      <input disabled type="radio" name="star-m" class="star-4" value="4" {{$rating == 4? 'checked':'' }}/>
+                      <input disabled type="radio" name="star-m" class="star-5"  value="5" {{$rating == 5? 'checked':'' }}/>
+                      <span></span>
+                  </div>
+                @endif
                 <ul uk-accordion="animation: true; multiple: false">
                     <li class="uk-open">
                         <h5 class="uk-accordion-title">EDITORS NOTES</h5>
@@ -130,23 +125,20 @@
                 <a href="/{{'review/'.$product->slug}}" class="uk-button uk-button-default">WRITE A REVIEW</a>
             </div>
             @if($rating)
-                <div class="uk-width-1-4@m">
+                <div class="uk-width-3-4@m">
                     <span class="uk-margin-remove-right">RATING FOR THIS PRODUCT :</span>
-                </div>
-                <div class="uk-width-1-4@m">
-                    <div class="stars-product uk-margin-remove">
-                        <input type="radio" name="star" class="star-1" value="1" {{$rating == 1? 'checked':'' }}/>
-                        <label for="star-1">1</label>
-                        <input type="radio" name="star" class="star-2" value="2" {{$rating == 2? 'checked':'' }}/>
-                        <label for="star-2">2</label>
-                        <input type="radio" name="star" class="star-3"  value="3" {{$rating == 3? 'checked':'' }}/>
-                        <label for="star-3">3</label>
-                        <input type="radio" name="star" class="star-4" value="4" {{$rating == 4? 'checked':'' }}/>
-                        <label for="star-4">4</label>
-                        <input type="radio" name="star" class="star-5"  value="5" {{$rating == 5? 'checked':'' }}/>
-                        <label for="star-5">5</label>
+                    <div class="stars-product stars-position">
+                        <input disabled type="radio" name="star" class="star-1" value="1" {{$rating == 1? 'checked':'' }}/>
+                        <input disabled type="radio" name="star" class="star-2" value="2" {{$rating == 2? 'checked':'' }}/>
+                        <input disabled type="radio" name="star" class="star-3"  value="3" {{$rating == 3? 'checked':'' }}/>
+                        <input disabled type="radio" name="star" class="star-4" value="4" {{$rating == 4? 'checked':'' }}/>
+                        <input disabled type="radio" name="star" class="star-5"  value="5" {{$rating == 5? 'checked':'' }}/>
                         <span></span>
                     </div>
+                    <div class="stars-count-position">
+                        {{$rating}}/5
+                    </div>
+                    <span><i>Based on {{count($product->review)}} Reviews</i></span>
                 </div>
             @else
                 WHAT OTHER SHOPPERS THINK: <br>
@@ -154,22 +146,17 @@
             @endif
         </div>
         <div id="review-ajax" class="uk-grid uk-visible@m" uk-grid>
-            @foreach($product->review as $review)
+            @foreach($reviews as $review)
                 <div class="uk-width-1-3@m">
                     <div class="uk-card uk-card-border uk-card-small">
                         <div class="uk-card-body" style="min-height: 250px">
                             <div class="uk-flex uk-flex-center">
                                 <div class="stars-product uk-margin-remove uk-text-center">
-                                    <input type="radio" name="star-{{$review->id}}" class="star-1" value="1" {{$review->rating == 1? 'checked':'' }}/>
-                                    <label for="star-1">1</label>
-                                    <input type="radio" name="star-{{$review->id}}" class="star-2" value="2" {{$review->rating == 2? 'checked':'' }}/>
-                                    <label for="star-2">2</label>
-                                    <input type="radio" name="star-{{$review->id}}" class="star-3"  value="3" {{$review->rating == 3? 'checked':'' }}/>
-                                    <label for="star-3">3</label>
-                                    <input type="radio" name="star-{{$review->id}}" class="star-4" value="4" {{$review->rating == 4? 'checked':'' }}/>
-                                    <label for="star-4">4</label>
-                                    <input type="radio" name="star-{{$review->id}}" class="star-5"  value="5" {{$review->rating == 5? 'checked':'' }}/>
-                                    <label for="star-5">5</label>
+                                    <input disabled type="radio" name="star-{{$review->id}}" class="star-1" value="1" {{$review->rating == 1? 'checked':'' }}/>
+                                    <input disabled type="radio" name="star-{{$review->id}}" class="star-2" value="2" {{$review->rating == 2? 'checked':'' }}/>
+                                    <input disabled type="radio" name="star-{{$review->id}}" class="star-3"  value="3" {{$review->rating == 3? 'checked':'' }}/>
+                                    <input disabled type="radio" name="star-{{$review->id}}" class="star-4" value="4" {{$review->rating == 4? 'checked':'' }}/>
+                                    <input disabled type="radio" name="star-{{$review->id}}" class="star-5"  value="5" {{$review->rating == 5? 'checked':'' }}/>
                                     <span></span>
                                 </div>
                             </div>
@@ -216,8 +203,8 @@
             <div id="loader" class="uk-grid-small uk-align-center">
                 <div id="remove-row">
                     <h2>
-                        @if(count($product->review) <= 3)
-                            <a onclick="myFunction({{ $product->review[2]->id .','. $product->id}})" id="btn-more" class="uk-button uk-button-default" > SEE MORE REVIEW </a>
+                        @if(count($reviews) == 3)
+                            <a onclick="myFunction({{ $reviews[2]->id .','. $product->id}})" id="btn-more" class="uk-button uk-button-default" > SEE MORE REVIEW </a>
                         @endif
                     </h2>
                 </div>
