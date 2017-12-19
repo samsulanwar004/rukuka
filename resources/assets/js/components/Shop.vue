@@ -2,7 +2,7 @@
     <div class="uk-grid-small uk-child-width-1-3@m uk-child-width-1-2" uk-grid>
         <!-- start product -->
         <div class="uk-panel uk-text-left" v-for="product in products">
-            <div class="uk-card uk-card-small uk-card-default uk-box-shadow-large uk-visible@m">
+            <div class="uk-card uk-card-small uk-card-default uk-box-shadow uk-visible@m">
                 <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
                     <a :href="'/product/'+ product.slug">
                         <img :src="'/'+ product.photo" :alt="product.name">
@@ -14,12 +14,12 @@
                     </div>
                 </div>
                 <div class="uk-card-body uk-padding-small">
-                    <a :href="'/product/'+ product.slug" class="uk-text-meta">{{ product.name }}</a>
+                    <a :href="'/product/'+ product.slug" alt="product.name" class="uk-text-meta">{{ product.name.substring(0,35) }}</a>
                     <br>
                     <span v-if="product.price_before_discount > 0 ">
-                        <span style="text-decoration: line-through;">
+                        <del class="uk-text-small">
                             {{ product.currency }} {{ product.price_before_discount }}
-                        </span>
+                        </del>
                     </span>
                     <span class="uk-text-danger uk-text-small" v-if="product.price_before_discount > 0 ">
                        &nbsp;{{ product.currency }} {{ product.price }}
@@ -39,9 +39,9 @@
                     <a :href="'/product/'+ product.slug" class="uk-text-meta">{{ product.name }}</a>
                     <br>
                     <span v-if="product.price_before_discount > 0 ">
-                        <span class="uk-text-small" style="text-decoration: line-through;">
-                            {{ product.currency }} {{ product.price_before_discount }}
-                        </span>
+                      <del class="uk-text-small">
+                          {{ product.currency }} {{ product.price_before_discount }}
+                      </del>
                     </span>
                     <span class="uk-text-danger uk-text-small" v-if="product.price_before_discount > 0 ">
                        &nbsp;{{ product.currency }} {{ product.price }}
