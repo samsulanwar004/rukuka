@@ -556,6 +556,26 @@ class UserController extends BaseController
 
     public function postShippingOption(Request $request)
     {
+        try {
+            $bag = new BagService;
+            $courierServices = new CourierRepository;
+
+            $user = $this->getUserActive();
+            $defaultAddress = $this->user
+                ->setUser($user)
+                ->getAddressDefault();
+
+            $courir = $courierServices->setCheckoutBag($bag->get(self::INSTANCE_SHOP))
+                            ->setDestinationAddress($defaultAddress)
+                            ->saveShippingCostChoosed($request->input('shipping'));
+
+            if ($courir['error'] != "000") {
+                throw new Exception($courir['message'], 1); 
+            }
+        } catch (Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
+
         return redirect($this->redirectAfterSaveShippingOption);
     }
 
@@ -742,6 +762,8 @@ class UserController extends BaseController
         // $defaultCreditcard->country = $creditCard->address->country;
         // $defaultCreditcard->phone_number = $creditCard->address->phone_number;
 
+        $shippingCost = (new CourierRepository)->getSavedSessionShippingChoosed();
+
         $defaultAddress = $this->user
             ->setUser($user)
             ->getAddressDefault();
@@ -752,6 +774,7 @@ class UserController extends BaseController
         return view('pages.checkout.shipping_preview', compact(
             // 'defaultCreditcard',
             'defaultAddress',
+            'shippingCost',
             'total'
         ));
     }

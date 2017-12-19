@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\OrderRepository;
 use App\Services\BagService;
 use App\Repositories\UserRepository;
+use App\Repositories\CourierRepository;
 use DB;
 use Carbon\Carbon;
 use Exception;
@@ -33,9 +34,9 @@ class OrderController extends BaseController
 			$user = $this->getUserActive();
 			$bag = new BagService;
 
-			$creditCard = $this->user
-            ->setUser($user)
-            ->getCreditCardDefault();
+			// $creditCard = $this->user
+   //          ->setUser($user)
+   //          ->getCreditCardDefault();
 
             $address = $this->user
             ->setUser($user)
@@ -49,6 +50,12 @@ class OrderController extends BaseController
 	        	throw new Exception("Bags is empty!", 1);
 	        }
 
+	        $courir = (new CourierRepository)->getSavedSessionShippingChoosed();
+
+	        if ($courir['error'] != "000") {
+	        	throw new Exception($courir['message'], 1);	
+	        }
+
 	        $detail = $bags->map(function ($entry) use ($bag){
 	        	$bag->remove($entry->rowId);
 	        	return [
@@ -60,9 +67,9 @@ class OrderController extends BaseController
 	        		'product_code' => $entry->options->product_code,
 	        		'product_stocks_id' => $entry->options->product_stocks_id,
 	        	];
-	        });
+	        });	        
 
-	        $shipping = 50;
+	        $shipping = $courir['data']->total_fee_usd;
 
 	        $orderDate = Carbon::now();
 	        $expiredDate = Carbon::now()->addDay();
@@ -71,12 +78,12 @@ class OrderController extends BaseController
 	        	->setOrderCode('ON'.date('YmdHis').rand(000,999))
 	        	->setUser($user)
 	        	->setPaymentMethod('creditcard')
-	        	->setPaymentName($creditCard->name_card)
+	        	->setPaymentName($address->first_name)
 	        	->setOrderSubtotal($total)
 	        	->setOrderSubtotalAfterDiscount($total)
 	        	->setOrderSubtotalAfterCoupon($total)
 	        	->setShipping($address)
-	        	->setPayment($creditCard)
+	        	// ->setPayment($creditCard)
 	        	->setShippingCost($shipping)
 	        	->setPendingReason('Waiting for payment')
 	        	->setOrderDate($orderDate)
