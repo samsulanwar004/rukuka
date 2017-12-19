@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Product;
 use App\Repositories\CategoryRepository;
 use App\Designer;
+use App\ProductCategory;
 
 class ProductRepository
 {
@@ -232,6 +233,16 @@ class ProductRepository
             ->where('name','LIKE','%'.$keyword.'%')
             ->whereNull('deleted_at')
             ->get();
+    }
+
+    public function updateCountProductCategory($id){
+        ProductCategory::where('id', $id)->increment('count');
+    }
+
+    public function getPopularSearch(){
+
+    return ProductCategory::orderBy('count','desc')->take(5)->get();
+
     }
 
 }
