@@ -61,7 +61,7 @@
           </div>
       </li>
       <li v-if="auth == 0" class="uk-margin-left">
-        <a class="uk-button uk-button-text uk-button-small" :href="login_link"><b>L O G I N</b></a>
+        <a class="uk-button uk-button-text uk-button-small" :href="login_link"><b>LOGIN</b></a>
       </li>
     </ul>
   </div>

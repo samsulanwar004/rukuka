@@ -1,7 +1,7 @@
 <template>
-    <ul class="uk-nav uk-navbar-dropdown-nav">
+    <ul class="uk-list uk-footer-nav">
         <li>
-            STAY UPDATE WITH US
+            <b>STAY UPDATE WITH US</b>
         </li>
         <li class="uk-text-meta" v-if="messages">
             <i v-if="messages">{{ messages }}</i>
@@ -46,7 +46,7 @@
                             UIkit.notification("<span uk-icon='icon: check'></span> Thanks for subscriber");
                         }
                     }
-                      
+
                 })
                 .catch(function (error) {
                     console.log(error);

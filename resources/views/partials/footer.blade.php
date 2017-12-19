@@ -2,8 +2,8 @@
   <div class="uk-container uk-container-small">
     <div class="uk-panel uk-grid" uk-grid>
       <div class="uk-width-1-5@m">
-        <ul class="uk-nav uk-navbar-dropdown-nav">
-          <li>LET US HELP YOU</li>
+        <ul class="uk-nav uk-footer-nav">
+          <li><b>LET US HELP YOU</b></li>
           <li><a href="{{ URL::to('help/order-status') }}">Order Status</a></li>
           <li><a href="{{ URL::to('help/shipping-handling') }}">Shipping & Handling</a></li>
           <li><a href="{{ URL::to('help/returns-exchanges') }}">Returns & Exchanges</a></li>
@@ -15,8 +15,8 @@
 
       </div>
       <div class="uk-width-1-5@m">
-        <ul class="uk-nav uk-navbar-dropdown-nav">
-          <li>ABOUT RUKUKA</li>
+        <ul class="uk-nav uk-footer-nav">
+          <li><b>ABOUT RUKUKA</b></li>
           <li><a href="{{ URL::to('page/our-story')}}">Our Story</a></li>
           <li><a href="{{ URL::to('page/social-responsibility')}}">Social Responsibility</a></li>
           <li><a href="{{ URL::to('page/investor-relation')}}">Investor Relations</a></li>
@@ -31,7 +31,7 @@
       <div class="uk-width-2-5@m">
         <subcriber api="{{ route('subcriber') }}"></subcriber>
         <p class="uk-margin-large">
-          <ul class="uk-nav uk-navbar-dropdown-nav">
+          <ul class="uk-nav uk-footer-nav">
             <li>CONNECT WITH US</li>
           </ul>
         <ul class="uk-grid-small" uk-grid>
@@ -58,11 +58,8 @@
       </div>
 
     </div>
-  </div>
-</div>
-<div class="uk-section uk-section-default uk-section-xsmall uk-text-small uk-visible@m">
-  <div class="uk-container uk-container-small uk-text-meta">
-    Copyright © 2017 rukuka.com - All Rights Reseved.
+    <span class="uk-text-meta">Copyright © 2017 rukuka.com - All Rights Reseved.</span>
+
   </div>
 </div>
 <div class="uk-section uk-section-muted uk-section-xsmall uk-text-small uk-hidden@m">
