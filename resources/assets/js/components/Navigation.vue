@@ -19,6 +19,8 @@
 
             $.get(api, function(navigations) {
               if (typeof navigations.data !== 'undefined') {
+                Event.fire('navigation', navigations.data);
+
                 if (typeof navigations.data.mens !== 'undefined') {
                   self.menCloths = navigations.data.mens;
                 }
