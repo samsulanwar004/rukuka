@@ -73,8 +73,8 @@
                         <tr class="uk-active">
                             <td>
                                 <input type="radio" class="uk-radio" name="shipping" value="1" required="required" checked> </td>
-                            <td> DHL Express (3 - 6 Ekonomi Days) </td>
-                            <td> IDR 500.000</td>
+                            <td> {{ $shippingCost['data']->origin->serviceName }} </td>
+                            <td> USD {{ $shippingCost['data']->total_fee_usd }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -91,7 +91,9 @@
               ></item-checkout>
             <hr class="uk-margin-small">
         </div>
-        <summary-checkout></summary-checkout>
+        <summary-checkout
+          shipping_cost="{{ $shippingCost['data']->total_fee_usd }}"
+        ></summary-checkout>
     </div>
 </div>
 @endsection

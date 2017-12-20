@@ -14,12 +14,12 @@
           </div>
         </div>
         <div class="uk-card-body uk-padding-remove uk-margin-small-top">
-          <a :href="'/product/'+ product.slug" class="uk-text-meta">{{ product.name }}</a>
+          <a :href="'/product/'+ product.slug" class="uk-text-meta">{{ product.name.substring(0,35) }}</a>
           <br>
             <span v-if="product.price_before_discount > 0 ">
-                <span class="uk-text-small" style="text-decoration: line-through;">
-                    {{ product.currency }} {{ product.price_before_discount }}
-                </span>
+              <del class="uk-text-small">
+                  {{ product.currency }} {{ product.price_before_discount }}
+              </del>
             </span>
             <span class="uk-text-danger uk-text-small" v-if="product.price_before_discount > 0 ">
                &nbsp;{{ product.currency }} {{ product.price }}
