@@ -193,18 +193,63 @@ class ProductRepository
             ->get();
     }
 
+    public function getSearchCategory($request )
+    {
+        if($request->has('category'))
+        {
+            {
+                $categories = (new CategoryRepository)->getCategoryByParent($request->input('category'));
+                $categoryArr=[];
+                foreach($categories as $category){
+                    foreach($category['child'] as $cat){
+                        $categoryArr[] =  $cat['id'];
+                    }
+                }
+            }
+
+            $query = $this->model()
+                ->where('name','like','%'.$request->input('keyword').'%')
+                ->whereIn('product_categories_id',$categoryArr)
+                ->whereNull('deleted_at');
+        }
+        else
+        {
+            $query = $this->model()
+                ->select('product_categories_id')
+                ->where('name','like','%'.$request->input('keyword').'%')
+                ->whereNull('deleted_at');
+        }
+
+        if ($request->has('price')) {
+            $query->orderBy('sell_price', $request->input('price'));
+        } else {
+            $query->orderBy('updated_at', 'desc');
+            $query->orderBy('id', 'desc');
+        }
+
+        return $query->get()->unique('product_categories_id');
+    }
+
     public function getSearch($request )
     {
         if($request->has('category'))
         {
-            $categories = (new CategoryRepository)->getCategoryByParent($request->input('category'));
-            $categoryArr=[];
-            foreach($categories as $category){
-                foreach($category['child'] as $cat){
-                    $categoryArr[] =  $cat['id'];
+
+            if( $request->has('subcategory'))
+            {
+                $categories = (new CategoryRepository)->getCategoryBySlug($request->input('subcategory'));
+                $categoryArr=[];
+                $categoryArr[]=[$categories->id];
+            }
+            else{
+                $categories = (new CategoryRepository)->getCategoryByParent($request->input('category'));
+                $categoryArr=[];
+                foreach($categories as $category){
+                    foreach($category['child'] as $cat){
+                        $categoryArr[] =  $cat['id'];
+                    }
                 }
             }
-
             $query = $this->model()
                 ->where('name','like','%'.$request->input('keyword').'%')
                 ->whereIn('product_categories_id',$categoryArr)
