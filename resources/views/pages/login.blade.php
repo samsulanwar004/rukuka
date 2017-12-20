@@ -36,6 +36,10 @@
                       <a href="{{ route('social.login', ['provider' => 'facebook']) }}" class="uk-button uk-button-primary uk-width-1-1 uk-button-small">
                         <span class="uk-margin-small-right uk-icon" uk-icon="icon: facebook"></span>Login with Facebook</a>
                     </li>
+                    <li>
+                      <a href="{{ route('social.login', ['provider' => 'google']) }}" class="uk-button uk-button-danger uk-width-1-1 uk-button-small">
+                        <span class="uk-margin-small-right uk-icon" uk-icon="icon: google"></span>Login with Google</a>
+                    </li>
                     <li class="uk-text-right">
                         <a href="{{ route('page.forgot') }}" class="uk-text-meta"><i>forgot your password?</i></a>
                     </li>
@@ -68,8 +72,14 @@
                     <span class="uk-text-meta">By clicking the "register" button, I agree to recieve KuKa news by e-mail, sms or telephone.
                     See our <a href="#">Privacy Policy</a> for further information.</span></li>
                     <li><button class="uk-button uk-button-secondary uk-width-1-1" type="submit">REGISTER</button></li>
-                    <li><a href="{{ route('social.login', ['provider' => 'facebook']) }}" class="uk-button uk-button-primary uk-button-small uk-width-1-1">
-                        <span class="uk-margin-small-right uk-icon" uk-icon="icon: facebook"></span>Register with Facebook</a></li>
+                    <li>
+                      <a href="{{ route('social.login', ['provider' => 'facebook']) }}" class="uk-button uk-button-primary uk-button-small uk-width-1-1">
+                        <span class="uk-margin-small-right uk-icon" uk-icon="icon: facebook"></span>Register with Facebook</a>
+                    </li>
+                    <li>
+                      <a href="{{ route('social.login', ['provider' => 'google']) }}" class="uk-button uk-button-danger uk-width-1-1 uk-button-small">
+                        <span class="uk-margin-small-right uk-icon" uk-icon="icon: google"></span>Register with Google</a>
+                    </li>
                   </ul>
                 </form>
             </div>

@@ -390,6 +390,7 @@ class PageController extends BaseController
         $shops = $products->map(function ($entry) {
             return [
                 'id' => $entry->id,
+                'product_categories_id' => $entry->product_categories_id,
                 'name' => $entry->name,
                 'slug' => $entry->slug,
                 'price' => $entry->sell_price,
@@ -401,11 +402,17 @@ class PageController extends BaseController
 
         $keyword = $request->input('keyword');
 
+        $productcategory = $product->getSearchCategory($request);
+        $category = $request->input('category');
+        $subcategory = $request->input('subcategory');
+
         return view('pages.search', compact(
             'products',
             'shops',
-            'keyword'
-
+            'keyword',
+            'productcategory',
+            'category',
+            'subcategory'
         ));
     }
 

@@ -12,6 +12,12 @@ class CategoryRepository
 	    	->first();
 	}
 
+    public function getCategoryBySlug($slug)
+    {
+        return Category::where('slug', $slug)
+            ->first();
+    }
+
 	public function getCategoryByParent($parent)
 	{
 		$categories = $this->getCategories();
