@@ -44,6 +44,9 @@
                                 <search
                                         api="{{ route('search.api',['keyword' => $keyword])}}"
                                         keyword="{{$keyword}}"
+                                        category="{{ $category }}"
+                                        subcategory="{{ $subcategory }}"
+                                        productcategory="{{ $productcategory }}"
                                 ></search>
                             </div>
                         </div>
@@ -61,6 +64,9 @@
                         <search
                                 api="{{ route('search.api',['keyword' => $keyword])}}"
                                 keyword="{{$keyword}}"
+                                category="{{ $category }}"
+                                subcategory="{{ $subcategory }}"
+                                productcategory="{{ $productcategory }}"
                         ></search>
                     </div>
                 </div>
