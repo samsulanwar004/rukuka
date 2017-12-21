@@ -1,4 +1,31 @@
 <template>
+  <h5 class="uk-margin-small">Color : {{ color }}</h5>
+    <select :class="{'uk-select uk-form-width-small uk-form-small': true, 'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
+    <option :value="null" disabled>Select Size</option>
+    <option v-for="stock in stocks" :value="stock.sku" :selected="sku ==  stock.sku" :disabled="stock.unit <= 0">{{ stock.size }} {{ stock.unit | unit }}</option>
+  </select>
+
+
+<ul uk-accordion="animation: true; multiple: false">
+  <li class="uk-open">
+      <h5 class="uk-accordion-title">EDITORS NOTES</h5>
+      <div class="uk-accordion-content">
+          {{ content }}
+      </div>
+  </li>
+  <li>
+      <h5 class="uk-accordion-title">SIZE & FIT</h5>
+      <div class="uk-accordion-content">
+          {{ size_and_fit }}
+      </div>
+  </li>
+  <li>
+      <h5 class="uk-accordion-title">DETAILS & CARE</h5>
+      <div class="uk-accordion-content">
+          {{ detail_and_care }}
+      </div>
+  </li>
+</ul>
     <div class="uk-child-width-1-2 uk-grid-small uk-margin-small-top" uk-grid>
         <div class="">
             Color : {{ color }}
