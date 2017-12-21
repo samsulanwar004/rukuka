@@ -59,7 +59,7 @@
 
 /*START RATING CSS*/
 .stars {
-	background: url(../../../images/stars-review.png) repeat-x 0 0;
+	background: url(https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/images/stars-review.png) repeat-x 0 0;
 	width: 150px;
 	margin: 0 auto;
 }
@@ -121,7 +121,7 @@
 	top: 0;
 	left: 0;
 	height: 30px;
- 	background: url(../../../images/stars-review.png) repeat-x 0 -60px;
+ 	background: url(https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/images/stars-review.png) repeat-x 0 -60px;
 	-webkit-transition: -webkit-width 0.5s;
 	-moz-transition: -moz-width 0.5s;
 	-ms-transition: -ms-width 0.5s;
@@ -145,7 +145,7 @@
 
 /*FOR PRODUCT STARS RATING CSS*/
 .stars-product {
-	background: url(../../../images/stars-product.png) repeat-x 0 0;
+	background: url(https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/images/stars-product.png) repeat-x 0 0;
 	width: 105px;
 	margin: 0 auto;
 }
@@ -176,7 +176,7 @@
 	top: 0;
 	left: 0;
 	height: 30px;
-	background: url(../../../images/stars-product.png) repeat-x 0 -60px;
+	background: url(https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/images/stars-product.png) repeat-x 0 -60px;
 	-webkit-transition: -webkit-width 0.5s;
 	-moz-transition: -moz-width 0.5s;
 	-ms-transition: -ms-width 0.5s;
