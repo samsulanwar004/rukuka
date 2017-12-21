@@ -3697,6 +3697,28 @@ ul.uk-nav-sub {
   color: #333;
 }
 /*
+ * Items
+ */
+.uk-footer-nav > li {
+  font-size: 12px;
+  color: #666;
+}
+.uk-footer-nav > li > a {
+  font-size: 12px;
+  color: #666;
+}
+/* Hover + Focus */
+.uk-footer-nav > li > a:hover,
+.uk-footer-nav > li > a:focus {
+  color: #000;
+}
+/* Active */
+.uk-footer-nav > li.uk-active > a {
+  font-size: 13px;
+  font-weight: bold;
+  color: #000;
+}
+/*
  * Header
  */
 .uk-navbar-dropdown-nav .uk-nav-header {
@@ -3725,7 +3747,7 @@ ul.uk-nav-sub {
   position: relative;
   box-sizing: border-box;
   border-top: 1px solid #e5e5e5;
-  border-bottom: 3px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
   background: #f8f8f8;
   overflow: hidden;
 }

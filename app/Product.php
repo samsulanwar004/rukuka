@@ -30,6 +30,6 @@ class Product extends Model
 
     public function review()
     {
-        return $this->hasMany(Review::class, 'products_id', 'id')->where('is_approved',1)->orderBy('id','DESC')->take(3);
+        return $this->hasMany(Review::class, 'products_id', 'id')->where('is_approved',1)->orderBy('id','DESC');
     }
 }

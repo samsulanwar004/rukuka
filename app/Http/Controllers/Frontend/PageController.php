@@ -101,6 +101,7 @@ class PageController extends BaseController
     try {
         $product = (new ProductRepository)->getProductBySlug($slug);
         $sumRating= collect($product->review)->sum('rating');
+        $reviews = collect($product->review)->take(3);
 
         if($sumRating > 0){
             $rating = round($sumRating/count($product->review));
@@ -137,6 +138,10 @@ class PageController extends BaseController
     $result = (new PageRepository)->getHelp($slug);
     $deliveryReturns = $result['page'][0]['content'];
 
+    //Count Product Categories For Popular Search
+    $idProductCategory = $product->product_categories_id;
+    (new ProductRepository)->updateCountProductCategory($idProductCategory);
+
     	return view('pages.product', compact(
             'product',
             'method',
@@ -144,7 +149,8 @@ class PageController extends BaseController
             'id',
             'share',
             'rating',
-            'deliveryReturns'
+            'deliveryReturns',
+            'reviews'
         ));
     }
 
@@ -384,6 +390,7 @@ class PageController extends BaseController
         $shops = $products->map(function ($entry) {
             return [
                 'id' => $entry->id,
+                'product_categories_id' => $entry->product_categories_id,
                 'name' => $entry->name,
                 'slug' => $entry->slug,
                 'price' => $entry->sell_price,
@@ -395,11 +402,17 @@ class PageController extends BaseController
 
         $keyword = $request->input('keyword');
 
+        $productcategory = $product->getSearchCategory($request);
+        $category = $request->input('category');
+        $subcategory = $request->input('subcategory');
+
         return view('pages.search', compact(
             'products',
             'shops',
-            'keyword'
-
+            'keyword',
+            'productcategory',
+            'category',
+            'subcategory'
         ));
     }
 

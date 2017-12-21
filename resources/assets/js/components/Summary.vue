@@ -7,17 +7,17 @@
     <div class="uk-card-body">
        <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
           <div class="uk-text-small"><b>SUBTOTAL</b></div>
-          <div id="sub_total" class="uk-text-right">{{ subtotal }}</div>
+          <div id="sub_total" class="uk-text-right">{{ subtotal | round }}</div>
        </div>
        <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
           <div class="uk-text-small">Shipping Cost</div>
-          <div id="shiping_fee" class="uk-text-right">0</div>
+          <div id="shiping_fee" class="uk-text-right">{{ shipping_cost | round }}</div>
        </div>
     </div>
     <div class="uk-card-footer">
        <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
           <div><b>TOTAL</b></div>
-          <div id="total_fee" class="uk-text-right">{{ subtotal }}</div>
+          <div id="total_fee" class="uk-text-right">{{ total | round }}</div>
        </div>
     </div>
  </div>
@@ -30,17 +30,29 @@
 
 <script>
     export default {
+        props :['shipping_cost'],
         data () {
             return {
-                subtotal: {}
+                subtotal: {},
+                total: {}
             }
         },
 
         created () {
             var self = this;
+            var shipping_cost = this.shipping_cost;
             Event.listen('bags', function (response) {
-                self.subtotal = response.data.subtotal;
+              var subtotal = response.data.subtotal;
+              self.subtotal = subtotal;
+              self.total = Number(subtotal) + Number(shipping_cost);
             });
+
+        }, 
+
+        filters: {
+          round: function(value) {
+            return Number(Math.round(value+'e'+2)+'e-'+2);
+          }
         }
     }
 </script>
