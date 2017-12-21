@@ -12,7 +12,7 @@
               </div>
               <div class="uk-width-1-3@m">
                 <div class="uk-panel uk-text-center">
-                  <a href="/" class="uk-link-reset"><img src="{{ config('filesystems.s3url').'/images/logo-kukaindonesia.jpg' }}" alt="" width="90"></a>
+                  <a href="/" class="uk-link-reset"><img src="{{ imageCDN('logo-kukaindonesia.jpg') }}" alt="rukuka" width="90"></a>
                 </div>
               </div>
               <user-panel
