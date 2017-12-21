@@ -2,7 +2,7 @@
   <div class="uk-section uk-section-default uk-section-xsmall uk-padding-remove-vertical">
     <div class="uk-container uk-container-small">
       <div class="uk-panel uk-text-center">
-        <a href="/" class="uk-link-reset"><img src="/images/logo-kukaindonesia.jpg" alt="" width="90"></a>
+        <a href="/" class="uk-link-reset"><img src="{{ imageCDN('logo-kukaindonesia.jpg') }}" alt="rukuka" width="90"></a>
       </div>
     </div>
   </div>

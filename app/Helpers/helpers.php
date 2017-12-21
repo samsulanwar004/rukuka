@@ -68,3 +68,16 @@ if (! function_exists('elixirCDN')) {
         return $cdn . elixir($file);
     }
 }
+
+if (! function_exists('imageCDN')) {
+    function imageCDN($file) {
+        $cdn = '';
+
+        if(env('S3_URL', false))
+        {
+            $cdn = env('S3_URL');
+        }
+
+        return $cdn .'/images/'.$file;
+    }
+}
