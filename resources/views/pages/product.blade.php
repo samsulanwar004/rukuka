@@ -55,11 +55,10 @@
                   </div>
                 @endif
 
-
                 <button-buy
                         api_bag="{{ route('persist.bag') }}"
                         api_wishlist="{{ route('persist.wishlist') }}"
-                        color="{{ $product->color }}"
+                        product="{{ $product }}"
                         sizes="{{ $product->stocks }}"
                         auth="{{ Auth::check() ? 1 : 0 }}"
                         method="{{ $method }}"
