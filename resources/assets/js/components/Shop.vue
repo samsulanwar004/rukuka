@@ -63,35 +63,17 @@
 
             <div class="uk-modal-header uk-visible@m">
               <h3 class="uk-margin-remove">{{ name }}</h3>
-                <span v-if="priceBeforeDiscount > 0 ">
-                    <span style="text-decoration: line-through;">
-                        {{ currency }} {{ priceBeforeDiscount }}
-                    </span>
-                </span>
-                <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
-                    &nbsp; {{ currency }} {{ price }}
-                </span>
-                <span v-else>
-                    {{ currency }} {{ price }}
-                </span>
+              <div class="uk-text-right">
+                <a :href="'/product/' +slug" class="uk-button uk-button-text uk-text-right">see details <span uk-icon="icon: chevron-right"></span> </a>
+              </div>
             </div>
 
-            <div class="uk-modal-body uk-padding-small" uk-overflow-auto>
+            <div class="uk-modal-body uk-padding-small-left" uk-overflow-auto>
               <div class="uk-grid" uk-grid>
                 <div class="uk-width-1-2@m">
                   <div class="uk-hidden@m">
                     <h5 class="uk-margin-remove">{{ name }}</h5>
-                      <span v-if="priceBeforeDiscount > 0 ">
-                          <span style="text-decoration: line-through;">
-                              {{ currency }} {{ priceBeforeDiscount }}
-                          </span>
-                      </span>
-                      <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
-                          &nbsp; {{ currency }} {{ price }}
-                      </span>
-                      <span v-else>
-                          {{ currency }} {{ price }}
-                      </span>
+
                   </div>
                   <div class="uk-inline">
                     <div class="">
@@ -117,58 +99,53 @@
                   </div>
                 </div>
                 <div class="uk-width-1-2@m">
-                  <div class="uk-grid uk-child-width-1-2">
-                    <div>
-                        <b>Color :</b> {{ color }}
-                    </div>
-                    <div>
-                      <!-- <div uk-form-custom="target: > * > span:first"> -->
-                          <select name="size" v-model="size" v-validate="'required'" class="uk-select">
-                              <option :value="null" disabled>Choose Size</option>
-                              <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
-                                {{ stock.size }} {{ stock.unit | unit }}
-                              </option>
-                          </select>
-                          <!-- <button class="uk-button uk-button-default" type="button" tabindex="-1">
-                              <span uk-icon="icon: chevron-down"></span>
-                          </button>
-                      </div> -->
+                  <span v-if="priceBeforeDiscount > 0 ">
+                      <del class="uk-text-lead">
+                          {{ currency }} {{ priceBeforeDiscount }}
+                      </del>
+                  </span>
+                  <span class="uk-text-danger uk-text-lead" v-if="priceBeforeDiscount > 0 ">
+                      &nbsp; {{ currency }} {{ price }}
+                  </span>
+                  <span v-else class="uk-text-lead">
+                      {{ currency }} {{ price }}
+                  </span>
+                  <h5 class="uk-margin-small"><b>Color : {{ color }}</b></h5>
 
-                    </div>
-                  </div>
+                  <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-small">
+                      <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
+                        {{ stock.size }} {{ stock.unit | unit }}
+                      </option>
+
+                  </select>
+                  <span class="uk-text-meta"><i>Choose your size</i> </span>
                   <ul uk-accordion="animation: true; multiple: false">
                       <li class="uk-open">
 
-                          <h5 class="uk-accordion-title"><b>EDITORS NOTES</b></h5>
-                          <div class="uk-accordion-content uk-text-muted">
+                          <h5 class="uk-accordion-title">Editor Note</h5>
+                          <div class="uk-accordion-content">
                             {{ content }}
                           </div>
 
                       </li>
                       <li>
 
-                          <h5 class="uk-accordion-title"><b>SIZE & FIT</b></h5>
-                          <div class="uk-accordion-content  uk-text-muted">
+                          <h5 class="uk-accordion-title">Size & Fit</h5>
+                          <div class="uk-accordion-content">
                             {{ sizeAndFit }}
                           </div>
 
                       </li>
                       <li>
 
-                          <h5 class="uk-accordion-title"><b>DETAILS & CARE</b></h5>
-                          <div class="uk-accordion-content uk-text-muted">
+                          <h5 class="uk-accordion-title">Details & Care</h5>
+                          <div class="uk-accordion-content">
                             {{ detailAndCare }}
                           </div>
 
                       </li>
 
                   </ul>
-                  <div class="uk-card uk-card-small uk-card-border">
-                    <div class="uk-card-body">
-                      <h4>DELIVERY & FREE RETURNS</h4>
-                        <p v-html="deliveryReturns"></p>
-                    </div>
-                  </div>
 
                 </div>
               </div>
@@ -210,6 +187,7 @@
                 content: {},
                 sizeAndFit: {},
                 detailAndCare: {},
+                slug: {},
                 size: null,
                 deliveryReturns: null
             }
@@ -234,6 +212,7 @@
                             self.sizeAndFit = data.size_and_fit;
                             self.detailAndCare = data.detail_and_care;
                             self.deliveryReturns = data.delivery_returns;
+                            self.slug =  data.slug;
 
                         }
                     })
