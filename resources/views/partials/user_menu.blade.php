@@ -1,11 +1,8 @@
 <progress id="progressbar" class="uk-progress" value="0" max="100" hidden></progress>
 <div class="uk-width-1-4@m">
-  <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-small uk-visible@m">
-      <div class="uk-card-header">
-          <h3 class="uk-margin-small"><b>{{ ucfirst($user->first_name).' '.ucfirst($user->last_name) }}</b></h3>
-      </div>
+  <div class="uk-card uk-card-border uk-card-small uk-card-border uk-margin-bottom uk-visible@m">
       <div class="uk-card-body">
-        <strong>MY ACCOUNT</strong>
+        <h3 class="uk-margin-small">{{ ucfirst($user->first_name).' '.ucfirst($user->last_name) }}</h3>
         <ul class="uk-nav uk-navbar-dropdown-nav">
           <li><a href="{{ route('user') }}" class="uk-text-small">Home</a></li>
           <li><a href="{{ route('user.detail') }}" class="uk-text-small">My Details</a></li>
