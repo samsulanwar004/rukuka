@@ -5,7 +5,7 @@
 <div class="uk-grid-small uk-margin-top">
 	@include('partials.alert')
 </div>
-<div class="uk-grid uk-margin-top" uk-grid>
+<div class="uk-grid uk-margin-top uk-margin-bottom" uk-grid>
 	@include('partials.user_menu')
 	<div class="uk-width-3-4@m">
 	  <b>PERSONAL INFORMATION</b>

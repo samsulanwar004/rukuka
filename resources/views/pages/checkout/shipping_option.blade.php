@@ -7,9 +7,8 @@
 
     <div class="uk-grid-small uk-margin-top" uk-grid>
         <div class="uk-width-3-4@m">
-            <b>C H E C K O U T</b>
-            <hr class="uk-margin-remove-vertical"></hr>
-            <div class="uk-grid uk-grid-divider uk-child-width-1-4@m uk-margin-small" uk-grid>
+            <h4>CHECKOUT</h4>
+            <div class="uk-grid uk-grid-divider uk-child-width-1-3@m uk-margin-small" uk-grid>
                 <div>
                     <a href="{{ route('checkout') }}" class="uk-button uk-button-text">SHIPPING ADDRESS</a>
                 </div>
@@ -27,7 +26,7 @@
             <span class="uk-text-meta">CHOOSE A SHIPPING METHOD</span>
             <hr class="uk-margin-small">
             <span class="uk-text-meta"><b>TODAY : </b>{{ \Carbon\Carbon::now()->toDayDateTimeString() }}</span>
-            <hr class="uk-margin-small">
+
             <form action="{{ route('checkout.shipping') }}" method="POST">
               {{ csrf_field() }}
             <table class="uk-table uk-table-divider uk-table-hover">
@@ -46,9 +45,9 @@
                     </tr> -->
 
                     @foreach ($availableCouriersService['available_couriers'] as $availableCouriersService_key => $availableCouriersService_val)
-                        
+
                         @if($availableCouriersService_val['error'] == '000')
-                          
+
                           @if(count($availableCouriersService_val['data']) > 1 )
 
                             @foreach($availableCouriersService_val['data'] as $dataServices_key => $dataServices_val)
@@ -74,20 +73,17 @@
                           @endif
 
                         @else
-                          
+
                           <tr>
                               <td> {{ $availableCouriersService_val['message'] }} </td>
                           </tr>
 
                         @endif
-                        
+
                     @endforeach
 
                 </tbody>
             </table>
-            <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
-              <input type="submit" name="submit" id="submit" value="C O N T I N U E" class="uk-button-danger uk-button uk-button-small uk-width-1-1">
-            </div>
             <form>
             <hr class="uk-margin-small">
             <span class="uk-text-meta"><b>SHIPPING DETAILS</b></span>
@@ -123,7 +119,7 @@
    function getTotal(shipingCost){
     var subTotal = $('#sub_total').html();
     var total = parseFloat(subTotal) + parseFloat(shipingCost);
-    
+
     $('#shiping_fee').html(shipingCost);
     $('#total_fee').html(round(total));
    }

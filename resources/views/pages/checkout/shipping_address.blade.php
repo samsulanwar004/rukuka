@@ -6,10 +6,8 @@
    </div>
    <div class="uk-grid-small uk-margin-top" uk-grid>
       <div class="uk-width-3-4@m">
-         <b>C H E C K O U T</b>
-         <hr class="uk-margin-remove-vertical">
-         </hr>
-         <div class="uk-grid uk-grid-divider uk-child-width-1-4@m uk-margin-small" uk-grid>
+         <h4>CHECKOUT</h4>
+         <div class="uk-grid uk-grid-divider uk-child-width-1-3@m uk-margin-small" uk-grid>
             <div>
                <button class="uk-button uk-button-text" disabled><b>SHIPPING ADDRESS</b></button>
             </div>
@@ -70,7 +68,7 @@
                   <div class="uk-margin-small uk-grid-small" uk-grid>
                     <div>
                       Countryss
-                      <select id="form-country-empty" name="country" class="uk-input uk-input-small {{ $errors->has('country') ? ' uk-form-danger' : '' }}" required="required" onchange="handleLocalAddress();showListProvices();">  
+                      <select id="form-country-empty" name="country" class="uk-input uk-input-small {{ $errors->has('country') ? ' uk-form-danger' : '' }}" required="required" onchange="handleLocalAddress();showListProvices();">
                         <option></option>
                       </select>
                     </div>
@@ -147,7 +145,7 @@
                </div>
                <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
                   Countryss
-                  <select id="form-country-empty" name="country" class="uk-input uk-form-small uk-from-width-small {{ $errors->has('country') ? ' uk-form-danger' : '' }}" required="required" onchange="handleLocalAddress();showListProvices();">  
+                  <select id="form-country-empty" name="country" class="uk-input uk-form-small uk-from-width-small {{ $errors->has('country') ? ' uk-form-danger' : '' }}" required="required" onchange="handleLocalAddress();showListProvices();">
                     <option></option>
                   </select>
               </div>
@@ -179,18 +177,17 @@
                   Phone Number *
                   <input type="text" name="phone_number" value="{{ old('phone_number') }}" class="uk-input uk-form-small uk-from-width-small {{ $errors->has('phone_number') ? ' uk-form-danger' : '' }}" required="required">
                </div>
-               
+
                <div class="uk-text-meta uk-margin-small-top">
 {{--                   <input type="checkbox" class="uk-checkbox" name="is_billing" value="ok"> This address is also my billing address --}}
                   <p> <b>* Required</b> </p>
                </div>
                <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
-                  <input type="submit" name="submit" id="submit" value="C O N T I N U E" class="uk-button-danger uk-button uk-button-small uk-width-1-1">
+                  <input type="submit" name="submit" id="submit" value="CONTINUE" class="uk-button-danger uk-button uk-button-small uk-width-1-1">
                </div>
             </form>
          </div>
          @endif
-         <hr class="uk-margin-small">
             <item-checkout
                bag_api="{{ route('persist.bag') }}"
             ></item-checkout>
@@ -206,7 +203,7 @@
 @section('footer_scripts')
 <script type="text/javascript">
    $(function () {
-   
+
      $("#continue").on('click', function (e) {
        e.preventDefault();
        var submit = $('#submit').val();
@@ -216,7 +213,7 @@
        } else {
          window.location.href = url;
        }
-   
+
      });
 
      $('#modal-submit').on('click', function () {
@@ -225,15 +222,15 @@
    })
 
    $(document).ready(function(){
-      startLocalAddressing(); 
+      startLocalAddressing();
   });
 
   function startLocalAddressing() {
-    
+
     // default hidden
     $('#div-sub-district').hide();
     $('#div-village').hide();
-    
+
     // show all country
     showListCountries();
 
@@ -266,7 +263,7 @@
       }
 
     }
-  
+
   }
 
   function handleLocalAddress() { //onchange , triger in <option> country
@@ -298,39 +295,39 @@
   }
 
   function showListCountries(){
-    
+
     var allOptionsCountry = '';
 
     var jqxhr = $.get( "/api/v1/countries", function(response) {
-      
+
       if (response.error == '000') {
 
         $.each(response.data, function( index, value ) {
-          
+
           if ("{{old('country')}}" == value.countries_code) {
 
             selectedAlreadyExist = true;
             allOptionsCountry += '<option selected value="' + value.countries_code + '">'+ value.countries_name.toUpperCase() +'</option>'
-          
+
           }else{
 
             allOptionsCountry += '<option value="' + value.countries_code + '">'+ value.countries_name.toUpperCase() +'</option>'
 
           }
-      
+
         });
 
       }else{
 
         console.log(response.message);
         allOptionsCountry += '<option></option>';
-      
+
       }
 
       $('#form-country-empty').append(allOptionsCountry);
 
     }).fail(function(xhr, status, error) {
-      
+
       alert(error + ' when load countries');
 
     });
@@ -341,43 +338,43 @@
     var allOptionsProvince = null;
 
     var jqxhr = $.get( "/api/v1/provinces", function(response) {
-      
+
       if (response.error == '000') {
 
           $.each(response.data, function( index, value ) {
-      
+
             if ("{{old('province')}}" == value.province) {
 
               selectedAlreadyExist = true;
               allOptionsProvince += '<option selected value="' + value.province + '">'+ value.province +'</option>';
-            
+
             }else{
 
               allOptionsProvince += '<option value="' + value.province + '">'+ value.province +'</option>';
 
             }
-        
+
           });
 
       }else{
 
         console.log(response.message);
         allOptionsProvince += '<option></option>';
-      
+
       }
 
       $('#form-province-empty').empty();
       $('#form-province-empty').append( '<option></option>'+ allOptionsProvince);
 
     }).fail(function(xhr, status, error) {
-      
+
       alert(error + ' when load province');
 
     });
   }
 
   function showListCities() {
-    
+
     var allOptionsCity = '';
     var byProvince = $('#form-province-empty').val();
 
@@ -388,36 +385,36 @@
     }
 
     var jqxhr = $.get( "/api/v1/cities/" + byProvince , function(response) {
-      
+
       if (response.error == '000') {
 
           $.each(response.data, function( index, value ) {
-      
+
             if ("{{old('city')}}" == value.city) {
 
               selectedAlreadyExist = true;
               allOptionsCity += '<option selected value="' + value.city + '">'+ value.city +'</option>';
-            
+
             }else{
 
               allOptionsCity += '<option value="' + value.city + '">'+ value.city +'</option>';
 
             }
-        
+
           });
 
       }else{
 
         console.log(response.message);
         allOptionsCity += '<option></option>';
-      
+
       }
 
       $('#form-city-empty').empty();
       $('#form-city-empty').append('<option></option>'+allOptionsCity);
 
     }).fail(function(xhr, status, error) {
-      
+
       alert(error + ' when load city');
 
     });
@@ -425,7 +422,7 @@
   }
 
   function showListSubDistricts() {
-    
+
     var allOptionsSubDistrict = '';
     var byCity = $('#form-city-empty').val();
 
@@ -440,31 +437,31 @@
       if (response.error == '000') {
 
           $.each(response.data, function( index, value ) {
-      
+
             if ("{{old('sub_district')}}" == value.sub_district) {
 
               allOptionsSubDistrict += '<option selected value="' + value.sub_district + '">'+ value.sub_district +'</option>';
-            
+
             }else{
 
               allOptionsSubDistrict += '<option value="' + value.sub_district + '">'+ value.sub_district +'</option>';
 
             }
-        
+
           });
 
       }else{
 
         console.log(response.message);
         allOptionsSubDistrict += '';
-      
+
       }
 
       $('#form-subdistrict-empty').empty();
       $('#form-subdistrict-empty').append('<option></option>' + allOptionsSubDistrict);
 
     }).fail(function(xhr, status, error) {
-      
+
       alert(error + ' when load subdistrict');
 
     });
@@ -472,7 +469,7 @@
   }
 
   function showListVillages() {
-    
+
     var allOptionsVillage = '';
     var bySubDistrict = $('#form-subdistrict-empty').val();
 
@@ -491,27 +488,27 @@
             if ("{{old('village')}}" == value.village) {
 
               allOptionsVillage += '<option selected value="' + value.village + '">'+ value.village + ' - ' + value.postal_code +'</option>';
-            
+
             }else{
 
               allOptionsVillage += '<option value="' + value.village + '">'+ value.village + ' - ' + value.postal_code +'</option>';
 
             }
-        
+
           });
 
       }else{
 
         console.log(response.message);
         allOptionsVillage += '';
-      
+
       }
       console.log(this.vilageWithPosCode);
       $('#form-village-empty').empty();
       $('#form-village-empty').append('<option></option>' + allOptionsVillage);
 
     }).fail(function(xhr, status, error) {
-      
+
       alert(error + ' when load village');
 
     });
@@ -539,35 +536,35 @@
     var byProvince = $('#form-province-vue').val();
 
     var jqxhr = $.get("/api/v1/cities/" + byProvince , function(response) {
-      
+
       if (response.error == '000') {
 
           $.each(response.data, function( index, value ) {
-      
+
             if ("{{old('city')}}" == value.city) {
 
               allOptionsCity += '<option selected value="' + value.city + '">'+ value.city +'</option>';
-            
+
             }else{
 
               allOptionsCity += '<option value="' + value.city + '">'+ value.city +'</option>';
 
             }
-        
+
           });
 
       }else{
 
         console.log(response.message);
         allOptionsCity += '<option></option>';
-      
+
       }
 
       $('#form-city-vue').empty();
       $('#form-city-vue').append('<option></option>'+allOptionsCity);
 
     }).fail(function(xhr, status, error) {
-      
+
       alert(error + ' when load city');
 
     });
@@ -575,7 +572,7 @@
   }
 
   function showVueListSubDistricts() {
-    
+
     var allOptionsSubDistrict = '';
     var byCity = $('#form-city-vue').val();
 
@@ -584,31 +581,31 @@
       if (response.error == '000') {
 
           $.each(response.data, function( index, value ) {
-      
+
             if ("{{old('sub_district')}}" == value.sub_district) {
 
               allOptionsSubDistrict += '<option selected value="' + value.sub_district + '">'+ value.sub_district +'</option>';
-            
+
             }else{
 
               allOptionsSubDistrict += '<option value="' + value.sub_district + '">'+ value.sub_district +'</option>';
 
             }
-        
+
           });
 
       }else{
 
         console.log(response.message);
         allOptionsSubDistrict += '';
-      
+
       }
 
       $('#form-subdistrict-vue').empty();
       $('#form-subdistrict-vue').append('<option></option>' + allOptionsSubDistrict);
 
     }).fail(function(xhr, status, error) {
-      
+
       alert(error + ' when load subdistrict');
 
     });
@@ -616,7 +613,7 @@
   }
 
   function showVueListVillages() {
-    
+
     var allOptionsVillage = '';
     var bySubDistrict = $('#form-subdistrict-vue').val();
 
@@ -625,31 +622,31 @@
       if (response.error == '000') {
 
           $.each(response.data, function( index, value ) {
-      
+
             if ("{{old('village')}}" == value.village) {
 
               allOptionsVillage += '<option selected value="' + value.village + '">'+ value.village + ' - ' + value.postal_code +'</option>';
-            
+
             }else{
 
               allOptionsVillage += '<option value="' + value.village + '">'+ value.village + ' - ' + value.postal_code +'</option>';
 
             }
-        
+
           });
 
       }else{
 
         console.log(response.message);
         allOptionsVillage += '';
-      
+
       }
 
       $('#form-village-vue').empty();
       $('#form-village-vue').append('<option></option>' + allOptionsVillage);
 
     }).fail(function(xhr, status, error) {
-      
+
       alert(error + ' when load subdistrict');
 
     });
@@ -668,7 +665,7 @@
     $('#form-postal-vue').val(posCode);
 
   }
-  
+
    // end punya vue -------
 </script>
 @endsection
