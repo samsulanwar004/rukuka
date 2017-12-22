@@ -73,6 +73,17 @@
                 <div class="uk-width-1-2@m">
                   <div class="uk-hidden@m">
                     <h5 class="uk-margin-remove">{{ name }}</h5>
+                      <span v-if="priceBeforeDiscount > 0 ">
+                          <span style="text-decoration: line-through;">
+                              {{ currency }} {{ priceBeforeDiscount }}
+                          </span>
+                      </span>
+                      <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
+                          &nbsp; {{ currency }} {{ price }}
+                      </span>
+                      <span v-else>
+                          {{ currency }} {{ price }}
+                      </span>
 
                   </div>
                   <div class="uk-inline">
@@ -99,23 +110,29 @@
                   </div>
                 </div>
                 <div class="uk-width-1-2@m">
+                  <h4 class="uk-margin-remove">
                   <span v-if="priceBeforeDiscount > 0 ">
-                      <del class="uk-text-lead">
-                          {{ currency }} {{ priceBeforeDiscount }}
-                      </del>
+
+                    <del>
+                        {{ currency }} {{ priceBeforeDiscount }}
+                    </del>
+
                   </span>
-                  <span class="uk-text-danger uk-text-lead" v-if="priceBeforeDiscount > 0 ">
+                  <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
                       &nbsp; {{ currency }} {{ price }}
                   </span>
-                  <span v-else class="uk-text-lead">
-                      {{ currency }} {{ price }}
+                  </h4>
+
+                  <span v-else>
+                      <h4>{{ currency }} {{ price }}</h4>
                   </span>
-                  <h5 class="uk-margin-small"><b>Color : {{ color }}</b></h5>
+                  <h5 class="uk-margin-small">Color : {{ color }}</h5>
 
                   <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-small">
-                      <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
-                        {{ stock.size }} {{ stock.unit | unit }}
-                      </option>
+                    <option :value="null" disabled>Select Size</option>
+                    <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
+                      {{ stock.size }} {{ stock.unit | unit }}
+                    </option>
 
                   </select>
                   <span class="uk-text-meta"><i>Choose your size</i> </span>
