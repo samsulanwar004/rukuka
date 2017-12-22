@@ -1,4 +1,4 @@
-<div class="uk-section-xsmall uk-box-shadow-medium uk-background-default uk-margin-remove uk-padding-remove" uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
+<div class="uk-section-xsmall uk-background-default uk-margin-remove uk-padding-remove" uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
     <div class="uk-section uk-section-default uk-section-xsmall uk-padding-remove-vertical">
         <div class="uk-container uk-container-small">
           <div class="uk-grid-small" uk-grid>
@@ -12,7 +12,7 @@
               </div>
               <div class="uk-width-1-3@m">
                 <div class="uk-panel uk-text-center">
-                  <a href="/" class="uk-link-reset"><img src="{{ config('filesystems.s3url').'/images/logo-kukaindonesia.jpg' }}" alt="" width="90"></a>
+                  <a href="/" class="uk-link-reset"><img src="{{ imageCDN('logo-kukaindonesia.jpg') }}" alt="rukuka" width="90"></a>
                 </div>
               </div>
               <user-panel
@@ -38,6 +38,7 @@
       men_link="{{ route('men') }}"
       women_link="{{ route('women') }}"
       kid_link="{{ route('kids') }}"
+      designer_link="{{ route('designer') }}"
     ></navigation>
 
   </div>

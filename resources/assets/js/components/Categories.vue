@@ -1,7 +1,7 @@
 <template>
     <ul class="uk-nav-default uk-nav-parent-icon" uk-nav="multiple: true" v-if="parent == 'designers'">
         <li class="uk-active">
-          <a :href="'/shop/'+parent+'/all'">All</a>
+          <a :href="'/shop/'+parent+'/all'">ALL</a>
         </li>
         <li :class="{'uk-parent':true, 'uk-parent uk-open': slug != 'all'}">
             <a href="#">{{ parent.toUpperCase() }}</a>
@@ -14,7 +14,7 @@
     </ul>
     <ul class="uk-nav-default uk-nav-parent-icon" uk-nav="multiple: true" v-else>
         <li class="uk-active">
-          <a :href="'/shop/'+parent+'/all'">All</a>
+          <a :href="'/shop/'+parent+'/all'">ALL</a>
         </li>
         <li :class="{'uk-parent':true, 'uk-parent uk-open': category_slug == category.name.toLowerCase() }" v-for="category in categories">
             <a href="#">{{ category.name.toUpperCase() }}</a>

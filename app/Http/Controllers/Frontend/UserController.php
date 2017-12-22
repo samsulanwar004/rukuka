@@ -556,6 +556,26 @@ class UserController extends BaseController
 
     public function postShippingOption(Request $request)
     {
+        try {
+            $bag = new BagService;
+            $courierServices = new CourierRepository;
+
+            $user = $this->getUserActive();
+            $defaultAddress = $this->user
+                ->setUser($user)
+                ->getAddressDefault();
+
+            $courir = $courierServices->setCheckoutBag($bag->get(self::INSTANCE_SHOP))
+                            ->setDestinationAddress($defaultAddress)
+                            ->saveShippingCostChoosed($request->input('shipping'));
+
+            if ($courir['error'] != "000") {
+                throw new Exception($courir['message'], 1); 
+            }
+        } catch (Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
+
         return redirect($this->redirectAfterSaveShippingOption);
     }
 
@@ -742,6 +762,8 @@ class UserController extends BaseController
         // $defaultCreditcard->country = $creditCard->address->country;
         // $defaultCreditcard->phone_number = $creditCard->address->phone_number;
 
+        $shippingCost = (new CourierRepository)->getSavedSessionShippingChoosed();
+
         $defaultAddress = $this->user
             ->setUser($user)
             ->getAddressDefault();
@@ -752,6 +774,7 @@ class UserController extends BaseController
         return view('pages.checkout.shipping_preview', compact(
             // 'defaultCreditcard',
             'defaultAddress',
+            'shippingCost',
             'total'
         ));
     }
@@ -907,6 +930,154 @@ class UserController extends BaseController
             $response = array('review' => $review, 'loader' => $loader, 'count' => count($reviews));
             echo json_encode($response);
         }
+    }
+
+    public function postFinalPage(Request $request)
+    {  
+        $data = $request->all();
+
+        $external_id = $data["order"]["order_code"]; 
+        $token_id = $data['response']['id'];
+        $amount = $data['request']['amount'];
+        $capture_options['authentication_id'] = $data['response']['authentication_id'];
+
+        $curl = curl_init();
+
+            $headers = array();
+            $headers[] = 'Content-Type: application/json';
+            $secret_api_key = config('common.xendit_secret_key');
+            $server_domain = 'https://api.xendit.co';
+
+            $end_point = $server_domain.'/credit_card_charges';
+
+            $data['external_id'] = $external_id;
+            $data['token_id'] = $token_id;
+            $data['amount'] = $amount;
+
+            if (!empty($capture_options['authentication_id'])) {
+                $data['authentication_id'] = $capture_options['authentication_id'];
+            }
+
+            if (!empty($capture_options['card_cvn'])) {
+                $data['card_cvn'] = $capture_options['card_cvn'];
+            }
+
+            if (!empty($capture_options['capture'])) {
+                $data['capture'] = $capture_options['capture'];
+            }
+
+            $payload = json_encode($data);
+
+            
+
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($curl, CURLOPT_USERPWD, $secret_api_key.":");
+            curl_setopt($curl, CURLOPT_URL, $end_point);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $payload);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+            $response = curl_exec($curl);
+            curl_close($curl);
+
+            $responseObject = json_decode($response, true);
+            //return $responseObject;
+
+            $response_cc = $responseObject;
+             if(!isset($response_cc["capture_amount"]))
+             {
+                $response_cc["capture_amount"] = null ;
+             }
+             if(!isset($response_cc["failure_reason"]))
+             {
+                $response_cc["failure_reason"] = null ;
+             }
+
+            DB::table('response_payments')->insert(
+                [
+                    'order_code' => $data["order"]["order_code"],
+                    'response_json' => $response
+                ]
+            );
+            if($response_cc["status"] == "CAPTURED")
+            {
+                DB::table('orders')
+                ->where('order_code', $data["order"]["order_code"])
+                ->update(['payment_status' => 1]);
+
+               // $request->session()->put('payment_message', 'Charge is successfully captured and the funds will be settled according to the settlement schedule.');
+            }
+
+            if($response_cc["status"] == "AUTHORIZED") // MASIH RAGU DI GANTI STATUSNYA GA
+            {
+                DB::table('orders')
+                ->where('order_code', $data["order"]["order_code"])
+                ->update(['payment_status' => 1]);
+
+               // $request->session()->put('payment_message', 'Charge is successfully authorized.');
+            }
+
+            if($response_cc["status"] == "FAILED")
+            {
+               if($response_cc["failure_reason"] == "EXPIRED_CARD")
+                {
+                    $message = "The card you are trying to capture is expired. Ask your customer for a different card";
+                }
+                elseif($response_cc["failure_reason"] == "CARD_DECLINED")
+                {
+                    $message = "The card you are trying to capture has been declined by the bank. Ask your customer for a different card";
+                }
+                elseif($response_cc["failure_reason"] == "INSUFFICIENT_BALANCE")
+                {
+                    $message = "The card you are trying to capture does not have enough balance to complete the capture";
+                }
+                elseif($response_cc["failure_reason"] == "STOLEN_CARD")
+                {
+                    $message = "The card you are trying to capture has been marked as stolen. Ask your customer for a different card";
+                }
+                elseif($response_cc["failure_reason"] == "INACTIVE_CARD")
+                {
+                    $message = "The card you are trying to capture is inactive. Ask your customer for a different card";
+                }
+                elseif($response_cc["failure_reason"] == "INVALID_CVN")
+                {
+                    $message = "The cvn that being submitted is not correct";
+                }
+                elseif($response_cc["failure_reason"] == "PROCESSOR_ERROR")
+                {
+                    $message = "The charge failed because there's an integration issue between card processor and the bank. Contact us if you encounter this issue";
+                }
+                else
+                {
+                    $message = "error";
+                }
+               // $request->session()->put('payment_message', $message);
+            }
+            
+             
+            // DB::table('payments')->insert(
+            //     [
+            //         'user_id' => $data["order"]["user_id"],
+            //         'authorized_amount' => $response_cc["authorized_amount"],
+            //         'business_id' => $response_cc["business_id"],
+            //         'external_id' => $data["order"]["order_code"],
+            //         'merchant_id' => $response_cc["merchant_id"],
+            //         'merchant_reference_code' => $response_cc["merchant_reference_code"],
+            //         'masked_card_number' => $response_cc["masked_card_number"],
+            //         'charge_type' => $response_cc["charge_type"],
+            //         'card_brand' => $response_cc["card_brand"],
+            //         'card_type' => $response_cc["card_type"],
+            //         'status' => $response_cc["status"],
+            //         'eci' => $response_cc["eci"],
+            //         'capture_amount' => $response_cc["capture_amount"],
+            //         'status_id' => $response_cc["id"],
+            //         'created'=> $response_cc["created"]
+            //     ]
+            // );
+          
+           session(['payment_status' => $response_cc["status"]]);
+           return $responseObject;
+       
     }
 
 }

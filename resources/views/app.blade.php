@@ -11,6 +11,7 @@
 
     <!-- jQuery is required -->
     <link rel="stylesheet" href="{{ elixirCDN('css/app.css') }}">
+    <link rel="shortcut icon" href="{{ imageCDN('favicon.png') }}">
 
   </head>
   <body>
@@ -24,14 +25,6 @@
       </div>
       <div class="uk-hidden@m">
         @include('partials.mobile_nav')
-        <div id="offcanvas-overlay-slide" uk-offcanvas="overlay: true">
-          <navigation-mobile
-                  api="{{ route('menu')}}"
-                  men_link="{{ route('men') }}"
-                  women_link="{{ route('women') }}"
-                  kid_link="{{ route('kids') }}"
-          ></navigation-mobile>
-        </div>
       </div>
 
       @yield('content')

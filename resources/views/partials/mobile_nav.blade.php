@@ -2,7 +2,7 @@
   <div class="uk-section uk-section-default uk-section-xsmall uk-padding-remove-vertical">
     <div class="uk-container uk-container-small">
       <div class="uk-panel uk-text-center">
-        <a href="/" class="uk-link-reset"><img src="/images/logo-kukaindonesia.jpg" alt="" width="90"></a>
+        <a href="/" class="uk-link-reset"><img src="{{ imageCDN('logo-kukaindonesia.jpg') }}" alt="rukuka" width="90"></a>
       </div>
     </div>
   </div>
@@ -33,6 +33,15 @@
               checkout_link="{{ route('checkout') }}"
               api_token="{{ Auth::user('web')->api_token }}"
             ></user-panel>
+            <div id="offcanvas-overlay-slide" uk-offcanvas="overlay: true">
+              <navigation-mobile
+                      api="{{ route('menu')}}"
+                      men_link="{{ route('men') }}"
+                      women_link="{{ route('women') }}"
+                      kid_link="{{ route('kids') }}"
+                      designer_link="{{ route('designer') }}"
+              ></navigation-mobile>
+            </div>
             <div class="uk-navbar-left uk-flex-1 test-overlay" hidden>
               <div class="uk-navbar-item uk-width-expand">
                 {{ Form::open(array('url' => '/search', 'method' =>'get','files' => true,'class' => 'uk-search uk-search-navbar uk-width-1-1')) }}

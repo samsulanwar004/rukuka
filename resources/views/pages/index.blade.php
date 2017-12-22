@@ -35,21 +35,22 @@
     <div class="uk-card-body">
     <div class="uk-grid-small" uk-grid>
 
-        <div class="uk-width-1-5@m uk-width-1-3 uk-flex uk-flex-middle">
+        <div class="uk-width-2-5@m uk-width-1-3 uk-flex uk-flex-middle">
           <div class="uk-visible@m">
-            <span class="uk-text-lead">New Arrival</span>
+            <h2>rukuka New Arrival</h2>
           </div>
           <div class="uk-hidden@m">
-            <h5>New Arrival</h5>
+            <h4>rukuka New Arrival</h4>
           </div>
         </div>
-        <div class="uk-width-2-5@m uk-width-2-3 uk-inline uk-flex uk-flex-middle">
+        <div class="uk-width-3-5@m uk-width-2-3">
           <div class="uk-visible@m">
-            <span class="uk-text-lead">
+            <h2>
                 <a href="{{ $home['homepage_content_url_1'] }}">{{$home['homepage_content_text_1']}}</a>
                 <a href="{{ $home['homepage_content_url_2'] }}">{{$home['homepage_content_text_2']}}</a>
                 <a href="{{ $home['homepage_content_url_3'] }}">{{$home['homepage_content_text_3']}}</a>
-            </span>
+                <a href="/blog">{{$home['homepage_text_blog_1']}}</a>
+            </h2>
           </div>
           <div class="uk-hidden@m">
             <h4>
@@ -57,16 +58,6 @@
                 <a href="{{ $home['homepage_content_url_2'] }}">{{$home['homepage_content_text_2']}}</a>
                 <a href="{{ $home['homepage_content_url_3'] }}">{{$home['homepage_content_text_3']}}</a>
             </h4>
-          </div>
-        </div>
-        <div class="uk-width-2-5@m uk-inline">
-          <div class="uk-visible@m">
-            <h3 class="uk-margin-remove uk-text-danger">{{$home['homepage_text_blog_1']}}</h3>
-            <a href="/blog" class="uk-text-muted">{{$home['homepage_text_blog_2']}}<span uk-icon="icon: triangle-right"></span></a>
-          </div>
-          <div class="uk-hidden@m">
-            <h4 class="uk-margin-remove uk-text-danger">{{$home['homepage_text_blog_1']}}</h4>
-            <a href="/blog" class="uk-text-muted">{{$home['homepage_text_blog_2']}}<span uk-icon="icon: triangle-right"></span></a>
           </div>
         </div>
     </div>
@@ -81,9 +72,9 @@
                           <img src="{{ $home['homepage_banner_1'] }}" alt="">
                           <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
                           </div>
-                          <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
+                          <div class="uk-card uk-position-bottom uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">
-                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_1'] }}</h3></div>
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove uk-text-center"><b>{{ $home['homepage_text_1'] }}</b></h3></div>
                               </div>
                           </div>
                       </a>
@@ -105,7 +96,7 @@
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">
-                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_2'] }}</h3></div>
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove uk-text-center"><b>{{ $home['homepage_text_2'] }}</b></h3></div>
                               </div>
                           </div>
                       </a>
@@ -127,7 +118,7 @@
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">
-                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_3'] }}</h3></div>
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove uk-text-center"><b>{{ $home['homepage_text_3'] }}</b></h3></div>
                               </div>
                           </div>
                       </a>
@@ -149,7 +140,7 @@
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">
-                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_4'] }}</h3></div>
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove uk-text-center"><b>{{ $home['homepage_text_4'] }}</b></h3></div>
                               </div>
                           </div>
                       </a>
@@ -171,7 +162,7 @@
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">
-                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_5'] }}</h3></div>
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove uk-text-center"><b>{{ $home['homepage_text_5'] }}</b></h3></div>
                               </div>
                           </div>
                       </a>
@@ -193,7 +184,7 @@
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">
-                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_6'] }}</h3></div>
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove uk-text-center"><b>{{ $home['homepage_text_6'] }}</b></h3></div>
                               </div>
                           </div>
                       </a>
@@ -215,7 +206,7 @@
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">
-                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_7'] }}</h3></div>
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove uk-text-center"><b>{{ $home['homepage_text_7'] }}</b></h3></div>
                               </div>
                           </div>
                       </a>
@@ -237,7 +228,7 @@
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">
-                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_8'] }}</h3></div>
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove uk-text-center"><b>{{ $home['homepage_text_8'] }}</b></h3></div>
                               </div>
                           </div>
                       </a>
@@ -259,7 +250,7 @@
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">
-                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove">{{ $home['homepage_text_9'] }}</h3></div>
+                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove uk-text-center"><b>{{ $home['homepage_text_9'] }}</b></h3></div>
                               </div>
                           </div>
                       </a>
@@ -273,11 +264,8 @@
               </div>
           </div>
       </div>
-  <hr>
-  <div class="uk-text-left">
-  	<span class="uk-text-lead">MOST POPULAR</span>
 
-  </div>
+  	<h3>MOST POPULAR</h3>
   	<popular
       api="{{ route('populer')}}"
       product_api="{{ route('product.api') }}"

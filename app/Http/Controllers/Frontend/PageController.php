@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Repositories\DesignerRepository;
 use Illuminate\Http\Request;
 use App\Repositories\ProductRepository;
 use App\Repositories\SettingRepository;
@@ -152,6 +153,12 @@ class PageController extends BaseController
             'deliveryReturns',
             'reviews'
         ));
+    }
+
+    public function designer()
+    {
+        $designers = (new DesignerRepository)->getDesignersAZ();
+        return view('pages.designer', compact('designers'));
     }
 
     public function women()
@@ -390,6 +397,7 @@ class PageController extends BaseController
         $shops = $products->map(function ($entry) {
             return [
                 'id' => $entry->id,
+                'product_categories_id' => $entry->product_categories_id,
                 'name' => $entry->name,
                 'slug' => $entry->slug,
                 'price' => $entry->sell_price,
@@ -401,11 +409,17 @@ class PageController extends BaseController
 
         $keyword = $request->input('keyword');
 
+        $productcategory = $product->getSearchCategory($request);
+        $category = $request->input('category');
+        $subcategory = $request->input('subcategory');
+
         return view('pages.search', compact(
             'products',
             'shops',
-            'keyword'
-
+            'keyword',
+            'productcategory',
+            'category',
+            'subcategory'
         ));
     }
 

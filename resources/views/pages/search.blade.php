@@ -16,7 +16,8 @@
         @else
 
         @endif
-        <div class="uk-grid-small uk-margin-top" uk-grid>
+        <div class="uk-section uk-section-xsmall uk-section-default uk-padding-small" uk-section uk-sticky="offset: 106">
+        <div class="uk-grid-small" uk-grid>
             <div class="uk-width-1-4@m uk-visible@m">
                 <div class="uk-panel">
                     <ul class="uk-breadcrumb">
@@ -44,6 +45,9 @@
                                 <search
                                         api="{{ route('search.api',['keyword' => $keyword])}}"
                                         keyword="{{$keyword}}"
+                                        category="{{ $category }}"
+                                        subcategory="{{ $subcategory }}"
+                                        productcategory="{{ $productcategory }}"
                                 ></search>
                             </div>
                         </div>
@@ -51,16 +55,18 @@
                 </div>
             </div>
         </div>
-        <div class="uk-grid-small uk-margin-top uk-margin-large-bottom" uk-grid>
+      </div>
+        <div class="uk-grid-small uk-margin-small-top uk-margin-large-bottom" uk-grid>
             <div class="uk-width-1-4@m uk-visible@m">
-                <div class="uk-card uk-card-default uk-card-border uk-card-small uk-panel">
-                    <div class="uk-card-header">
-                        <span class="uk-text-bold">Search :  </span> {{$keyword}}
-                    </div>
+                <div class="uk-card uk-card-border uk-card-small uk-panel">
                     <div class="uk-card-body">
+                      <h4>Search :  <b> {{$keyword}} </b> </h4>
                         <search
                                 api="{{ route('search.api',['keyword' => $keyword])}}"
                                 keyword="{{$keyword}}"
+                                category="{{ $category }}"
+                                subcategory="{{ $subcategory }}"
+                                productcategory="{{ $productcategory }}"
                         ></search>
                     </div>
                 </div>
@@ -73,14 +79,6 @@
                         wishlist_api="{{ route('persist.wishlist') }}"
                         auth="{{ Auth::check() ? 1 : 0 }}"a
                 ></shop>
-                <hr>
-                <div class="uk-panel">
-                    <div class="uk-text-right">
-              <span class="uk-text-meta">
-                @include('pagination.default', ['paginator' => $products])
-              </span>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

@@ -196,7 +196,9 @@
             ></item-checkout>
          <hr class="uk-margin-small">
       </div>
-      <summary-checkout></summary-checkout>
+      <summary-checkout
+        shipping_cost="0"
+      ></summary-checkout>
    </div>
 </div>
 </div>
