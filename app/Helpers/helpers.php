@@ -81,3 +81,16 @@ if (! function_exists('imageCDN')) {
         return $cdn .'/images/'.$file;
     }
 }
+
+if (! function_exists('uploadCDN')) {
+    function uploadCDN($file) {
+        $cdn = '';
+
+        if(env('S3_URL', false))
+        {
+            $cdn = env('S3_URL');
+        }
+
+        return $cdn .'/'.$file;
+    }
+}
