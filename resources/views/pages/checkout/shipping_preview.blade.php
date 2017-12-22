@@ -6,9 +6,8 @@
     </div>
     <div class="uk-grid-small uk-margin-top" uk-grid>
         <div class="uk-width-3-4@m">
-            <b>C H E C K O U T</b>
-            <hr class="uk-margin-remove-vertical"></hr>
-            <div class="uk-grid uk-grid-small uk-grid-divider uk-child-width-1-4@m uk-margin-small" uk-grid>
+            <h4>CHECKOUT</h4>
+            <div class="uk-grid uk-grid-small uk-grid-divider uk-child-width-1-3@m uk-margin-small" uk-grid>
                 <div>
                     <a href="{{ route('checkout') }}" class="uk-button uk-button-text">SHIPPING ADDRESS</a>
                 </div>
@@ -24,35 +23,7 @@
             </div>
             <hr class="uk-margin-small">
             <h4 class="uk-margin-remove">PLEASE CONFIRM YOUR ORDER</h4>
-
-{{--               <hr class="uk-margin-small">
-              <b>BILLING OPTION</b>
-              <hr class="uk-margin-small">
-              <div class="uk-grid uk-grid-small" grid>
-                <div class="uk-width-1-3@m">
-                  <ul class="uk-list uk-text-meta">
-                      <li>{{ $defaultCreditcard->first_name }}</li>
-                      <li>{{ $defaultCreditcard->company }}</li>
-                      <li>{{ $defaultCreditcard->address_line }}</li>
-                      <li>{{ $defaultCreditcard->city }}</li>
-                      <li>{{ $defaultCreditcard->city }}, {{ $defaultCreditcard->country }} {{ $defaultCreditcard->postal }}</li>
-                      <li>{{ $defaultCreditcard->country }}</li>
-                      <li>{{ $defaultCreditcard->phone_number }}</li>
-                  </ul>
-                </div>
-                <div class="uk-width-1-3@m">
-                  <input type="hidden" name="card_number" value="{{ $defaultCreditcard->card_number }}" id="card-number-hidden">
-                  <ul class="uk-list uk-text-meta">
-                      <li><span id="card"></span></li>
-                      <li><span id="card-number"></span></li>
-                      <li><img src="#" id="card_img" width="50px"></li>
-                      <li>{{ $defaultCreditcard->name }}</li>
-                      <li>IDR {{ $total }}</li>
-                  </ul>
-                </div>
-              </div> --}}
-            <hr class="uk-margin-small">
-            <b>SHIPPING DETAILS</b>
+            SHIPPING DETAILS
             <hr class="uk-margin-small">
             <div class="uk-grid uk-grid-small" grid>
               <div class="uk-width-1-3@m">
@@ -116,7 +87,7 @@
       //   } else {
       //     $('#card_img').attr('src', '/images/default_card.png');
       //   }
-        
+
       // });
 
       // var card = $('#card-number-hidden').val();

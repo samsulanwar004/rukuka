@@ -5,7 +5,7 @@
         <table class="uk-table uk-table-divider">
           <thead>
               <tr>
-                  <th class="uk-table-shrink" colspan="4"><b>Y O U R &nbsp;&nbsp; B A G ({{ bags.length }}) </b></th>
+                  <th class="uk-table-shrink" colspan="4"><h5>Y O U R &nbsp;&nbsp; B A G ({{ bags.length }}) </h5></th>
               </tr>
           </thead>
             <thead>
@@ -158,7 +158,7 @@
                     console.log(error);
                   });
                 }
-                
+
             },
 
             plus: function (sku) {
