@@ -13,6 +13,11 @@ class DesignerRepository
 		return Designer::whereNull('deleted_at')->get()->toArray();
 	}
 
+    public function getDesignersAZ()
+    {
+        return Designer::whereNull('deleted_at')->orderBy('slug', 'asc')->get()->toArray();
+    }
+
     public function getDesignersByKeyword($keyword)
     {
         return Designer::where('name','LIKE','%'.$keyword.'%')->whereNull('deleted_at')->get()->toArray();
