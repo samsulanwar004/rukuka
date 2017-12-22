@@ -6,19 +6,19 @@
             @include('partials.alert')
         </div>
         <div class="uk-grid-small uk-margin-top" uk-grid>
-            <div class="uk-width-3-5@m">
+            <div class="uk-width-2-3@m">
                 <div uk-grid>
                     <div class="uk-width-auto@m uk-visible@m">
                         <ul class="uk-tab-left" uk-tab="connect: #component-tab-left; animation: uk-animation-fade">
                             @foreach($product->images as $image)
-                                <li><a href="#"><img src="/{{ $image->photo }}" alt="" width="80"></a></li>
+                                <li style="margin-bottom: 10px"><a href="#"><img src="/{{ $image->photo }}" alt="" width="80"></a></li>
                             @endforeach
                         </ul>
                     </div>
                     <div class="uk-width-expand@m">
                         <ul id="component-tab-left" class="uk-switcher">
                             @foreach($product->images as $image)
-                                <li><a href="#"><img src="/{{ $image->photo }}" alt="" width="450"></a></li>
+                                <li><a href="#"><img src="/{{ $image->photo }}" alt="" width="530"></a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -31,16 +31,16 @@
                     </div>
                 </div>
             </div>
-            <div class="uk-width-2-5@m">
+            <div class="uk-width-1-3@m">
                 <a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}">{{ $product->designer->name }}</a><br>
-                <span class="uk-text-lead">{{ $product->name }}</span><br>
+                <h3 class="uk-margin-remove">{{ $product->name }}</h3>
                 @if($product->price_before_discount > 0)
                     <b>
-                        <span style="text-decoration: line-through;">{{ $product->currency }} {{ number_format($product->price_before_discount) }}</span>
-                        <span class="uk-text-danger">{{ $product->currency }} {{ number_format($product->sell_price) }}</span>
+                        <h4 class="uk-margin-remove"><del>{{ $product->currency }} {{ number_format($product->price_before_discount) }}</del>
+                        <span class="uk-text-danger">{{ $product->currency }} {{ number_format($product->sell_price) }}</h4>
                     </b>
                 @else
-                    <b>{{ $product->currency }} {{ number_format($product->sell_price) }} </b>
+                    <h4 class="uk-margin-remove">{{ $product->currency }} {{ number_format($product->sell_price) }} </h4>
                 @endif
 
                 <br>
@@ -54,30 +54,11 @@
                       <span></span>
                   </div>
                 @endif
-                <ul uk-accordion="animation: true; multiple: false">
-                    <li class="uk-open">
-                        <h5 class="uk-accordion-title">EDITORS NOTES</h5>
-                        <div class="uk-accordion-content">
-                            {{ $product->content }}
-                        </div>
-                    </li>
-                    <li>
-                        <h5 class="uk-accordion-title">SIZE & FIT</h5>
-                        <div class="uk-accordion-content">
-                            {{ $product->size_and_fit }}
-                        </div>
-                    </li>
-                    <li>
-                        <h5 class="uk-accordion-title">DETAILS & CARE</h5>
-                        <div class="uk-accordion-content">
-                            {{ $product->detail_and_care }}
-                        </div>
-                    </li>
-                </ul>
+
                 <button-buy
                         api_bag="{{ route('persist.bag') }}"
                         api_wishlist="{{ route('persist.wishlist') }}"
-                        color="{{ $product->color }}"
+                        product="{{ $product }}"
                         sizes="{{ $product->stocks }}"
                         auth="{{ Auth::check() ? 1 : 0 }}"
                         method="{{ $method }}"
@@ -102,12 +83,12 @@
                 <div class="uk-child-width-1-2 uk-margin-top uk-grid-divider uk-flex-middle uk-flex-center" uk-grid>
                     <div class="uk-text-center">
                         Product Code: <br>
-                        <b class="uk-text-lead">{{ $product->product_code }}</b>
+                        <h5 class="uk-margin-remove">{{ $product->product_code }}</h5>
                     </div>
                     <div class="uk-text-center">
                         <a href="{{ route('shop', ['categories' => strtolower($product->category->parent->parent->name) ,'category' => strtolower($product->category->parent->name), 'slug' => $product->category->slug]) }}">{{ $product->category->name }}</a>
                         <br>
-                        <a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}" class="uk-text-lead">{{ $product->designer->name }}</a>
+                        <h5 class="uk-margin-remove"><a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}">{{ $product->designer->name }}</a></h5>
                     </div>
                 </div>
                 <hr class="uk-margin-small">
@@ -197,7 +178,7 @@
                 </div>
             @endforeach
         </div>
-        
+
         @if($rating)
         <div class="uk-grid uk-visible@m" uk-grid>
             <div id="loader" class="uk-grid-small uk-align-center">
@@ -215,7 +196,7 @@
         <hr>
         <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
             <div class="uk-panel">
-                <span class="uk-text-lead">RELATED PRODUCT</span>
+                <h3 class="uk-margin-small">RELATED PRODUCT</h3>
             </div>
         </div>
         <related

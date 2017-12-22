@@ -91,7 +91,8 @@
                 <a :class="{'uk-text-bold': category == 'kids'}" :href="'/search?keyword='+keyword+'&category=kids'">KIDS ({{kidCounts}})</a>
             </li>
             <li v-if="category == 'womens'" :class="{'uk-parent':true, 'uk-parent uk-open': subcategory}">
-                <hr>
+
+                <hr class="uk-margin-small-top">
                 <a>CATEGORY</a>
                 <ul class="uk-nav-sub">
                 <span v-for="cloth in womenCloths">
@@ -102,7 +103,7 @@
                 </ul>
             </li>
             <li v-if="category == 'mens'" :class="{'uk-parent':true, 'uk-parent uk-open': subcategory}">
-                <hr>
+                <hr class="uk-margin-small-top">
                 <a>CATEGORY</a>
                 <ul class="uk-nav-sub">
                 <span v-for="cloth in menCloths">
@@ -113,7 +114,7 @@
                 </ul>
             </li>
             <li v-if="category == 'kids'" :class="{'uk-parent':true, 'uk-parent uk-open': subcategory}">
-                <hr>
+                <hr class="uk-margin-small-top">
                 <a>CATEGORY</a>
                 <ul class="uk-nav-sub">
                 <span v-for="cloth in kidCloths">
@@ -125,5 +126,3 @@
             </li>
          </ul>
 </template>
-
-
