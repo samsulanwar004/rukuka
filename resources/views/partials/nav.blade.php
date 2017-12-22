@@ -38,6 +38,7 @@
       men_link="{{ route('men') }}"
       women_link="{{ route('women') }}"
       kid_link="{{ route('kids') }}"
+      designer_link="{{ route('designer') }}"
     ></navigation>
 
   </div>

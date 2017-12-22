@@ -1,6 +1,6 @@
 <script>
     export default {
-        props: ['api', 'men_link', 'women_link', 'kid_link'],
+        props: ['api', 'men_link', 'women_link', 'kid_link','designer_link'],
         created() {
             var self = this;
             var api = this.api;
@@ -71,6 +71,7 @@
                 menLink: this.men_link,
                 womenLink: this.women_link,
                 kidLink: this.kid_link,
+                designerLink: this.designer_link,
                 designersNav: {},
                 womensNav: {},
                 mensNav: {},
@@ -83,13 +84,10 @@
 
 <template>
     <nav class="uk-container uk-container-small uk-section-default uk-background-default" uk-navbar="dropbar: true; align: center; boundary-align: true; delay-hide: 100; duration:50">
-  <!-- <div uk-navbar> -->
       <div class="uk-navbar-center">
 
-          <!-- <a class="uk-navbar-item uk-logo" href="#"><img src="images/logo.png" alt="" width="60"></a> -->
-
           <ul class="uk-navbar-nav">
-              <li><a href="/shop/designers/all">DESIGNERS</a>
+              <li><a :href="designerLink">DESIGNERS</a>
                 <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                     <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
@@ -342,6 +340,5 @@
               </li>
           </ul>
       </div>
-  <!-- </div> -->
     </nav>
 </template>

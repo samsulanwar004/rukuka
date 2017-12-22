@@ -1,6 +1,6 @@
 <script>
     export default {
-        props: ['api', 'men_link', 'women_link', 'kid_link'],
+        props: ['api', 'men_link', 'women_link', 'kid_link','designer_link'],
         created() {
             var self = this;
             var api = this.api;
@@ -49,6 +49,7 @@
                 menLink: this.men_link,
                 womenLink: this.women_link,
                 kidLink: this.kid_link,
+                designerLink: this.designer_link,
             }
         }
     }
@@ -60,7 +61,7 @@
         <ul class="uk-nav uk-nav-primary uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
             <li> <a href="/">HOME</a></li>
             <li class="uk-parent">
-                <a href="#">DESIGNERS</a>
+                <a :href="designerLink">DESIGNERS</a>
                 <ul class="uk-nav-sub">
                     <li class="uk-parent uk-active">
                         <a href="/shop/designers/all">All</a>

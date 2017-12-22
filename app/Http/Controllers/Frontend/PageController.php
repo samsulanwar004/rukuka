@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Repositories\DesignerRepository;
 use Illuminate\Http\Request;
 use App\Repositories\ProductRepository;
 use App\Repositories\SettingRepository;
@@ -152,6 +153,12 @@ class PageController extends BaseController
             'deliveryReturns',
             'reviews'
         ));
+    }
+
+    public function designer()
+    {
+        $designers = (new DesignerRepository)->getDesignersAZ();
+        return view('pages.designer', compact('designers'));
     }
 
     public function women()
