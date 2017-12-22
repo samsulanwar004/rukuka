@@ -1,6 +1,14 @@
 <script>
     export default {
-        props: ['api', 'men_link', 'women_link', 'kid_link','designer_link'],
+        props: [
+          'api', 
+          'men_link', 
+          'women_link', 
+          'kid_link',
+          'designer_link',
+          'aws_link'
+        ],
+
         created() {
             var self = this;
             var api = this.api;
@@ -112,7 +120,7 @@
                             </ul>
                             <hr class="uk-margin-small">
                             <a :href="designersNav.designer_designer_of_the_week_url">
-                              <img v-if="designersNav.designer_of_the_week != null" style="height: 180px" :src="'/'+designersNav.designer_of_the_week" :alt="designersNav.designer_designer_of_the_week_text">
+                              <img v-if="designersNav.designer_of_the_week != null" style="height: 180px" :src="aws_link+'/'+designersNav.designer_of_the_week" :alt="designersNav.designer_designer_of_the_week_text">
                             </a>
                         </div>
                     </div>
@@ -129,7 +137,7 @@
                                 <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                                 <li>
                                     <a :href="womensNav.women_blog_url">
-                                        <img v-if="womensNav.women_blog_image != null" style="height: 150px" :src="'/'+womensNav.women_blog_image" :alt="Rukuka">
+                                        <img v-if="womensNav.women_blog_image != null" style="height: 150px" :src="aws_link+'/'+womensNav.women_blog_image" :alt="Rukuka">
                                     </a>
                                 </li>
                                 <li><a href="/blog" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
@@ -190,7 +198,7 @@
                               <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                               <li>
                                   <a :href="mensNav.men_blog_url">
-                                      <img v-if="mensNav.men_blog_image != null" style="height: 150px" :src="'/'+mensNav.men_blog_image" :alt="Rukuka">
+                                      <img v-if="mensNav.men_blog_image != null" style="height: 150px" :src="aws_link+'/'+mensNav.men_blog_image" :alt="Rukuka">
                                   </a>
                               </li>
                               <li><a href="/blog" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
@@ -252,7 +260,7 @@
                                   <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                                   <li>
                                       <a :href="kidsNav.kid_blog_url">
-                                          <img v-if="kidsNav.kid_blog_image != null" style="height: 150px" :src="'/'+kidsNav.kid_blog_image" :alt="Rukuka">
+                                          <img v-if="kidsNav.kid_blog_image != null" style="height: 150px" :src="aws_link+'/'+kidsNav.kid_blog_image" :alt="Rukuka">
                                       </a>
                                   </li>
                                   <li><a href="/blog" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
@@ -314,7 +322,7 @@
                               </ul>
                               <hr class="uk-margin-small">
                               <a :href="salesNav.sale_url">
-                                  <img v-if="salesNav.sale_image != null" style="height: 100px; width: 800px" :src="'/'+salesNav.sale_image" :alt="salesNav.sale_text">
+                                  <img v-if="salesNav.sale_image != null" style="height: 100px; width: 800px" :src="aws_link+'/'+salesNav.sale_image" :alt="salesNav.sale_text">
                               </a>
                           </div>
                           <div class="uk-width-1-5@m" uk-grid>
