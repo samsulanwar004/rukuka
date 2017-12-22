@@ -23,7 +23,7 @@
       <div class="uk-inline">
           <a href="{{ $home['homepage_main_url'] }}" class="uk-link-reset">
             <div class="uk-inline-clip uk-transition-toggle uk-light">
-                    {{ Html::image("/".$home['homepage_main_banner'], "rukuka", array()) }}
+                <img src="{{ uploadCDN($home['homepage_main_banner']) }}" alt="rukuka banner">
                 <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
             </div>
           </a>
@@ -69,7 +69,7 @@
               <div class="uk-inline uk-visible@m">
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_1'] }}" class="uk-link-reset">
-                          <img src="{{ $home['homepage_banner_1'] }}" alt="">
+                          <img src="{{ uploadCDN($home['homepage_banner_1']) }}" alt="">
                           <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom uk-position-medium uk-card-small uk-card-border-light">
@@ -82,7 +82,7 @@
               </div>
               <div class="uk-inline uk-hidden@m">
                   <a href="{{ $home['homepage_url_1'] }}" class="uk-link-reset">
-                      <img src="/{{ $home['homepage_banner_1'] }}" alt="">
+                      <img src="{{ uploadCDN($home['homepage_banner_1']) }}" alt="rukuka banner">
                       <h5 class="uk-margin-remove">{{ $home['homepage_text_1'] }}</h5>
                   </a>
               </div>
@@ -91,7 +91,7 @@
               <div class="uk-inline uk-visible@m">
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_2'] }}" class="uk-link-reset">
-                          <img src="{{ $home['homepage_banner_2'] }}" alt="">
+                          <img src="{{ uploadCDN($home['homepage_banner_2']) }}" alt="rukuka banner">
                           <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
@@ -104,7 +104,7 @@
               </div>
               <div class="uk-inline uk-hidden@m">
                   <a href="{{ $home['homepage_url_2'] }}" class="uk-link-reset">
-                      <img src="/{{ $home['homepage_banner_2'] }}" alt="">
+                      <img src="{{ uploadCDN($home['homepage_banner_2']) }}" alt="rukuka banner">
                       <h5 class="uk-margin-remove">{{ $home['homepage_text_2'] }}</h5>
                   </a>
               </div>
@@ -113,7 +113,7 @@
               <div class="uk-inline uk-visible@m">
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_3'] }}" class="uk-link-reset">
-                          <img src="{{ $home['homepage_banner_3'] }}" alt="">
+                          <img src="{{ uploadCDN($home['homepage_banner_3']) }}" alt="rukuka banner">
                           <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
@@ -126,7 +126,7 @@
               </div>
               <div class="uk-inline uk-hidden@m">
                   <a href="{{ $home['homepage_url_3'] }}" class="uk-link-reset">
-                      <img src="/{{ $home['homepage_banner_3'] }}" alt="">
+                      <img src="{{ uploadCDN($home['homepage_banner_3']) }}" alt="rukuka banner">
                       <h5 class="uk-margin-remove">{{ $home['homepage_text_3'] }}</h5>
                   </a>
               </div>
@@ -135,7 +135,7 @@
               <div class="uk-inline uk-visible@m">
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_4'] }}" class="uk-link-reset">
-                          <img src="{{ $home['homepage_banner_4'] }}" alt="">
+                          <img src="{{ uploadCDN($home['homepage_banner_4']) }}" alt="rukuka banner">
                           <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
@@ -148,7 +148,7 @@
               </div>
               <div class="uk-inline uk-hidden@m">
                   <a href="{{ $home['homepage_url_4'] }}" class="uk-link-reset">
-                      <img src="/{{ $home['homepage_banner_4'] }}" alt="">
+                      <img src="{{ uploadCDN($home['homepage_banner_4']) }}" alt="rukuka banner">
                       <h5 class="uk-margin-remove">{{ $home['homepage_text_4'] }}</h5>
                   </a>
               </div>
@@ -157,7 +157,7 @@
               <div class="uk-inline uk-visible@m">
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_5'] }}" class="uk-link-reset">
-                          <img src="{{ $home['homepage_banner_5'] }}" alt="">
+                          <img src="{{ uploadCDN($home['homepage_banner_5']) }}" alt="rukuka banner">
                           <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
@@ -170,7 +170,7 @@
               </div>
               <div class="uk-inline uk-hidden@m">
                   <a href="{{ $home['homepage_url_5'] }}" class="uk-link-reset">
-                      <img src="/{{ $home['homepage_banner_5'] }}" alt="">
+                      <img src="{{ uploadCDN($home['homepage_banner_5']) }}" alt="rukuka banner">
                       <h5 class="uk-margin-remove">{{ $home['homepage_text_5'] }}</h5>
                   </a>
               </div>
@@ -179,7 +179,7 @@
               <div class="uk-inline uk-visible@m">
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_6'] }}" class="uk-link-reset">
-                          <img src="{{ $home['homepage_banner_6'] }}" alt="">
+                          <img src="{{ uploadCDN($home['homepage_banner_6']) }}" alt="rukuka banner">
                           <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
@@ -192,7 +192,7 @@
               </div>
               <div class="uk-inline uk-hidden@m">
                   <a href="{{ $home['homepage_url_6'] }}" class="uk-link-reset">
-                      <img src="/{{ $home['homepage_banner_6'] }}" alt="">
+                      <img src="{{ uploadCDN($home['homepage_banner_6']) }}" alt="rukuka banner">
                       <h5 class="uk-margin-remove">{{ $home['homepage_text_6'] }}</h5>
                   </a>
               </div>
@@ -201,7 +201,7 @@
               <div class="uk-inline uk-visible@m">
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_7'] }}" class="uk-link-reset">
-                          <img src="{{ $home['homepage_banner_7'] }}" alt="">
+                          <img src="{{ uploadCDN($home['homepage_banner_7']) }}" alt="rukuka banner">
                           <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
@@ -214,7 +214,7 @@
               </div>
               <div class="uk-inline uk-hidden@m">
                   <a href="{{ $home['homepage_url_7'] }}" class="uk-link-reset">
-                      <img src="/{{ $home['homepage_banner_7'] }}" alt="">
+                      <img src="{{ uploadCDN($home['homepage_banner_7']) }}" alt="rukuka banner">
                       <h5 class="uk-margin-remove">{{ $home['homepage_text_7'] }}</h5>
                   </a>
               </div>
@@ -223,7 +223,7 @@
               <div class="uk-inline uk-visible@m">
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_8'] }}" class="uk-link-reset">
-                          <img src="{{ $home['homepage_banner_8'] }}" alt="">
+                          <img src="{{ uploadCDN($home['homepage_banner_8']) }}" alt="rukuka banner">
                           <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
@@ -236,7 +236,7 @@
               </div>
               <div class="uk-inline uk-hidden@m">
                   <a href="{{ $home['homepage_url_8'] }}" class="uk-link-reset">
-                      <img src="/{{ $home['homepage_banner_8'] }}" alt="">
+                      <img src="{{ uploadCDN($home['homepage_banner_8']) }}" alt="rukuka banner">
                       <h5 class="uk-margin-remove">{{ $home['homepage_text_8'] }}</h5>
                   </a>
               </div>
@@ -245,7 +245,7 @@
               <div class="uk-inline uk-visible@m">
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
-                          <img src="{{ $home['homepage_banner_9'] }}" alt="">
+                          <img src="{{ uploadCDN($home['homepage_banner_9']) }}" alt="rukuka banner">
                           <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
@@ -258,7 +258,7 @@
               </div>
               <div class="uk-inline uk-hidden@m">
                   <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
-                      <img src="/{{ $home['homepage_banner_9'] }}" alt="">
+                      <img src="{{ uploadCDN($home['homepage_banner_9']) }}" alt="rukuka banner">
                       <h5 class="uk-margin-remove">{{ $home['homepage_text_9'] }}</h5>
                   </a>
               </div>
