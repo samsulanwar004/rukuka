@@ -100,7 +100,7 @@
                           </tbody>
                       </table>
                       </td>
-                      <td><button class="uk-button uk-button-default" type="button">Pay</button></td>
+                      <td><!-- <button class="uk-button uk-button-default" type="button">Pay</button> --></td>
                   </tr>
                 @endforeach
             </tbody>

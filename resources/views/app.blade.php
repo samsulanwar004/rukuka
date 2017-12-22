@@ -11,6 +11,7 @@
 
     <!-- jQuery is required -->
     <link rel="stylesheet" href="{{ elixirCDN('css/app.css') }}">
+    <link rel="shortcut icon" href="{{ imageCDN('favicon.png') }}">
 
   </head>
   <body>
