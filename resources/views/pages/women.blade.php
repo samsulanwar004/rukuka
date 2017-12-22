@@ -9,7 +9,7 @@
                 <h3 class="uk-heading-line"><span>{{$women['women_main_title']}}</span></h3>
                 <a href="{{ $women['women_main_url'] }}" class="uk-link-reset">
                     <div class="uk-inline-clip uk-transition-toggle uk-dark">
-                        <img src="/{{ $women['women_main_banner'] }}" alt="">
+                        <img src="{{ uploadCDN($women['women_main_banner']) }}" alt="">
                         <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
                         <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
                     </div>
@@ -23,7 +23,7 @@
             <div class="uk-width-1-2">
                 <a href="/{{ $women['women_url_1'] }}" class="uk-text-muted">
                     <div class="uk-inline-clip uk-transition-toggle uk-dark uk-margin-small-bottom">
-                        <img src="/{{ $women['women_banner_1'] }}" alt="{{ $leftTitle[0] }}">
+                        <img src="{{ uploadCDN($women['women_banner_1']) }}" alt="{{ $leftTitle[0] }}">
                         <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
                         <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
                     </div>
@@ -48,7 +48,7 @@
             <div class="uk-width-1-2">
                 <a href="/{{ $women['women_url_2'] }}" class="uk-text-muted">
                     <div class="uk-inline-clip uk-transition-toggle uk-dark uk-margin-small-bottom">
-                        <img src="/{{ $women['women_banner_2'] }}" alt="{{ $leftTitle[0] }}">
+                        <img src="{{ uploadCDN($women['women_banner_2']) }}" alt="{{ $leftTitle[0] }}">
                         <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
                         <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
                     </div>
@@ -79,7 +79,7 @@
             <div class="uk-width-1-3">
                 <a href="/{{ $women['women_url_3'] }}" class="uk-text-muted">
                     <div class="uk-inline-clip uk-transition-toggle uk-dark uk-margin-small-bottom">
-                        <img src="/{{ $women['women_banner_3'] }}" alt="{{ $leftTitle[0] }}">
+                        <img src="{{ uploadCDN($women['women_banner_3']) }}" alt="{{ $leftTitle[0] }}">
                         <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
                         <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
                     </div>
@@ -104,7 +104,7 @@
             <div class="uk-width-1-3">
                 <a href="/{{ $women['women_url_4'] }}" class="uk-text-muted">
                     <div class="uk-inline-clip uk-transition-toggle uk-dark uk-margin-small-bottom">
-                        <img src="/{{ $women['women_banner_4'] }}" alt="{{ $leftTitle[0] }}">
+                        <img src="{{ uploadCDN($women['women_banner_4']) }}" alt="{{ $leftTitle[0] }}">
                         <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
                         <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
                     </div>
@@ -129,7 +129,7 @@
             <div class="uk-width-1-3">
                 <a href="/{{ $women['women_url_5'] }}" class="uk-text-muted">
                     <div class="uk-inline-clip uk-transition-toggle uk-dark uk-margin-small-bottom">
-                        <img src="/{{ $women['women_banner_5'] }}" alt="{{ $leftTitle[0] }}">
+                        <img src="{{ uploadCDN($women['women_banner_5']) }}" alt="{{ $leftTitle[0] }}">
                         <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
                         <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
                     </div>
