@@ -70,9 +70,11 @@ class OrderController extends BaseController
 	        });	        
 
 	        $shipping = $courir['data']->total_fee_usd;
+	        $shipping = 50;
 
 	        $orderDate = Carbon::now();
 	        $expiredDate = Carbon::now()->addDay();
+	        $rupiah = 13000; // nanti dari database diedit admin
 
 	        $order = $this->order
 	        	->setOrderCode('ON'.date('YmdHis').rand(000,999))
@@ -97,7 +99,8 @@ class OrderController extends BaseController
 				'order', 
 				'detail', 
 				'total', 
-				'shipping'
+				'shipping',
+				'rupiah'
 			));
 
 		} catch (Exception $e) {

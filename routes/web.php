@@ -313,6 +313,11 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@showReviewPage',
     ]);
 
+    Route::post('/checkout/final', [
+        'as'   => 'checkout.final',
+        'uses' => 'Frontend\UserController@postFinalPage',
+    ]);
+
 
     // Route Address module
     Route::get('/account/address', [
@@ -377,6 +382,11 @@ Route::middleware(['auth'])->group(function () {
     // ]);
 
     Route::post('/order', [
+        'as'   => 'order',
+        'uses' => 'Frontend\OrderController@store',
+    ]);
+
+    Route::get('/order', [
         'as'   => 'order',
         'uses' => 'Frontend\OrderController@store',
     ]);
