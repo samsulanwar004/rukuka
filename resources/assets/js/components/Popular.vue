@@ -51,17 +51,9 @@
             <div class="uk-width-1-2@m">
               <div class="uk-hidden@m">
                 <h5 class="uk-margin-remove">{{ name }}</h5>
-                  <span v-if="priceBeforeDiscount > 0 ">
-                      <span style="text-decoration: line-through;">
-                          {{ currency }} {{ priceBeforeDiscount }}
-                      </span>
-                  </span>
-                  <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
-                      &nbsp; {{ currency }} {{ price }}
-                  </span>
-                  <span v-else>
-                      {{ currency }} {{ price }}
-                  </span>
+                <div>
+                  <a :href="'/product/' +slug" class="uk-button uk-button-text uk-text-right">see details <span uk-icon="icon: chevron-right"></span> </a>
+                </div>
               </div>
               <div class="uk-inline">
                 <div class="">

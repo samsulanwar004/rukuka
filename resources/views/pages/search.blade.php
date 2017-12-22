@@ -16,7 +16,7 @@
         @else
 
         @endif
-        <div class="uk-section uk-section-xsmall uk-section-default uk-padding-small" uk-section uk-sticky="offset: 106">
+        <div class="uk-section uk-section-xsmall uk-section-default uk-padding-small">
         <div class="uk-grid-small" uk-grid>
             <div class="uk-width-1-4@m uk-visible@m">
                 <div class="uk-panel">
