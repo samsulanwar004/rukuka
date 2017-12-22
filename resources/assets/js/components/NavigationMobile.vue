@@ -75,7 +75,7 @@
                 <a :href="womenLink">WOMEN</a>
                 <ul class="uk-nav uk-nav-sub uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
                     <li>
-                        <a class="uk-text-bold uk-text-uppercase" href="/landing/women">What's New</a>
+                        <a class="uk-text-bold uk-text-uppercase" href="/women">What's New</a>
                     </li>
                     <li class="uk-parent">
                         <a v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'" class="uk-text-bold" >{{ cloth.name.toUpperCase() }}</a>
@@ -109,7 +109,7 @@
                 <a :href="menLink">MEN</a>
                 <ul class="uk-nav uk-nav-sub uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
                     <li>
-                        <a class="uk-text-bold uk-text-uppercase" href="/landing/men">What's New</a>
+                        <a class="uk-text-bold uk-text-uppercase" href="/men">What's New</a>
                     </li>
                     <li class="uk-parent">
                         <a v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'" class="uk-text-bold" >{{ cloth.name.toUpperCase() }}</a>
@@ -143,7 +143,7 @@
                 <a :href="kidLink">KIDS</a>
                 <ul class="uk-nav uk-nav-sub uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
                     <li>
-                        <a class="uk-text-bold uk-text-uppercase" href="/landing/kids">What's New</a>
+                        <a class="uk-text-bold uk-text-uppercase" href="/kids">What's New</a>
                     </li>
                     <li class="uk-parent">
                         <a v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'clothing'" class="uk-text-bold" >{{ cloth.name.toUpperCase() }}</a>

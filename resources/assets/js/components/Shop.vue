@@ -5,7 +5,7 @@
             <div class="uk-card uk-card-small uk-card-default uk-box-shadow uk-visible@m">
                 <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
                     <a :href="'/product/'+ product.slug">
-                        <img :src="'/'+ product.photo" :alt="product.name">
+                        <img :src="aws_link+'/'+ product.photo" :alt="product.name">
                     </a>
                     <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default">
                         <div class="uk-text-center">
@@ -32,7 +32,7 @@
             <div class="uk-card uk-card-small uk-padding-remove uk-hidden@m">
                 <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
                     <a :href="'/product/'+ product.slug">
-                        <img :src="'/'+ product.photo" :alt="product.name">
+                        <img :src="aws_link+'/'+ product.photo" :alt="product.name">
                     </a>
                 </div>
                 <div class="uk-card-body uk-padding-remove uk-margin-small-top">
@@ -82,7 +82,7 @@
                     <div class="">
                     <ul class="uk-switcher uk-margin" id="component-tab-left">
                       <li v-for="image in images">
-                        <img :src="'/'+image.photo" :alt="image.name">
+                        <img :src="aws_link+'/'+image.photo" :alt="image.name">
                         <div class="uk-position uk-position-small uk-position-center-left">
                           <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="previous" uk-icon="icon: chevron-left"></a>
                         </div>
@@ -95,7 +95,7 @@
                     <div class="">
                     <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" uk-grid>
                       <li class="uk-padding-remove" v-for="image in images"><a href="#"  class="uk-padding-remove">
-                        <img :src="'/'+image.photo" width="55"></a>
+                        <img :src="aws_link+'/'+image.photo" width="55"></a>
                       </li>
                     </ul>
                   </div>
@@ -176,7 +176,14 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['shops', 'product_api', 'bag_api', 'wishlist_api', 'auth'],
+        props: [
+          'shops', 
+          'product_api', 
+          'bag_api', 
+          'wishlist_api', 
+          'auth', 
+          'aws_link'
+        ],
 
         created () {
             var self = this;

@@ -32,6 +32,7 @@
               product_link="{{ route('product') }}"
               checkout_link="{{ route('checkout') }}"
               api_token="{{ Auth::user('web')->api_token }}"
+              aws_link="{{ config('filesystems.s3url') }}"
             ></user-panel>
             <div id="offcanvas-overlay-slide" uk-offcanvas="overlay: true">
               <navigation-mobile

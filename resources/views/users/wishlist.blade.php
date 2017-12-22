@@ -17,6 +17,7 @@
         bag_api="{{ route('persist.bag') }}"
      	  wishlist_delete="{{ route('user.wishlist.destroy') }}"
         product_link="{{ route('product') }}"
+        aws_link="{{ config('filesystems.s3url') }}"
       ></wishlist>
   </div>
 </div>

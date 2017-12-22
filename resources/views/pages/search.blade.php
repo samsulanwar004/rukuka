@@ -5,7 +5,7 @@
         @if($search == 'designers' && $category != 'all')
             <div class="uk-grid-small uk-margin-top" uk-grid>
                 <div class="uk-panel uk-width-1-4 uk-flex uk-flex-middle uk-flex-center">
-                    <img src="/{{ $designer->photo }}" width="60" alt="" class="uk-box-shadow-medium">
+                    <img src="{{ uploadCDN($designer->photo) }}" width="60" alt="" class="uk-box-shadow-medium">
                 </div>
                 <div class="uk-panel uk-width-3-4">
                     <span class="uk-text-lead">{{ $designer->name }}</span><br>
@@ -77,7 +77,8 @@
                         product_api="{{ route('product.api') }}"
                         bag_api="{{ route('persist.bag') }}"
                         wishlist_api="{{ route('persist.wishlist') }}"
-                        auth="{{ Auth::check() ? 1 : 0 }}"a
+                        auth="{{ Auth::check() ? 1 : 0 }}"
+                        aws_link="{{ config('filesystems.s3url') }}"
                 ></shop>
             </div>
         </div>
