@@ -28,6 +28,7 @@
                 checkout_link="{{ route('checkout') }}"
                 api_token="{{ Auth::user('web')->api_token }}"
                 logout_link="{{ route('logout') }}"
+                aws_link="{{ config('filesystems.s3url') }}"
               ></user-panel>
           </div>
 
