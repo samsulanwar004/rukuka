@@ -189,6 +189,7 @@
             content: {},
             sizeAndFit: {},
             detailAndCare: {},
+            slug: {},
             size: null,
             deliveryReturns: null
         }
@@ -213,6 +214,7 @@
             self.sizeAndFit = data.size_and_fit;
             self.detailAndCare = data.detail_and_care;
             self.deliveryReturns = data.delivery_returns;
+            self.slug =  data.slug;
 
           }
         })
