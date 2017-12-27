@@ -5,7 +5,7 @@
       <div class="uk-card uk-card-small uk-padding-remove">
         <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
           <a :href="'/product/'+ product.slug">
-            <img :src="'/'+ product.photo" :alt="product.name">
+            <img :src="aws_link+'/'+ product.photo" :alt="product.name">
           </a>
           <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default uk-visible@m">
             <div class="uk-text-center">
@@ -51,23 +51,15 @@
             <div class="uk-width-1-2@m">
               <div class="uk-hidden@m">
                 <h5 class="uk-margin-remove">{{ name }}</h5>
-                  <span v-if="priceBeforeDiscount > 0 ">
-                      <span style="text-decoration: line-through;">
-                          {{ currency }} {{ priceBeforeDiscount }}
-                      </span>
-                  </span>
-                  <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
-                      &nbsp; {{ currency }} {{ price }}
-                  </span>
-                  <span v-else>
-                      {{ currency }} {{ price }}
-                  </span>
+                <div>
+                  <a :href="'/product/' +slug" class="uk-button uk-button-text uk-text-right">see details <span uk-icon="icon: chevron-right"></span> </a>
+                </div>
               </div>
               <div class="uk-inline">
                 <div class="">
                 <ul class="uk-switcher uk-margin" id="component-tab-left-related">
                   <li v-for="image in images">
-                    <img :src="'/'+image.photo" :alt="image.name">
+                    <img :src="aws_link+'/'+image.photo" :alt="image.name">
                     <div class="uk-position uk-position-small uk-position-center-left">
                       <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="previous" uk-icon="icon: chevron-left"></a>
                     </div>
@@ -80,7 +72,7 @@
                 <div class="">
                 <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left-related; animation: uk-animation-fade" uk-grid>
                   <li class="uk-padding-remove" v-for="image in images">
-                      <a href="#"><img :src="'/'+image.photo" width="55"></a>
+                      <a href="#"><img :src="aws_link+'/'+image.photo" width="55"></a>
                   </li>
                 </ul>
               </div>
@@ -160,7 +152,7 @@
 <script>
   import axios from 'axios';
   export default {
-    props: ['api', 'product_api', 'bag_api', 'wishlist_api', 'auth'],
+    props: ['api', 'product_api', 'bag_api', 'wishlist_api', 'auth', 'aws_link'],
     created() {
       var self = this;
       let api = this.api;
@@ -188,6 +180,7 @@
             content: {},
             sizeAndFit: {},
             detailAndCare: {},
+            slug: {},
             size: null,
             deliveryReturns: null
         }
@@ -212,6 +205,7 @@
             self.sizeAndFit = data.size_and_fit;
             self.detailAndCare = data.detail_and_care;
             self.deliveryReturns = data.delivery_returns;
+            self.slug =  data.slug;
           }
         })
         .catch(function (error) {

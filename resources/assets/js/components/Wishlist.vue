@@ -5,7 +5,7 @@
         <!-- start product -->
         <div class="uk-card uk-card-small uk-padding-remove uk-visible@m">
             <div class="uk-card-media-top">
-                <img :src="'/'+wish.photo" :alt="wish.name">
+                <img :src="aws_link+'/'+wish.photo" :alt="wish.name">
 
             </div>
             <div class="uk-card-body uk-padding-remove uk-margin-small-top">
@@ -28,7 +28,7 @@
                       </li>
                     </ul>
                   </div>
-                    <img :src="'/'+wish.photo" :alt="wish.photo">
+                    <img :src="aws_link+'/'+wish.photo" :alt="wish.photo">
                 </div>
                 <div class="uk-card-body uk-background-default uk-padding-small uk-margin-small-top">
                     <a :href="'/product/'+wish.slug">{{ wish.name }}</a>
@@ -73,7 +73,7 @@
                   </li>
                 </ul>
               </div>
-                <img :src="'/'+wish.photo" :alt="wish.photo">
+                <img :src="aws_link+'/'+wish.photo" :alt="wish.photo">
             </div>
             <div class="uk-card-body uk-background-default uk-padding-small">
                 <a :href="'/product/'+wish.slug" class="uk-text-meta">{{ wish.name }}</a>
@@ -113,7 +113,7 @@
 <script>
   import axios from 'axios';
   export default {
-    props: ['wishlist_api', 'bag_api', 'wishlist_delete', 'product_link'],
+    props: ['wishlist_api', 'bag_api', 'wishlist_delete', 'product_link', 'aws_link'],
     created () {
       var self = this;
       self.getWishlist();
