@@ -2,7 +2,7 @@
 <div class="uk-width-1-4@m">
  <div class="uk-card uk-card-border uk-card-default uk-card-small">
     <div class="uk-card-header">
-       <b>SUMMARY</b>
+       <h4>SUMMARY</h4>
     </div>
     <div class="uk-card-body">
        <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
@@ -16,15 +16,14 @@
     </div>
     <div class="uk-card-footer">
        <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
-          <div><b>TOTAL</b></div>
+          <div> <h5>TOTAL</h5> </div>
           <div id="total_fee" class="uk-text-right">{{ total | round }}</div>
        </div>
     </div>
  </div>
  <div class="uk-panel uk-margin-small-top">
-    <button class="uk-button uk-button-small uk-button-danger uk-width-1-1" id="continue">C O N T I N U E</button>
+    <button class="uk-button uk-button-danger uk-width-1-1" id="continue">CONTINUE</button>
  </div>
- <hr>
 </div>
 </template>
 
@@ -47,7 +46,7 @@
               self.total = Number(subtotal) + Number(shipping_cost);
             });
 
-        }, 
+        },
 
         filters: {
           round: function(value) {

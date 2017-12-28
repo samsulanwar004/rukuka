@@ -29,7 +29,7 @@
               <div class="uk-card-body uk-card-small">
                 <div class="uk-grid-small" uk-grid v-for="bag in filteredBags">
                   <div class="uk-width-1-3">
-                    <img :src="'/'+bag.options.photo" :alt="bag.name">
+                    <img :src="aws_link+'/'+bag.options.photo" :alt="bag.name">
                   </div>
                   <div class="uk-width-2-3">
                     <div class="uk-panel">
@@ -104,7 +104,8 @@
       'product_link',
       'checkout_link',
       'api_token',
-      'logout_link'
+      'logout_link',
+      'aws_link'
     ],
 
     created () {
