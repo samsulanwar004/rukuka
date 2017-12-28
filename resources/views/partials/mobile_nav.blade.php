@@ -32,7 +32,17 @@
               product_link="{{ route('product') }}"
               checkout_link="{{ route('checkout') }}"
               api_token="{{ Auth::user('web')->api_token }}"
+              aws_link="{{ config('filesystems.s3url') }}"
             ></user-panel>
+            <div id="offcanvas-overlay-slide" uk-offcanvas="overlay: true">
+              <navigation-mobile
+                      api="{{ route('menu')}}"
+                      men_link="{{ route('men') }}"
+                      women_link="{{ route('women') }}"
+                      kid_link="{{ route('kids') }}"
+                      designer_link="{{ route('designer') }}"
+              ></navigation-mobile>
+            </div>
             <div class="uk-navbar-left uk-flex-1 test-overlay" hidden>
               <div class="uk-navbar-item uk-width-expand">
                 {{ Form::open(array('url' => '/search', 'method' =>'get','files' => true,'class' => 'uk-search uk-search-navbar uk-width-1-1')) }}

@@ -28,6 +28,7 @@
                 checkout_link="{{ route('checkout') }}"
                 api_token="{{ Auth::user('web')->api_token }}"
                 logout_link="{{ route('logout') }}"
+                aws_link="{{ config('filesystems.s3url') }}"
               ></user-panel>
           </div>
 
@@ -38,6 +39,8 @@
       men_link="{{ route('men') }}"
       women_link="{{ route('women') }}"
       kid_link="{{ route('kids') }}"
+      designer_link="{{ route('designer') }}"
+      aws_link="{{ config('filesystems.s3url') }}"
     ></navigation>
 
   </div>

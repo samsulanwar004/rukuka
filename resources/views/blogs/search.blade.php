@@ -13,9 +13,9 @@
                         <div class="uk-inline-clip uk-transition-toggle uk-light">
                             <a href="{{ URL::to('blog/'.$post->slug)}}" class="uk-link-reset">
                                 @if(count($post->photo_1))
-                                    <img src="/{{ $post->photo_1 }}" alt="{{$post->title}}">
+                                    <img src="{{ uploadCDN($post->photo_1) }}" alt="{{$post->title}}">
                                 @else
-                                    {{ Html::image("images/blog-default.jpg") }}
+                                    {{ Html::image(imageCDN('blog-default.jpg')) }}
                                 @endif
                                 <div class="uk-card uk-position-bottom-left uk-card-small">
                                     <div class="uk-card-body">

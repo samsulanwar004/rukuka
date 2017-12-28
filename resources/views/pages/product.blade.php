@@ -6,41 +6,41 @@
             @include('partials.alert')
         </div>
         <div class="uk-grid-small uk-margin-top" uk-grid>
-            <div class="uk-width-3-5@m">
+            <div class="uk-width-2-3@m">
                 <div uk-grid>
                     <div class="uk-width-auto@m uk-visible@m">
                         <ul class="uk-tab-left" uk-tab="connect: #component-tab-left; animation: uk-animation-fade">
                             @foreach($product->images as $image)
-                                <li><a href="#"><img src="/{{ $image->photo }}" alt="" width="80"></a></li>
+                                <li style="margin-bottom: 10px"><a href="#"><img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="80"></a></li>
                             @endforeach
                         </ul>
                     </div>
                     <div class="uk-width-expand@m">
                         <ul id="component-tab-left" class="uk-switcher">
                             @foreach($product->images as $image)
-                                <li><a href="#"><img src="/{{ $image->photo }}" alt="" width="450"></a></li>
+                                <li><a href="#"><img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="530"></a></li>
                             @endforeach
                         </ul>
                     </div>
                     <div class="uk-width-auto@m uk-hidden@m uk-margin-small">
                         <ul class="uk-margin-remove uk-padding-remove" uk-tab="connect: #component-tab-left; animation: uk-animation-fade">
                             @foreach($product->images as $image)
-                                <li><a href="#"><img src="/{{ $image->photo }}" alt="" width="50"></a></li>
+                                <li><a href="#"><img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="50"></a></li>
                             @endforeach
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="uk-width-2-5@m">
+            <div class="uk-width-1-3@m">
                 <a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}">{{ $product->designer->name }}</a><br>
                 <h3 class="uk-margin-remove">{{ $product->name }}</h3>
                 @if($product->price_before_discount > 0)
                     <b>
-                        <del class="uk-text-lead">{{ $product->currency }} {{ number_format($product->price_before_discount) }}</del>
-                        <span class="uk-text-danger uk-text-lead">{{ $product->currency }} {{ number_format($product->sell_price) }}</span>
+                        <h4 class="uk-margin-remove"><del>{{ $product->currency }} {{ number_format($product->price_before_discount) }}</del>
+                        <span class="uk-text-danger">{{ $product->currency }} {{ number_format($product->sell_price) }}</h4>
                     </b>
                 @else
-                    <span class="uk-text-lead"> <b>{{ $product->currency }} {{ number_format($product->sell_price) }} </b></span>
+                    <h4 class="uk-margin-remove">{{ $product->currency }} {{ number_format($product->sell_price) }} </h4>
                 @endif
 
                 <br>
@@ -55,11 +55,10 @@
                   </div>
                 @endif
 
-
                 <button-buy
                         api_bag="{{ route('persist.bag') }}"
                         api_wishlist="{{ route('persist.wishlist') }}"
-                        color="{{ $product->color }}"
+                        product="{{ $product }}"
                         sizes="{{ $product->stocks }}"
                         auth="{{ Auth::check() ? 1 : 0 }}"
                         method="{{ $method }}"
@@ -197,7 +196,7 @@
         <hr>
         <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
             <div class="uk-panel">
-                <span class="uk-text-lead">RELATED PRODUCT</span>
+                <h3 class="uk-margin-small">RELATED PRODUCT</h3>
             </div>
         </div>
         <related
@@ -206,6 +205,7 @@
                 bag_api="{{ route('persist.bag') }}"
                 wishlist_api="{{ route('persist.wishlist') }}"
                 auth="{{ Auth::check() ? 1 : 0 }}"
+                aws_link="{{ config('filesystems.s3url') }}"
         ></related>
         <div class="uk-grid-small uk-margin-small-bottom uk-margin-medium-top uk-margin-xlarge-bottom">
             <div class="uk-panel uk-text-center">

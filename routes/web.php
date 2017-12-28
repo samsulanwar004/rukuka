@@ -122,17 +122,22 @@ Route::get('/popup/{slug?}', [
     'uses' => 'Frontend\PageController@popup',
 ]);
 
-Route::get('/landing/women', [
+Route::get('/designer', [
+    'as'   => 'designer',
+    'uses' => 'Frontend\PageController@designer',
+]);
+
+Route::get('/women', [
     'as'   => 'women',
     'uses' => 'Frontend\PageController@women',
 ]);
 
-Route::get('/landing/men', [
+Route::get('/men', [
     'as'   => 'men',
     'uses' => 'Frontend\PageController@men',
 ]);
 
-Route::get('/landing/kids', [
+Route::get('/kids', [
     'as'   => 'kids',
     'uses' => 'Frontend\PageController@kids',
 ]);

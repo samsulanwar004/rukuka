@@ -1,6 +1,14 @@
 <script>
     export default {
-        props: ['api', 'men_link', 'women_link', 'kid_link'],
+        props: [
+          'api', 
+          'men_link', 
+          'women_link', 
+          'kid_link',
+          'designer_link',
+          'aws_link'
+        ],
+
         created() {
             var self = this;
             var api = this.api;
@@ -71,6 +79,7 @@
                 menLink: this.men_link,
                 womenLink: this.women_link,
                 kidLink: this.kid_link,
+                designerLink: this.designer_link,
                 designersNav: {},
                 womensNav: {},
                 mensNav: {},
@@ -83,13 +92,10 @@
 
 <template>
     <nav class="uk-container uk-container-small uk-section-default uk-background-default" uk-navbar="dropbar: true; align: center; boundary-align: true; delay-hide: 100; duration:50">
-  <!-- <div uk-navbar> -->
       <div class="uk-navbar-center">
 
-          <!-- <a class="uk-navbar-item uk-logo" href="#"><img src="images/logo.png" alt="" width="60"></a> -->
-
           <ul class="uk-navbar-nav">
-              <li><a href="/shop/designers/all">DESIGNERS</a>
+              <li><a :href="designerLink">DESIGNERS</a>
                 <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                     <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
@@ -114,7 +120,7 @@
                             </ul>
                             <hr class="uk-margin-small">
                             <a :href="designersNav.designer_designer_of_the_week_url">
-                              <img v-if="designersNav.designer_of_the_week != null" style="height: 180px" :src="'/'+designersNav.designer_of_the_week" :alt="designersNav.designer_designer_of_the_week_text">
+                              <img v-if="designersNav.designer_of_the_week != null" style="height: 180px" :src="aws_link+'/'+designersNav.designer_of_the_week" :alt="designersNav.designer_designer_of_the_week_text">
                             </a>
                         </div>
                     </div>
@@ -131,7 +137,7 @@
                                 <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                                 <li>
                                     <a :href="womensNav.women_blog_url">
-                                        <img v-if="womensNav.women_blog_image != null" style="height: 150px" :src="'/'+womensNav.women_blog_image" :alt="Rukuka">
+                                        <img v-if="womensNav.women_blog_image != null" style="height: 150px" :src="aws_link+'/'+womensNav.women_blog_image" :alt="Rukuka">
                                     </a>
                                 </li>
                                 <li><a href="/blog" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
@@ -192,7 +198,7 @@
                               <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                               <li>
                                   <a :href="mensNav.men_blog_url">
-                                      <img v-if="mensNav.men_blog_image != null" style="height: 150px" :src="'/'+mensNav.men_blog_image" :alt="Rukuka">
+                                      <img v-if="mensNav.men_blog_image != null" style="height: 150px" :src="aws_link+'/'+mensNav.men_blog_image" :alt="Rukuka">
                                   </a>
                               </li>
                               <li><a href="/blog" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
@@ -254,7 +260,7 @@
                                   <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                                   <li>
                                       <a :href="kidsNav.kid_blog_url">
-                                          <img v-if="kidsNav.kid_blog_image != null" style="height: 150px" :src="'/'+kidsNav.kid_blog_image" :alt="Rukuka">
+                                          <img v-if="kidsNav.kid_blog_image != null" style="height: 150px" :src="aws_link+'/'+kidsNav.kid_blog_image" :alt="Rukuka">
                                       </a>
                                   </li>
                                   <li><a href="/blog" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
@@ -316,7 +322,7 @@
                               </ul>
                               <hr class="uk-margin-small">
                               <a :href="salesNav.sale_url">
-                                  <img v-if="salesNav.sale_image != null" style="height: 100px; width: 800px" :src="'/'+salesNav.sale_image" :alt="salesNav.sale_text">
+                                  <img v-if="salesNav.sale_image != null" style="height: 100px; width: 800px" :src="aws_link+'/'+salesNav.sale_image" :alt="salesNav.sale_text">
                               </a>
                           </div>
                           <div class="uk-width-1-5@m" uk-grid>
@@ -342,6 +348,5 @@
               </li>
           </ul>
       </div>
-  <!-- </div> -->
     </nav>
 </template>

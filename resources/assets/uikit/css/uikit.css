@@ -242,7 +242,7 @@ h6,
 .uk-h6 {
   margin: 0 0 20px 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   color: #000;
   letter-spacing: 2px;
   text-transform: none;
@@ -4814,7 +4814,8 @@ ul.uk-nav-sub {
   position: relative;
   /* 2 */
   box-sizing: border-box;
-  margin: 50px auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
   width: 600px;
   max-width: 100%;
   /* 3 */
@@ -4829,8 +4830,8 @@ ul.uk-nav-sub {
 /* Phone portrait and smaller */
 @media (max-width: 639px) {
   .uk-modal-dialog {
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
 /*
@@ -4877,8 +4878,8 @@ ul.uk-nav-sub {
   background: rgba(0, 0, 0, 0.9);
 }
 .uk-modal-lightbox .uk-modal-dialog {
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 /* Sections
  ========================================================================== */

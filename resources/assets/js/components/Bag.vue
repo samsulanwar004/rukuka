@@ -5,7 +5,7 @@
         <table class="uk-table uk-table-divider">
           <thead>
               <tr>
-                  <th class="uk-table-shrink" colspan="4"><b>Y O U R &nbsp;&nbsp; B A G ({{ bags.length }}) </b></th>
+                  <th class="uk-table-shrink" colspan="4"><h5>Y O U R &nbsp;&nbsp; B A G ({{ bags.length }}) </h5></th>
               </tr>
           </thead>
             <thead>
@@ -18,7 +18,7 @@
             </thead>
             <tbody v-for="bag in bags">
                 <tr>
-                    <td><img class="uk-preserve-width" :src="'/'+bag.options.photo" width="130" alt=""></td>
+                    <td><img class="uk-preserve-width" :src="aws_link+'/'+bag.options.photo" width="130" alt=""></td>
                     <td class="uk-table-link">
                       <ul class="uk-list uk-margin-small-top">
                         <li><b>{{ bag.name }}</b></li>
@@ -82,7 +82,7 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['bag_link', 'wishlist_link', 'auth', 'checkout_link'],
+        props: ['bag_link', 'wishlist_link', 'auth', 'checkout_link', 'aws_link'],
         created () {
             var self = this;
             Event.listen('bags', function (response) {
@@ -158,7 +158,7 @@
                     console.log(error);
                   });
                 }
-                
+
             },
 
             plus: function (sku) {

@@ -1,51 +1,42 @@
 <template>
-  <h5 class="uk-margin-small">Color : {{ color }}</h5>
-    <select :class="{'uk-select uk-form-width-small uk-form-small': true, 'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
-    <option :value="null" disabled>Select Size</option>
-    <option v-for="stock in stocks" :value="stock.sku" :selected="sku ==  stock.sku" :disabled="stock.unit <= 0">{{ stock.size }} {{ stock.unit | unit }}</option>
-  </select>
-
-
-<ul uk-accordion="animation: true; multiple: false">
-  <li class="uk-open">
-      <h5 class="uk-accordion-title">EDITORS NOTES</h5>
-      <div class="uk-accordion-content">
-          {{ content }}
-      </div>
-  </li>
-  <li>
-      <h5 class="uk-accordion-title">SIZE & FIT</h5>
-      <div class="uk-accordion-content">
-          {{ size_and_fit }}
-      </div>
-  </li>
-  <li>
-      <h5 class="uk-accordion-title">DETAILS & CARE</h5>
-      <div class="uk-accordion-content">
-          {{ detail_and_care }}
-      </div>
-  </li>
-</ul>
-    <div class="uk-child-width-1-2 uk-grid-small uk-margin-small-top" uk-grid>
-        <div class="">
-            Color : {{ color }}
-        </div>
-        <div class="">
-            <select :class="{'uk-select': true, 'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
+    <div>
+        <h5 class="uk-margin-small">Color : {{ prod.color }}</h5>
+        <div>
+            <select :class="{'uk-select uk-form-width-small uk-form-small': true, 'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
               <option :value="null" disabled>Select Size</option>
               <option v-for="stock in stocks" :value="stock.sku" :selected="sku ==  stock.sku" :disabled="stock.unit <= 0">{{ stock.size }} {{ stock.unit | unit }}</option>
             </select>
         </div>
-        <div class="" v-if="method == 'bag'">
+        <ul uk-accordion="animation: true; multiple: false">
+                  <li class="uk-open">
+                      <h5 class="uk-accordion-title">Editors Notes</h5>
+                      <div class="uk-accordion-content">
+                          {{ prod.content }}
+                      </div>
+                  </li>
+                  <li>
+                      <h5 class="uk-accordion-title">Size & Fit</h5>
+                      <div class="uk-accordion-content">
+                          {{ prod.size_and_fit }}
+                      </div>
+                  </li>
+                  <li>
+                      <h5 class="uk-accordion-title">Details & Care</h5>
+                      <div class="uk-accordion-content">
+                          {{ prod.detail_and_care }}
+                      </div>
+                  </li>
+                </ul>
+        <div class="uk-margin-small-top" v-if="method == 'bag'">
           <button class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right" v-on:click="updateBag(sku)"> UPDATE BAG </button>
         </div>
-        <div class="" v-else>
+        <div class="uk-margin-small-top" v-else>
           <button class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right" v-on:click="bag"> ADD TO BAG </button>
         </div>
-        <div class="" v-if="method == 'wishlist'">
+        <div class="uk-margin-small-top" v-if="method == 'wishlist'">
             <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right" v-on:click="updateWishlist(id)">UPDATE WISHLIST</button>
         </div>
-        <div class="" v-else>
+        <div class="uk-margin-small-top" v-else>
             <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right" v-on:click="wishlist">WISHLIST</button>
         </div>
     </div>
@@ -57,7 +48,7 @@
         props: [
             'api_bag',
             'api_wishlist',
-            'color',
+            'product',
             'sizes',
             'auth',
             'method',
@@ -70,10 +61,12 @@
         created () {
             var self = this;
             self.stocks = this.sizes ? JSON.parse(this.sizes) : {};
+            self.prod = this.product ? JSON.parse(this.product) : {};
         },
 
         data () {
             return {
+                prod: {},
                 stocks: {},
                 size: this.sku ? this.sku : null
             }

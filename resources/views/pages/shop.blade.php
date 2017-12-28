@@ -5,7 +5,7 @@
         @if($categories == 'designers' && $category != 'all')
             <div class="uk-grid-small uk-margin-top" uk-grid>
                 <div class="uk-panel uk-width-1-4 uk-flex uk-flex-middle uk-flex-center">
-                    <img src="/{{ $designer->photo }}" width="60" alt="" class="uk-box-shadow-medium">
+                    <img src="/{{ $designer->photo }}" width="100" alt="" class="uk-box-shadow-medium">
                 </div>
                 <div class="uk-panel uk-width-3-4">
                     <span class="uk-text-lead">{{ $designer->name }}</span><br>
@@ -16,7 +16,7 @@
         @else
 
         @endif
-      <div class="uk-section uk-section-xsmall uk-section-default uk-padding-small" uk-section uk-sticky="offset: 106">
+      <div class="uk-section uk-section-xsmall uk-section-default uk-padding-small">
         <div class="uk-grid-small" uk-grid>
             <div class="uk-width-1-4@m uk-visible@m">
                 @if($categories == 'designers')
@@ -105,6 +105,7 @@
                   bag_api="{{ route('persist.bag') }}"
                   wishlist_api="{{ route('persist.wishlist') }}"
                   auth="{{ Auth::check() ? 1 : 0 }}"
+                  aws_link="{{ config('filesystems.s3url') }}"
                 ></shop>
             </div>
         </div>
