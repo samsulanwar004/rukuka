@@ -35,7 +35,7 @@
                             <a href="{{ URL::to('blog/'.$post->slug)}}" class="uk-link-reset">
                                 <div style="background: rgba(0,0,0,.2);" class="uk-position-cover"></div>
                                 @if(count($post->photo_1))
-                                    <img src="/{{ $post->photo_1 }}" alt="{{$post->title}}">
+                                    <img src="{{ uploadCDN($post->photo_1) }}" alt="{{$post->title}}">
                                 @else
                                     {{ Html::image("images/blog-default.jpg") }}
                                 @endif
