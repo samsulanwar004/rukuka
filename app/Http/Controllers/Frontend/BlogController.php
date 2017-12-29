@@ -45,10 +45,10 @@ class BlogController extends Controller
                 $url = url('blog/'.$post->slug);
 
                 if(count($post->photo_1)){
-                    $image = '<img src="/'.$post->photo_1.'" alt="'.$post->title.'">';
+                    $image = '<img src="'.uploadCDN($post->photo_1).'" alt="'.$post->title.'">';
                 }
                 else{
-                    $image = '<img src="/images/blog-default.jpg" alt="kuka">';
+                    $image = '<img src="'.imageCDN('blog-default.jpg').'" alt="kuka">';
                 }
 
                 $blog .= '<div class="uk-width-1-3@m uk-width-1-2@s uk-inline">
