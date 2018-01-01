@@ -84,6 +84,9 @@
 
                 </tbody>
             </table>
+            <div style="display: none;">
+              <input type="submit" name="submit" id="submit">
+            </div>
             <form>
             <hr class="uk-margin-small">
             <span class="uk-text-meta"><b>SHIPPING DETAILS</b></span>
@@ -134,14 +137,7 @@
 
      $("#continue").on('click', function (e) {
        e.preventDefault();
-       var submit = $('#submit').val();
-       var url = '{{ route('checkout.review') }}';
-       if (submit == 'C O N T I N U E') {
-         $('#submit').click();
-       } else {
-         window.location.href = url;
-       }
-
+       $('#submit').click();
      });
    })
 
