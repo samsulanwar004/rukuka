@@ -6,7 +6,8 @@
           'women_link', 
           'kid_link',
           'designer_link',
-          'aws_link'
+          'aws_link',
+          'default_image'
         ],
 
         created() {
@@ -85,6 +86,24 @@
                 mensNav: {},
                 kidsNav: {},
                 salesNav: {},
+                defaultImage: JSON.parse(this.default_image,true),
+            }
+        },
+        methods: {
+            imageDesignerError () {
+                this.designersNav.designer_of_the_week = "images/"+this.defaultImage.image_4;
+            },
+            imageWomensError (){
+                this.womensNav.women_blog_image = "images/"+this.defaultImage.image_2;
+            },
+            imageMensError (){
+                this.mensNav.men_blog_image = "images/"+this.defaultImage.image_2;
+            },
+            imageKidsError (){
+                this.kidsNav.kid_blog_image = "images/"+this.defaultImage.image_2;
+            },
+            imageSaleError (){
+                this.salesNav.sale_image = "images/"+this.defaultImage.image_5;
             }
         }
     }
@@ -120,7 +139,7 @@
                             </ul>
                             <hr class="uk-margin-small">
                             <a :href="designersNav.designer_designer_of_the_week_url">
-                              <img v-if="designersNav.designer_of_the_week != null" style="height: 180px" :src="aws_link+'/'+designersNav.designer_of_the_week" :alt="designersNav.designer_designer_of_the_week_text">
+                              <img style="height: 180px" :src="aws_link+'/'+designersNav.designer_of_the_week" :alt="designersNav.designer_designer_of_the_week_text" @error="imageDesignerError">
                             </a>
                         </div>
                     </div>
@@ -133,11 +152,11 @@
                         <div class="uk-width-1-5@m">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li class="uk-nav-header uk-text-bold">What's New</li>
-                                <li class="uk-parent"><a href="/landing/women">New Arrival</a></li>
+                                <li class="uk-parent"><a :href="womenLink">New Arrival</a></li>
                                 <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                                 <li>
                                     <a :href="womensNav.women_blog_url">
-                                        <img v-if="womensNav.women_blog_image != null" style="height: 150px" :src="aws_link+'/'+womensNav.women_blog_image" :alt="Rukuka">
+                                        <img style="height: 150px" :src="aws_link+'/'+womensNav.women_blog_image" :alt="rukuka" @error="imageWomensError">
                                     </a>
                                 </li>
                                 <li><a href="/blog" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
@@ -194,11 +213,11 @@
                       <div class="uk-width-1-5@m">
                           <ul class="uk-nav uk-navbar-dropdown-nav">
                               <li class="uk-nav-header uk-text-bold">What's New</li>
-                              <li class="uk-parent"><a href="/landing/men">New Arrival</a></li>
+                              <li class="uk-parent"><a :href="menLink">New Arrival</a></li>
                               <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                               <li>
                                   <a :href="mensNav.men_blog_url">
-                                      <img v-if="mensNav.men_blog_image != null" style="height: 150px" :src="aws_link+'/'+mensNav.men_blog_image" :alt="Rukuka">
+                                      <img style="height: 150px" :src="aws_link+'/'+mensNav.men_blog_image" :alt="Rukuka" @error="imageMensError">
                                   </a>
                               </li>
                               <li><a href="/blog" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
@@ -256,11 +275,11 @@
                           <div class="uk-width-1-5@m">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
                                   <li class="uk-nav-header uk-text-bold">What's New</li>
-                                  <li class="uk-parent"><a href="/landing/kids">New Arrival</a></li>
+                                  <li class="uk-parent"><a :href="kidLink">New Arrival</a></li>
                                   <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                                   <li>
                                       <a :href="kidsNav.kid_blog_url">
-                                          <img v-if="kidsNav.kid_blog_image != null" style="height: 150px" :src="aws_link+'/'+kidsNav.kid_blog_image" :alt="Rukuka">
+                                          <img style="height: 150px" :src="aws_link+'/'+kidsNav.kid_blog_image" :alt="Rukuka" @error="imageKidsError">
                                       </a>
                                   </li>
                                   <li><a href="/blog" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li>
@@ -322,7 +341,7 @@
                               </ul>
                               <hr class="uk-margin-small">
                               <a :href="salesNav.sale_url">
-                                  <img v-if="salesNav.sale_image != null" style="height: 100px; width: 800px" :src="aws_link+'/'+salesNav.sale_image" :alt="salesNav.sale_text">
+                                  <img style="height: 100px; width: 800px" :src="aws_link+'/'+salesNav.sale_image" :alt="salesNav.sale_text" @error="imageSaleError">
                               </a>
                           </div>
                           <div class="uk-width-1-5@m" uk-grid>

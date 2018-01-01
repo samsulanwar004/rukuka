@@ -44,16 +44,11 @@ class BlogController extends Controller
             {
                 $url = url('blog/'.$post->slug);
 
-                if(count($post->photo_1)){
-                    $image = '<img src="'.uploadCDN($post->photo_1).'" alt="'.$post->title.'">';
-                }
-                else{
-                    $image = '<img src="'.imageCDN('blog-default.jpg').'" alt="kuka">';
-                }
+                $image = '<img src="'. uploadCDN($post->photo_1) .'" alt="'.$post->title.'" onerror="this.src = \''.imageCDN(config('common.default.image_2')).'\'">';
 
                 $blog .= '<div class="uk-width-1-3@m uk-width-1-2@s uk-inline">
                                 <div class="uk-inline">
-                                    <div class="uk-inline-clip uk-transition-toggle uk-light">
+                                    <div class="uk-inline-clip uk-transition-toggle uk-light"> 
                                         <a href="'.$url.'" class="uk-link-reset">
                                             <div style="background: rgba(0,0,0,.2);" class="uk-position-cover"></div>
                                             '.$image.'

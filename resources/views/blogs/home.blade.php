@@ -4,7 +4,6 @@
 
     @if($status['code'] == '000')
     <div class="uk-container uk-container-small">
-      {{-- <h4 class="uk-margin-top">CATEGORIES!</h4> --}}
       <div class="uk-panel uk-margin-top">
         <div class="uk-card uk-card-border uk-card-small">
           <div class="uk-card-body">
@@ -34,11 +33,7 @@
                         <div class="uk-inline-clip uk-transition-toggle uk-light">
                             <a href="{{ URL::to('blog/'.$post->slug)}}" class="uk-link-reset">
                                 <div style="background: rgba(0,0,0,.2);" class="uk-position-cover"></div>
-                                @if(count($post->photo_1))
-                                    <img src="{{ uploadCDN($post->photo_1) }}" alt="{{$post->title}}">
-                                @else
-                                    {{ Html::image("images/blog-default.jpg") }}
-                                @endif
+                                    <img src="{{ uploadCDN($post->photo_1) }}" alt="{{$post->title}}" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'">
                                 <div class="uk-card uk-position-bottom-left uk-card-small">
                                     <div class="uk-card-body">
                                         <div class="uk-transition-slide-left-small uk-visible@m">

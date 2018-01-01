@@ -25,12 +25,6 @@
       <div class="uk-hidden@m">
         @include('partials.mobile_nav')
         <div id="offcanvas-overlay-slide" uk-offcanvas="overlay: true">
-          <navigation-mobile
-                  api="{{ route('menu')}}"
-                  men_link="{{ route('men') }}"
-                  women_link="{{ route('women') }}"
-                  kid_link="{{ route('kids') }}"
-          ></navigation-mobile>
         </div>
       </div>
       <div class="uk-offcanvas-content">

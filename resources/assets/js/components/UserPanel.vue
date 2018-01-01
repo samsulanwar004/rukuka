@@ -29,7 +29,8 @@
               <div class="uk-card-body uk-card-small">
                 <div class="uk-grid-small" uk-grid v-for="bag in filteredBags">
                   <div class="uk-width-1-3">
-                    <img :src="aws_link+'/'+bag.options.photo" :alt="bag.name">
+                    <img v-if="bag.options.photo" :src="aws_link+'/'+bag.options.photo" :alt="bag.name">
+                    <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
                   </div>
                   <div class="uk-width-2-3">
                     <div class="uk-panel">
@@ -45,7 +46,7 @@
               </div>
               <div class="uk-card-footer uk-padding-remove uk-background-muted">
                 <div class="uk-text-center">
-                  <a :href="bag_link">see all your shop</a>
+                  <a :href="bag_link">See all your shop</a>
                 </div>
               </div>
               <div class="uk-card-footer uk-padding-small">
@@ -105,7 +106,8 @@
       'checkout_link',
       'api_token',
       'logout_link',
-      'aws_link'
+      'aws_link',
+      'default_image'
     ],
 
     created () {
@@ -144,7 +146,8 @@
         bagCount: {},
         bags: {},
         accounts: {},
-        subtotal: {}
+        subtotal: {},
+        defaultImage: JSON.parse(this.default_image,true)
       }
     },
 

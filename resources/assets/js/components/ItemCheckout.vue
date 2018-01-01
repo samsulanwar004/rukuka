@@ -7,7 +7,10 @@
         </thead>
         <tbody v-for="bag in bags">
             <tr>
-                <td><img class="uk-preserve-width" :src="'/'+bag.options.photo" width="130" alt=""></td>
+                <td>
+                    <img v-if="bag.options.photo" class="uk-preserve-width" :src="aws_link+'/'+bag.options.photo" width="130" alt="rukuka product">
+                    <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka" width="130">
+                </td>
                 <td class="uk-table-link">
                   <ul class="uk-list uk-margin-small-top">
                     <li><b>{{ bag.name }}</b></li>
@@ -29,10 +32,11 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['bag_api'],
+        props: ['bag_api','aws_link','default_image'],
         data () {
             return {
-                bags: {}
+                bags: {},
+                defaultImage: JSON.parse(this.default_image,true)
             }
         },
 

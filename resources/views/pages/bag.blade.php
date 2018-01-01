@@ -11,6 +11,7 @@
     auth="{{ Auth::check() ? 1 : 0 }}"
     checkout_link="{{ route('checkout') }}"
     aws_link="{{ config('filesystems.s3url') }}"
+    default_image="{{ json_encode(config('common.default')) }}"
   ></bag>
   <hr>
   <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">

@@ -41,7 +41,7 @@
                                     <div class="uk-card-header">
                                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                                             <div class="uk-width-auto">
-                                                <img class="uk-border-circle" width="80" height="80" src="{{ uploadCDN($value['photo']) }}">
+                                                    <img class="uk-border-circle" width="80" height="80" src="{{uploadCDN($value['photo'])}}" onerror="this.src = '{{imageCDN(config('common.default.image_6'))}}'">
                                             </div>
                                             <div class="uk-width-expand">
                                                 <h3 class="uk-card-title uk-margin-remove-bottom">{{$value['name']}}</h3>
@@ -62,6 +62,6 @@
                 @php $isPrinted = false; @endphp
             @endforeach
 
-</div>
-</div>
+        </div>
+    </div>
 @endsection
