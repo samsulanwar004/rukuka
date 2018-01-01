@@ -1,25 +1,16 @@
 <!-- Header Image -->
-    <div>
-        @if($status['code'] == '010')
-            <div class="uk-background-cover uk-position-relative" style="background-image: url({{ '/'.$posts[0]['photo_2']}}); height: 350px;">
-                <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
-                </div>
-                <div class="uk-position-medium uk-position-top-right uk-margin-large-right">
-                    <a href="{{ URL::to('blog/')}}">
-                        {{ Html::image("images/logo-kukaindonesia-white.png", "alt", array( "width" => 125, "height" => 125 )) }}
-                    </a>
-                </div>
+<div class="uk-text-center">
+    <div class="uk-inline">
+        <a href="{{ $home['homepage_main_url'] }}" class="uk-link-reset">
+            <div class="uk-inline-clip uk-transition-toggle uk-light">
+                @if($status['code'] == '010')
+                    <img src="{{ uploadCDN($posts[0]['photo_2']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
+                @else
+                    <img src="{{ uploadCDN($header[0]['content']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
+                @endif
+                <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
             </div>
-        @else
-            <div class="uk-background-cover uk-position-relative" style="background-image: url({{ '/'.$header[0]['content']}}); height: 350px;">
-                <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
-                </div>
-                <div class="uk-position-medium uk-position-top-right uk-margin-large-right">
-                    <a href="{{ URL::to('blog/')}}">
-                        {{ Html::image("images/logo-kukaindonesia-white.png", "alt", array( "width" => 125, "height" => 125 )) }}
-                    </a>
-                </div>
-            </div>
-        @endif
+        </a>
     </div>
+</div>
 <!-- End Header Image-->

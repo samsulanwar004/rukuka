@@ -18,7 +18,10 @@
             </thead>
             <tbody v-for="bag in bags">
                 <tr>
-                    <td><img class="uk-preserve-width" :src="aws_link+'/'+bag.options.photo" width="130" alt=""></td>
+                    <td>
+                        <img v-if="bag.options.photo" class="uk-preserve-width" :src="aws_link+'/'+bag.options.photo" width="130" alt="rukuka product">
+                        <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
+                    </td>
                     <td class="uk-table-link">
                       <ul class="uk-list uk-margin-small-top">
                         <li><b>{{ bag.name }}</b></li>
@@ -82,7 +85,7 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['bag_link', 'wishlist_link', 'auth', 'checkout_link', 'aws_link'],
+        props: ['bag_link', 'wishlist_link', 'auth', 'checkout_link', 'aws_link','default_image'],
         created () {
             var self = this;
             Event.listen('bags', function (response) {
@@ -100,7 +103,8 @@
         data () {
             return {
                 bags: {},
-                subtotal: {}
+                subtotal: {},
+                defaultImage: JSON.parse(this.default_image,true),
             }
         },
 

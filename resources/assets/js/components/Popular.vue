@@ -5,7 +5,8 @@
       <div class="uk-card uk-card-small uk-padding-remove">
         <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
           <a :href="'/product/'+ product.slug">
-            <img :src="aws_link+'/'+ product.photo" :alt="product.name">
+            <img v-if="product.photo" :src="aws_link+'/'+ product.photo" :alt="product.name">
+            <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
           </a>
           <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default uk-visible@m">
             <div class="uk-text-center">
@@ -28,17 +29,15 @@
                 {{ product.currency }} {{ product.price }}
             </span>
             <div class="uk-hidden@m">
-              <a href="#modal-overflow" class="uk-button uk-button-small uk-button-default uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">quick shop</a>
+              <a href="#modal-overflow" class="uk-button uk-button-small uk-button-default uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
             </div>
         </div>
       </div>
     </div>
     <!-- end product single -->
     <div id="modal-overflow" class="uk-modal-container-small" uk-modal="center: true">
-      <div class="uk-modal-dialog">
-
+      <div class="uk-modal-dialog uk-margin-auto">
         <button class="uk-modal-close-default" type="button" uk-close></button>
-
         <div class="uk-modal-header uk-visible@m">
           <h3 class="uk-margin-remove">{{ name }}</h3>
           <div class="uk-text-right">
@@ -55,7 +54,7 @@
                   <a :href="'/product/' +slug" class="uk-button uk-button-text uk-text-right">see details <span uk-icon="icon: chevron-right"></span> </a>
                 </div>
               </div>
-              <div class="uk-inline">
+              <div v-if="images[0]" class="uk-inline">
                 <div class="">
                 <ul class="uk-switcher uk-margin" id="component-tab-left-related">
                   <li v-for="image in images">
@@ -77,32 +76,30 @@
                 </ul>
               </div>
               </div>
+              <div v-else class="uk-inline">
+                  <img :src="aws_link+'/'+'images/'+defaultImage.image_2">
+              </div>
             </div>
             <div class="uk-width-1-2@m">
               <h4 class="uk-margin-remove">
               <span v-if="priceBeforeDiscount > 0 ">
-
                 <del>
                     {{ currency }} {{ priceBeforeDiscount }}
                 </del>
-
               </span>
               <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
                   &nbsp; {{ currency }} {{ price }}
               </span>
               </h4>
-
               <span v-else>
                   <h4>{{ currency }} {{ price }}</h4>
               </span>
               <h5 class="uk-margin-small">Color : {{ color }}</h5>
-
               <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-small">
                 <option :value="null" disabled>Select Size</option>
                 <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
                   {{ stock.size }} {{ stock.unit | unit }}
                 </option>
-
               </select>
               <span class="uk-text-meta"><i>Choose your size</i> </span>
               <ul uk-accordion="animation: true; multiple: false">
@@ -115,22 +112,17 @@
 
                   </li>
                   <li>
-
                       <h5 class="uk-accordion-title">Size & Fit</h5>
                       <div class="uk-accordion-content">
                         {{ sizeAndFit }}
                       </div>
-
                   </li>
                   <li>
-
                       <h5 class="uk-accordion-title">Details & Care</h5>
                       <div class="uk-accordion-content">
                         {{ detailAndCare }}
                       </div>
-
                   </li>
-
               </ul>
             </div>
           </div>
@@ -152,7 +144,7 @@
 <script>
   import axios from 'axios';
   export default {
-    props: ['api', 'product_api', 'bag_api', 'wishlist_api', 'auth', 'aws_link'],
+    props: ['api', 'product_api', 'bag_api', 'wishlist_api', 'auth', 'aws_link','default_image'],
     created() {
       var self = this;
       let api = this.api;
@@ -182,7 +174,8 @@
             detailAndCare: {},
             slug: {},
             size: null,
-            deliveryReturns: null
+            deliveryReturns: null,
+            defaultImage: JSON.parse(this.default_image,true)
         }
     },
 
