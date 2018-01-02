@@ -59,6 +59,8 @@
             <hr class="uk-margin-small">
               <item-checkout
                  bag_api="{{ route('persist.bag') }}"
+                 aws_link="{{ config('filesystems.s3url') }}"
+                 default_image="{{ json_encode(config('common.default')) }}"
               ></item-checkout>
             <hr class="uk-margin-small">
         </div>

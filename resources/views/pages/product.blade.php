@@ -10,22 +10,30 @@
                 <div uk-grid>
                     <div class="uk-width-auto@m uk-visible@m">
                         <ul class="uk-tab-left" uk-tab="connect: #component-tab-left; animation: uk-animation-fade">
-                            @foreach($product->images as $image)
-                                <li style="margin-bottom: 10px"><a href="#"><img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="80"></a></li>
-                            @endforeach
+                            @if($product->images[0])
+                                @foreach($product->images as $image)
+                                    <li style="margin-bottom: 10px"><a href="#"><img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="80" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'"></a></li>
+                                @endforeach
+                            @else
+                                <li style="margin-bottom: 10px"><a href="#"><img src="{{ imageCDN(config('common.default.image_2')) }}" alt="{{ $image->name }}" width="80" ></a></li>
+                            @endif
                         </ul>
                     </div>
                     <div class="uk-width-expand@m">
                         <ul id="component-tab-left" class="uk-switcher">
-                            @foreach($product->images as $image)
-                                <li><a href="#"><img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="530"></a></li>
-                            @endforeach
+                            @if($product->images[0])
+                                @foreach($product->images as $image)
+                                    <li><a href="#"><img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="530" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'"></a></li>
+                                @endforeach
+                            @else
+                                <li style="margin-bottom: 10px"><a href="#"><img src="{{ imageCDN(config('common.default.image_2')) }}" alt="{{ $image->name }}" width="530" ></a></li>
+                            @endif
                         </ul>
                     </div>
                     <div class="uk-width-auto@m uk-hidden@m uk-margin-small">
                         <ul class="uk-margin-remove uk-padding-remove" uk-tab="connect: #component-tab-left; animation: uk-animation-fade">
                             @foreach($product->images as $image)
-                                <li><a href="#"><img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="50"></a></li>
+                                <li><a href="#"><img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="50" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'"></a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -37,7 +45,8 @@
                 @if($product->price_before_discount > 0)
                     <b>
                         <h4 class="uk-margin-remove"><del>{{ $product->currency }} {{ number_format($product->price_before_discount) }}</del>
-                        <span class="uk-text-danger">{{ $product->currency }} {{ number_format($product->sell_price) }}</h4>
+                            <span class="uk-text-danger">{{ $product->currency }} {{ number_format($product->sell_price) }}</span>
+                        </h4>
                     </b>
                 @else
                     <h4 class="uk-margin-remove">{{ $product->currency }} {{ number_format($product->sell_price) }} </h4>
@@ -206,6 +215,7 @@
                 wishlist_api="{{ route('persist.wishlist') }}"
                 auth="{{ Auth::check() ? 1 : 0 }}"
                 aws_link="{{ config('filesystems.s3url') }}"
+                default_image="{{ json_encode(config('common.default')) }}"
         ></related>
         <div class="uk-grid-small uk-margin-small-bottom uk-margin-medium-top uk-margin-xlarge-bottom">
             <div class="uk-panel uk-text-center">

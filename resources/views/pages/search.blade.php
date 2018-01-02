@@ -79,6 +79,7 @@
                         wishlist_api="{{ route('persist.wishlist') }}"
                         auth="{{ Auth::check() ? 1 : 0 }}"
                         aws_link="{{ config('filesystems.s3url') }}"
+                        default_image="{{ json_encode(config('common.default')) }}"
                 ></shop>
             </div>
         </div>
