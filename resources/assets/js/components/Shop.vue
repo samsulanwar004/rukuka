@@ -33,8 +33,8 @@
             <div class="uk-card uk-card-small uk-padding-remove uk-hidden@m">
                 <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
                     <a :href="'/product/'+ product.slug">
-                        <img :src="aws_link+'/'+ product.photo" :alt="product.name">
-                    </a>
+                        <img v-if="product.photo" :src="aws_link+'/'+ product.photo" :alt="product.name">
+                        <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">                    </a>
                 </div>
                 <div class="uk-card-body uk-padding-remove uk-margin-small-top">
                     <a :href="'/product/'+ product.slug" class="uk-text-meta">{{ product.name }}</a>
@@ -79,7 +79,8 @@
                     <div class="">
                     <ul class="uk-switcher uk-margin" id="component-tab-left">
                       <li v-for="image in images">
-                        <img :src="aws_link+'/'+image.photo" :alt="image.name">
+                          <img v-if="image.photo" :src="aws_link+'/'+ image.photo" :alt="image.name">
+                          <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
                         <div class="uk-position uk-position-small uk-position-center-left">
                           <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="previous" uk-icon="icon: chevron-left"></a>
                         </div>
@@ -91,8 +92,11 @@
                     </div>
                     <div class="">
                     <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" uk-grid>
-                      <li class="uk-padding-remove" v-for="image in images"><a href="#"  class="uk-padding-remove">
-                        <img :src="aws_link+'/'+image.photo" width="55"></a>
+                      <li class="uk-padding-remove" v-for="image in images">
+                          <a href="#"  class="uk-padding-remove">
+                              <img v-if="image.photo" :src="aws_link+'/'+ image.photo" :alt="image.name" width="55">
+                              <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka" width="55">
+                          </a>
                       </li>
                     </ul>
                   </div>
