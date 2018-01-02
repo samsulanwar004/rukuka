@@ -33,6 +33,7 @@
               checkout_link="{{ route('checkout') }}"
               api_token="{{ Auth::user('web')->api_token }}"
               aws_link="{{ config('filesystems.s3url') }}"
+              default_image="{{ json_encode(config('common.default')) }}"
             ></user-panel>
             <div id="offcanvas-overlay-slide" uk-offcanvas="overlay: true">
               <navigation-mobile
