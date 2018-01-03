@@ -47,16 +47,7 @@ class Cms_settingsSeeder extends Seeder {
     {        
 
        $data = [
-        //CURRENCY
-       [
-           'created_at'=>date('Y-m-d H:i:s'),
-           'name'=>'fix_price',
-           'label'=>'Fix Price',
-           'content'=>NULL,
-           'content_input_type'=>'text',
-           'group_setting'=>'Currency',
-           'dataenum'=>NULL,
-           'helper'=>'1 USD Fixing Price to IDR'],
+
         //LOGIN REGISTER STYLE
         [   
             'created_at'=>date('Y-m-d H:i:s'),

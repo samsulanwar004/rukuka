@@ -1,5 +1,8 @@
 <template>
-    <div class="uk-grid-small uk-margin-top" uk-grid>
+    <div v-if="bags == 0" class="uk-margin-large">
+        <h3 align="center"><p>You have no items in the shopping bag</p></h3>
+    </div>
+    <div v-else class="uk-grid-small uk-margin-top" uk-grid>
       <div class="uk-width-3-4@m">
 
         <table class="uk-table uk-table-divider">
@@ -76,12 +79,8 @@
           </div>
           <hr>
         </div>
-      </div>
-
     </div>
 </template>
-
-
 <script>
     import axios from 'axios';
     export default {
