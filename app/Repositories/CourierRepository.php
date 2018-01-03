@@ -256,14 +256,26 @@ class CourierRepository{
 
 		}
 
+		if(config('common.is_pos_indonesia_prod') == true){
+
+			$requestUserId = config('common.username_pos_indonesia_prod');
+			$requestPassword = config('common.password_pos_indonesia_prod');
+		
+		}else{
+
+			$requestUserId = config('common.username_pos_indonesia_dev');
+			$requestPassword = config('common.password_pos_indonesia_dev');
+
+		}
+
 		//create request getfee
 	    $requestToPosIndonesia = [
 	                                [
-	                                    'userId'            => config('common.username_pos_indonesia'),
-	                                    'password'          => config('common.password_pos_indonesia'),
+	                                    'userId'            => $requestUserId,
+	                                    'password'          => $requestPassword,
 	                                    'customerId'        => '',
 	                                    'isDomestic'        => $requestIsDomestic,
-	                                    'senderPosCode'     => '13210',
+	                                    'senderPosCode'     => config('common.sender_pos_code'),
 	                                    'receiverPosCode'   => $requesReceiverPosCode,
 	                                    'weight'            => $requestWeight,
 	                                    'length'            => $requestLength,
@@ -275,7 +287,7 @@ class CourierRepository{
 	                            ];
 
 	    $resultPosIndonesia = $posIndonesia->callMethod('getFee', $requestToPosIndonesia);
-
+	    
 	    if ($resultPosIndonesia->r_fee->serviceName == 'ERROR') {
 	    	
 	    	return $this->formatResponse('999', 'error shiping services unavailable', $resultPosIndonesia, null);
@@ -285,6 +297,16 @@ class CourierRepository{
 	    	return $this->formatResponse('999', 'error shiping services unavailable', $resultPosIndonesia, null);
 	    
 	    }else{
+
+	    	if (is_array($resultPosIndonesia->r_fee) == false) {
+	    		
+	    		if ((float) $resultPosIndonesia->r_fee->totalFee > 0 == false) {
+	    			
+	    			return $this->formatResponse('999', $resultPosIndonesia->r_fee->serviceName, $resultPosIndonesia, null);
+
+	    		}
+
+	    	}
 
 	    	$rebuildResponse = $this->rebuildDataResponseFromProviderShipping(self::POS_INDONESIA, $resultPosIndonesia);
 	    	
