@@ -91,6 +91,8 @@ if (! function_exists('uploadCDN')) {
             $cdn = env('S3_URL');
         }
 
-        return $cdn .'/'.$file;
+        $sparator = $file == null ? '#' : '/'.$file;
+
+        return $cdn.$sparator;
     }
 }
