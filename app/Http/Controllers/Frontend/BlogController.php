@@ -46,7 +46,7 @@ class BlogController extends Controller
 
                 $image = '<img src="'. uploadCDN($post->photo_1) .'" alt="'.$post->title.'" onerror="this.src = \''.imageCDN(config('common.default.image_2')).'\'">';
 
-                $blog .= '<div class="uk-width-1-3@m uk-width-1-2@s uk-inline">
+                $blog .= '<div class="uk-width-1-3@m uk-width-1-2 uk-inline">
                                 <div class="uk-inline">
                                     <div class="uk-inline-clip uk-transition-toggle uk-light"> 
                                         <a href="'.$url.'" class="uk-link-reset">
@@ -54,8 +54,11 @@ class BlogController extends Controller
                                             '.$image.'
                                             <div class="uk-card uk-position-bottom-left uk-card-small">
                                                 <div class="uk-card-body">
-                                                    <div class="uk-transition-slide-left-small">
+                                                    <div class="uk-transition-slide-left-small uk-visible@m">
                                                         <h1 class="uk-margin-remove uk-text-bold blog-subtitle">'.$post->title.'</h1>
+                                                    </div>
+                                                    <div class="uk-hidden@m">
+                                                        <h4 class="uk-margin-remove">'.$post->title.'</h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -112,11 +115,9 @@ class BlogController extends Controller
         $status= $result['status'];
         $category = $this->getCategory();
         $header= $BlogRepository->getHeader();
-        $keyword = $request->input('search');
+        $keyword = $request->input('keyword');
 
         return view('blogs.search', compact('posts','category','keyword','header','status'));
-
-
     }
 
     public function getCategory()
