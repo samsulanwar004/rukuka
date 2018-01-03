@@ -23,6 +23,15 @@ class PosIndonesiaCourierService
 
 	public function callMethod($method, $requestToPosIndonesia)
 	{
-	    return $this->getTemplateWSDL(config('common.wsdl_pos_indonesia'))->call($method, $requestToPosIndonesia);
+		if(config('common.is_pos_indonesia_prod') == true){
+
+			return $this->getTemplateWSDL(config('common.wsdl_pos_indonesia_prod'))->call($method, $requestToPosIndonesia);
+			
+		}else{
+
+			return $this->getTemplateWSDL(config('common.wsdl_pos_indonesia_dev'))->call($method, $requestToPosIndonesia);
+		
+		}
+
 	}
 }
