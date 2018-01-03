@@ -5,7 +5,8 @@
             <div class="uk-card uk-card-small uk-card-default uk-box-shadow uk-visible@m">
                 <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
                     <a :href="'/product/'+ product.slug">
-                        <img :src="aws_link+'/'+ product.photo" :alt="product.name">
+                        <img v-if="product.photo" :src="aws_link+'/'+ product.photo" :alt="product.name">
+                        <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
                     </a>
                     <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default">
                         <div class="uk-text-center">
@@ -32,8 +33,8 @@
             <div class="uk-card uk-card-small uk-padding-remove uk-hidden@m">
                 <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
                     <a :href="'/product/'+ product.slug">
-                        <img :src="aws_link+'/'+ product.photo" :alt="product.name">
-                    </a>
+                        <img v-if="product.photo" :src="aws_link+'/'+ product.photo" :alt="product.name">
+                        <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">                    </a>
                 </div>
                 <div class="uk-card-body uk-padding-remove uk-margin-small-top">
                     <a :href="'/product/'+ product.slug" class="uk-text-meta">{{ product.name }}</a>
@@ -57,17 +58,14 @@
         </div>
         <!-- end product single -->
         <div id="modal-overflow" class="uk-modal-container-small" uk-modal="center: true">
-          <div class="uk-modal-dialog">
-
+          <div class="uk-modal-dialog uk-margin-auto">
             <button class="uk-modal-close-default" type="button" uk-close></button>
-
             <div class="uk-modal-header uk-visible@m">
               <h3 class="uk-margin-remove">{{ name }}</h3>
               <div class="uk-text-right">
                 <a :href="'/product/' +slug" class="uk-button uk-button-text uk-text-right">see details <span uk-icon="icon: chevron-right"></span> </a>
               </div>
             </div>
-
             <div class="uk-modal-body uk-padding-small-left" uk-overflow-auto>
               <div class="uk-grid" uk-grid>
                 <div class="uk-width-1-2@m">
@@ -76,13 +74,13 @@
                     <div>
                       <a :href="'/product/' +slug" class="uk-button uk-button-text uk-text-right">see details <span uk-icon="icon: chevron-right"></span> </a>
                     </div>
-
                   </div>
-                  <div class="uk-inline">
+                    <div v-if="images[0]" class="uk-inline">
                     <div class="">
                     <ul class="uk-switcher uk-margin" id="component-tab-left">
                       <li v-for="image in images">
-                        <img :src="aws_link+'/'+image.photo" :alt="image.name">
+                          <img v-if="image.photo" :src="aws_link+'/'+ image.photo" :alt="image.name">
+                          <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
                         <div class="uk-position uk-position-small uk-position-center-left">
                           <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="previous" uk-icon="icon: chevron-left"></a>
                         </div>
@@ -94,12 +92,18 @@
                     </div>
                     <div class="">
                     <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" uk-grid>
-                      <li class="uk-padding-remove" v-for="image in images"><a href="#"  class="uk-padding-remove">
-                        <img :src="aws_link+'/'+image.photo" width="55"></a>
+                      <li class="uk-padding-remove" v-for="image in images">
+                          <a href="#"  class="uk-padding-remove">
+                              <img v-if="image.photo" :src="aws_link+'/'+ image.photo" :alt="image.name" width="55">
+                              <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka" width="55">
+                          </a>
                       </li>
                     </ul>
                   </div>
                   </div>
+                    <div v-else class="uk-inline">
+                        <img :src="aws_link+'/'+'images/'+defaultImage.image_2">
+                    </div>
                 </div>
                 <div class="uk-width-1-2@m">
                   <h4 class="uk-margin-remove">
@@ -182,7 +186,8 @@
           'bag_api', 
           'wishlist_api', 
           'auth', 
-          'aws_link'
+          'aws_link',
+          'default_image'
         ],
 
         created () {
@@ -205,7 +210,8 @@
                 detailAndCare: {},
                 slug: {},
                 size: null,
-                deliveryReturns: null
+                deliveryReturns: null,
+                defaultImage: JSON.parse(this.default_image,true)
             }
         },
 

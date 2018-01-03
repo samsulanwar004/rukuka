@@ -15,10 +15,11 @@
       <wishlist
         wishlist_api="{{ route('persist.wishlist') }}"
         bag_api="{{ route('persist.bag') }}"
-     	  wishlist_delete="{{ route('user.wishlist.destroy') }}"
+		wishlist_delete="{{ route('user.wishlist.destroy') }}"
         product_link="{{ route('product') }}"
         aws_link="{{ config('filesystems.s3url') }}"
-      ></wishlist>
+		default_image="{{ json_encode(config('common.default')) }}"
+	  ></wishlist>
   </div>
 </div>
 </div>

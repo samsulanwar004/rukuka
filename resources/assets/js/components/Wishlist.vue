@@ -5,8 +5,8 @@
         <!-- start product -->
         <div class="uk-card uk-card-small uk-padding-remove uk-visible@m">
             <div class="uk-card-media-top">
-                <img :src="aws_link+'/'+wish.photo" :alt="wish.name">
-
+                <img v-if="wish.photo" :src="aws_link+'/'+wish.photo" :alt="wish.name">
+                <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
             </div>
             <div class="uk-card-body uk-padding-remove uk-margin-small-top">
 
@@ -28,7 +28,8 @@
                       </li>
                     </ul>
                   </div>
-                    <img :src="aws_link+'/'+wish.photo" :alt="wish.photo">
+                    <img v-if="wish.photo" :src="aws_link+'/'+wish.photo" :alt="wish.name">
+                    <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
                 </div>
                 <div class="uk-card-body uk-background-default uk-padding-small uk-margin-small-top">
                     <a :href="'/product/'+wish.slug">{{ wish.name }}</a>
@@ -73,7 +74,8 @@
                   </li>
                 </ul>
               </div>
-                <img :src="aws_link+'/'+wish.photo" :alt="wish.photo">
+                <img v-if="wish.photo" :src="aws_link+'/'+wish.photo" :alt="wish.name">
+                <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
             </div>
             <div class="uk-card-body uk-background-default uk-padding-small">
                 <a :href="'/product/'+wish.slug" class="uk-text-meta">{{ wish.name }}</a>
@@ -106,14 +108,14 @@
             </div> -->
         </div>
     </div>
-      <center v-if="wishlists == 0">wishlist not found</center>
+      <div v-if="wishlists == 0" class="uk-text-left">Wishlist not found</div>
   </div>
 </template>
 
 <script>
   import axios from 'axios';
   export default {
-    props: ['wishlist_api', 'bag_api', 'wishlist_delete', 'product_link', 'aws_link'],
+    props: ['wishlist_api', 'bag_api', 'wishlist_delete', 'product_link', 'aws_link','default_image'],
     created () {
       var self = this;
       self.getWishlist();
@@ -121,7 +123,8 @@
 
     data () {
       return {
-        wishlists: {}
+        wishlists: {},
+        defaultImage: JSON.parse(this.default_image,true)
       }
     },
 
