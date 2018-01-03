@@ -16,8 +16,8 @@
         @else
 
         @endif
-      <div class="uk-section uk-section-xsmall uk-section-default uk-padding-small">
-        <div class="uk-grid-small" uk-grid>
+
+        <div class="uk-grid-small uk-margin-small-top" uk-grid>
             <div class="uk-width-1-4@m uk-visible@m">
                 @if($categories == 'designers')
                     @include('partials.breadcrumb', [
@@ -71,8 +71,8 @@
 
             </div>
         </div>
-      </div>
-        <div class="uk-grid-small uk-margin-small-top uk-margin-large-bottom" uk-grid>
+
+        <div class="uk-grid-small uk-margin-small-top" uk-grid>
             <div class="uk-width-1-4@m uk-visible@m">
                 <div class="uk-card uk-card-border uk-card-small uk-panel">
 
@@ -110,5 +110,12 @@
                 ></shop>
             </div>
         </div>
+
+          <div class="uk-text-right uk-margin-bottom">
+            <span class="uk-text-meta">
+            @include('pagination.default', ['paginator' => $products])
+            </span>
+          </div>
+
     </div>
 @endsection

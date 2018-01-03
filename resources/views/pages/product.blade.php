@@ -33,7 +33,7 @@
                     <div class="uk-width-auto@m uk-hidden@m uk-margin-small">
                         <ul class="uk-margin-remove uk-padding-remove" uk-tab="connect: #component-tab-left; animation: uk-animation-fade">
                             @foreach($product->images as $image)
-                                <li><a href="#"><img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="50" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'"></a></li>
+                                <li class="uk-margin-small-right"><a href="#"><img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="50" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'"></a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -131,8 +131,10 @@
                     <span><i>Based on {{count($product->review)}} Reviews</i></span>
                 </div>
             @else
+              <div class="uk-panel">
                 WHAT OTHER SHOPPERS THINK: <br>
                 There are no reviews for this product. Be the first to comment.
+              </div>
             @endif
         </div>
         <div id="review-ajax" class="uk-grid uk-visible@m" uk-grid>
@@ -217,9 +219,9 @@
                 aws_link="{{ config('filesystems.s3url') }}"
                 default_image="{{ json_encode(config('common.default')) }}"
         ></related>
-        <div class="uk-grid-small uk-margin-small-bottom uk-margin-medium-top uk-margin-xlarge-bottom">
+        <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">
             <div class="uk-panel uk-text-center">
-                <a  href="{{route('search')}}" class="uk-button uk-button-secondary">SHOW ALL PRODUCT</a>
+                <a  href="{{route('search')}}" class="uk-button uk-button-small uk-button-text">SHOW ALL PRODUCT</a>
             </div>
         </div>
     </div>
