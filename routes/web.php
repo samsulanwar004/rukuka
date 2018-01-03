@@ -72,7 +72,7 @@ Route::get('/blog/{slug}', [
     'uses' => 'Frontend\BlogController@blogRead',
 ]);
 
-Route::post('/blog/search', [
+Route::get('/search/blog', [
     'as'   => 'blog-get-search',
     'uses' => 'Frontend\BlogController@search',
 ]);

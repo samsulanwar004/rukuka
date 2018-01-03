@@ -76,7 +76,7 @@ class BlogRepository
 
     public function getSearch($keyword)
     {
-        $result['post'] = Blog::where('is_publish', 1)->where('title','like','%'.$keyword['search'].'%')->orderBy('created_at', 'desc')->take(25)->get();
+        $result['post'] = Blog::where('is_publish', 1)->where('title','like','%'.$keyword['keyword'].'%')->orderBy('created_at', 'desc')->take(25)->get();
 
         if(count($result['post']) == 0 ){
             $result['status'] = $this->status('001');
