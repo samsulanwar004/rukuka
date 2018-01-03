@@ -25,7 +25,21 @@
           </div>
         </div>
       </div>
-        <h3 class="uk-margin-small">{{$title}}</h3>
+        <div class="uk-grid-small" uk-grid>
+            <div class="uk-width-1-2">
+                <div class="uk-panel uk-margin-small-top">
+                    <h3 class="uk-margin-small">{{$title}}</h3>
+                </div>
+            </div>
+            <div class="uk-width-1-2">
+                <div class="uk-panel uk-text-right uk-margin-small-top">
+                    {{ Form::open(array('url' => 'search/blog', 'method' =>'get','files' => true,'class' => 'uk-search uk-form-width-medium uk-first-column uk-margin-small-top')) }}
+                    <button type="submit" class="uk-search-icon-flip uk-search-icon uk-icon" uk-search-icon></button>
+                    <input type="text" class=" uk-search-input" name="keyword"  placeholder="S E A R C H . . .">
+                    {{ Form::close() }}
+                </div>
+            </div>
+        </div>
         <div id="blog" class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
             @foreach($posts as $post)
                 <div class="uk-width-1-3@m uk-width-1-2 uk-inline">

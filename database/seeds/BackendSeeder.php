@@ -221,6 +221,16 @@ class CmsModulsSeeder extends Seeder {
             'controller'=>'AdminSubcribersController',
             'is_protected'=>0,
             'is_active'=>0
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Exchange Rates',
+            'icon'=>'fa fa-exchange',
+            'path'=>'exchange-rates',
+            'table_name'=>'exchange_rates',
+            'controller'=>'AdminExchangeRatesController',
+            'is_protected'=>0,
+            'is_active'=>0
         ]
         ];
 
@@ -565,6 +575,19 @@ class CmsMenusSeeder extends Seeder {
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 4
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Exchange Rates',
+            'type'=>'Route',
+            'path'=>'AdminExchangeRatesControllerGetIndex',
+            'color' => 'normal',
+            'icon'=>'fa fa-exchange',
+            'parent_id'=>0,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 7
         ]
     ];
 

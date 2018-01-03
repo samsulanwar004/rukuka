@@ -12,7 +12,7 @@
 
         created() {
             var self = this;
-            var api = this.api;
+            var api = this.api;            
             var sort_by = function(field, reverse, primer){
 
               var key = primer ?
@@ -88,6 +88,13 @@
                 salesNav: {},
                 defaultImage: JSON.parse(this.default_image,true),
             }
+        },
+
+        filters: {
+          awsLink: function (value, aws) {
+            var sparator = value == null ? '#' : '/'+value;
+            return aws+sparator;
+          }
         }
     }
 </script>
@@ -122,7 +129,7 @@
                             </ul>
                             <hr class="uk-margin-small">
                             <a :href="designersNav.designer_designer_of_the_week_url">
-                              <img v-if="designersNav.designer_of_the_week" style="height: 180px" :src="aws_link+'/'+designersNav.designer_of_the_week" :alt="designersNav.designer_designer_of_the_week_text">
+                              <img v-if="designersNav.designer_of_the_week" style="height: 180px" :src="designersNav.designer_of_the_week | awsLink(aws_link)" :alt="designersNav.designer_designer_of_the_week_text">
                               <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_4" :alt="rukuka">
                             </a>
                         </div>
@@ -140,7 +147,7 @@
                                 <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                                 <li>
                                     <a :href="womensNav.women_blog_url">
-                                        <img v-if="womensNav.women_blog_image" style="height: 150px" :src="aws_link+'/'+womensNav.women_blog_image" :alt="rukuka">
+                                        <img v-if="womensNav.women_blog_image" style="height: 150px" :src="womensNav.women_blog_image | awsLink(aws_link)" :alt="rukuka">
                                         <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
                                     </a>
                                 </li>
@@ -202,7 +209,7 @@
                               <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                               <li>
                                   <a :href="mensNav.men_blog_url">
-                                      <img v-if="mensNav.men_blog_image" style="height: 150px" :src="aws_link+'/'+mensNav.men_blog_image" :alt="Rukuka">
+                                      <img v-if="mensNav.men_blog_image" style="height: 150px" :src="mensNav.men_blog_image | awsLink(aws_link)" :alt="Rukuka">
                                       <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
                                   </a>
                               </li>
@@ -265,7 +272,7 @@
                                   <li class="uk-nav-header uk-text-bold">Featured Style Story</li>
                                   <li>
                                       <a :href="kidsNav.kid_blog_url">
-                                          <img v-if="" style="height: 150px" :src="aws_link+'/'+kidsNav.kid_blog_image" :alt="Rukuka">
+                                          <img v-if="" style="height: 150px" :src="kidsNav.kid_blog_image | awsLink(aws_link)" :alt="Rukuka">
                                           <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
                                       </a>
                                   </li>
@@ -327,7 +334,7 @@
                               </ul>
                               <hr class="uk-margin-small">
                               <a :href="salesNav.sale_url">
-                                  <img v-if="salesNav.sale_image" style="height: 100px; width: 800px" :src="aws_link+'/'+salesNav.sale_image" :alt="salesNav.sale_text">
+                                  <img v-if="salesNav.sale_image" style="height: 100px; width: 800px" :src="salesNav.sale_image | awsLink(aws_link)" :alt="salesNav.sale_text">
                                   <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_5" :alt="rukuka">
                               </a>
                           </div>
