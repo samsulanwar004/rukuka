@@ -3,9 +3,16 @@
 return [
 
 	// config pos indonesia courier service 
-	'username_pos_indonesia' => env('USERNAME_POS_INDONESIA'),
-	'password_pos_indonesia' => env('PASSWORD_POS_INDONESIA'),
-	'wsdl_pos_indonesia' 	 =>	env('WSDL_POS_INDONESIA'),
+	'is_pos_indonesia_prod' 	 => env('IS_POS_INDONESIA_PROD'),
+	'sender_pos_code'			 => env('SENDER_POS_CODE'),
+		
+	'username_pos_indonesia_dev' => env('USERNAME_POS_INDONESIA_DEV'),
+	'password_pos_indonesia_dev' => env('PASSWORD_POS_INDONESIA_DEV'),
+	'wsdl_pos_indonesia_dev' 	 =>	env('WSDL_POS_INDONESIA_DEV'),
+
+	'username_pos_indonesia_prod' => env('USERNAME_POS_INDONESIA_PROD'),
+	'password_pos_indonesia_prod' => env('PASSWORD_POS_INDONESIA_PROD'),
+	'wsdl_pos_indonesia_prod' 	  => env('WSDL_POS_INDONESIA_PROD'),
 
 	// config pos indonesia courier service 
 	'xendit_public_key' => env('XENDIT_PUBLIC_KEY'),
