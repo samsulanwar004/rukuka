@@ -46,7 +46,7 @@
                     <div class="uk-inline">
                         <div class="uk-inline-clip uk-transition-toggle uk-light">
                             <a href="{{ URL::to('blog/'.$post->slug)}}" class="uk-link-reset">
-                                <div style="background: rgba(0,0,0,.2);" class="uk-position-cover"></div>
+                                <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
                                     <img src="{{ uploadCDN($post->photo_1) }}" alt="{{$post->title}}" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'">
                                 <div class="uk-card uk-position-bottom-left uk-card-small">
                                     <div class="uk-card-body">
