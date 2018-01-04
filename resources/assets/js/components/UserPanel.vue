@@ -29,7 +29,7 @@
               <div class="uk-card-body uk-card-small">
                 <div class="uk-grid-small" uk-grid v-for="bag in filteredBags">
                   <div class="uk-width-1-3">
-                    <img v-if="bag.options.photo" :src="aws_link+'/'+bag.options.photo" :alt="bag.name">
+                    <img v-if="bag.options.photo" :src="bag.options.photo | awsLink(aws_link)" :alt="bag.name">
                     <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
                   </div>
                   <div class="uk-width-2-3">
@@ -211,6 +211,13 @@
     computed: {
       filteredBags: function () {
         return typeof this.bags[0] !== 'undefined' ? this.bags.slice(0,2) : {};
+      }
+    },
+
+    filters: {
+      awsLink: function (value, aws) {
+        var link = value == null ? '#' : aws+'/'+value;
+        return link;
       }
     }
   }

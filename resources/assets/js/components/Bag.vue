@@ -1,5 +1,8 @@
 <template>
-    <div class="uk-grid-small uk-margin-top" uk-grid>
+    <div class="uk-margin-large" v-if="bags == 0" >
+        <h3 align="center"><p>You have no items in the shopping bag</p></h3>
+    </div>
+    <div class="uk-grid-small uk-margin-top" uk-grid v-else>
       <div class="uk-width-3-4@m">
 
         <table class="uk-table uk-table-divider">
@@ -19,7 +22,7 @@
             <tbody v-for="bag in bags">
                 <tr>
                     <td>
-                        <img v-if="bag.options.photo" class="uk-preserve-width" :src="aws_link+'/'+bag.options.photo" width="130" alt="rukuka product">
+                        <img v-if="bag.options.photo" class="uk-preserve-width" :src="bag.options.photo | awsLink(aws_link)" width="130" alt="rukuka product">
                         <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
                     </td>
                     <td class="uk-table-link">
@@ -76,12 +79,8 @@
           </div>
           <hr>
         </div>
-      </div>
-
     </div>
 </template>
-
-
 <script>
     import axios from 'axios';
     export default {
@@ -243,6 +242,13 @@
                     });
                 }
             }
+        },
+
+        filters: {
+          awsLink: function (value, aws) {
+            var link = value == null ? '#' : aws+'/'+value;
+            return link;
+          }
         }
     }
 </script>

@@ -3,7 +3,7 @@
         <li><b>POPULAR SEARCHES</b></li>
         <ul class="uk-nav uk-navbar-dropdown-nav" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
             <li class="uk-parent" v-for="cat in cloth.child" >
-                <a v-for="data in popularSearch" :href="'/shop/womens/'+cloth.name.toLowerCase()+'/'+ cat.slug" v-if="data.slug == cat.slug" class="">{{ cat.nama }}</a>
+                <a v-for="data in popularSearch" :href="'/shop/womens/'+cloth.name.toLowerCase()+'/'+ cat.slug" v-if="data.slug == cat.slug">{{ cat.name }}</a>
             </li>
         </ul>
         <ul class="uk-nav uk-navbar-dropdown-nav" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
@@ -41,6 +41,7 @@
         props: ['popular_search'],
         created() {
             var self = this;
+            var api = this.api;
             let popular_search = this.popular_search;
             axios.get(popular_search)
                 .then(function (response) {
@@ -65,6 +66,7 @@
                 }
 
             });
+
         },
 
         data() {

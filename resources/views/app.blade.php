@@ -12,7 +12,8 @@
     <!-- jQuery is required -->
     <link rel="stylesheet" href="{{ elixirCDN('css/app.css') }}">
     <link rel="shortcut icon" href="{{ imageCDN('favicon.png') }}">
-
+    <script src="{{ elixirCDN('js/vendor.js') }}"></script>
+    <script src="{{ elixirCDN('js/custom.js') }}"></script>
   </head>
   <body>
     <div id="app">
@@ -29,9 +30,7 @@
 
       @yield('content')
       @include('partials.footer')
-    </div>
-    <script src="{{ elixirCDN('js/vendor.js') }}"></script>
-    <script src="{{ elixirCDN('js/custom.js') }}"></script>
+    </div>    
     <script src="{{ elixirCDN('js/main.js') }}"></script>
     <script src="{{ elixirCDN('js/app.js') }}"></script>
     @section('upload_scripts')

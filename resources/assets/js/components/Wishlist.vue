@@ -5,7 +5,7 @@
         <!-- start product -->
         <div class="uk-card uk-card-small uk-padding-remove uk-visible@m">
             <div class="uk-card-media-top">
-                <img v-if="wish.photo" :src="aws_link+'/'+wish.photo" :alt="wish.name">
+                <img v-if="wish.photo" :src="wish.photo | awsLink(aws_link)" :alt="wish.name">
                 <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
             </div>
             <div class="uk-card-body uk-padding-remove uk-margin-small-top">
@@ -28,7 +28,7 @@
                       </li>
                     </ul>
                   </div>
-                    <img v-if="wish.photo" :src="aws_link+'/'+wish.photo" :alt="wish.name">
+                    <img v-if="wish.photo" :src="wish.photo | awsLink(aws_link)" :alt="wish.name">
                     <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
                 </div>
                 <div class="uk-card-body uk-background-default uk-padding-small uk-margin-small-top">
@@ -74,7 +74,7 @@
                   </li>
                 </ul>
               </div>
-                <img v-if="wish.photo" :src="aws_link+'/'+wish.photo" :alt="wish.name">
+                <img v-if="wish.photo" :src="wish.photo | awsLink(aws_link)" :alt="wish.name">
                 <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
             </div>
             <div class="uk-card-body uk-background-default uk-padding-small">
@@ -108,7 +108,7 @@
             </div> -->
         </div>
     </div>
-      <div v-if="wishlists == 0" class="uk-text-left">Wishlist not found</div>
+      <div v-if="wishlists == 0" class="uk-text-left">You have no items in your wishlist</div>
   </div>
 </template>
 
@@ -205,6 +205,13 @@
               });
             }
         });
+      }
+    },
+
+    filters: {
+      awsLink: function (value, aws) {
+        var link = value == null ? '#' : aws+'/'+value;
+        return link;
       }
     }
   }
