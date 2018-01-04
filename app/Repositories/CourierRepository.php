@@ -10,6 +10,8 @@ use DB;
 use Exception;
 use Cache;
 
+use App\ExchangeRate;
+
 class CourierRepository{
 
 	const POS_INDONESIA 		 = 'pos_indonesia';
@@ -328,6 +330,24 @@ class CourierRepository{
 
 		if ($courierName == self::POS_INDONESIA) {
 
+			// kurensi
+			$usdToIdrRate = ExchangeRate::where('currency_code_from','=','usd')
+							->where('currency_code_to','=','idr')
+							->get();
+			
+			if ($usdToIdrRate == null) {
+				
+				return $this->formatResponse('887', 'error exhange rate not set', null, null);
+
+			}else if ($usdToIdrRate[0]->conversion_value != 1) {
+				
+				return $this->formatResponse('886', 'convertion value must 1', null, null);
+
+			}
+
+			$oneUsdToIdr = $usdToIdrRate[0]->inverse_conversion_value;
+			
+			// reforming structur
 			if (is_array($resultFromCourierProvider->r_fee)) {
 				
 				foreach ($resultFromCourierProvider->r_fee as $resultFromCourierProviderKey => $resultFromCourierProviderValue) {
@@ -341,7 +361,7 @@ class CourierRepository{
 											$resultFromCourierProviderValue->insuranceTax, 
 											$resultFromCourierProviderValue->totalFee, 
 											$resultFromCourierProviderValue->itemValue,
-											$resultFromCourierProviderValue->notes
+											round($resultFromCourierProviderValue->totalFee / $oneUsdToIdr, 2)
 										);
 
 				}
@@ -362,6 +382,30 @@ class CourierRepository{
 
 			}
 
+			// rewrite label
+			$rewriteLabel['010'] =  array('mark' => 'R LN ', 'replace' => 'letter service ');
+			$rewriteLabel['312'] =  array('mark' => 'EMS BARANG ', 'replace' => 'EMS service ');
+			$rewriteLabel['331'] =  array('mark' => 'PAKETPOS CEPAT LN ', 'replace' => 'Quick service ');
+			$rewriteLabel['332'] =  array('mark' => 'PAKETPOS BIASA LN ', 'replace' => 'Normal service ');
+
+			foreach ($listServiceCost as $listServiceCostKey => $listServiceCostValue) {
+			
+				$listServiceCost[$listServiceCostKey]->serviceName = str_replace(
+																		$rewriteLabel[$listServiceCostValue->serviceCode]['mark'],  
+																		$rewriteLabel[$listServiceCostValue->serviceCode]['replace'],
+																		$listServiceCost[$listServiceCostKey]->serviceName
+																	);
+				$listServiceCost[$listServiceCostKey]->serviceName = str_replace(
+																			'HARI', 
+																			'DAYS', 
+																			$listServiceCost[$listServiceCostKey]->serviceName
+																	);
+
+			}
+
+			// blacklist service
+
+
 			return $this->formatResponse('000', 'success rebuild data response from provider shipping', $listServiceCost, null);
 
 		}else{
@@ -381,11 +425,12 @@ class CourierRepository{
 					'feeTax' 		=> $feeTax,
 					'insurance' 	=> $insurance,
 					'insuranceTax' 	=> $insuranceTax,
-					'totalFee' 		=> $totalFee,
+					'totalFeeIdr' 	=> $totalFee,
 					'itemValue' 	=> $itemValue,
-					'notes'			=> $notes
+					'totalFeeDollar'=> $notes
 				];
 	}
+
 	//-------------------------------------------------------------------
 	// exmaple parameter for method : saveResultShippingCostService($courierName, $result)
 	//-------------------------------------------------------------------
@@ -552,7 +597,7 @@ class CourierRepository{
 
 		if ($constCourier == self::POS_INDONESIA) {
 
-			if ($costChoosed['data']->totalFee <= 0) {
+			if ($costChoosed['data']->totalFeeIdr <= 0) {
 
 				return $this->formatResponse('996', 'error shipping total', null, null);
 
@@ -560,8 +605,8 @@ class CourierRepository{
 
 			$rebuildData = $this->defaultTemplateForSummary(
 								'POS INDONESIA', 
-								$costChoosed['data']->totalFee, 
-								$costChoosed['data']->notes, 
+								$costChoosed['data']->totalFeeIdr, 
+								$costChoosed['data']->totalFeeDollar, 
 								$valueChoosed, 
 								$costChoosed['data']
 							);
