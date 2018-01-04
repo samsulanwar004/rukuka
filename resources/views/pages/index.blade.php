@@ -31,7 +31,7 @@
     </div>
   <div class="uk-container uk-container-small">
       {{--BLOG--}}
-    <div class="uk-card-border uk-card-small uk-margin-top">
+    <div class="uk-card-border uk-card-small uk-margin-top uk-margin-bottom">
     <div class="uk-card-body">
     <div class="uk-grid-small" uk-grid>
 
@@ -64,13 +64,13 @@
     </div>
   </div>
 {{--END BLOG--}}
-      <div class="uk-grid-small uk-margin-medium" uk-grid>
+      <div class="uk-grid-small" uk-grid>
           <div class="uk-width-1-3 uk-inline">
               <div class="uk-inline uk-visible@m">
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_1'] }}" class="uk-link-reset">
                           <img src="{{ uploadCDN($home['homepage_banner_1']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          <div style="background: rgba(0,0,0,.1);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">
@@ -92,7 +92,7 @@
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_2'] }}" class="uk-link-reset">
                           <img src="{{ uploadCDN($home['homepage_banner_2']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          <div style="background: rgba(0,0,0,.1);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">
@@ -114,7 +114,7 @@
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_3'] }}" class="uk-link-reset">
                           <img src="{{ uploadCDN($home['homepage_banner_3']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          <div style="background: rgba(0,0,0,.1);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">
@@ -131,12 +131,14 @@
                   </a>
               </div>
           </div>
+      </div>
+      <div class="uk-grid-small" uk-grid>
           <div class="uk-width-1-3 uk-inline">
               <div class="uk-inline uk-visible@m">
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_4'] }}" class="uk-link-reset">
                           <img src="{{ uploadCDN($home['homepage_banner_4']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          <div style="background: rgba(0,0,0,.1);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">
@@ -158,7 +160,7 @@
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_5'] }}" class="uk-link-reset">
                           <img src="{{ uploadCDN($home['homepage_banner_5']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          <div style="background: rgba(0,0,0,.1);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">
@@ -180,7 +182,7 @@
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_6'] }}" class="uk-link-reset">
                           <img src="{{ uploadCDN($home['homepage_banner_6']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          <div style="background: rgba(0,0,0,.1);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">
@@ -197,12 +199,14 @@
                   </a>
               </div>
           </div>
+      </div>
+      <div class="uk-grid-small" uk-grid>
           <div class="uk-width-1-3 uk-inline">
               <div class="uk-inline uk-visible@m">
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_7'] }}" class="uk-link-reset">
                           <img src="{{ uploadCDN($home['homepage_banner_7']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          <div style="background: rgba(0,0,0,.1);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">
@@ -224,7 +228,7 @@
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_8'] }}" class="uk-link-reset">
                           <img src="{{ uploadCDN($home['homepage_banner_8']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          <div style="background: rgba(0,0,0,.1);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">
@@ -246,7 +250,7 @@
                   <div class="uk-inline-clip uk-transition-toggle uk-light">
                       <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
                           <img src="{{ uploadCDN($home['homepage_banner_9']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div style="background: rgba(0,0,0,.2);" class="uk-position-cover">
+                          <div style="background: rgba(0,0,0,.1);" class="uk-position-cover">
                           </div>
                           <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small uk-card-border-light">
                               <div class="uk-card-body">

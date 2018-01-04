@@ -1,8 +1,8 @@
 <template>
-    <div v-if="bags == 0" class="uk-margin-large">
+    <div class="uk-margin-large" v-if="bags == 0" >
         <h3 align="center"><p>You have no items in the shopping bag</p></h3>
     </div>
-    <div v-else class="uk-grid-small uk-margin-top" uk-grid>
+    <div class="uk-grid-small uk-margin-top" uk-grid v-else>
       <div class="uk-width-3-4@m">
 
         <table class="uk-table uk-table-divider">
