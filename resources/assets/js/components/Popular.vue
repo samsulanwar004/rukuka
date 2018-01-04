@@ -5,7 +5,7 @@
       <div class="uk-card uk-card-small uk-padding-remove">
         <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
           <a :href="'/product/'+ product.slug">
-            <img v-if="product.photo" :src="aws_link+'/'+ product.photo" :alt="product.name">
+            <img v-if="product.photo" :src="product.photo | awsLink(aws_link)" :alt="product.name">
             <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
           </a>
           <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default uk-visible@m">
@@ -58,7 +58,7 @@
                 <div class="">
                 <ul class="uk-switcher uk-margin" id="component-tab-left-related">
                   <li v-for="image in images">
-                    <img :src="aws_link+'/'+image.photo" :alt="image.name">
+                    <img :src="image.photo | awsLink(aws_link)" :alt="image.name">
                     <div class="uk-position uk-position-small uk-position-center-left">
                       <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="previous" uk-icon="icon: chevron-left"></a>
                     </div>
@@ -71,7 +71,7 @@
                 <div class="">
                 <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left-related; animation: uk-animation-fade" uk-grid>
                   <li class="uk-padding-remove" v-for="image in images">
-                      <a href="#"><img :src="aws_link+'/'+image.photo" width="55"></a>
+                      <a href="#"><img :src="image.photo | awsLink(aws_link)" width="55"></a>
                   </li>
                 </ul>
               </div>
@@ -309,6 +309,11 @@
                   return '(Only '+unit+' Left)';
               }
           }
+      },
+
+      awsLink: function (value, aws) {
+        var link = value == null ? '#' : aws+'/'+value;
+        return link;
       }
     }
   }
