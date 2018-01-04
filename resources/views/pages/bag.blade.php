@@ -14,6 +14,7 @@
     default_image="{{ json_encode(config('common.default')) }}"
   ></bag>
   <hr>
+  @if($categoryId)
   <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
     <div class="uk-panel">
       <span class="uk-text-lead">RELATED PRODUCTS</span>
@@ -28,10 +29,13 @@
     aws_link="{{ config('filesystems.s3url') }}"
     default_image="{{ json_encode(config('common.default')) }}"
   ></related>
+  @endif
   <div class="uk-grid-small uk-margin-small-bottom uk-margin-medium-top uk-margin-xlarge-bottom">
-    <div class="uk-panel uk-text-center">
-      <button class="uk-button uk-button-secondary">SHOW ALL PRODUCT</button>
-    </div>
+    <a href="/shop/designers/all">
+      <div class="uk-panel uk-text-center">
+        <button class="uk-button uk-button-secondary">SHOW ALL PRODUCT</button>
+      </div>
+    </a>
   </div>
 </div>
 @endsection

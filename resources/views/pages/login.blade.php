@@ -1,8 +1,6 @@
 @extends('app')
 
 @section('content')
-<div class="uk-section uk-section-muted uk-section-xsmall uk-margin-small-top uk-margin-bottom">
-
 <div class="uk-container uk-container-small">
   <div class="uk-grid-small uk-margin-top">
       @include('partials.alert')
@@ -64,7 +62,7 @@
                     <li><input name="last_name" class="uk-input {{ $errors->has('last_name') ? ' uk-form-danger' : '' }}" type="text" placeholder="Last Name" required="required" value="{{ old('last_name') }}"></li>
                   </ul>
                   <ul class="uk-list">
-                    <li class="uk-text-muted">Set Username and Password</li>
+                    <li class="uk-text-muted">Set Email and Password</li>
                     <li><input name="email" class="uk-input {{ $errors->has('email') ? ' uk-form-danger' : '' }}" id="email" type="email" placeholder="Email Address" required="required" value="{{ old('email') }}"></li>
                     <li><input name="password" class="uk-input {{ $errors->has('password') ? ' uk-form-danger' : '' }}" id="password" type="password" placeholder="Password" required="required"></li>
                     <li><input name="confirmed" class="uk-input {{ $errors->has('confirmed') ? ' uk-form-danger' : '' }}" id="confirmed" type="password" placeholder="Confirm Password" required="required"></li>
@@ -93,5 +91,4 @@
 
 </div>
 
-</div>
 @endsection

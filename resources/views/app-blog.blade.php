@@ -11,6 +11,8 @@
 
     <!-- jQuery is required -->
     <link rel="stylesheet" href="{{ elixirCDN('css/app.css') }}">
+    <script src="{{ elixirCDN('js/vendor.js') }}"></script>
+    <script src="{{ elixirCDN('js/custom.js') }}"></script>
 
   </head>
   <body>
@@ -32,9 +34,7 @@
         @yield('content')
       @include('partials.footer')
       </div>
-    </div>
-    <script src="{{ elixirCDN('js/vendor.js') }}"></script>
-    <script src="{{ elixirCDN('js/custom.js') }}"></script>
+    </div>    
     <script src="{{ elixirCDN('js/main.js') }}"></script>
     <script src="{{ elixirCDN('js/app.js') }}"></script>
     @section('footer_scripts')

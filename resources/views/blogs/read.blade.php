@@ -41,34 +41,34 @@
             <div class="uk-hidden@m">
                 <h4>Other people also read</h4>
             </div>
-          <div class="uk-grid-small" uk-grid>
             @foreach($postsRandom as $post)
-                <div class="uk-width-1-1@m uk-width-1-3 uk-inline">
-                <div class="uk-inline">
-                    <div class="uk-inline-clip uk-transition-toggle uk-light">
-                        <a href="{{ URL::to('blog/'.$post->slug)}}" class="uk-link-reset">
-                            <div style="background: rgba(0,0,0,.2);" class="uk-position-cover"></div>
-                            <img src="{{ uploadCDN($post->photo_1) }}" alt="{{$post->title}}" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'">
-                            <div class="uk-card uk-position-bottom-left uk-card-small">
-                                <div class="uk-card-body">
-                                  <div class="uk-visible@m">
-                                    <div class="uk-transition-slide-left-small">
-                                        <h1 class="uk-margin-remove uk-text-bold blog-subtitle">{{$post->title}}</h1>
+              <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-1@m uk-width-1-3 uk-inline">
+                        <div class="uk-inline">
+                        <div class="uk-inline-clip uk-transition-toggle uk-light">
+                            <a href="{{ URL::to('blog/'.$post->slug)}}" class="uk-link-reset">
+                                <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
+                                <img src="{{ uploadCDN($post->photo_1) }}" alt="{{$post->title}}" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'">
+                                <div class="uk-card uk-position-bottom-left uk-card-small">
+                                    <div class="uk-card-body">
+                                      <div class="uk-visible@m">
+                                        <div class="uk-transition-slide-left-small">
+                                            <h1 class="uk-margin-remove uk-text-bold blog-subtitle">{{$post->title}}</h1>
+                                        </div>
+                                      </div>
+                                      <div class="uk-hidden@m">
+                                        <div>
+                                            <span class="uk-margin-remove uk-text-small uk-light">{{$post->title}}</span>
+                                        </div>
+                                      </div>
                                     </div>
-                                  </div>
-                                  <div class="uk-hidden@m">
-                                    <div>
-                                        <span class="uk-margin-remove uk-text-small uk-light">{{$post->title}}</span>
-                                    </div>
-                                  </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
+              </div>
             @endforeach
-          </div>
         </div>
       </div>
 

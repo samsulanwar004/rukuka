@@ -11,6 +11,8 @@
 
     <!-- jQuery is required -->
     <link rel="stylesheet" href="{{ elixirCDN('css/app.css') }}">
+    <script src="{{ elixirCDN('js/vendor.js') }}"></script>
+    <script src="{{ elixirCDN('js/custom.js') }}"></script>
      <style type="text/css">
          .credit-card-box .panel-title {
                 display: inline;
@@ -105,9 +107,7 @@
       @include('partials.header_checkout')
       @yield('content')
       @include('partials.footer_checkout')
-    </div>
-    <script src="{{ elixirCDN('js/vendor.js') }}"></script>
-    <script src="{{ elixirCDN('js/custom.js') }}"></script>
+    </div>    
     <script src="{{ elixirCDN('js/main.js') }}"></script>
     <script src="{{ elixirCDN('js/app.js') }}"></script>
     @section('footer_scripts')
