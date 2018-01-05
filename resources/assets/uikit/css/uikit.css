@@ -1732,6 +1732,29 @@ select.uk-form-width-xsmall {
   border-color: #999999;
 }
 /*
+ * Default
+ */
+.uk-button-default-warm {
+  background-color: transparent;
+  color: #000;
+  border: 1px solid #000;
+  border: 1px solid #b2b2b2;
+}
+/* Hover + Focus */
+.uk-button-default-warm:hover,
+.uk-button-default-warm:focus {
+  background-color: transparent;
+  color: #333;
+  border-color: #000;
+}
+/* OnClick + Active */
+.uk-button-default-warm:active,
+.uk-button-default-warm.uk-active {
+  background-color: transparent;
+  color: #333;
+  border-color: #999999;
+}
+/*
  * Primary
  */
 .uk-button-primary {
