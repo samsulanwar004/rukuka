@@ -47,7 +47,8 @@ class SocialMediaService
             }
 
             $this->user->auth($user);
-        
+
+            return true;
  
         } catch (Exception $e) {
             throw new SocialAuthException($e->getMessage());
