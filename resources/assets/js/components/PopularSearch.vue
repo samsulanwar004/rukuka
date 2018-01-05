@@ -38,7 +38,7 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['popular_search','api'],
+        props: ['popular_search'],
         created() {
             var self = this;
             var api = this.api;
@@ -53,19 +53,20 @@
                     console.log(error);
                 });
 
-            $.get(api, function(response) {
+            Event.listen('navigation', function (response) {
 
-                if (typeof response.data.mens !== 'undefined') {
-                    self.menCloths = response.data.mens;
+                if (typeof response.mens !== 'undefined') {
+                    self.menCloths = response.mens;
                 }
-                if (typeof response.data.womens !== 'undefined') {
-                    self.womenCloths = response.data.womens;
+                if (typeof response.womens !== 'undefined') {
+                    self.womenCloths = response.womens;
                 }
-                if (typeof response.data.kids !== 'undefined') {
-                    self.kidCloths = response.data.kids;
+                if (typeof response.kids !== 'undefined') {
+                    self.kidCloths = response.kids;
                 }
 
             });
+
         },
 
         data() {

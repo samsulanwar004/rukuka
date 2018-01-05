@@ -37,7 +37,6 @@
             ></user-panel>
             <div id="offcanvas-overlay-slide" uk-offcanvas="overlay: true">
               <navigation-mobile
-                      api="{{ route('menu')}}"
                       men_link="{{ route('men') }}"
                       women_link="{{ route('women') }}"
                       kid_link="{{ route('kids') }}"
