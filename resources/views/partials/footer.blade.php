@@ -26,7 +26,6 @@
       <div class="uk-width-1-5@m">
           <popular-search
           popular_search="{{ route('popular-search') }}"
-          api="{{ route('menu')}}"
           ></popular-search>
       </div>
       <div class="uk-width-2-5@m">

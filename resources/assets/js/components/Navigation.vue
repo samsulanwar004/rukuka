@@ -1,104 +1,3 @@
-<script>
-    export default {
-        props: [
-          'api', 
-          'men_link', 
-          'women_link', 
-          'kid_link',
-          'designer_link',
-          'aws_link',
-          'default_image'
-        ],
-
-        created() {
-            var self = this;
-            var api = this.api;            
-            var sort_by = function(field, reverse, primer){
-
-              var key = primer ?
-              function(x) {return primer(x[field])} :
-              function(x) {return x[field]};
-
-              reverse = !reverse ? 1 : -1;
-
-             return function (a, b) {
-              return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
-             }
-            }
-
-            $.get(api, function(navigations) {
-              if (typeof navigations.data !== 'undefined') {
-                Event.fire('navigation', navigations.data);
-
-                if (typeof navigations.data.mens !== 'undefined') {
-                  self.menCloths = navigations.data.mens;
-                }
-
-                if (typeof navigations.data.womens !== 'undefined') {
-                  self.womenCloths = navigations.data.womens;
-                }
-
-                if (typeof navigations.data.kids !== 'undefined') {
-                  self.kidCloths = navigations.data.kids;
-                }
-
-                if (typeof navigations.data.designers !== 'undefined') {
-                   self.designers = navigations.data.designers.sort(sort_by('created_at', true, function(result){
-                    return result;
-                  })).slice(0,17);
-                }
-
-                if (typeof navigations.data.designers_nav !== 'undefined') {
-                   self.designersNav = navigations.data.designers_nav;
-                }
-
-                if (typeof navigations.data.womens_nav !== 'undefined') {
-                   self.womensNav = navigations.data.womens_nav;
-                }
-
-                if (typeof navigations.data.mens_nav !== 'undefined') {
-                  self.mensNav = navigations.data.mens_nav;
-                }
-
-                if (typeof navigations.data.kids_nav !== 'undefined') {
-                  self.kidsNav = navigations.data.kids_nav;
-                }
-
-                if (typeof navigations.data.sales_nav !== 'undefined') {
-                  self.salesNav = navigations.data.sales_nav;
-                }
-              }
-            });
-        },
-
-        data() {
-            return {
-                menCloths: {},
-                womenCloths: {},
-                kidCloths: {},
-                designers: {},
-                menLink: this.men_link,
-                womenLink: this.women_link,
-                kidLink: this.kid_link,
-                designerLink: this.designer_link,
-                designersNav: {},
-                womensNav: {},
-                mensNav: {},
-                kidsNav: {},
-                salesNav: {},
-                defaultImage: JSON.parse(this.default_image,true),
-            }
-        },
-
-        filters: {
-          awsLink: function (value, aws) {
-            var sparator = value == null ? '#' : '/'+value;
-            return aws+sparator;
-          }
-        }
-    }
-</script>
-
 <template>
     <nav class="uk-container uk-container-small uk-section-default uk-background-default" uk-navbar="dropbar: true; align: center; boundary-align: true; delay-hide: 100; duration:50">
       <div class="uk-navbar-center">
@@ -363,3 +262,108 @@
       </div>
     </nav>
 </template>
+
+<script>
+    import axios from 'axios';
+    export default {
+        props: [
+          'api', 
+          'men_link', 
+          'women_link', 
+          'kid_link',
+          'designer_link',
+          'aws_link',
+          'default_image'
+        ],
+
+        created() {
+            var self = this;
+            var api = this.api;            
+            var sort_by = function(field, reverse, primer){
+
+              var key = primer ?
+              function(x) {return primer(x[field])} :
+              function(x) {return x[field]};
+
+              reverse = !reverse ? 1 : -1;
+
+             return function (a, b) {
+              return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
+             }
+            }
+            axios.get(api)
+            .then(function (navigations) {
+              if (typeof navigations.data.data !== 'undefined') {
+                Event.fire('navigation', navigations.data.data);
+
+                if (typeof navigations.data.data.mens !== 'undefined') {
+                  self.menCloths = navigations.data.data.mens;
+                }
+
+                if (typeof navigations.data.data.womens !== 'undefined') {
+                  self.womenCloths = navigations.data.data.womens;
+                }
+
+                if (typeof navigations.data.data.kids !== 'undefined') {
+                  self.kidCloths = navigations.data.data.kids;
+                }
+
+                if (typeof navigations.data.data.designers !== 'undefined') {
+                   self.designers = navigations.data.data.designers.sort(sort_by('created_at', true, function(result){
+                    return result;
+                  })).slice(0,17);
+                }
+
+                if (typeof navigations.data.data.designers_nav !== 'undefined') {
+                   self.designersNav = navigations.data.data.designers_nav;
+                }
+
+                if (typeof navigations.data.data.womens_nav !== 'undefined') {
+                   self.womensNav = navigations.data.data.womens_nav;
+                }
+
+                if (typeof navigations.data.data.mens_nav !== 'undefined') {
+                  self.mensNav = navigations.data.data.mens_nav;
+                }
+
+                if (typeof navigations.data.data.kids_nav !== 'undefined') {
+                  self.kidsNav = navigations.data.data.kids_nav;
+                }
+
+                if (typeof navigations.data.data.sales_nav !== 'undefined') {
+                  self.salesNav = navigations.data.data.sales_nav;
+                }
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        },
+
+        data() {
+            return {
+                menCloths: {},
+                womenCloths: {},
+                kidCloths: {},
+                designers: {},
+                menLink: this.men_link,
+                womenLink: this.women_link,
+                kidLink: this.kid_link,
+                designerLink: this.designer_link,
+                designersNav: {},
+                womensNav: {},
+                mensNav: {},
+                kidsNav: {},
+                salesNav: {},
+                defaultImage: JSON.parse(this.default_image,true),
+            }
+        },
+
+        filters: {
+          awsLink: function (value, aws) {
+            var link = value == null ? '#' : aws+'/'+value;
+            return link;
+          }
+        }
+    }
+</script>

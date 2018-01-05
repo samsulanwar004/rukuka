@@ -1,76 +1,3 @@
-<script>
-    export default {
-        props: ['api','keyword','category','subcategory','productcategory'],
-        created() {
-            var self = this;
-            var api = this.api;
-            self.productsCategory = this.productcategory ? JSON.parse(this.productcategory) : {};
-            var sort_by = function(field, reverse, primer){
-
-                var key = primer ?
-                    function(x) {return primer(x[field])} :
-                    function(x) {return x[field]};
-
-                reverse = !reverse ? 1 : -1;
-
-                return function (a, b) {
-                    return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
-                }
-            }
-
-            $.get(api, function(navigations) {
-                if (typeof navigations.data !== 'undefined') {
-                    if (typeof navigations.data.mens !== 'undefined') {
-                        self.menCounts = navigations.data.mens;
-                    }
-
-                    if (typeof navigations.data.womens !== 'undefined') {
-                        self.womenCounts = navigations.data.womens;
-                    }
-
-                    if (typeof navigations.data.kids !== 'undefined') {
-                        self.kidCounts = navigations.data.kids;
-                    }
-
-                    if (typeof navigations.data.designers !== 'undefined') {
-                        self.designers = navigations.data.designers.sort(sort_by('created_at', true, function(result){
-                            return result;
-                        }));
-                    }
-                }
-            });
-
-            Event.listen('navigation', function (response) {
-
-                if (typeof response.mens !== 'undefined') {
-                    self.menCloths = response.mens;
-                }
-                if (typeof response.womens !== 'undefined') {
-                    self.womenCloths = response.womens;
-                }
-                if (typeof response.kids !== 'undefined') {
-                    self.kidCloths = response.kids;
-                }
-
-            });
-        },
-        data() {
-            return {
-                menCloths: {},
-                womenCloths: {},
-                kidCloths: {},
-                menCounts: {},
-                womenCounts: {},
-                kidCounts: {},
-                designers: {},
-                productsCategory: {},
-                category: {},
-                subcategory: {},
-            }
-        }
-    }
-</script>
-
 <template>
         <ul class="uk-nav uk-nav-small uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
             <li class="uk-parent">
@@ -126,3 +53,81 @@
             </li>
          </ul>
 </template>
+
+<script>
+    import axios from 'axios';
+    export default {
+        props: ['api','keyword','category','subcategory','productcategory'],
+        created() {
+            var self = this;
+            var api = this.api;
+            self.productsCategory = this.productcategory ? JSON.parse(this.productcategory) : {};
+            var sort_by = function(field, reverse, primer){
+
+                var key = primer ?
+                    function(x) {return primer(x[field])} :
+                    function(x) {return x[field]};
+
+                reverse = !reverse ? 1 : -1;
+
+                return function (a, b) {
+                    return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
+                }
+            }
+
+            axios.get(api)
+            .then(function (navigations) {
+                if (typeof navigations.data.data !== 'undefined') {
+                    if (typeof navigations.data.data.mens !== 'undefined') {
+                        self.menCounts = navigations.data.data.mens;
+                    }
+
+                    if (typeof navigations.data.data.womens !== 'undefined') {
+                        self.womenCounts = navigations.data.data.womens;
+                    }
+
+                    if (typeof navigations.data.data.kids !== 'undefined') {
+                        self.kidCounts = navigations.data.data.kids;
+                    }
+
+                    if (typeof navigations.data.data.designers !== 'undefined') {
+                        self.designers = navigations.data.data.designers.sort(sort_by('created_at', true, function(result){
+                            return result;
+                        }));
+                    }
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+            Event.listen('navigation', function (response) {
+
+                if (typeof response.mens !== 'undefined') {
+                    self.menCloths = response.mens;
+                }
+                if (typeof response.womens !== 'undefined') {
+                    self.womenCloths = response.womens;
+                }
+                if (typeof response.kids !== 'undefined') {
+                    self.kidCloths = response.kids;
+                }
+
+            });
+        },
+        data() {
+            return {
+                menCloths: {},
+                womenCloths: {},
+                kidCloths: {},
+                menCounts: {},
+                womenCounts: {},
+                kidCounts: {},
+                designers: {},
+                productsCategory: {},
+                category: {},
+                subcategory: {},
+            }
+        }
+    }
+</script>
