@@ -14,6 +14,7 @@ class LoginController extends BaseController
 {
 	private $social;
 	private $user;
+    protected $redirectAfterLogin = '/account';
     protected $redirectAfterRegister = '/login';
     protected $redirectAfterForgot = '/forgot';
 
@@ -28,11 +29,7 @@ class LoginController extends BaseController
         $ref = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
         $ref = rtrim($ref, '/');
 
-        if ($ref != url('logout')) {
-            Session::put('referrer', $ref);
-        } else {
-            Session::put('referrer', '/');
-        }
+        Session::put('referrer', $ref);
 
         return view('pages.login');
     }
@@ -85,17 +82,22 @@ class LoginController extends BaseController
             	->setPassword($request->input('password_login'))
             	->setRemember($request->input('remember'))
             	->auth();
-            (new UserRepository)->updateLastLogin($this->getUserActive()->id);
 
             if (!$auth) {
-                throw new Exception("Login failed!", 1);     
+                throw new Exception("The username and password you entered did not match our records. Please double-check and try again", 1);     
+            } else {
+                (new UserRepository)->updateLastLogin($this->getUserActive()->id);
             }
         } catch (Exception $e) {
             return back()->withErrors($e->getMessage());
         }
 
-        return redirect()->intended(Session::pull('referrer'))
-            ->with('success', 'Login successfully!');
+        if (Session::get('url.intended') == url('logout')) {
+            return redirect($this->redirectAfterLogin)->with('success', 'Login successfully!');
+        } else {
+            return redirect()->intended(Session::get('referrer'))->with('success', 'Login successfully!');
+        }
+        
     }
 
     public function logout()
@@ -113,13 +115,20 @@ class LoginController extends BaseController
     public function socialLoginCallback($provider)
     {
         try {
-            $this->social->login($provider);            
+            $auth = $this->social->login($provider); 
+
+            if ($auth) {
+                (new UserRepository)->updateLastLogin($this->getUserActive()->id);
+            }          
         } catch (SocialAuthException $e) {
             return back()->withErrors($e->getMessage());
         }
-
-        return redirect()->intended(Session::pull('referrer'))
-            ->with('success', 'Login successfully!');
+        
+        if (Session::get('url.intended') == url('logout')) {
+            return redirect($this->redirectAfterLogin)->with('success', 'Login successfully!');
+        } else {
+            return redirect()->intended(Session::get('referrer'))->with('success', 'Login successfully!');
+        }
     }
 
     public function activation($code)
