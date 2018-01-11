@@ -5,7 +5,7 @@
             <select :class="{'uk-select uk-form-width-small uk-form-small': true, 'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
               <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">{{ stock.size }} {{ stock.unit | unit }}</option>
             </select>
-            <span class="uk-text-meta"><i>Choose your size</i> </span>
+            <span class="uk-text-meta"><i> Choose your size</i> </span>
         </div>
         <div v-else>
             <span class="uk-text-meta"><i class="uk-text-danger">No size available </i> <br>Please, contact our cuctomer service! </span>

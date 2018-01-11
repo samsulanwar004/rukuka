@@ -99,7 +99,7 @@
                     {{ stock.size }} {{ stock.unit | unit }}
                   </option>
                 </select>
-                <span class="uk-text-meta"><i>Choose your size</i> </span>
+                <span class="uk-text-meta"><i> Choose your size</i> </span>
               </div>
               <div v-else>
                 <span class="uk-text-meta"><i class="uk-text-danger">No size available </i> <br>Please, contact our cuctomer service! </span>
