@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="uk-hidden@m uk-text-right">
-                        <a href="#modal" class="uk-button uk-button-default uk-button-small" uk-toggle>Filter</a>
+                        <a href="#modal" class="uk-button uk-button-default-warm uk-button-small" uk-toggle>Filter</a>
                         <div id="modal" uk-modal>
                             <div class="uk-modal-dialog uk-modal-body">
                                 <search

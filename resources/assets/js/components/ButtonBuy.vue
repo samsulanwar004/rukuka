@@ -1,11 +1,14 @@
 <template>
     <div>
         <h5 class="uk-margin-small">Color : {{ prod.color }}</h5>
-        <div>
+        <div v-if="stocks.length > 0">
             <select :class="{'uk-select uk-form-width-small uk-form-small': true, 'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
-              <option :value="null" disabled>Select Size</option>
-              <option v-for="stock in stocks" :value="stock.sku" :selected="sku ==  stock.sku" :disabled="stock.unit <= 0">{{ stock.size }} {{ stock.unit | unit }}</option>
+              <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">{{ stock.size }} {{ stock.unit | unit }}</option>
             </select>
+            <span class="uk-text-meta"><i> Choose your size</i> </span>
+        </div>
+        <div v-else>
+            <span class="uk-text-meta"><i class="uk-text-danger">No size available </i> <br>Please, contact our cuctomer service! </span>
         </div>
         <ul uk-accordion="animation: true; multiple: false">
                   <li class="uk-open">
@@ -62,13 +65,15 @@
             var self = this;
             self.stocks = this.sizes ? JSON.parse(this.sizes) : {};
             self.prod = this.product ? JSON.parse(this.product) : {};
+            var sku = self.stocks.length > 0 ? self.stocks[0].sku : null;
+            self.size = this.sku ? this.sku : sku;
         },
 
         data () {
             return {
                 prod: {},
                 stocks: {},
-                size: this.sku ? this.sku : null
+                size: {} 
             }
         },
 

@@ -15,6 +15,9 @@
           </div>
         </div>
         <div class="uk-card-body uk-padding-remove uk-margin-small-top">
+          <div class="uk-hidden@m">
+            <a href="#modal-overflow" class="uk-button uk-button-small uk-button-default-warm uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">quick shop</a>
+          </div>
           <a :href="'/product/'+ product.slug" class="uk-text-muted">{{ product.name.substring(0,35) }}</a>
           <br>
           <span v-if="product.price_before_discount > 0 ">
@@ -28,9 +31,7 @@
           <span v-else class="uk-text-small">
               {{ product.currency }} {{ product.price }}
           </span>
-          <div class="uk-hidden@m">
-            <a href="#modal-overflow" class="uk-button uk-button-small uk-button-default uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">quick shop</a>
-          </div>
+
         </div>
       </div>
     </div>
@@ -49,10 +50,7 @@
           <div class="uk-grid" uk-grid>
             <div class="uk-width-1-2@m">
               <div class="uk-hidden@m">
-                <h5 class="uk-margin-remove">{{ name }}</h5>
-                <div>
-                  <a :href="'/product/' +slug" class="uk-button uk-button-text uk-text-right">see details <span uk-icon="icon: chevron-right"></span> </a>
-                </div>
+                <h5 class="uk-margin-small"><a :href="'/product/' +slug">{{ name }}</a></h5>
               </div>
               <div v-if="images[0]" class="uk-inline">
                 <div class="">
@@ -98,15 +96,17 @@
                   <h4>{{ currency }} {{ price }}</h4>
               </span>
               <h5 class="uk-margin-small">Color : {{ color }}</h5>
-
-              <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-small">
-                <option :value="null" disabled>Select Size</option>
-                <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
-                  {{ stock.size }} {{ stock.unit | unit }}
-                </option>
-
-              </select>
-              <span class="uk-text-meta"><i>Choose your size</i> </span>
+              <div v-if="stocks.length > 0">
+                <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-small">
+                  <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
+                    {{ stock.size }} {{ stock.unit | unit }}
+                  </option>
+                </select>
+                <span class="uk-text-meta"><i> Choose your size</i> </span>
+              </div>
+              <div v-else>
+                <span class="uk-text-meta"><i class="uk-text-danger">No size available </i> <br>Please, contact our cuctomer service! </span>
+              </div>
               <ul uk-accordion="animation: true; multiple: false">
                   <li class="uk-open">
 
@@ -142,8 +142,8 @@
             <button class="uk-button uk-button-default" type="button" v-on:click="wishlist">ADD TO WISHLIST</button>
         </div>
         <div class="uk-modal-footer uk-text-right uk-padding-small uk-hidden@m">
-            <button class="uk-button uk-button-secondary" type="button" v-on:click="bag">BAG <span class="uk-icon" uk-icon="icon:  chevron-right"></span></button>
-            <button class="uk-button uk-button-default" type="button" v-on:click="wishlist">WISHLIST <span class="uk-icon" uk-icon="icon:  chevron-right"></span></button>
+            <button class="uk-button uk-button-secondary uk-button-small" type="button" v-on:click="bag">BAG <span class="uk-icon" uk-icon="icon:  chevron-right"></span></button>
+            <button class="uk-button uk-button-default uk-button-small" type="button" v-on:click="wishlist">WISHLIST <span class="uk-icon" uk-icon="icon:  chevron-right"></span></button>
         </div>
       </div>
     </div>
@@ -183,7 +183,7 @@
             sizeAndFit: {},
             detailAndCare: {},
             slug: {},
-            size: null,
+            size: {},
             deliveryReturns: null,
             defaultImage: JSON.parse(this.default_image,true)
         }
@@ -209,6 +209,7 @@
             self.detailAndCare = data.detail_and_care;
             self.deliveryReturns = data.delivery_returns;
             self.slug =  data.slug;
+            self.size = self.stocks.length > 0 ? self.stocks[0].sku : null;
 
           }
         })
