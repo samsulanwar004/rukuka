@@ -288,6 +288,8 @@ class CourierRepository{
 	                                ]
 	                            ];
 
+	    echo "<script>console.log('" . json_encode($requestToPosIndonesia) . "');</script>";
+	    
 	    $resultPosIndonesia = $posIndonesia->callMethod('getFee', $requestToPosIndonesia);
 	    
 	    if ($resultPosIndonesia->r_fee->serviceName == 'ERROR') {
@@ -404,7 +406,18 @@ class CourierRepository{
 			}
 
 			// blacklist service
+			$blackList = [
+				'010' => 'R LN '
+			];
 
+			foreach ($listServiceCost as $listServiceCostKey => $listServiceCostValue) {
+				
+				if (array_key_exists($listServiceCostValue->serviceCode, $blackList) == true) {
+					
+					unset($listServiceCost[$listServiceCostKey]);
+
+				}	
+			}
 
 			return $this->formatResponse('000', 'success rebuild data response from provider shipping', $listServiceCost, null);
 
