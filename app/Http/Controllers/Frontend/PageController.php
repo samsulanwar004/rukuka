@@ -13,6 +13,7 @@ use Exception;
 use Carbon\Carbon;
 use App\Services\BagService;
 use Share;
+use DB;
 
 class PageController extends BaseController
 {
@@ -421,6 +422,17 @@ class PageController extends BaseController
             'category',
             'subcategory'
         ));
+    }
+
+    public function callBackXendit(Request $request)
+    {
+        
+        $content = $request->getContent();
+        DB::table('callback_payment')->insert(
+        ['merchant' => 'xendit', 'response' => $content]
+        );
+
+        return $content;
     }
 
 }
