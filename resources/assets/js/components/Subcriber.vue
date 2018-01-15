@@ -39,9 +39,6 @@
                 })
                 .then(function (response) {
                     if (typeof response.data.message !== 'undefined') {
-                        if (typeof response.data.message.email !== 'undefined') {
-                            self.messages = response.data.message.email[0];
-                        }
                         if (response.data.message.toLowerCase() == 'success') {
                             UIkit.notification("<span uk-icon='icon: check'></span> Thanks for subscriber");
                         }
@@ -49,7 +46,15 @@
 
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    var error = JSON.parse(JSON.stringify(error));
+                    if (typeof error.response.data.message !== 'undefined') {
+                        UIkit.notification(error.response.data.message.email[0], {
+                            status:'danger'
+                        });
+                    }
+                    if (typeof error.response.data.message !== 'undefined') {
+                        self.messages = error.response.data.message.email[0];
+                    }
                 });
             }
         }

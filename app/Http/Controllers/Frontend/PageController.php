@@ -253,7 +253,7 @@ class PageController extends BaseController
                     ];
                     $bag->save($product, self::INSTANCE_SHOP);
                 } else {
-                    throw new Exception("Stock not found!", 1);  
+                    throw new Exception("No stock available!", 1);  
                 }
                 
 

@@ -67,7 +67,7 @@
                   </div>
                   <div class="uk-margin-small uk-grid-small" uk-grid>
                     <div>
-                      Countryss
+                      Country
                       <select id="form-country-empty" name="country" class="uk-input uk-input-small {{ $errors->has('country') ? ' uk-form-danger' : '' }}" required="required" onchange="handleLocalAddress();showListProvices();">
                         <option></option>
                       </select>

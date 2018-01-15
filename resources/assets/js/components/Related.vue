@@ -96,15 +96,17 @@
                   <h4>{{ currency }} {{ price }}</h4>
               </span>
               <h5 class="uk-margin-small">Color : {{ color }}</h5>
-
-              <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-small">
-                <option :value="null" disabled>Select Size</option>
-                <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
-                  {{ stock.size }} {{ stock.unit | unit }}
-                </option>
-
-              </select>
-              <span class="uk-text-meta"><i>Choose your size</i> </span>
+              <div v-if="stocks.length > 0">
+                <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-small">
+                  <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
+                    {{ stock.size }} {{ stock.unit | unit }}
+                  </option>
+                </select>
+                <span class="uk-text-meta"><i> Choose your size</i> </span>
+              </div>
+              <div v-else>
+                <span class="uk-text-meta"><i class="uk-text-danger">No size available </i> <br>Please, contact our cuctomer service! </span>
+              </div>
               <ul uk-accordion="animation: true; multiple: false">
                   <li class="uk-open">
 
@@ -181,7 +183,7 @@
             sizeAndFit: {},
             detailAndCare: {},
             slug: {},
-            size: null,
+            size: {},
             deliveryReturns: null,
             defaultImage: JSON.parse(this.default_image,true)
         }
@@ -207,6 +209,7 @@
             self.detailAndCare = data.detail_and_care;
             self.deliveryReturns = data.delivery_returns;
             self.slug =  data.slug;
+            self.size = self.stocks.length > 0 ? self.stocks[0].sku : null;
 
           }
         })
