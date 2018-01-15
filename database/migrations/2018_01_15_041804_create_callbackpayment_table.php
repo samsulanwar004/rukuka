@@ -30,6 +30,6 @@ class CreateCallbackpaymentTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('callback_payment');
     }
 }
