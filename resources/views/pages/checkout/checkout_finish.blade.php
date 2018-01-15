@@ -19,6 +19,7 @@
                       <div>
                         Total Amount :
                         <input class="uk-input uk-input-small" name="card_amount" id="card_amount" type="text" value="{{ $total +  $shipping}}" required="required" readonly>
+                        <input type="hidden" name="signature" id="signature"value="{{$totalwithshipping}}">
                       </div>
                     </div>
                     <div class="row">
@@ -87,12 +88,14 @@
 <script src="https://js.xendit.co/v1/xendit.min.js"></script>
 <?php echo "<script>Xendit.setPublishableKey('".config('common.xendit_public_key')."');</script>"; ?>
 <script type="text/javascript">
-orderData = { 'order_code': '<? echo $orderCode; ?>','user_id': '<? echo $userId; ?>'};
+orderData = { 'order_code': '<? echo $orderCode; ?>','user_id': '<? echo $userId; ?>','signature': '<? echo $signature; ?>', 'totalwithshipping': '<? echo $totalwithshipping; ?>'};
+
 
   // Submit form with name function.
   function pay() {
     var cardNumber = document.getElementById("card_number").value;
     var cardAmount = document.getElementById("card_amount").value;
+    var signature = document.getElementById("signature").value;
     var cardexpMonth = document.getElementById("card_exp_month").value;
     var cardExpYear = document.getElementById("card_exp_year").value;
     var cardCvn = document.getElementById("card_cvn").value;
@@ -102,6 +105,8 @@ orderData = { 'order_code': '<? echo $orderCode; ?>','user_id': '<? echo $userId
         var x = document.getElementsByName('form_name');
         x[0].submit(); 
         tokenData = getTokenData();
+        console.log(tokenData);
+        console.log(orderData);
         Xendit.card.createToken(tokenData, function (err, data) {
             
               if (err) 
@@ -120,19 +125,20 @@ orderData = { 'order_code': '<? echo $orderCode; ?>','user_id': '<? echo $userId
                     var request = $.ajax({
                         type: "POST",
                         url: "{!! route('checkout.final') !!}",
-                        data: {order: orderData, request: tokenData, response: data, _token: getTokenValue()},
+                        data: { order: orderData, request: tokenData, response: data, _token: getTokenValue()},
                     });
 
                     request.done(function(msg) 
-                    {
+                    {   console.log(msg);
                         if(msg.status == "CAPTURED" ||msg.status == "AUTHORIZED")
                         {  
                              window.location = "{!! route('user.history') !!}";
                         }
                         else
                         {   
+                            //alert(err.error_code +" : "+err.message);
+                            window.location = "{!! route('user.history') !!}";
                             
-                            window.location = "{!! route('bag') !!}";
                         }
                     });
 
@@ -155,6 +161,10 @@ orderData = { 'order_code': '<? echo $orderCode; ?>','user_id': '<? echo $userId
                 {
                    window.location = "{!! route('bag') !!}";
                 }
+                else
+                {
+                   window.location = "{!! route('bag') !!}";
+                }
                 
             });
         }
@@ -174,6 +184,10 @@ orderData = { 'order_code': '<? echo $orderCode; ?>','user_id': '<? echo $userId
       {
           alert("Please fill all fields...!!!!!!");
           return false;
+      }
+      else if (cardNumber === '')
+      {
+        return false;
       }
   
       else if((isNaN(cardNumber)) || (isNaN(cardAmount)) || (isNaN(cardexpMonth)) || (isNaN(cardExpYear)) || (isNaN(cardCvn)))

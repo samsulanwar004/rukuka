@@ -24,4 +24,19 @@
 	</div>
 @endif
 
+@if (session('payment_message') != NULL)
+
+	@if (session('payment_status') == "CAPTURED" || session('payment_status') == "AUTHORIZED")
+	    <div class="uk-alert-success" uk-alert>
+		    <a class="uk-alert-close" uk-close></a>
+		    <p>{{session('payment_message')}}</p>
+		</div>
+	@else
+		<div class="uk-alert-danger" uk-alert>
+			    <a class="uk-alert-close" uk-close></a>
+			    <p>{{session('payment_message')}}</p>
+		</div>
+    @endif
+@endif
+<?php session(['payment_status' => NULL]); session(['payment_message' => NULL]); ?>
 
