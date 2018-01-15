@@ -395,6 +395,11 @@ Route::middleware(['auth'])->group(function () {
         'as'   => 'order',
         'uses' => 'Frontend\OrderController@store',
     ]);
+
+    Route::post('/xendit', [
+    'as'   => 'xendit',
+    'uses' => 'Frontend\PageController@callBackXendit',
+    ]);
 });
 
 // Route Admin crudbooster
