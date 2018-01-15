@@ -401,3 +401,9 @@ Route::middleware(['auth'])->group(function () {
     'uses' => 'Frontend\PageController@callBackXendit',
     ]);
 });
+
+// Route Admin crudbooster
+Route::post('/upload-product', [
+    'as'   => 'upload.product',
+    'uses' => 'AdminProductImagesController@uploadProduct',
+]);
