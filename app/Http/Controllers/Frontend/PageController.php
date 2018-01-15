@@ -428,7 +428,7 @@ class PageController extends BaseController
     {
         
         $content = $request->getContent();
-        DB::table('call_back_payment')->insert(
+        DB::table('callback_payment')->insert(
         ['merchant' => 'xendit', 'response' => $content]
         );
 
