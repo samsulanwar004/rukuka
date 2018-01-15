@@ -70,11 +70,15 @@ class OrderController extends BaseController
 	        });	        
 
 	        $shipping = $courir['data']->total_fee_usd;
-	        $shipping = 50;
+	        //$shipping = 50;
 
 	        $orderDate = Carbon::now();
 	        $expiredDate = Carbon::now()->addDay();
-	        $rupiah = 13000; // nanti dari database diedit admin
+	        $rupiah =DB::table('exchange_rates')->select('conversion_value')->get()->last();
+	        $rupiah = $rupiah->conversion_value; // nanti dari database diedit admin
+	        $totalwithshipping = ($total+$shipping)*$rupiah;
+	        $secret = config('common.order_key_signature');
+	        $signature = sha1($totalwithshipping.$secret);
 
 	        $order = $this->order
 	        	->setOrderCode('ON'.date('YmdHis').rand(000,999))
@@ -100,7 +104,9 @@ class OrderController extends BaseController
 				'detail', 
 				'total', 
 				'shipping',
-				'rupiah'
+				'rupiah',
+				'signature',
+				'$totalwithshipping'
 			));
 
 		} catch (Exception $e) {

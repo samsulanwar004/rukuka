@@ -781,6 +781,7 @@ class UserController extends BaseController
 
     public function history()
     {
+        
         $user = $this->getUserActive();
 
         $onPaid = $user->orders->filter(function ($entry) {
@@ -809,7 +810,9 @@ class UserController extends BaseController
             'onSent',
             'onReceived',
             'onDone',
-            'onCanceled'
+            'onCanceled',
+            'status',
+            'status_message'
 
         ));
     }
@@ -935,13 +938,19 @@ class UserController extends BaseController
     public function postFinalPage(Request $request)
     {  
         $data = $request->all();
+        $signature1 = $data["order"]["signature"];
+        $secret = config('common.order_key_signature');
+        $signature2 = sha1($data['request']['amount'].$secret);
 
-        $external_id = $data["order"]["order_code"]; 
-        $token_id = $data['response']['id'];
-        $amount = $data['request']['amount'];
-        $capture_options['authentication_id'] = $data['response']['authentication_id'];
 
-        $curl = curl_init();
+        if($signature1 == $signature2)
+       {
+            $external_id = $data["order"]["order_code"]; 
+            $token_id = $data['response']['id'];
+            $amount = $data['request']['amount'];
+            $capture_options['authentication_id'] = $data['response']['authentication_id'];
+
+            $curl = curl_init();
 
             $headers = array();
             $headers[] = 'Content-Type: application/json';
@@ -1005,7 +1014,7 @@ class UserController extends BaseController
                 ->where('order_code', $data["order"]["order_code"])
                 ->update(['payment_status' => 1]);
 
-               // $request->session()->put('payment_message', 'Charge is successfully captured and the funds will be settled according to the settlement schedule.');
+                $message = "Charge is successfully captured and the funds will be settled according to the settlement schedule.";
             }
 
             if($response_cc["status"] == "AUTHORIZED") // MASIH RAGU DI GANTI STATUSNYA GA
@@ -1014,7 +1023,7 @@ class UserController extends BaseController
                 ->where('order_code', $data["order"]["order_code"])
                 ->update(['payment_status' => 1]);
 
-               // $request->session()->put('payment_message', 'Charge is successfully authorized.');
+                 $message = "Charge is successfully authorized.";
             }
 
             if($response_cc["status"] == "FAILED")
@@ -1051,7 +1060,8 @@ class UserController extends BaseController
                 {
                     $message = "error";
                 }
-               // $request->session()->put('payment_message', $message);
+
+                
             }
             
              
@@ -1075,7 +1085,14 @@ class UserController extends BaseController
             //     ]
             // );
           
-           session(['payment_status' => $response_cc["status"]]);
+          
+         }
+         else 
+         {
+            $message = "error";
+         }
+         session(['payment_status' => $response_cc["status"]]);
+         session(['payment_message' => $message]);
            return $responseObject;
        
     }

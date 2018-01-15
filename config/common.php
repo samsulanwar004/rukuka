@@ -34,5 +34,8 @@ return [
 	// Encrypt config
 	'encryption' => [
 		'key' => env('KEY_ENCRYPTION'),
-	]				
+	],
+
+	// signature for order to payment
+	'order_key_signature' => env('ORDER_KEY_SIGNATURE')				
 ];
