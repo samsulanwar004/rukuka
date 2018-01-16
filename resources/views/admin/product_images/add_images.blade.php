@@ -4,14 +4,16 @@
   <!-- Your html goes here -->
   <p><a title="Return" href="{{ $return_url }}"><i class="fa fa-chevron-circle-left "></i> &nbsp; Back To List Data Images</a></p>
   <div class='panel panel-default'>
+    <div class='panel-heading'><strong><i class="fa fa-circle-o"></i> Add Images</strong></div>
     <form method='post' action='{{ route('upload.product') }}' enctype='multipart/form-data'>
     {{ csrf_field() }}
     <div class='panel-body'>
         <div class='form-group'>
-          <label>Image Product</label>
+          <label>Name Photo</label>
           <input type="hidden" name="return_url" value="{{ $return_url }}">
           <input type="hidden" name="parent_id" value="{{ $parent_id }}">
           <input type='text' name='name' required class='form-control'/>
+          <label>Image</label>
           <input type='file' name='image' required class='form-control'/>
         </div>
     </div>
