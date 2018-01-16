@@ -5,13 +5,12 @@
   	<div class="uk-grid-small uk-margin-top">
     	@include('partials.alert')
   	</div>
-  	    <form class="form-horizontal" method="POST" action="{{ route('forgot') }}">
+  	    <form class="form-horizontal uk-text-center uk-margin-large-top" method="POST" action="{{ route('forgot') }}">
             {{ csrf_field() }}
           <ul class="uk-list">
             <li>
                 <input class="uk-input uk-form-width-medium {{ $errors->has('email') ? ' uk-form-danger' : '' }}" id="form-s-email" type="email" placeholder="*Email" required="required" name="email" value="{{ old('email') }}">
-                <button class="uk-button uk-button-secondary" type="submit">SUBMIT</button>
-
+                <button class="uk-button uk-button-medium uk-button-secondary" type="submit">SUBMIT</button>
             </li>
           </ul>
         </form>
