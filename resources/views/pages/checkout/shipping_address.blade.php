@@ -144,7 +144,7 @@
                   <input type="text" name="address_line" value="{{ old('address_line') }}" class="uk-input uk-form-small {{ $errors->has('address_line') ? ' uk-form-danger' : '' }}" required="required">
                </div>
                <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
-                  Countryss
+                  Country
                   <select id="form-country-empty" name="country" class="uk-input uk-form-small uk-from-width-small {{ $errors->has('country') ? ' uk-form-danger' : '' }}" required="required" onchange="handleLocalAddress();showListProvices();">
                     <option></option>
                   </select>
