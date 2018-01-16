@@ -361,9 +361,9 @@
 				                date('YmdHis'),
 				                $file->getClientOriginalExtension()
 				            );
-				    // $driver = config('filesystems.s3url') == null ? 'local' : 's3';
+				    $driver = config('filesystems.s3url') == null ? 'local' : 's3';
 
-				    // (new UploadService)->uploadProductImage($driver, $userId, $file, $filename);
+				    (new UploadService)->uploadProductImage($driver, $userId, $file, $filename);
 				}
 
 				$image = new ProductImage;
