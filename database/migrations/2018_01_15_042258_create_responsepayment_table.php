@@ -14,10 +14,10 @@ class CreateResponsepaymentTable extends Migration
     public function up()
     {
         //
-        Schema::create('response_payment', function (Blueprint $table) {
+        Schema::create('response_payments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('order_code')->nullable();
-            $table->string('response_json')->nullable();                     
+            $table->text('response_json')->nullable();                     
             $table->timestamps();
         });
     }

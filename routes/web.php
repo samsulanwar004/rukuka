@@ -152,6 +152,11 @@ Route::post('/persist-bag', [
     'uses' => 'Frontend\PageController@bag',
 ]);
 
+Route::post('/xendit', [
+    'as'   => 'xendit',
+    'uses' => 'Frontend\PageController@callBackXendit',
+    ]);
+
 Route::get('/bag', [
     'as'   => 'bag',
     'uses' => 'Frontend\PageController@showBagPage',
@@ -396,8 +401,5 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\OrderController@store',
     ]);
 
-    Route::post('/xendit', [
-    'as'   => 'xendit',
-    'uses' => 'Frontend\PageController@callBackXendit',
-    ]);
+    
 });

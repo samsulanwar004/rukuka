@@ -14,10 +14,10 @@ class CreateCallbackpaymentTable extends Migration
     public function up()
     {
         //
-        Schema::create('callback_payment', function (Blueprint $table) {
+        Schema::create('callback_payments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('merchant')->nullable();
-            $table->string('response')->nullable();
+            $table->text('response')->nullable();
                        
             $table->timestamps();
         });

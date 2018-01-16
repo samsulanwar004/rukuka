@@ -428,10 +428,10 @@ class PageController extends BaseController
     {
         
         $content = $request->getContent();
-        DB::table('callback_payment')->insert(
-        ['merchant' => 'xendit', 'response' => $content]
+        DB::table('callback_payments')->insert(
+        ['merchant' => 'xendit', 'response' => $content,'created_at' => date("Y-m-d H:i:s"),'updated_at' => date("Y-m-d H:i:s")]
         );
-
+        
         return $content;
     }
 
