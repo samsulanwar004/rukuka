@@ -4,12 +4,12 @@
     <div class="uk-container uk-container-small">
         @if($categories == 'designers' && $category != 'all')
             <div class="uk-grid-small uk-margin-top" uk-grid>
-                <div class="uk-panel uk-width-1-4 uk-flex uk-flex-middle uk-flex-center">
-                    <img src="{{uploadCDN($designer->photo)}}" width="100" alt="rukuka designer" class="uk-box-shadow-medium" onerror="this.src = '{{imageCDN(config('common.default.image_6'))}}'">
+                <div class="uk-panel uk-width-1-4 uk-text-center">
+                    <img src="{{uploadCDN($designer->photo)}}" width="170" height="170" alt="rukuka designer" class="uk-box-shadow-medium" onerror="this.src = '{{imageCDN(config('common.default.image_6'))}}'">
                 </div>
                 <div class="uk-panel uk-width-3-4">
                     <span class="uk-text-lead">{{ $designer->name }}</span><br>
-                    {{ $designer->content }}
+                    {!! $designer->content !!}
                 </div>
             </div>
             <hr class="uk-margin-small">
