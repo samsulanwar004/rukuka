@@ -49,7 +49,7 @@
                                         </div>
                                     </div>
                                     <div class="uk-card-body uk-text-justify ">
-                                        <p>{{$value['content']}}</p>
+                                        <p>{!! $value['content'] !!}</p>
                                     </div>
                                 </div>
                             </div>
