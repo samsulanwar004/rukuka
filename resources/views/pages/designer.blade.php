@@ -49,7 +49,7 @@
                                         </div>
                                     </div>
                                     <div class="uk-card-body uk-text-justify ">
-                                        <p>{!! $value['content'] !!}</p>
+                                        <p>{!! str_limit($value['content'],500) !!}</p>
                                     </div>
                                 </div>
                             </div>
