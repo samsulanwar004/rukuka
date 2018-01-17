@@ -253,7 +253,7 @@
 	    public function hook_row_index($column_index,&$column_value) {
 	    	//Your code here
             if($column_index==2){
-                $column_value = '<img src="'.URL::to('/'.$column_value).'" alt="-" height="40">';
+                $column_value = '<img src="'.uploadCDN($column_value).'" alt="-" height="40">';
             }
 	    }
 

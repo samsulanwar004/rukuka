@@ -25,7 +25,7 @@
 			$this->button_add = true;
 			$this->button_edit = true;
 			$this->button_delete = true;
-			$this->button_detail = true;
+			$this->button_detail = false;
 			$this->button_show = true;
 			$this->button_filter = true;
 			$this->button_import = false;
@@ -357,13 +357,13 @@
 					$name = $request->input('name');
 				    $filename = sprintf(
 				                "%s-%s.%s",
-				                $name,
+				                str_slug($name),
 				                date('YmdHis'),
 				                $file->getClientOriginalExtension()
 				            );
-				    // $driver = config('filesystems.s3url') == null ? 'local' : 's3';
+				    $driver = config('filesystems.s3url') == null ? 'local' : 's3';
 
-				    // (new UploadService)->uploadProductImage($driver, $userId, $file, $filename);
+				    (new UploadService)->uploadProductImage($driver, $userId, $file, $filename);
 				}
 
 				$image = new ProductImage;
@@ -374,6 +374,53 @@
 
 			    return redirect($request->input('return_url'))->with(['message' => 'Upload image product successfully!','message_type' => 'success']);
 
+			} catch (Exception $e) {
+				return back()->with(['message' => $e->getMessage(), 'message_type' => 'danger']);
+			}
+		}
+
+		public function getEdit($id) {
+		  //Create an Auth
+		  if(!CRUDBooster::isUpdate() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {    
+		    CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
+		  }
+		  
+		  $data = [];
+		  $data['page_title'] = 'Edit Image';
+		  $data['row'] = ProductImage::where('id',$id)->first();
+		  $data['return_url'] = request()->input('return_url');
+		  
+		  //Please use cbView method instead view method from laravel
+		  $this->cbView('admin.product_images.edit_images',$data);
+		}
+
+		public function editUploadProduct(NewRequest $request, $id)
+		{
+			try {
+				if (!$userId = CRUDBooster::myId()) {
+					throw new Exception("Error Processing Request", 1);	
+				}
+
+				if ($request->hasFile('image')) {
+					$file = $request->file('image');
+					$name = $request->input('name');
+				    $filename = sprintf(
+				                "%s-%s.%s",
+				                str_slug($name),
+				                date('YmdHis'),
+				                $file->getClientOriginalExtension()
+				            );
+				    $driver = config('filesystems.s3url') == null ? 'local' : 's3';
+
+				    (new UploadService)->uploadProductImage($driver, $userId, $file, $filename);
+				}
+
+				$image = ProductImage::where('id',$id)->first();
+				$image->name = $name;
+				$image->photo = 'uploads/'.$userId.'/'.date('Y-m').'/'.$filename;
+				$image->save();
+
+			    return redirect($request->input('return_url'))->with(['message' => 'Update image product successfully!','message_type' => 'success']);
 			} catch (Exception $e) {
 				return back()->with(['message' => $e->getMessage(), 'message_type' => 'danger']);
 			}

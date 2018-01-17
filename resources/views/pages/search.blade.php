@@ -82,7 +82,7 @@
                 ></shop>
             </div>
         </div>
-        <div class="uk-text-right uk-margin-bottom">
+        <div class="uk-text-right uk-margin-bottom uk-margin-top">
           <span class="uk-text-meta">
           @include('pagination.default', ['paginator' => $products])
           </span>
