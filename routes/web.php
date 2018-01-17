@@ -413,3 +413,14 @@ Route::post('/upload-update/{id?}', [
     'as'   => 'upload.update',
     'uses' => 'AdminProductImagesController@editUploadProduct',
 ]);
+
+// Module Main Slider
+Route::post('/add-main-slider', [
+    'as'   => 'add.slider',
+    'uses' => 'AdminMainSlidersController@addSlider',
+]);
+
+Route::post('/edit-main-slider/{id?}', [
+    'as'   => 'edit.slider',
+    'uses' => 'AdminMainSlidersController@editSlider',
+]);
