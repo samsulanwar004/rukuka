@@ -109,6 +109,8 @@ class PageController extends BaseController
             $rating = round($sumRating/count($product->review));
         }
 
+        //Validate Product Active
+        $this->validActive($product);
         //Validate Product Deleted
         $this->validDelete($product);
 

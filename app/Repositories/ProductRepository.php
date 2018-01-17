@@ -22,12 +22,11 @@ class ProductRepository
 		$query = $this->model()
 			->whereHas('category', function ($query) use ($slug) {
 	            $query->where('slug', '=', $slug);
-	        })->whereNull('deleted_at');
+	        })->where('is_active',1)->whereNull('deleted_at');
 
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
         } else {
-            $query->orderBy('updated_at', 'desc');
         	$query->orderBy('id', 'desc');
         }
 
@@ -39,12 +38,11 @@ class ProductRepository
         $query = $this->model()
             ->whereHas('category', function ($query) use ($slug) {
                 $query->where('slug', '=', $slug);
-            })->where('price_before_discount','>',0)->whereNull('deleted_at');
+            })->where('price_before_discount','>',0)->where('is_active',1)->whereNull('deleted_at');
 
         if ($request->has('price')) {
             $query->orderBy('sell_price', $request->input('price'));
         } else {
-            $query->orderBy('updated_at', 'desc');
             $query->orderBy('id', 'desc');
         }
 
@@ -67,12 +65,11 @@ class ProductRepository
 		$query = $this->model()
 			->whereHas('category', function ($query) use ($ids) {
 	            $query->whereIn('id', $ids);
-	        })->whereNull('deleted_at');
+	        })->where('is_active',1)->where('is_active',1)->whereNull('deleted_at');
 
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
         } else {
-        	$query->orderBy('updated_at', 'desc');
         	$query->orderBy('id', 'desc');
         }
 
@@ -96,12 +93,11 @@ class ProductRepository
 		$query = $this->model()
 			->whereHas('category', function ($query) use ($ids) {
 	            $query->whereIn('id', $ids);
-	        })->where('price_before_discount','>',0)->whereNull('deleted_at');
+	        })->where('price_before_discount','>',0)->where('is_active',1)->whereNull('deleted_at');
 
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
         } else {
-            $query->orderBy('updated_at', 'desc');
         	$query->orderBy('id', 'desc');
         }
 
@@ -117,12 +113,11 @@ class ProductRepository
 	            if ($category != 'all') {
 	            	$query->where('slug', $category);
 	            }
-	        })->whereNull('deleted_at');
+	        })->where('is_active',1)->whereNull('deleted_at');
 
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
         } else {
-            $query->orderBy('updated_at', 'desc');
         	$query->orderBy('id', 'desc');
         }
 
@@ -188,6 +183,7 @@ class ProductRepository
                 $query->where('product_categories_id', '=', $categoryId);
             })
             ->inRandomOrder()
+            ->where('is_active',1)
             ->whereNull('deleted_at')
             ->take(4)
             ->get();
@@ -210,6 +206,7 @@ class ProductRepository
             $query = $this->model()
                 ->where('name','like','%'.$request->input('keyword').'%')
                 ->whereIn('product_categories_id',$categoryArr)
+                ->where('is_active',1)
                 ->whereNull('deleted_at');
         }
         else
@@ -217,13 +214,13 @@ class ProductRepository
             $query = $this->model()
                 ->select('product_categories_id')
                 ->where('name','like','%'.$request->input('keyword').'%')
+                ->where('is_active',1)
                 ->whereNull('deleted_at');
         }
 
         if ($request->has('price')) {
             $query->orderBy('sell_price', $request->input('price'));
         } else {
-            $query->orderBy('updated_at', 'desc');
             $query->orderBy('id', 'desc');
         }
 
@@ -253,19 +250,20 @@ class ProductRepository
             $query = $this->model()
                 ->where('name','like','%'.$request->input('keyword').'%')
                 ->whereIn('product_categories_id',$categoryArr)
+                ->where('is_active',1)
                 ->whereNull('deleted_at');
         }
         else
         {
             $query = $this->model()
                 ->where('name','like','%'.$request->input('keyword').'%')
+                ->where('is_active',1)
                 ->whereNull('deleted_at');
         }
 
         if ($request->has('price')) {
             $query->orderBy('sell_price', $request->input('price'));
         } else {
-            $query->orderBy('updated_at', 'desc');
             $query->orderBy('id', 'desc');
         }
 
@@ -276,6 +274,7 @@ class ProductRepository
     {
         return $this->model($keyword)
             ->where('name','LIKE','%'.$keyword.'%')
+            ->where('is_active',1)
             ->whereNull('deleted_at')
             ->get();
     }
