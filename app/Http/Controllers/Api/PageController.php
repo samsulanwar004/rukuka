@@ -110,20 +110,19 @@ class PageController extends BaseApiController
         }
     }
 
-    public function popular()
+    public function popular($group)
     {
         try {
-            $popular = (new ProductRepository)->getMostProduct();
-            
+            $popular = (new ProductRepository)->getMostProduct($group);
             $popular = $popular->map(function ($entry) {
                 return [
-                    'id' => $entry->id,
-                    'name' => $entry->name,
-                    'slug' => $entry->slug,
-                    'price' => $entry->sell_price,
-                    'price_before_discount' => $entry->price_before_discount,
-                    'currency' => $entry->currency,
-                    'photo' => $entry->images->first()->photo,
+                    'id' => $entry->product->id,
+                    'name' => $entry->product->name,
+                    'slug' => $entry->product->slug,
+                    'price' => $entry->product->sell_price,
+                    'price_before_discount' => $entry->product->price_before_discount,
+                    'currency' => $entry->product->currency,
+                    'photo' => $entry->product->images->first()->photo,
                 ];
             })->toArray();
 

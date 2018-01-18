@@ -14,10 +14,10 @@
           <label>Group Setting</label>
           <select class="form-control" name="group_setting" required>
             <option value="">** please select a group setting</option>
-            <option value="homepage">Homepage</option>
-            <option value="women">Women</option>
-            <option value="men">Men</option>
-            <option value="kids">Kids</option>
+            <option value="Homepage">Homepage</option>
+            <option value="Women">Women</option>
+            <option value="Men">Men</option>
+            <option value="Kids">Kids</option>
           </select>
         </div>
 
