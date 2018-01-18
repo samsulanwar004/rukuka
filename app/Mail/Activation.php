@@ -32,6 +32,6 @@ class Activation extends Mailable
     {
 
         return $this->markdown('emails.activation', ['user' => $this->user])
-            ->subject('Activation');
+            ->subject('Activation Account');
     }
 }

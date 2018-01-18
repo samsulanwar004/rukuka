@@ -18,9 +18,4 @@ class EmailService
 	{
 		Mail::to($user->email)->send(new Forgot($user));
 	}
-
-	public function sendPersonalInformation($user)
-	{
-		Mail::to($user->email)->send(new PersonalInformation($user));
-	}
 }
