@@ -96,7 +96,6 @@ class UserRepository
 		if ($user->save() && $user->social_media_type == 'web') {
 			$user->passwordString = $this->getPassword();
 			$emailService = (new EmailService);
-			$emailService->sendPersonalInformation($user);
 			$emailService->sendActivationCode($user);
 		}
 

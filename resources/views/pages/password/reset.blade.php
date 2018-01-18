@@ -7,8 +7,9 @@
   	</div>
   	    <form class="form-horizontal" method="POST" action="{{ route('reset') }}">
             {{ csrf_field() }}
-          <ul class="uk-list">
 
+          <ul class="uk-list uk-text-center uk-margin-large-bottom">
+			  <h4>Please input your new password</h4>
           	<input type="hidden" name="token" value="{{ old('email', $code) }}">
 
             <li>
@@ -19,15 +20,10 @@
             	<input name="confirmed" class="uk-input uk-form-width-medium {{ $errors->has('confirmed') ? ' uk-form-danger' : '' }}" id="confirmed" type="password" placeholder="*CONFIRM PASSWORD" required="required">
             </li>
 
-            <li>
+            <li class="uk-margin-medium-top">
             	<button class="uk-button uk-button-secondary" type="submit">SUBMIT</button>
             </li>
           </ul>
         </form>
-  	<div class="uk-grid-small uk-margin-small-bottom uk-margin-medium-top uk-margin-xlarge-bottom">
-	  <div class="uk-panel uk-text-center">
-	    <a href="{{ route('index') }}"><button class="uk-button uk-button-secondary">Back To Home</button></a>
-	  </div>
-	</div>
 </div>
 @endsection
