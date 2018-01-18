@@ -187,4 +187,30 @@ class PageController extends BaseApiController
             return $this->error($e, 400, true);
         }
     }
+
+    public function recently(Request $request)
+    {
+        try {
+
+            $product = $request->input('product');
+            
+            $recently = (new ProductRepository)->getRecentlyViewedProduct($product);
+
+            $recently = $recently->map(function ($entry) {
+                return [
+                    'id' => $entry->id,
+                    'name' => $entry->name,
+                    'slug' => $entry->slug,
+                    'price' => $entry->sell_price,
+                    'price_before_discount' => $entry->price_before_discount,
+                    'currency' => $entry->currency,
+                    'photo' => $entry->images->first()->photo,
+                ];
+            })->toArray();
+
+            return $this->success($recently, 200, true);
+        } catch (Exception $e) {
+            return $this->error($e, 400, true);
+        }
+    }
 }

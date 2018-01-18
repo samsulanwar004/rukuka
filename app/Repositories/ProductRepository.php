@@ -283,8 +283,16 @@ class ProductRepository
 
     public function getPopularSearch(){
 
-    return ProductCategory::orderBy('count','desc')->take(5)->get();
+        return ProductCategory::orderBy('count','desc')->take(5)->get();
 
+    }
+
+    public function getRecentlyViewedProduct($ids)
+    {
+        return $this->model()
+            ->whereIn('id', $ids)
+            ->take(4)
+            ->get();
     }
 
 }

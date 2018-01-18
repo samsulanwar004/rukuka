@@ -117,5 +117,29 @@
             </span>
           </div>
 
+        <hr>
+        @if($recently)
+        <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
+            <div class="uk-panel">
+                <h3 class="uk-margin-small">RECENTLY VIEWED</h3>
+            </div>
+        </div>
+        <related
+                api="{{ route('recently') }}"
+                product_api="{{ route('product.api') }}"
+                bag_api="{{ route('persist.bag') }}"
+                wishlist_api="{{ route('persist.wishlist') }}"
+                auth="{{ Auth::check() ? 1 : 0 }}"
+                aws_link="{{ config('filesystems.s3url') }}"
+                default_image="{{ json_encode(config('common.default')) }}"
+                recently="{{ json_encode($recently) }}"
+        ></related>
+        @endif
+        <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">
+            <div class="uk-panel uk-text-center">
+                <a  href="{{route('search')}}" class="uk-button uk-button-small uk-button-text">SHOW ALL PRODUCT</a>
+            </div>
+        </div>
+
     </div>
 @endsection

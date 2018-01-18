@@ -31,6 +31,8 @@ Route::post('v1/subcriber', 'Api\UserController@subcriber')->name('subcriber');
 
 Route::get('v1/product/{id?}', 'Api\PageController@product')->name('product.api');
 
+Route::post('v1/recently', 'Api\PageController@recently')->name('recently');
+
 Route::group([
 	'prefix' => 'v1', 
 	'middleware' => 'auth:api'
