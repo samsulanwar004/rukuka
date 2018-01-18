@@ -4,20 +4,15 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
-	use Illuminate\Support\Facades\URL;
-    use Exception;
-    use App\Services\UploadService;
-    use Illuminate\Http\Request as NewRequest;
-    use App\MainSlider;
 
-	class AdminMainSlidersController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminPopularsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "id";
 			$this->limit = "20";
-			$this->orderby = "group_setting,asc";
+			$this->orderby = "id,desc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
@@ -30,30 +25,28 @@
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "main_sliders";
+			$this->table = "populars";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"Group Setting","name"=>"group_setting"];
-			$this->col[] = ["label"=>"Banner","name"=>"banner"];
-			$this->col[] = ["label"=>"Url","name"=>"url"];
+			$this->col[] = ["label"=>"Products","name"=>"products_id","join"=>"products,name"];
 			$this->col[] = ["label"=>"Order","name"=>"order"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Group Setting','name'=>'group_setting','type'=>'select2','validation'=>'required','width'=>'col-sm-10','dataenum'=>'homepage|Homepage;women|Women;men|Men;kids|Kids'];
-			$this->form[] = ['label'=>'Banner','name'=>'banner','type'=>'upload','validation'=>'max:3000','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP'];
-			$this->form[] = ['label'=>'Url','name'=>'url','type'=>'text','width'=>'col-sm-10','placeholder'=>'Please enter a valid URL'];
-			$this->form[] = ['label'=>'Order','name'=>'order','type'=>'number','validation'=>'required','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Group Setting','name'=>'group_setting','type'=>'select','validation'=>'required','width'=>'col-sm-10','dataenum'=>'Homepage;Women;Men;Kids'];
+			$this->form[] = ['label'=>'Products','name'=>'products_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'products,name'];
+			$this->form[] = ['label'=>'Order','name'=>'order','type'=>'number','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Group Setting','name'=>'group_setting','type'=>'select2','validation'=>'required','width'=>'col-sm-10','dataenum'=>'homepage;women;men;kids'];
-			//$this->form[] = ['label'=>'Banner','name'=>'banner','type'=>'upload','validation'=>'max:3000','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP'];
-			//$this->form[] = ['label'=>'Url','name'=>'url','type'=>'text','width'=>'col-sm-10','placeholder'=>'Please enter a valid URL'];
+			//$this->form[] = ['label'=>'Group Setting','name'=>'group_setting','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Products Id','name'=>'products_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'products,name'];
+			//$this->form[] = ['label'=>'Order','name'=>'order','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			# OLD END FORM
 
 			/* 
@@ -253,9 +246,6 @@
 	    */    
 	    public function hook_row_index($column_index,&$column_value) {	        
 	    	//Your code here
-            if($column_index==2){
-                $column_value = '<img src="'.URL::to('/'.$column_value).'" alt="-" height="40">';
-            }
 	    }
 
 	    /*
@@ -335,100 +325,5 @@
 
 	    //By the way, you can still create your own method in here... :) 
 
-        public function getAdd() {
-            //Create an Auth
-            if(!CRUDBooster::isCreate() && $this->global_privilege==FALSE || $this->button_add==FALSE) {
-                CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
-            }
 
-            $data = [];
-            $data['page_title'] = 'Add Main Sliders';
-            $data['return_url'] = request()->input('return_url');
-
-            //Please use cbView method instead view method from laravel
-            $this->cbView('admin.main_sliders.add_main_sliders',$data);
-        }
-
-        public function addSlider(NewRequest $request)
-        {
-            try {
-                if (!$userId = CRUDBooster::myId()) {
-                    throw new Exception("Error Processing Request", 1);
-                }
-
-                if ($request->hasFile('banner')) {
-                    $file = $request->file('banner');
-                    $filename = sprintf(
-                        "%s-%s.%s",
-                        md5(str_random(5)),
-                        date('YmdHis'),
-                        $file->getClientOriginalExtension()
-                    );
-                    $driver = config('filesystems.s3url') == null ? 'local' : 's3';
-
-                    (new UploadService)->uploadProductImage($driver, $userId, $file, $filename);
-                }
-
-                $dataSlider = new MainSlider();
-                $dataSlider->banner = 'uploads/'.$userId.'/'.date('Y-m').'/'.$filename;
-                $dataSlider->group_setting = $request->input('group_setting');
-                $dataSlider->url = $request->input('url');
-                $dataSlider->order = $request->input('order');
-                $dataSlider->save();
-
-                return redirect($request->input('return_url'))->with(['message' => 'Upload image product successfully!','message_type' => 'success']);
-
-            } catch (Exception $e) {
-                return back()->with(['message' => $e->getMessage(), 'message_type' => 'danger']);
-            }
-        }
-
-        public function getEdit($id) {
-            //Create an Auth
-            if(!CRUDBooster::isUpdate() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {
-                CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
-            }
-
-            $data = [];
-            $data['page_title'] = 'Edit Image';
-            $data['row'] = MainSlider::where('id',$id)->first();
-            $data['return_url'] = request()->input('return_url');
-
-            //Please use cbView method instead view method from laravel
-            $this->cbView('admin.main_sliders.edit_main_sliders',$data);
-        }
-
-        public function editSlider(NewRequest $request, $id)
-        {
-            try {
-                if (!$userId = CRUDBooster::myId()) {
-                    throw new Exception("Error Processing Request", 1);
-                }
-
-                if ($request->hasFile('banner')) {
-                    $file = $request->file('banner');
-                    $filename = sprintf(
-                        "%s-%s.%s",
-                        md5(str_random(5)),
-                        date('YmdHis'),
-                        $file->getClientOriginalExtension()
-                    );
-                    $driver = config('filesystems.s3url') == null ? 'local' : 's3';
-
-                    (new UploadService)->uploadProductImage($driver, $userId, $file, $filename);
-                }
-
-                $dataSlider = MainSlider::where('id',$id)->first();
-                $dataSlider->banner = 'uploads/'.$userId.'/'.date('Y-m').'/'.$filename;
-                $dataSlider->group_setting = $request->input('group_setting');
-                $dataSlider->url = $request->input('url');
-                $dataSlider->order = $request->input('order');
-                $dataSlider->save();
-
-                return redirect($request->input('return_url'))->with(['message' => 'Upload image product successfully!','message_type' => 'success']);
-
-            } catch (Exception $e) {
-                return back()->with(['message' => $e->getMessage(), 'message_type' => 'danger']);
-            }
-        }
 	}

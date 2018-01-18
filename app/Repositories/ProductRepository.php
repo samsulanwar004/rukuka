@@ -6,6 +6,7 @@ use App\Product;
 use App\Repositories\CategoryRepository;
 use App\Designer;
 use App\ProductCategory;
+use App\Popular;
 
 class ProductRepository
 {
@@ -167,12 +168,9 @@ class ProductRepository
         return Designer::where('id',$id)->first();
     }
 
-    public function getMostProduct()
+    public function getMostProduct($group)
     {
-        return $this->model()
-            ->whereNull('deleted_at')
-            ->inRandomOrder()
-            ->take(4)
+        return Popular::where('group_setting',$group)
             ->get();
     }
 

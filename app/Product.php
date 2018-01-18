@@ -32,4 +32,9 @@ class Product extends Model
     {
         return $this->hasMany(Review::class, 'products_id', 'id')->where('is_approved',1)->orderBy('id','DESC');
     }
+
+    public function popular()
+    {
+        return $this->belongsTo(Popular::class, 'products_id');
+    }
 }

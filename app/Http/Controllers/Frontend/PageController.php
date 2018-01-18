@@ -34,7 +34,9 @@ class PageController extends BaseController
             return [$item['name'] => $item['content']];
         })->toArray();
 
-    	return view('pages.index', compact('home'));
+        $slider = (new SettingRepository())->getSliderByGroup('Homepage');
+
+    	return view('pages.index', compact('home','slider'));
     }
 
     public function shop(Request $request, $categories, $category, $slug = null, $sale = null)

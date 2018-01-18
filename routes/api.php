@@ -21,7 +21,7 @@ Route::get('v1/menu/{parent?}', 'Api\PageController@menu')->name('menu');
 
 Route::get('v1/search/{keyword?}', 'Api\PageController@search')->name('search.api');
 
-Route::get('v1/popular', 'Api\PageController@popular')->name('populer');
+Route::get('v1/popular/{group}', 'Api\PageController@popular')->name('populer');
 
 Route::get('v1/popular-search', 'Api\PageController@popularSearch')->name('popular-search');
 
