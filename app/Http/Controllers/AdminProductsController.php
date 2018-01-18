@@ -38,6 +38,7 @@
 			$this->col[] = ["label"=>"Product Categories","name"=>"product_categories_id","join"=>"product_categories,name"];
 			$this->col[] = ["label"=>"Product Code","name"=>"product_code"];
 			$this->col[] = ["label"=>"Name","name"=>"name"];
+			$this->col[] = ["label"=>"Status","name"=>"is_active"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
@@ -59,7 +60,7 @@
 			$this->form[] = ['label'=>'Width','name'=>'width','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-2','help'=>'on Cm, Min. 0','placeholder'=>'cm'];
 			$this->form[] = ['label'=>'Height','name'=>'height','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-2','help'=>'on Cm, Min. 0','placeholder'=>'cm'];
 			$this->form[] = ['label'=>'Diameter','name'=>'diameter','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-2','help'=>'on Cm, Min. 0','placeholder'=>'cm'];
-			$this->form[] = ['label'=>'Is Active','name'=>'is_active','type'=>'checkbox','width'=>'col-sm-10','dataenum'=>'Active'];
+			$this->form[] = ['label'=>'Status','name'=>'is_active','type'=>'radio','width'=>'col-sm-10','dataenum'=>'0|Unactive;1|Active'];
 			$this->form[] = ['label'=>'Tags','name'=>'tags','type'=>'multitext','validation'=>'min:1|max:20','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
@@ -299,6 +300,13 @@
 	    */    
 	    public function hook_row_index($column_index,&$column_value) {	        
 	    	//Your code here
+            if($column_index==5) {
+                if ($column_value == '0') {
+                    $column_value = '<span class="label label-warning">Unactive</span>';
+                } else {
+                    $column_value = '<span class="label label-success">Active</span>';
+                }
+            }
 	    }
 
 	    /*

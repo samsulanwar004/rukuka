@@ -14,10 +14,10 @@
           <input type="hidden" name="return_url" value="{{ $return_url }}">
           <label>Group Setting</label>
           <select class="form-control" name="group_setting" required>
-            <option value="homepage" {{ $row->group_setting == 'homepage' ? 'selected' : null }}>Homepage</option>
-            <option value="women" {{ $row->group_setting == 'women' ? 'selected' : null }}>Women</option>
-            <option value="men" {{ $row->group_setting == 'men' ? 'selected' : null }}>Men</option>
-            <option value="kids" {{ $row->group_setting == 'kids' ? 'selected' : null }}>Kids</option>
+            <option value="Homepage" {{ $row->group_setting == 'Homepage' ? 'selected' : null }}>Homepage</option>
+            <option value="Women" {{ $row->group_setting == 'Women' ? 'selected' : null }}>Women</option>
+            <option value="Men" {{ $row->group_setting == 'Men' ? 'selected' : null }}>Men</option>
+            <option value="Kids" {{ $row->group_setting == 'Kids' ? 'selected' : null }}>Kids</option>
           </select>
         </div>
 

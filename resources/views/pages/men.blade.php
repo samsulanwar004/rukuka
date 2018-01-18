@@ -156,7 +156,7 @@
         <hr>
         <h3 class="uk-margin-small">TRENDING NOW</h3>
         <popular
-                api="{{ route('populer')}}"
+                api="{{ route('populer', 'Men')}}"
                 product_api="{{ route('product.api') }}"
                 bag_api="{{ route('persist.bag') }}"
                 wishlist_api="{{ route('persist.wishlist') }}"

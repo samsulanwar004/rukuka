@@ -34,7 +34,9 @@ class PageController extends BaseController
             return [$item['name'] => $item['content']];
         })->toArray();
 
-    	return view('pages.index', compact('home'));
+        $slider = (new SettingRepository())->getSliderByGroup('Homepage');
+
+    	return view('pages.index', compact('home','slider'));
     }
 
     public function shop(Request $request, $categories, $category, $slug = null, $sale = null)
@@ -114,6 +116,11 @@ class PageController extends BaseController
                 $rating = round($sumRating/count($product->review));
             }
 
+            // Validate Designer Deleted
+            $designer = (new ProductRepository)->getDesignerById($product->product_designers_id);
+            $this->validDelete($designer);
+            //Validate Product Active
+            $this->validActive($product);
             //Validate Product Deleted
             $this->validDelete($product);
 
@@ -125,32 +132,23 @@ class PageController extends BaseController
                     'gmail',
                     'pinterest',
                     'tumblr'
-                );
+                );        
+
+            //get Delivery & Free Returns
+            $slug = 'delivery-free-returns';
+            $result = (new PageRepository)->getHelp($slug);
+            $deliveryReturns = $result['page'][0]['content'];
+
+            //Count Product Categories For Popular Search
+            $idProductCategory = $product->product_categories_id;
+            (new ProductRepository)->updateCountProductCategory($idProductCategory);
+
+            // Push product ID to session
+            session()->push('products.recently_viewed', $product->getKey());
 
         } catch (Exception $e) {
             return view('pages.not_found')->withErrors($e->getMessage());
         }
-
-        // Validate Designer Deleted
-        try{
-            $designer = (new ProductRepository)->getDesignerById($product->product_designers_id);
-            $this->validDelete($designer);
-
-        } catch (Exception $e) {
-            return view('pages.not_found')->withErrors($e->getMessage());
-        }
-
-        //get Delivery & Free Returns
-        $slug = 'delivery-free-returns';
-        $result = (new PageRepository)->getHelp($slug);
-        $deliveryReturns = $result['page'][0]['content'];
-
-        //Count Product Categories For Popular Search
-        $idProductCategory = $product->product_categories_id;
-        (new ProductRepository)->updateCountProductCategory($idProductCategory);
-
-        // Push product ID to session
-        session()->push('products.recently_viewed', $product->getKey());
 
     	return view('pages.product', compact(
             'product',
