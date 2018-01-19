@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="uk-card-body uk-text-justify">
-                                {!! str_limit($value['content'],100, '... <b><a href="/shop/designers/'.$value['slug'].'">more</a></b>') !!}
+                                {!! str_limit(strip_tags($value['content']),100, '... <b><a href="/shop/designers/'.$value['slug'].'">more</a></b>') !!}
                             </div>
                         </div>
                     </div>
