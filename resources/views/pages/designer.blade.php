@@ -9,9 +9,11 @@
             </div>
             {{--END MAIN BANNER--}}
 
-{{--             @php $previous = null; @endphp
-            @php $isPrinted = false; @endphp
-            @php $listAlphabeth = null; @endphp
+            @php
+                $previous = null;
+                $isPrinted = false;
+                $listAlphabeth = null;
+            @endphp
 
             @foreach($designers as $value)
                 @php
@@ -60,7 +62,7 @@
                 @endif
 
                 @php $isPrinted = false; @endphp
-            @endforeach --}}
+            @endforeach
 
         </div>
     </div>

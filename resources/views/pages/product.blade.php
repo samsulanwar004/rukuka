@@ -221,7 +221,7 @@
         ></related>
         <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">
             <div class="uk-panel uk-text-center">
-                <a  href="{{route('search')}}" class="uk-button uk-button-small uk-button-text">SHOW ALL PRODUCT</a>
+                <a  href="{{route('shop',['categories' => 'designers', 'category' => 'all' ])}}" class="uk-button uk-button-small uk-button-text">SHOW ALL PRODUCT</a>
             </div>
         </div>
     </div>
