@@ -18,7 +18,7 @@
          @php 
          $firstLetter = strtolower(substr($value['slug'], 0, 1)); 
          @endphp
-         @if($firstLetter == $abjad)
+         {{-- @if($firstLetter == $abjad)
          <div>
             <a href="/shop/designers/{{$value['slug']}}">
             {{ucfirst(strtolower($value['name']))}}
@@ -43,7 +43,7 @@
                </div>
             </div>
          </div>
-         @endif
+         @endif --}}
          @endforeach
       </div>
       @endforeach
