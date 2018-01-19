@@ -67,7 +67,7 @@
                 <a :href="'/product/' +slug" class="uk-button uk-button-text uk-text-right">see details <span uk-icon="icon: chevron-right"></span> </a>
               </div>
             </div>
-            <div class="uk-modal-body uk-padding-small-left" uk-overflow-auto>
+            <div class="uk-modal-body uk-padding-small-left">
               <div class="uk-grid" uk-grid>
                 <div class="uk-width-1-2@m">
                   <div class="uk-hidden@m">
@@ -129,10 +129,10 @@
 
                     </select>
                     <span class="uk-text-meta"><i> Choose your size</i> </span>
-                  </div>  
+                  </div>
                   <div v-else>
                     <span class="uk-text-meta"><i class="uk-text-danger">No size available </i> <br>Please, contact our cuctomer service! </span>
-                  </div>                
+                  </div>
                   <ul uk-accordion="animation: true; multiple: false">
                       <li class="uk-open">
 
