@@ -7,13 +7,38 @@
             {{--MAIN BANNER--}}
             <div class="uk-text-center">
                 <h3 class="uk-heading-line"><span>{{$men['men_main_title']}}</span></h3>
-                <a href="{{ $men['men_main_url'] }}" class="uk-link-reset">
+                {{-- <a href="{{ $men['men_main_url'] }}" class="uk-link-reset">
                     <div class="uk-inline-clip uk-transition-toggle uk-dark">
                         <img src="{{ uploadCDN($men['men_main_banner']) }}" alt="rukuka mens" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
                         <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
                         <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
                     </div>
-                </a>
+                </a> --}}
+                <div class="uk-inline">
+                  <ul id="component-tab-left" class="uk-switcher">
+
+                      <a href="{{ $men['men_main_url'] }}" class="uk-link-reset">
+                      <li>
+                        <img src="{{ uploadCDN($men['men_main_banner']) }}" alt="rukuka mens" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
+                      </li>
+                      </a>
+                      <a href="{{ $men['men_main_url'] }}" class="uk-link-reset">
+                      <li>
+                        <img src="{{ uploadCDN($men['men_main_banner']) }}" alt="rukuka mens" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
+                      </li>
+                    </a>
+                    <a href="#"></a>
+
+                  </ul>
+                  <div class="uk-position-small uk-position-bottom-center">
+                    <ul class="uk-dotnav" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" >
+
+                        <li><a href="#">item1</a></li>
+                        <li><a href="#">item1</a></li>
+
+                    </ul>
+                  </div>
+                </div>
             </div>
             {{--END MAIN BANNER--}}
         </div>
