@@ -34,7 +34,9 @@ class PageController extends BaseController
             return [$item['name'] => $item['content']];
         })->toArray();
 
-    	return view('pages.index', compact('home'));
+        $slider = (new SettingRepository())->getSliderByGroup('Homepage');
+
+    	return view('pages.index', compact('home','slider'));
     }
 
     public function shop(Request $request, $categories, $category, $slug = null, $sale = null)
@@ -86,6 +88,10 @@ class PageController extends BaseController
             ];
         });
 
+        $recentlyViewed = session()->get('products.recently_viewed');
+
+        $recently = $recentlyViewed ? array_keys(array_flip($recentlyViewed)) : [];
+
         return view('pages.shop', compact(
             'products',
             'categories',
@@ -93,56 +99,56 @@ class PageController extends BaseController
             'slug',
             'designer',
             'shops',
-            'sale'
+            'sale',
+            'recently'
         ));
 
     }
 
     public function product($slug, $method = null, $sku = null, $id = null)
     {
-    try {
-        $product = (new ProductRepository)->getProductBySlug($slug);
-        $sumRating= collect($product->review)->sum('rating');
-        $reviews = collect($product->review)->take(3);
+        try {
+            $product = (new ProductRepository)->getProductBySlug($slug);
+            $sumRating= collect($product->review)->sum('rating');
+            $reviews = collect($product->review)->take(3);
 
-        if($sumRating > 0){
-            $rating = round($sumRating/count($product->review));
+            if($sumRating > 0){
+                $rating = round($sumRating/count($product->review));
+            }
+
+            // Validate Designer Deleted
+            $designer = (new ProductRepository)->getDesignerById($product->product_designers_id);
+            $this->validDelete($designer);
+            //Validate Product Active
+            $this->validActive($product);
+            //Validate Product Deleted
+            $this->validDelete($product);
+
+            $share = Share::load(route('product', ['slug' => $slug]), $product->name, route('index').'/'.$product->images->first()->photo)
+                ->services(
+                    'facebook',
+                    'gplus',
+                    'twitter',
+                    'gmail',
+                    'pinterest',
+                    'tumblr'
+                );        
+
+            //get Delivery & Free Returns
+            $slug = 'delivery-free-returns';
+            $result = (new PageRepository)->getHelp($slug);
+            $deliveryReturns = $result['page'][0]['content'];
+
+            //Count Product Categories For Popular Search
+            $idProductCategory = $product->product_categories_id;
+            (new ProductRepository)->updateCountProductCategory($idProductCategory);
+
+            // Push product ID to session
+            session()->push('products.recently_viewed', $product->getKey());
+
+        } catch (Exception $e) {
+            return view('pages.not_found')->withErrors($e->getMessage());
         }
-
-        //Validate Product Deleted
-        $this->validDelete($product);
-
-        $share = Share::load(route('product', ['slug' => $slug]), $product->name, route('index').'/'.$product->images->first()->photo)
-            ->services(
-                'facebook',
-                'gplus',
-                'twitter',
-                'gmail',
-                'pinterest',
-                'tumblr'
-            );
-
-    } catch (Exception $e) {
-        return view('pages.not_found')->withErrors($e->getMessage());
-    }
-
-    // Validate Designer Deleted
-    try{
-        $designer = (new ProductRepository)->getDesignerById($product->product_designers_id);
-        $this->validDelete($designer);
-
-    } catch (Exception $e) {
-        return view('pages.not_found')->withErrors($e->getMessage());
-    }
-
-    //get Delivery & Free Returns
-    $slug = 'delivery-free-returns';
-    $result = (new PageRepository)->getHelp($slug);
-    $deliveryReturns = $result['page'][0]['content'];
-
-    //Count Product Categories For Popular Search
-    $idProductCategory = $product->product_categories_id;
-    (new ProductRepository)->updateCountProductCategory($idProductCategory);
 
     	return view('pages.product', compact(
             'product',
@@ -341,14 +347,12 @@ class PageController extends BaseController
     public function showBagPage()
     {
         $getBags = (new BagService)->get(self::INSTANCE_SHOP);
-        $categoryId = [];
-        foreach ($getBags as $bag) {
-            $categoryId[] = $bag->options->category_id;
-        }
 
-        $categoryId = $categoryId == null ? null : $categoryId[array_rand($categoryId)];
+        $recentlyViewed = session()->get('products.recently_viewed');
 
-        return view('pages.bag', compact('categoryId'));
+        $recently = $recentlyViewed ? array_keys(array_flip($recentlyViewed)) : [];
+
+        return view('pages.bag', compact('recently'));
     }
 
     public function page($slug){

@@ -21,7 +21,7 @@ Route::get('v1/menu/{parent?}', 'Api\PageController@menu')->name('menu');
 
 Route::get('v1/search/{keyword?}', 'Api\PageController@search')->name('search.api');
 
-Route::get('v1/popular', 'Api\PageController@popular')->name('populer');
+Route::get('v1/popular/{group}', 'Api\PageController@popular')->name('populer');
 
 Route::get('v1/popular-search', 'Api\PageController@popularSearch')->name('popular-search');
 
@@ -30,6 +30,8 @@ Route::get('v1/related/{categoryId}', 'Api\PageController@related')->name('relat
 Route::post('v1/subcriber', 'Api\UserController@subcriber')->name('subcriber');
 
 Route::get('v1/product/{id?}', 'Api\PageController@product')->name('product.api');
+
+Route::post('v1/recently', 'Api\PageController@recently')->name('recently');
 
 Route::group([
 	'prefix' => 'v1', 
