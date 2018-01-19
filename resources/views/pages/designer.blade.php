@@ -18,12 +18,12 @@
          @php 
          $firstLetter = strtolower(substr($value['slug'], 0, 1)); 
          @endphp
-         {{-- @if($firstLetter == $abjad)
+         @if($firstLetter == $abjad)
          <div>
             <a href="/shop/designers/{{$value['slug']}}">
             {{ucfirst(strtolower($value['name']))}}
             </a>
-            <div uk-drop="pos: right-center">
+            {{-- <div uk-drop="pos: right-center">
                <div class="uk-card uk-card-default uk-card-small">
                   <div class="uk-card-header">
                      <div class="uk-grid-small uk-flex-middle" uk-grid>
@@ -41,9 +41,9 @@
                      <p>{!! str_limit($value['content'],500) !!}</p>
                   </div>
                </div>
-            </div>
+            </div> --}}
          </div>
-         @endif --}}
+         @endif
          @endforeach
       </div>
       @endforeach
