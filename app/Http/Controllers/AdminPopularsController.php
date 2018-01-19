@@ -39,7 +39,7 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'Group Setting','name'=>'group_setting','type'=>'select','validation'=>'required','width'=>'col-sm-10','dataenum'=>'Homepage;Women;Men;Kids'];
 			$this->form[] = ['label'=>'Products','name'=>'products_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'products,name'];
-			$this->form[] = ['label'=>'Order','name'=>'order','type'=>'number','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Order','name'=>'order','type'=>'number','validation'=>'required|min:0','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
