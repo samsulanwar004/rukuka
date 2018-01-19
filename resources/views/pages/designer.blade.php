@@ -9,7 +9,7 @@
             </div>
             {{--END MAIN BANNER--}}
 
-            @php $previous = null; @endphp
+{{--             @php $previous = null; @endphp
             @php $isPrinted = false; @endphp
             @php $listAlphabeth = null; @endphp
 
@@ -60,7 +60,7 @@
                 @endif
 
                 @php $isPrinted = false; @endphp
-            @endforeach
+            @endforeach --}}
 
         </div>
     </div>
