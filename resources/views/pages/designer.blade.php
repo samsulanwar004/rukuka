@@ -9,36 +9,19 @@
             </div>
             {{--END MAIN BANNER--}}
 
-            @php
-                $previous = null;
-                $isPrinted = false;
-            @endphp
-
             @foreach($alpabeths as $abjad)
+                <h3 class="uk-heading-line">
+                    <span>
+                        {{strtoupper($abjad)}}
+                    </span> 
+                </h3>
+                <div class="uk-column-1-3@m uk-column-1-2@s">
                 @foreach($designers as $value)
                     @php 
                         $firstLetter = strtolower(substr($value['slug'], 0, 1)); 
                     @endphp
-                    @if($firstLetter == $abjad)
-                        @php 
-                            $isPrinted = true; 
-                            break; 
-                        @endphp
-                    @endif
-                @endforeach
 
-                @if($isPrinted)
-                    <h3 class="uk-heading-line">
-                        <span>
-                            {{strtoupper($abjad)}}
-                        </span> 
-                    </h3>
-                    <div class="uk-column-1-3@m uk-column-1-2@s">
-                    @foreach($designers as $value)
-                        @php 
-                            $firstLetter = strtolower(substr($value['slug'], 0, 1)); 
-                        @endphp
-                        @if($firstLetter == $abjad)
+                    @if($firstLetter == $abjad)
                         <div>
                             <a href="/shop/designers/{{$value['slug']}}">
                                 {{ucfirst(strtolower($value['name']))}}
@@ -63,13 +46,9 @@
                                 </div>
                             </div>
                         </div>
-                        @endif
-                    @endforeach
-                    </div>
-                @endif
-                @php 
-                    $isPrinted = false; 
-                @endphp
+                    @endif
+                @endforeach
+                </div>
             @endforeach
 
         </div>
