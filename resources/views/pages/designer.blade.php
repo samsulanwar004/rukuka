@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="uk-card-body uk-text-justify">
-                                <p>{{ str_limit($value['content'],500) }}</p>
+                                {!! str_limit($value['content'],100, '... <b><a href="/shop/designers/'.$value['slug'].'">more</a></b>') !!}
                             </div>
                         </div>
                     </div>
