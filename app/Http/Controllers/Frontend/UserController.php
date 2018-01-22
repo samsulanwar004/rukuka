@@ -944,7 +944,7 @@ class UserController extends BaseController
 
 
         if($signature1 == $signature2)
-       {
+        {
             $external_id = $data["order"]["order_code"]; 
             $token_id = $data['response']['id'];
             $amount = $data['request']['amount'];
@@ -1004,15 +1004,17 @@ class UserController extends BaseController
 
             DB::table('response_payments')->insert(
                 [
-                    'order_code' => $data["order"]["order_code"],
-                    'response_json' => $response
+                    'order_code'    => $data["order"]["order_code"],
+                    'response_json' => $response, 
+                    'created_at'    => date("Y-m-d H:i:s"),
+                    'updated_at'    => date("Y-m-d H:i:s")
                 ]
             );
             if($response_cc["status"] == "CAPTURED")
             {
                 DB::table('orders')
                 ->where('order_code', $data["order"]["order_code"])
-                ->update(['payment_status' => 1]);
+                ->update(['payment_status' => 1, 'payment_name' => $data["order"]["card_holder"], 'pending_reason' => 'already paid','updated_at' => date("Y-m-d H:i:s")]);
 
                 $message = "Charge is successfully captured and the funds will be settled according to the settlement schedule.";
             }
@@ -1021,7 +1023,7 @@ class UserController extends BaseController
             {
                 DB::table('orders')
                 ->where('order_code', $data["order"]["order_code"])
-                ->update(['payment_status' => 1]);
+                ->update(['payment_status' => 1,'payment_status' => 1,'updated_at' => date("Y-m-d H:i:s")]);
 
                  $message = "Charge is successfully authorized.";
             }

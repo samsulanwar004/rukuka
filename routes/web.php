@@ -108,6 +108,11 @@ Route::post('/persist-bag', [
     'uses' => 'Frontend\PageController@bag',
 ]);
 
+Route::post('/xendit', [
+    'as'   => 'xendit',
+    'uses' => 'Frontend\PageController@callBackXendit',
+    ]);
+
 Route::get('/bag', [
     'as'   => 'bag',
     'uses' => 'Frontend\PageController@showBagPage',
@@ -393,16 +398,17 @@ Route::middleware(['auth'])->group(function () {
         'as'   => 'order',
         'uses' => 'Frontend\OrderController@store',
     ]);
+    Route::post('/repayment', [
+        'as'   => 'repayment',
+        'uses' => 'Frontend\OrderController@restore',
+    ]);
 
     Route::get('/order', [
         'as'   => 'order',
         'uses' => 'Frontend\OrderController@store',
     ]);
 
-    Route::post('/xendit', [
-    'as'   => 'xendit',
-    'uses' => 'Frontend\PageController@callBackXendit',
-    ]);
+    
 });
 
 // Route Admin crudbooster
