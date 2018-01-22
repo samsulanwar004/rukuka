@@ -171,6 +171,7 @@ class ProductRepository
     public function getMostProduct($group)
     {
         return Popular::where('group_setting',$group)
+            ->orderBy('order','asc')
             ->get();
     }
 

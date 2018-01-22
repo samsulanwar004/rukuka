@@ -4256,6 +4256,8 @@ ul.uk-nav-sub {
  ========================================================================== */
 .uk-accordion-content {
   margin-top: 0px;
+  font-size: 13px;
+  color: #333;
 }
 /*
  * Micro clearfix
