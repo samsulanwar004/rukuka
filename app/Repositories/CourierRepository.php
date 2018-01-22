@@ -291,7 +291,7 @@ class CourierRepository{
 	    echo "<script>console.log('" . json_encode($requestToPosIndonesia) . "');</script>";
 	    
 	    $resultPosIndonesia = $posIndonesia->callMethod('getFee', $requestToPosIndonesia);
-	dd($resultPosIndonesia);  
+	
 	    if ($resultPosIndonesia->r_fee->serviceName == 'ERROR') {
 	    	
 	    	return $this->formatResponse('999', 'error shiping services unavailable', $resultPosIndonesia, null);
