@@ -395,6 +395,10 @@ Route::middleware(['auth'])->group(function () {
         'as'   => 'order',
         'uses' => 'Frontend\OrderController@store',
     ]);
+    Route::post('/repayment', [
+        'as'   => 'repayment',
+        'uses' => 'Frontend\OrderController@restore',
+    ]);
 
     Route::get('/order', [
         'as'   => 'order',
