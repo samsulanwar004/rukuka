@@ -521,7 +521,7 @@ class UserController extends BaseController
         $availableCouriersService = $courierServices->setCheckoutBag($bag->get(self::INSTANCE_SHOP))
                         ->setDestinationAddress($defaultAddress)
                         ->getAvailableCouriers();
-
+        
         return view('pages.checkout.shipping_option', compact('defaultAddress','availableCouriersService'));
     }
 
