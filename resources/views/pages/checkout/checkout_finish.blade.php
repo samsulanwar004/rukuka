@@ -3,7 +3,7 @@
   <div class="uk-container uk-container-small">
     <div class="uk-grid-small uk-margin-top uk-flex uk-flex-center" uk-grid>
       <div class="uk-width-3-4@m">
-        <h3>Your Checkout Process is almost done!</h3>
+        <h3>Your Checkout Process is almost done!</h3>{{$totalwithshipping}}
         <div class="uk-card uk-card-default uk-card-border">
             <div class="uk-card-body">
                 <form role="form" id="payment-form" method="POST" action="javascript:void(0);" class="form_class">
@@ -87,7 +87,7 @@
         $userId    = $order->users_id; ?>
 
          <script src="https://js.xendit.co/v1/xendit.min.js"></script>
-         <script>Xendit.setPublishableKey('xnd_public_development_OoiFKOl3172qnJJpeuFNTDOUYdL1o4Z0mH3h/Rhm9G3e+b2gCgJ3');</script>
+         <?php echo "<script>Xendit.setPublishableKey('".config('common.xendit_public_key')."');</script>"; ?>
         <script>
             $(function () {
 
@@ -132,7 +132,7 @@
                         var card_holder = document.getElementById("card_holder").value;
                         orderData = { 'order_code': '<? echo $orderCode; ?>','user_id': '<? echo $userId; ?>','signature': '<? echo $signature; ?>', 'totalwithshipping': '<? echo $totalwithshipping; ?>', 'card_holder' : card_holder };
                         tokenData = getTokenData();
-                        console.log(tokenData);
+
                         $.ajaxSetup({
                         headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')}
                         });   
@@ -190,7 +190,7 @@
                 }
 
                 function getTokenData () {
-                  var total = ({{$total}} + {{$shipping}}) * {{$rupiah}};
+                  var total = Math.round(({{$total}} + {{$shipping}}) * {{$rupiah}});
                   var amount = total.toString();
                     return {
                         amount: amount,
