@@ -33,7 +33,7 @@
 
 
             @foreach ($slider as $item)
-              <a href="{{ $home['homepage_main_url'] }}" class="uk-link-reset">
+              <a href="{{ $item->url }}" class="uk-link-reset">
               <li>
                 <img src="{{ uploadCDN($item->banner) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
               </li>
