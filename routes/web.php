@@ -52,6 +52,10 @@ Route::get('/posindonesia', function () {
     var_dump($resultFee);
 });
 
+Route::get('/', [
+    'as'   => 'index',
+    'uses' => 'Frontend\PageController@index',
+]);
 
 Route::get('/home', [
     'as'   => 'home',
