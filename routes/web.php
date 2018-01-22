@@ -97,11 +97,6 @@ Route::get('/', [
     'uses' => 'Frontend\PageController@index',
 ]);
 
-Route::get('/', [
-    'as'   => 'index',
-    'uses' => 'Frontend\PageController@index',
-]);
-
 Route::get('/home', [
     'as'   => 'home',
     'uses' => 'Frontend\PageController@index',
@@ -297,38 +292,6 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@postReview',
     ]);
 
-    // Route checkout module
-    Route::get('/checkout', [
-        'as'   => 'checkout',
-        'uses' => 'Frontend\UserController@showShippingAddressPage',
-    ]);
-
-    Route::get('/checkout/shipping', [
-        'as'   => 'checkout.shipping',
-        'uses' => 'Frontend\UserController@showShippingOptionPage',
-    ]);
-
-    // Route::get('/checkout/billing', [
-    //     'as'   => 'checkout.billing',
-    //     'uses' => 'Frontend\UserController@showShippingBillingPage',
-    // ]);
-
-    Route::post('/checkout/shipping', [
-        'as'   => 'checkout.shipping',
-        'uses' => 'Frontend\UserController@postShippingOption',
-    ]);
-
-    Route::get('/checkout/review', [
-        'as'   => 'checkout.review',
-        'uses' => 'Frontend\UserController@showReviewPage',
-    ]);
-
-    Route::post('/checkout/final', [
-        'as'   => 'checkout.final',
-        'uses' => 'Frontend\UserController@postFinalPage',
-    ]);
-
-
     // Route Address module
     Route::get('/account/address', [
         'as'   => 'user.address',
@@ -404,8 +367,40 @@ Route::middleware(['auth'])->group(function () {
         'as'   => 'order',
         'uses' => 'Frontend\OrderController@store',
     ]);
+  
+});
 
-    
+Route::middleware(['as.guest'])->group(function () {
+    // Route checkout module
+    Route::get('/checkout', [
+        'as'   => 'checkout',
+        'uses' => 'Frontend\UserController@showShippingAddressPage',
+    ]);
+
+    Route::get('/checkout/shipping', [
+        'as'   => 'checkout.shipping',
+        'uses' => 'Frontend\UserController@showShippingOptionPage',
+    ]);
+
+    // Route::get('/checkout/billing', [
+    //     'as'   => 'checkout.billing',
+    //     'uses' => 'Frontend\UserController@showShippingBillingPage',
+    // ]);
+
+    Route::post('/checkout/shipping', [
+        'as'   => 'checkout.shipping',
+        'uses' => 'Frontend\UserController@postShippingOption',
+    ]);
+
+    Route::get('/checkout/review', [
+        'as'   => 'checkout.review',
+        'uses' => 'Frontend\UserController@showReviewPage',
+    ]);
+
+    Route::post('/checkout/final', [
+        'as'   => 'checkout.final',
+        'uses' => 'Frontend\UserController@postFinalPage',
+    ]);
 });
 
 // Route Admin crudbooster
