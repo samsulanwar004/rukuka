@@ -67,7 +67,7 @@
                     </table>
                                       
                     <div class="uk-text-center">
-                        <button class="uk-button uk-button-danger uk-width-1-2 uk-text-center" type="submit">Bayar Sekarang</button>
+                        <button class="uk-button uk-button-danger uk-width-1-2 uk-text-center" type="submit">Pay Now</button>
                     </div>
                    
                    
