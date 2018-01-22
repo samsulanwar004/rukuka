@@ -7,13 +7,31 @@
             {{--MAIN BANNER--}}
             <div class="uk-text-center">
                 <h3 class="uk-heading-line"><span>{{$kids['kids_main_title']}}</span></h3>
-                <a href="{{ $kids['kids_main_url'] }}" class="uk-link-reset">
-                    <div class="uk-inline-clip uk-transition-toggle uk-dark">
-                        <img src="{{ uploadCDN($kids['kids_main_banner']) }}" alt="rukuka kids" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
-                        <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
-                        <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
+                {{--<a href="{{ $kids['kids_main_url'] }}" class="uk-link-reset">--}}
+                    {{--<div class="uk-inline-clip uk-transition-toggle uk-dark">--}}
+                        {{--<img src="{{ uploadCDN($kids['kids_main_banner']) }}" alt="rukuka kids" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">--}}
+                        {{--<div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>--}}
+                        {{--<div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>--}}
+                    {{--</div>--}}
+                {{--</a>--}}
+                <div class="uk-inline">
+                    <ul id="component-tab-left" class="uk-switcher">
+                        @foreach ($slider as $item)
+                            <a href="{{ $item->url }}" class="uk-link-reset">
+                                <li>
+                                    <img src="{{ uploadCDN($item->banner) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
+                                </li>
+                            </a>
+                        @endforeach
+                    </ul>
+                    <div class="uk-position-small uk-position-bottom-center">
+                        <ul class="uk-dotnav" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" >
+                            @foreach ($slider as $item)
+                                <li><a href="#">item1</a></li>
+                            @endforeach
+                        </ul>
                     </div>
-                </a>
+                </div>
             </div>
             {{--END MAIN BANNER--}}
         </div>

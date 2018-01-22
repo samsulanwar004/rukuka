@@ -15,10 +15,8 @@ class PageRepository extends Controller
         $result['page'] = Page::where('slug',$slug)->get();
 
         if(count($result['page']) == 0 ){
-            $result['status'] = $this->status('001');
-            return $result;
+            abort(404);
         }
-        $result['status'] = $result['status'] = $this->status('000');
         return $result;
     }
 
@@ -27,10 +25,8 @@ class PageRepository extends Controller
         $result['page'] = Help::where('slug',$slug)->get();
 
         if(count($result['page']) == 0 ){
-            $result['status'] = $this->status('001');
-            return $result;
+            abort(404);
         }
-        $result['status'] = $result['status'] = $this->status('000');
         return $result;
     }
 
@@ -39,36 +35,10 @@ class PageRepository extends Controller
         $result['popup'] = Popup::where('slug',$slug)->get()->first();
 
         if(count($result['popup']) == 0 ){
-            $result['status'] = $this->status('001');
-            return $result;
+            abort(404);
         }
-        $result['status'] = $result['status'] = $this->status('000');
+
         return $result;
-    }
-
-    public function status($code, $custom_msg = null)
-    {
-        switch ($code) {
-            case '000':
-                $msg = "Success";
-                break;
-            case '001':
-                $msg = "No Result";
-                break;
-            default:
-                $msg = "Unknown";
-        }
-
-        if ($msg != null)
-        {
-            $msg =  $msg . " " . $custom_msg;
-        }
-
-        return $response = array(
-            'code' => $code ,
-            'message' =>  $msg
-        );
-
     }
 
 }

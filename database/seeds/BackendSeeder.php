@@ -251,6 +251,16 @@ class CmsModulsSeeder extends Seeder {
             'controller'=>'AdminPopularsController',
             'is_protected'=>0,
             'is_active'=>0
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Contacts',
+            'icon'=>'fa fa-circle-o',
+            'path'=>'contacts',
+            'table_name'=>'contacts',
+            'controller'=>'AdminContactsController',
+            'is_protected'=>0,
+            'is_active'=>0
         ]
         ];
 
@@ -594,7 +604,7 @@ class CmsMenusSeeder extends Seeder {
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 4
+            'sorting' => 6
         ],[
 
             'created_at'=>date('Y-m-d H:i:s'),
@@ -647,6 +657,19 @@ class CmsMenusSeeder extends Seeder {
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 2
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Contacts',
+            'type'=>'Route',
+            'path'=>'AdminContactsControllerGetIndex',
+            'color' => 'normal',
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>20,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 5
         ]
     ];
 
