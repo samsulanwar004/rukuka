@@ -34,4 +34,12 @@ class BaseController extends Controller
         }
     }
 
+    protected function validActive($value)
+    {
+        if($value->is_active == 0)
+        {
+            throw new Exception("Page Not Found", 1);
+        }
+    }
+
 }

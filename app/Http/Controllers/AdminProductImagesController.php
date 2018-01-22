@@ -5,6 +5,10 @@
 	use DB;
 	use CRUDBooster;
 	use Illuminate\Support\Facades\URL;
+	use Exception;
+	use App\Services\UploadService;
+	use Illuminate\Http\Request as NewRequest;
+	use App\ProductImage;
 
 	class AdminProductImagesController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -21,7 +25,7 @@
 			$this->button_add = true;
 			$this->button_edit = true;
 			$this->button_delete = true;
-			$this->button_detail = true;
+			$this->button_detail = false;
 			$this->button_show = true;
 			$this->button_filter = true;
 			$this->button_import = false;
@@ -246,7 +250,7 @@
 	    public function hook_row_index($column_index,&$column_value) {	        
 	    	//Your code here
             if($column_index==3){
-                $column_value = '<img src="'.URL::to('/'.$column_value).'" alt="-" height="40">';
+                $column_value = '<img src="'.uploadCDN($column_value).'" alt="-" height="40">';
             }
 	    }
 
@@ -326,6 +330,101 @@
 
 
 	    //By the way, you can still create your own method in here... :) 
+
+	    public function getAdd() {
+		  //Create an Auth
+		  if(!CRUDBooster::isCreate() && $this->global_privilege==FALSE || $this->button_add==FALSE) {    
+		    CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
+		  }
+
+		  $data = [];
+		  $data['page_title'] = 'Add Image';
+		  $data['return_url'] = request()->input('return_url');
+		  
+		  //Please use cbView method instead view method from laravel
+		  $this->cbView('admin.product_images.add_images',$data);
+		}
+
+		public function uploadProduct(NewRequest $request)
+		{
+			try {
+				if (!$userId = CRUDBooster::myId()) {
+					throw new Exception("Error Processing Request", 1);	
+				}
+
+				if ($request->hasFile('image')) {
+					$file = $request->file('image');
+					$name = $request->input('name');
+				    $filename = sprintf(
+				                "%s-%s.%s",
+				                str_slug($name),
+				                date('YmdHis'),
+				                $file->getClientOriginalExtension()
+				            );
+				    $driver = config('filesystems.s3url') == null ? 'local' : 's3';
+
+				    (new UploadService)->uploadProductImage($driver, $userId, $file, $filename);
+				}
+
+				$image = new ProductImage;
+				$image->name = $name;
+				$image->photo = 'uploads/'.$userId.'/'.date('Y-m').'/'.$filename;
+				$image->product()->associate($request->input('parent_id'));
+				$image->save();
+
+			    return redirect($request->input('return_url'))->with(['message' => 'Upload image product successfully!','message_type' => 'success']);
+
+			} catch (Exception $e) {
+				return back()->with(['message' => $e->getMessage(), 'message_type' => 'danger']);
+			}
+		}
+
+		public function getEdit($id) {
+		  //Create an Auth
+		  if(!CRUDBooster::isUpdate() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {    
+		    CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
+		  }
+		  
+		  $data = [];
+		  $data['page_title'] = 'Edit Image';
+		  $data['row'] = ProductImage::where('id',$id)->first();
+		  $data['return_url'] = request()->input('return_url');
+		  
+		  //Please use cbView method instead view method from laravel
+		  $this->cbView('admin.product_images.edit_images',$data);
+		}
+
+		public function editUploadProduct(NewRequest $request, $id)
+		{
+			try {
+				if (!$userId = CRUDBooster::myId()) {
+					throw new Exception("Error Processing Request", 1);	
+				}
+
+				if ($request->hasFile('image')) {
+					$file = $request->file('image');
+					$name = $request->input('name');
+				    $filename = sprintf(
+				                "%s-%s.%s",
+				                str_slug($name),
+				                date('YmdHis'),
+				                $file->getClientOriginalExtension()
+				            );
+				    $driver = config('filesystems.s3url') == null ? 'local' : 's3';
+
+				    (new UploadService)->uploadProductImage($driver, $userId, $file, $filename);
+				}
+
+				$image = ProductImage::where('id',$id)->first();
+				$image->name = $name;
+				$image->photo = 'uploads/'.$userId.'/'.date('Y-m').'/'.$filename;
+				$image->save();
+
+			    return redirect($request->input('return_url'))->with(['message' => 'Update image product successfully!','message_type' => 'success']);
+			} catch (Exception $e) {
+				return back()->with(['message' => $e->getMessage(), 'message_type' => 'danger']);
+			}
+		}
 
 
 	}

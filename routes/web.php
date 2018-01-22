@@ -407,3 +407,16 @@ Route::middleware(['auth'])->group(function () {
 
     
 });
+
+// Route Admin crudbooster
+// Module image product
+Route::post('/upload-product', [
+    'as'   => 'upload.product',
+    'uses' => 'AdminProductImagesController@uploadProduct',
+]);
+
+Route::post('/upload-update/{id?}', [
+    'as'   => 'upload.update',
+    'uses' => 'AdminProductImagesController@editUploadProduct',
+]);
+

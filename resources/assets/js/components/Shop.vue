@@ -10,7 +10,7 @@
                     </a>
                     <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default">
                         <div class="uk-text-center">
-                            <a href="#modal-overflow" class="uk-button uk-button-small uk-button-secondary" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
+                            <a href="#modal-shop" class="uk-button uk-button-small uk-button-secondary" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="uk-card-body uk-padding-remove uk-margin-small-top">
                   <div>
-                    <a href="#modal-overflow" class="uk-button uk-button-small uk-button-default-warm uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
+                    <a href="#modal-shop" class="uk-button uk-button-small uk-button-default-warm uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
                   </div>
                   <a :href="'/product/'+ product.slug" class="uk-text-meta">{{ product.name }}</a>
                   <br>
@@ -58,50 +58,58 @@
             </div>
         </div>
         <!-- end product single -->
-        <div id="modal-overflow" class="uk-modal-container-small" uk-modal="center: true">
+        <div id="modal-shop" class="uk-modal-container-small" uk-modal="center: true">
           <div class="uk-modal-dialog uk-margin-auto">
             <button class="uk-modal-close-default" type="button" uk-close></button>
             <div class="uk-modal-header uk-visible@m">
-              <h3 class="uk-margin-remove">{{ name }}</h3>
+              <transition name="fade">
+                <h3 class="uk-margin-remove" v-if="isLoading">Loading..</h3>
+                <h3 class="uk-margin-remove" v-else>{{ name }}</h3>
+              </transition>              
               <div class="uk-text-right">
                 <a :href="'/product/' +slug" class="uk-button uk-button-text uk-text-right">see details <span uk-icon="icon: chevron-right"></span> </a>
               </div>
             </div>
-            <div class="uk-modal-body uk-padding-small-left" uk-overflow-auto>
+            <div class="uk-modal-body uk-padding-small-left">
               <div class="uk-grid" uk-grid>
                 <div class="uk-width-1-2@m">
                   <div class="uk-hidden@m">
                     <h5 class="uk-margin-small"><a :href="'/product/' +slug">{{ name }}</a></h5>
                   </div>
-                    <div v-if="images[0]" class="uk-inline">
+                  <transition name="fade">
+                  <div class="uk-inline" v-if="isLoading">
+                    <img :src="aws_link+'/'+'images/'+defaultImage.image_2">
+                  </div>
+                  <div v-else v-if="images[0]" class="uk-inline">
                     <div class="">
-                    <ul class="uk-switcher uk-margin" id="component-tab-left">
-                      <li v-for="image in images">
-                          <img v-if="image.photo" :src="image.photo | awsLink(aws_link)" :alt="image.name">
-                          <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
-                        <div class="uk-position uk-position-small uk-position-center-left">
-                          <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="previous" uk-icon="icon: chevron-left"></a>
-                        </div>
-                        <div class="uk-position uk-position-small uk-position-center-right">
-                          <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="next" uk-icon="icon: chevron-right"></a>
-                        </div>
-                      </li>
-                    </ul>
+                      <ul class="uk-switcher uk-margin" id="component-tab-left">
+                        <li v-for="image in images">
+                            <img v-if="image.photo" :src="image.photo | awsLink(aws_link)" :alt="image.name">
+                            <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
+                          <div class="uk-position uk-position-small uk-position-center-left">
+                            <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="previous" uk-icon="icon: chevron-left"></a>
+                          </div>
+                          <div class="uk-position uk-position-small uk-position-center-right">
+                            <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="next" uk-icon="icon: chevron-right"></a>
+                          </div>
+                        </li>
+                      </ul>
                     </div>
                     <div class="">
-                    <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" uk-grid>
-                      <li class="uk-padding-remove" v-for="image in images">
-                          <a href="#"  class="uk-padding-remove">
-                              <img v-if="image.photo" :src="image.photo | awsLink(aws_link)" :alt="image.name" width="55">
-                              <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka" width="55">
-                          </a>
-                      </li>
-                    </ul>
-                  </div>
-                  </div>
-                    <div v-else class="uk-inline">
-                        <img :src="aws_link+'/'+'images/'+defaultImage.image_2">
+                      <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" uk-grid>
+                        <li class="uk-padding-remove" v-for="image in images">
+                            <a href="#"  class="uk-padding-remove">
+                                <img v-if="image.photo" :src="image.photo | awsLink(aws_link)" :alt="image.name" width="55">
+                                <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka" width="55">
+                            </a>
+                        </li>
+                      </ul>
                     </div>
+                  </div>
+                  <div v-else class="uk-inline">
+                    <img :src="aws_link+'/'+'images/'+defaultImage.image_2">
+                  </div>
+                  </transition>
                 </div>
                 <div class="uk-width-1-2@m">
                   <h4 class="uk-margin-remove">
@@ -129,10 +137,10 @@
 
                     </select>
                     <span class="uk-text-meta"><i> Choose your size</i> </span>
-                  </div>  
+                  </div>
                   <div v-else>
                     <span class="uk-text-meta"><i class="uk-text-danger">No size available </i> <br>Please, contact our cuctomer service! </span>
-                  </div>                
+                  </div>
                   <ul uk-accordion="animation: true; multiple: false">
                       <li class="uk-open">
 
@@ -177,7 +185,14 @@
         </div>
     </div>
 </template>
-
+<style>
+  .fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+</style>
 <script>
     import axios from 'axios';
     export default {
@@ -212,7 +227,8 @@
                 slug: {},
                 size: {},
                 deliveryReturns: null,
-                defaultImage: JSON.parse(this.default_image,true)
+                defaultImage: JSON.parse(this.default_image,true),
+                isLoading: false
             }
         },
 
@@ -220,6 +236,7 @@
             quick: function (e) {
                 var self = this;
                 self.size = null;
+                self.isLoading = true;
                 axios.get(this.product_api+'/'+e)
                     .then(function (response) {
                         if (typeof response.data.data !== 'undefined') {
@@ -237,9 +254,12 @@
                             self.deliveryReturns = data.delivery_returns;
                             self.slug =  data.slug;
                             self.size = self.stocks.length > 0 ? self.stocks[0].sku : null;
+
+                            self.isLoading = false;
                         }
                     })
                     .catch(function (error) {
+                        self.isLoading = false;
                         console.log(error);
                     });
             },

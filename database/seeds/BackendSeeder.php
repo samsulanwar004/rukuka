@@ -225,10 +225,30 @@ class CmsModulsSeeder extends Seeder {
 
             'created_at'=>date('Y-m-d H:i:s'),
             'name'=>'Exchange Rates',
-            'icon'=>'fa fa-exchange',
+            'icon'=>'fa fa-circle-o',
             'path'=>'exchange-rates',
             'table_name'=>'exchange_rates',
             'controller'=>'AdminExchangeRatesController',
+            'is_protected'=>0,
+            'is_active'=>0
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Main Sliders',
+            'icon'=>'fa fa-circle-o',
+            'path'=>'main_sliders',
+            'table_name'=>'main_sliders',
+            'controller'=>'AdminMainSlidersController',
+            'is_protected'=>0,
+            'is_active'=>0
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Popular Products',
+            'icon'=>'fa fa-circle-o',
+            'path'=>'populars',
+            'table_name'=>'populars',
+            'controller'=>'AdminPopularsController',
             'is_protected'=>0,
             'is_active'=>0
         ]
@@ -480,7 +500,7 @@ class CmsMenusSeeder extends Seeder {
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 1
+            'sorting' => 3
         ],[
 
             'created_at'=>date('Y-m-d H:i:s'),
@@ -493,7 +513,7 @@ class CmsMenusSeeder extends Seeder {
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 2
+            'sorting' => 4
         ],[
 
             'created_at'=>date('Y-m-d H:i:s'),
@@ -502,11 +522,11 @@ class CmsMenusSeeder extends Seeder {
             'path'=>'AdminPopupsControllerGetIndex',
             'color' => 'normal',
             'icon'=>'fa fa-circle-o',
-            'parent_id'=>20,
+            'parent_id'=>25,
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 3
+            'sorting' => 1
         ],[
 
             'created_at'=>date('Y-m-d H:i:s'),
@@ -582,12 +602,51 @@ class CmsMenusSeeder extends Seeder {
             'type'=>'Route',
             'path'=>'AdminExchangeRatesControllerGetIndex',
             'color' => 'normal',
-            'icon'=>'fa fa-exchange',
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>25,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 2
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Web Setting',
+            'type'=>'Route',
+            'path'=>'websetting',
+            'color' => 'normal',
+            'icon'=>'fa fa-cogs',
             'parent_id'=>0,
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 7
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Main Slider',
+            'type'=>'Route',
+            'path'=>'AdminMainSlidersControllerGetIndex',
+            'color' => 'normal',
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>20,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 1
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Popular Products',
+            'type'=>'Route',
+            'path'=>'AdminPopularsControllerGetIndex',
+            'color' => 'normal',
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>20,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 2
         ]
     ];
 

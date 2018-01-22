@@ -4,12 +4,12 @@
     <div class="uk-container uk-container-small">
         @if($categories == 'designers' && $category != 'all')
             <div class="uk-grid-small uk-margin-top" uk-grid>
-                <div class="uk-panel uk-width-1-4 uk-flex uk-flex-middle uk-flex-center">
-                    <img src="{{uploadCDN($designer->photo)}}" width="100" alt="rukuka designer" class="uk-box-shadow-medium" onerror="this.src = '{{imageCDN(config('common.default.image_6'))}}'">
+                <div class="uk-panel uk-width-1-4 uk-text-center">
+                    <img src="{{uploadCDN($designer->photo)}}" width="170" height="170" alt="rukuka designer" class="uk-box-shadow-medium" onerror="this.src = '{{imageCDN(config('common.default.image_6'))}}'">
                 </div>
                 <div class="uk-panel uk-width-3-4">
                     <span class="uk-text-lead">{{ $designer->name }}</span><br>
-                    {{ $designer->content }}
+                    {!! $designer->content !!}
                 </div>
             </div>
             <hr class="uk-margin-small">
@@ -111,11 +111,35 @@
             </div>
         </div>
 
-          <div class="uk-text-right uk-margin-bottom">
+          <div class="uk-text-right uk-margin-bottom uk-margin-top">
             <span class="uk-text-meta">
             @include('pagination.default', ['paginator' => $products])
             </span>
           </div>
 
+        <hr>
+        @if($recently)
+        <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
+            <div class="uk-panel">
+                <h4 class="uk-margin-small">RECENTLY VIEWED</h4>
+            </div>
+        </div>
+        <related
+                api="{{ route('recently') }}"
+                product_api="{{ route('product.api') }}"
+                bag_api="{{ route('persist.bag') }}"
+                wishlist_api="{{ route('persist.wishlist') }}"
+                auth="{{ Auth::check() ? 1 : 0 }}"
+                aws_link="{{ config('filesystems.s3url') }}"
+                default_image="{{ json_encode(config('common.default')) }}"
+                recently="{{ json_encode($recently) }}"
+        ></related>
+
+        <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">
+            <div class="uk-panel uk-text-center">
+                <a  href="{{route('shop',['categories' => 'designers', 'category' => 'all' ])}}" class="uk-button uk-button-small uk-button-text">SHOW ALL PRODUCT</a>
+            </div>
+        </div>
+        @endif
     </div>
 @endsection

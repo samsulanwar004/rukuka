@@ -8,7 +8,7 @@
       <div class="uk-width-3-4@m">
          <h4>CHECKOUT</h4>
          <div class="uk-grid uk-grid-divider uk-child-width-1-3@m uk-margin-small" uk-grid>
-            <div>
+            <div class="uk-text-center">
                <button class="uk-button uk-button-text" disabled><b>SHIPPING ADDRESS</b></button>
             </div>
             <div class="uk-text-center">
@@ -144,7 +144,7 @@
                   <input type="text" name="address_line" value="{{ old('address_line') }}" class="uk-input uk-form-small {{ $errors->has('address_line') ? ' uk-form-danger' : '' }}" required="required">
                </div>
                <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
-                  Countryss
+                  Country
                   <select id="form-country-empty" name="country" class="uk-input uk-form-small uk-from-width-small {{ $errors->has('country') ? ' uk-form-danger' : '' }}" required="required" onchange="handleLocalAddress();showListProvices();">
                     <option></option>
                   </select>
@@ -182,8 +182,8 @@
 {{--                   <input type="checkbox" class="uk-checkbox" name="is_billing" value="ok"> This address is also my billing address --}}
                   <p> <b>* Required</b> </p>
                </div>
-               <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
-                  <input type="submit" name="submit" id="submit" value="CONTINUE" class="uk-button-danger uk-button uk-button-small uk-width-1-1">
+                <div class="uk-panel uk-margin-small-top">
+                  <input type="submit" name="submit" id="submit" value="SUBMIT" class="uk-button uk-button-danger uk-width-1-1">
                </div>
             </form>
          </div>
@@ -210,7 +210,7 @@
        e.preventDefault();
        var submit = $('#submit').val();
        var url = '{{ route('checkout.shipping') }}';
-       if (submit == 'C O N T I N U E') {
+       if (submit == 'SUBMIT') {
          $('#submit').click();
        } else {
          window.location.href = url;

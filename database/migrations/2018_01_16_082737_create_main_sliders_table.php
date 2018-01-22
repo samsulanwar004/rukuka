@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateResponsepaymentTable extends Migration
+class CreateMainSlidersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateResponsepaymentTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('response_payments', function (Blueprint $table) {
+        Schema::create('main_sliders', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('order_code')->nullable();
-            $table->text('response_json')->nullable();                     
+            $table->string('group_setting');
+            $table->string('banner', 150)->nullable();
+            $table->string('url', 150)->nullable();
+            $table->unsignedInteger('order');
             $table->timestamps();
         });
     }

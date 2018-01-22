@@ -154,19 +154,48 @@
 <script>
   import axios from 'axios';
   export default {
-    props: ['api', 'product_api', 'bag_api', 'wishlist_api', 'auth', 'aws_link','default_image'],
+    props: [
+      'api',
+      'product_api',
+      'bag_api',
+      'wishlist_api',
+      'auth',
+      'aws_link',
+      'default_image',
+      'recently'
+    ],
+
     created() {
       var self = this;
       let api = this.api;
-      axios.get(api)
-      .then(function (response) {
-        if (response.data.data !== 'undefined') {
-            self.products = response.data.data;
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      var recently = this.recently;
+
+      if (recently) {
+        var product = JSON.parse(recently);
+        axios.post(api, {
+            product: product
+        })
+        .then(function (response) {
+            if (response.data.data !== 'undefined') {
+                self.products = response.data.data;
+            }
+        })
+        .catch(function (error) {
+            var error = JSON.parse(JSON.stringify(error));
+            console.log(error);
+        });
+      } else {
+        axios.get(api)
+        .then(function (response) {
+          if (response.data.data !== 'undefined') {
+              self.products = response.data.data;
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+
     },
 
     data() {

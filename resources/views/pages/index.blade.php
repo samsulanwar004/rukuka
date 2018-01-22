@@ -21,12 +21,33 @@
         </div>
       </div>
       <div class="uk-inline">
-          <a href="{{ $home['homepage_main_url'] }}" class="uk-link-reset">
+          {{-- <a href="{{ $home['homepage_main_url'] }}" class="uk-link-reset">
             <div class="uk-inline-clip uk-transition-toggle uk-light">
                 <img src="{{ uploadCDN($home['homepage_main_banner']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
                 <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
             </div>
-          </a>
+          </a> --}}
+
+          <ul id="component-tab-left" class="uk-switcher">
+
+
+
+            @foreach ($slider as $item)
+              <a href="{{ $item->url }}" class="uk-link-reset">
+              <li>
+                <img src="{{ uploadCDN($item->banner) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
+              </li>
+            </a>
+            @endforeach
+
+          </ul>
+          <div class="uk-position-small uk-position-bottom-center">
+            <ul class="uk-dotnav" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" >
+              @foreach ($slider as $item)
+                <li><a href="#">item1</a></li>
+              @endforeach
+            </ul>
+          </div>
       </div>
     </div>
   <div class="uk-container uk-container-small">
@@ -271,7 +292,7 @@
 
   	<h3>MOST POPULAR</h3>
   	<popular
-      api="{{ route('populer')}}"
+      api="{{ route('populer', 'Homepage')}}"
       product_api="{{ route('product.api') }}"
       bag_api="{{ route('persist.bag') }}"
       wishlist_api="{{ route('persist.wishlist') }}"
