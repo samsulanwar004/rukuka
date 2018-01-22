@@ -95,6 +95,19 @@
             pre.result {
                 width: 49%;
             }
+
+            .credit-card-div  span {
+    padding-top:10px;
+        }
+.credit-card-div img {
+    padding-top:30px;
+}
+.credit-card-div .small-font {
+    font-size:9px;
+}
+.credit-card-div .pad-adjust {
+    padding-top:10px;
+}
     </style>
 
   </head>
