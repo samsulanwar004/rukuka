@@ -165,7 +165,13 @@ class PageController extends BaseController
     public function designer()
     {
         $designers = (new DesignerRepository)->getDesignersAZ();
-        return view('pages.designer', compact('designers'));
+        $alpabeths = collect($designers)->map(function ($item) {
+            return strtolower(substr($item['slug'], 0, 1));
+        })->toArray();
+
+        $alpabeths = array_unique($alpabeths);
+
+        return view('pages.designer', compact('designers', 'alpabeths'));
     }
 
     public function women()

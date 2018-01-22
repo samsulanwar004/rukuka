@@ -21,7 +21,7 @@
         {{--2 ROW BANNER  --}}
         <div class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
             <div class="uk-width-1-2">
-                <a href="/{{ $women['women_url_1'] }}" class="uk-text-muted">
+                <a href="{{ $women['women_url_1'] }}" class="uk-text-muted">
                     <div class="uk-inline-clip uk-transition-toggle uk-dark uk-margin-small-bottom">
                         <img src="{{ uploadCDN($women['women_banner_1']) }}" alt="rukuka womens" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
                         <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
@@ -29,24 +29,24 @@
                     </div>
                 </a>
                 <div class="uk-visible@m">
-                  <a href="/{{ $women['women_url_1'] }}" class="uk-text-muted">
+                  <a href="{{ $women['women_url_1'] }}" class="uk-text-muted">
                     <h3 class="uk-margin-remove">{{ $women['women_text_1_1'] }}</h3>
                   </a>
                 </div>
                 <div class="uk-hidden@m">
-                  <a href="/{{ $women['women_url_1'] }}" class="uk-text-muted">
+                  <a href="{{ $women['women_url_1'] }}" class="uk-text-muted">
                     <h5 class="uk-margin-remove">{{ $women['women_text_1_1'] }}</h5>
                   </a>
                 </div>
                 <div class="uk-visible@m">
-                  <a href="/{{ $women['women_url_1'] }}" class="uk-text-muted uk-link">
+                  <a href="{{ $women['women_url_1'] }}" class="uk-text-muted uk-link">
                       {{ $women['women_text_1_2'] }}<span uk-icon="icon: triangle-right"></span>
                   </a>
                 </div>
 
             </div>
             <div class="uk-width-1-2">
-                <a href="/{{ $women['women_url_2'] }}" class="uk-text-muted">
+                <a href="{{ $women['women_url_2'] }}" class="uk-text-muted">
                     <div class="uk-inline-clip uk-transition-toggle uk-dark uk-margin-small-bottom">
                         <img src="{{ uploadCDN($women['women_banner_2']) }}" alt="rukuka womens" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
                         <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
@@ -54,17 +54,17 @@
                     </div>
                 </a>
                 <div class="uk-visible@m">
-                  <a href="/{{ $women['women_url_2'] }}" class="uk-text-muted">
+                  <a href="{{ $women['women_url_2'] }}" class="uk-text-muted">
                     <h3 class="uk-margin-remove">{{ $women['women_text_2_1'] }}</h3>
                   </a>
                 </div>
                 <div class="uk-hidden@m">
-                  <a href="/{{ $women['women_url_2'] }}" class="uk-text-muted">
+                  <a href="{{ $women['women_url_2'] }}" class="uk-text-muted">
                       <h5 class="uk-margin-remove">{{ $women['women_text_2_1'] }}</h5>
                   </a>
                 </div>
                 <div class="uk-visible@m">
-                  <a href="/{{ $women['women_url_2'] }}" class="uk-text-muted uk-link">
+                  <a href="{{ $women['women_url_2'] }}" class="uk-text-muted uk-link">
                       {{ $women['women_text_2_2'] }}<span uk-icon="icon: triangle-right"></span>
                   </a>
                 </div>
@@ -77,7 +77,7 @@
         {{--3 ROW BANNER--}}
         <div class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
             <div class="uk-width-1-3">
-                <a href="/{{ $women['women_url_3'] }}" class="uk-text-muted">
+                <a href="{{ $women['women_url_3'] }}" class="uk-text-muted">
                     <div class="uk-inline-clip uk-transition-toggle uk-dark uk-margin-small-bottom">
                         <img src="{{ uploadCDN($women['women_banner_3']) }}" alt="rukuka womens" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
                         <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
@@ -85,24 +85,24 @@
                     </div>
                 </a>
                 <div class="uk-visible@m">
-                  <a href="/{{ $women['women_url_3'] }}" class="uk-text-muted">
+                  <a href="{{ $women['women_url_3'] }}" class="uk-text-muted">
                       <h3 class="uk-margin-remove">{{ $women['women_text_3_1'] }}</h3>
                   </a>
                 </div>
                 <div class="uk-hidden@m">
-                  <a href="/{{ $women['women_url_3'] }}" class="uk-text-muted">
+                  <a href="{{ $women['women_url_3'] }}" class="uk-text-muted">
                       <h5 class="uk-margin-remove">{{ $women['women_text_3_1'] }}</h5>
                   </a>
                 </div>
                 <div class="uk-visible@m">
-                  <a href="/{{ $women['women_url_3'] }}" class="uk-text-muted uk-link">
+                  <a href="{{ $women['women_url_3'] }}" class="uk-text-muted uk-link">
                       {{ $women['women_text_3_2'] }}<span uk-icon="icon: triangle-right"></span>
                   </a>
                 </div>
 
             </div>
             <div class="uk-width-1-3">
-                <a href="/{{ $women['women_url_4'] }}" class="uk-text-muted">
+                <a href="{{ $women['women_url_4'] }}" class="uk-text-muted">
                     <div class="uk-inline-clip uk-transition-toggle uk-dark uk-margin-small-bottom">
                         <img src="{{ uploadCDN($women['women_banner_4']) }}" alt="rukuka mens" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
                         <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
@@ -110,24 +110,24 @@
                     </div>
                 </a>
                 <div class="uk-visible@m">
-                  <a href="/{{ $women['women_url_4'] }}" class="uk-text-muted">
+                  <a href="{{ $women['women_url_4'] }}" class="uk-text-muted">
                       <h3 class="uk-margin-remove">{{ $women['women_text_4_1'] }}</h3>
                   </a>
                 </div>
                 <div class="uk-hidden@m">
-                  <a href="/{{ $women['women_url_4'] }}" class="uk-text-muted">
+                  <a href="{{ $women['women_url_4'] }}" class="uk-text-muted">
                       <h5 class="uk-margin-remove">{{ $women['women_text_4_1'] }}</h5>
                   </a>
                 </div>
                 <div class="uk-visible@m">
-                  <a href="/{{ $women['women_url_4'] }}" class="uk-text-muted uk-link">
+                  <a href="{{ $women['women_url_4'] }}" class="uk-text-muted uk-link">
                       {{ $women['women_text_4_2'] }}<span uk-icon="icon: triangle-right"></span>
                   </a>
                 </div>
 
             </div>
             <div class="uk-width-1-3">
-                <a href="/{{ $women['women_url_5'] }}" class="uk-text-muted">
+                <a href="{{ $women['women_url_5'] }}" class="uk-text-muted">
                     <div class="uk-inline-clip uk-transition-toggle uk-dark uk-margin-small-bottom">
                         <img src="{{ uploadCDN($women['women_banner_5']) }}" alt="rukuka womens" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
                         <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
@@ -135,17 +135,17 @@
                     </div>
                 </a>
                 <div class="uk-visible@m">
-                  <a href="/{{ $women['women_url_5'] }}" class="uk-text-muted">
+                  <a href="{{ $women['women_url_5'] }}" class="uk-text-muted">
                       <h3 class="uk-margin-remove">{{ $women['women_text_5_1'] }}</h3>
                   </a>
                 </div>
                 <div class="uk-hidden@m">
-                  <a href="/{{ $women['women_url_5'] }}" class="uk-text-muted">
+                  <a href="{{ $women['women_url_5'] }}" class="uk-text-muted">
                       <h5 class="uk-margin-remove">{{ $women['women_text_5_1'] }}</h5>
                   </a>
                 </div>
                 <div class="uk-visible@m">
-                  <a href="/{{ $women['women_url_5'] }}" class="uk-text-muted uk-link">
+                  <a href="{{ $women['women_url_5'] }}" class="uk-text-muted uk-link">
                       {{ $women['women_text_5_2'] }}<span uk-icon="icon: triangle-right"></span>
                   </a>
                 </div>

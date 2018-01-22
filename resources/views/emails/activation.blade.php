@@ -107,10 +107,10 @@
 
             <table cellspacing="0" cellpadding="0" width="100%">
                 <tr>
-                    <td background="https://www.filepicker.io/api/file/zLBr1W6UT6qZP4jI2yRz" bgcolor="#64594b" valign="top" style="background: url(https://www.filepicker.io/api/file/zLBr1W6UT6qZP4jI2yRz) no-repeat center; background-color: #64594b; background-position: center;">
+                    <td height="350" background="https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/uploads/2017-11/9b41f941c74fe229774c3382cd753e57.jpeg" bgcolor="#64594b" valign="top" style="background: url(https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/uploads/2017-11/9b41f941c74fe229774c3382cd753e57.jpeg) no-repeat center; background-color: #F8F8F8; background-position: center;">
                         <!--[if gte mso 9]>
                         <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="mso-width-percent:1000;height:303px;">
-                            <v:fill type="tile" src="https://www.filepicker.io/api/file/ewEXNrLlTneFGtlB5ryy" color="#64594b" />
+                            <v:fill type="tile" src="https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/uploads/2017-11/9b41f941c74fe229774c3382cd753e57.jpeg" color="#64594b" />
                             <v:textbox inset="0,0,0,0">
                         <![endif]-->
                         <div>
@@ -157,7 +157,7 @@
                                                 <td>
                                                     <div>
                                                         @component('mail::button', ['url' => route('activation', ['code' => $user->verification_token ])])
-                                                            Activation
+                                                            Activate Now
                                                         @endcomponent
                                                     </div>
                                                 </td>
