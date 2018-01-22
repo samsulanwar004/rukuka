@@ -53,9 +53,9 @@ class OrderController extends BaseController
 
 	        $courir = (new CourierRepository)->getSavedSessionShippingChoosed();
 
-	        // if ($courir['error'] != "000") {
-	        // 	throw new Exception($courir['message'], 1);	
-	        // }
+	         if ($courir['error'] != "000") {
+	         	throw new Exception($courir['message'], 1);	
+	        }
 
 	        $detail = $bags->map(function ($entry) use ($bag){
 	        	$bag->remove($entry->rowId);
@@ -71,7 +71,7 @@ class OrderController extends BaseController
 	        });	        
 
 	        //$shipping = $courir['data']->total_fee_usd;
-	        $shipping = 50;
+	        //$shipping = 50;
 
 	        $orderDate = Carbon::now();
 	        $expiredDate = Carbon::now()->addDay();
