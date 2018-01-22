@@ -70,14 +70,14 @@ class OrderController extends BaseController
 	        	];
 	        });	        
 
-	        //$shipping = $courir['data']->total_fee_usd;
+	        $shipping = $courir['data']->total_fee_usd;
 	        //$shipping = 50;
 
 	        $orderDate = Carbon::now();
 	        $expiredDate = Carbon::now()->addDay();
-	        $rupiah =DB::table('exchange_rates')->select('conversion_value')->get()->last();
+	        $rupiah =DB::table('exchange_rates')->select('conversion_value')->where('currency_code_from', 'idr')->get()->last();
 	        $rupiah = $rupiah->conversion_value; // nanti dari database diedit admin
-	        $totalwithshipping = ($total+$shipping)*$rupiah;
+	        $totalwithshipping = round(($total+$shipping)*$rupiah);
 	        $secret = config('common.order_key_signature');
 	        $signature = sha1($totalwithshipping.$secret);
 
@@ -144,9 +144,9 @@ class OrderController extends BaseController
 
 			$total = $data_order->order_subtotal_after_coupon;
 			$shipping = $data_order->shipping_cost;
-			$rupiah =DB::table('exchange_rates')->select('conversion_value')->get()->last();
+			$rupiah =DB::table('exchange_rates')->select('conversion_value')->where('currency_code_from', 'idr')->get()->last();
 	        $rupiah = $rupiah->conversion_value; // nanti dari database diedit admin
-	        $totalwithshipping = ($total+$shipping)*$rupiah;
+	        $totalwithshipping = round(($total+$shipping)*$rupiah);
 	        $secret = config('common.order_key_signature');
 	        $signature = sha1($totalwithshipping.$secret);
 	        
