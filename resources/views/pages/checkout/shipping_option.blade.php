@@ -9,7 +9,7 @@
         <div class="uk-width-3-4@m">
             <h4>CHECKOUT</h4>
             <div class="uk-grid uk-grid-divider uk-child-width-1-3@m uk-margin-small" uk-grid>
-                <div>
+                <div class="uk-text-center">
                     <a href="{{ route('checkout') }}" class="uk-button uk-button-text">SHIPPING ADDRESS</a>
                 </div>
                 <div class="uk-text-center">

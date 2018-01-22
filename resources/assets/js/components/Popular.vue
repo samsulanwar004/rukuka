@@ -10,13 +10,13 @@
           </a>
           <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default uk-visible@m">
             <div class="uk-text-center">
-              <a href="#modal-overflow" class="uk-button uk-button-small uk-button-secondary" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
+              <a href="#modal-popular" class="uk-button uk-button-small uk-button-secondary" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
             </div>
           </div>
         </div>
         <div class="uk-card-body uk-padding-remove uk-margin-small-top">
           <div class="uk-hidden@m">
-            <a href="#modal-overflow" class="uk-button uk-button-small uk-button-default-warm uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
+            <a href="#modal-popular" class="uk-button uk-button-small uk-button-default-warm uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
           </div>
           <a :href="'/product/'+ product.slug" class="uk-text-meta">{{ product.name.substring(0,35) }}</a>
           <br>
@@ -36,7 +36,7 @@
       </div>
     </div>
     <!-- end product single -->
-    <div id="modal-overflow" class="uk-modal-container-small" uk-modal="center: true">
+    <div id="modal-popular" class="uk-modal-container-small" uk-modal="center: true">
       <div class="uk-modal-dialog uk-margin-auto">
         <button class="uk-modal-close-default" type="button" uk-close></button>
         <div class="uk-modal-header uk-visible@m">
