@@ -111,6 +111,11 @@ Route::post('/persist-bag', [
     'uses' => 'Frontend\PageController@bag',
 ]);
 
+Route::post('/xendit', [
+    'as'   => 'xendit',
+    'uses' => 'Frontend\PageController@callBackXendit',
+    ]);
+
 Route::get('/bag', [
     'as'   => 'bag',
     'uses' => 'Frontend\PageController@showBagPage',
@@ -121,6 +126,53 @@ Route::get('/search', [
     'uses' => 'Frontend\PageController@search',
 ]);
 
+Route::get('/blog', [
+    'as'   => 'blog-get-index',
+    'uses' => 'Frontend\BlogController@index',
+]);
+
+Route::post('/blog', [
+    'as'   => 'blog-post-ajax',
+    'uses' => 'Frontend\BlogController@getBlogAjax',
+]);
+
+Route::get('/blog/category/{slug}', [
+    'as'   => 'blog-get-category',
+    'uses' => 'Frontend\BlogController@category',
+]);
+
+Route::get('/blog/{slug}', [
+    'as'   => 'blog-get-read',
+    'uses' => 'Frontend\BlogController@blogRead',
+]);
+
+Route::get('/search/blog', [
+    'as'   => 'blog-get-search',
+    'uses' => 'Frontend\BlogController@search',
+]);
+
+Route::get('/help/{slug}', [
+    'as'   => 'get-help',
+    'uses' => 'Frontend\PageController@help',
+]);
+
+Route::get('/page/{slug}', [
+    'as'   => 'get-page',
+    'uses' => 'Frontend\PageController@page',
+]);
+
+Route::post('/review-ajax', [
+    'as'   => 'review-post-ajax',
+    'uses' => 'Frontend\UserController@getReviewAjax',
+]);
+
+Route::post('/contact', [
+    'as'   => 'contact',
+    'uses' => 'Frontend\PageController@contact',
+]);
+
+
+//MIDDLEWARE
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [
         'as'   => 'login',
@@ -349,16 +401,17 @@ Route::middleware(['auth'])->group(function () {
         'as'   => 'order',
         'uses' => 'Frontend\OrderController@store',
     ]);
+    Route::post('/repayment', [
+        'as'   => 'repayment',
+        'uses' => 'Frontend\OrderController@restore',
+    ]);
 
     Route::get('/order', [
         'as'   => 'order',
         'uses' => 'Frontend\OrderController@store',
     ]);
 
-    Route::post('/xendit', [
-    'as'   => 'xendit',
-    'uses' => 'Frontend\PageController@callBackXendit',
-    ]);
+    
 });
 
 // Route Admin crudbooster

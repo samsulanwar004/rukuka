@@ -1,17 +1,19 @@
 @extends('app')
 
 @section('content')
-<div class="uk-container uk-container-small">
+<section class="uk-section uk-section-muted uk-section-xsmall">
+<div class="uk-container">
   <div class="uk-grid-small uk-margin-top">
       @include('partials.alert')
   </div>
-  <div class="uk-flex uk-flex uk-flex-center">
-    <div class="uk-width-4-5@m">
-      <div class="uk-grid uk-margin-bottom" uk-grid>
-        <div class="uk-width-1-2@m">
+  <h4 class="uk-margin-small-top">YOUR CHECKOUT PROCESS START HERE!</h4>
+  <div class="uk-flex uk-flex uk-flex-center" uk-grid>
+    {{-- <div class="uk-width-4-5@m"> --}}
+      {{-- <div class="uk-grid uk-margin-bottom" uk-grid> --}}
+        <div class="uk-width-1-3@m">
           <div class="uk-card uk-card-default">
             <div class="uk-card-body">
-              <h3>LOGIN</h3>
+              <h4>LOGIN</h4>
                 <form class="form-horizontal" method="POST" action="{{ route('authenticate') }}">
                     {{ csrf_field() }}
                   <ul class="uk-list">
@@ -48,10 +50,10 @@
             </div>
           </div>
         </div>
-        <div class="uk-width-1-2@m">
+        <div class="uk-width-1-3@m">
           <div class="uk-card uk-card-default">
             <div class="uk-card-body">
-              <h3>REGISTER</h3>
+              <h4>REGISTER</h4>
                   <!-- <h3>SIGN IN</h3> -->
                 <form class="uk-form-stacked" action="{{ route('register') }}" method="POST">
                   {{ csrf_field() }}
@@ -85,10 +87,32 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
+        <div class="uk-width-1-3@m">
+          <div class="uk-card uk-card-default">
+            <div class="uk-card-body">
+              <h3>GUEST CHECKOUT</h3>
+                <form class="form-horizontal" method="POST" action="{{ route('authenticate') }}">
+                    {{ csrf_field() }}
+                  <ul class="uk-list">
+                    <li>
+                        <input class="uk-input {{ $errors->has('email_login') ? ' uk-form-danger' : '' }}" id="form-s-email" type="email" placeholder="Email" required="required" name="email_login" value="{{ old('email_login') }}">
+                    </li>
+
+
+                    <li>
+                        <button class="uk-button uk-button-secondary uk-width-1-1" type="submit">continue</button>
+                    </li>
+
+
+                  </ul>
+                </form>
+            </div>
+          </div>
+        </div>
+      {{-- </div> --}}
+    {{-- </div> --}}
   </div>
-
+<hr>
 </div>
-
+</section>
 @endsection

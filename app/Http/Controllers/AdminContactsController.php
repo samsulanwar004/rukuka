@@ -4,57 +4,61 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
-	use Illuminate\Support\Facades\URL;
-    use Exception;
-    use App\Services\UploadService;
-    use Illuminate\Http\Request as NewRequest;
-    use App\MainSlider;
 
-	class AdminMainSlidersController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminContactsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "id";
+			$this->title_field = "title";
 			$this->limit = "20";
-			$this->orderby = "group_setting,asc";
+			$this->orderby = "id,desc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
 			$this->button_action_style = "button_icon";
-			$this->button_add = true;
-			$this->button_edit = true;
+			$this->button_add = false;
+			$this->button_edit = false;
 			$this->button_delete = true;
-			$this->button_detail = false;
+			$this->button_detail = true;
 			$this->button_show = true;
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "main_sliders";
+			$this->table = "contacts";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Group Setting","name"=>"group_setting"];
-			$this->col[] = ["label"=>"Banner","name"=>"banner"];
-			$this->col[] = ["label"=>"Url","name"=>"url"];
-			$this->col[] = ["label"=>"Order","name"=>"order"];
+			$this->col[] = ["label"=>"Title","name"=>"title","width"=>"60"];
+			$this->col[] = ["label"=>"First Name","name"=>"first_name","width"=>"100"];
+			$this->col[] = ["label"=>"Last Name","name"=>"last_name","width"=>"100"];
+			$this->col[] = ["label"=>"Email","name"=>"email","width"=>"150"];
+			$this->col[] = ["label"=>"Subject","name"=>"subject","width"=>"150"];
+			$this->col[] = ["label"=>"Message","name"=>"message","width"=>"200"];
+			$this->col[] = ["label"=>"Created At","name"=>"created_at","width"=>"150"];
+			$this->col[] = ["label"=>"Is Read","name"=>"is_read","width"=>"70"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Group Setting','name'=>'group_setting','type'=>'select2','validation'=>'required','width'=>'col-sm-10','dataenum'=>'Homepage|Homepage;Women|Women;Men|Men;Kids|Kids'];
-			$this->form[] = ['label'=>'Banner','name'=>'banner','type'=>'upload','validation'=>'max:3000','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP'];
-			$this->form[] = ['label'=>'Url','name'=>'url','type'=>'text','width'=>'col-sm-10','placeholder'=>'Please enter a valid URL'];
-			$this->form[] = ['label'=>'Order','name'=>'order','type'=>'number','validation'=>'required|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Title','name'=>'title','type'=>'text','validation'=>'required','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
+			$this->form[] = ['label'=>'First Name','name'=>'first_name','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Last Name','name'=>'last_name','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','validation'=>'required','width'=>'col-sm-10','placeholder'=>'Please enter a valid email address'];
+			$this->form[] = ['label'=>'Subject','name'=>'subject','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Message','name'=>'message','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Group Setting','name'=>'group_setting','type'=>'select2','validation'=>'required','width'=>'col-sm-10','dataenum'=>'homepage|Homepage;women|Women;men|Men;kids|Kids'];
-			//$this->form[] = ['label'=>'Banner','name'=>'banner','type'=>'upload','validation'=>'max:3000','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP'];
-			//$this->form[] = ['label'=>'Url','name'=>'url','type'=>'text','width'=>'col-sm-10','placeholder'=>'Please enter a valid URL'];
-			//$this->form[] = ['label'=>'Order','name'=>'order','type'=>'number','validation'=>'required|min:0','width'=>'col-sm-10'];
+			//$this->form[] = ["label"=>"Title","name"=>"title","type"=>"text","required"=>TRUE,"validation"=>"required|string|min:3|max:70","placeholder"=>"You can only enter the letter only"];
+			//$this->form[] = ["label"=>"First Name","name"=>"first_name","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Last Name","name"=>"last_name","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Email","name"=>"email","type"=>"email","required"=>TRUE,"validation"=>"required|min:1|max:255|email|unique:contacts","placeholder"=>"Please enter a valid email address"];
+			//$this->form[] = ["label"=>"Subject","name"=>"subject","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Message","name"=>"message","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Is Read","name"=>"is_read","type"=>"radio","required"=>TRUE,"validation"=>"required|integer","dataenum"=>"Array"];
 			# OLD END FORM
 
 			/* 
@@ -84,6 +88,7 @@
 	        | 
 	        */
 	        $this->addaction = array();
+            $this->addaction[] = ['label'=>'Mark as read','icon'=>'fa fa-check','color'=>'success','url'=>CRUDBooster::mainpath('read').'/[id]','showIf'=>'[is_read] == 0'];
 
 
 	        /* 
@@ -229,7 +234,6 @@
 	    */
 	    public function actionButtonSelected($id_selected,$button_name) {
 	        //Your code here
-	            
 	    }
 
 
@@ -242,8 +246,7 @@
 	    */
 	    public function hook_query_index(&$query) {
 	        //Your code here
-            $query->orderBy('group_setting');
-            $query->orderBy('order');
+	            
 	    }
 
 	    /*
@@ -252,10 +255,19 @@
 	    | ---------------------------------------------------------------------- 
 	    |
 	    */    
-	    public function hook_row_index($column_index,&$column_value) {	        
-	    	//Your code here
-            if($column_index==2){
-                $column_value = '<img src="'.uploadCDN($column_value).'" alt="-" height="40">';
+	    public function hook_row_index($column_index,&$column_value) {
+            if($column_index==5) {
+                $column_value = str_limit($column_value,30);
+            }
+            if($column_index==6) {
+                $column_value = str_limit($column_value,50);
+            }
+            if($column_index==8) {
+                if ($column_value == '0') {
+                    $column_value = '<span class="label label-warning">Unread</span>';
+                } else {
+                    $column_value = '<span class="label label-success">Read</span>';
+                }
             }
 	    }
 
@@ -335,5 +347,14 @@
 
 
 	    //By the way, you can still create your own method in here... :) 
+
+        public function getRead($id)
+        {
+            DB::table('contacts')
+                ->where('id', $id)
+                ->update(['is_read' => 1]);
+
+            CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Contact has been read !","info");
+        }
 
 	}

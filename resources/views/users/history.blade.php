@@ -54,7 +54,11 @@
                           </tbody>
                       </table>
                       </td>
-                      <td><button class="uk-button uk-button-default" type="button">Pay</button></td>
+                      <td><form action="/repayment" method="POST">
+                      <input type="hidden" name="order_code" value="{{ $item->order_code }}">
+                      <input type="hidden" name="signature" value="{{ sha1($item->order_code) }}">
+                      {{ csrf_field() }}
+                      <input  class="uk-button uk-button-default" type="submit" value="Pay"></form></td>
                   </tr>
                 @endforeach
             </tbody>
