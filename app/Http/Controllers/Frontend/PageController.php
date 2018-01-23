@@ -374,32 +374,37 @@ class PageController extends BaseController
         $PageRepository = new PageRepository();
 
         $result= $PageRepository->getPage($slug);
-        $page = $result['page'];
+        if(!$result){
+            abort(404);
+        }
+        $page = $result;
         return view('pages.page', compact('page'));
-
     }
 
     public function help($slug){
         $PageRepository = new PageRepository();
 
         $result= $PageRepository->getHelp($slug);
-        $page = $result['page'];
+        if(!$result){
+            abort(404);
+        }
+        $page = $result;
         if($slug == 'contact-us'){
             return view('pages.contact', compact('page'));
         }
         else{
             return view('pages.help', compact('page'));
         }
-
     }
 
     public function popup($slug){
         $PageRepository = new PageRepository();
 
         $result= $PageRepository->getPopup($slug);
-
-        return redirect($result['popup']->url);
-
+        if(!$result){
+            abort(404);
+        }
+        return redirect($result->url);
     }
 
     public function search(Request $request)
