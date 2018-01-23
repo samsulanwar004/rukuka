@@ -11,47 +11,50 @@
 |
 */
 
-// this route for testing pos indonesia courier service
-use App\Services\PosIndonesiaCourierService;
+Route::get('/blog', [
+    'as'   => 'blog-get-index',
+    'uses' => 'Frontend\BlogController@index',
+]);
 
-Route::get('/posindonesia', function () {
-    //init object
-    $posIndonesia = new PosIndonesiaCourierService;
+Route::post('/blog', [
+    'as'   => 'blog-post-ajax',
+    'uses' => 'Frontend\BlogController@getBlogAjax',
+]);
 
-    //create request getfee
-    // $requestToPosIndonesia = [
-    //                             [
-    //                                 'userId'            => config('common.username_pos_indonesia'),
-    //                                 'password'          => config('common.password_pos_indonesia'),
-    //                                 'customerId'        => '0',
-    //                                 'isDomestic'        => '0',
-    //                                 'senderPosCode'     => '13210',
-    //                                 'receiverPosCode'   => 'SG',
-    //                                 'weight'            => '1000',
-    //                                 'length'            => '0',
-    //                                 'width'             => '100',
-    //                                 'height'            => '100',
-    //                                 'diameter'          => '0',
-    //                                 'itemValue'         => '900000'
-    //                             ]
-    //                         ];
+Route::get('/blog/category/{slug}', [
+    'as'   => 'blog-get-category',
+    'uses' => 'Frontend\BlogController@category',
+]);
 
-    $requestToPosIndonesia = [
-                                [
-                                    'userId'            => config('common.username_pos_indonesia'),
-                                    'password'          => config('common.password_pos_indonesia'),
-                                    'city'        => '',
-                                    'address'        => ''
-                                ]
-                            ];
+Route::get('/blog/{slug}', [
+    'as'   => 'blog-get-read',
+    'uses' => 'Frontend\BlogController@blogRead',
+]);
 
-    //send request
-    $resultFee = $posIndonesia->callMethod('getPosCodeByaddrAndCity', $requestToPosIndonesia);
+Route::get('/search/blog', [
+    'as'   => 'blog-get-search',
+    'uses' => 'Frontend\BlogController@search',
+]);
 
-    //result
-    var_dump($resultFee);
-});
+Route::get('/help/{slug}', [
+    'as'   => 'get-help',
+    'uses' => 'Frontend\PageController@help',
+]);
 
+Route::get('/page/{slug}', [
+    'as'   => 'get-page',
+    'uses' => 'Frontend\PageController@page',
+]);
+
+Route::post('/review-ajax', [
+    'as'   => 'review-post-ajax',
+    'uses' => 'Frontend\UserController@getReviewAjax',
+]);
+
+Route::get('/', [
+    'as'   => 'index',
+    'uses' => 'Frontend\PageController@index',
+]);
 
 Route::get('/', [
     'as'   => 'index',
