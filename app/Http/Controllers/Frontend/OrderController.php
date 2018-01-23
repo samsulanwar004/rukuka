@@ -188,4 +188,9 @@ class OrderController extends BaseController
 		}
 	}
 	
+	public function getTrackAndTrace($ordeCode){
+
+		$resultTrackAndTrace = $this->order->setOrderCode($ordeCode)->getProcessTrackAndTrace();
+	
+	}
 }

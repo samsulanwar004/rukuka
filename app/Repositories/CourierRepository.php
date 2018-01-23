@@ -367,19 +367,20 @@ class CourierRepository{
 			// kurensi
 			$usdToIdrRate = ExchangeRate::where('currency_code_from','=','usd')
 							->where('currency_code_to','=','idr')
-							->get();
+							->get()
+							->last();
 			
 			if ($usdToIdrRate == null) {
 				
 				return $this->formatResponse('887', 'error exhange rate not set', null, null);
 
-			}else if ($usdToIdrRate[0]->conversion_value != 1) {
+			}else if ($usdToIdrRate->conversion_value != 1) {
 				
 				return $this->formatResponse('886', 'convertion value must 1', null, null);
 
 			}
 
-			$oneUsdToIdr = $usdToIdrRate[0]->inverse_conversion_value;
+			$oneUsdToIdr = $usdToIdrRate->inverse_conversion_value;
 			
 			// reforming structur
 			if (is_array($resultFromCourierProvider->r_fee)) {
