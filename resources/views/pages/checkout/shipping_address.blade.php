@@ -209,7 +209,7 @@
      $("#continue").on('click', function (e) {
        e.preventDefault();
        var submit = $('#submit').val();
-       console.log(submit);
+       var url = '{{ route('checkout.shipping') }}';
        if (submit == 'SUBMIT') {
          $('#submit').click();
        } else {

@@ -29,9 +29,6 @@
           </a> --}}
 
           <ul id="component-tab-left" class="uk-switcher">
-
-
-
             @foreach ($slider as $item)
               <a href="{{ $item->url }}" class="uk-link-reset">
               <li>
@@ -39,7 +36,6 @@
               </li>
             </a>
             @endforeach
-
           </ul>
           <div class="uk-position-small uk-position-bottom-center">
             <ul class="uk-dotnav" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" >

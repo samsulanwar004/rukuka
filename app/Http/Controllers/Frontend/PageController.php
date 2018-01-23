@@ -12,13 +12,16 @@ use App\Repositories\PageRepository;
 use Exception;
 use Carbon\Carbon;
 use App\Services\BagService;
+use App\Contact;
 use Share;
 use DB;
+use Validator;
 
 class PageController extends BaseController
 {
     const INSTANCE_SHOP = 'shopping';
 
+    protected $redirectAfterInsertContact = '/help/contact-us';
     private $date;
 
     public function __construct()
@@ -182,7 +185,9 @@ class PageController extends BaseController
             return [$item['name'] => $item['content']];
         })->toArray();
 
-        return view('pages.women', compact('women'));
+        $slider = (new SettingRepository())->getSliderByGroup('Women');
+
+        return view('pages.women', compact('women','slider'));
     }
 
     public function men()
@@ -193,7 +198,9 @@ class PageController extends BaseController
             return [$item['name'] => $item['content']];
         })->toArray();
 
-        return view('pages.men', compact('men'));
+        $slider = (new SettingRepository())->getSliderByGroup('Men');
+
+        return view('pages.men', compact('men','slider'));
     }
 
     public function kids()
@@ -204,7 +211,9 @@ class PageController extends BaseController
             return [$item['name'] => $item['content']];
         })->toArray();
 
-        return view('pages.kids', compact('kids'));
+        $slider = (new SettingRepository())->getSliderByGroup('Kids');
+
+        return view('pages.kids', compact('kids','slider'));
     }
 
     public function bag(Request $request)
@@ -365,34 +374,37 @@ class PageController extends BaseController
         $PageRepository = new PageRepository();
 
         $result= $PageRepository->getPage($slug);
-        $page = $result['page'];
-        $status= $result['status'];
-        return view('pages.page', compact('page','status'));
-
+        if(!$result){
+            abort(404);
+        }
+        $page = $result;
+        return view('pages.page', compact('page'));
     }
 
     public function help($slug){
         $PageRepository = new PageRepository();
 
         $result= $PageRepository->getHelp($slug);
-        $page = $result['page'];
-        $status= $result['status'];
-        return view('pages.help', compact('page','status'));
-
+        if(!$result){
+            abort(404);
+        }
+        $page = $result;
+        if($slug == 'contact-us'){
+            return view('pages.contact', compact('page'));
+        }
+        else{
+            return view('pages.help', compact('page'));
+        }
     }
 
     public function popup($slug){
         $PageRepository = new PageRepository();
 
         $result= $PageRepository->getPopup($slug);
-
-        if($result['status']['code'] == '001')
-        {
-            return redirect('/');
+        if(!$result){
+            abort(404);
         }
-
-        return redirect($result['popup']->url);
-
+        return redirect($result->url);
     }
 
     public function search(Request $request)
@@ -434,14 +446,47 @@ class PageController extends BaseController
         ));
     }
 
+    public function contact (Request $request){
+        $this->validate($request, [
+            'title' => 'required|string',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|email',
+            'subject' => 'required|string',
+            'message' => 'required|string',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $contact = new Contact();
+
+            $contact->title = $request->input('title');
+            $contact->first_name = $request->input('first_name');
+            $contact->last_name = $request->input('last_name');
+            $contact->email = $request->input('email');
+            $contact->subject = $request->input('subject');
+            $contact->message = $request->input('message');
+            $contact->save();
+            DB::commit();
+
+            return redirect($this->redirectAfterInsertContact)->with(['success' => 'Thank you for contacting us, we will contact back to you as soon as we can.']);
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return back()->withErrors($e->getMessage());
+        }
+
+    }
+
     public function callBackXendit(Request $request)
     {
         
         $content = $request->getContent();
-        DB::table('callback_payment')->insert(
-        ['merchant' => 'xendit', 'response' => $content]
+        DB::table('callback_payments')->insert(
+        ['merchant' => 'xendit', 'response' => $content,'created_at' => date("Y-m-d H:i:s"),'updated_at' => date("Y-m-d H:i:s")]
         );
-
+        
         return $content;
     }
 
