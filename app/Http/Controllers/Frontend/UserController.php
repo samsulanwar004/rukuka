@@ -503,6 +503,7 @@ class UserController extends BaseController
     public function showShippingAddressPage()
     {
         $user = $this->getUserActive();
+
         $address = $user->address;
 
         return view('pages.checkout.shipping_address', compact('address'));

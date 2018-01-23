@@ -14,8 +14,11 @@ class BaseController extends Controller
     {
         if (session()->has('as.guest')) {
             $email = session()->get('as.guest')['email'];
-            return (new \App\Repositories\UserRepository)->getUserByEmail($email);
+
+            $user = (new \App\Repositories\UserRepository)->getUserByEmail($email);
+            return $user ? $user : session()->forget('as.guest');
         }
+        
     	return auth('web')->user();
     }
 
