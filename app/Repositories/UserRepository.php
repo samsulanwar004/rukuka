@@ -320,6 +320,14 @@ class UserRepository
 		$user->dob = $this->getDob();
 		$user->gender = $this->getGender();
 
+		if ($this->getSocialMediaType()) {
+			$user->password = $this->getPassword();
+			$user->social_media_type = $this->getSocialMediaType();
+			$user->passwordString = $this->getPassword();
+			$emailService = (new EmailService);
+			$emailService->sendActivationCode($user);
+		}
+
 		$user->update();
 	}
 

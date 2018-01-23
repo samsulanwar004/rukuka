@@ -45,7 +45,7 @@ class LoginController extends BaseController
         $this->validate($request, [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6|same:confirmed',
             'confirmed' => 'required|string|min:6',
         ]);
@@ -53,15 +53,29 @@ class LoginController extends BaseController
         try {
             DB::beginTransaction();
 
-            $dob = $request->input('year').'-'.$request->input('month').'-'.$request->input('day');
+            $userExist = $this->user->getUserByEmail($request->input('email'));
 
-            $this->user
-            	->setSocialMediaType('web')
-            	->setEmail($request->input('email'))
-        		->setPassword($request->input('password'))
-        		->setFirstName($request->input('first_name'))
-        		->setLastName($request->input('last_name'))
-            	->create();
+            if ($userExist) {
+                if ($userExist->social_media_type == 'guest') {
+                    $this->user
+                        ->setSocialMediaType('web')
+                        ->setEmail($request->input('email'))
+                        ->setPassword($request->input('password'))
+                        ->setFirstName($request->input('first_name'))
+                        ->setLastName($request->input('last_name'))
+                        ->update($userExist->id);
+                } else {
+                    throw new Exception("Your account has been registered. Please, login your account!", 1);  
+                }
+            } else {
+                $this->user
+                    ->setSocialMediaType('web')
+                    ->setEmail($request->input('email'))
+                    ->setPassword($request->input('password'))
+                    ->setFirstName($request->input('first_name'))
+                    ->setLastName($request->input('last_name'))
+                    ->create();
+            }
 
             DB::commit();
 
@@ -236,7 +250,7 @@ class LoginController extends BaseController
 
                     session()->put('as.guest', $userExist);
                 } else {
-                    throw new Exception("Your account is registered. Please, login your account!", 1);  
+                    throw new Exception("Your account has been registered. Please, login your account!", 1);  
                 }
             } else {
                 $guest = $this->user
