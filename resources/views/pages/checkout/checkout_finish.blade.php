@@ -3,7 +3,7 @@
   <div class="uk-container uk-container-small">
     <div class="uk-grid-small uk-margin-top uk-flex uk-flex-center" uk-grid>
       <div class="uk-width-3-4@m">
-        <h3>Your Checkout Process is almost done!</h3>{{$totalwithshipping}}
+        <h3>Your Checkout Process is almost done!</h3>
         <div class="uk-card uk-card-default uk-card-border">
             <div class="uk-card-body">
                 <form role="form" id="payment-form" method="POST" action="javascript:void(0);" class="form_class">
@@ -96,7 +96,7 @@
                 $form.submit(function (event) {
                     hideResults();
 
-                    Xendit.setPublishableKey('xnd_public_development_OoiFKOl3172qnJJpeuFNTDOUYdL1o4Z0mH3h/Rhm9G3e+b2gCgJ3');
+                    <?php echo "Xendit.setPublishableKey('".config('common.xendit_public_key')."')";?>
 
                     // Disable the submit button to prevent repeated clicks:
                     $form.find('.submit').prop('disabled', true);
