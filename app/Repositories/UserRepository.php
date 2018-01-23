@@ -88,7 +88,7 @@ class UserRepository
 		$user->verification_expired = $verificationExpired;
 		$user->api_token = str_random(60);
 
-		if ($user->social_media_type != 'web') {
+		if ($user->social_media_type != 'web' && $user->social_media_type != 'guest') {
 			$user->status = 1;
 			$user->is_verified = 1;
 		}
@@ -319,6 +319,14 @@ class UserRepository
 		$user->phone_number = $this->getPhone();
 		$user->dob = $this->getDob();
 		$user->gender = $this->getGender();
+
+		if ($this->getSocialMediaType()) {
+			$user->password = $this->getPassword();
+			$user->social_media_type = $this->getSocialMediaType();
+			$user->passwordString = $this->getPassword();
+			$emailService = (new EmailService);
+			$emailService->sendActivationCode($user);
+		}
 
 		$user->update();
 	}
