@@ -8,15 +8,19 @@ use DB;
 use App\Repositories\UserRepository;
 use App\Exceptions\SocialAuthException;
 use App\Services\SocialMediaService;
+use App\Services\BagService;
 use Session;
+use Illuminate\Routing\Route;
 
 class LoginController extends BaseController
 {
+    const INSTANCE_SHOP = 'shopping';
 	private $social;
 	private $user;
     protected $redirectAfterLogin = '/account';
     protected $redirectAfterRegister = '/login';
     protected $redirectAfterForgot = '/forgot';
+    protected $redirectAfterAsGuest = '/checkout';
 
     public function __construct(SocialMediaService $social, UserRepository $user)
     {
@@ -30,8 +34,10 @@ class LoginController extends BaseController
         $ref = rtrim($ref, '/');
 
         Session::put('referrer', $ref);
+        $bag = (new BagService)->get(self::INSTANCE_SHOP);
+        $checkout = count($bag) ? true : false; 
 
-        return view('pages.login');
+        return view('pages.login', compact('checkout'));
     }
 
     public function register(Request $request)
@@ -39,7 +45,7 @@ class LoginController extends BaseController
         $this->validate($request, [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6|same:confirmed',
             'confirmed' => 'required|string|min:6',
         ]);
@@ -47,15 +53,29 @@ class LoginController extends BaseController
         try {
             DB::beginTransaction();
 
-            $dob = $request->input('year').'-'.$request->input('month').'-'.$request->input('day');
+            $userExist = $this->user->getUserByEmail($request->input('email'));
 
-            $this->user
-            	->setSocialMediaType('web')
-            	->setEmail($request->input('email'))
-        		->setPassword($request->input('password'))
-        		->setFirstName($request->input('first_name'))
-        		->setLastName($request->input('last_name'))
-            	->create();
+            if ($userExist) {
+                if ($userExist->social_media_type == 'guest') {
+                    $this->user
+                        ->setSocialMediaType('web')
+                        ->setEmail($request->input('email'))
+                        ->setPassword($request->input('password'))
+                        ->setFirstName($request->input('first_name'))
+                        ->setLastName($request->input('last_name'))
+                        ->update($userExist->id);
+                } else {
+                    throw new Exception("Your account has been registered. Please, login your account!", 1);  
+                }
+            } else {
+                $this->user
+                    ->setSocialMediaType('web')
+                    ->setEmail($request->input('email'))
+                    ->setPassword($request->input('password'))
+                    ->setFirstName($request->input('first_name'))
+                    ->setLastName($request->input('last_name'))
+                    ->create();
+            }
 
             DB::commit();
 
@@ -76,7 +96,9 @@ class LoginController extends BaseController
         ]);
 
         try {
-
+            //delete session as guest
+            session()->forget('as.guest');
+            
             $auth = $this->user
             	->setEmail($request->input('email_login'))
             	->setPassword($request->input('password_login'))
@@ -205,6 +227,54 @@ class LoginController extends BaseController
        	} catch (Exception $e) {
        		return back()->withErrors($e->getMessage());
        	}
+    }
+
+    public function asGuest(Request $request)
+    {
+        $this->validate($request, [
+            'email_guest' => 'required|string|email|max:255',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $userExist = $this->user->getUserByEmail($request->input('email_guest'));
+
+            if ($userExist) {
+                if ($userExist->social_media_type == 'guest') {
+
+                    $userExist =  [
+                        'id' => $userExist->id,
+                        'email' => $userExist->email
+                    ];
+
+                    session()->put('as.guest', $userExist);
+                } else {
+                    throw new Exception("Your account has been registered. Please, login your account!", 1);  
+                }
+            } else {
+                $guest = $this->user
+                    ->setSocialMediaType('guest')
+                    ->setEmail($request->input('email_guest'))
+                    ->setPassword(strtolower(str_random(10)))
+                    ->create(); 
+
+                $guest = [
+                    'id' => $guest->id,
+                    'email' => $guest->email
+                ];
+
+                session()->put('as.guest', $guest);
+            }         
+
+            DB::commit();
+
+            return redirect($this->redirectAfterAsGuest)
+                ->with(['success' => 'As guest successfully! Please, finish your order!']);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return back()->withErrors($e->getMessage());
+        }
     }
  
 }

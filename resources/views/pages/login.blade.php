@@ -6,7 +6,9 @@
   <div class="uk-grid-small uk-margin-top">
       @include('partials.alert')
   </div>
-  <h4 class="uk-margin-small-top">YOUR CHECKOUT PROCESS START HERE!</h4>
+  @if($checkout)
+    <h4 class="uk-margin-small-top uk-text-center">YOUR CHECKOUT PROCESS START HERE!</h4>
+  @endif
   <div class="uk-flex uk-flex uk-flex-center" uk-grid>
     {{-- <div class="uk-width-4-5@m"> --}}
       {{-- <div class="uk-grid uk-margin-bottom" uk-grid> --}}
@@ -87,15 +89,16 @@
             </div>
           </div>
         </div>
+        @if($checkout)
         <div class="uk-width-1-3@m">
           <div class="uk-card uk-card-default">
             <div class="uk-card-body">
               <h3>GUEST CHECKOUT</h3>
-                <form class="form-horizontal" method="POST" action="{{ route('authenticate') }}">
+                <form class="form-horizontal" method="POST" action="{{ route('checkout.as.guest') }}">
                     {{ csrf_field() }}
                   <ul class="uk-list">
                     <li>
-                        <input class="uk-input {{ $errors->has('email_login') ? ' uk-form-danger' : '' }}" id="form-s-email" type="email" placeholder="Email" required="required" name="email_login" value="{{ old('email_login') }}">
+                        <input class="uk-input {{ $errors->has('email_guest') ? ' uk-form-danger' : '' }}" id="form-s-email" type="email" placeholder="Email" required="required" name="email_guest" value="{{ old('email_guest') }}">
                     </li>
 
 
@@ -109,6 +112,7 @@
             </div>
           </div>
         </div>
+        @endif
       {{-- </div> --}}
     {{-- </div> --}}
   </div>
