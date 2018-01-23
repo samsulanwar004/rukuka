@@ -11,9 +11,9 @@
     @endphp
 
     <div class="uk-container uk-container-small uk-margin-large-top uk-margin-large-bottom">
-        <h1>{!! $page[0]['title']!!}</h1>
+        <h1>{!! $page['title']!!}</h1>
         <div class="scroll">
-            {!! $page[0]['content']!!}
+            {!! $page['content']!!}
         </div>
     </div>
 

@@ -20,8 +20,8 @@
 
                   <div class="uk-width-3-4@m">
                       <div class="scroll">
-                          <h3>{!! $page[0]['title'] !!}</h3>
-                          {!! $page[0]['content']!!}
+                          <h3>{!! $page['title'] !!}</h3>
+                          {!! $page['content']!!}
                       </div>
                   </div>
               </div>
