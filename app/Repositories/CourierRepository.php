@@ -374,13 +374,10 @@ class CourierRepository{
 				
 				return $this->formatResponse('887', 'error exchange rate not set', null, null);
 
-			}else if ($usdToIdrRate->conversion_value != 1) {
-				
-				return $this->formatResponse('886', 'convertion value must 1', null, null);
-
 			}
 
-			$oneUsdToIdr = $usdToIdrRate->inverse_conversion_value;
+
+			$oneUsdToIdr = $usdToIdrRate->conversion_value;
 			
 			// reforming structur
 			if (is_array($resultFromCourierProvider->r_fee)) {
