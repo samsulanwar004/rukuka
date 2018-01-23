@@ -45,6 +45,7 @@
 			$this->form[] = ['label'=>'Shipping Id','name'=>'shipping_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'shipping,id'];
 			$this->form[] = ['label'=>'Payment Id','name'=>'payment_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'payment,id'];
 			$this->form[] = ['label'=>'Order Code','name'=>'order_code','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Air Waybill','name'=>'airwaybill','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Payment Method','name'=>'payment_method','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Payment Name','name'=>'payment_name','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Payment Status','name'=>'payment_status','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];

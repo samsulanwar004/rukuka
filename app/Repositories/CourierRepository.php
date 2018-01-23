@@ -51,7 +51,7 @@ class CourierRepository{
 
 	}
 
-	public function createSignatureBag(){
+	private function createSignatureBag(){
 
 		$session = new Session();
 
@@ -69,7 +69,7 @@ class CourierRepository{
 		return $this->formatResponse('000', 'signature bag created',  $signatureResult['data'], null);
 	}
 
-	public function verifySignatureBag(){
+	private function verifySignatureBag(){
 
 		$session = new Session();
 
@@ -97,7 +97,7 @@ class CourierRepository{
 		
 	}
 
-	public function getSignatureBag(){
+	private function getSignatureBag(){
 
 		$checkoutBag = $this->checkoutBag;
 
@@ -132,7 +132,7 @@ class CourierRepository{
 		return $this->formatResponse('000', 'bring signature bag in data', $signatureResult, null);
 	}
 
-	public function createSignatureAddress(){
+	private function createSignatureAddress(){
 
 		$session = new Session();
 
@@ -151,7 +151,7 @@ class CourierRepository{
 
 	}
 
-	public function veryfySignatureAddress(){
+	private function veryfySignatureAddress(){
 
 		$session = new Session();
 
@@ -178,7 +178,7 @@ class CourierRepository{
 		}
 	}
 
-	public function getSignatureAddress(){
+	private function getSignatureAddress(){
 
 		$destinationAddress = $this->destinationAddress;
 
@@ -210,7 +210,39 @@ class CourierRepository{
 		return $this->formatResponse('000', 'bring signature address in data', $signatureResult, null);
 	}
 
-	public function getShippingServiceByPosIndonesia(){
+	public function getTrackingAndTrace(){
+		
+		$posIndonesia 		= new PosIndonesiaCourierService;
+
+		if(config('common.is_pos_indonesia_prod') == true){
+
+			$requestUserId = config('common.username_pos_indonesia_prod');
+			$requestPassword = config('common.password_pos_indonesia_prod');
+		
+		}else{
+
+			$requestUserId = config('common.username_pos_indonesia_dev');
+			$requestPassword = config('common.password_pos_indonesia_dev');
+
+		}
+
+		//create request getfee
+	    $requestToPosIndonesia = [
+	                                [
+	                                    'userId'  	=> $requestUserId,
+	                                    'password'  => $requestPassword,
+	                                    'barcode'   => '15464658065'
+	                                ]
+	                            ]; 
+
+	    echo "<script>console.log('" . json_encode($requestToPosIndonesia) . "');</script>";
+	    
+	    $resultPosIndonesia = $posIndonesia->callMethod('getTrackAndTrace', $requestToPosIndonesia);
+	
+	    dd($resultPosIndonesia);
+	}
+
+	private function getShippingServiceByPosIndonesia(){
 		
 		$posIndonesia 		= new PosIndonesiaCourierService;
 		$checkoutBag 		= $this->checkoutBag;
@@ -291,7 +323,7 @@ class CourierRepository{
 	    echo "<script>console.log('" . json_encode($requestToPosIndonesia) . "');</script>";
 	    
 	    $resultPosIndonesia = $posIndonesia->callMethod('getFee', $requestToPosIndonesia);
-	    
+	
 	    if ($resultPosIndonesia->r_fee->serviceName == 'ERROR') {
 	    	
 	    	return $this->formatResponse('999', 'error shiping services unavailable', $resultPosIndonesia, null);
@@ -328,7 +360,7 @@ class CourierRepository{
 
 	}
 
-	public function rebuildDataResponseFromProviderShipping($courierName, $resultFromCourierProvider){
+	private function rebuildDataResponseFromProviderShipping($courierName, $resultFromCourierProvider){
 
 		if ($courierName == self::POS_INDONESIA) {
 
@@ -429,7 +461,7 @@ class CourierRepository{
 
 	}
 
-	public function defaultTemplateResponseCourier($serviceCode, $serviceName, $fee, $feeTax, $insurance, $insuranceTax, $totalFee, $itemValue, $notes){
+	private function defaultTemplateResponseCourier($serviceCode, $serviceName, $fee, $feeTax, $insurance, $insuranceTax, $totalFee, $itemValue, $notes){
 
 		return (object) [
 					'serviceCode' 	=> $serviceCode,
@@ -456,7 +488,7 @@ class CourierRepository{
 	//
 	//-------------------------------------------------------------------
 
-	public function saveResultShippingCostService($courierName, $result){
+	private function saveResultShippingCostService($courierName, $result){
 
 		$session = new Session();
 		
@@ -492,7 +524,7 @@ class CourierRepository{
 
 	}
 
-	public function getShippingCostChoosed($valueChoosed){
+	private function getShippingCostChoosed($valueChoosed){
 
 		$session = new Session();
 
@@ -573,7 +605,7 @@ class CourierRepository{
 
 	}
 
-	public function saveToSessionShippingCostChoosed($rebuildDataForSummary){
+	private function saveToSessionShippingCostChoosed($rebuildDataForSummary){
 
 		$session = new Session();
 
@@ -604,7 +636,7 @@ class CourierRepository{
 
 	}
 
-	public function rebuildDataForSummary($constCourier, $valueChoosed, $costChoosed){
+	private function rebuildDataForSummary($constCourier, $valueChoosed, $costChoosed){
 
 		// NOTE : standar return array for this method follow pos indonesia bellow
 
@@ -634,7 +666,7 @@ class CourierRepository{
 
 	}
 
-	public function defaultTemplateForSummary($courierName, $totalFeeIdr, $totalFeeUsd, $valueCourierSelected, $origin){
+	private function defaultTemplateForSummary($courierName, $totalFeeIdr, $totalFeeUsd, $valueCourierSelected, $origin){
 
 		return (object) [
 							'courier_name' 			 => $courierName,
@@ -646,7 +678,7 @@ class CourierRepository{
 
 	}
 
-	public function formatResponse($erroCode, $message, $data, $separator){
+	private function formatResponse($erroCode, $message, $data, $separator){
 
 		return [
 			'error'	=>	$erroCode, 

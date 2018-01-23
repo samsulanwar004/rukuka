@@ -205,7 +205,7 @@
 @section('footer_scripts')
 <script type="text/javascript">
    $(function () {
-
+     var url = '{{ route('checkout.shipping') }}';
      $("#continue").on('click', function (e) {
        e.preventDefault();
        var submit = $('#submit').val();
