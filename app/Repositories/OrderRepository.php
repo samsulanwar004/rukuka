@@ -287,4 +287,9 @@ class OrderRepository
 		return Order::where('id', $id)
 			->first();
 	}
+
+	public function getProcessTrackAndTrace(){
+		dd(Order::where('order_code', $this->getOrderCode())
+			->first());
+	}
 }

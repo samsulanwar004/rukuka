@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/blog', [
+    'as'   => 'blog-get-index',
+    'uses' => 'Frontend\BlogController@index',
+]);
 
 Route::get('/blog', [
     'as'   => 'blog-get-index',
@@ -411,7 +415,11 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\OrderController@store',
     ]);
 
-    
+    Route::get('/airwaybill/{ordeCode}', [
+        'as'   => 'airwaybill-get-track-and-trace',
+        'uses' => 'Frontend\OrderController@getTrackAndTrace',
+    ]);
+
 });
 
 // Route Admin crudbooster
