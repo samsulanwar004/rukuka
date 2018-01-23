@@ -19,7 +19,7 @@ class AsGuestMiddleware
     public function handle($request, Closure $next)
     {
 
-        if (!Auth::check()) {
+        if (!Auth::check() && !$request->session()->has('as.guest')) {
             return redirect('login');
         }
 

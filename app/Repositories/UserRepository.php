@@ -88,7 +88,7 @@ class UserRepository
 		$user->verification_expired = $verificationExpired;
 		$user->api_token = str_random(60);
 
-		if ($user->social_media_type != 'web') {
+		if ($user->social_media_type != 'web' && $user->social_media_type != 'guest') {
 			$user->status = 1;
 			$user->is_verified = 1;
 		}

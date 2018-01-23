@@ -224,7 +224,10 @@ Route::middleware(['guest'])->group(function () {
         'uses' => 'Frontend\LoginController@reset',
     ]);
 
-
+    Route::post('/checkout-as-guest', [
+        'as'   => 'checkout.as.guest',
+        'uses' => 'Frontend\LoginController@asGuest',
+    ]);
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -305,31 +308,6 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@showAddressPage',
     ]);
 
-    Route::post('/account/address', [
-        'as'   => 'user.address',
-        'uses' => 'Frontend\UserController@addressSave',
-    ]);
-
-    Route::post('/account/address-default', [
-        'as'   => 'user.address.default',
-        'uses' => 'Frontend\UserController@defaultAddress',
-    ]);
-
-    Route::delete('/account/address/destroy', [
-        'as'   => 'user.address.destroy',
-        'uses' => 'Frontend\UserController@addressDestroy',
-    ]);
-
-    Route::get('/account/address/edit/{id?}', [
-        'as'   => 'user.address.edit',
-        'uses' => 'Frontend\UserController@addressEdit',
-    ]);
-
-    Route::post('/account/address/update/{id?}', [
-        'as'   => 'user.address.update',
-        'uses' => 'Frontend\UserController@addressUpdate',
-    ]);
-
     // Route Credit Card module
     // Route::get('/account/cc', [
     //     'as'   => 'user.cc',
@@ -361,10 +339,6 @@ Route::middleware(['auth'])->group(function () {
     //     'uses' => 'Frontend\UserController@ccUpdate',
     // ]);
 
-    Route::post('/order', [
-        'as'   => 'order',
-        'uses' => 'Frontend\OrderController@store',
-    ]);
     Route::post('/repayment', [
         'as'   => 'repayment',
         'uses' => 'Frontend\OrderController@restore',
@@ -407,7 +381,39 @@ Route::middleware(['as.guest'])->group(function () {
     Route::post('/checkout/final', [
         'as'   => 'checkout.final',
         'uses' => 'Frontend\UserController@postFinalPage',
+    ]); 
+
+    //Route Address
+    Route::post('/account/address', [
+        'as'   => 'user.address',
+        'uses' => 'Frontend\UserController@addressSave',
     ]);
+
+    Route::post('/account/address-default', [
+        'as'   => 'user.address.default',
+        'uses' => 'Frontend\UserController@defaultAddress',
+    ]);
+
+    Route::delete('/account/address/destroy', [
+        'as'   => 'user.address.destroy',
+        'uses' => 'Frontend\UserController@addressDestroy',
+    ]);
+
+    Route::get('/account/address/edit/{id?}', [
+        'as'   => 'user.address.edit',
+        'uses' => 'Frontend\UserController@addressEdit',
+    ]);
+
+    Route::post('/account/address/update/{id?}', [
+        'as'   => 'user.address.update',
+        'uses' => 'Frontend\UserController@addressUpdate',
+    ]);  
+
+    //Route Order
+    Route::post('/order', [
+        'as'   => 'order',
+        'uses' => 'Frontend\OrderController@store',
+    ]); 
 });
 
 // Route Admin crudbooster
