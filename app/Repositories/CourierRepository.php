@@ -365,14 +365,14 @@ class CourierRepository{
 		if ($courierName == self::POS_INDONESIA) {
 
 			// kurensi
-			$usdToIdrRate = ExchangeRate::where('currency_code_from','=','usd')
-							->where('currency_code_to','=','idr')
+			$usdToIdrRate = ExchangeRate::where('currency_code_from','=','idr')
+							->where('currency_code_to','=','usd')
 							->get()
 							->last();
 			
 			if ($usdToIdrRate == null) {
 				
-				return $this->formatResponse('887', 'error exhange rate not set', null, null);
+				return $this->formatResponse('887', 'error exchange rate not set', null, null);
 
 			}else if ($usdToIdrRate->conversion_value != 1) {
 				
