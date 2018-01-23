@@ -39,7 +39,7 @@
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Currency Code From','name'=>'currency_code_from','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'usd;idr'];
+			$this->form[] = ['label'=>'Currency Code From','name'=>'currency_code_from','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'idr'];
 			$this->form[] = ['label'=>'Currency Code To','name'=>'currency_code_to','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'usd;idr'];
 			$this->form[] = ['label'=>'Conversion Value','name'=>'conversion_value','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Inverse Conversion Value','name'=>'inverse_conversion_value','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
@@ -47,11 +47,10 @@
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ["label"=>"Cms Users Id","name"=>"cms_users_id","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"cms_users,name"];
-			//$this->form[] = ["label"=>"Currency Code From","name"=>"currency_code_from","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"Currency Code To","name"=>"currency_code_to","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"Conversion Value","name"=>"conversion_value","type"=>"money","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"Inverse Conversion Value","name"=>"inverse_conversion_value","type"=>"money","required"=>TRUE,"validation"=>"required|integer|min:0"];
+			//$this->form[] = ['label'=>'Currency Code From','name'=>'currency_code_from','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'usd;idr'];
+			//$this->form[] = ['label'=>'Currency Code To','name'=>'currency_code_to','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'usd;idr'];
+			//$this->form[] = ['label'=>'Conversion Value','name'=>'conversion_value','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Inverse Conversion Value','name'=>'inverse_conversion_value','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			# OLD END FORM
 
 			/* 
