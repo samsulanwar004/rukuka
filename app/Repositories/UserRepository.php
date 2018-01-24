@@ -323,12 +323,15 @@ class UserRepository
 		if ($this->getSocialMediaType()) {
 			$user->password = $this->getPassword();
 			$user->social_media_type = $this->getSocialMediaType();
+
+			$user->update();
+			
 			$user->passwordString = $this->getPassword();
 			$emailService = (new EmailService);
 			$emailService->sendActivationCode($user);
+		} else {
+			$user->update();
 		}
-
-		$user->update();
 	}
 
     public function updateLastLogin($id)
