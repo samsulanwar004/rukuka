@@ -1,9 +1,18 @@
 <template>
+    <div class="uk-overflow-auto">
     <table class="uk-table uk-table-divider">
         <thead>
             <tr>
                 <th class="uk-table-shrink" colspan="3"><b>ITEMS ({{ bags.length }})</b></th>
             </tr>
+        </thead>
+        <thead>
+        <tr>
+            <th class="uk-table-shrink"></th>
+            <th class="uk-table-expand">ITEM</th>
+            <th class="uk-width-medium">QTY</th>
+            <th class="uk-table-shrink uk-text-nowrap">UNIT PRICE</th>
+        </tr>
         </thead>
         <tbody v-for="bag in bags">
             <tr>
@@ -27,6 +36,7 @@
             </tr>
         </tbody>
     </table>
+    </div>
 </template>
 
 <script>
