@@ -17,7 +17,7 @@
   @if($recently)
   <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
       <div class="uk-panel">
-          <h3 class="uk-margin-small">RECENTLY VIEWED</h3>
+          <h4 class="uk-margin-small">RECENTLY VIEWED</h4>
       </div>
   </div>
   <related
