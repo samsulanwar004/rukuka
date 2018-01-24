@@ -141,9 +141,25 @@
             <button class="uk-button uk-button-secondary" type="button" v-on:click="bag">ADD TO BAG</button>
             <button class="uk-button uk-button-default" type="button" v-on:click="wishlist">ADD TO WISHLIST</button>
         </div>
-        <div class="uk-modal-footer uk-text-right uk-padding-small uk-hidden@m">
-            <button class="uk-button uk-button-secondary uk-button-small" type="button" v-on:click="bag">BAG <span class="uk-icon" uk-icon="icon:  chevron-right"></span></button>
-            <button class="uk-button uk-button-default uk-button-small" type="button" v-on:click="wishlist">WISHLIST <span class="uk-icon" uk-icon="icon:  chevron-right"></span></button>
+        <div class="uk-modal-footer uk-padding-small uk-hidden@m">
+          <div class="uk-grid-match uk-child-width-auto uk-flex-between uk-grid" uk-grid>
+          <div class="uk-first-column">
+            <div>
+              <a class="uk-icon uk-icon-link" href="#" uk-icon="icon: cart"></a>
+              <div class="uk-badge">
+                <a href="#" class="uk-light uk-link-reset">7</a>
+              </div>
+            </div>
+
+          </div>
+          <div class="uk-panel">
+            <div>
+              <button class="uk-button uk-button-secondary uk-button-small" type="button" v-on:click="bag">BAG <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+              <button class="uk-button uk-button-default uk-button-small" type="button" v-on:click="wishlist">WISHLIST <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+            </div>
+
+          </div>
+          </div>
         </div>
       </div>
     </div>

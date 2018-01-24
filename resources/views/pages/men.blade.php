@@ -172,7 +172,7 @@
         </div>
         {{--END 3 ROW BANNER--}}
         <hr>
-        <h3 class="uk-margin-small">TRENDING NOW</h3>
+        <h4 class="uk-margin-small">TRENDING NOW</h4>
         <popular
                 api="{{ route('populer', 'Men')}}"
                 product_api="{{ route('product.api') }}"
