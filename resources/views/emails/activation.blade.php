@@ -43,7 +43,7 @@
         }
 
         table {
-            background:
+
         }
 
         h1, h2, h3 {
@@ -209,6 +209,11 @@
                                     <td>
                                         <center>
                                             <table style="margin:0 auto;" cellspacing="0" cellpadding="5" width="100%">
+                                                <tr>
+                                                    <td style="text-align:center; margin:0 auto;" width="100%">
+                                                        <a href="/" class="uk-link-reset"><img src="{{ imageCDN(config('common.logo')) }}" alt="rukuka" width="90"></a>
+                                                    </td>
+                                                </tr>
                                                 <tr>
                                                     <td style="text-align:center; margin:0 auto;" width="100%">
                                                         © 2018 rukuka - All Rights Reserved.
