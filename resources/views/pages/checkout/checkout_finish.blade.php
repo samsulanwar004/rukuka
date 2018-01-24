@@ -7,7 +7,10 @@
         <div class="uk-card uk-card-default uk-card-border">
             <div class="uk-card-body">
                 <form role="form" id="payment-form" method="POST" action="javascript:void(0);" class="form_class">
-                  Order Number : <br><span class="uk-label uk-text-lead uk-light">{{ $order->order_code }}</span>
+                  Order Number :
+                    <br>
+                    <span class="uk-label uk-text-lead uk-light uk-visible@m">{{ $order->order_code }}</span>
+                    <span class="uk-label uk-text-small uk-light uk-hidden@m">{{ $order->order_code }}</span>
                   <div class="uk-margin-small uk-grid-small" >
                       <div>
                         Card Number :

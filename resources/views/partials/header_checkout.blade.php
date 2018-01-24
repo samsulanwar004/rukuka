@@ -9,7 +9,7 @@
               </div>
               <div class="uk-width-1-3@m">
                 <div class="uk-panel uk-text-center">
-                  <a href="/" class="uk-link-reset"><img src="{{ imageCDN('logo-kukaindonesia.jpg') }}" alt="rukuka" width="80"></a>
+                  <a href="/" class="uk-link-reset"><img src="{{ imageCDN(config('common.logo')) }}" alt="rukuka" width="80"></a>
                 </div>
               </div>
 

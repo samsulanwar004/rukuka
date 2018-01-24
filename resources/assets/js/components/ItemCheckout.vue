@@ -1,9 +1,18 @@
 <template>
+    <div class="uk-overflow-auto">
     <table class="uk-table uk-table-divider">
         <thead>
             <tr>
                 <th class="uk-table-shrink" colspan="3"><b>ITEMS ({{ bags.length }})</b></th>
             </tr>
+        </thead>
+        <thead>
+        <tr>
+            <th class="uk-table-shrink"></th>
+            <th class="uk-table-expand">ITEM</th>
+            <th class="uk-width-medium">QTY</th>
+            <th class="uk-table-shrink uk-text-nowrap">UNIT PRICE</th>
+        </tr>
         </thead>
         <tbody v-for="bag in bags">
             <tr>
@@ -23,10 +32,11 @@
                   <li>{{ bag.qty }}</li>
                 </ul>
                 </td>
-                <td class="uk-text-nowrap">{{ bag.price }}</td>
+                <td class="uk-text-nowrap">{{ bag.price | round }}</td>
             </tr>
         </tbody>
     </table>
+    </div>
 </template>
 
 <script>
@@ -65,6 +75,14 @@
           awsLink: function (value, aws) {
             var link = value == null ? '#' : aws+'/'+value;
             return link;
+          },
+
+          round: function(value) {
+            var money = function(n, currency) {
+              return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+            };
+            
+            return money(Number(Math.round(value+'e'+2)+'e-'+2), '$');
           }
         }
     }
