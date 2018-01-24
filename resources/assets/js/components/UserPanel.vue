@@ -74,7 +74,7 @@
         </div>
       </li>
       <li v-if="auth == 0"><a class="uk-icon-link" uk-icon="icon: user" href="/login"></a></li>
-      <li v-if="auth == 1" ><a class="uk-icon-link" uk-icon="icon: user" :href="wishlist_link"></a>
+      <li v-if="auth == 1" ><a class="uk-icon-link" uk-icon="icon: user" :href="profile_link"></a>
         <div class="uk-badge" v-if="wishlistCount > 0">
         {{ wishlistCount }}
         </div>

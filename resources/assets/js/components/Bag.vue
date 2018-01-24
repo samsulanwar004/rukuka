@@ -4,55 +4,56 @@
     </div>
     <div class="uk-grid-small uk-margin-top" uk-grid v-else>
       <div class="uk-width-3-4@m">
-
-        <table class="uk-table uk-table-divider">
-          <thead>
-              <tr>
-                  <th class="uk-table-shrink" colspan="4"><h5>Y O U R &nbsp;&nbsp; B A G ({{ bags.length }}) </h5></th>
-              </tr>
-          </thead>
-            <thead>
-                <tr>
-                    <th class="uk-table-shrink">ITEM</th>
-                    <th class="uk-table-expand">PRODUCT NAME</th>
-                    <th class="uk-width-medium">QTY</th>
-                    <th class="uk-table-shrink uk-text-nowrap">UNIT PRICE</th>
-                </tr>
-            </thead>
-            <tbody v-for="bag in bags">
-                <tr>
-                    <td>
-                        <img v-if="bag.options.photo" class="uk-preserve-width" :src="bag.options.photo | awsLink(aws_link)" width="130" alt="rukuka product">
-                        <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
-                    </td>
-                    <td class="uk-table-link">
-                      <ul class="uk-list uk-margin-small-top">
-                        <li><b>{{ bag.name }}</b></li>
-                        <li class="uk-margin-remove"><span class="uk-text-small">Color: {{ bag.options.color }}</span></li>
-                        <li class="uk-margin-remove"><span class="uk-text-small">Size : {{ bag.options.size }}</span></li>
-                      </ul>
-                      <form v-on:submit.prevent="moveWishlist">
-                          <input type="hidden" name="size" :value="bag.id">
-                          <input type="hidden" name="qty" :value="bag.qty">
-                          <input type="hidden" name="move" :value="bag.id">
-                          <button class="uk-button uk-button-small uk-button-default uk-padding-small-right uk-margin-remove" type="submit">MOVE TO WISHLIST</button>
-                    <a class="uk-button uk-button-small uk-button-default uk-padding-small-right uk-text-right" v-on:click="removeBag(bag.id, bag.name)">REMOVE</a>
-                    </form>
-                    </td>
-                    <td class="uk-text-nowrap">
-                    <ul class="uk-grid-small uk-flex-middle" uk-grid>
-                      <li><a class="uk-icon-link" uk-icon="icon: minus" v-on:click.prevent="min(bag.id, bag.qty, bag.name)"></a></li>
-                      <li><input type="text" name="qty" class="uk-input uk-form-width-xsmall uk-form-small" :value="bag.qty" v-on:keyup="countQty(bag.id, $event)"></li>
-                      <li><a class="uk-icon-link" uk-icon="icon: plus" v-on:click.prevent="plus(bag.id)"></a></li>
-                    </ul>
-                    </td>
-                    <td class="uk-text-nowrap">{{ bag.price }}</td>
-                </tr>
-            </tbody>
-            <tbody v-if="bags == 0">
-                <tr><td colspan="6" align="center"><p>You have no items in the shopping bag</p></td></tr>
-            </tbody>
-        </table>
+        <div class="uk-overflow-auto">
+            <table class="uk-table uk-table-divider">
+                <thead>
+                  <tr>
+                      <th class="uk-table-shrink" colspan="4"><h5>Y O U R &nbsp;&nbsp; B A G ({{ bags.length }}) </h5></th>
+                  </tr>
+              </thead>
+                <thead>
+                    <tr>
+                        <th class="uk-table-shrink"></th>
+                        <th class="uk-table-expand">ITEM</th>
+                        <th class="uk-width-medium">QTY</th>
+                        <th class="uk-table-shrink uk-text-nowrap">UNIT PRICE</th>
+                    </tr>
+                </thead>
+                <tbody v-for="bag in bags">
+                    <tr>
+                        <td>
+                            <img v-if="bag.options.photo" class="uk-preserve-width" :src="bag.options.photo | awsLink(aws_link)" width="130" alt="rukuka product">
+                            <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
+                        </td>
+                        <td class="uk-table-link">
+                          <ul class="uk-list uk-margin-small-top">
+                            <li><b>{{ bag.name }}</b></li>
+                            <li class="uk-margin-remove"><span class="uk-text-small">Color: {{ bag.options.color }}</span></li>
+                            <li class="uk-margin-remove"><span class="uk-text-small">Size : {{ bag.options.size }}</span></li>
+                          </ul>
+                          <form v-on:submit.prevent="moveWishlist">
+                              <input type="hidden" name="size" :value="bag.id">
+                              <input type="hidden" name="qty" :value="bag.qty">
+                              <input type="hidden" name="move" :value="bag.id">
+                              <button class="uk-button uk-button-small uk-button-default uk-padding-small-right uk-margin-remove" type="submit">MOVE TO WISHLIST</button>
+                        <a class="uk-button uk-button-small uk-button-default uk-padding-small-right uk-text-right" v-on:click="removeBag(bag.id, bag.name)">REMOVE</a>
+                        </form>
+                        </td>
+                        <td class="uk-text-nowrap">
+                        <ul class="uk-grid-small uk-flex-middle" uk-grid>
+                          <li><a class="uk-icon-link" uk-icon="icon: minus" v-on:click.prevent="min(bag.id, bag.qty, bag.name)"></a></li>
+                          <li><input type="text" name="qty" class="uk-input uk-form-width-xsmall uk-form-small" :value="bag.qty" v-on:keyup="countQty(bag.id, $event)"></li>
+                          <li><a class="uk-icon-link" uk-icon="icon: plus" v-on:click.prevent="plus(bag.id)"></a></li>
+                        </ul>
+                        </td>
+                        <td class="uk-text-nowrap">{{ bag.price }}</td>
+                    </tr>
+                </tbody>
+                <tbody v-if="bags == 0">
+                    <tr><td colspan="6" align="center"><p>You have no items in the shopping bag</p></td></tr>
+                </tbody>
+            </table>
+        </div>
       </div>
       <div class="uk-width-1-4@m">
         <div class="uk-card uk-card-border uk-card-default uk-card-small">
