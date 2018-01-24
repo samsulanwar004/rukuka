@@ -93,7 +93,7 @@ class PageController extends BaseController
 
         $recentlyViewed = session()->get('products.recently_viewed');
 
-        $recently = $recentlyViewed ? array_keys(array_flip($recentlyViewed)) : [];
+        $recently = $recentlyViewed ? array_keys(array_flip(array_reverse($recentlyViewed))) : [];
 
         return view('pages.shop', compact(
             'products',
