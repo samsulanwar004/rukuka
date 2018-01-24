@@ -46,7 +46,7 @@
                           <li><a class="uk-icon-link" uk-icon="icon: plus" v-on:click.prevent="plus(bag.id)"></a></li>
                         </ul>
                         </td>
-                        <td class="uk-text-nowrap">{{ bag.price }}</td>
+                        <td class="uk-text-nowrap">{{ bag.price | round }}</td>
                     </tr>
                 </tbody>
                 <tbody v-if="bags == 0">
@@ -63,13 +63,13 @@
           <div class="uk-card-body">
             <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
               <div class="uk-text-small"><b>SUBTOTAL</b></div>
-              <div class="uk-text-right">{{ subtotal }}</div>
+              <div class="uk-text-right">{{ subtotal | round }}</div>
             </div>
           </div>
           <div class="uk-card-footer">
             <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
               <div><b>TOTAL</b></div>
-              <div class="uk-text-right">{{ subtotal }}</div>
+              <div class="uk-text-right">{{ subtotal | round }}</div>
             </div>
           </div>
           <div class="uk-card-footer">
@@ -90,12 +90,12 @@
             var self = this;
             Event.listen('bags', function (response) {
                 self.bags = response.data.bags;
-                self.subtotal = response.data.subtotal;
+                self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
             });
 
             Event.listen('removeBag', function (response) {
                 self.bags = response.data.bags;
-                self.subtotal = response.data.subtotal;
+                self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
             });
 
         },
@@ -249,6 +249,14 @@
           awsLink: function (value, aws) {
             var link = value == null ? '#' : aws+'/'+value;
             return link;
+          },
+
+          round: function(value) {
+            var money = function(n, currency) {
+              return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+            };
+            
+            return money(Number(Math.round(value+'e'+2)+'e-'+2), '$');
           }
         }
     }

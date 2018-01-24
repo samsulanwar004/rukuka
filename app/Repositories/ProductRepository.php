@@ -290,8 +290,10 @@ class ProductRepository
 
     public function getRecentlyViewedProduct($ids)
     {
+        $orders = implode(',', $ids);
         return $this->model()
             ->whereIn('id', $ids)
+            ->orderByRaw(\DB::raw("FIELD(id, $orders)"))
             ->take(4)
             ->get();
     }

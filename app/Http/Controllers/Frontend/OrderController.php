@@ -47,7 +47,7 @@ class OrderController extends BaseController
 	        $bags = $bag->get(self::INSTANCE_SHOP);
 	        $items = $bags;
 
-	        $total = $bag->subtotal();
+	        $total = str_replace(',', '', $bag->subtotal());
 
 	        if (!count($bags)) {
 	        	throw new Exception("Bags is empty!", 1);
