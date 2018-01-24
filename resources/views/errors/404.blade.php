@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-    <div class="uk-container uk-container-small">
+    {{-- <div class="uk-container uk-container-small">
         <div class="uk-grid-small uk-margin-top uk-margin-bottom">
             <div>
                 <div class="uk-card uk-card-default uk-card-large uk-card-body">
@@ -20,5 +20,5 @@
             </div>
         </div>
 
-    </div>
+    </div> --}}
 @endsection
