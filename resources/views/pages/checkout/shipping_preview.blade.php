@@ -22,7 +22,7 @@
                 </div>
             </div>
             <hr class="uk-margin-small">
-            <h4 class="uk-margin-remove">PLEASE CONFIRM YOUR ORDER</h4>
+            <h4>PLEASE CONFIRM YOUR ORDER</h4>
             SHIPPING DETAILS
             <hr class="uk-margin-small">
             <div class="uk-grid uk-grid-small" grid>
@@ -37,7 +37,7 @@
                   <li>{{ $defaultAddress->phone_number }}</li>
                 </ul>
               </div>
-              <div class="uk-width-2-3@m">
+              <div class="uk-margin-small-top uk-width-2-3@m">
                 TODAY: {{ \Carbon\Carbon::now()->toDayDateTimeString() }}
                 <table class="uk-table uk-table-divider uk-table-hover">
                     <tbody>
