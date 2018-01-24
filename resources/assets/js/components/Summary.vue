@@ -7,7 +7,8 @@
     <div class="uk-card-body">
        <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
           <div class="uk-text-small"><b>SUBTOTAL</b></div>
-          <div id="sub_total" class="uk-text-right">{{ subtotal | round }}</div>
+          <div class="uk-text-right">{{ subtotal | round }}</div>
+          <input type="hidden" id="sub_total" :value="subtotal">
        </div>
        <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
           <div class="uk-text-small">Shipping Cost</div>
@@ -39,18 +40,28 @@
 
         created () {
             var self = this;
-            var shipping_cost = this.shipping_cost;
+            var shipping_cost = parseFloat(this.shipping_cost.replace(/,/g, ''));
             Event.listen('bags', function (response) {
-              var subtotal = response.data.subtotal;
+              var subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
               self.subtotal = subtotal;
               self.total = Number(subtotal) + Number(shipping_cost);
             });
 
         },
 
+        methods: {
+          money: function(n, currency) {
+            return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+          }
+        },
+
         filters: {
           round: function(value) {
-            return Number(Math.round(value+'e'+2)+'e-'+2);
+            var money = function(n, currency) {
+              return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+            };
+            
+            return money(Number(Math.round(value+'e'+2)+'e-'+2), '$');
           }
         }
     }

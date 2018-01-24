@@ -45,7 +45,7 @@
                             <td>
                                 <input type="radio" class="uk-radio" name="shipping" value="1" required="required" checked> </td>
                             <td> {{ $shippingCost['data']->origin->serviceName }} </td>
-                            <td> USD {{ $shippingCost['data']->total_fee_usd }}</td>
+                            <td> $ {{ $shippingCost['data']->total_fee_usd }}</td>
                         </tr>
                     </tbody>
                 </table>
