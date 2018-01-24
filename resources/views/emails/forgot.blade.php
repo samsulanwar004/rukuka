@@ -43,7 +43,6 @@
         }
 
         table {
-            background:
         }
 
         h1, h2, h3 {
@@ -54,7 +53,7 @@
         }
 
         h3 {
-            color: #21c5ba;
+            color: #ffffff;
             font-size: 24px;
         }
     </style>

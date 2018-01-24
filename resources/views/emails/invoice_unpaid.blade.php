@@ -55,7 +55,7 @@
         }
 
         h3 {
-            color: #37302d;
+            color: #ffffff;
             font-size: 24px;
         }
 
@@ -103,20 +103,9 @@
             vertical-align: top;
         }
 
-        .force-width-gmail {
-            min-width:600px;
-            height: 0px !important;
-            line-height: 1px !important;
-            font-size: 1px !important;
-        }
-
         .important-font {
             color: #37302d;
             font-weight: bold;
-        }
-
-        .hide {
-            display: none !important;
         }
 
         .force-full-width {
@@ -205,7 +194,7 @@
                                                 <tr>
                                                     <td>
                                                         <h1>THANK YOU FOR YOUR ORDER</h1><br>
-                                                        <h2>Your order has been approved, <br>Please review your order below</h2>
+                                                        <h3>Your order has been approved, <br>Please review your order below</h3>
                                                         <br>
                                                     </td>
                                                 </tr>

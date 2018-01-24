@@ -54,7 +54,7 @@
         }
 
         h3 {
-            color: #21c5ba;
+            color: #ffffff;
             font-size: 24px;
         }
     </style>
@@ -119,7 +119,7 @@
                                     <tr>
                                         <td valign="middle" style="vertical-align:middle; padding-right: 15px; padding-left: 15px; text-align:left;" class="mobile-center" height="303">
                                             <h1>WELCOME TO RUKUKA</h1><br>
-                                            <h2>We hope you will have<br> an Awesome time!</h2>
+                                            <h3>We hope you will have<br> an Awesome time!</h3>
                                         </td>
                                     </tr>
                                 </table>
@@ -156,9 +156,9 @@
                                             <tr>
                                                 <td>
                                                     <div>
-                                                        @component('mail::button', ['url' => route('activation', ['code' => $user->verification_token ])])
-                                                            Activate Now
-                                                        @endcomponent
+                                                        {{--@component('mail::button', ['url' => route('activation', ['code' => $user->verification_token ])])--}}
+                                                            {{--Activate Now--}}
+                                                        {{--@endcomponent--}}
                                                     </div>
                                                 </td>
                                                 <td>
