@@ -32,7 +32,7 @@
                   <li>{{ bag.qty }}</li>
                 </ul>
                 </td>
-                <td class="uk-text-nowrap">{{ bag.price }}</td>
+                <td class="uk-text-nowrap">{{ bag.price | round }}</td>
             </tr>
         </tbody>
     </table>
@@ -75,6 +75,14 @@
           awsLink: function (value, aws) {
             var link = value == null ? '#' : aws+'/'+value;
             return link;
+          },
+
+          round: function(value) {
+            var money = function(n, currency) {
+              return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+            };
+            
+            return money(Number(Math.round(value+'e'+2)+'e-'+2), '$');
           }
         }
     }
