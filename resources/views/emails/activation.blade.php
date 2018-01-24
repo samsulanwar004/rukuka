@@ -119,7 +119,7 @@
                                     <tr>
                                         <td valign="middle" style="vertical-align:middle; padding-right: 15px; padding-left: 15px; text-align:left;" class="mobile-center" height="303">
                                             <h1>WELCOME TO RUKUKA</h1><br>
-                                            <h3>We hope you will have<br> an Awesome time!</h3>
+                                            <h2 style="color: #FFFFFF">We hope you will have<br> an Awesome time!</h2>
                                         </td>
                                     </tr>
                                 </table>

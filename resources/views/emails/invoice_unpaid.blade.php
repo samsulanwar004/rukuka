@@ -194,7 +194,7 @@
                                                 <tr>
                                                     <td>
                                                         <h1>THANK YOU FOR YOUR ORDER</h1><br>
-                                                        <h3>Your order has been approved, <br>Please review your order below</h3>
+                                                        <h2 style="color: #FFFFFF">Your order has been approved, <br>Please review your order below</h2>
                                                         <br>
                                                     </td>
                                                 </tr>
