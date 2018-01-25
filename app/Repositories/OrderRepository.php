@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Order;
 use App\OrderDetail;
+use App\Repositories\CourierRepository;
 
 class OrderRepository
 {
@@ -288,9 +289,37 @@ class OrderRepository
 			->first();
 	}
 
-	public function getProcessTrackAndTrace(){
-		dd(Order::where('order_code', $this->getOrderCode())
-			->first());
+	public function getProcessTrackAndTraceOrder(){
+		
+		$order = Order::with('user')
+						->with('address')
+						->where('order_code', $this->getOrderCode())
+						->first();
+		
+		$user = $this->getUser();
+
+		if ($order == null) {
+			
+			return (new CourierRepository)->formatResponse('806', 'Order not found', null, null);
+		
+		}else if ($order->airwaybill == null) {
+			
+			return (new CourierRepository)->formatResponse('801', 'Tracking code not available please contact customer sevice', null, null);
+		
+		}else if($order->user->email != $user->email){
+
+			return (new CourierRepository)->formatResponse('803', 'Tracking code is not your order', null, null);
+
+		}
+
+		$resultTracking = (new CourierRepository)->getTrackingAndTracePosIndonesia($order->airwaybill);
+		
+		$data = [
+			'tracking' => $resultTracking['data'],
+			'order' => $order
+		];
+
+		return 	(new CourierRepository)->formatResponse($resultTracking['error'], $resultTracking['message'], $data, null);
 	}
 
 	public function getOrderbyOrderCode($code){
