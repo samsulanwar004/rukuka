@@ -10,10 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/mail', function () {
-    return view('emails.invoice_paid');
-});
-
 Route::get('/blog', [
     'as'   => 'blog-get-index',
     'uses' => 'Frontend\BlogController@index',
