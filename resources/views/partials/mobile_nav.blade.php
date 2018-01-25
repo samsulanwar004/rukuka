@@ -2,7 +2,7 @@
   <div class="uk-section uk-section-default uk-section-xsmall uk-padding-remove-vertical">
     <div class="uk-container uk-container-small">
       <div class="uk-panel uk-text-center">
-        <a href="/" class="uk-link-reset"><img src="{{ imageCDN('logo-kukaindonesia.jpg') }}" alt="rukuka" width="90"></a>
+        <a href="/" class="uk-link-reset"><img src="{{ imageCDN(config('common.logo')) }}" alt="rukuka" width="90"></a>
       </div>
     </div>
   </div>
@@ -20,21 +20,12 @@
                 <li><a class="uk-icon-link" uk-icon="icon: user"></a><span class="uk-badge">2</span></li>
               </ul>
             </div> --}}
-            <user-panel
+            <user-panel-mobile
               profile_link="{{ route('user') }}"
-              wishlist_link="{{ route('user.wishlist') }}"
               bag_link="{{ route('bag') }}"
               login_link="{{ route('login') }}"
               auth="{{ Auth::check() ? 1 : 0 }}"
-              account="{{ Auth::user('web') }}"
-              wishlist_api="{{ route('wishlist') }}"
-              bag_api="{{ route('persist.bag') }}"
-              product_link="{{ route('product') }}"
-              checkout_link="{{ route('checkout') }}"
-              api_token="{{ Auth::user('web')->api_token }}"
-              aws_link="{{ config('filesystems.s3url') }}"
-              default_image="{{ json_encode(config('common.default')) }}"
-            ></user-panel>
+            ></user-panel-mobile>
             <div id="offcanvas-overlay-slide" uk-offcanvas="overlay: true">
               <navigation-mobile
                       men_link="{{ route('men') }}"

@@ -4,82 +4,61 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
-	use App\Repositories\OrderRepository;
 
-	class AdminOrdersController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminContactsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "orders";
+			$this->title_field = "title";
 			$this->limit = "20";
 			$this->orderby = "id,desc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
-			$this->button_bulk_action = false;
-			$this->button_action_style = "button_text";
+			$this->button_bulk_action = true;
+			$this->button_action_style = "button_icon";
 			$this->button_add = false;
 			$this->button_edit = false;
-			$this->button_delete = false;
+			$this->button_delete = true;
 			$this->button_detail = true;
-			$this->button_show = false;
+			$this->button_show = true;
 			$this->button_filter = true;
 			$this->button_import = false;
-			$this->button_export = true;
-			$this->table = "orders";
+			$this->button_export = false;
+			$this->table = "contacts";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Order Code","name"=>"order_code"];
-			$this->col[] = ["label"=>"Payment Method","name"=>"payment_method"];
-			$this->col[] = ["label"=>"Payment Status","name"=>"payment_status"];
-			$this->col[] = ["label"=>"Order Status","name"=>"order_status"];
-			$this->col[] = ["label"=>"Order Subtotal","name"=>"order_subtotal"];
-			$this->col[] = ["label"=>"Order Date","name"=>"order_date"];
+			$this->col[] = ["label"=>"Title","name"=>"title","width"=>"60"];
+			$this->col[] = ["label"=>"First Name","name"=>"first_name","width"=>"100"];
+			$this->col[] = ["label"=>"Last Name","name"=>"last_name","width"=>"100"];
+			$this->col[] = ["label"=>"Email","name"=>"email","width"=>"150"];
+			$this->col[] = ["label"=>"Subject","name"=>"subject","width"=>"150"];
+			$this->col[] = ["label"=>"Message","name"=>"message","width"=>"200"];
+			$this->col[] = ["label"=>"Created At","name"=>"created_at","width"=>"150"];
+			$this->col[] = ["label"=>"Is Read","name"=>"is_read","width"=>"70"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Users Id','name'=>'users_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'users,first_name'];
-			$this->form[] = ['label'=>'Shipping Id','name'=>'shipping_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'shipping,id'];
-			$this->form[] = ['label'=>'Payment Id','name'=>'payment_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'payment,id'];
-			$this->form[] = ['label'=>'Order Code','name'=>'order_code','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Air Waybill','name'=>'airwaybill','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Payment Method','name'=>'payment_method','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Payment Name','name'=>'payment_name','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Payment Status','name'=>'payment_status','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Payment Validation Status','name'=>'payment_validation_status','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Order Status','name'=>'order_status','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Order Subtotal','name'=>'order_subtotal','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Order Subtotal After Discount','name'=>'order_subtotal_after_discount','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Order Subtotal After Coupon','name'=>'order_subtotal_after_coupon','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Shipping Cost','name'=>'shipping_cost','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Cancel Reason','name'=>'cancel_reason','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Pending Reason','name'=>'pending_reason','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Order Date','name'=>'order_date','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Expired Date','name'=>'expired_date','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Title','name'=>'title','type'=>'text','validation'=>'required','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
+			$this->form[] = ['label'=>'First Name','name'=>'first_name','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Last Name','name'=>'last_name','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','validation'=>'required','width'=>'col-sm-10','placeholder'=>'Please enter a valid email address'];
+			$this->form[] = ['label'=>'Subject','name'=>'subject','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Message','name'=>'message','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Users Id','name'=>'users_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'users,first_name'];
-			//$this->form[] = ['label'=>'Shipping Id','name'=>'shipping_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'shipping,id'];
-			//$this->form[] = ['label'=>'Payment Id','name'=>'payment_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'payment,id'];
-			//$this->form[] = ['label'=>'Order Code','name'=>'order_code','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Payment Method','name'=>'payment_method','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Payment Name','name'=>'payment_name','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Payment Status','name'=>'payment_status','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Payment Validation Status','name'=>'payment_validation_status','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Order Status','name'=>'order_status','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Order Subtotal','name'=>'order_subtotal','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Order Subtotal After Discount','name'=>'order_subtotal_after_discount','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Order Subtotal After Coupon','name'=>'order_subtotal_after_coupon','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Shipping Cost','name'=>'shipping_cost','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Cancel Reason','name'=>'cancel_reason','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Pending Reason','name'=>'pending_reason','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Order Date','name'=>'order_date','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Expired Date','name'=>'expired_date','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10'];
+			//$this->form[] = ["label"=>"Title","name"=>"title","type"=>"text","required"=>TRUE,"validation"=>"required|string|min:3|max:70","placeholder"=>"You can only enter the letter only"];
+			//$this->form[] = ["label"=>"First Name","name"=>"first_name","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Last Name","name"=>"last_name","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Email","name"=>"email","type"=>"email","required"=>TRUE,"validation"=>"required|min:1|max:255|email|unique:contacts","placeholder"=>"Please enter a valid email address"];
+			//$this->form[] = ["label"=>"Subject","name"=>"subject","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Message","name"=>"message","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Is Read","name"=>"is_read","type"=>"radio","required"=>TRUE,"validation"=>"required|integer","dataenum"=>"Array"];
 			# OLD END FORM
 
 			/* 
@@ -109,6 +88,7 @@
 	        | 
 	        */
 	        $this->addaction = array();
+            $this->addaction[] = ['label'=>'Mark as read','icon'=>'fa fa-check','color'=>'success','url'=>CRUDBooster::mainpath('read').'/[id]','showIf'=>'[is_read] == 0'];
 
 
 	        /* 
@@ -254,7 +234,6 @@
 	    */
 	    public function actionButtonSelected($id_selected,$button_name) {
 	        //Your code here
-	            
 	    }
 
 
@@ -276,27 +255,18 @@
 	    | ---------------------------------------------------------------------- 
 	    |
 	    */    
-	    public function hook_row_index($column_index,&$column_value) {	        
-	    	//Your code here
-	    	if($column_index==2) {
-                if ($column_value == '0') {
-                    $column_value = '<span class="label label-primary">Payment Pending</span>';
-                } else if ($column_value == '1') {
-                    $column_value = '<span class="label label-success">Payment Success</span>';
-                } else {
-                    $column_value = '<span class="label label-danger">Payment Expired</span>';
-                }
+	    public function hook_row_index($column_index,&$column_value) {
+            if($column_index==5) {
+                $column_value = str_limit($column_value,30);
             }
-
-            if($column_index==3) {
+            if($column_index==6) {
+                $column_value = str_limit($column_value,50);
+            }
+            if($column_index==8) {
                 if ($column_value == '0') {
-                    $column_value = '<span class="label label-primary">Sent Pending</span>';
-                } else if ($column_value == '1') {
-                    $column_value = '<span class="label label-info">Sent Process</span>';
-                } else if ($column_value == '2') {
-                    $column_value = '<span class="label label-success">Sent Done</span>';
+                    $column_value = '<span class="label label-warning">Unread</span>';
                 } else {
-                    $column_value = '<span class="label label-danger">Cancel</span>';
+                    $column_value = '<span class="label label-success">Read</span>';
                 }
             }
 	    }
@@ -378,20 +348,13 @@
 
 	    //By the way, you can still create your own method in here... :) 
 
-	    public function getDetail($id) {
-		  //Create an Auth
-		  if(!CRUDBooster::isRead() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {    
-		    CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
-		  }
+        public function getRead($id)
+        {
+            DB::table('contacts')
+                ->where('id', $id)
+                ->update(['is_read' => 1]);
 
-		  $data = [];
-		  $data['page_title'] = 'Detail Data';
-		  $data['row'] = (new OrderRepository)->getOrderById($id);
-		  $data['return_url'] = request()->input('return_url');
-		  
-		  //Please use cbView method instead view method from laravel
-		  $this->cbView('admin.order_details',$data);
-		}
-
+            CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Contact has been read !","info");
+        }
 
 	}

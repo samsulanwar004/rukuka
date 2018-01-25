@@ -63,52 +63,55 @@
             <button class="uk-modal-close-default" type="button" uk-close></button>
             <div class="uk-modal-header uk-visible@m">
               <transition name="fade">
-                <h3 class="uk-margin-remove" v-if="isLoading">Loading..</h3>
+                <h3 class="uk-margin-remove" v-if="isLoading">Loading...</h3>
                 <h3 class="uk-margin-remove" v-else>{{ name }}</h3>
-              </transition>              
+              </transition>
               <div class="uk-text-right">
                 <a :href="'/product/' +slug" class="uk-button uk-button-text uk-text-right">see details <span uk-icon="icon: chevron-right"></span> </a>
               </div>
             </div>
-            <div class="uk-modal-body uk-padding-small-left">
+            <div class="uk-modal-body uk-padding-small-left" uk-overflow-auto>
               <div class="uk-grid" uk-grid>
                 <div class="uk-width-1-2@m">
                   <div class="uk-hidden@m">
-                    <h5 class="uk-margin-small"><a :href="'/product/' +slug">{{ name }}</a></h5>
+                    <transition name="fade">
+                      <h5 class="uk-margin-small" v-if="isLoading">Loading...</h5>
+                      <h5 class="uk-margin-small" v-else><a :href="'/product/' +slug">{{ name }}</a></h5>
+                    </transition>
                   </div>
                   <transition name="fade">
-                  <div class="uk-inline" v-if="isLoading">
-                    <img :src="aws_link+'/'+'images/'+defaultImage.image_2">
-                  </div>
-                  <div v-else v-if="images[0]" class="uk-inline">
-                    <div class="">
-                      <ul class="uk-switcher uk-margin" id="component-tab-left">
-                        <li v-for="image in images">
-                            <img v-if="image.photo" :src="image.photo | awsLink(aws_link)" :alt="image.name">
-                            <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
-                          <div class="uk-position uk-position-small uk-position-center-left">
-                            <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="previous" uk-icon="icon: chevron-left"></a>
-                          </div>
-                          <div class="uk-position uk-position-small uk-position-center-right">
-                            <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="next" uk-icon="icon: chevron-right"></a>
-                          </div>
-                        </li>
-                      </ul>
+                    <div class="uk-inline" v-if="isLoading">
+                      <img :src="aws_link+'/'+'images/'+defaultImage.image_2">
                     </div>
-                    <div class="">
-                      <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" uk-grid>
-                        <li class="uk-padding-remove" v-for="image in images">
-                            <a href="#"  class="uk-padding-remove">
-                                <img v-if="image.photo" :src="image.photo | awsLink(aws_link)" :alt="image.name" width="55">
-                                <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka" width="55">
-                            </a>
-                        </li>
-                      </ul>
+                    <div v-else v-if="images[0]" class="uk-inline">
+                      <div class="">
+                        <ul class="uk-switcher uk-margin" id="component-tab-left">
+                          <li v-for="image in images">
+                              <img v-if="image.photo" :src="image.photo | awsLink(aws_link)" :alt="image.name">
+                              <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
+                            <div class="uk-position uk-position-small uk-position-center-left">
+                              <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="previous" uk-icon="icon: chevron-left"></a>
+                            </div>
+                            <div class="uk-position uk-position-small uk-position-center-right">
+                              <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="next" uk-icon="icon: chevron-right"></a>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="">
+                        <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" uk-grid>
+                          <li class="uk-padding-remove" v-for="image in images">
+                              <a href="#"  class="uk-padding-remove">
+                                  <img v-if="image.photo" :src="image.photo | awsLink(aws_link)" :alt="image.name" width="55">
+                                  <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka" width="55">
+                              </a>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                  <div v-else class="uk-inline">
-                    <img :src="aws_link+'/'+'images/'+defaultImage.image_2">
-                  </div>
+                    <div v-else class="uk-inline">
+                      <img :src="aws_link+'/'+'images/'+defaultImage.image_2">
+                    </div>
                   </transition>
                 </div>
                 <div class="uk-width-1-2@m">
@@ -177,9 +180,24 @@
                 <button class="uk-button uk-button-secondary" type="button" v-on:click="bag">ADD TO BAG</button>
                 <button class="uk-button uk-button-default" type="button" v-on:click="wishlist">ADD TO WISHLIST</button>
             </div>
-            <div class="uk-modal-footer uk-text-right uk-padding-small uk-hidden@m">
-                <button class="uk-button uk-button-secondary uk-button-small" type="button" v-on:click="bag">BAG <span class="uk-icon" uk-icon="icon:  chevron-right"></span></button>
-                <button class="uk-button uk-button-default uk-button-small" type="button" v-on:click="wishlist">WISHLIST <span class="uk-icon" uk-icon="icon:  chevron-right"></span></button>
+            <div class="uk-modal-footer uk-padding-small uk-hidden@m">
+              <div class="uk-grid-match uk-child-width-auto uk-flex-between uk-grid" uk-grid>
+              <div class="uk-first-column">
+                <div v-if="bagCount > 0">
+                  <a class="uk-icon uk-icon-link" href="#" uk-icon="icon: cart"></a>
+                  <div class="uk-badge">
+                    <a :href="bag_link" class="uk-light uk-link-reset">{{ bagCount }}</a>
+                  </div>
+                </div>
+              </div>
+              <div class="uk-panel">
+                <div>
+                  <button class="uk-button uk-button-secondary uk-button-small" type="button" v-on:click="bag">BAG <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                  <button class="uk-button uk-button-default uk-button-small" type="button" v-on:click="wishlist">WISHLIST <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                </div>
+
+              </div>
+              </div>
             </div>
           </div>
         </div>
@@ -203,12 +221,21 @@
           'wishlist_api',
           'auth',
           'aws_link',
-          'default_image'
+          'default_image',
+          'bag_link'
         ],
 
         created () {
             var self = this;
             self.products = this.shops ? JSON.parse(this.shops) : {};
+
+            Event.listen('bags', function (response) {
+              self.bagCount = response.data.bagCount;
+            });  
+
+            Event.listen('addBag', function (response) {
+              self.bagCount = response.data.bagCount;
+            });       
         },
 
         data () {
@@ -228,6 +255,7 @@
                 size: {},
                 deliveryReturns: null,
                 defaultImage: JSON.parse(this.default_image,true),
+                bagCount: {},
                 isLoading: false
             }
         },

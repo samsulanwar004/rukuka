@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head> <title>page not found</title>
+<head> <title>404</title>
 <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet" type="text/css">
 
 <style>
@@ -30,7 +30,7 @@
     }
 
     .title {
-       font-size: 72px;
+       font-size: 100px;
        margin-bottom: 40px;
     }
 </style>
@@ -38,7 +38,7 @@
 <body>
     <div class="container">
         <div class="content">
-            <div class="title">Oops... page not found</div>
+            <div class="title">Opss...Page Not Found!</div>
         </div>
     </div>
 </body>

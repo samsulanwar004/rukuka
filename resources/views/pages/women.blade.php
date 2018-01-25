@@ -15,29 +15,22 @@
                     </div>
                 </a> --}}
                 <div class="uk-inline">
-                  <ul id="component-tab-left" class="uk-switcher">
-
-                      <a href="{{ $women['women_main_url'] }}" class="uk-link-reset">
-                      <li>
-                        <img src="{{ uploadCDN($women['women_main_banner']) }}" alt="rukuka womens" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
-                      </li>
-                      </a>
-                      <a href="{{ $women['women_main_url'] }}" class="uk-link-reset">
-                      <li>
-                        <img src="{{ uploadCDN($women['women_main_banner']) }}" alt="rukuka womens" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
-                      </li>
-                    </a>
-                    <a href="#"></a>
-
-                  </ul>
-                  <div class="uk-position-small uk-position-bottom-center">
-                    <ul class="uk-dotnav" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" >
-
-                        <li><a href="#">item1</a></li>
-                        <li><a href="#">item1</a></li>
-
+                    <ul id="component-tab-left" class="uk-switcher">
+                        @foreach ($slider as $item)
+                            <a href="{{ $item->url }}" class="uk-link-reset">
+                                <li>
+                                    <img src="{{ uploadCDN($item->banner) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
+                                </li>
+                            </a>
+                        @endforeach
                     </ul>
-                  </div>
+                    <div class="uk-position-small uk-position-bottom-center">
+                        <ul class="uk-dotnav" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" >
+                            @foreach ($slider as $item)
+                                <li><a href="#">item1</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
             </div>
             {{--END MAIN BANNER--}}
@@ -180,7 +173,7 @@
         {{--END 3 ROW BANNER--}}
         <hr>
 
-        <h3 class="uk-margin-small">TRENDING NOW</h3>
+        <h4 class="uk-margin-small">TRENDING NOW</h4>
         <popular
                 api="{{ route('populer', 'Women')}}"
                 product_api="{{ route('product.api') }}"

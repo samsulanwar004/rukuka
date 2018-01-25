@@ -10,47 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// this route for testing pos indonesia courier service
-use App\Services\PosIndonesiaCourierService;
-
-Route::get('/posindonesia', function () {
-    //init object
-    $posIndonesia = new PosIndonesiaCourierService;
-
-    //create request getfee
-    // $requestToPosIndonesia = [
-    //                             [
-    //                                 'userId'            => config('common.username_pos_indonesia'),
-    //                                 'password'          => config('common.password_pos_indonesia'),
-    //                                 'customerId'        => '0',
-    //                                 'isDomestic'        => '0',
-    //                                 'senderPosCode'     => '13210',
-    //                                 'receiverPosCode'   => 'SG',
-    //                                 'weight'            => '1000',
-    //                                 'length'            => '0',
-    //                                 'width'             => '100',
-    //                                 'height'            => '100',
-    //                                 'diameter'          => '0',
-    //                                 'itemValue'         => '900000'
-    //                             ]
-    //                         ];
-
-    $requestToPosIndonesia = [
-                                [
-                                    'userId'            => config('common.username_pos_indonesia'),
-                                    'password'          => config('common.password_pos_indonesia'),
-                                    'city'        => '',
-                                    'address'        => ''
-                                ]
-                            ];
-
-    //send request
-    $resultFee = $posIndonesia->callMethod('getPosCodeByaddrAndCity', $requestToPosIndonesia);
-
-    //result
-    var_dump($resultFee);
-});
+Route::get('/blog', [
+    'as'   => 'blog-get-index',
+    'uses' => 'Frontend\BlogController@index',
+]);
 
 Route::get('/blog', [
     'as'   => 'blog-get-index',
@@ -90,11 +53,6 @@ Route::get('/page/{slug}', [
 Route::post('/review-ajax', [
     'as'   => 'review-post-ajax',
     'uses' => 'Frontend\UserController@getReviewAjax',
-]);
-
-Route::get('/', [
-    'as'   => 'index',
-    'uses' => 'Frontend\PageController@index',
 ]);
 
 Route::get('/', [
@@ -167,6 +125,53 @@ Route::get('/search', [
     'uses' => 'Frontend\PageController@search',
 ]);
 
+Route::get('/blog', [
+    'as'   => 'blog-get-index',
+    'uses' => 'Frontend\BlogController@index',
+]);
+
+Route::post('/blog', [
+    'as'   => 'blog-post-ajax',
+    'uses' => 'Frontend\BlogController@getBlogAjax',
+]);
+
+Route::get('/blog/category/{slug}', [
+    'as'   => 'blog-get-category',
+    'uses' => 'Frontend\BlogController@category',
+]);
+
+Route::get('/blog/{slug}', [
+    'as'   => 'blog-get-read',
+    'uses' => 'Frontend\BlogController@blogRead',
+]);
+
+Route::get('/search/blog', [
+    'as'   => 'blog-get-search',
+    'uses' => 'Frontend\BlogController@search',
+]);
+
+Route::get('/help/{slug}', [
+    'as'   => 'get-help',
+    'uses' => 'Frontend\PageController@help',
+]);
+
+Route::get('/page/{slug}', [
+    'as'   => 'get-page',
+    'uses' => 'Frontend\PageController@page',
+]);
+
+Route::post('/review-ajax', [
+    'as'   => 'review-post-ajax',
+    'uses' => 'Frontend\UserController@getReviewAjax',
+]);
+
+Route::post('/contact', [
+    'as'   => 'contact',
+    'uses' => 'Frontend\PageController@contact',
+]);
+
+
+//MIDDLEWARE
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [
         'as'   => 'login',
@@ -222,7 +227,10 @@ Route::middleware(['guest'])->group(function () {
         'uses' => 'Frontend\LoginController@reset',
     ]);
 
-
+    Route::post('/checkout-as-guest', [
+        'as'   => 'checkout.as.guest',
+        'uses' => 'Frontend\LoginController@asGuest',
+    ]);
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -297,67 +305,10 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\UserController@postReview',
     ]);
 
-    // Route checkout module
-    Route::get('/checkout', [
-        'as'   => 'checkout',
-        'uses' => 'Frontend\UserController@showShippingAddressPage',
-    ]);
-
-    Route::get('/checkout/shipping', [
-        'as'   => 'checkout.shipping',
-        'uses' => 'Frontend\UserController@showShippingOptionPage',
-    ]);
-
-    // Route::get('/checkout/billing', [
-    //     'as'   => 'checkout.billing',
-    //     'uses' => 'Frontend\UserController@showShippingBillingPage',
-    // ]);
-
-    Route::post('/checkout/shipping', [
-        'as'   => 'checkout.shipping',
-        'uses' => 'Frontend\UserController@postShippingOption',
-    ]);
-
-    Route::get('/checkout/review', [
-        'as'   => 'checkout.review',
-        'uses' => 'Frontend\UserController@showReviewPage',
-    ]);
-
-    Route::post('/checkout/final', [
-        'as'   => 'checkout.final',
-        'uses' => 'Frontend\UserController@postFinalPage',
-    ]);
-
-
     // Route Address module
     Route::get('/account/address', [
         'as'   => 'user.address',
         'uses' => 'Frontend\UserController@showAddressPage',
-    ]);
-
-    Route::post('/account/address', [
-        'as'   => 'user.address',
-        'uses' => 'Frontend\UserController@addressSave',
-    ]);
-
-    Route::post('/account/address-default', [
-        'as'   => 'user.address.default',
-        'uses' => 'Frontend\UserController@defaultAddress',
-    ]);
-
-    Route::delete('/account/address/destroy', [
-        'as'   => 'user.address.destroy',
-        'uses' => 'Frontend\UserController@addressDestroy',
-    ]);
-
-    Route::get('/account/address/edit/{id?}', [
-        'as'   => 'user.address.edit',
-        'uses' => 'Frontend\UserController@addressEdit',
-    ]);
-
-    Route::post('/account/address/update/{id?}', [
-        'as'   => 'user.address.update',
-        'uses' => 'Frontend\UserController@addressUpdate',
     ]);
 
     // Route Credit Card module
@@ -391,10 +342,82 @@ Route::middleware(['auth'])->group(function () {
     //     'uses' => 'Frontend\UserController@ccUpdate',
     // ]);
 
+    Route::post('/repayment', [
+        'as'   => 'repayment',
+        'uses' => 'Frontend\OrderController@restore',
+    ]);
+
+    Route::get('/order', [
+        'as'   => 'order',
+        'uses' => 'Frontend\OrderController@store',
+    ]);
+  
+});
+
+Route::middleware(['as.guest'])->group(function () {
+    // Route checkout module
+    Route::get('/checkout', [
+        'as'   => 'checkout',
+        'uses' => 'Frontend\UserController@showShippingAddressPage',
+    ]);
+
+    Route::get('/checkout/shipping', [
+        'as'   => 'checkout.shipping',
+        'uses' => 'Frontend\UserController@showShippingOptionPage',
+    ]);
+
+    // Route::get('/checkout/billing', [
+    //     'as'   => 'checkout.billing',
+    //     'uses' => 'Frontend\UserController@showShippingBillingPage',
+    // ]);
+
+    Route::post('/checkout/shipping', [
+        'as'   => 'checkout.shipping',
+        'uses' => 'Frontend\UserController@postShippingOption',
+    ]);
+
+    Route::get('/checkout/review', [
+        'as'   => 'checkout.review',
+        'uses' => 'Frontend\UserController@showReviewPage',
+    ]);
+
+    Route::post('/checkout/final', [
+        'as'   => 'checkout.final',
+        'uses' => 'Frontend\UserController@postFinalPage',
+    ]); 
+
+    //Route Address
+    Route::post('/account/address', [
+        'as'   => 'user.address',
+        'uses' => 'Frontend\UserController@addressSave',
+    ]);
+
+    Route::post('/account/address-default', [
+        'as'   => 'user.address.default',
+        'uses' => 'Frontend\UserController@defaultAddress',
+    ]);
+
+    Route::delete('/account/address/destroy', [
+        'as'   => 'user.address.destroy',
+        'uses' => 'Frontend\UserController@addressDestroy',
+    ]);
+
+    Route::get('/account/address/edit/{id?}', [
+        'as'   => 'user.address.edit',
+        'uses' => 'Frontend\UserController@addressEdit',
+    ]);
+
+    Route::post('/account/address/update/{id?}', [
+        'as'   => 'user.address.update',
+        'uses' => 'Frontend\UserController@addressUpdate',
+    ]);  
+
+    //Route Order
     Route::post('/order', [
         'as'   => 'order',
         'uses' => 'Frontend\OrderController@store',
     ]);
+    
     Route::post('/repayment', [
         'as'   => 'repayment',
         'uses' => 'Frontend\OrderController@restore',
@@ -405,7 +428,10 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'Frontend\OrderController@store',
     ]);
 
-    
+    Route::get('/airwaybill/{ordeCode}', [
+        'as'   => 'airwaybill-get-track-and-trace',
+        'uses' => 'Frontend\OrderController@getTrackAndTrace',
+    ]);
 });
 
 // Route Admin crudbooster

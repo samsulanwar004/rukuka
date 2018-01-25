@@ -24,9 +24,17 @@
       <input type="hidden" name="expired_date" value="{{ $row->expired_date }}">
       <div class="panel-body" style="padding:20px 0px 0px 0px">
         <div class="box-body" id="parent-form-area">
-          <div class="col-md-6">
+          <div class="col-md-3">
             Order Number <hr>
-            {{ $row->order_code }} <br>
+            <b>{{ $row->order_code }} </b>
+            <br>
+            Air Waybill
+            <span class="label label-info"> {{ $row->airwaybill }} </span>
+          </div>
+          <div class="col-md-3">
+            Payment<hr>
+            <b style="text-transform: capitalize;">{{ $row->payment_method }} </b>
+            <br>
             @php
               if ($row->payment_status == '0') {
                   echo '<span class="label label-primary">Payment Pending</span>';
@@ -36,6 +44,7 @@
                   echo '<span class="label label-danger">Payment Expired</span>';
               }
             @endphp
+            <br>
           </div>
           <div class="col-md-6">
             Shipping Address <hr>
@@ -127,6 +136,9 @@
                 Cancel
               </option>
             </select>
+            <br>
+            <label class="control-label">Air Waybill</label>
+            <input type='text' name='airwaybill' class='form-control' value="{{ $row->airwaybill }}" style="width: 300px"/>
           </div>
           <div class="col-sm-12" align="right">
             <br>

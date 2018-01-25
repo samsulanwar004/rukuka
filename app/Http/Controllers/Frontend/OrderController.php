@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Repositories\OrderRepository;
 use App\Services\BagService;
+use App\Services\EmailService;
 use App\Repositories\UserRepository;
 use App\Repositories\CourierRepository;
 use DB;
@@ -44,8 +45,9 @@ class OrderController extends BaseController
 
 
 	        $bags = $bag->get(self::INSTANCE_SHOP);
+	        $items = $bags;
 
-	        $total = $bag->subtotal();
+	        $total = str_replace(',', '', $bag->subtotal());
 
 	        if (!count($bags)) {
 	        	throw new Exception("Bags is empty!", 1);
@@ -67,8 +69,9 @@ class OrderController extends BaseController
 	        		'product_id' => $entry->options->product_id,
 	        		'product_code' => $entry->options->product_code,
 	        		'product_stocks_id' => $entry->options->product_stocks_id,
+	        		'product_photo' => $entry->options->photo,
 	        	];
-	        });	        
+	        });
 
 	        $shipping = $courir['data']->total_fee_usd;
 	        //$shipping = 50;
@@ -98,8 +101,12 @@ class OrderController extends BaseController
 	        	->setDetail($detail)
 	        	->save();
 
-			DB::commit();
+            //EMAILSENT
+			//sent invoice unpaid to buyer
+            $emailService = (new EmailService);
+            $emailService->sendInvoiceUnpaid($user,$order,$detail);
 
+            DB::commit();
 			return view('pages.checkout.checkout_finish', compact(
 				'order', 
 				'detail', 
@@ -188,4 +195,9 @@ class OrderController extends BaseController
 		}
 	}
 	
+	public function getTrackAndTrace($ordeCode){
+
+		$resultTrackAndTrace = $this->order->setOrderCode($ordeCode)->getProcessTrackAndTrace();
+	
+	}
 }

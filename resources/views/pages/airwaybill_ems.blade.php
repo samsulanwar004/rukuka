@@ -1,0 +1,83 @@
+@extends('app')
+
+@section('content')
+<div class="uk-container uk-container-small">
+  	<div class="uk-grid-small uk-margin-top uk-margin-bottom">
+		<div>
+			<div class="uk-card uk-card-default uk-card-large uk-card-body">
+				<h3 class="uk-card-title uk-text-center">
+				THE STATUS OF THE SHIPMENT
+				</h3>
+				<div class="uk-overflow-auto">
+					<table class="uk-table uk-table-small uk-table-divider">
+					<thead>
+					<tr>
+						<th class="uk-table-small">The Shipment</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>Barcode</td>
+						<td>RB050301140SG</td>
+					</tr>
+					<tr>
+						<td>From</td>
+						<td>INDONESIA - ID </td>
+					</tr>
+					<tr>
+						<td>To</td>
+						<td>SINGAPORE - SG</td>
+					</tr>
+					</tbody>
+				</table>
+				</div>
+				<div class="uk-overflow-auto">
+					<table class="uk-table uk-table-small uk-table-striped ">
+						<thead>
+						<tr>
+							<th class="uk-table-small">Detail Status</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<th>No</th>
+							<th>Office</th>
+							<th>Date</th>
+							<th>Time</th>
+							<th>Status</th>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>INDONESIA - ID</td>
+							<td>2016-04-05</td>
+							<td>14:04</td>
+							<td>Departure From OE</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>MPC JAKARTA</td>
+							<td>2016-04-05</td>
+							<td>16:04</td>
+							<td>Arrival at inward OE</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>MPC JAKARTA</td>
+							<td>2016-04-05</td>
+							<td>16:04</td>
+							<td>Arrival at inward OE</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">
+					<div class="uk-panel uk-text-center">
+						<a href="{{ route('index') }}"><button class="uk-button uk-button-secondary">Back To Home</button></a>
+					</div>
+				</div>
+			</div>
+		</div>
+  	</div>
+
+</div>
+@endsection

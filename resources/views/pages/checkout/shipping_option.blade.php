@@ -48,10 +48,10 @@
 
                         @if($availableCouriersService_val['error'] == '000')
 
-                          @if(count($availableCouriersService_val['data']) > 1 )
+                          @if(count($availableCouriersService_val['data']) > 0 )
 
                             @foreach($availableCouriersService_val['data'] as $dataServices_key => $dataServices_val)
-
+                              
                               <tr>
                                   <td>
                                       <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{ $availableCouriersService_key }}{{$availableCouriersService_val['separator']}}{{ $dataServices_val->serviceCode }}" required="" onclick="getTotal({{ $dataServices_val->totalFeeDollar }})"> </td>
@@ -122,15 +122,19 @@
 
 
    function getTotal(shipingCost){
-    var subTotal = $('#sub_total').html();
+    var subTotal = $('#sub_total').val();
     var total = parseFloat(subTotal) + parseFloat(shipingCost);
 
-    $('#shiping_fee').html(shipingCost);
+    $('#shiping_fee').html(round(shipingCost));
     $('#total_fee').html(round(total));
    }
 
    function round(value) {
-      return Number(Math.round(value+'e'+2)+'e-'+2);
+    var money = function(n, currency) {
+      return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+    };
+
+      return money(Number(Math.round(value+'e'+2)+'e-'+2), '$');
    }
 
    $(function () {

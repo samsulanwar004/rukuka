@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Repositories\OrderRepository;
 use Illuminate\Http\Request;
 use Exception;
 use DB;
 use App\Repositories\UserRepository;
 use App\Repositories\ProductStockRepository;
 use App\Services\BagService;
+use App\Services\EmailService;
 use App\Repositories\CourierRepository;
 use App\Repositories\ProductRepository;
 use App\Review;
@@ -503,6 +505,7 @@ class UserController extends BaseController
     public function showShippingAddressPage()
     {
         $user = $this->getUserActive();
+
         $address = $user->address;
 
         return view('pages.checkout.shipping_address', compact('address'));
@@ -521,7 +524,7 @@ class UserController extends BaseController
         $availableCouriersService = $courierServices->setCheckoutBag($bag->get(self::INSTANCE_SHOP))
                         ->setDestinationAddress($defaultAddress)
                         ->getAvailableCouriers();
-
+        
         return view('pages.checkout.shipping_option', compact('defaultAddress','availableCouriersService'));
     }
 
@@ -1012,9 +1015,19 @@ class UserController extends BaseController
             );
             if($response_cc["status"] == "CAPTURED")
             {
-                DB::table('orders')
-                ->where('order_code', $data["order"]["order_code"])
-                ->update(['payment_status' => 1, 'payment_name' => $data["order"]["card_holder"], 'pending_reason' => 'already paid','updated_at' => date("Y-m-d H:i:s")]);
+                $user = $this->getUserActive();
+                $order = (new OrderRepository)->getOrderbyOrderCode($data["order"]["order_code"]);
+
+                $order->payment_status = 1;
+                $order->payment_name = $data["order"]["card_holder"];
+                $order->pending_reason = 'already paid';
+                $order->payment_status = 1;
+                $order->update();
+
+                //EMAILSENT
+                //sent invoice unpaid to buyer
+                $emailService = (new EmailService);
+                $emailService->sendInvoicePaid($user,$order);
 
                 $message = "Charge is successfully captured and the funds will be settled according to the settlement schedule.";
             }

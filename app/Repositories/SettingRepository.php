@@ -16,6 +16,7 @@ class SettingRepository
 	public function getSliderByGroup($group)
 	{
 		return MainSlider::where('group_setting', $group)
+            ->orderBy('order','asc')
 	    	->get();
 	}
 }
