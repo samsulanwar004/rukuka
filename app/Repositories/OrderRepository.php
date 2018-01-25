@@ -292,4 +292,9 @@ class OrderRepository
 		dd(Order::where('order_code', $this->getOrderCode())
 			->first());
 	}
+
+	public function getOrderbyOrderCode($code){
+        return Order::where('order_code', $code)
+            ->first();
+    }
 }
