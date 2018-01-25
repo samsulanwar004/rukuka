@@ -198,7 +198,7 @@
                                                 <tr>
                                                     <td valign="middle" style="vertical-align:middle; padding-right: 15px; padding-left: 15px; text-align:left;" class="mobile-center font-white" height="303">
                                                         <h1 class="font-white">THANK YOU FOR YOUR ORDER</h1><br>
-                                                        <h2 class="font-white">Your order has been approved, <br>Please review your order below</h2>
+                                                        <h2 class="font-white">Your order has been approved, <br>please review your order below</h2>
                                                         <br>
                                                     </td>
                                                 </tr>
