@@ -101,7 +101,7 @@ class OrderController extends BaseController
 	        	->setDetail($detail)
 	        	->save();
 
-
+            //EMAILSENT
 			//sent invoice unpaid to buyer
             $emailService = (new EmailService);
             $emailService->sendInvoiceUnpaid($user,$order,$detail);
