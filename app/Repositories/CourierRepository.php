@@ -210,9 +210,9 @@ class CourierRepository{
 		return $this->formatResponse('000', 'bring signature address in data', $signatureResult, null);
 	}
 
-	public function getTrackingAndTrace(){
+	public function getTrackingAndTracePosIndonesia($airwayBillNumber){
 		
-		$posIndonesia 		= new PosIndonesiaCourierService;
+		$posIndonesia = new PosIndonesiaCourierService;
 
 		if(config('common.is_pos_indonesia_prod') == true){
 
@@ -231,7 +231,7 @@ class CourierRepository{
 	                                [
 	                                    'userId'  	=> $requestUserId,
 	                                    'password'  => $requestPassword,
-	                                    'barcode'   => '15464658065'
+	                                    'barcode'   => $airwayBillNumber,
 	                                ]
 	                            ]; 
 
@@ -239,7 +239,16 @@ class CourierRepository{
 	    
 	    $resultPosIndonesia = $posIndonesia->callMethod('getTrackAndTrace', $requestToPosIndonesia);
 	
-	    dd($resultPosIndonesia);
+	    if ($resultPosIndonesia == null) {
+
+	    	return $this->formatResponse('802', 'error track and trace services unavailable', $resultPosIndonesia, null);
+	    
+	    }else if (count($resultPosIndonesia->r_tnt) == 0) {
+	    	
+	    	return $this->formatResponse('804', 'Tracking result not found', $resultPosIndonesia, null);
+	    }
+
+	    return $this->formatResponse('000', 'this is result of track and trace', $resultPosIndonesia->r_tnt, null);
 	}
 
 	private function getShippingServiceByPosIndonesia(){
@@ -326,7 +335,8 @@ class CourierRepository{
 	
 	    if ($resultPosIndonesia->r_fee->serviceName == 'ERROR') {
 	    	
-	    	return $this->formatResponse('999', 'error shiping services unavailable', $resultPosIndonesia, null);
+	    	
+
 	    
 	    }else if ($resultPosIndonesia->r_fee->serviceName == 'NOT FOUND'){
 	    	
@@ -676,7 +686,7 @@ class CourierRepository{
 
 	}
 
-	private function formatResponse($erroCode, $message, $data, $separator){
+	public function formatResponse($erroCode, $message, $data, $separator){
 
 		return [
 			'error'	=>	$erroCode, 

@@ -197,7 +197,11 @@ class OrderController extends BaseController
 	
 	public function getTrackAndTrace($ordeCode){
 
-		$resultTrackAndTrace = $this->order->setOrderCode($ordeCode)->getProcessTrackAndTrace();
-	
+		$resultTrackAndTrace = $this->order
+									->setOrderCode($ordeCode)
+									->setUser($this->getUserActive())
+									->getProcessTrackAndTraceOrder();
+			
+		return view('pages.airwaybill_ems', compact('resultTrackAndTrace'));
 	}
 }
