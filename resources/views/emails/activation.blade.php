@@ -43,7 +43,7 @@
         }
 
         table {
-            background:
+
         }
 
         h1, h2, h3 {
@@ -54,8 +54,12 @@
         }
 
         h3 {
-            color: #21c5ba;
+            color: #ffffff;
             font-size: 24px;
+        }
+
+        .font-white {
+            color: #FFFFFF;
         }
     </style>
 
@@ -118,8 +122,8 @@
                                 <table cellspacing="0" cellpadding="0" width="530" height="303" class="w320">
                                     <tr>
                                         <td valign="middle" style="vertical-align:middle; padding-right: 15px; padding-left: 15px; text-align:left;" class="mobile-center" height="303">
-                                            <h1>WELCOME TO RUKUKA</h1><br>
-                                            <h2>We hope you will have<br> an Awesome time!</h2>
+                                            <h1 class="font-white">WELCOME TO RUKUKA</h1><br>
+                                            <h2 class="font-white">We hope you will have<br> an Awesome time!</h2>
                                         </td>
                                     </tr>
                                 </table>
@@ -156,9 +160,9 @@
                                             <tr>
                                                 <td>
                                                     <div>
-                                                        @component('mail::button', ['url' => route('activation', ['code' => $user->verification_token ])])
-                                                            Activate Now
-                                                        @endcomponent
+                                                        {{--@component('mail::button', ['url' => route('activation', ['code' => $user->verification_token ])])--}}
+                                                            {{--Activate Now--}}
+                                                        {{--@endcomponent--}}
                                                     </div>
                                                 </td>
                                                 <td>
@@ -209,6 +213,11 @@
                                     <td>
                                         <center>
                                             <table style="margin:0 auto;" cellspacing="0" cellpadding="5" width="100%">
+                                                <tr>
+                                                    <td style="text-align:center; margin:0 auto;" width="100%">
+                                                        <a href="/" class="uk-link-reset"><img src="{{ imageCDN(config('common.logo')) }}" alt="rukuka" width="90"></a>
+                                                    </td>
+                                                </tr>
                                                 <tr>
                                                     <td style="text-align:center; margin:0 auto;" width="100%">
                                                         © 2018 rukuka - All Rights Reserved.

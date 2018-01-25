@@ -321,4 +321,9 @@ class OrderRepository
 
 		return 	(new CourierRepository)->formatResponse($resultTracking['error'], $resultTracking['message'], $data, null);
 	}
+
+	public function getOrderbyOrderCode($code){
+        return Order::where('order_code', $code)
+            ->first();
+    }
 }

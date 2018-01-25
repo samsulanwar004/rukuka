@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head> <title>rukuka is cooming soon</title>
+<head> <title>rukuka is coming soon</title>
 <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet" type="text/css">
 
 <style>
