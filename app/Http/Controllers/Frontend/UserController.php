@@ -1021,7 +1021,6 @@ class UserController extends BaseController
                 $order->payment_status = 1;
                 $order->payment_name = $data["order"]["card_holder"];
                 $order->pending_reason = 'already paid';
-                $order->payment_status = 1;
                 $order->update();
 
                 $message = "Charge is successfully captured and the funds will be settled according to the settlement schedule.";
