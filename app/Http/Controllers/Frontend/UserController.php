@@ -1091,7 +1091,7 @@ class UserController extends BaseController
          }
          else 
          {
-            $message = "error".$signature1." dan ".$signature2."=".$secret ;
+            $message = "error".$signature1." dan ".$signature2."=".$secret."==>".$data["order"] ;
          }
          session(['payment_status' => $response_cc["status"]]);
          session(['payment_message' => $message]);
