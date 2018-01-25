@@ -57,28 +57,7 @@
 								<th>Time</th>
 								<th>Status</th>
 							</tr>
-							<!-- <tr>
-								<td>1</td>
-								<td>INDONESIA - ID</td>
-								<td>2016-04-05</td>
-								<td>14:04</td>
-								<td>Departure From OE</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>MPC JAKARTA</td>
-								<td>2016-04-05</td>
-								<td>16:04</td>
-								<td>Arrival at inward OE</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>MPC JAKARTA</td>
-								<td>2016-04-05</td>
-								<td>16:04</td>
-								<td>Arrival at inward OE</td>
-							</tr> -->
-
+							
 							@foreach ($resultTrackAndTrace['data']['tracking'] as $key => $trackingData)
 							    <tr>
 									<td>{{++$key}}</td>
