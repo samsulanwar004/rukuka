@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Mail\Activation;
 use App\Mail\Forgot;
 use App\Mail\InvoiceUnpaid;
-use App\Mail\PersonalInformation;
+use App\Mail\InvoicePaid;
 use Illuminate\Support\Facades\Mail;
 
 class EmailService
