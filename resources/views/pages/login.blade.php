@@ -98,7 +98,7 @@
                     {{ csrf_field() }}
                   <ul class="uk-list">
                     <li>
-                        <input class="uk-input {{ $errors->has('email_guest') ? ' uk-form-danger' : '' }}" id="form-s-email" type="email" placeholder="Email" required="required" name="email_guest" value="{{ old('email_guest') }}">
+                        <input class="uk-input {{ $errors->has('email_guest') ? ' uk-form-danger' : '' }}" type="email" placeholder="Email" required="required" name="email_guest" value="{{ old('email_guest') }}">
                     </li>
 
 
