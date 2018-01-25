@@ -133,7 +133,7 @@
 
                     if (creditCardCharge.status == 'VERIFIED') {
                         var card_holder = document.getElementById("card_holder").value;
-                        orderData = { 'order_code': '<? echo $orderCode; ?>','user_id': '<? echo $userId; ?>','signature': '<? echo $signature; ?>', 'totalwithshipping': '<? echo $totalwithshipping; ?>', 'card_holder' : card_holder };
+                        <?php echo "orderData = { 'order_code': '".$orderCode."','user_id': '".$userId."','signature': '".$signature."', 'totalwithshipping': '".$totalwithshipping."', 'card_holder' : card_holder };"; ?>
                         tokenData = getTokenData();
 
                         $.ajaxSetup({
