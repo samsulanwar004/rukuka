@@ -1024,12 +1024,12 @@ class UserController extends BaseController
                 $order->payment_status = 1;
                 $order->update();
 
+                $message = "Charge is successfully captured and the funds will be settled according to the settlement schedule.";
+
                 //EMAILSENT
                 //sent invoice unpaid to buyer
                 $emailService = (new EmailService);
                 $emailService->sendInvoicePaid($user,$order);
-
-                $message = "Charge is successfully captured and the funds will be settled according to the settlement schedule.";
             }
 
             if($response_cc["status"] == "AUTHORIZED") // MASIH RAGU DI GANTI STATUSNYA GA
@@ -1104,7 +1104,7 @@ class UserController extends BaseController
          }
          else 
          {
-            $message = "error".$signature1." dan ".$signature2."=".$secret."==>".$data["order"] ;
+            $message = "error" ;
          }
          session(['payment_status' => $response_cc["status"]]);
          session(['payment_message' => $message]);
