@@ -29,6 +29,7 @@
           aws_link="{{ config('filesystems.s3url') }}"
           default_image="{{ json_encode(config('common.default')) }}"
           recently="{{ json_encode($recently) }}"
+          bag_link="{{ route('bag') }}"
   ></related>
   @endif
   <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">

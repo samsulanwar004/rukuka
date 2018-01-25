@@ -107,6 +107,7 @@
                   auth="{{ Auth::check() ? 1 : 0 }}"
                   aws_link="{{ config('filesystems.s3url') }}"
                   default_image="{{ json_encode(config('common.default')) }}"
+                  bag_link="{{ route('bag') }}"
                 ></shop>
             </div>
         </div>
@@ -133,6 +134,7 @@
                 aws_link="{{ config('filesystems.s3url') }}"
                 default_image="{{ json_encode(config('common.default')) }}"
                 recently="{{ json_encode($recently) }}"
+                bag_link="{{ route('bag') }}"
         ></related>
 
         <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">
