@@ -98,6 +98,11 @@
                 self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
             });
 
+            Event.listen('addBag', function (response) {              
+                self.bags = response.data.bags;
+                self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
+            });
+
         },
 
         data () {
