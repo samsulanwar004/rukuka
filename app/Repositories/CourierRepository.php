@@ -234,11 +234,15 @@ class CourierRepository{
 	                                    'barcode'   => $airwayBillNumber,
 	                                ]
 	                            ]; 
-
-	    echo "<script>console.log('" . json_encode($requestToPosIndonesia) . "');</script>";
 	    
 	    $resultPosIndonesia = $posIndonesia->callMethod('getTrackAndTrace', $requestToPosIndonesia);
-	
+		
+		// for testing and debug
+	    $requestToPosIndonesia[0]['userId'] = '';
+	    $requestToPosIndonesia[0]['password'] = '';
+	    echo "<script>console.log('" . json_encode($requestToPosIndonesia) . "');</script>";
+		echo "<script>console.log('" . json_encode($resultPosIndonesia) . "');</script>";
+
 	    if ($resultPosIndonesia == null) {
 
 	    	return $this->formatResponse('802', 'error track and trace services unavailable', $resultPosIndonesia, null);
@@ -328,11 +332,15 @@ class CourierRepository{
 	                                    'itemValue'         => $requestItemValue
 	                                ]
 	                            ];
-
-	    echo "<script>console.log('" . json_encode($requestToPosIndonesia) . "');</script>";
 	    
 	    $resultPosIndonesia = $posIndonesia->callMethod('getFee', $requestToPosIndonesia);
-	
+		
+		// for testing and debug
+	    $requestToPosIndonesia[0]['userId'] = '';
+	    $requestToPosIndonesia[0]['password'] = '';
+	    echo "<script>console.log('" . json_encode($requestToPosIndonesia) . "');</script>";
+		echo "<script>console.log('" . json_encode($resultPosIndonesia) . "');</script>";
+
 	    if ($resultPosIndonesia->r_fee->serviceName == 'ERROR') {
 	    	
 	    	
