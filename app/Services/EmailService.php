@@ -25,5 +25,10 @@ class EmailService
         Mail::to($user->email)->send(new InvoiceUnpaid($user,$order,$detail));
     }
 
+    public function sendInvoicePaid($user,$order)
+    {
+        Mail::to($user->email)->send(new InvoicePaid($user,$order));
+    }
+
 
 }

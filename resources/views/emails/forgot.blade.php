@@ -56,6 +56,10 @@
             color: #ffffff;
             font-size: 24px;
         }
+
+        .font-white {
+            color: #FFFFFF;
+        }
     </style>
 
     <style type="text/css" media="screen">
@@ -117,8 +121,8 @@
                                 <table cellspacing="0" cellpadding="0" width="530" height="303" class="w320">
                                     <tr>
                                         <td valign="middle" style="vertical-align:middle; padding-right: 15px; padding-left: 15px; text-align:left;" class="mobile-center" height="303">
-                                            <h1>FORGOT YOUR PASSWORD ?</h1><br>
-                                            <h2 style="color: #FFFFFF">Let's get you<br> a new one.</h2>
+                                            <h1 class="font-white">FORGOT YOUR PASSWORD ?</h1><br>
+                                            <h2 class="font-white">Let's get you<br> a new one.</h2>
                                         </td>
                                     </tr>
                                 </table>

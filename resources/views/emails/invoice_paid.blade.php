@@ -264,13 +264,13 @@
                                                 </td>
                                             </tr>
 
-                                            @foreach($detail as $item)
+                                            @foreach($order->detail as $item)
                                             <tr>
                                                 <td class="item-col item">
                                                     <table cellspacing="0" cellpadding="0" width="100%">
                                                         <tr>
                                                             <td class="mobile-hide-img">
-                                                                <a href=""><img width="110" height="92" src="{{ uploadCDN($item['product_photo']) }}" alt="item1"></a>
+                                                                {{--<a href=""><img width="110" height="92" src="{{ uploadCDN($item['product_photo']) }}" alt="item1"></a>--}}
                                                             </td>
                                                             <td class="product">
                                                                 <span style="color: #4d4d4d; font-weight:bold;">{{$item['product_name']}}</span> <br />
