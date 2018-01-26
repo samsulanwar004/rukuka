@@ -31,6 +31,8 @@ import CreditCard from './components/CreditCard.vue';
 
 import NavigationMobile from './components/NavigationMobile.vue';
 
+import UserPanelMobile from './components/UserPanelMobile.vue';
+
 import Search from './components/Search.vue';
 
 import PopularSearch from './components/PopularSearch.vue';
@@ -76,6 +78,7 @@ new Vue({
     'address-list' : Address,
     'credit-card' : CreditCard,
     'navigation-mobile' : NavigationMobile,
+    'user-panel-mobile' : UserPanelMobile,
     'search' : Search,
     'popular-search' : PopularSearch
 	}

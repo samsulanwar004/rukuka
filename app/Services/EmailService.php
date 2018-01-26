@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Mail\Activation;
 use App\Mail\Forgot;
 use App\Mail\InvoiceUnpaid;
-use App\Mail\PersonalInformation;
+use App\Mail\InvoicePaid;
 use Illuminate\Support\Facades\Mail;
 
 class EmailService
@@ -23,6 +23,11 @@ class EmailService
 	public function sendInvoiceUnpaid($user,$order,$detail)
     {
         Mail::to($user->email)->send(new InvoiceUnpaid($user,$order,$detail));
+    }
+
+    public function sendInvoicePaid($user,$order)
+    {
+        Mail::to($user->email)->send(new InvoicePaid($user,$order));
     }
 
 
