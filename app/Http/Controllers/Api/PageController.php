@@ -7,6 +7,7 @@ use App\Repositories\DesignerRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\PageRepository;
+use Exception;
 
 class PageController extends BaseApiController
 {

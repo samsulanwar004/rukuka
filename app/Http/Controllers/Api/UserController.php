@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
+use Exception;
 
 class UserController extends BaseApiController
 {
