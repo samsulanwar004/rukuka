@@ -160,9 +160,9 @@
                                             <tr>
                                                 <td>
                                                     <div>
-                                                        {{--@component('mail::button', ['url' => route('activation', ['code' => $user->verification_token ])])--}}
-                                                            {{--Activate Now--}}
-                                                        {{--@endcomponent--}}
+                                                        @component('mail::button', ['url' => route('activation', ['code' => $user->verification_token ])])
+                                                            Activate Now
+                                                        @endcomponent
                                                     </div>
                                                 </td>
                                                 <td>

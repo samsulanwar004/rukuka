@@ -981,8 +981,6 @@ class UserController extends BaseController
 
                 $payload = json_encode($data);
 
-                
-
                 curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
                 curl_setopt($curl, CURLOPT_USERPWD, $secret_api_key.":");
                 curl_setopt($curl, CURLOPT_URL, $end_point);
@@ -1018,7 +1016,6 @@ class UserController extends BaseController
                 {
                     $user = $this->getUserActive();
                     $order = (new OrderRepository)->getOrderbyOrderCode($data["order"]["order_code"]);
-
                     $order->payment_status = 1;
                     $order->payment_name = $data["order"]["card_holder"];
                     $order->pending_reason = 'already paid';

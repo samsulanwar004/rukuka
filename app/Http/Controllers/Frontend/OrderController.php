@@ -104,7 +104,7 @@ class OrderController extends BaseController
             //EMAILSENT
 			//sent invoice unpaid to buyer
             $emailService = (new EmailService);
-            $emailService->sendInvoiceUnpaid($user,$order,$detail);
+            $emailService->sendInvoiceUnpaid($order);
 
             DB::commit();
 			return view('pages.checkout.checkout_finish', compact(
