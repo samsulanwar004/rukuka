@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Invoice Unpaid</title>
+    <title>Shipping Confirmation</title>
     <style type="text/css">
         @import url(http://fonts.googleapis.com/css?family=Lato:400);
 
@@ -197,8 +197,8 @@
                                             <table cellspacing="0" cellpadding="0" width="100%">
                                                 <tr>
                                                     <td valign="middle" style="vertical-align:middle; padding-right: 15px; padding-left: 15px; text-align:left;" class="mobile-center font-white" height="303">
-                                                        <h1 class="font-white">THANK YOU FOR YOUR ORDER</h1><br>
-                                                        <h2 class="font-white">Your order has been approved, <br>please review your order below</h2>
+                                                        <h1 class="font-white">YOUR ORDER HAS SHIPPED!</h1><br>
+                                                        <h2 class="font-white">Please review your order below</h2>
                                                         <br>
                                                     </td>
                                                 </tr>
@@ -264,29 +264,29 @@
                                             </tr>
 
                                             @foreach($order->details as $item)
-                                            <tr>
-                                                <td class="item-col item">
-                                                    <table cellspacing="0" cellpadding="0" width="100%">
-                                                        <tr>
-                                                            <td class="mobile-hide-img">
-                                                                <a href=""><img width="110" height="92" src="{{ uploadCDN($item->productStock->product->images->first()->photo) }}" alt="item1"></a>
-                                                            </td>
-                                                            <td class="product">
-                                                                <span style="color: #4d4d4d; font-weight:bold;">{{$item['product_name']}}</span> <br />
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td class="item-col quantity">
-                                                    {{$item['qty']}}
-                                                </td>
-                                                <td class="item-col">
-                                                    ${{$item['price']}}
-                                                </td>
-                                                <td class="item-col">
-                                                    ${{$item['price']*$item['qty']}}
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <td class="item-col item">
+                                                        <table cellspacing="0" cellpadding="0" width="100%">
+                                                            <tr>
+                                                                <td class="mobile-hide-img">
+                                                                    <a href=""><img width="110" height="92" src="{{ uploadCDN($item->productStock->product->images->first()->photo) }}" alt="item1"></a>
+                                                                </td>
+                                                                <td class="product">
+                                                                    <span style="color: #4d4d4d; font-weight:bold;">{{$item['product_name']}}</span> <br />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="item-col quantity">
+                                                        {{$item['qty']}}
+                                                    </td>
+                                                    <td class="item-col">
+                                                        ${{$item['price']}}
+                                                    </td>
+                                                    <td class="item-col">
+                                                        ${{$item['price']*$item['qty']}}
+                                                    </td>
+                                                </tr>
                                             @endforeach
 
                                             <tr>
@@ -321,7 +321,7 @@
                                         <table cellspacing="0" cellpadding="0" width="100%">
                                             <tr>
                                                 <td style="text-align: left;">
-                                                    Thank you for ordering from us, Your order has been approved and is waiting for your payment. We will confirm you shortly once payment has been completed.
+                                                    Thank you for ordering from us. We wanted to let you know that we just shipped off your order.
                                                     <br>You can review complete details of your order on the Order History page.
                                                     <br>
                                                     <br>
@@ -339,7 +339,7 @@
                                             <tr>
                                                 <td class="mobile-padding" style="text-align:left;">
                                                     <br>
-                                                    Please <a href="{{URL::to('/help/contact-us')}}">contact us</a> with any questions regarding this invoice.
+                                                    Please <a href="{{URL::to('/help/contact-us')}}">contact us</a> with any questions regarding this shipping confirmation.
                                                     <br>
                                                     <br>
                                                     Sincerely,<br>

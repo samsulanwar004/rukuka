@@ -5,8 +5,10 @@
 	use DB;
 	use CRUDBooster;
 	use App\Repositories\OrderRepository;
+    use App\Services\EmailService;
 
 	class AdminOrdersController extends \crocodicstudio\crudbooster\controllers\CBController {
+
 
 	    public function cbInit() {
 
@@ -333,9 +335,15 @@
 	    | @id       = current id 
 	    | 
 	    */
-	    public function hook_before_edit(&$postdata,$id) {        
-	        //Your code here
+	    public function hook_before_edit(&$postdata,$id) {
+            //EMAILSENT
+            //Send shipping Notification to buyer
+            $order = (new OrderRepository)->getOrderById($id);
+            if($order->order_status == 0){
+                $emailService = (new EmailService);
+                $emailService->sendShipping($order);
 
+            }
 	    }
 
 	    /* 

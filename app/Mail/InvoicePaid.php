@@ -10,16 +10,14 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class InvoicePaid extends Mailable
 {
     use Queueable, SerializesModels;
-    private $user;
     private $order;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user,$order)
+    public function __construct($order)
     {
-        $this->user = $user;
         $this->order = $order;
     }
 
@@ -31,7 +29,6 @@ class InvoicePaid extends Mailable
     public function build()
     {
         return $this->markdown('emails.invoice_paid', [
-            'user' => $this->user,
             'order' => $this->order,
         ])
             ->subject('Invoice Paid');

@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Skyline Invoice Email</title>
+    <title>Invoice Paid</title>
     <style type="text/css">
         @import url(http://fonts.googleapis.com/css?family=Lato:400);
 
@@ -198,7 +198,7 @@
                                                 <tr>
                                                     <td valign="middle" style="vertical-align:middle; padding-right: 15px; padding-left: 15px; text-align:left;" class="mobile-center font-white" height="303">
                                                         <h1 class="font-white">THANK YOU FOR YOUR ORDER</h1><br>
-                                                        <h2 class="font-white">Your payment has been approved, <br>please review your order below</h2>
+                                                        <h2 class="font-white">Your payment has been confirmed, <br>please review your order below</h2>
                                                         <br>
                                                     </td>
                                                 </tr>
@@ -226,7 +226,6 @@
                                                   <span class="important-font">
                                                     Invoice :  {{$order->order_code}} <br>
                                                   </span>
-                                                    {{$order->order_date}}
                                                 </td>
                                             </tr>
                                         </table>
@@ -235,7 +234,7 @@
                                             <tr>
                                                 <td style="text-align: left;">
                                                   <span class="important-font">
-                                                    {{$user->first_name}} <br>
+                                                    {{$order->address->first_name}} <br>
                                                   </span>
                                                     {{$order->address->address_line}} <br>
                                                     {{$order->address->city}},{{$order->address->province}} <br>
@@ -322,7 +321,8 @@
                                         <table cellspacing="0" cellpadding="0" width="100%">
                                             <tr>
                                                 <td style="text-align: left;">
-                                                    Thank you for ordering from us, we'll let you know as soon as your items have shipped
+                                                    Thank you for ordering from us, We'll get started on it right away and you'll receive a shipping confirmation email soon.
+                                                    <br>You can review complete details of your order on the Order History page.
                                                     <br>
                                                     <br>
                                                 </td>
