@@ -32,14 +32,14 @@ class UserController extends BaseApiController
     public function subcriber(Request $request)
     {
 
-        $rules = [
-            'email' => 'required|string|email|max:255|unique:subcribers'
-        ];
+        // $rules = [
+        //     'email' => 'required|string|email|max:255|unique:subcribers'
+        // ];
 
-        $validation = $this->validRequest($request, $rules);
-        if ($validation->fails()) {
-            return $this->error($validation->errors(), 400, true);
-        }
+        // $validation = $this->validRequest($request, $rules);
+        // if ($validation->fails()) {
+        //     return $this->error($validation->errors(), 400, true);
+        // }
 
         try {
             $subcriber = $this->user
