@@ -952,8 +952,8 @@ class UserController extends BaseController
                 $token_id = $data['response']['id'];
                 $amount = $data['request']['amount'];
                 $capture_options['authentication_id'] = $data['response']['authentication_id'];
-throw new Exception($signature1.' '.$signature2, 1);
-                $curl = curl_init();
+
+                //$curl = curl_init();
 
                 $headers = array();
                 $headers[] = 'Content-Type: application/json';
@@ -961,11 +961,12 @@ throw new Exception($signature1.' '.$signature2, 1);
                 $server_domain = 'https://api.xendit.co';
 
 
-                // $end_point = $server_domain.'/credit_card_charges';
+                $end_point = $server_domain.'/credit_card_charges';
 
-                // $data['external_id'] = $external_id;
-                // $data['token_id'] = $token_id;
-                // $data['amount'] = $amount;
+                $data['external_id'] = $external_id;
+                $data['token_id'] = $token_id;
+                $data['amount'] = $amount;
+throw new Exception($secret_api_key, 1);
 
                 // if (!empty($capture_options['authentication_id'])) {
                 //     $data['authentication_id'] = $capture_options['authentication_id'];
