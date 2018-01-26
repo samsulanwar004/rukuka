@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Skyline Invoice Email</title>
+    <title>Invoice Unpaid</title>
     <style type="text/css">
         @import url(http://fonts.googleapis.com/css?family=Lato:400);
 
@@ -226,7 +226,6 @@
                                                   <span class="important-font">
                                                     Invoice :  {{$order->order_code}} <br>
                                                   </span>
-                                                    {{date_format($order->order_date,"F j, Y")}}
                                                 </td>
                                             </tr>
                                         </table>
@@ -235,7 +234,7 @@
                                             <tr>
                                                 <td style="text-align: left;">
                                                   <span class="important-font">
-                                                    {{$user->first_name}} <br>
+                                                    {{$order->address->first_name}} <br>
                                                   </span>
                                                     {{$order->address->address_line}} <br>
                                                     {{$order->address->city}},{{$order->address->province}} <br>
@@ -264,13 +263,13 @@
                                                 </td>
                                             </tr>
 
-                                            @foreach($detail as $item)
+                                            @foreach($order->details as $item)
                                             <tr>
                                                 <td class="item-col item">
                                                     <table cellspacing="0" cellpadding="0" width="100%">
                                                         <tr>
                                                             <td class="mobile-hide-img">
-                                                                <a href=""><img width="110" height="92" src="{{ uploadCDN($item['product_photo']) }}" alt="item1"></a>
+                                                                <a href=""><img width="110" height="92" src="{{ uploadCDN($item->productStock->product->images->first()->photo) }}" alt="item1"></a>
                                                             </td>
                                                             <td class="product">
                                                                 <span style="color: #4d4d4d; font-weight:bold;">{{$item['product_name']}}</span> <br />
@@ -322,7 +321,8 @@
                                         <table cellspacing="0" cellpadding="0" width="100%">
                                             <tr>
                                                 <td style="text-align: left;">
-                                                    Thank you for ordering from us, Your order has been approved and is waiting for payment
+                                                    Thank you for ordering from us, Your order has been approved and is waiting for your payment. We will confirm you shortly once payment has been completed.
+                                                    <br>You can review complete details of your order on the Order History page.
                                                     <br>
                                                     <br>
                                                 </td>

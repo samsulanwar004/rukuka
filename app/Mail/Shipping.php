@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class InvoiceUnpaid extends Mailable
+class Shipping extends Mailable
 {
     use Queueable, SerializesModels;
     private $order;
@@ -29,9 +29,9 @@ class InvoiceUnpaid extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.invoice_unpaid', [
+        return $this->markdown('emails.shipping', [
             'order' => $this->order
         ])
-            ->subject('Invoice Unpaid');
+            ->subject('Shipping Confirmation');
     }
 }
