@@ -113,7 +113,7 @@ Route::post('/persist-bag', [
 Route::post('/xendit', [
     'as'   => 'xendit',
     'uses' => 'Frontend\PageController@callBackXendit',
-    ]);
+]);
 
 Route::get('/bag', [
     'as'   => 'bag',
