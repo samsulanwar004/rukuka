@@ -945,7 +945,7 @@ class UserController extends BaseController
             $signature1 = $data["order"]["signature"];
             $secret = config('common.order_key_signature');
             $signature2 = sha1($data['request']['amount'].$secret);
-
+dd($signature1 == $signature2);
             if($signature1 == $signature2)
             {
                 $external_id = $data["order"]["order_code"]; 
