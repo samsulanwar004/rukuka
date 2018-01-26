@@ -17,9 +17,11 @@
       <div class="uk-width-1-5@m">
         <ul class="uk-nav uk-footer-nav">
           <li><b>ABOUT RUKUKA</b></li>
-          <li><a href="{{ URL::to('page/our-story')}}">Our Story</a></li>
-          <li><a href="{{ URL::to('page/social-responsibility')}}">Social Responsibility</a></li>
-          <li><a href="{{ URL::to('page/investor-relation')}}">Investor Relations</a></li>
+          <li><a href="{{ URL::to('page/about-rukuka')}}">About ruKuKa</a></li>
+          <li><a href="{{ URL::to('page/partners')}}">Partners</a></li>
+          <li><a href="{{ URL::to('page/careers')}}">Careers</a></li>
+          <li><a href="{{ URL::to('page/terms-privacy')}}">Terms & Privacy</a></li>
+          <li><a href="{{ URL::to('page/investor-relations')}}">Investor Relations</a></li>
         </ul>
 
       </div>
@@ -46,28 +48,17 @@
       </p>
       </div>
     </div>
-    <div class="uk-panel uk-grid" uk-grid>
-      <div class="uk-width-3-5@m">
-        <p>
-          <ul class="uk-grid uk-text-meta" uk-grid>
-            <li><a href="{{ URL::to('page/terms-and-conditions')}}">TERMS AND CONDITIONS</a></li>
-            <li><a href="{{ URL::to('page/privacy-policy')}}">PRIVACY POLICY</a></li>
-
-          </ul>
-        </p>
-      </div>
-
-    </div>
-    <span class="uk-text-meta">Copyright © 2017 rukuka.com - All Rights Reseved.</span>
-
+    <p>
+    <span class="uk-text-meta uk-margin-top">Copyright © 2017 rukuka.com - All Rights Reseved.</span>
+    </p>
   </div>
 </div>
 <div class="uk-section uk-section-muted uk-section-xsmall uk-text-small uk-hidden@m">
   <div class="uk-container uk-container-small uk-text-meta">
     <ul class="uk-grid" uk-grid>
       <li><a href="{{ URL::to('help/need-some-help')}}">Help!</a></li>
-      <li><a href="{{ URL::to('page/terms-and-conditions')}}">Term & Conditions</a></li>
-      <li><a href="{{ URL::to('page/privacy-policy')}}">Privacy & Policy</a></li>
+      <li><a href="{{ URL::to('page/about-rukuka')}}">About ruKuKa</a></li>
+      <li><a href="{{ URL::to('page/terms-privacy')}}">Terms & Privacy</a></li>
     </ul>
 
     <p>Copyright © 2017 rukuka.com - All Rights Reseved.</p>

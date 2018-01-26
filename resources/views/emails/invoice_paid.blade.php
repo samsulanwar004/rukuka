@@ -198,7 +198,7 @@
                                                 <tr>
                                                     <td valign="middle" style="vertical-align:middle; padding-right: 15px; padding-left: 15px; text-align:left;" class="mobile-center font-white" height="303">
                                                         <h1 class="font-white">THANK YOU FOR YOUR ORDER</h1><br>
-                                                        <h2 class="font-white">Your order has been approved, <br>Please review your order below</h2>
+                                                        <h2 class="font-white">Your payment has been approved, <br>please review your order below</h2>
                                                         <br>
                                                     </td>
                                                 </tr>
@@ -226,7 +226,7 @@
                                                   <span class="important-font">
                                                     Invoice :  {{$order->order_code}} <br>
                                                   </span>
-                                                    {{date_format($order->order_date,"F j, Y")}}
+                                                    {{$order->order_date}}
                                                 </td>
                                             </tr>
                                         </table>
@@ -264,13 +264,13 @@
                                                 </td>
                                             </tr>
 
-                                            @foreach($order->detail as $item)
+                                            @foreach($order->details as $item)
                                             <tr>
                                                 <td class="item-col item">
                                                     <table cellspacing="0" cellpadding="0" width="100%">
                                                         <tr>
                                                             <td class="mobile-hide-img">
-                                                                {{--<a href=""><img width="110" height="92" src="{{ uploadCDN($item['product_photo']) }}" alt="item1"></a>--}}
+                                                                <a href=""><img width="110" height="92" src="{{ uploadCDN($item->productStock->product->images->first()->photo) }}" alt="item1"></a>
                                                             </td>
                                                             <td class="product">
                                                                 <span style="color: #4d4d4d; font-weight:bold;">{{$item['product_name']}}</span> <br />
@@ -322,7 +322,7 @@
                                         <table cellspacing="0" cellpadding="0" width="100%">
                                             <tr>
                                                 <td style="text-align: left;">
-                                                    Thank you for ordering from us, Your order has been approved and is waiting for payment
+                                                    Thank you for ordering from us, we'll let you know as soon as your items have shipped
                                                     <br>
                                                     <br>
                                                 </td>

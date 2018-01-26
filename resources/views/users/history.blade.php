@@ -10,9 +10,9 @@
 	<div class="uk-width-3-4@m">
 	  <h3>Order History</h3>
 	  <ul class="uk-child-width-1-5 uk-margin" uk-tab="animation: uk-animation-slide-bottom">
-	    <li><a href="#"><b>NOT YET PAID</b> </a> </li>
-      <li><a href="#"><b>NOT YET SENT</b> </a> </li>
-      <li><a href="#"><b>NOT YET RECEIVED</b> </a> </li>
+	    <li><a href="#"><b>UNPAID</b> </a> </li>
+      <li><a href="#"><b>UNSENT</b> </a> </li>
+      <li><a href="#"><b>UNRECEIVED</b> </a> </li>
       <li><a href="#"><b>DONE</b> </a> </li>
       <li><a href="#"><b>CANCELED</b> </a> </li>
 	  </ul>
@@ -44,7 +44,7 @@
                                   <td>x {{ $detail->qty }}</td>
                                   <td>{{ $detail->subtotal }}</td>
                               </tr>
-                              @php                                
+                              @php
                                 $total += $detail->subtotal;
                               @endphp
                             @endforeach
@@ -94,7 +94,7 @@
                                   <td>x {{ $detail->qty }}</td>
                                   <td>{{ $detail->subtotal }}</td>
                               </tr>
-                              @php                                
+                              @php
                                 $total += $detail->subtotal;
                               @endphp
                             @endforeach
@@ -140,7 +140,7 @@
                                   <td>x {{ $detail->qty }}</td>
                                   <td>{{ $detail->subtotal }}</td>
                               </tr>
-                              @php                                
+                              @php
                                 $total += $detail->subtotal;
                               @endphp
                             @endforeach
@@ -187,7 +187,7 @@
                                   <td>x {{ $detail->qty }}</td>
                                   <td>{{ $detail->subtotal }}</td>
                               </tr>
-                              @php                                
+                              @php
                                 $total += $detail->subtotal;
                               @endphp
                             @endforeach
@@ -233,7 +233,7 @@
                                   <td>x {{ $detail->qty }}</td>
                                   <td>{{ $detail->subtotal }}</td>
                               </tr>
-                              @php                                
+                              @php
                                 $total += $detail->subtotal;
                               @endphp
                             @endforeach
