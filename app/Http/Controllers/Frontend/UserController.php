@@ -1028,7 +1028,7 @@ class UserController extends BaseController
                 //EMAILSENT
                 //sent invoice unpaid to buyer
                 $emailService = (new EmailService);
-                $emailService->sendInvoicePaid($user,$order);
+                $emailService->sendInvoicePaid($order);
             }
 
             if($response_cc["status"] == "AUTHORIZED") // MASIH RAGU DI GANTI STATUSNYA GA

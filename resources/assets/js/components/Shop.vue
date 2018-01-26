@@ -116,21 +116,19 @@
                 </div>
                 <div class="uk-width-1-2@m">
                   <h4 class="uk-margin-remove">
-                  <span v-if="priceBeforeDiscount > 0 ">
-
-                    <del>
-                        {{ currency }} {{ priceBeforeDiscount }}
-                    </del>
-
-                  </span>
-                  <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
-                      &nbsp; {{ currency }} {{ price }}
-                  </span>
+                    <span v-if="priceBeforeDiscount > 0 ">
+                      <del>
+                          {{ currency }} {{ priceBeforeDiscount }}
+                      </del>
+                    </span>
+                    <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
+                        &nbsp; {{ currency }} {{ price }}
+                    </span>
+                    <span v-else>
+                        {{ currency }} {{ price }}
+                    </span>
                   </h4>
-
-                  <span v-else>
-                      <h4>{{ currency }} {{ price }}</h4>
-                  </span>
+                  
                   <h5 class="uk-margin-small">Color : {{ color }}</h5>
                   <div v-if="stocks.length > 0">
                     <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-small">

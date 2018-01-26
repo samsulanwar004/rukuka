@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Exception;
 use Validator;
 
 class BaseApiController extends Controller
@@ -18,8 +17,7 @@ class BaseApiController extends Controller
      */
     protected function error($message, $httpCode = 500, $isValidationMessage = false)
     {
-        logger($message);
-        if(config('app.debug') || $isValidationMessage) {
+        if($isValidationMessage) {
             if ($message instanceof \Exception || $message instanceof \InvalidArgumentException) {
                 $message = $message->getMessage();
             }

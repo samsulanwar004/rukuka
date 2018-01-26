@@ -6,6 +6,7 @@ use App\Mail\Activation;
 use App\Mail\Forgot;
 use App\Mail\InvoiceUnpaid;
 use App\Mail\InvoicePaid;
+use App\Mail\Shipping;
 use Illuminate\Support\Facades\Mail;
 
 class EmailService
@@ -20,14 +21,19 @@ class EmailService
 		Mail::to($user->email)->send(new Forgot($user));
 	}
 
-	public function sendInvoiceUnpaid($user,$order,$detail)
+	public function sendInvoiceUnpaid($order)
     {
-        Mail::to($user->email)->send(new InvoiceUnpaid($user,$order,$detail));
+        Mail::to($order->user->email)->send(new InvoiceUnpaid($order));
     }
 
-    public function sendInvoicePaid($user,$order)
+    public function sendInvoicePaid($order)
     {
-        Mail::to($user->email)->send(new InvoicePaid($user,$order));
+        Mail::to($order->user->email)->send(new InvoicePaid($order));
+    }
+
+    public function sendShipping($order)
+    {
+        Mail::to($order->user->email)->send(new Shipping($order));
     }
 
 
