@@ -959,27 +959,28 @@ class UserController extends BaseController
                 $headers[] = 'Content-Type: application/json';
                 $secret_api_key = config('common.xendit_secret_key');
                 $server_domain = 'https://api.xendit.co';
+throw new Exception($secret_api_key, 1);
 
-                $end_point = $server_domain.'/credit_card_charges';
+                // $end_point = $server_domain.'/credit_card_charges';
 
-                $data['external_id'] = $external_id;
-                $data['token_id'] = $token_id;
-                $data['amount'] = $amount;
+                // $data['external_id'] = $external_id;
+                // $data['token_id'] = $token_id;
+                // $data['amount'] = $amount;
 
-                if (!empty($capture_options['authentication_id'])) {
-                    $data['authentication_id'] = $capture_options['authentication_id'];
-                }
+                // if (!empty($capture_options['authentication_id'])) {
+                //     $data['authentication_id'] = $capture_options['authentication_id'];
+                // }
 
-                if (!empty($capture_options['card_cvn'])) {
-                    $data['card_cvn'] = $capture_options['card_cvn'];
-                }
+                // if (!empty($capture_options['card_cvn'])) {
+                //     $data['card_cvn'] = $capture_options['card_cvn'];
+                // }
 
-                if (!empty($capture_options['capture'])) {
-                    $data['capture'] = $capture_options['capture'];
-                }
+                // if (!empty($capture_options['capture'])) {
+                //     $data['capture'] = $capture_options['capture'];
+                // }
 
-                $payload = json_encode($data);
-throw new Exception($payload, 1);
+                // $payload = json_encode($data);
+
                 // curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
                 // curl_setopt($curl, CURLOPT_USERPWD, $secret_api_key.":");
                 // curl_setopt($curl, CURLOPT_URL, $end_point);
