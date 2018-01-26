@@ -945,21 +945,21 @@ class UserController extends BaseController
             $signature1 = $data["order"]["signature"];
             $secret = config('common.order_key_signature');
             $signature2 = sha1($data['request']['amount'].$secret);
-dd($signature1 == $signature2);
+
             if($signature1 == $signature2)
             {
                 $external_id = $data["order"]["order_code"]; 
                 $token_id = $data['response']['id'];
                 $amount = $data['request']['amount'];
                 $capture_options['authentication_id'] = $data['response']['authentication_id'];
-
+throw new Exception($signature1.' '.$signature2, 1);
                 $curl = curl_init();
 
                 $headers = array();
                 $headers[] = 'Content-Type: application/json';
                 $secret_api_key = config('common.xendit_secret_key');
                 $server_domain = 'https://api.xendit.co';
-throw new Exception($secret_api_key, 1);
+
 
                 // $end_point = $server_domain.'/credit_card_charges';
 
