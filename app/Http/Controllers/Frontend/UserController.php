@@ -979,20 +979,20 @@ class UserController extends BaseController
                 }
 
                 $payload = json_encode($data);
+throw new Exception($payload, 1);
+                // curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+                // curl_setopt($curl, CURLOPT_USERPWD, $secret_api_key.":");
+                // curl_setopt($curl, CURLOPT_URL, $end_point);
+                // curl_setopt($curl, CURLOPT_POST, true);
+                // curl_setopt($curl, CURLOPT_POSTFIELDS, $payload);
+                // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
-                curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-                curl_setopt($curl, CURLOPT_USERPWD, $secret_api_key.":");
-                curl_setopt($curl, CURLOPT_URL, $end_point);
-                curl_setopt($curl, CURLOPT_POST, true);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $payload);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                // $response = curl_exec($curl);
+                // curl_close($curl);
 
-                $response = curl_exec($curl);
-                curl_close($curl);
+                // $responseObject = json_decode($response, true);
+                // //return $responseObject;
 
-                $responseObject = json_decode($response, true);
-                //return $responseObject;
-throw new Exception($responseObject, 1);
 
                 // $response_cc = $responseObject;
                 //  if(!isset($response_cc["capture_amount"]))
