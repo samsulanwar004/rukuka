@@ -286,7 +286,7 @@
           </div>
       </div>
 
-  	<h3>MOST POPULAR</h3>
+  	<h4>MOST POPULAR</h4>
   	<popular
       api="{{ route('populer', 'Homepage')}}"
       product_api="{{ route('product.api') }}"

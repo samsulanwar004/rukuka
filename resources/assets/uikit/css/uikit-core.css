@@ -1714,7 +1714,7 @@ select.uk-form-width-xsmall {
 /* Hover + Focus */
 .uk-button-secondary:hover,
 .uk-button-secondary:focus {
-  background-color: #000000;
+  background-color: #333;
   color: #fff;
 }
 /* OnClick + Active */
@@ -3556,6 +3556,7 @@ ul.uk-nav-sub {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   /* 4 */
   text-decoration: none;
+  font-weight: 700;
   /* 5 */
   letter-spacing: 2px;
 }
@@ -3563,7 +3564,7 @@ ul.uk-nav-sub {
  * Nav items
  */
 .uk-navbar-nav > li > a {
-  color: #666;
+  color: #333;
 }
 /*
  * Hover
@@ -3572,7 +3573,7 @@ ul.uk-nav-sub {
 .uk-navbar-nav > li:hover > a,
 .uk-navbar-nav > li > a:focus,
 .uk-navbar-nav > li > a.uk-open {
-  color: #999;
+  color: #e5e5e5;
   outline: none;
 }
 /* OnClick */
@@ -3704,6 +3705,7 @@ ul.uk-nav-sub {
 .uk-navbar-dropdown-nav > li > a {
   font-size: 12px;
   color: #333;
+  font-weight: 600;
 }
 /* Hover + Focus */
 .uk-navbar-dropdown-nav > li > a:hover,

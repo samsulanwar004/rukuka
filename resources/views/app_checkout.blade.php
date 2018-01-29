@@ -119,8 +119,8 @@
       </div>
       @include('partials.header_checkout')
       @yield('content')
-      @include('partials.footer_checkout')
-    </div>    
+      @include('partials.footer')
+    </div>
     <script src="{{ elixirCDN('js/main.js') }}"></script>
     <script src="{{ elixirCDN('js/app.js') }}"></script>
     @section('footer_scripts')

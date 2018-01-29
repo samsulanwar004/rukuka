@@ -45,7 +45,6 @@ class OrderController extends BaseController
 
 
 	        $bags = $bag->get(self::INSTANCE_SHOP);
-	        $items = $bags;
 
 	        $total = str_replace(',', '', $bag->subtotal());
 
@@ -74,7 +73,6 @@ class OrderController extends BaseController
 	        });
 
 	        $shipping = $courir['data']->total_fee_usd;
-	        //$shipping = 50;
 
 	        $orderDate = Carbon::now();
 	        $expiredDate = Carbon::now()->addDay();

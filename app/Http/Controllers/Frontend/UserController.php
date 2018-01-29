@@ -1016,7 +1016,6 @@ class UserController extends BaseController
                 );
                 if($response_cc["status"] == "CAPTURED")
                 {
-                    $user = $this->getUserActive();
                     $order = (new OrderRepository)->getOrderbyOrderCode($data["order"]["order_code"]);
                     $order->payment_status = 1;
                     $order->payment_name = $data["order"]["card_holder"];
@@ -1028,7 +1027,7 @@ class UserController extends BaseController
                     //EMAILSENT
                     //sent invoice unpaid to buyer
                     $emailService = (new EmailService);
-                    $emailService->sendInvoicePaid($user,$order);
+                    $emailService->sendInvoicePaid($order);
                 }
 
                 if($response_cc["status"] == "AUTHORIZED") // MASIH RAGU DI GANTI STATUSNYA GA
