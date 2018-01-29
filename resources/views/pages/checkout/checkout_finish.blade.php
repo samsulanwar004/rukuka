@@ -43,7 +43,7 @@
                           </div>
                       </div>
                     </div>
-
+                    <div class="uk-overflow-auto">
                     <table class="uk-table uk-table-divider uk-table-hover">
                       <thead>
                           <tr>
@@ -57,7 +57,7 @@
                               $subtotal = $product['price'] * $product['qty'];
                             @endphp
                             <tr>
-                              <td>{{ $product['product_name'] }}</td><td>{{ $product['price'] }}</td><td>{{ $product['qty'] }}</td><td>{{ $subtotal }}</td>
+                               <td>{{ $product['product_name'] }}</td><td>{{ $product['price'] }}</td><td>{{ $product['qty'] }}</td><td>{{ $subtotal }}</td>
                             </tr>
                           @endforeach
                             <tr>
@@ -68,7 +68,7 @@
                             </tr>
                       </tbody>
                     </table>
-                                      
+                    </div>
                     <div class="uk-text-center">
                         <button class="uk-button uk-button-danger uk-width-1-2 uk-text-center" type="submit">Pay Now</button>
                     </div>
