@@ -87,137 +87,138 @@
 </div>
 
         <?php $orderCode = $order->order_code;
-        $userId    = $order->users_id; ?>
-
-         <script src="https://js.xendit.co/v1/xendit.min.js"></script>
-         <?php echo "<script>Xendit.setPublishableKey('".config('common.xendit_public_key')."');</script>"; ?>
-        <script>
-            $(function () {
-
-                var $form = $('#payment-form');
-
-                $form.submit(function (event) {
-                    hideResults();
-
-                    <?php echo "Xendit.setPublishableKey('".config('common.xendit_public_key')."')";?>
-
-                    // Disable the submit button to prevent repeated clicks:
-                    $form.find('.submit').prop('disabled', true);
-
-                    // Request a token from Xendit:
-                    var tokenData = getTokenData();
-                    
-                    
-                    Xendit.card.createToken(tokenData, xenditResponseHandler);
-                    
-
-                    // Prevent the form from being submitted:
-                    return false;
-                });
-
-                $('#bundle-authentication').change(function() {
-                    if(this.checked) {
-                        $('.hide-if-multi').hide();
-                    } else {
-                        $('.hide-if-multi').show();
-                    }
-                });
-
-                function xenditResponseHandler (err, creditCardCharge) {
-                    $form.find('.submit').prop('disabled', false);
-                    
-                    if (err) {
-                        alert(err.error_code +" : "+err.message);
-                        window.location = "{!! route('bag') !!}";
-                    }
-
-                    if (creditCardCharge.status == 'VERIFIED') {
-                        var card_holder = document.getElementById("card_holder").value;
-                        <?php echo "orderData = { 'order_code': '".$orderCode."','user_id': '".$userId."','signature': '".$signature."', 'totalwithshipping': '".$totalwithshipping."', 'card_holder' : card_holder };"; ?>
-                        tokenData = getTokenData();
-
-                        $.ajaxSetup({
-                        headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')}
-                        });   
-
-                        var request = $.ajax({
-                            type: "POST",
-                            url: "{!! route('checkout.final') !!}",
-                            data: { order: orderData, request: tokenData, response: creditCardCharge, _token: getTokenValue()},
-                        });
-
-                        request.done(function(msg) 
-                        {   
-                            if(msg.status == "CAPTURED" ||msg.status == "AUTHORIZED")
-                            {  
-                                 window.location = "{!! route('user.history') !!}";
-                            }
-                            else
-                            {   
-                                //alert(err.error_code +" : "+err.message);
-                                window.location = "{!! route('user.history') !!}";
-                                
-                            }
-                        });
-
-                        displaySuccess(creditCardCharge);
-
-                        
-                    } else if (creditCardCharge.status === 'IN_REVIEW') {
-                        window.open(creditCardCharge.payer_authentication_url, 'sample-inline-frame');
-                        $('.overlay').show();
-                        $('#three-ds-container').show();
-                    } else if (creditCardCharge.status === 'FRAUD') {
-                        displayError(creditCardCharge);
-                    } else if (creditCardCharge.status === 'FAILED') {
-                        displayError(creditCardCharge);
-                    }
-                }
-
-                
-
-                function displaySuccess (creditCardCharge) {
-                    $('#three-ds-container').hide();
-                    $('.overlay').hide();
-                   
-
-                    var requestData = {};
-                    $.extend(requestData, getTokenData(), getFraudData());
-                    if (shouldEnableMeta) {
-                        requestData["meta_enabled"] = true;
-                    } else {
-                        requestData["meta_enabled"] = false;
-                    }
-                    $('#success .request-data').text(JSON.stringify(requestData, null, 4));
-
-                }
-
-                function getTokenData () {
-                  var total = Math.round(({{$total}} + {{$shipping}}) * {{$rupiah}});
-                  var amount = total.toString();
-                    return {
-                        amount: amount,
-                        card_number: $form.find('#card-number').val(),
-                        card_exp_month: $form.find('#card-exp-month').val(),
-                        card_exp_year: $form.find('#card-exp-year').val(),
-                        card_cvn: $form.find('#card-cvn').val(),
-                        is_multiple_use: false,
-                        should_authenticate: true
-                    };
-                }
-
-
-                function getFraudData () {
-                    return JSON.parse($form.find('#meta-json').val());
-                }
-
-                function hideResults() {
-                    $('#success').hide();
-                    $('#error').hide();
-                }
-            });
-
-        </script>
-   
+        $userId    = $order->users_id; ?>   
 
 @endsection
+
+@section('footer_scripts')
+  <script src="https://js.xendit.co/v1/xendit.min.js"></script>
+   <?php echo "<script>Xendit.setPublishableKey('".config('common.xendit_public_key')."');</script>"; ?>
+  <script>
+      $(function () {
+
+          var $form = $('#payment-form');
+
+          $form.submit(function (event) {
+              hideResults();
+
+              <?php echo "Xendit.setPublishableKey('".config('common.xendit_public_key')."')";?>
+
+              // Disable the submit button to prevent repeated clicks:
+              $form.find('.submit').prop('disabled', true);
+
+              // Request a token from Xendit:
+              var tokenData = getTokenData();
+              
+              
+              Xendit.card.createToken(tokenData, xenditResponseHandler);
+              
+
+              // Prevent the form from being submitted:
+              return false;
+          });
+
+          $('#bundle-authentication').change(function() {
+              if(this.checked) {
+                  $('.hide-if-multi').hide();
+              } else {
+                  $('.hide-if-multi').show();
+              }
+          });
+
+          function xenditResponseHandler (err, creditCardCharge) {
+              $form.find('.submit').prop('disabled', false);
+              
+              if (err) {
+                  alert(err.error_code +" : "+err.message);
+                  window.location = "{!! route('bag') !!}";
+              }
+
+              if (creditCardCharge.status == 'VERIFIED') {
+                  var card_holder = document.getElementById("card_holder").value;
+                  <?php echo "orderData = { 'order_code': '".$orderCode."','user_id': '".$userId."','signature': '".$signature."', 'totalwithshipping': '".$totalwithshipping."', 'card_holder' : card_holder };"; ?>
+                  tokenData = getTokenData();
+
+                  $.ajaxSetup({
+                  headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')}
+                  });   
+
+                  var request = $.ajax({
+                      type: "POST",
+                      url: "{!! route('checkout.final') !!}",
+                      data: { order: orderData, request: tokenData, response: creditCardCharge, _token: getTokenValue()},
+                  });
+
+                  request.done(function(msg) 
+                  {   
+                      if(msg.status == "CAPTURED" ||msg.status == "AUTHORIZED")
+                      {  
+                           window.location = "{!! route('user.history') !!}";
+                      }
+                      else
+                      {   
+                          //alert(err.error_code +" : "+err.message);
+                          window.location = "{!! route('user.history') !!}";
+                          
+                      }
+                  });
+
+                  displaySuccess(creditCardCharge);
+
+                  
+              } else if (creditCardCharge.status === 'IN_REVIEW') {
+                  window.open(creditCardCharge.payer_authentication_url, 'sample-inline-frame');
+                  $('.overlay').show();
+                  $('#three-ds-container').show();
+              } else if (creditCardCharge.status === 'FRAUD') {
+                  displayError(creditCardCharge);
+              } else if (creditCardCharge.status === 'FAILED') {
+                  displayError(creditCardCharge);
+              }
+          }
+
+          
+
+          function displaySuccess (creditCardCharge) {
+              $('#three-ds-container').hide();
+              $('.overlay').hide();
+             
+
+              var requestData = {};
+              $.extend(requestData, getTokenData(), getFraudData());
+              if (shouldEnableMeta) {
+                  requestData["meta_enabled"] = true;
+              } else {
+                  requestData["meta_enabled"] = false;
+              }
+              $('#success .request-data').text(JSON.stringify(requestData, null, 4));
+
+          }
+
+          function getTokenData () {
+            var total = Math.round(({{$total}} + {{$shipping}}) * {{$rupiah}});
+            var amount = total.toString();
+              return {
+                  amount: amount,
+                  card_number: $form.find('#card-number').val(),
+                  card_exp_month: $form.find('#card-exp-month').val(),
+                  card_exp_year: $form.find('#card-exp-year').val(),
+                  card_cvn: $form.find('#card-cvn').val(),
+                  is_multiple_use: false,
+                  should_authenticate: true
+              };
+          }
+
+
+          function getFraudData () {
+              return JSON.parse($form.find('#meta-json').val());
+          }
+
+          function hideResults() {
+              $('#success').hide();
+              $('#error').hide();
+          }
+      });
+
+  </script>
+@stop
