@@ -150,8 +150,7 @@
                           </tbody>
                       </table>
                       </td>
-                      <td><a href="{{URL::to('/airwaybill/' . $item->order_code )}}">#Click to Track Your Order</a></td>
-                      <td><!-- <button class="uk-button uk-button-default" type="button">Pay</button> --></td>
+                      <td><a href="{{URL::to('/airwaybill/' . $item->order_code )}}" class="uk-button uk-button-default uk-button-small">Track</a></td>
                   </tr>
                 @endforeach
             </tbody>
