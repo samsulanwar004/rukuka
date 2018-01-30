@@ -21,7 +21,8 @@
           <li><a href="{{ URL::to('page/partners')}}">Partners</a></li>
           <li><a href="{{ URL::to('page/careers')}}">Careers</a></li>
           <li><a href="{{ URL::to('page/terms-privacy')}}">Terms & Privacy</a></li>
-          <li><a href="{{ URL::to('page/investor-relations')}}">Investor Relations</a></li>
+          <li><a href="{{ URL::to('page/payment')}}">Payment</a></li>
+          <li><a href="{{ URL::to('help/contact-us')}}">Customer Care</a></li>
         </ul>
 
       </div>
