@@ -17,10 +17,11 @@
             <div class="uk-width-1-5@m">
               <ul class="uk-nav uk-navbar-dropdown-nav">
                 <li>ABOUT RUKUKA</li>
-                <li><a href="{{ URL::to('page/our-story')}}">Our Story</a></li>
-                <li><a href="{{ URL::to('page/social-responsibility')}}">Social Responsibility</a></li>
-                <li><a href="{{ URL::to('page/investor-relation')}}">Investor Relations</a></li>
-                <li><a href="{{ URL::to('help/contact-us')}}">Contact Us</a></li>
+                <li><a href="{{ URL::to('page/about-rukuka')}}">About ruKuKa</a></li>
+                <li><a href="{{ URL::to('page/partners')}}">Partners</a></li>
+                <li><a href="{{ URL::to('page/careers')}}">Careers</a></li>
+                <li><a href="{{ URL::to('page/terms-privacy')}}">Terms & Privacy</a></li>
+                <li><a href="{{ URL::to('page/investor-relations')}}">Investor Relations</a></li>
               </ul>
 
             </div>
@@ -33,8 +34,9 @@
             <div class="uk-width-3-5@m">
               <p>
                 <ul class="uk-grid uk-text-meta" uk-grid>
-                <li><a href="{{ URL::to('page/terms-and-conditions')}}">TERMS AND CONDITIONS</a></li>
-                <li><a href="{{ URL::to('page/privacy-policy')}}">PRIVACY POLICY</a></li>
+                <li><a href="{{ URL::to('help/need-some-help')}}">Help!</a></li>
+                <li><a href="{{ URL::to('page/about-rukuka')}}">About ruKuKa</a></li>
+                <li><a href="{{ URL::to('page/terms-privacy')}}">Terms & Privacy</a></li>
 
                 </ul>
               </p>

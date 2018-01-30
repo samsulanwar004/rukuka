@@ -10,6 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('lang/{lang}', [
+    'as'=>'lang.switch',
+    'uses'=>'LanguageController@switchLang'
+]);
+
 Route::get('/blog', [
     'as'   => 'blog-get-index',
     'uses' => 'Frontend\BlogController@index',
