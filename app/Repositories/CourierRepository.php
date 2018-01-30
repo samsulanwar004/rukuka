@@ -411,7 +411,8 @@ class CourierRepository{
 											$resultFromCourierProviderValue->insuranceTax, 
 											$resultFromCourierProviderValue->totalFee, 
 											$resultFromCourierProviderValue->itemValue,
-											round($resultFromCourierProviderValue->totalFee / $oneUsdToIdr, 2)
+											round($resultFromCourierProviderValue->totalFee / $oneUsdToIdr, 2),
+											self::POS_INDONESIA
 										);
 
 				}
@@ -427,14 +428,15 @@ class CourierRepository{
 										$resultFromCourierProvider->r_fee->insuranceTax, 
 										$resultFromCourierProvider->r_fee->totalFee, 
 										$resultFromCourierProvider->r_fee->itemValue,
-										$resultFromCourierProviderValue->note
+										round($resultFromCourierProviderValue->totalFee / $oneUsdToIdr, 2),
+										self::POS_INDONESIA
 									);
 
 			}
 
 			// rewrite label
 			$rewriteLabel['010'] =  array('mark' => 'R LN ', 'replace' => 'letter service ');
-			$rewriteLabel['312'] =  array('mark' => 'EMS BARANG ', 'replace' => 'EMS service ');
+			$rewriteLabel['312'] =  array('mark' => 'EMS BARANG ', 'replace' => 'Express service');
 			$rewriteLabel['331'] =  array('mark' => 'PAKETPOS CEPAT LN ', 'replace' => 'Quick service ');
 			$rewriteLabel['332'] =  array('mark' => 'PAKETPOS BIASA LN ', 'replace' => 'Normal service ');
 
@@ -477,7 +479,7 @@ class CourierRepository{
 
 	}
 
-	private function defaultTemplateResponseCourier($serviceCode, $serviceName, $fee, $feeTax, $insurance, $insuranceTax, $totalFee, $itemValue, $notes){
+	private function defaultTemplateResponseCourier($serviceCode, $serviceName, $fee, $feeTax, $insurance, $insuranceTax, $totalFee, $itemValue, $notes, $courierName){
 
 		return (object) [
 					'serviceCode' 	=> $serviceCode,
@@ -488,7 +490,8 @@ class CourierRepository{
 					'insuranceTax' 	=> $insuranceTax,
 					'totalFeeIdr' 	=> $totalFee,
 					'itemValue' 	=> $itemValue,
-					'totalFeeDollar'=> $notes
+					'totalFeeDollar'=> $notes,
+					'optionValue'	=> $courierName . self::CHOOSED_SEPARATOR . $serviceCode 
 				];
 	}
 

@@ -51,10 +51,10 @@
                           @if(count($availableCouriersService_val['data']) > 0 )
 
                             @foreach($availableCouriersService_val['data'] as $dataServices_key => $dataServices_val)
-                              
+                     
                               <tr>
                                   <td>
-                                      <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{ $availableCouriersService_key }}{{$availableCouriersService_val['separator']}}{{ $dataServices_val->serviceCode }}" required="" onclick="getTotal({{ $dataServices_val->totalFeeDollar }})"> </td>
+                                      <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{$dataServices_val->optionValue}}" required="" onclick="getTotal({{ $dataServices_val->totalFeeDollar }})"> </td>
                                   <td> {{ $dataServices_val->serviceName }} </td>
                                   <td> $ {{ $dataServices_val->totalFeeDollar }}</td>
                               </tr>
@@ -65,7 +65,7 @@
 
                             <tr>
                                 <td>
-                                    <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{ $availableCouriersService_key }}{{ $availableCouriersService_val['separator'] }}{{ $availableCouriersService_val['data']->serviceCode }}" required="" onclick="getTotal({{ $availableCouriersService_val['data']->totalFeeDollar }})"> </td>
+                                    <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{$dataServices_val->optionValue}}" required="" onclick="getTotal({{ $availableCouriersService_val['data']->totalFeeDollar }})"> </td>
                                 <td> {{ $availableCouriersService_val['data']->serviceName }} </td>
                                 <td> $ {{ $availableCouriersService_val['data']->totalFeeDollar }} </td>
                             </tr>
