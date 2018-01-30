@@ -32,7 +32,7 @@
       </div>
       <div class="uk-width-2-5@m">
         <subcriber api="{{ route('subcriber') }}"></subcriber>
-        <p class="uk-margin-large">
+        <p class="uk-margin-medium">
           <ul class="uk-nav uk-footer-nav">
             <li>CONNECT WITH US</li>
           </ul>
@@ -46,6 +46,24 @@
           <li><a class="uk-icon-link" uk-icon="icon: mail"></a></li>
         </ul>
       </p>
+        <li class="uk-nav uk-footer-nav">
+            <a class="uk-button uk-button-text uk-button-small" href="#">{{ Config::get('languages')[App::getLocale()] }}</a>
+            <div class="uk-drop uk-drop-bottom-left" uk-drop="delay-hide:0; mode: click" style="width: 150px">
+              <div class="uk-card uk-card-border uk-background-default uk-card-small">
+                <div class="uk-card-body">
+                  <ul class="uk-list uk-text-meta">
+                    @foreach (Config::get('languages') as $lang => $language)
+                      @if ($lang != App::getLocale())
+                        <li>
+                          <a href="{{ route('lang.switch', $lang) }}">{{$language}}</a>
+                        </li>
+                      @endif
+                    @endforeach
+                  </ul>
+                </div>
+              </div>
+            </div>
+        </li>
       </div>
     </div>
     <p>
