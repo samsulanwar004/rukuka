@@ -31,7 +31,7 @@
           popular_search="{{ route('popular-search') }}"
           ></popular-search>
       </div>
-      <div class="uk-width-2-5@m">
+      <div class="uk-width-expand@m">
         <subcriber api="{{ route('subcriber') }}"></subcriber>
         <p class="uk-margin-large">
           <ul class="uk-nav uk-footer-nav">

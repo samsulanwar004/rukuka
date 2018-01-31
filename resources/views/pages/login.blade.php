@@ -73,7 +73,7 @@
                   </ul>
                   <ul class="uk-list">
                     <li><input class="uk-checkbox" type="checkbox" name="subcriber" required="required" {{ old('subcriber') ? 'checked' : '' }}>
-                    <span class="uk-text-meta">By clicking the "register" button, I agree to recieve KuKa news by e-mail, sms or telephone.
+                    <span class="uk-text-meta">By clicking the "register" button, I agree to recieve ruKuKa news by e-mail, sms or telephone.
                     See our <a href="#">Privacy Policy</a> for further information.</span></li>
                     <li><button class="uk-button uk-button-secondary uk-width-1-1" type="submit">REGISTER</button></li>
                     <li>
