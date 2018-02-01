@@ -2,9 +2,9 @@
     <div class="uk-offcanvas-bar uk-flex uk-flex-column uk-text-left">
         <button class="uk-offcanvas-close uk-close-large" type="button" uk-close></button>
         <ul class="uk-nav uk-nav-primary uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
-            <li> <a href="/">HOME</a></li>
+            <li class="uk-text-uppercase"> <a href="/">{{ trans.home }}</a></li>
             <li class="uk-parent">
-                <a :href="designerLink">DESIGNERS</a>
+                <a :href="designerLink" class="uk-text-uppercase" >{{ trans.designers_nav }}</a>
                 <ul class="uk-nav-sub">
                     <li class="uk-parent uk-active">
                         <a href="/shop/designers/all">All</a>
@@ -15,10 +15,10 @@
                 </ul>
             </li>
             <li class="uk-parent">
-                <a :href="womenLink">WOMEN</a>
+                <a :href="womenLink" class="uk-text-uppercase">{{ trans.women_nav }}</a>
                 <ul class="uk-nav uk-nav-sub uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
                     <li>
-                        <a class="uk-text-bold uk-text-uppercase" :href="womenLink">What's New</a>
+                        <a class="uk-text-bold uk-text-uppercase" :href="womenLink">{{ trans.whats_new}}</a>
                     </li>
                     <li class="uk-parent">
                         <a v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'" class="uk-text-bold" >{{ cloth.name.toUpperCase() }}</a>
@@ -49,10 +49,10 @@
                 </ul>
             </li>
             <li class="uk-parent">
-                <a :href="menLink">MEN</a>
+                <a :href="menLink" class="uk-text-uppercase">{{ trans.men_nav }}</a>
                 <ul class="uk-nav uk-nav-sub uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
                     <li>
-                        <a class="uk-text-bold uk-text-uppercase" :href="menLink">What's New</a>
+                        <a class="uk-text-bold uk-text-uppercase" :href="menLink">{{ trans.whats_new}}</a>
                     </li>
                     <li class="uk-parent">
                         <a v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'" class="uk-text-bold" >{{ cloth.name.toUpperCase() }}</a>
@@ -83,10 +83,10 @@
                 </ul>
             </li>
             <li class="uk-parent">
-                <a :href="kidLink">KIDS</a>
+                <a :href="kidLink" class="uk-text-uppercase">{{ trans.kids_nav }}</a>
                 <ul class="uk-nav uk-nav-sub uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
                     <li>
-                        <a class="uk-text-bold uk-text-uppercase" :href="kidLink">What's New</a>
+                        <a class="uk-text-bold uk-text-uppercase" :href="kidLink">{{ trans.whats_new}}</a>
                     </li>
                     <li class="uk-parent">
                         <a v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'clothing'" class="uk-text-bold" >{{ cloth.name.toUpperCase() }}</a>
@@ -118,14 +118,14 @@
             </li>
 
             <li class="uk-parent">
-                <a href="#">SALE</a>
-                <ul class="uk-nav-sub">
-                    <li><a href="/shop/womens/sale">Womens</a></li>
-                    <li><a href="/shop/mens/sale">Mens</a></li>
-                    <li><a href="/shop/kids/sale">Kids</a></li>
+                <a href="#" class="uk-text-uppercase"> {{ trans.sale_nav }}</a>
+                <ul class="uk-nav-sub uk-text-uppercase">
+                    <li><a href="/shop/womens/sale">{{ trans.women_nav}}</a></li>
+                    <li><a href="/shop/mens/sale">{{ trans.men_nav}}</a></li>
+                    <li><a href="/shop/kids/sale">{{ trans.kids_nav}}</a></li>
                 </ul>
             </li>
-            <li><a href="/blog">BLOG</a></li>
+            <li><a href="/blog" class="uk-text-uppercase">{{ trans.blog_nav }}</a></li>
         </ul>
     </div>
 
@@ -133,7 +133,7 @@
 
 <script>
     export default {
-        props: ['men_link', 'women_link', 'kid_link','designer_link'],
+        props: ['men_link', 'women_link', 'kid_link','designer_link','locale'],
         created() {
             var self = this;
             var api = this.api;
@@ -185,6 +185,7 @@
                 womenLink: this.women_link,
                 kidLink: this.kid_link,
                 designerLink: this.designer_link,
+                trans: JSON.parse(this.locale,true),
             }
         }
     }

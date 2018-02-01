@@ -1,47 +1,41 @@
 <template>
-    <div class="uk-grid" uk-grid>
+    <div class="uk-grid uk-grid-small" uk-grid>
        <div class="uk-width-1-3@m" v-for="add in data">
-          <div :class="{'uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large': true, 'uk-background-muted': add.is_default }">
+          <div :class="{'uk-card uk-card-default uk-card-small uk-box-shadow-small uk-box-shadow-hover-medium': true, 'uk-background-muted': add.is_default }">
              <div class="uk-card-body">
                 <table>
                    <tr>
-                      <td>
-                         <input class="uk-radio" type="radio" name="default" :checked="add.is_default ? true : false" v-on:click="changeDefault(add.id)">
+                      <td rowspan="6" width="40">
+                        <input class="uk-radio" type="radio" name="default" :checked="add.is_default ? true : false" v-on:click="changeDefault(add.id)">
                       </td>
                       <td>
-                         {{ add.first_name }} {{ add.last_name }}
+                         <h4 class="uk-margin-small">{{ add.first_name }} {{ add.last_name }}</h4>
                       </td>
                    </tr>
                    <tr>
-                      <td>
-                      </td>
+
                       <td>{{ add.address_line }}</td>
                    </tr>
                    <tr>
-                      <td>
-                      </td>
+
                       <td>
                          {{ add.city }}, {{ add.province }} {{ add.postal }}
                       </td>
                    </tr>
                    <tr>
-                      <td>
-                      </td>
+
                       <td>
                          {{ add.country }}
                       </td>
                    </tr>
                    <tr>
+
                       <td>
-                      </td>
-                      <td>
-                         {{ add.phone_number }}
+                         <h5>{{ add.phone_number }}</h5>
                       </td>
                    </tr>
                    <tr>
-                      <td>
 
-                      </td>
                       <td>
                         <a href="#modal-edit" class="uk-icon-link" uk-icon="icon: file-edit" uk-toggle v-on:click.prevent="editAddress(add.id)"></a>
                         <a href="#" v-on:click.prevent="removeAddress(add.id)" class="uk-icon-link" uk-icon="icon: trash"></a>
@@ -52,99 +46,107 @@
           </div>
        </div>
        <div class="uk-width-1-3@m">
-          <div class="uk-card uk-card-default uk-card-small uk-card-border uk-box-shadow-hover-large">
-             <div class="uk-card-body">
-                <a href="#modal-sections" class="uk-text-meta" uk-toggle> <span class="uk-icon" uk-icon="icon: plus"></span> ADD NEW SHIPPING ADDRESS </a>
-             </div>
-          </div>
+         <div class="uk-panel uk-width-1-1">
+
+         </div>
+        <a href="#modal-sections" class="uk-button uk-button-default-warm uk-button-small uk-width-1-1" uk-toggle> <span class="uk-icon" uk-icon="icon: plus"></span> ADD NEW SHIPPING ADDRESS </a>
        </div>
        <div id="modal-edit" uk-modal>
         <div class="uk-modal-dialog">
           <button class="uk-modal-close-default" type="button" uk-close></button>
-          <div class="uk-modal-header">
-              <h4 class="uk-modal-title">EDIT ADDRESS</h4>
-          </div>
-          <div class="uk-modal-body">
+          <div class="uk-modal-body" uk-overflow-auto>
+            <h4>EDIT ADDRESS</h4>
+            <div class="uk-width-1-1">
+
+
             <form class="uk-form-stacked" v-on:submit.prevent="updateAddress">
               <input type="hidden" name="id" :value="add.id">
-              <div class="uk-margin-small uk-grid-small" uk-grid>
+              <div class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
                   First name
-                  <input class="uk-input uk-input-small" name="first_name" id="form-s-tel" type="text" :value="add.first_name" required="required">
+                  <input class="uk-input uk-form-small" name="first_name" id="form-s-tel" type="text" :value="add.first_name" required="required">
                 </div>
               </div>
-              <div class="uk-margin-small uk-grid-small" uk-grid>
+              <div class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
                   Last name
-                  <input class="uk-input uk-input-small" name="last_name" id="form-s-tel" type="text" :value="add.last_name" required="required">
+                  <input class="uk-input uk-form-small" name="last_name" id="form-s-tel" type="text" :value="add.last_name" required="required">
                 </div>
               </div>
-              <div class="uk-margin-small uk-grid-small" uk-grid>
+              <div class="uk-margin-small uk-text-meta uk-width-1-1">
               <div>
                 Company
-                <input class="uk-input uk-input-small" name="company" id="form-s-tel" type="text" :value="add.company"></div>
+                <input class="uk-input uk-form-small" name="company" id="form-s-tel" type="text" :value="add.company"></div>
               </div>
-              <div class="uk-margin-small uk-grid-small" uk-grid>
+              <div class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
                   Address line
-                  <input class="uk-input uk-input-small" name="address_line" id="form-s-tel" type="text" :value="add.address_line" required="required">
+                  <input class="uk-input uk-form-small" name="address_line" id="form-s-tel" type="text" :value="add.address_line" required="required">
                 </div>
               </div>
-              <div class="uk-margin-small uk-grid-small" uk-grid>
+              <div class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
                   Country
-                  <!-- <input class="uk-input uk-input-small" name="country" id="form-s-tel" type="text" :value="add.country" required="required"> -->
-                  <select class="uk-input uk-input-small" name="country" id="form-country-vue" type="text" required="required" @change="changeCountryAddress">
+                  <!-- <input class="uk-input uk-form-small" name="country" id="form-s-tel" type="text" :value="add.country" required="required"> -->
+                  <select class="uk-input uk-form-small" name="country" id="form-country-vue" type="text" required="required" @change="changeCountryAddress">
                   </select>
                 </div>
               </div>
-              <div class="uk-margin-small uk-grid-small" uk-grid>
+              <div class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
                   Province
-                  <input class="uk-input uk-input-small" name="province" id="form-province-vue" type="text" :value="add.province" required="required" @change="showVueListCities()">
+                  <input class="uk-input uk-form-small" name="province" id="form-province-vue" type="text" :value="add.province" required="required" @change="showVueListCities()">
                 </div>
               </div>
-              <div class="uk-margin-small uk-grid-small" uk-grid>
+              <div class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
                   City
-                  <input class="uk-input uk-input-small" name="city" id="form-city-vue" type="text" :value="add.city" required="required">
+                  <input class="uk-input uk-form-small" name="city" id="form-city-vue" type="text" :value="add.city" required="required">
                 </div>
               </div>
 
               <!-- only indonesia's address-->
-              <div id="div-sub-district-vue" class="uk-margin-small uk-grid-small" uk-grid>
+              <div id="div-sub-district-vue" class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
                   Sub district
-                  <input class="uk-input uk-input-small " name="sub_district" id="form-subdistrict-vue" type="text" value="" required>
+                  <input class="uk-input uk-form-small " name="sub_district" id="form-subdistrict-vue" type="text" value="" required>
                 </div>
               </div>
-              <div  id="div-village-vue" class="uk-margin-small uk-grid-small" uk-grid>
+              <div  id="div-village-vue" class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
                   Village
-                  <input class="uk-input uk-input-small " name="village" id="form-village-vue" type="text" value="" required>
+                  <input class="uk-input uk-form-small " name="village" id="form-village-vue" type="text" value="" required>
                 </div>
               </div>
               <!-- end only indonesia's address-->
 
-              <div class="uk-margin-small uk-grid-small" uk-grid>
+              <div class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
                   Postal
-                  <input class="uk-input uk-input-small" name="postal" id="form-postal-vue" type="text" :value="add.postal" required="required">
+                  <input class="uk-input uk-form-small" name="postal" id="form-postal-vue" type="text" :value="add.postal" required="required">
                 </div>
               </div>
 
-              <div class="uk-margin-small uk-grid-small" uk-grid>
+              <div class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
                   Phone number
-                  <input class="uk-input uk-input-small" name="phone_number" id="form-s-tel" type="text" :value="add.phone_number" required="required">
+                  <input class="uk-input uk-form-small" name="phone_number" id="form-s-tel" type="text" :value="add.phone_number" required="required">
                 </div>
               </div>
               <input type="submit" id="submit-edit" style="display: none">
               </form>
+            </div>
           </div>
           <div class="uk-modal-footer uk-text-right">
-              <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-              <button class="uk-button uk-button-secondary" v-on:click="submitUpdate">Save</button>
+            <div class="uk-grid uk-child-width-1-2" uk-grid>
+              <div>
+                <button class="uk-button uk-button-default uk-button-small uk-modal-close uk-width-1-1" type="button">Cancel</button>
+              </div>
+              <div>
+                <button class="uk-button uk-button-secondary uk-button-small uk-width-1-1" v-on:click="submitUpdate">Save</button>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -263,7 +265,7 @@
               var id = e.target.elements.id.value;
 
               if (country == 'ID') {
-                  
+
                   var sub_district = e.target.elements.sub_district.value;
                   var village = e.target.elements.village.value;
 
@@ -279,7 +281,7 @@
                                     sub_district : sub_district,
                                     village : village
                                   };
-              
+
               }else{
 
                 requestUpdate = {
@@ -330,10 +332,10 @@
 
               if (existAddress.country == 'ID') {
 
-                $('#form-province-vue').replaceWith('<select id="form-province-vue" onchange="showVueListCities()" name="province" class="uk-input uk-input-small " required><option>Select country first ya</option></select>');
-                $('#form-city-vue').replaceWith('<select id="form-city-vue" onchange="showVueListSubDistricts()" name="city" class="uk-input uk-input-small " required><option>Select province first</option></select>');
-                $('#form-subdistrict-vue').replaceWith('<select id="form-subdistrict-vue" onchange="showVueListVillages()" name="sub_district" class="uk-input uk-input-small " required><option>Select city first</option></select>');
-                $('#form-village-vue').replaceWith('<select id="form-village-vue" onchange="setVuePostalCode()" name="village" class="uk-input uk-input-small " required><option>Select sub district first</option></select>');
+                $('#form-province-vue').replaceWith('<select id="form-province-vue" onchange="showVueListCities()" name="province" class="uk-input uk-form-small " required><option>Select country first ya</option></select>');
+                $('#form-city-vue').replaceWith('<select id="form-city-vue" onchange="showVueListSubDistricts()" name="city" class="uk-input uk-form-small " required><option>Select province first</option></select>');
+                $('#form-subdistrict-vue').replaceWith('<select id="form-subdistrict-vue" onchange="showVueListVillages()" name="sub_district" class="uk-input uk-form-small " required><option>Select city first</option></select>');
+                $('#form-village-vue').replaceWith('<select id="form-village-vue" onchange="setVuePostalCode()" name="village" class="uk-input uk-form-small " required><option>Select sub district first</option></select>');
 
                 $('#form-postal-vue').val('');
 
@@ -342,13 +344,13 @@
 
               }else{
 
-                $('#form-province-vue').replaceWith('<input class="uk-input uk-input-small" name="province" id="form-province-vue" type="text" value="' + existAddress.province +'" required>');
-                $('#form-city-vue').replaceWith('<input class="uk-input uk-input-small" name="city" id="form-city-vue" type="text" value="' + existAddress.city +'" required>');
-                $('#form-subdistrict-vue').replaceWith('<span class="uk-input uk-input-small " name="sub_district" id="form-subdistrict-vue" type="text" value=""></span>');
-                $('#form-village-vue').replaceWith('<span class="uk-input uk-input-small " name="village" id="form-village-vue" type="text" value=""></span>');
+                $('#form-province-vue').replaceWith('<input class="uk-input uk-form-small" name="province" id="form-province-vue" type="text" value="' + existAddress.province +'" required>');
+                $('#form-city-vue').replaceWith('<input class="uk-input uk-form-small" name="city" id="form-city-vue" type="text" value="' + existAddress.city +'" required>');
+                $('#form-subdistrict-vue').replaceWith('<span class="uk-input uk-form-small " name="sub_district" id="form-subdistrict-vue" type="text" value=""></span>');
+                $('#form-village-vue').replaceWith('<span class="uk-input uk-form-small " name="village" id="form-village-vue" type="text" value=""></span>');
 
                 $('#form-postal-vue').val('');
-                
+
                 $('#div-sub-district-vue').hide();
                 $('#div-village-vue').hide();
 
@@ -542,7 +544,7 @@
             showVueListVillages: function(existAddress){
 
               var allOptions;
-              
+
               axios.get('/api/v1/villages/' + existAddress.sub_district ).then(function (response) {
 
                 if (response.data.error == '000') {
@@ -592,11 +594,11 @@
               this.initHandleAddressing(existAddress);
 
               if (existAddress.country == 'ID') {
-                
+
                 this.showVueListProvinces(existAddress);
 
               }
-              
+
             },
 
 

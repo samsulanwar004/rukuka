@@ -13,9 +13,9 @@
     aws_link="{{ config('filesystems.s3url') }}"
     default_image="{{ json_encode(config('common.default')) }}"
   ></bag>
-  <hr>
+  <hr class="uk-margin-large uk-padding-large" style="border-color: #333; border-width: 3px">
   @if($recently)
-  <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
+  <div class="uk-grid-small uk-margin-small-bottom uk-margin-large-top">
       <div class="uk-panel">
           <h4 class="uk-margin-small">RECENTLY VIEWED</h4>
       </div>

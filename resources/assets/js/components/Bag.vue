@@ -2,13 +2,13 @@
     <div class="uk-margin-large" v-if="bags == 0" >
         <h3 align="center"><p>You have no items in the shopping bag</p></h3>
     </div>
-    <div class="uk-grid-small uk-margin-top" uk-grid v-else>
-      <div class="uk-width-3-4@m">
+    <div class="uk-margin-top" uk-grid v-else>
+      <div class="uk-width-2-3@m">
         <div class="uk-overflow-auto">
-            <table class="uk-table uk-table-divider">
+            <table class="uk-table uk-table-striped">
                 <thead>
                   <tr>
-                      <th class="uk-table-shrink" colspan="4"><h5>Y O U R &nbsp;&nbsp; B A G ({{ bags.length }}) </h5></th>
+                      <th class="uk-table-shrink" colspan="4"><h4 class="uk-margin-remove">YOUR BAG ({{ bags.length }}) </h4></th>
                   </tr>
               </thead>
                 <thead>
@@ -27,7 +27,7 @@
                         </td>
                         <td class="uk-table-link">
                           <ul class="uk-list uk-margin-small-top">
-                            <li><b>{{ bag.name }}</b></li>
+                            <li><h4>{{ bag.name }}</h4></li>
                             <li class="uk-margin-remove"><span class="uk-text-small">Color: {{ bag.options.color }}</span></li>
                             <li class="uk-margin-remove"><span class="uk-text-small">Size : {{ bag.options.size }}</span></li>
                           </ul>
@@ -35,8 +35,8 @@
                               <input type="hidden" name="size" :value="bag.id">
                               <input type="hidden" name="qty" :value="bag.qty">
                               <input type="hidden" name="move" :value="bag.id">
-                              <button class="uk-button uk-button-small uk-button-default uk-padding-small-right uk-margin-remove" type="submit">MOVE TO WISHLIST</button>
-                        <a class="uk-button uk-button-small uk-button-default uk-padding-small-right uk-text-right" v-on:click="removeBag(bag.id, bag.name)">REMOVE</a>
+                              <button class="uk-button uk-button-small uk-button-default-warm uk-padding-small-right uk-margin-bottom" type="submit">MOVE TO WISHLIST</button>
+                        <a class="uk-button uk-button-small uk-button-default-warm uk-padding-small-right uk-text-right uk-margin-bottom" v-on:click="removeBag(bag.id, bag.name)">REMOVE</a>
                         </form>
                         </td>
                         <td class="uk-text-nowrap">
@@ -46,7 +46,7 @@
                           <li><a class="uk-icon-link" uk-icon="icon: plus" v-on:click.prevent="plus(bag.id)"></a></li>
                         </ul>
                         </td>
-                        <td class="uk-text-nowrap">{{ bag.price | round }}</td>
+                        <td class="uk-text-nowrap"><h4>{{ bag.price | round }}</h4></td>
                     </tr>
                 </tbody>
                 <tbody v-if="bags == 0">
@@ -55,30 +55,29 @@
             </table>
         </div>
       </div>
-      <div class="uk-width-1-4@m">
-        <div class="uk-card uk-card-border uk-card-default uk-card-small">
+      <div class="uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-background-muted uk-card-small uk-box-shadow-small">
           <div class="uk-card-header">
-            <b>SUMMARY</b>
+            <h4>SUMMARY</h4>
           </div>
           <div class="uk-card-body">
             <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
-              <div class="uk-text-small"><b>SUBTOTAL</b></div>
+              <div class="uk-text-small"><h6>SUBTOTAL</h6></div>
               <div class="uk-text-right">{{ subtotal | round }}</div>
             </div>
           </div>
           <div class="uk-card-footer">
             <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
-              <div><b>TOTAL</b></div>
-              <div class="uk-text-right">{{ subtotal | round }}</div>
+              <div><h4> <b>TOTAL</b></h4></div>
+              <div class="uk-text-right"><h4>{{ subtotal | round }}</h4></div>
             </div>
           </div>
           <div class="uk-card-footer">
-            <a :href="checkout_link" class="uk-button uk-button-small uk-button-danger uk-width-1-1">
-              c h e c k o u t
+            <a :href="checkout_link" class="uk-button uk-button-secondary uk-width-1-1">
+               checkout
             </a>
           </div>
           </div>
-          <hr>
         </div>
     </div>
 </template>
@@ -98,7 +97,7 @@
                 self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
             });
 
-            Event.listen('addBag', function (response) {              
+            Event.listen('addBag', function (response) {
                 self.bags = response.data.bags;
                 self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
             });
@@ -260,7 +259,7 @@
             var money = function(n, currency) {
               return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
             };
-            
+
             return money(Number(Math.round(value+'e'+2)+'e-'+2), '$');
           }
         }

@@ -10,7 +10,7 @@
 
 	@include('partials.user_menu')
 	<div class="uk-width-3-4@m">
-			<b>WISHLIST</b>
+			<b class="uk-text-uppercase">{{ trans('app.wishlist') }}</b>
 			<hr class="uk-margin-small">
       <wishlist
         wishlist_api="{{ route('persist.wishlist') }}"

@@ -193,7 +193,7 @@ class OrderController extends BaseController
 		}
 	}
 	
-	public function getTrackAndTrace($ordeCode){
+	public function trackingTrace($ordeCode){
 
 		$resultTrackAndTrace = $this->order
 									->setOrderCode($ordeCode)
@@ -203,13 +203,13 @@ class OrderController extends BaseController
 		return view('pages.airwaybill_ems', compact('resultTrackAndTrace'));
 	}
 
-	public function showTrackAndTraceGuest(){
-		
-		return view('pages.show_check_airwaybill_order');
+	public function trackingOrder(){
+
+		return view('pages.airwaybill_order');
 	
 	}
 
-	public function getTrackAndTraceGuest(Request $request){
+	public function trackingOrderCode(Request $request){
 
 		$resultTrackAndTrace = $this->order
 									->setOrderCode($request->input('order_code'))
