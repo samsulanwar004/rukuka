@@ -1,6 +1,6 @@
 <template>
     <ul class="uk-nav uk-footer-nav">
-        <li><b>POPULAR SEARCHES</b></li>
+        <li><b>{{ trans.popular_searches}}</b></li>
         <ul class="uk-nav uk-footer-nav" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
             <li class="uk-parent" v-for="cat in cloth.child" >
                 <a v-for="data in popularSearch" :href="'/shop/womens/'+cloth.name.toLowerCase()+'/'+ cat.slug" v-if="data.slug == cat.slug">{{ cat.name }}</a>
@@ -38,10 +38,11 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['popular_search'],
+        props: ['popular_search','locale'],
         created() {
             var self = this;
-            var api = this.api;
+
+            console.log(this.trans);
             let popular_search = this.popular_search;
             axios.get(popular_search)
                 .then(function (response) {
@@ -75,6 +76,7 @@
                 menCloths: {},
                 womenCloths: {},
                 kidCloths: {},
+                trans: JSON.parse(this.locale,true)
             }
         },
 

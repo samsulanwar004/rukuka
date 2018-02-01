@@ -10,6 +10,22 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('lang/{lang}', [
+    'as'=>'lang.switch',
+    'uses'=>'LanguageController@switchLang'
+]);
+
+Route::get('/tracking/order/', [
+    'as'   => 'tracking-page',
+    'uses' => 'Frontend\OrderController@trackingOrder',
+]);
+
+Route::post('/tracking/order/result', [
+    'as'   => 'tracking-result',
+    'uses' => 'Frontend\OrderController@trackingOrderCode',
+]);
+
 Route::get('/blog', [
     'as'   => 'blog-get-index',
     'uses' => 'Frontend\BlogController@index',
@@ -428,10 +444,11 @@ Route::middleware(['as.guest'])->group(function () {
         'uses' => 'Frontend\OrderController@store',
     ]);
 
-    Route::get('/airwaybill/{ordeCode}', [
-        'as'   => 'airwaybill-get-track-and-trace',
-        'uses' => 'Frontend\OrderController@getTrackAndTrace',
+    Route::get('tracking/trace/{ordeCode}', [
+        'as'   => 'tracking-trace',
+        'uses' => 'Frontend\OrderController@trackingTrace',
     ]);
+
 });
 
 // Route Admin crudbooster

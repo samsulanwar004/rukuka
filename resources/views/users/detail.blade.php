@@ -8,7 +8,7 @@
 <div class="uk-grid uk-margin-top uk-margin-bottom" uk-grid>
 	@include('partials.user_menu')
 	<div class="uk-width-3-4@m">
-      <b>EDIT MY PERSONAL INFORMATION</b>
+      <b class="uk-text-uppercase">{{ trans('app.edit_personal_info') }}</b>
 			<hr class="uk-margin-small">
       <div class="uk-grid-small" uk-grid>
           <div class="uk-panel">
@@ -22,23 +22,23 @@
           		$year = $dob[0];
           	@endphp
             <div class="uk-margin">
-              <!-- <legend class="uk-legend">PERSONAL INFORMATION</legend> -->
-              FULL NAME
+
+                <label class="uk-text-uppercase">{{ trans('app.full_name') }}</label>
               <div class="uk-margin-small uk-grid-small uk-child-width-1-2" uk-grid>
                   <div>
-                      <input class="uk-input {{ $errors->has('first_name') ? ' uk-form-danger' : '' }}" name="first_name" value="{{ $user->first_name }}" type="text" placeholder="*FIRST NAME" required="required">
+                      <input class="uk-input {{ $errors->has('first_name') ? ' uk-form-danger' : '' }}" name="first_name" value="{{ $user->first_name }}" type="text" placeholder="*{{ trans('app.first_name') }}" required="required">
                   </div>
                   <div>
-                      <input class="uk-input {{ $errors->has('last_name') ? ' uk-form-danger' : '' }}" name="last_name" value="{{ $user->last_name }}" type="text" placeholder="*LAST NAME" required="required">
+                      <input class="uk-input {{ $errors->has('last_name') ? ' uk-form-danger' : '' }}" name="last_name" value="{{ $user->last_name }}" type="text" placeholder="*{{ trans('app.last_name') }}" required="required">
                   </div>
               </div>
-              PHONE NUMBER
+                <label class="uk-text-uppercase">{{ trans('app.phone') }}</label>
               <div class="uk-margin-small uk-grid-small" uk-grid>
                   <div>
-                      <input class="uk-input {{ $errors->has('phone_number') ? ' uk-form-danger' : '' }}" name="phone_number" id="form-s-tel" type="tel" placeholder="*PHONE NUMBER" value="{{ $user->phone_number }}" required="required">
+                      <input class="uk-input {{ $errors->has('phone_number') ? ' uk-form-danger' : '' }}" name="phone_number" id="form-s-tel" type="tel" placeholder="*{{ trans('app.phone') }}" value="{{ $user->phone_number }}" required="required">
                   </div>
               </div>
-              DATE OF BIRTH
+                <label class="uk-text-uppercase">{{ trans('app.dob') }}</label>
               <div class="uk-margin-small uk-grid-small" uk-grid>
                   <div>
 
@@ -76,15 +76,15 @@
 
                   </div>
               </div>
-              GENDER
-              <div class="uk-margin-small uk-grid-small uk-margin-bottom" uk-grid>
+                <label class="uk-text-uppercase">{{ trans('app.gender') }}</label>
+                <div class="uk-margin-small uk-grid-small uk-margin-bottom" uk-grid>
                   <div>
-                      <input class="uk-radio" type="radio" name="gender" value="m" required="required" {{ old('gender', $user->gender) == 'm' ? 'checked' : '' }}> Men
-                      <input class="uk-radio" type="radio" name="gender" value="f" required="required" {{ old('gender', $user->gender) == 'f' ? 'checked' : '' }}> Women
+                      <input class="uk-radio" type="radio" name="gender" value="m" required="required" {{ old('gender', $user->gender) == 'm' ? 'checked' : '' }}> {{ trans('app.men') }}
+                      <input class="uk-radio" type="radio" name="gender" value="f" required="required" {{ old('gender', $user->gender) == 'f' ? 'checked' : '' }}> {{ trans('app.women') }}
                   </div>
               </div>
             </div>
-            <button class="uk-button uk-button-secondary" type="submit">SAVE</button>
+            <button class="uk-button uk-button-secondary uk-text-uppercase" type="submit">{{ trans('app.save') }}</button>
 
             </form>
           </div>

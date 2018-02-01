@@ -12,14 +12,6 @@
       <div class="uk-container uk-container-small">
         <div class="uk-grid-small" uk-grid>
           <div class="uk-width-1-4@m">
-            {{-- <div class="uk-penel">
-              <ul class="uk-grid-small uk-flex-between" uk-grid>
-                <li><a class="uk-icon-link" uk-icon="icon: more" href="#offcanvas-overlay-slide" uk-toggle></a></li>
-                <li><a class="uk-icon-link" uk-icon="icon: search" uk-toggle="target: .test-overlay; animation: uk-animation-fade" href="#"></a></li>
-                <li><a class="uk-icon-link" uk-icon="icon: cart"></a><span class="uk-badge">3</span></li>
-                <li><a class="uk-icon-link" uk-icon="icon: user"></a><span class="uk-badge">2</span></li>
-              </ul>
-            </div> --}}
             <user-panel-mobile
               profile_link="{{ route('user') }}"
               bag_link="{{ route('bag') }}"
@@ -32,6 +24,7 @@
                       women_link="{{ route('women') }}"
                       kid_link="{{ route('kids') }}"
                       designer_link="{{ route('designer') }}"
+                      locale="{{ json_encode(trans('app')) }}"
               ></navigation-mobile>
             </div>
             <div class="uk-navbar-left uk-flex-1 test-overlay" hidden>
