@@ -4,27 +4,28 @@
    <div class="uk-grid-small uk-margin-top">
       @include('partials.alert')
    </div>
-   <div class="uk-grid-small uk-margin-top" uk-grid>
-      <div class="uk-width-3-4@m">
-         <h4>CHECKOUT</h4>
-         <div class="uk-grid uk-grid-divider uk-child-width-1-3@m uk-margin-small" uk-grid>
-            <div class="uk-text-center">
-               <button class="uk-button uk-button-text" disabled><b>SHIPPING ADDRESS</b></button>
-            </div>
-            <div class="uk-text-center">
-               <button class="uk-button uk-button-text" disabled>SHIPPING OPTION</button>
-            </div>
-{{--             <div class="uk-text-center">
-               <button class="uk-button uk-button-text" disabled>BILLING</button>
-            </div> --}}
-            <div class="uk-text-center">
-               <button class="uk-button uk-button-text" disabled>REVIEW</button>
-            </div>
+   <div class="uk-margin-top" uk-grid>
+      <div class="uk-width-2-3@m">
+        <div class="uk-card uk-card-default uk-card-small uk-background-muted uk-box-shadow-small" uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
+          <div class="uk-card-body">
+           <div class="uk-grid uk-grid-divider uk-child-width-1-3 uk-margin-small" uk-grid>
+
+               <div class="uk-text-center">
+                  <button class="uk-button uk-button-text" disabled><b>SHIPPING ADDRESS</b></button>
+               </div>
+               <div class="uk-text-center">
+                  <button class="uk-button uk-button-text" disabled>SHIPPING OPTION</button>
+               </div>
+               <div class="uk-text-center">
+                  <button class="uk-button uk-button-text" disabled>REVIEW</button>
+               </div>
+
+           </div>
          </div>
-         <hr class="uk-margin-small">
+         </div>
+         <h4 class="uk-margin-small">CHECKOUT</h4>
          @if (count($address))
-         <span class="uk-text-meta">SELECT YOUR SHIPPING ADDRESS:</span>
-         <hr class="uk-margin-small">
+         <h6 class="uk-margin-small">SELECT YOUR SHIPPING ADDRESS:</h6>
           <address-list
             address="{{ $address }}"
             address_default="{{ route('user.address.default') }}"
@@ -35,92 +36,97 @@
          <div id="modal-sections" uk-modal>
             <div class="uk-modal-dialog">
               <button class="uk-modal-close-default" type="button" uk-close></button>
-              <div class="uk-modal-header">
-                  <h4 class="uk-modal-title">ADD A NEW ADDRESS</h4>
-              </div>
               <div class="uk-modal-body">
+                <h4>ADD A NEW ADDRESS</h4>
                 <form class="uk-form-stacked" action="{{ route('user.address') }}" method="post">
                   {{ csrf_field() }}
                   <input type="hidden" name="checkout" value="ok">
-                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                  <div class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
                       First name
-                      <input class="uk-input uk-input-small" name="first_name" id="form-s-tel" type="text" value="{{ old('first_name') }}" required="required">
+                      <input class="uk-input uk-form-small" name="first_name" id="form-s-tel" type="text" value="{{ old('first_name') }}" required="required">
                     </div>
                   </div>
-                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                  <div class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
                       Last name
-                      <input class="uk-input uk-input-small" name="last_name" id="form-s-tel" type="text" value="{{ old('last_name') }}" required="required">
+                      <input class="uk-input uk-form-small" name="last_name" id="form-s-tel" type="text" value="{{ old('last_name') }}" required="required">
                     </div>
                   </div>
-                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                  <div class="uk-margin-small uk-text-meta uk-width-1-1">
                   <div>
                     Company
-                    <input class="uk-input uk-input-small" name="company" id="form-s-tel" type="text" value="{{ old('company') }}"></div>
+                    <input class="uk-input uk-form-small" name="company" id="form-s-tel" type="text" value="{{ old('company') }}"></div>
                   </div>
-                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                  <div class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
                       Address line
-                      <input class="uk-input uk-input-small" name="address_line" id="form-s-tel" type="text" value="{{ old('address_line') }}" required="required">
+                      <input class="uk-input uk-form-small" name="address_line" id="form-s-tel" type="text" value="{{ old('address_line') }}" required="required">
                     </div>
                   </div>
-                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                  <div class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
                       Country
-                      <select id="form-country-empty" name="country" class="uk-input uk-input-small {{ $errors->has('country') ? ' uk-form-danger' : '' }}" required="required" onchange="handleLocalAddress();showListProvices();">
+                      <select id="form-country-empty" name="country" class="uk-input uk-form-small {{ $errors->has('country') ? ' uk-form-danger' : '' }}" required="required" onchange="handleLocalAddress();showListProvices();">
                         <option></option>
                       </select>
                     </div>
                   </div>
-                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                  <div class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
                       Province
-                      <input class="uk-input uk-input-small" name="province" id="form-province-empty" type="text" value="{{ old('province') }}" required="required">
+                      <input class="uk-input uk-form-small" name="province" id="form-province-empty" type="text" value="{{ old('province') }}" required="required">
                     </div>
                   </div>
-                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                  <div class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
                       City
-                      <input id="form-city-empty" class="uk-input uk-input-small" name="city" id="form-s-tel" type="text" value="{{ old('city') }}" required="required">
+                      <input id="form-city-empty" class="uk-input uk-form-small" name="city" id="form-s-tel" type="text" value="{{ old('city') }}" required="required">
                     </div>
                   </div>
-                  <div id="div-sub-district" class="uk-margin-small uk-grid-small" uk-grid>
+                  <div id="div-sub-district" class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
                       Sub district
-                      <input class="uk-input uk-input-small {{ $errors->has('sub_district') ? ' uk-form-danger' : '' }}" name="sub_district" id="form-subdistrict-empty" type="text" value="{{ old('sub_district') }}" required>
+                      <input class="uk-input uk-form-small {{ $errors->has('sub_district') ? ' uk-form-danger' : '' }}" name="sub_district" id="form-subdistrict-empty" type="text" value="{{ old('sub_district') }}" required>
                     </div>
                   </div>
-                  <div  id="div-village" class="uk-margin-small uk-grid-small" uk-grid>
+                  <div  id="div-village" class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
                       Village
-                      <input class="uk-input uk-input-small {{ $errors->has('village') ? ' uk-form-danger' : '' }}" name="village" id="form-village-empty" type="text" value="{{ old('village') }}" required>
+                      <input class="uk-input uk-form-small {{ $errors->has('village') ? ' uk-form-danger' : '' }}" name="village" id="form-village-empty" type="text" value="{{ old('village') }}" required>
                     </div>
                   </div>
-                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                  <div class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
                       Postal
-                      <input class="uk-input uk-input-small {{ $errors->has('postal') ? ' uk-form-danger' : '' }}" name="postal" id="form-postal-empty" type="text" value="{{ old('postal') }}" required="required">
+                      <input class="uk-input uk-form-small {{ $errors->has('postal') ? ' uk-form-danger' : '' }}" name="postal" id="form-postal-empty" type="text" value="{{ old('postal') }}" required="required">
                     </div>
                   </div>
-                  <div class="uk-margin-small uk-grid-small" uk-grid>
+                  <div class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
                       Phone number
-                      <input class="uk-input uk-input-small" name="phone_number" id="form-s-tel" type="text" value="{{ old('phone_number') }}" required="required">
+                      <input class="uk-input uk-form-small" name="phone_number" id="form-s-tel" type="text" value="{{ old('phone_number') }}" required="required">
                     </div>
                   </div>
                   <input type="submit" id="new-address" style="display: none">
                   </form>
               </div>
               <div class="uk-modal-footer uk-text-right">
-                  <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-                  <button class="uk-button uk-button-secondary" id="modal-submit">Save</button>
+                <div class="uk-child-width-1-2" uk-grid>
+                  <div>
+                    <button class="uk-button uk-button-default uk-button-small uk-modal-close uk-width-1-1" type="button">Cancel</button>
+                  </div>
+                  <div>
+                    <button class="uk-button uk-button-secondary uk-button-small uk-width-1-1" id="modal-submit">Save</button>
+                  </div>
+                </div>
+
+
               </div>
             </div>
           </div>
          @else
-         <span class="uk-text-meta">YOUR SHIPPING INFORMATION</span>
-         <hr class="uk-margin-small">
+         <h5 class="uk-margin-small-top">YOUR SHIPPING INFORMATION</h5>
          <div class="uk-grid uk-width-1-2@m">
             <form action="{{ route('user.address') }}" method="post">
                {{ csrf_field() }}
@@ -160,13 +166,13 @@
                <div id="div-sub-district" class="uk-margin-small uk-grid-small" uk-grid>
                     <div>
                       Sub district
-                      <input class="uk-input uk-input-small {{ $errors->has('sub_district') ? ' uk-form-danger' : '' }}" name="sub_district" id="form-subdistrict-empty" type="text" value="{{ old('sub_district') }}" required>
+                      <input class="uk-input uk-form-small {{ $errors->has('sub_district') ? ' uk-form-danger' : '' }}" name="sub_district" id="form-subdistrict-empty" type="text" value="{{ old('sub_district') }}" required>
                     </div>
                   </div>
                   <div  id="div-village" class="uk-margin-small uk-grid-small" uk-grid>
                     <div>
                       Village
-                      <input class="uk-input uk-input-small {{ $errors->has('village') ? ' uk-form-danger' : '' }}" name="village" id="form-village-empty" type="text" value="{{ old('village') }}" required>
+                      <input class="uk-input uk-form-small {{ $errors->has('village') ? ' uk-form-danger' : '' }}" name="village" id="form-village-empty" type="text" value="{{ old('village') }}" required>
                     </div>
                </div>
                <div class="uk-text-meta uk-margin-small-top">
@@ -178,22 +184,23 @@
                   <input type="text" name="phone_number" value="{{ old('phone_number') }}" class="uk-input uk-form-small uk-from-width-small {{ $errors->has('phone_number') ? ' uk-form-danger' : '' }}" required="required">
                </div>
 
-               <div class="uk-text-meta uk-margin-small-top">
+               <div class="uk-text-meta uk-margin-top">
 {{--                   <input type="checkbox" class="uk-checkbox" name="is_billing" value="ok"> This address is also my billing address --}}
                   <p> <b>* Required</b> </p>
                </div>
                 <div class="uk-panel uk-margin-small-top">
-                  <input type="submit" name="submit" id="submit" value="SUBMIT" class="uk-button uk-button-danger uk-width-1-1">
+                  <input type="submit" name="submit" id="submit" value="SUBMIT" class="uk-button uk-button-default uk-button-small uk-width-1-1">
                </div>
             </form>
          </div>
+
          @endif
+         <hr class="uk-margin" style="border-color: #333; border-width: 3px">
             <item-checkout
                bag_api="{{ route('persist.bag') }}"
                aws_link="{{ config('filesystems.s3url') }}"
                default_image="{{ json_encode(config('common.default')) }}"
             ></item-checkout>
-         <hr class="uk-margin-small">
       </div>
       <summary-checkout
         shipping_cost="0"
@@ -247,19 +254,19 @@
 
       if ('{{old("country")}}' == 'ID') {
 
-        $('#form-province-empty').replaceWith('<select id="form-province-empty" onchange="showListCities()" name="province" class="uk-input uk-input-small {{ $errors->has("province") ? " uk-form-danger" : "" }}" required></select>');
+        $('#form-province-empty').replaceWith('<select id="form-province-empty" onchange="showListCities()" name="province" class="uk-input uk-form-small {{ $errors->has("province") ? " uk-form-danger" : "" }}" required></select>');
         showListProvices();
 
-        $('#form-city-empty').replaceWith('<select id="form-city-empty" onchange="showListSubDistricts()" name="city" class="uk-input uk-input-small {{ $errors->has("city") ? " uk-form-danger" : "" }}" required></select>');
+        $('#form-city-empty').replaceWith('<select id="form-city-empty" onchange="showListSubDistricts()" name="city" class="uk-input uk-form-small {{ $errors->has("city") ? " uk-form-danger" : "" }}" required></select>');
         showListCities();
 
         $('#div-sub-district').show();
         $('#div-village').show();
 
-        $('#form-subdistrict-empty').replaceWith('<select id="form-subdistrict-empty" onchange="showListVillages()" name="sub_district" class="uk-input uk-input-small {{ $errors->has("sub_district") ? " uk-form-danger" : "" }}" required></select>');
+        $('#form-subdistrict-empty').replaceWith('<select id="form-subdistrict-empty" onchange="showListVillages()" name="sub_district" class="uk-input uk-form-small {{ $errors->has("sub_district") ? " uk-form-danger" : "" }}" required></select>');
         showListSubDistricts();
 
-        $('#form-village-empty').replaceWith('<select id="form-village-empty" onchange="setPostalCode()" name="village" class="uk-input uk-input-small {{ $errors->has("village") ? " uk-form-danger" : "" }}" required></select>');
+        $('#form-village-empty').replaceWith('<select id="form-village-empty" onchange="setPostalCode()" name="village" class="uk-input uk-form-small {{ $errors->has("village") ? " uk-form-danger" : "" }}" required></select>');
         showListVillages();
 
       }
@@ -272,20 +279,20 @@
 
     if ($('#form-country-empty').val() == 'ID') {
 
-      $('#form-province-empty').replaceWith('<select id="form-province-empty" onchange="showListCities()" name="province" class="uk-input uk-input-small {{ $errors->has("province") ? " uk-form-danger" : "" }}" required><option>Select country first</option></select>');
-      $('#form-city-empty').replaceWith('<select id="form-city-empty" onchange="showListSubDistricts()" name="city" class="uk-input uk-input-small {{ $errors->has("city") ? " uk-form-danger" : "" }}" required><option>Select province first</option></select>');
-      $('#form-subdistrict-empty').replaceWith('<select id="form-subdistrict-empty" onchange="showListVillages()" name="sub_district" class="uk-input uk-input-small {{ $errors->has("city") ? " uk-form-danger" : "" }}" required><option>Select city first</option></select>');
-      $('#form-village-empty').replaceWith('<select id="form-village-empty" onchange="setPostalCode()" name="village" class="uk-input uk-input-small {{ $errors->has("village") ? " uk-form-danger" : "" }}" required><option>Select sub district first</option></select>');
+      $('#form-province-empty').replaceWith('<select id="form-province-empty" onchange="showListCities()" name="province" class="uk-input uk-form-small {{ $errors->has("province") ? " uk-form-danger" : "" }}" required><option>Select country first</option></select>');
+      $('#form-city-empty').replaceWith('<select id="form-city-empty" onchange="showListSubDistricts()" name="city" class="uk-input uk-form-small {{ $errors->has("city") ? " uk-form-danger" : "" }}" required><option>Select province first</option></select>');
+      $('#form-subdistrict-empty').replaceWith('<select id="form-subdistrict-empty" onchange="showListVillages()" name="sub_district" class="uk-input uk-form-small {{ $errors->has("city") ? " uk-form-danger" : "" }}" required><option>Select city first</option></select>');
+      $('#form-village-empty').replaceWith('<select id="form-village-empty" onchange="setPostalCode()" name="village" class="uk-input uk-form-small {{ $errors->has("village") ? " uk-form-danger" : "" }}" required><option>Select sub district first</option></select>');
 
       $('#div-sub-district').show();
       $('#div-village').show();
 
     }else{
 
-      $('#form-province-empty').replaceWith('<input class="uk-input uk-input-small" name="province" id="form-province-empty" type="text" value="{{ old("province") }}" required>');
-      $('#form-city-empty').replaceWith('<input class="uk-input uk-input-small" name="city" id="form-city-empty" type="text" value="{{ old("city") }}" required>');
-      $('#form-subdistrict-empty').replaceWith('<span class="uk-input uk-input-small " name="sub_district" id="form-subdistrict-empty" type="text" value=""></span>');
-      $('#form-village-empty').replaceWith('<span class="uk-input uk-input-small " name="village" id="form-village-empty" type="text" value=""></span>');
+      $('#form-province-empty').replaceWith('<input class="uk-input uk-form-small" name="province" id="form-province-empty" type="text" value="{{ old("province") }}" required>');
+      $('#form-city-empty').replaceWith('<input class="uk-input uk-form-small" name="city" id="form-city-empty" type="text" value="{{ old("city") }}" required>');
+      $('#form-subdistrict-empty').replaceWith('<span class="uk-input uk-form-small " name="sub_district" id="form-subdistrict-empty" type="text" value=""></span>');
+      $('#form-village-empty').replaceWith('<span class="uk-input uk-form-small " name="village" id="form-village-empty" type="text" value=""></span>');
 
       $('#div-sub-district').hide();
       $('#div-village').hide();
