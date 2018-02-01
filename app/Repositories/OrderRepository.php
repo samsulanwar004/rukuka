@@ -295,31 +295,50 @@ class OrderRepository
 						->with('address')
 						->where('order_code', $this->getOrderCode())
 						->first();
-		
-		$user = $this->getUser();
 
+		// adakah ordenya atau adakah airwaybill numbernya
 		if ($order == null) {
 			
 			return (new CourierRepository)->formatResponse('806', 'Order not found', null, null);
 		
 		}else if ($order->airwaybill == null) {
 			
-			return (new CourierRepository)->formatResponse('801', 'Tracking code not available please contact customer sevice', null, null);
+			return (new CourierRepository)->formatResponse('801', 'Airwaybill code not available in your order please contact customer sevice', null, null);
 		
-		}else if($order->user->email != $user->email){
-
-			return (new CourierRepository)->formatResponse('803', 'Tracking code is not your order', null, null);
-
 		}
 
-		$resultTracking = (new CourierRepository)->getTrackingAndTracePosIndonesia($order->airwaybill);
+		if ($order->user->social_media_type == "guest") {
+			
+			$resultTracking = (new CourierRepository)->getTrackingAndTracePosIndonesia($order->airwaybill);
 		
-		$data = [
-			'tracking' => $resultTracking['data'],
-			'order' => $order
-		];
+			$data = [
+				'tracking' => $resultTracking['data'],
+				'order' => $order
+			];
 
-		return 	(new CourierRepository)->formatResponse($resultTracking['error'], $resultTracking['message'], $data, null);
+			return 	(new CourierRepository)->formatResponse($resultTracking['error'], $resultTracking['message'], $data, null);
+
+		}else{
+
+			$user = $this->getUser();
+
+			if($order->user->email != $user->email){
+
+				return (new CourierRepository)->formatResponse('803', 'You do not have an order with that number ', null, null);
+
+			}
+
+			$resultTracking = (new CourierRepository)->getTrackingAndTracePosIndonesia($order->airwaybill);
+		
+			$data = [
+				'tracking' => $resultTracking['data'],
+				'order' => $order
+			];
+
+			return 	(new CourierRepository)->formatResponse($resultTracking['error'], $resultTracking['message'], $data, null);
+
+		}
+		
 	}
 
 	public function getOrderbyOrderCode($code){

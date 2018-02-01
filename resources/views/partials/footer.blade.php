@@ -12,7 +12,6 @@
           <li><a href="{{ URL::to('help/our-services') }}">{{ trans('app.our_services') }}</a></li>
           <li><a href="{{ URL::to('help/size-charts') }}">{{ trans('app.size_chart') }}</a></li>
         </ul>
-
       </div>
       <div class="uk-width-1-5@m">
         <ul class="uk-nav uk-footer-nav">
@@ -32,12 +31,12 @@
           locale="{{ json_encode(trans('app')) }}"
           ></popular-search>
       </div>
-      <div class="uk-width-2-5@m">
+      <div class="uk-width-expand@m">
         <subcriber
-        api="{{ route('subcriber') }}"
-        locale="{{ json_encode(trans('app')) }}"
+                api="{{ route('subcriber') }}"
+                locale="{{ json_encode(trans('app')) }}"
         ></subcriber>
-        <p class="uk-margin-medium">
+        <p class="uk-margin-large">
           <ul class="uk-nav uk-footer-nav">
             <li class="uk-text-uppercase">{{ trans('app.connect_us') }}</li>
           </ul>

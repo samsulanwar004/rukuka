@@ -343,8 +343,7 @@ class CourierRepository{
 
 	    if ($resultPosIndonesia->r_fee->serviceName == 'ERROR') {
 	    	
-	    	
-
+	    	return $this->formatResponse('999', 'error shipping cost please contact administrator', $resultPosIndonesia, null);
 	    
 	    }else if ($resultPosIndonesia->r_fee->serviceName == 'NOT FOUND'){
 	    	
