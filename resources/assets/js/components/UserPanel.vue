@@ -3,27 +3,27 @@
   <div class="uk-width-1-1 uk-flex uk-flex-middle uk-flex-right uk-visible@m">
     <ul class="uk-grid-small " uk-grid>
       <li v-if="auth == 1" class="uk-margin-right">
-        <a class="uk-button uk-button-text uk-button-small" :href="profile_link"> Hallo, <b>{{ accounts.first_name }}</b></a>
+        <a class="uk-button uk-button-text uk-button-small" :href="profile_link"> {{trans.hallo}} <b>{{ accounts.first_name }}</b></a>
         <div class="uk-drop uk-drop-bottom-left" uk-drop="delay-hide:0" style="width: 150px">
           <div class="uk-card uk-card-border uk-background-default uk-card-small">
             <div class="uk-card-body">
               <ul class="uk-list uk-text-meta">
-                <li><a :href="profile_link">MY ACCOUNT</a> </li>
-                <li><a :href="logout_link">SIGN OUT</a> </li>
+                <li><a :href="profile_link">{{trans.account}}</a> </li>
+                <li><a :href="logout_link">{{trans.sign_out}}</a> </li>
               </ul>
             </div>
           </div>
         </div>
       </li>
       <li v-if="auth == 1"  class="uk-margin-right">
-        <a class="uk-button uk-button-text uk-button-small" :href="wishlist_link"><b>LOVE</b></a>
+        <a class="uk-button uk-button-text uk-button-small" :href="wishlist_link"><b>{{trans.love}}</b></a>
           <div class="uk-badge" v-if="wishlistCount > 0">
             {{ wishlistCount }}
           </div>
       </li>
 
       <li>
-        <a class="uk-button uk-button-text uk-button-small" v-on:click.prevent="goBag"> <b>BAG</b></a>
+        <a class="uk-button uk-button-text uk-button-small" v-on:click.prevent="goBag"> <b>{{trans.bag_label}}</b></a>
         <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" v-if="bagCount > 0">
               <div class="uk-card-body uk-card-small">
                 <div class="uk-grid-small" uk-grid v-for="bag in filteredBags">
@@ -35,23 +35,23 @@
                     <div class="uk-panel">
                       <span class="uk-text-small"><b>{{ bag.name }}</b></span><br>
                       <span class="uk-text-small">{{ bag.options.currency }} {{ bag.price }} </span><br>
-                      <span class="uk-text-meta">color : {{ bag.options.color }}</span><br>
-                      <span class="uk-text-meta">size  : {{ bag.options.size }}</span><br>
-                      <a :href="product_link+'/'+bag.options.slug+'/bag/'+bag.id" class="uk-button uk-button-text uk-button-small" name="button"><span class="uk-icon" uk-icon="icon: pencil; ratio: 0.8"></span>edit</a>
-                      <button type="button" class="uk-button uk-button-text uk-button-small" name="button" v-on:click="removeBag(bag.id)"><span class="uk-icon" uk-icon="icon: trash; ratio: 0.8"></span>remove</button>
+                      <span class="uk-text-meta">{{ trans.color }} : {{ bag.options.color }}</span><br>
+                      <span class="uk-text-meta">{{ trans.size }}  : {{ bag.options.size }}</span><br>
+                      <a :href="product_link+'/'+bag.options.slug+'/bag/'+bag.id" class="uk-button uk-button-text uk-button-small" name="button"><span class="uk-icon" uk-icon="icon: pencil; ratio: 0.8"></span>{{ trans.edit }}</a>
+                      <button type="button" class="uk-button uk-button-text uk-button-small" name="button" v-on:click="removeBag(bag.id)"><span class="uk-icon" uk-icon="icon: trash; ratio: 0.8"></span>{{trans.remove}}</button>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="uk-card-footer uk-padding-remove uk-background-muted">
                 <div class="uk-text-center">
-                  <a :href="bag_link">See all your shop</a>
+                  <a :href="bag_link">{{ trans.your_shop}}</a>
                 </div>
               </div>
               <div class="uk-card-footer uk-padding-small">
                 <div class="uk-text-center">
-                  <b>SUB TOTAL: {{ subtotal }}</b>
-                  <a :href="checkout_link" class="uk-button-secondary uk-button uk-button-small uk-width-1-1">CHECKOUT NOW</a>
+                  <b class="uk-text-uppercase">{{ trans.subtotal}}: {{ subtotal }}</b>
+                  <a :href="checkout_link" class="uk-button-secondary uk-button uk-button-small uk-width-1-1 uk-text-uppercase">{{ trans.checkout_now}}</a>
                 </div>
               </div>
           </div>
@@ -61,7 +61,7 @@
           </div>
       </li>
       <li v-if="auth == 0" class="uk-margin-left">
-        <a class="uk-button uk-button-text uk-button-small" :href="login_link"><b>LOGIN</b></a>
+        <a class="uk-button uk-button-text uk-button-small" :href="login_link"><b>{{ trans.login }}</b></a>
       </li>
     </ul>
   </div>
@@ -91,7 +91,8 @@
       'api_token',
       'logout_link',
       'aws_link',
-      'default_image'
+      'default_image',
+      'locale'
     ],
 
     created () {
@@ -131,7 +132,8 @@
         bags: {},
         accounts: {},
         subtotal: {},
-        defaultImage: JSON.parse(this.default_image,true)
+        defaultImage: JSON.parse(this.default_image,true),
+        trans: JSON.parse(this.locale,true)
       }
     },
 

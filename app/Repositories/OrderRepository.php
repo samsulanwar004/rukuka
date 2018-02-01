@@ -307,37 +307,14 @@ class OrderRepository
 		
 		}
 
-		if ($order->user->social_media_type == "guest") {
-			
-			$resultTracking = (new CourierRepository)->getTrackingAndTracePosIndonesia($order->airwaybill);
+		$resultTracking = (new CourierRepository)->getTrackingAndTracePosIndonesia($order->airwaybill);
 		
-			$data = [
-				'tracking' => $resultTracking['data'],
-				'order' => $order
-			];
+		$data = [
+			'tracking' => $resultTracking['data'],
+			'order' => $order
+		];
 
-			return 	(new CourierRepository)->formatResponse($resultTracking['error'], $resultTracking['message'], $data, null);
-
-		}else{
-
-			$user = $this->getUser();
-
-			if($order->user->email != $user->email){
-
-				return (new CourierRepository)->formatResponse('803', 'You do not have an order with that number ', null, null);
-
-			}
-
-			$resultTracking = (new CourierRepository)->getTrackingAndTracePosIndonesia($order->airwaybill);
-		
-			$data = [
-				'tracking' => $resultTracking['data'],
-				'order' => $order
-			];
-
-			return 	(new CourierRepository)->formatResponse($resultTracking['error'], $resultTracking['message'], $data, null);
-
-		}
+		return 	(new CourierRepository)->formatResponse($resultTracking['error'], $resultTracking['message'], $data, null);
 		
 	}
 

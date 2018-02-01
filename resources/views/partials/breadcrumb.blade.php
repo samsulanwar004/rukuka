@@ -1,7 +1,7 @@
 <div class="uk-panel">
 
     <ul class="uk-breadcrumb">
-      <li><a href="/">Home</a></li>
+      <li><a href="/">{{ trans('app.home') }}</a></li>
       @foreach($breadcrumbs as $key => $b)
           @if(! $b)
               <li class="uk-disabled"><a href="#">{{ ucfirst($key) }}</a></li>

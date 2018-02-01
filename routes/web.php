@@ -10,14 +10,20 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/show-track-and-trace-order-guest/', [
-    'as'   => 'show-track-and-trace-order-guest',
-    'uses' => 'Frontend\OrderController@showTrackAndTraceGuest',
+
+Route::get('lang/{lang}', [
+    'as'=>'lang.switch',
+    'uses'=>'LanguageController@switchLang'
 ]);
 
-Route::post('/result-track-and-trace-order-guest/', [
-    'as'   => 'result-track-and-trace-order-guest',
-    'uses' => 'Frontend\OrderController@getTrackAndTraceGuest',
+Route::get('/tracking/order/', [
+    'as'   => 'tracking-page',
+    'uses' => 'Frontend\OrderController@trackingOrder',
+]);
+
+Route::post('/tracking/order/result', [
+    'as'   => 'tracking-result',
+    'uses' => 'Frontend\OrderController@trackingOrderCode',
 ]);
 
 Route::get('/blog', [
@@ -438,10 +444,11 @@ Route::middleware(['as.guest'])->group(function () {
         'uses' => 'Frontend\OrderController@store',
     ]);
 
-    Route::get('result-track-and-trace-order-nonguest/{ordeCode}', [
-        'as'   => 'result-track-and-trace-nonguest',
-        'uses' => 'Frontend\OrderController@getTrackAndTrace',
+    Route::get('tracking/trace/{ordeCode}', [
+        'as'   => 'tracking-trace',
+        'uses' => 'Frontend\OrderController@trackingTrace',
     ]);
+
 });
 
 // Route Admin crudbooster
