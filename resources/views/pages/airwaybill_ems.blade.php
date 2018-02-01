@@ -74,11 +74,37 @@
 
 				@endif
 				
-				<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">
-					<div class="uk-panel uk-text-center">
-						<a href="{{ route('index') }}"><button class="uk-button uk-button-secondary">Back To Home</button></a>
+				@if(\Request::route()->getName() == 'result-track-and-trace-order-guest')
+					
+					<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">
+						<div class="uk-panel uk-text-center">
+							<a href="{{ route('show-track-and-trace-order-guest') }}">#Click here to Input other orde code</a>
+						</div>
 					</div>
-				</div>
+
+					<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">
+						<div class="uk-panel uk-text-center">
+							<a href="{{ route('index') }}"><button class="uk-button uk-button-secondary">Back To Home</button></a>
+						</div>
+					</div>
+				
+				@else
+					
+					<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">
+						<div class="uk-panel uk-text-center">
+							<a href="{{ url('account/history') }}">#Click here back to history</a>
+						</div>
+					</div>
+
+					<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">
+						<div class="uk-panel uk-text-center">
+							<a href="{{ route('index') }}"><button class="uk-button uk-button-secondary">Back To Home</button></a>
+						</div>
+					</div>
+
+				@endif
+
+				
 			</div>
 		</div>
   	</div>

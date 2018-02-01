@@ -9,7 +9,15 @@ class PosIndonesiaCourierService
 {
 	private function getTemplateWSDL($wsdlPath)
 	{
-	    return (new Factory())->create(new Client(), $wsdlPath);
+		// $client = new Client([
+		// 						'defaults' => [
+		// 	    					'verify' => 'E:\Xampp_windows_server\php\cacert.pem'
+		// 						]
+		// 					]);
+		
+		$client = new Client();
+
+	    return (new Factory())->create($client, $wsdlPath);
 	}
 
 	/* 
