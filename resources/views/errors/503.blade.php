@@ -10,6 +10,7 @@
 
     body {
        margin: 0;
+       background-color: #dadada;
        padding: 0;
        width: 100%;
        color: #666666;
@@ -38,7 +39,7 @@
 <body>
     <div class="container">
         <div class="content">
-            <div class="title">Coming Soon</div>
+          <img src="images/rukuka is coming.jpg" alt="" width="600px">
         </div>
     </div>
 </body>

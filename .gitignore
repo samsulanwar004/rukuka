@@ -16,5 +16,4 @@ yarn-error.log
 /public/vendor
 /public/vendor/crudbooster
 composer.lock
-
-
+.DS_Store
