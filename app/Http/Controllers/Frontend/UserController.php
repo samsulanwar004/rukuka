@@ -506,7 +506,15 @@ class UserController extends BaseController
     {
         $user = $this->getUserActive();
 
+        if (this->isCurlSupported()) {
+            echo "cURL is supported\n";
+        }
+        else {
+            echo "cURL isn't supported\n";
+        }
+        
         $address = $user->address;
+
 
         return view('pages.checkout.shipping_address', compact('address'));
     }
