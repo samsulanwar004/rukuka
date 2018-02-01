@@ -1,30 +1,31 @@
 <template>
-<div class="uk-width-1-4@m">
- <div class="uk-card uk-card-border uk-card-default uk-card-small">
+<div class="uk-width-1-3@m">
+ <div class="uk-card uk-background-muted uk-card-default uk-card-small uk-box-shadow-small">
     <div class="uk-card-header">
        <h4>SUMMARY</h4>
     </div>
     <div class="uk-card-body">
        <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
-          <div class="uk-text-small"><b>SUBTOTAL</b></div>
-          <div class="uk-text-right">{{ subtotal | round }}</div>
+         <div class="uk-text-small"><h6>SUBTOTAL</h6></div>
+         <div class="uk-text-right">{{ subtotal | round }}</div>
           <input type="hidden" id="sub_total" :value="subtotal">
        </div>
        <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
-          <div class="uk-text-small">Shipping Cost</div>
+          <div class="uk-text-small"><h6>SHIPPING COST</h6></div>
           <div id="shiping_fee" class="uk-text-right">{{ shipping_cost | round }}</div>
        </div>
     </div>
     <div class="uk-card-footer">
        <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
-          <div> <h5>TOTAL</h5> </div>
-          <div id="total_fee" class="uk-text-right">{{ total | round }}</div>
+          <div> <h4><b>TOTAL</b></h4> </div>
+          <div id="total_fee" class="uk-text-right"><h4>{{ total | round }}</h4></div>
        </div>
     </div>
+    <div class="uk-card-footer">
+       <button class="uk-button uk-button-secondary uk-width-1-1" id="continue">CONTINUE</button>
+    </div>
  </div>
- <div class="uk-panel uk-margin-small-top">
-    <button class="uk-button uk-button-danger uk-width-1-1" id="continue">CONTINUE</button>
- </div>
+
 </div>
 </template>
 
@@ -54,7 +55,7 @@
             var money = function(n, currency) {
               return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
             };
-            
+
             return money(Number(Math.round(value+'e'+2)+'e-'+2), '$');
           }
         }
