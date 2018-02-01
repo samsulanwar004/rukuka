@@ -3,13 +3,13 @@
       <div class="uk-navbar-center">
 
           <ul class="uk-navbar-nav">
-              <li><a :href="designerLink">DESIGNERS</a>
+              <li><a :href="designerLink">{{ trans.designers_nav }}</a>
                 <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                     <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
                           <div class="uk-width-1-1">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
-                              <li><h5 class="uk-margin-small">DESIGNERS</h5></li>
+                              <li><h5 class="uk-margin-small">{{ trans.designers_nav }}</h5></li>
                             </ul>
                             <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-3">
                                 <li class="uk-parent uk-active">
@@ -34,20 +34,18 @@
                 </div>
               </li>
               <li>
-                  <a :href="womenLink">WOMEN</a>
+                  <a :href="womenLink">{{ trans.women_nav }}</a>
                   <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                       <div uk-grid>
                         <div class="uk-width-1-5@m">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li><a :href="womenLink"><h5 class="uk-margin-small">NEW ARRIVAL</h5></a></li>
-                                <!-- <li class="uk-nav-header uk-text-bold">Featured Style Story</li> -->
+                                <li class="uk-parent"><a :href="womenLink"><h5 class="uk-margin-small">{{ trans.new_arrival }}</h5></a></li>
                                 <li>
                                     <a :href="womensNav.women_blog_url">
                                         <img v-if="womensNav.women_blog_image" style="height: 150px" :src="womensNav.women_blog_image | awsLink(aws_link)" :alt="rukuka">
                                         <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
                                     </a>
                                 </li>
-                                <!-- <li><a href="/blog" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li> -->
                             </ul>
                         </div>
                           <div class="uk-width-3-5@m" uk-grid>
@@ -81,25 +79,24 @@
 
                           <div class="uk-width-1-5@m">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li><h5 class="uk-margin-small">OUR DESIGNERS</h5></li>
+                                <li><h5 class="uk-margin-small">{{ trans.our_designer }}</h5></li>
                                 <li class="uk-parent"><a :href="womensNav.women_designer_1_url" >{{womensNav.women_designer_1_text}}</a></li>
                                 <li class="uk-parent"><a :href="womensNav.women_designer_2_url" >{{womensNav.women_designer_2_text}}</a></li>
                                 <li class="uk-parent"><a :href="womensNav.women_designer_3_url" >{{womensNav.women_designer_3_text}}</a></li>
                                 <li class="uk-parent"><a :href="womensNav.women_designer_4_url" >{{womensNav.women_designer_4_text}}</a></li>
                                 <li class="uk-parent"><a :href="womensNav.women_designer_5_url" >{{womensNav.women_designer_5_text}}</a></li>
-                                <!-- <li class="uk-parent"><a href="/shop/womens/sale" class="uk-text-danger"><b>ALL WOMEN'S SALE</b></a></li> -->
                             </ul>
                           </div>
                       </div>
                   </div>
               </li>
-              <li><a :href="menLink">MEN</a>
+              <li><a :href="menLink">{{ trans.men_nav }}</a>
                 <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                     <div uk-grid>
                       <div class="uk-width-1-5@m">
                           <ul class="uk-nav uk-navbar-dropdown-nav">
 
-                              <li class="uk-parent"><a :href="menLink"><h5 class="uk-margin-small">NEW ARRIVAL</h5></a></li>
+                              <li class="uk-parent"><a :href="menLink"><h5 class="uk-margin-small">{{ trans.new_arrival }}</h5></a></li>
 
                               <li>
                                   <a :href="mensNav.men_blog_url">
@@ -107,7 +104,6 @@
                                       <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
                                   </a>
                               </li>
-                              <!-- <li><a href="/blog" class="uk-text-danger"><b>SEE ALL STYLE STORY</b></a></li> -->
                           </ul>
                       </div>
 
@@ -142,7 +138,7 @@
 
                         <div class="uk-width-1-5@m">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li><h5 class="uk-margin-small">OUR DESIGNERS</h5></li>
+                                <li><h5 class="uk-margin-small">{{ trans.our_designer }}</h5></li>
                                 <li class="uk-parent"><a :href="mensNav.men_designer_1_url" >{{mensNav.men_designer_1_text}}</a></li>
                                 <li class="uk-parent"><a :href="mensNav.men_designer_2_url" >{{mensNav.men_designer_2_text}}</a></li>
                                 <li class="uk-parent"><a :href="mensNav.men_designer_3_url" >{{mensNav.men_designer_3_text}}</a></li>
@@ -153,12 +149,12 @@
                     </div>
                 </div>
               </li>
-              <li><a :href="kidLink">KIDS</a>
+              <li><a :href="kidLink">{{ trans.kids_nav }}</a>
                   <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                       <div uk-grid>
                           <div class="uk-width-1-5@m">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
-                                  <li class="uk-parent"><a :href="kidLink"><h5 class="uk-margin-small">NEW ARRIVAL</h5></a></li>
+                                  <li class="uk-parent"><a :href="kidLink"><h5 class="uk-margin-small">{{ trans.new_arrival }}</h5></a></li>
                                   <li>
                                       <a :href="kidsNav.kid_blog_url">
                                           <img v-if="" style="height: 150px" :src="kidsNav.kid_blog_image | awsLink(aws_link)" :alt="Rukuka">
@@ -199,19 +195,18 @@
 
                           <div class="uk-width-1-5@m">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
-                                  <li><h5 class="uk-margin-small">OUR DESIGNERS</h5></li>
+                                  <li><h5 class="uk-margin-small">{{ trans.our_designer }}</h5></li>
                                   <li class="uk-parent"><a :href="kidsNav.kid_designer_1_url" >{{kidsNav.kid_designer_1_text}}</a></li>
                                   <li class="uk-parent"><a :href="kidsNav.kid_designer_2_url" >{{kidsNav.kid_designer_2_text}}</a></li>
                                   <li class="uk-parent"><a :href="kidsNav.kid_designer_3_url" >{{kidsNav.kid_designer_3_text}}</a></li>
                                   <li class="uk-parent"><a :href="kidsNav.kid_designer_4_url" >{{kidsNav.kid_designer_4_text}}</a></li>
                                   <li class="uk-parent"><a :href="kidsNav.kid_designer_5_url" >{{kidsNav.kid_designer_5_text}}</a></li>
-
                               </ul>
                           </div>
                       </div>
                   </div>
               </li>
-              <li><a>SALE</a>
+              <li><a>{{ trans.sale_nav }}</a>
                   <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                       <div uk-grid>
                           <div class="uk-width-4-5@m uk-margin-remove">
@@ -226,13 +221,13 @@
                           <div class="uk-width-1-5@m" uk-grid>
                               <div>
                                   <ul class="uk-nav uk-navbar-dropdown-nav">
-                                      <li><h5 class="uk-margin-small">ON SALE</h5></li>
+                                      <li><h5 class="uk-margin-small">{{ trans.on_sale }}</h5></li>
                                   </ul>
                                   <ul class="uk-nav uk-navbar-dropdown-nav">
                                       <li>
-                                          <a href="/shop/womens/sale" class="uk-text-danger">Womens</a>
-                                          <a href="/shop/mens/sale" class="uk-text-danger">Mens</a>
-                                          <a href="/shop/kids/sale" class="uk-text-danger">Kids</a>
+                                          <a href="/shop/womens/sale" class="uk-text-danger">{{ trans.women_nav }}</a>
+                                          <a href="/shop/mens/sale" class="uk-text-danger">{{ trans.men_nav }}</a>
+                                          <a href="/shop/kids/sale" class="uk-text-danger">{{ trans.kids_nav }}</a>
                                       </li>
                                   </ul>
                               </div>
@@ -240,7 +235,7 @@
                       </div>
                   </div>
               </li>
-              <li><a href="/blog">BLOG</a>
+              <li><a href="/blog">{{ trans.blog_nav }}</a>
               </li>
           </ul>
       </div>
@@ -257,7 +252,8 @@
           'kid_link',
           'designer_link',
           'aws_link',
-          'default_image'
+          'default_image',
+          'locale'
         ],
 
         created() {
@@ -340,6 +336,7 @@
                 kidsNav: {},
                 salesNav: {},
                 defaultImage: JSON.parse(this.default_image,true),
+                trans: JSON.parse(this.locale,true),
             }
         },
 
