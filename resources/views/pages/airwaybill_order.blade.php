@@ -12,7 +12,7 @@
 				</h3>
 
 				<div class="uk-overflow-auto">
-					<form class="form-horizontal" method="post" action="{{ route('result-track-and-trace-order-guest') }}">
+					<form class="form-horizontal" method="post" action="{{ route('tracking-result') }}">
 		            	{{ csrf_field() }}
 		            	<ul class="uk-list uk-text-center">
 				            <li>
