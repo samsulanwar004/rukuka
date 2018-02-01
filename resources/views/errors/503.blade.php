@@ -39,7 +39,7 @@
 <body>
     <div class="container">
         <div class="content">
-          <img src="images/rukuka is coming.jpg" alt="" width="600px">
+          <img src="{{ imageCDN('rukuka_is_coming.jpg') }}" alt="" width="600px">
         </div>
     </div>
 </body>
