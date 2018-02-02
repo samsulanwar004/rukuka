@@ -17,6 +17,7 @@ return [
     'submit'                    =>  '提出する',
     'show_all_product'          =>  'すべての製品を表示する',
     'related'                   =>  '関連商品',
+    'quick_shop'                =>  'クイックショップ',
 
     //resources/views/partials/nav.blade.php
     'search'                    =>  'サーチ',
@@ -29,7 +30,6 @@ return [
     'love'                      =>  '愛',
     'checkout_now'              =>  '今すぐチェックアウト',
     'your_shop'                 =>  '今すぐチェックアウト',
-    //end navigation
 
     //resources/views/partials/footer.blade.php
     //resources/views/partials/footer_checkout.blade.php
@@ -72,6 +72,8 @@ return [
     'new_arrival'               =>  '新参者',
     'our_designer'              =>  '私たちのデザイナー',
     'on_sale'                   =>  '発売中',
+    'clothing'                  =>  '衣類',
+    'accessories'               =>  'アクセサリーa',
 
     //resources/views/partials/user_menu.blade.php
     'home'                      =>  'ホーム',
@@ -210,4 +212,107 @@ return [
 
     //resources/views/pages/bag.blade.php
     'recently'                  =>  '最近閲覧した',
+
+    //resources/assets/js/components/Address.vue
+    'edit_address'              =>  '住所の編集',
+    'add_new_address'           =>  '新しい配送先住所を追加',
+
+    //resources/assets/js/components/Bag.vue
+    'no_bag'                    =>  'ショッピングバッグに商品がありません',
+    'your_bag'                  =>  'あなたのバッグ',
+    'item'                      =>  '項目',
+    'qty'                       =>  '数量',
+    'move_wishlist'             =>  'ウィッシュリストに入れる',
+    'summary'                   =>  '概要',
+    'total'                     =>  '合計',
+    'checkout'                  =>  'チェックアウト',
+
+    //resources/assets/js/components/ButtonBuy.vue
+    'choose_size_label'         =>  'あなたのサイズを選択してください',
+    'no_size'                   =>  'サイズがありません',
+    'contact_cs'                =>  'cuctomerサービスにご連絡ください。',
+    'editors_notes'             =>  '編集者ノート',
+    'size_fit'                  =>  'サイズ＆フィット',
+    'detail_care'               =>  '詳細＆ケア',
+    'update_bag'                =>  'アップデートバッグ',
+    'add_to_bag'                =>  'かごに入れます',
+    'update_wishlist'           =>  'ウィッシュリストを更新',
+    'wishlist_label'            =>  'ウィッシュリスト',
+    'color_label'               =>  '色',
+
+    //resources/assets/js/components/ItemCheckout.vue
+    'items'                     =>  'アイテム',
+
+    //resources/assets/js/components/ItemCheckout.vue
+    'loading'                   =>  '読み込み中...',
+    'see_detail'                =>  '詳細を見る',
+    'add_to_wishlist'           =>  '欲しいものリストに追加',
+
+    //resources/assets/js/components/Search.vue
+    'category'                  =>  'カテゴリー',
+
+    //resources/assets/js/components/Summary.vue
+    'shipping_cost_label'       =>  '輸送費',
+    'continue'                  =>  '持続する',
+
+    //resources/assets/js/components/Wishlist.vue
+    'no_wishlist'               =>  'あなたのウィッシュリストにはアイテムがありません',
+    'cart'                      =>  'カート',
+    'add_to_cart'               =>  'カートに追加',
+
+    //resources/views/pages/checkout/shipping_address.blade.php
+    'shipping_address'          =>  'お届け先の住所',
+    'shipping_option'           =>  '配送オプション',
+    'review'                    =>  'レビュー',
+    'select_shipping'           =>  '配送先住所を選択してください',
+    'shipping_info'             =>  'あなたの発送情報',
+    'required'                  =>  '必須',
+
+    //resources/views/pages/checkout/shipping_option.blade.php
+    'shipping_method'           =>  '配送方法の選択',
+    'today'                     =>  '今日',
+    'shipping_detail'           =>  '配送の詳細',
+
+    //resources/views/pages/checkout/shipping_preview.blade.php
+    'confirm_order'             =>  'あなたの注文を確認してください',
+
+    //resources/views/partials/header_checkout.blade.php
+    'back_to_shopping_bag'      =>  'ショッピングバッグに戻る',
+
+    //resources/views/users/history.blade.php
+    'unpaid'                    =>  '未払い',
+    'unsent'                    =>  '未送信',
+    'unreceived'                =>  '未受信',
+    'done'                      =>  '完了',
+    'canceled'                  =>  'キャンセル',
+    'order_number'              =>  '注文番号',
+    'details'                   =>  '詳細',
+    'no_data'                   =>  'データなし',
+    'pay'                       =>  '支払う',
+    'track'                     =>  'トラック',
+    'buy_again'                 =>  'もう一度買う',
+
+    //resources/views/pages/checkout/checkout_finish.blade.php
+    'checkout_almost'           =>  'あなたのチェックアウトプロセスはほぼ完了しています!',
+    'price'                     =>  '価格',
+    'pay_now'                   =>  '今払う',
+    'card_number'               =>  'カード番号 :',
+    'card_help'                 =>  'あなたのカード番号を挿入する',
+    'card_holder'               =>  'カードホルダー :',
+    'holder_help'               =>  'あなたのカード番号を挿入する',
+    'expired'                   =>  '期限切れ',
+    'year'                      =>  '年',
+    'month'                     =>  '月',
+    'cvn_code'                  =>  'CVN コード',
+
+    //resources/views/blogs/home.blade.php
+    'load_more'                 =>  'もっと読み込む',
+    'no_content'                =>  'コンテンツなし',
+    'search_result'             =>  'の検索結果',
+    'nothing_found'             =>  '申し訳ありませんが、何も見つかりませんでした.',
+    'another_keyword'           =>  '他のキーワードで検索しよう',
+    'other_people'              =>  '他の人も読む',
+
+
+
 ];

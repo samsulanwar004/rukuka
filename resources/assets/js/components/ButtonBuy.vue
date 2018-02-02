@@ -1,46 +1,46 @@
 <template>
     <div>
-        <h5 class="uk-margin-small">Color : {{ prod.color }}</h5>
+        <h5 class="uk-margin-small">{{ trans.color_label}} : {{ prod.color }}</h5>
         <div v-if="stocks.length > 0">
             <select :class="{'uk-select uk-form-width-small uk-form-small': true, 'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
               <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">{{ stock.size }} {{ stock.unit | unit }}</option>
             </select>
-            <span class="uk-text-meta"><i> Choose your size</i> </span>
+            <span class="uk-text-meta"><i> {{ trans.choose_size_label }}</i> </span>
         </div>
         <div v-else>
-            <span class="uk-text-meta"><i class="uk-text-danger">No size available </i> <br>Please, contact our cuctomer service! </span>
+            <span class="uk-text-meta"><i class="uk-text-danger">{{ trans.no_size }} </i> <br>{{ trans.contact_cs }} </span>
         </div>
         <ul uk-accordion="animation: true; multiple: false">
                   <li class="uk-open">
-                      <h5 class="uk-accordion-title">Editors Notes</h5>
+                      <h5 class="uk-accordion-title">{{ trans.editors_notes }}</h5>
                       <div class="uk-accordion-content">
                           {{ prod.content }}
                       </div>
                   </li>
                   <li>
-                      <h5 class="uk-accordion-title">Size & Fit</h5>
+                      <h5 class="uk-accordion-title">{{ trans.size_fit }}</h5>
                       <div class="uk-accordion-content">
                           {{ prod.size_and_fit }}
                       </div>
                   </li>
                   <li>
-                      <h5 class="uk-accordion-title">Details & Care</h5>
+                      <h5 class="uk-accordion-title">{{ trans.detail_care }}</h5>
                       <div class="uk-accordion-content">
                           {{ prod.detail_and_care }}
                       </div>
                   </li>
                 </ul>
         <div class="uk-margin-small-top" v-if="method == 'bag'">
-          <button class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right" v-on:click="updateBag(sku)"> UPDATE BAG </button>
+          <button class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right uk-text-uppercase" v-on:click="updateBag(sku)"> {{ trans.update_bag }} </button>
         </div>
         <div class="uk-margin-small-top" v-else>
-          <button class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right" v-on:click="bag"> ADD TO BAG </button>
+          <button class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right uk-text-uppercase" v-on:click="bag"> {{ trans.add_to_bag }} </button>
         </div>
         <div class="uk-margin-small-top" v-if="method == 'wishlist'">
-            <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right" v-on:click="updateWishlist(id)">UPDATE WISHLIST</button>
+            <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right uk-text-uppercase" v-on:click="updateWishlist(id)">{{ trans.update_wishlist }}</button>
         </div>
         <div class="uk-margin-small-top" v-else>
-            <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right" v-on:click="wishlist">WISHLIST</button>
+            <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right uk-text-uppercase" v-on:click="wishlist">{{ trans.wishlist_label }}</button>
         </div>
     </div>
 </template>
@@ -59,7 +59,7 @@
             'id',
             'bag_link',
             'wishlist_link',
-            'locale,'
+            'locale',
         ],
 
         created () {

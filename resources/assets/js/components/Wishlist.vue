@@ -40,7 +40,7 @@
                       <input type="hidden" name="size" :value="wish.sku">
                       <input type="hidden" name="qty" :value="wish.qty">
                       <input type="hidden" name="move" :value="wish.id">
-                      <button type="submit" class="uk-button uk-button-secondary uk-button-small uk-width-1-1">Add to cart</button>
+                      <button type="submit" class="uk-button uk-button-secondary uk-button-small uk-width-1-1">{{ trans.add_to_cart }}</button>
                     </form>
                 </div>
                 <hr class="uk-margin-remove">
@@ -86,7 +86,7 @@
                   <input type="hidden" name="size" :value="wish.sku">
                   <input type="hidden" name="qty" :value="wish.qty">
                   <input type="hidden" name="move" :value="wish.id">
-                  <button type="submit" class="uk-button uk-button-secondary uk-button-small uk-width-1-1"><span class="uk-icon" uk-icon="icon: cart"></span> cart</button>
+                  <button type="submit" class="uk-button uk-button-secondary uk-button-small uk-width-1-1"><span class="uk-icon" uk-icon="icon: cart"></span> {{ trans.cart }}</button>
                 </form>
             </div>
             <hr class="uk-margin-remove">
@@ -108,7 +108,7 @@
             </div> -->
         </div>
     </div>
-      <div v-if="wishlists == 0" class="uk-text-center"><h3>You have no items in your wishlist</h3></div>
+      <div v-if="wishlists == 0" class="uk-text-center"><h3>{{ trans.no_wishlist }}</h3></div>
   </div>
 </template>
 

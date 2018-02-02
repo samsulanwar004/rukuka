@@ -10,56 +10,55 @@
               <div class="uk-card-body">
                <div class="uk-grid uk-grid-divider uk-child-width-1-3 uk-margin-small" uk-grid>
                  <div class="uk-text-center">
-                     <a href="{{ route('checkout') }}" class="uk-button uk-button-text">SHIPPING ADDRESS</a>
+                     <a href="{{ route('checkout') }}" class="uk-button uk-button-text">{{ trans('app.shipping_address') }}</a>
                  </div>
                  <div class="uk-text-center">
-                     <a href="{{ route('checkout.shipping') }}" class="uk-button uk-button-text">SHIPPING OPTION</a>
+                     <a href="{{ route('checkout.shipping') }}" class="uk-button uk-button-text">{{ trans('app.shipping_option') }}</a>
                  </div>
-
                  <div class="uk-text-center">
-                     <button class="uk-button uk-button-text" disabled><b>REVIEW</b></button>
+                     <button class="uk-button uk-button-text" disabled><b>{{ trans('app.review') }}</b></button>
                  </div>
                </div>
              </div>
              </div>
-            <h4>PLEASE CONFIRM YOUR ORDER</h4>
-            <h6 class="uk-margin-small">SHIPPING DETAILS</h6>
+            <h4 class="uk-text-uppercase">{{ trans('app.confirm_order') }}</h4>
+            <h6 class="uk-margin-small uk-text-uppercase">{{ trans('app.shipping_detail') }}</h6>
             <div>
               <table class="uk-table uk-table-divider uk-table-small uk-text-meta uk-table-hover uk-background-muted">
                   <tbody>
                     <tr>
-                      <td class="uk-width-small">Full Name</td>
+                      <td class="uk-width-small">{{ trans('app.full_name') }}</td>
                       <td>{{ $defaultAddress->first_name }} {{ $defaultAddress->last_name}}</td>
                     </tr>
                     <tr>
-                      <td>Company  </td>
+                      <td>{{ trans('app.company') }}  </td>
                       <td>{{ $defaultAddress->company }}</td>
                     </tr>
                     <tr>
-                      <td>Address  </td>
+                      <td>{{ trans('app.address_line') }}  </td>
                       <td>{{ $defaultAddress->address_line }}</td>
                     </tr>
                     <tr>
-                      <td>City     </td>
+                      <td>{{ trans('app.city') }}     </td>
                       <td>{{ $defaultAddress->city }}</td>
                     </tr>
                     <tr>
-                      <td>City and Postal Code</td>
-                      <td>{{ $defaultAddress->city }}, {{ $defaultAddress->country }} {{ $defaultAddress->postal }}</td>
+                        <td>{{ trans('app.country') }} </td>
+                        <td>{{ $defaultAddress->country }}</td>
                     </tr>
                     <tr>
-                      <td>Country Code </td>
-                      <td>{{ $defaultAddress->country }}</td>
+                        <td>{{ trans('app.postal') }}</td>
+                        <td>{{ $defaultAddress->postal }}</td>
                     </tr>
                     <tr>
-                      <td>Phone Number </td>
-                      <td>{{ $defaultAddress->phone_number }}</td>
+                        <td>{{ trans('app.phone') }}</td>
+                        <td>{{ $defaultAddress->phone_number }}</td>
                     </tr>
                   </tbody>
                 </table>
             </div>
               <div class="uk-margin-small-top">
-                <h6>TODAY: {{ \Carbon\Carbon::now()->toDayDateTimeString() }}</h6>
+                <h6>{{ trans('app.today') }}: {{ \Carbon\Carbon::now()->toDayDateTimeString() }}</h6>
                 <table class="uk-table uk-table-divider uk-table-hover">
                     <tbody>
                         <tr class="uk-active">

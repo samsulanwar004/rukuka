@@ -1,6 +1,6 @@
 <template>
     <div class="uk-margin-large" v-if="bags == 0" >
-        <h3 align="center"><p>You have no items in the shopping bag</p></h3>
+        <h3 align="center"><p>{{ trans.no_bag }}</p></h3>
     </div>
     <div class="uk-margin-top" uk-grid v-else>
       <div class="uk-width-2-3@m">
@@ -8,15 +8,15 @@
             <table class="uk-table uk-table-striped">
                 <thead>
                   <tr>
-                      <th class="uk-table-shrink" colspan="4"><h4 class="uk-margin-remove">YOUR BAG ({{ bags.length }}) </h4></th>
+                      <th class="uk-table-shrink" colspan="4"><h4 class="uk-margin-remove uk-text-uppercase">{{ trans.your_bag }}({{ bags.length }}) </h4></th>
                   </tr>
               </thead>
                 <thead>
                     <tr>
                         <th class="uk-table-shrink"></th>
-                        <th class="uk-table-expand">ITEM</th>
-                        <th class="uk-width-medium">QTY</th>
-                        <th class="uk-table-shrink uk-text-nowrap">UNIT PRICE</th>
+                        <th class="uk-table-expand uk-text-uppercase">{{ trans.item }}</th>
+                        <th class="uk-width-medium uk-text-uppercase">{{ trans.qty }}</th>
+                        <th class="uk-table-shrink uk-text-nowrap uk-text-uppercase">{{ trans.unit_price }}</th>
                     </tr>
                 </thead>
                 <tbody v-for="bag in bags">
@@ -28,15 +28,15 @@
                         <td class="uk-table-link">
                           <ul class="uk-list uk-margin-small-top">
                             <li><h4>{{ bag.name }}</h4></li>
-                            <li class="uk-margin-remove"><span class="uk-text-small">Color: {{ bag.options.color }}</span></li>
-                            <li class="uk-margin-remove"><span class="uk-text-small">Size : {{ bag.options.size }}</span></li>
+                            <li class="uk-margin-remove"><span class="uk-text-small">{{ trans.color }}: {{ bag.options.color }}</span></li>
+                            <li class="uk-margin-remove"><span class="uk-text-small">{{ trans.size }} : {{ bag.options.size }}</span></li>
                           </ul>
                           <form v-on:submit.prevent="moveWishlist">
                               <input type="hidden" name="size" :value="bag.id">
                               <input type="hidden" name="qty" :value="bag.qty">
                               <input type="hidden" name="move" :value="bag.id">
-                              <button class="uk-button uk-button-small uk-button-default-warm uk-padding-small-right uk-margin-bottom" type="submit">MOVE TO WISHLIST</button>
-                        <a class="uk-button uk-button-small uk-button-default-warm uk-padding-small-right uk-text-right uk-margin-bottom" v-on:click="removeBag(bag.id, bag.name)">REMOVE</a>
+                              <button class="uk-button uk-button-small uk-button-default-warm uk-padding-small-right uk-margin-bottom uk-text-uppercase" type="submit">{{ trans.move_wishlist}}</button>
+                        <a class="uk-button uk-button-small uk-button-default-warm uk-padding-small-right uk-text-right uk-margin-bottom" v-on:click="removeBag(bag.id, bag.name)">{{ trans.remove }}</a>
                         </form>
                         </td>
                         <td class="uk-text-nowrap">
@@ -50,7 +50,7 @@
                     </tr>
                 </tbody>
                 <tbody v-if="bags == 0">
-                    <tr><td colspan="6" align="center"><p>You have no items in the shopping bag</p></td></tr>
+                    <tr><td colspan="6" align="center"><p>{{ trans.no_bag }}</p></td></tr>
                 </tbody>
             </table>
         </div>
@@ -58,23 +58,23 @@
       <div class="uk-width-1-3@m">
         <div class="uk-card uk-card-default uk-background-muted uk-card-small uk-box-shadow-small">
           <div class="uk-card-header">
-            <h4>SUMMARY</h4>
+            <h4 class="uk-text-uppercase">{{ trans.summary }}</h4>
           </div>
           <div class="uk-card-body">
             <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
-              <div class="uk-text-small"><h6>SUBTOTAL</h6></div>
+              <div class="uk-text-small"><h6>{{ trans.subtotal }}</h6></div>
               <div class="uk-text-right">{{ subtotal | round }}</div>
             </div>
           </div>
           <div class="uk-card-footer">
             <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
-              <div><h4> <b>TOTAL</b></h4></div>
+              <div><h4 class="uk-text-uppercase"> <b>{{ trans.total }}</b></h4></div>
               <div class="uk-text-right"><h4>{{ subtotal | round }}</h4></div>
             </div>
           </div>
           <div class="uk-card-footer">
             <a :href="checkout_link" class="uk-button uk-button-secondary uk-width-1-1">
-               checkout
+               {{ trans.checkout}}
             </a>
           </div>
           </div>

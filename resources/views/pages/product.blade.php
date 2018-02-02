@@ -241,7 +241,7 @@
     }
 
     function myFunction(id_review,id_product) {
-        $("#btn-more").html("Loading....");
+        $("#btn-more").html("{{trans('app.loading')}}");
 
         $.ajax({
             url : '{{ url("review-ajax") }}',

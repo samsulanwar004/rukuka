@@ -4,7 +4,7 @@
     @if($status['code'] == '000')
     <div class="uk-container uk-container-small">
         <div class="uk-text-lead uk-text-uppercase uk-text-center uk-margin-medium-top">
-            <h3 class="uk-margin-small">  search results for:</h3>
+            <h3 class="uk-margin-small">  {{ trans('app.search_result') }}:</h3>
         </div>
         <div class="uk-heading-line uk-text-lead uk-text-center blog-grey-text">
             <span>"{{$keyword}}"</span>
@@ -14,7 +14,7 @@
                 <div class="uk-panel uk-text-right">
                     {{ Form::open(array('url' => 'search/blog', 'method' =>'get','files' => true,'class' => 'uk-search uk-form-width-medium uk-first-column')) }}
                     <button type="submit" class="uk-search-icon-flip uk-search-icon uk-icon" uk-search-icon></button>
-                    <input type="text" class=" uk-search-input" name="keyword"  placeholder="S E A R C H . . .">
+                    <input type="text" class=" uk-search-input" name="keyword"  placeholder="{{ trans('app.search') }}">
                     {{ Form::close() }}
                 </div>
             </div>
@@ -48,13 +48,13 @@
     @else
         <div class="uk-container uk-container-small">
             <div class="uk-text-small uk-text-uppercase uk-text-center uk-margin-medium-top">
-                <span>Sorry, Nothing Found.</span>
+                <span>{{ trans('app.nothing_found') }}</span>
             </div>
             <div class="uk-text-large uk-text-center uk-margin-medium-bottom blog-grey-text">
                 <span>{{$keyword}}</span>
             </div>
             <div class="uk-section uk-section-default uk-text-small uk-text-uppercase uk-section-small uk-text-center">
-                <div><span>try searching with other keywords</span></div>
+                <div><span>{{ trans('app.another_keyword') }}</span></div>
                 <div>
                     {{ Form::open(array('url' => 'search/blog/','method' =>'get','files' => true,'class' => 'uk-search uk-search-large')) }}
                         <span style="color: #B4B4B4;" uk-search-icon></span>

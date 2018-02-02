@@ -17,9 +17,10 @@ return [
     'submit'                    =>  'Submit',
     'show_all_product'          =>  'Show All Product',
     'related'                   =>  'Related Product',
+    'quick_shop'                =>  'Quick Shop',
 
     //resources/views/partials/nav.blade.php
-    'search'                    =>  'Search',
+    'search'                    =>  'S E A R C H . . .',
 
     //resources/assets/js/components/UserPanel.vue
     'hallo'                     =>  'Hallo,',
@@ -29,7 +30,6 @@ return [
     'love'                      =>  'Love',
     'checkout_now'              =>  'Checkout Now',
     'your_shop'                 =>  'See all your shop',
-    //end navigation
 
     //resources/views/partials/footer.blade.php
     //resources/views/partials/footer_checkout.blade.php
@@ -72,6 +72,8 @@ return [
     'new_arrival'               =>  'New Arrival',
     'our_designer'              =>  'Our Designer',
     'on_sale'                   =>  'On Sale',
+    'clothing'                  =>  'Clothing',
+    'accessories'               =>  'Accessories',
 
     //resources/views/partials/user_menu.blade.php
     'home'                      =>  'Home',
@@ -209,7 +211,106 @@ return [
     'input_order'               =>  'Input your order code',
 
     //resources/views/pages/bag.blade.php
-    'recently'                  =>  'Recently Viewed',
+    'recently'                  =>  'Recently Vieweds',
 
+    //resources/assets/js/components/Address.vue
+    'edit_address'              =>  'Edit Address',
+    'add_new_address'           =>  'Add New Shipping Address',
+
+    //resources/assets/js/components/Bag.vue
+    'no_bag'                    =>  'You have no items in the shopping bag',
+    'your_bag'                  =>  'Your Bag',
+    'item'                      =>  'item',
+    'qty'                       =>  'qty',
+    'move_wishlist'             =>  'Move to Wishlist',
+    'summary'                   =>  'Summary',
+    'total'                     =>  'Total',
+    'checkout'                  =>  'Checkout',
+
+    //resources/assets/js/components/ButtonBuy.vue
+    'choose_size_label'         =>  'Choose your size',
+    'no_size'                   =>  'No size available',
+    'contact_cs'                =>  'Please, contact our cuctomer service.',
+    'editors_notes'             =>  'Editors Notes',
+    'size_fit'                  =>  'Size & Fit',
+    'detail_care'               =>  'Details & Care',
+    'update_bag'                =>  'Update Bag',
+    'add_to_bag'                =>  'Add to Bag',
+    'update_wishlist'           =>  'Update Wishlist',
+    'wishlist_label'            =>  'Wishlist',
+    'color_label'               =>  'Color',
+
+    //resources/assets/js/components/ItemCheckout.vue
+    'items'                     =>  'Items',
+
+    //resources/assets/js/components/ItemCheckout.vue
+    'loading'                   =>  'Loading...',
+    'see_detail'                =>  'See Detail',
+    'add_to_wishlist'           =>  'Add to Wishlist',
+
+    //resources/assets/js/components/Search.vue
+    'category'                  =>  'Category',
+
+    //resources/assets/js/components/Summary.vue
+    'shipping_cost_label'       =>  'Shipping Cost',
+    'continue'                  =>  'Continue',
+
+    //resources/assets/js/components/Wishlist.vue
+    'no_wishlist'               =>  'You have no items in your wishlist',
+    'cart'                      =>  'Cart',
+    'add_to_cart'               =>  'Add to Cart',
+
+    //resources/views/pages/checkout/shipping_address.blade.php
+    'shipping_address'          =>  'Shipping Address',
+    'shipping_option'           =>  'Shipping Option',
+    'review'                    =>  'Review',
+    'select_shipping'           =>  'Select your shipping address',
+    'shipping_info'             =>  'Your Shipping Information',
+    'required'                  =>  'Required',
+
+    //resources/views/pages/checkout/shipping_option.blade.php
+    'shipping_method'           =>  'Choose a Shipping Method',
+    'today'                     =>  'Today',
+    'shipping_detail'           =>  'Shipping Detail',
+
+    //resources/views/pages/checkout/shipping_preview.blade.php
+    'confirm_order'             =>  'Please Confirm Your Order',
+
+    //resources/views/partials/header_checkout.blade.php
+    'back_to_shopping_bag'      =>  'Back To Shopping Bag',
+
+    //resources/views/users/history.blade.php
+    'unpaid'                    =>  'Unpaid',
+    'unsent'                    =>  'Unsent',
+    'unreceived'                =>  'Unreceived',
+    'done'                      =>  'Done',
+    'canceled'                  =>  'Canceled',
+    'order_number'              =>  'Order Number',
+    'details'                   =>  'Details',
+    'no_data'                   =>  'No Data',
+    'pay'                       =>  'Pay',
+    'track'                     =>  'Track',
+    'buy_again'                 =>  'Buy Again',
+
+    //resources/views/pages/checkout/checkout_finish.blade.php
+    'checkout_almost'           =>  'Your Checkout Process is almost done!',
+    'price'                     =>  'Price',
+    'pay_now'                   =>  'Pay Now',
+    'card_number'               =>  'Card Number :',
+    'card_help'                 =>  'Insert your card number',
+    'card_holder'               =>  'Card holder :',
+    'holder_help'               =>  'Insert your card number',
+    'expired'                   =>  'Expired',
+    'year'                      =>  'Year',
+    'month'                     =>  'Month',
+    'cvn_code'                  =>  'Cvn Code',
+
+    //resources/views/blogs/home.blade.php
+    'load_more'                 =>  'Load More',
+    'no_content'                =>  'No Content',
+    'search_result'             =>  'Search results for',
+    'nothing_found'             =>  'Sorry, Nothing Found.',
+    'another_keyword'           =>  'try searching with other keywords',
+    'other_people'              =>  'Other people also read',
 
 ];

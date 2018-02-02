@@ -20,15 +20,15 @@
             <div class="uk-width-1-4@m uk-visible@m">
                 <div class="uk-panel">
                     <ul class="uk-breadcrumb">
-                        <li><a href="/">Home</a></li>
-                        <li><a>Search</a></li>
+                        <li><a href="/">{{ trans('app.home') }}</a></li>
+                        <li><a>{{ trans('app.search') }}</a></li>
                     </ul>
                 </div>
             </div>
             <div class="uk-width-3-4@m">
                 <div class="uk-grid-small uk-child-width-1-2 uk-flex-center" uk-grid>
                     <div class="uk-text-left">
-                        <span class="uk-text-meta">Sort by price : <a href="?price=desc&keyword={{$keyword}}">high</a> | <a href="?price=asc&keyword={{$keyword}}">low</a></span>
+                        <span class="uk-text-meta">{{ trans('app.sort_by_price') }} : <a href="?price=desc&keyword={{$keyword}}">{{ trans('app.high') }}</a> | <a href="?price=asc&keyword={{$keyword}}">{{ trans('app.low') }}</a></span>
                     </div>
                     <div class="uk-visible@m">
                         <div class="uk-text-right">
