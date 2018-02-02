@@ -11,6 +11,12 @@ return [
     'sign_out'                  =>  'Sign Out',
     'cancel'                    =>  'Cancel',
     'save'                      =>  'Save',
+    'trending'                  =>  'Trending Now',
+    'popular'                   =>  'Most Popular',
+    'back_to_home'              =>  'Back To Home',
+    'submit'                    =>  'Submit',
+    'show_all_product'          =>  'Show All Product',
+    'related'                   =>  'Related Product',
 
     //resources/views/partials/nav.blade.php
     'search'                    =>  'Search',
@@ -121,5 +127,89 @@ return [
 
     //resources/views/partials/help-sidebar.blade.php
     'reg_qa'                    =>  'Registration Q & A',
+
+    //resources/views/pages/login.blade.php
+    'checkout_text'             =>  'Your checkout process start here.',
+    'email'                     =>  'Email',
+    'password'                  =>  'Password',
+    'remember'                  =>  'Remember Me',
+    'login_facebook'            =>  'Login With Facebook',
+    'login_google'              =>  'Login With Google',
+    'forgot_password'           =>  'Forgot your password?',
+    'register'                  =>  'Register',
+    'set_email_password'        =>  'Set Email and Password',
+    'confirm_password'          =>  'Confirm Password',
+    'agreement_text_1'          =>  'By clicking the "register" button, I agree to recieve ruKuKa news by e-mail, sms or telephone.',
+    'agreement_text_2'          =>  'See our',
+    'agreement_text_3'          =>  'for further information.',
+
+    //resources/views/pages/contact.blade.php
+    'name'                      =>  'Name',
+    'subject'                   =>  'Subject',
+    'message'                   =>  'Message',
+
+    //resources/views/pagination/default.blade.php
+    'page'                      =>  'Page',
+    'of'                        =>  'of',
+
+    //resources/views/pages/shop.blade.php
+    'sort_by_price'             =>  'Sort by price',
+    'high'                      =>  'high',
+    'low'                       =>  'low',
+    'recently_view'             =>  'Recently View',
+
+    //resources/views/pages/product.blade.php
+    'product_code'              =>  'Product Code:',
+    'delivery_returns'          =>  'Delivery & Free Returns',
+    'write_review'              =>  'Write a Review',
+    'rating_text'               =>  'Rating for this product :',
+    'based_on'                  =>  'Based on',
+    'reviews'                   =>  'Reviews',
+    'shopper_text'              =>  'What Other Shoppers Think :',
+    'comment_text'              =>  'There are no reviews for this product. Be the first to comment.',
+    'show_more'                 =>  'show more',
+    'show_less'                 =>  'show less',
+    'rukuka_response'           =>  'Response from ruKuKa',
+    'more_review'               =>  'See More Review',
+
+    //resources/views/pages/add_review.blade.php
+    'tell_text'                 =>  'Tell me what you think',
+    'overall_rating'            =>  '*Overall Rating',
+    'review_purchase'           =>  'Review Your Purchase',
+    'writing_guide'             =>  'Writing Guidelines',
+    'writing_text_1'            =>  'We want to publish your review, so please keep our guidelines in mind:',
+    'writing_text_2'            =>  'Do keep your review focused on the item you recently purchased (without sharing the price you paid for it)',
+    'writing_text_3'            =>  'Don\'t write about customer service, just contact us here if something needs our attention',
+    'writing_text_4'            =>  'Don\'t mention other brands',
+    'writing_text_5'            =>  'Don\'t include your full name or anything else that might identify you',
+    'title_review'              =>  '*Title your review:',
+    'title_help'                =>  'Example: Perfect spring transition piece',
+    'write_your_review'         =>  '*Write your review:',
+    'write_your_help'           =>  'You must enter at least 50 characters in this field and no more than 1,000.',
+    'location_review'           =>  '*Your location:',
+
+    //resources/views/pages/airwaybill_ems.blade.php
+    'status_shipment'           =>  'The Status of Shipment',
+    'the_shipment'              =>  'The Shipment',
+    'barcode'                   =>  'Barcode',
+    'from'                      =>  'From',
+    'to'                        =>  'To',
+    'detail_status'             =>  'Detail Status',
+    'no'                        =>  'No',
+    'office'                    =>  'Office',
+    'date'                      =>  'Date',
+    'time'                      =>  'Time',
+    'status'                    =>  'Status',
+    'back_to_history'           =>  'Back to History',
+    'back_to_tracking'          =>  'Track another order code',
+
+    //resources/views/pages/airwaybill_order.blade.php
+    'check_shipment'            =>  'Check the Status of The Shipment',
+    'process'                   =>  'Process',
+    'input_order'               =>  'Input your order code',
+
+    //resources/views/pages/bag.blade.php
+    'recently'                  =>  'Recently Viewed',
+
 
 ];

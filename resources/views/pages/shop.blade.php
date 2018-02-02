@@ -41,7 +41,7 @@
 
 
                       <div class="uk-text-left">
-                          <span class="uk-text-meta">Sort by price : <a href="?price=desc">high</a> | <a href="?price=asc">low</a></span>
+                          <span class="uk-text-meta">{{ trans('app.sort_by_price') }} : <a href="?price=desc">{{ trans('app.high') }}</a> | <a href="?price=asc">{{ trans('app.low') }}</a></span>
                       </div>
                       <div class="uk-visible@m">
                         <div class="uk-text-right">
@@ -50,9 +50,6 @@
                           </span>
                         </div>
                       </div>
-
-
-
                     <div class="uk-hidden@m uk-text-right">
                       <a href="#modal" class="uk-button uk-button-default-warm uk-button-small" uk-toggle>Filter</a>
                       <div id="modal" uk-modal>
@@ -75,9 +72,6 @@
         <div class="uk-grid-small uk-margin-small-top" uk-grid>
             <div class="uk-width-1-4@m uk-visible@m">
                 <div class="uk-card uk-card-border uk-card-small uk-panel">
-
-
-
                     <div class="uk-card-body">
                       @if($categories == 'designers' && $category != 'all')
                           <h4>{{ $designer->name }}</h4>
@@ -111,18 +105,16 @@
                 ></shop>
             </div>
         </div>
-
           <div class="uk-text-right uk-margin-bottom uk-margin-top">
             <span class="uk-text-meta">
             @include('pagination.default', ['paginator' => $products])
             </span>
           </div>
-
         <hr>
         @if($recently)
         <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
             <div class="uk-panel">
-                <h4 class="uk-margin-small">RECENTLY VIEWED</h4>
+                <h4 class="uk-margin-small uk-text-uppercase">{{ trans('app.recently_view') }}</h4>
             </div>
         </div>
         <related
@@ -139,7 +131,7 @@
 
         <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">
             <div class="uk-panel uk-text-center">
-                <a  href="{{route('shop',['categories' => 'designers', 'category' => 'all' ])}}" class="uk-button uk-button-small uk-button-text">SHOW ALL PRODUCT</a>
+                <a  href="{{route('shop',['categories' => 'designers', 'category' => 'all' ])}}" class="uk-button uk-button-small uk-button-text">{{ trans('app.show_all_product') }}</a>
             </div>
         </div>
         @endif

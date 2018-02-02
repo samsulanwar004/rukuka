@@ -11,6 +11,12 @@ return [
     'sign_out'                  =>  'サインアウト',
     'cancel'                    =>  'キャンセル',
     'save'                      =>  'セーブ',
+    'trending'                  =>  '今流行っている',
+    'popular'                   =>  '今流行っている',
+    'back_to_home'              =>  '家に帰る',
+    'submit'                    =>  '提出する',
+    'show_all_product'          =>  'すべての製品を表示する',
+    'related'                   =>  '関連商品',
 
     //resources/views/partials/nav.blade.php
     'search'                    =>  'サーチ',
@@ -118,4 +124,87 @@ return [
 
     //resources/assets/js/components/NavigationMobile.vue
     'whats_new'                 =>  'なにが新しい',
+
+    //resources/views/partials/help-sidebar.blade.php
+    'reg_qa'                    =>  '登録Q＆A',
+
+    //resources/views/pages/login.blade.php
+    'checkout_text'             =>  'あなたのチェックアウトプロセスはここから始まります。',
+    'email'                     =>  'Eメール',
+    'password'                  =>  'パスワード',
+    'remember'                  =>  '私を覚えてますか',
+    'login_facebook'            =>  'でログイン Facebook',
+    'login_google'              =>  'でログイン Google',
+    'forgot_password'           =>  'パスワードをお忘れですか?',
+    'register'                  =>  '登録',
+    'set_email_password'        =>  'メールとパスワードを設定する',
+    'confirm_password'          =>  'パスワードを認証する',
+    'agreement_text_1'          =>  '登録」ボタンをクリックすると、ruKuKaのニュースをメール、SMS、または電話で受け取ることに同意します',
+    'agreement_text_2'          =>  '我々を参照してください',
+    'agreement_text_3'          =>  '詳細については',
+
+    //resources/views/pages/contact.blade.php
+    'name'                      =>  '名',
+    'subject'                   =>  '主題',
+    'message'                   =>  'メッセージ',
+
+    //resources/views/pagination/default.blade.php
+    'page'                      =>  'ページ',
+    'of'                        =>  'の',
+
+    //resources/views/pages/shop.blade.php
+    'sort_by_price'             =>  '価格で並べ替え',
+    'high'                      =>  '高い',
+    'low'                       =>  '低い',
+    'recently_view'             =>  '最近見た',
+
+    //resources/views/pages/product.blade.php
+    'product_code'              =>  '製品コード:',
+    'delivery_returns'          =>  '配送＆無料返品',
+    'write_review'              =>  'レビューを書く',
+    'rating_text'               =>  'この商品の評価 :',
+    'based_on'                  =>  'に基づく',
+    'reviews'                   =>  'レビュー',
+    'shopper_text'              =>  '他の買い物客が考えるもの :',
+    'comment_text'              =>  'この商品のレビューはありません。最初にコメントする',
+    'show_more'                 =>  'もっと見せる',
+    'show_less'                 =>  'あまり見せない',
+    'rukuka_response'           =>  'ruKuKa からの応答',
+    'more_review'               =>  'レビューをもっと見る',
+
+    //resources/views/pages/add_review.blade.php
+    'tell_text'                 =>  'あなたの考えを教えてください',
+    'overall_rating'            =>  '*総合評価',
+    'review_purchase'           =>  '購入のレビュー',
+    'writing_guide'             =>  '執筆ガイドライン',
+    'writing_text_1'            =>  'あなたのレビューを公開したいので、私たちのガイドラインに留意してください:',
+    'writing_text_2'            =>  'あなたのレビューは、最近購入したアイテムに焦点を当ててください (あなたが支払った価格を分かち合うことなく)',
+    'writing_text_3'            =>  'カスタマーサービスについて書いてはいけません。何か注意が必要な場合は、ここにお問い合わせください',
+    'writing_text_4'            =>  '他のブランドは言及しないでください',
+    'writing_text_5'            =>  'あなたのフルネームなど、あなたを特定するものは含めないでください',
+    'title_review'              =>  '*あなたのレビューにタイトルをつける:',
+    'title_help'                =>  '例: パーフェクトスプリングトランジションピース',
+    'write_your_review'         =>  '*あなたのレビューを書く:',
+    'write_your_help'           =>  'このフィールドには少なくとも50文字を入力し、1,000文字を超えないようにしてください',
+    'location_review'           =>  '*あなたの場所:',
+
+    //resources/views/pages/airwaybill_ems.blade.php
+    'status_shipment'           =>  '出荷状況',
+    'the_shipment'              =>  '出荷',
+    'barcode'                   =>  'バーコード',
+    'from'                      =>  'から',
+    'to'                        =>  'に',
+    'detail_status'             =>  '詳細ステータス',
+    'no'                        =>  '数',
+    'office'                    =>  'オフィス',
+    'date'                      =>  '日付',
+    'time'                      =>  '時間',
+    'status'                    =>  '状態',
+    'back_to_history'           =>  '履歴に戻る',
+    'back_to_tracking'          =>  'Track another order code',
+
+    //resources/views/pages/airwaybill_order.blade.php
+    'check_shipment'            =>  '貨物の状態を確認する',
+    'process'                   =>  'プロセス',
+    'input_order'               =>  '注文コードを入力してください',
 ];
