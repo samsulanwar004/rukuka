@@ -5,8 +5,15 @@
         <!-- start product -->
         <div class="uk-card uk-card-small uk-padding-remove uk-visible@m">
             <div class="uk-card-media-top">
-                <img v-if="wish.photo" :src="wish.photo | awsLink(aws_link)" :alt="wish.name">
-                <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
+                <lazy-background
+                  :image-source="wish.photo | awsLink(aws_link)"
+                  :alt="product.name"
+                  :loading-image="loadingImage"
+                  :error-image="errorImage"
+                  :image-success-callback="successCallback"
+                  :image-error-callback="errorCallback"
+                  :alt="wish.name">
+                </lazy-background>
             </div>
             <div class="uk-card-body uk-padding-remove uk-margin-small-top">
 
@@ -28,8 +35,15 @@
                       </li>
                     </ul>
                   </div>
-                    <img v-if="wish.photo" :src="wish.photo | awsLink(aws_link)" :alt="wish.name">
-                    <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
+                    <lazy-background
+                      :image-source="wish.photo | awsLink(aws_link)"
+                      :alt="product.name"
+                      :loading-image="loadingImage"
+                      :error-image="errorImage"
+                      :image-success-callback="successCallback"
+                      :image-error-callback="errorCallback"
+                      :alt="wish.name">
+                    </lazy-background>
                 </div>
                 <div class="uk-card-body uk-background-default uk-padding-small uk-margin-small-top">
                     <a :href="'/product/'+wish.slug">{{ wish.name }}</a>
@@ -74,8 +88,15 @@
                   </li>
                 </ul>
               </div>
-                <img v-if="wish.photo" :src="wish.photo | awsLink(aws_link)" :alt="wish.name">
-                <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
+                <lazy-background
+                  :image-source="wish.photo | awsLink(aws_link)"
+                  :alt="product.name"
+                  :loading-image="loadingImage"
+                  :error-image="errorImage"
+                  :image-success-callback="successCallback"
+                  :image-error-callback="errorCallback"
+                  :alt="wish.name">
+                </lazy-background>
             </div>
             <div class="uk-card-body uk-background-default uk-padding-small">
                 <a :href="'/product/'+wish.slug" class="uk-text-meta">{{ wish.name }}</a>
@@ -114,8 +135,15 @@
 
 <script>
   import axios from 'axios';
+  import VueLazyBackgroundImage from '../components/VueLazyBackgroundImage.vue';
+
   export default {
     props: ['wishlist_api', 'bag_api', 'wishlist_delete', 'product_link', 'aws_link','default_image'],
+
+    components: {
+      'lazy-background': VueLazyBackgroundImage
+    },
+
     created () {
       var self = this;
       self.getWishlist();
@@ -124,7 +152,9 @@
     data () {
       return {
         wishlists: {},
-        defaultImage: JSON.parse(this.default_image,true)
+        defaultImage: JSON.parse(this.default_image,true),
+        errorImage: {},
+        loadingImage: {}
       }
     },
 

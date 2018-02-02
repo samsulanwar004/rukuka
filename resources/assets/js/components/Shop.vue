@@ -1,12 +1,19 @@
 <template>
     <div class="uk-grid-small uk-child-width-1-3@m uk-child-width-1-2" uk-grid>
+
         <!-- start product -->
         <div class="uk-panel uk-text-left" v-for="product in products">
             <div class="uk-card uk-card-small uk-card-default uk-box-shadow uk-visible@m">
                 <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
                     <a :href="'/product/'+ product.slug">
-                        <img v-if="product.photo" :src="product.photo | awsLink(aws_link)" :alt="product.name">
-                        <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
+                         <lazy-background
+                          :image-source="product.photo | awsLink(aws_link)"
+                          :alt="product.name"
+                          :loading-image="loadingImage"
+                          :error-image="errorImage"
+                          :image-success-callback="successCallback"
+                          :image-error-callback="errorCallback">
+                        </lazy-background>
                     </a>
                     <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default">
                         <div class="uk-text-center">
@@ -33,8 +40,15 @@
             <div class="uk-card uk-card-small uk-padding-remove uk-hidden@m">
                 <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
                     <a :href="'/product/'+ product.slug">
-                        <img v-if="product.photo" :src="product.photo | awsLink(aws_link)" :alt="product.name">
-                        <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">                    </a>
+                      <lazy-background
+                          :image-source="product.photo | awsLink(aws_link)"
+                          :alt="product.name"
+                          :loading-image="loadingImage"
+                          :error-image="errorImage"
+                          :image-success-callback="successCallback"
+                          :image-error-callback="errorCallback">
+                        </lazy-background>
+                    </a>
                 </div>
                 <div class="uk-card-body uk-padding-remove uk-margin-small-top">
                   <div>
@@ -79,40 +93,45 @@
                       <h5 class="uk-margin-small" v-else><a :href="'/product/' +slug">{{ name }}</a></h5>
                     </transition>
                   </div>
-                  <transition name="fade">
-                    <div class="uk-inline" v-if="isLoading">
-                      <img :src="aws_link+'/'+'images/'+defaultImage.image_2">
+                  <div class="uk-inline">
+                    <div class="">
+                      <ul class="uk-switcher uk-margin" id="component-tab-left">
+                        <li v-for="image in images">
+                            <lazy-background
+                              :image-source="image.photo | awsLink(aws_link)"
+                              :alt="image.name"
+                              :loading-image="loadingImage"
+                              :error-image="errorImage"
+                              :image-success-callback="successCallback"
+                              :image-error-callback="errorCallback">
+                            </lazy-background>
+                          <div class="uk-position uk-position-small uk-position-center-left">
+                            <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="previous" uk-icon="icon: chevron-left"></a>
+                          </div>
+                          <div class="uk-position uk-position-small uk-position-center-right">
+                            <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="next" uk-icon="icon: chevron-right"></a>
+                          </div>
+                        </li>
+                      </ul>
                     </div>
-                    <div v-else v-if="images[0]" class="uk-inline">
-                      <div class="">
-                        <ul class="uk-switcher uk-margin" id="component-tab-left">
-                          <li v-for="image in images">
-                              <img v-if="image.photo" :src="image.photo | awsLink(aws_link)" :alt="image.name">
-                              <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
-                            <div class="uk-position uk-position-small uk-position-center-left">
-                              <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="previous" uk-icon="icon: chevron-left"></a>
-                            </div>
-                            <div class="uk-position uk-position-small uk-position-center-right">
-                              <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="next" uk-icon="icon: chevron-right"></a>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="">
-                        <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" uk-grid>
-                          <li class="uk-padding-remove" v-for="image in images">
-                              <a href="#"  class="uk-padding-remove">
-                                  <img v-if="image.photo" :src="image.photo | awsLink(aws_link)" :alt="image.name" width="55">
-                                  <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka" width="55">
-                              </a>
-                          </li>
-                        </ul>
-                      </div>
+                    <div class="">
+                      <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" uk-grid>
+                        <li class="uk-padding-remove" v-for="image in images">
+                            <a href="#"  class="uk-padding-remove">
+                                <lazy-background
+                                  :image-source="image.photo | awsLink(aws_link)"
+                                  :alt="image.name"
+                                  :loading-image="loadingImage"
+                                  :error-image="errorImage"
+                                  :image-success-callback="successCallback"
+                                  :image-error-callback="errorCallback"
+                                  width="55px">
+                                </lazy-background>
+                            </a>
+                        </li>
+                      </ul>
                     </div>
-                    <div v-else class="uk-inline">
-                      <img :src="aws_link+'/'+'images/'+defaultImage.image_2">
-                    </div>
-                  </transition>
+                  </div>
                 </div>
                 <div class="uk-width-1-2@m">
                   <h4 class="uk-margin-remove">
@@ -211,6 +230,8 @@
 </style>
 <script>
     import axios from 'axios';
+    import VueLazyBackgroundImage from '../components/VueLazyBackgroundImage.vue';
+
     export default {
         props: [
           'shops',
@@ -223,6 +244,10 @@
           'bag_link'
         ],
 
+        components: {
+          'lazy-background': VueLazyBackgroundImage
+        },
+
         created () {
             var self = this;
             self.products = this.shops ? JSON.parse(this.shops) : {};
@@ -233,7 +258,10 @@
 
             Event.listen('addBag', function (response) {
               self.bagCount = response.data.bagCount;
-            });       
+            }); 
+
+            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;      
+            self.loadingImage = this.aws_link+'/images/loading-image.gif';      
         },
 
         data () {
@@ -254,7 +282,9 @@
                 deliveryReturns: null,
                 defaultImage: JSON.parse(this.default_image,true),
                 bagCount: {},
-                isLoading: false
+                isLoading: false,
+                errorImage: {},
+                loadingImage: {}
             }
         },
 

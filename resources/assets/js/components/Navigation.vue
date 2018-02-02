@@ -26,8 +26,15 @@
                                 <li><h5 class="uk-margin-small">{{designersNav.designer_designer_of_the_week_text}}</h5></li>
                             </ul>
                             <a :href="designersNav.designer_designer_of_the_week_url">
-                              <img v-if="designersNav.designer_of_the_week" style="height: 180px" :src="designersNav.designer_of_the_week | awsLink(aws_link)" :alt="designersNav.designer_designer_of_the_week_text">
-                              <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_4" :alt="rukuka">
+                              <lazy-background
+                                :image-source="designersNav.designer_of_the_week | awsLink(aws_link)"
+                                :alt="designersNav.designer_designer_of_the_week_text"
+                                :loading-image="loadingImage"
+                                :error-image="errorImage"
+                                :image-success-callback="successCallback"
+                                :image-error-callback="errorCallback"
+                                image-style="height: 180px">
+                              </lazy-background>
                             </a>
                         </div>
                     </div>
@@ -42,8 +49,15 @@
                                 <li class="uk-parent"><a :href="womenLink"><h5 class="uk-margin-small">{{ trans.new_arrival }}</h5></a></li>
                                 <li>
                                     <a :href="womensNav.women_blog_url">
-                                        <img v-if="womensNav.women_blog_image" style="height: 150px" :src="womensNav.women_blog_image | awsLink(aws_link)" :alt="rukuka">
-                                        <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
+                                        <lazy-background
+                                          :image-source="womensNav.women_blog_image | awsLink(aws_link)"
+                                          alt="rukuka"
+                                          :loading-image="loadingImage"
+                                          :error-image="errorImage"
+                                          :image-success-callback="successCallback"
+                                          :image-error-callback="errorCallback"
+                                          image-style="height: 150px">
+                                        </lazy-background>
                                     </a>
                                 </li>
                             </ul>
@@ -100,8 +114,15 @@
 
                               <li>
                                   <a :href="mensNav.men_blog_url">
-                                      <img v-if="mensNav.men_blog_image" style="height: 150px" :src="mensNav.men_blog_image | awsLink(aws_link)" :alt="Rukuka">
-                                      <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
+                                      <lazy-background
+                                        :image-source="mensNav.men_blog_image | awsLink(aws_link)"
+                                        alt="rukuka"
+                                        :loading-image="loadingImage"
+                                        :error-image="errorImage"
+                                        :image-success-callback="successCallback"
+                                        :image-error-callback="errorCallback"
+                                        image-style="height: 150px">
+                                      </lazy-background>
                                   </a>
                               </li>
                           </ul>
@@ -157,8 +178,15 @@
                                   <li class="uk-parent"><a :href="kidLink"><h5 class="uk-margin-small">{{ trans.new_arrival }}</h5></a></li>
                                   <li>
                                       <a :href="kidsNav.kid_blog_url">
-                                          <img v-if="" style="height: 150px" :src="kidsNav.kid_blog_image | awsLink(aws_link)" :alt="Rukuka">
-                                          <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
+                                          <lazy-background
+                                            :image-source="kidsNav.kid_blog_image | awsLink(aws_link)"
+                                            alt="rukuka"
+                                            :loading-image="loadingImage"
+                                            :error-image="errorImage"
+                                            :image-success-callback="successCallback"
+                                            :image-error-callback="errorCallback"
+                                            image-style="height: 150px">
+                                          </lazy-background>
                                       </a>
                                   </li>
                               </ul>
@@ -214,8 +242,15 @@
                                   <li><h5 class="uk-margin-small">{{salesNav.sale_text}}</h5></li>
                               </ul>
                               <a :href="salesNav.sale_url">
-                                  <img v-if="salesNav.sale_image" style="height: 100px; width: 800px" :src="salesNav.sale_image | awsLink(aws_link)" :alt="salesNav.sale_text">
-                                  <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_5" :alt="rukuka">
+                                  <lazy-background
+                                    :image-source="salesNav.sale_image | awsLink(aws_link)"
+                                    :alt="salesNav.sale_text"
+                                    :loading-image="loadingImage"
+                                    :error-image="errorImageSale"
+                                    :image-success-callback="successCallback"
+                                    :image-error-callback="errorCallback"
+                                    image-style="height: 100px; width: 800px">
+                                  </lazy-background>
                               </a>
                           </div>
                           <div class="uk-width-1-5@m" uk-grid>
@@ -244,6 +279,8 @@
 
 <script>
     import axios from 'axios';
+    import VueLazyBackgroundImage from '../components/VueLazyBackgroundImage.vue';
+
     export default {
         props: [
           'api',
@@ -255,6 +292,10 @@
           'default_image',
           'locale'
         ],
+
+        components: {
+          'lazy-background': VueLazyBackgroundImage
+        },
 
         created() {
             var self = this;
@@ -318,6 +359,10 @@
             .catch(function (error) {
               console.log(error);
             });
+
+            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;      
+            self.errorImageSale = this.aws_link+'/images/'+this.defaultImage.image_5;      
+            self.loadingImage = this.aws_link+'/images/loading-image.gif';   
         },
 
         data() {
@@ -337,6 +382,8 @@
                 salesNav: {},
                 defaultImage: JSON.parse(this.default_image,true),
                 trans: JSON.parse(this.locale,true),
+                errorImage: {},
+                loadingImage: {}
             }
         },
 

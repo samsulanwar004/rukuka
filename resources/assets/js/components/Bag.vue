@@ -22,8 +22,17 @@
                 <tbody v-for="bag in bags">
                     <tr>
                         <td>
-                            <img v-if="bag.options.photo" class="uk-preserve-width" :src="bag.options.photo | awsLink(aws_link)" width="130" alt="rukuka product">
-                            <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
+                            <lazy-background
+                              :image-source="bag.options.photo | awsLink(aws_link)"
+                              :alt="product.name"
+                              :loading-image="loadingImage"
+                              :error-image="errorImage"
+                              :image-success-callback="successCallback"
+                              :image-error-callback="errorCallback"
+                              :alt="bag.name"
+                              image-class="uk-preserve-width"
+                              width="130px">
+                            </lazy-background>
                         </td>
                         <td class="uk-table-link">
                           <ul class="uk-list uk-margin-small-top">
@@ -83,6 +92,8 @@
 </template>
 <script>
     import axios from 'axios';
+    import VueLazyBackgroundImage from '../components/VueLazyBackgroundImage.vue';
+
     export default {
         props: ['bag_link', 'wishlist_link', 'auth', 'checkout_link', 'aws_link','default_image'],
         created () {
@@ -102,6 +113,9 @@
                 self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
             });
 
+            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;      
+            self.loadingImage = this.aws_link+'/images/loading-image.gif'; 
+
         },
 
         data () {
@@ -109,6 +123,8 @@
                 bags: {},
                 subtotal: {},
                 defaultImage: JSON.parse(this.default_image,true),
+                errorImage: {},
+                loadingImage: {}
             }
         },
 

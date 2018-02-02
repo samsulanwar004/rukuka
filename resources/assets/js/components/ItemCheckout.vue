@@ -17,8 +17,17 @@
         <tbody v-for="bag in bags">
             <tr>
                 <td>
-                    <img v-if="bag.options.photo" class="uk-preserve-width" :src="bag.options.photo | awsLink(aws_link)" width="130" alt="rukuka product">
-                    <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka" width="130">
+                    <lazy-background
+                      :image-source="bag.options.photo | awsLink(aws_link)"
+                      :alt="product.name"
+                      :loading-image="loadingImage"
+                      :error-image="errorImage"
+                      :image-success-callback="successCallback"
+                      :image-error-callback="errorCallback"
+                      :alt="bag.name"
+                      image-class="uk-preserve-width"
+                      width="130px">
+                    </lazy-background>
                 </td>
                 <td class="uk-table-link">
                   <ul class="uk-list uk-margin-small-top">
@@ -41,18 +50,30 @@
 
 <script>
     import axios from 'axios';
+    import VueLazyBackgroundImage from '../components/VueLazyBackgroundImage.vue';
+
     export default {
         props: ['bag_api','aws_link','default_image'],
+
+        components: {
+          'lazy-background': VueLazyBackgroundImage
+        },
+
         data () {
             return {
                 bags: {},
-                defaultImage: JSON.parse(this.default_image,true)
+                defaultImage: JSON.parse(this.default_image,true),
+                errorImage: {},
+                loadingImage: {}
             }
         },
 
         created () {
             var self = this;
             self.getBag();
+
+            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;      
+            self.loadingImage = this.aws_link+'/images/loading-image.gif'; 
         },
 
         methods: {
