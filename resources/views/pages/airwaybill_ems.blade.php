@@ -73,12 +73,12 @@
 					</div>
 
 				@endif
-				
-				@if(\Request::route()->getName() == 'result-track-and-trace-order-guest')
+			
+				@if(\Request::route()->getName() == 'tracking-result')
 					
 					<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">
 						<div class="uk-panel uk-text-center">
-							<a href="{{ route('show-track-and-trace-order-guest') }}">#Click here to Input other orde code</a>
+							<a href="{{ route('tracking-page') }}">#Click here to Input other order code</a>
 						</div>
 					</div>
 
