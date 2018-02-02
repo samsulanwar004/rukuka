@@ -17,6 +17,7 @@
               bag_link="{{ route('bag') }}"
               login_link="{{ route('login') }}"
               auth="{{ Auth::check() ? 1 : 0 }}"
+              locale="{{ json_encode(trans('app')) }}"
             ></user-panel-mobile>
             <div id="offcanvas-overlay-slide" uk-offcanvas="overlay: true">
               <navigation-mobile

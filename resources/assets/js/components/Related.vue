@@ -10,13 +10,13 @@
           </a>
           <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default uk-visible@m">
             <div class="uk-text-center">
-              <a href="#modal-related" class="uk-button uk-button-small uk-button-secondary" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
+              <a href="#modal-related" class="uk-button uk-button-small uk-button-secondary uk-text-uppercase" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
             </div>
           </div>
         </div>
         <div class="uk-card-body uk-padding-remove uk-margin-small-top">
           <div class="uk-hidden@m">
-            <a href="#modal-related" class="uk-button uk-button-small uk-button-default-warm uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">quick shop</a>
+            <a href="#modal-related" class="uk-button uk-button-small uk-button-default-warm uk-width-1-1 uk-text-uppercase" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
           </div>
           <a :href="'/product/'+ product.slug" class="uk-text-muted">{{ product.name.substring(0,35) }}</a>
           <br>
@@ -41,11 +41,11 @@
         <button class="uk-modal-close-default" type="button" uk-close></button>
         <div class="uk-modal-header uk-visible@m">
           <transition name="fade">
-            <h3 class="uk-margin-remove" v-if="isLoading">Loading..</h3>
+            <h3 class="uk-margin-remove" v-if="isLoading">{{ trans.loading }}</h3>
             <h3 class="uk-margin-remove" v-else>{{ name }}</h3>
           </transition>
           <div class="uk-text-right">
-            <a :href="'/product/' +slug" class="uk-button uk-button-text uk-text-right">see details <span uk-icon="icon: chevron-right"></span> </a>
+            <a :href="'/product/' +slug" class="uk-button uk-button-text uk-text-right uk-text-uppercase">{{ trans.see_detail }} <span uk-icon="icon: chevron-right"></span> </a>
           </div>
         </div>
 
@@ -54,7 +54,7 @@
             <div class="uk-width-1-2@m">
               <div class="uk-hidden@m">
                 <transition name="fade">
-                  <h5 class="uk-margin-small" v-if="isLoading">Loading...</h5>
+                  <h5 class="uk-margin-small" v-if="isLoading">{{ trans.loading }}</h5>
                   <h5 class="uk-margin-small" v-else><a :href="'/product/' +slug">{{ name }}</a></h5>
                 </transition>
               </div>
@@ -103,51 +103,45 @@
                     {{ currency }} {{ price }}
                 </span>
               </h4>
-              <h5 class="uk-margin-small">Color : {{ color }}</h5>
+              <h5 class="uk-margin-small">{{ trans.color }} : {{ color }}</h5>
               <div v-if="stocks.length > 0">
                 <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-small">
                   <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
                     {{ stock.size }} {{ stock.unit | unit }}
                   </option>
                 </select>
-                <span class="uk-text-meta"><i> Choose your size</i> </span>
+                <span class="uk-text-meta"><i> {{ trans.choose_size_label }} </i> </span>
               </div>
               <div v-else>
-                <span class="uk-text-meta"><i class="uk-text-danger">No size available </i> <br>Please, contact our cuctomer service! </span>
+                <span class="uk-text-meta"><i class="uk-text-danger">{{ trans.no_size }} </i> <br>{{ trans.contact_cs }} </span>
               </div>
               <ul uk-accordion="animation: true; multiple: false">
                   <li class="uk-open">
 
-                      <h5 class="uk-accordion-title">Editor Note</h5>
+                    <h5 class="uk-accordion-title">{{ trans.editors_notes }}</h5>
                       <div class="uk-accordion-content">
                         {{ content }}
                       </div>
-
                   </li>
                   <li>
-
-                      <h5 class="uk-accordion-title">Size & Fit</h5>
+                    <h5 class="uk-accordion-title">{{ trans.size_fit }}</h5>
                       <div class="uk-accordion-content">
                         {{ sizeAndFit }}
                       </div>
-
                   </li>
                   <li>
-
-                      <h5 class="uk-accordion-title">Details & Care</h5>
+                    <h5 class="uk-accordion-title">{{ trans.detail_care }}</h5>
                       <div class="uk-accordion-content">
                         {{ detailAndCare }}
                       </div>
-
                   </li>
-
               </ul>
             </div>
           </div>
         </div>
         <div class="uk-modal-footer uk-text-right uk-visible@m">
-            <button class="uk-button uk-button-secondary" type="button" v-on:click="bag">ADD TO BAG</button>
-            <button class="uk-button uk-button-default" type="button" v-on:click="wishlist">ADD TO WISHLIST</button>
+            <button class="uk-button uk-button-secondary uk-text-uppercase" type="button" v-on:click="bag">{{ trans.add_to_bag}}</button>
+            <button class="uk-button uk-button-default uk-text-uppercase" type="button" v-on:click="wishlist">{{ trans.add_to_wishlist }}</button>
         </div>
         <div class="uk-modal-footer uk-padding-small uk-hidden@m">
           <div class="uk-grid-match uk-child-width-auto uk-flex-between uk-grid" uk-grid>
@@ -162,17 +156,15 @@
           </div>
           <div class="uk-panel">
             <div>
-              <button class="uk-button uk-button-secondary uk-button-small" type="button" v-on:click="bag">BAG <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
-              <button class="uk-button uk-button-default uk-button-small" type="button" v-on:click="wishlist">WISHLIST <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+              <button class="uk-button uk-button-secondary uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+              <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="wishlist">{{ trans.wishlist_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
             </div>
-
           </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 <style>
   .fade-enter-active, .fade-leave-active {
@@ -194,7 +186,8 @@
       'aws_link',
       'default_image',
       'recently',
-      'bag_link'
+      'bag_link',
+      'locale'
     ],
 
     created() {
@@ -256,7 +249,8 @@
             deliveryReturns: null,
             defaultImage: JSON.parse(this.default_image,true),
             bagCount: {},
-            isLoading: false
+            isLoading: false,
+            trans: JSON.parse(this.locale,true),
         }
     },
 

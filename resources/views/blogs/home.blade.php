@@ -35,7 +35,7 @@
                 <div class="uk-panel uk-text-right uk-margin-small-top">
                     {{ Form::open(array('url' => 'search/blog', 'method' =>'get','files' => true,'class' => 'uk-search uk-form-width-medium uk-first-column uk-margin-small-top')) }}
                     <button type="submit" class="uk-search-icon-flip uk-search-icon uk-icon" uk-search-icon></button>
-                    <input type="text" class=" uk-search-input" name="keyword"  placeholder="S E A R C H . . .">
+                    <input type="text" class=" uk-search-input" name="keyword"  placeholder="{{ trans('app.search') }}">
                     {{ Form::close() }}
                 </div>
             </div>
@@ -68,7 +68,7 @@
             <div id="remove-row" class="uk-align-center">
                 <h2>
                     @if(count($posts) == 9)
-                        <a onclick="myFunction({{ $post->id }})" id="btn-more" class="uk-button uk-button-default" > LOAD MORE </a>
+                        <a onclick="myFunction({{ $post->id }})" id="btn-more" class="uk-button uk-button-default" > {{ trans('app.load_more') }} </a>
                     @endif
                 </h2>
             </div>
@@ -100,14 +100,14 @@
             </div>
             <h3 class="uk-margin-small">{{$title}}</h3>
             <div class="uk-section uk-section-default uk-section-xlarge uk-text-center">
-                <h1>No Content</h1>
+                <h1>{{ trans('app.no_content') }}</h1>
             </div>
         </div>
     @endif
     <script type="text/javascript">
 
         function myFunction(id) {
-                $("#btn-more").html("Loading....");
+                $("#btn-more").html("{{ trans('app.loading') }}");
                 var pathArray = window.location.pathname.split( '/' );
                 var segment_3 = pathArray[3];
                 $.ajax({

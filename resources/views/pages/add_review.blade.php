@@ -6,7 +6,7 @@
     @include('partials.alert')
   </div>
 <div class="uk-text-center uk-padding-small">
-  <h3>TELL ME WHAT YOU THINK!</h3>
+  <h3 class="uk-text-uppercase">{{ trans('app.tell_text') }}</h3>
 </div>
 
 {{ Form::open(array('url' => '/review', 'method' =>'post','files' => true,'class' => '')) }}
@@ -21,7 +21,7 @@
     </div>
 
     <div class="uk-width-3-5@m">
-      <h4>* OVERALL RATING</h4>
+      <h4 class="uk-text-uppercase"><b>{{ trans('app.overall_rating') }}</b></h4>
       <div class="stars uk-margin-left">
         <input type="radio" name="star" class="star-1" id="star-1" value="1"/>
         <label class="star-1" for="star-1">1</label>
@@ -35,41 +35,41 @@
         <label class="star-5" for="star-5">5</label>
         <span></span>
       </div>
-      <h4>REVIEW YOUR PURCHASE</h4>
+      <h4 class="uk-text-uppercase">{{ trans('app.review_purchase') }}</h4>
       <div class="uk-card uk-card-small uk-card-border">
         <div class="uk-card-body">
-          <h5><b>WRITING GUIDLINES</b></h5>
-          We want to publish your review, so please keep our guidelines in mind:
+          <h5 class="uk-text-uppercase"><b>{{ trans('app.writing_guide') }}</b></h5>
+          {{ trans('app.writing_text_1') }}
           <ul>
-            <li>Do keep your review focused on the item you recently purchased (without sharing the price you paid for it)</li>
-            <li>Don't write about customer service—just contact us here if something needs our attention</li>
-            <li>Don't mention other brands</li>
-            <li>Don't include your full name or anything else that might identify you</li>
+            <li>{{ trans('app.writing_text_2') }}</li>
+            <li>{{ trans('app.writing_text_3') }}</li>
+            <li>{{ trans('app.writing_text_4') }}</li>
+            <li>{{ trans('app.writing_text_5') }}</li>
           </ul>
         </div>
       </div>
       <div class="uk-panel uk-margin-top">
         <div class="uk-padding-small">
-          <h4 class="uk-margin-remove"> <b>*Title your review:</b></h4>
-          <i>Example: Perfect spring transition piece</i>
+          <h4 class="uk-margin-remove"> <b>{{ trans('app.title_review') }}</b></h4>
+          <i>{{ trans('app.title_help') }}</i>
         </div>
         <input type="text" class="uk-input uk-form {{ $errors->has('title') ? ' uk-form-danger' : '' }}" name="title" value="">
       </div>
       <div class="uk-panel">
         <div class="uk-padding-small">
-          <h4 class="uk-margin-remove"> <b>*Write your review:</b></h4>
-          <i>You must enter at least 50 characters in this field and no more than 1,000.</i>
+          <h4 class="uk-margin-remove"> <b>{{ trans('app.write_your_review') }}</b></h4>
+          <i>{{ trans('app.write_your_help') }}</i>
         </div>
         <textarea name="review" rows="8" cols="80" class="uk-textarea"></textarea>
       </div>
       <div class="uk-panel">
         <div class="uk-padding-small">
-          <h4 class="uk-margin-remove"> <b>*Your location:</b></h4>
+          <h4 class="uk-margin-remove"> <b>{{ trans('app.location_review') }}</b></h4>
         </div>
         <input type="text" class="uk-input uk-form" name="location" value="">
       </div>
       <div class="uk-margin-top uk-margin-bottom">
-        <button type="submit" class="uk-button uk-button-secondary">PREVIEW AND SUBMIT</button>
+        <button type="submit" class="uk-button uk-button-secondary uk-text-uppercase">{{ trans('app.submit') }}</button>
       </div>
     </div>
   </div>
