@@ -205,7 +205,8 @@
       'auth', 
       'aws_link',
       'default_image',
-      'bag_link'
+      'bag_link',
+      'locale',
     ],
 
     components: {
@@ -257,7 +258,8 @@
             bagCount: {},
             isLoading: false,
             errorImage: {},
-            loadingImage: {}
+            loadingImage: {},
+            trans: JSON.parse(this.locale,true)
         }
     },
 

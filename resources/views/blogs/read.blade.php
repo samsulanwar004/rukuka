@@ -36,10 +36,10 @@
             </div>
 
             <div class="uk-visible@m">
-                <h3>Other people also read</h3>
+                <h3>{{ trans('app.other_people') }}</h3>
             </div>
             <div class="uk-hidden@m">
-                <h4>Other people also read</h4>
+                <h4>{{ trans('app.other_people') }}</h4>
             </div>
             @foreach($postsRandom as $post)
               <div class="uk-grid-small" uk-grid>
@@ -77,7 +77,7 @@
     @else
         <div class="uk-container uk-container-small">
             <div class="uk-section uk-section-default uk-section-xlarge uk-text-center">
-                <h1>No Content</h1>
+                <h1>{{ trans('app.no_content') }}</h1>
             </div>
         </div>
     @endif

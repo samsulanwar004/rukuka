@@ -14,28 +14,28 @@
 
 				@else
 
-					<h3 class="uk-card-title uk-text-center">
-					THE STATUS OF THE SHIPMENT
+					<h3 class="uk-card-title uk-text-center uk-text-uppercase">
+					{{ trans('app.status_shipment') }}
 					</h3>
 
 					<div class="uk-overflow-auto">
 						<table class="uk-table uk-table-small uk-table-divider">
 							<thead>
 							<tr>
-								<th class="uk-table-small">The Shipment</th>
+								<th class="uk-table-small"><b>{{ trans('app.the_shipment') }}</b></th>
 							</tr>
 							</thead>
 							<tbody>
 							<tr>
-								<td>Barcode</td>
+								<td>{{ trans('app.barcode') }}</td>
 								<td>{{ $resultTrackAndTrace['data']['order']->airwaybill }}</td>
 							</tr>
 							<tr>
-								<td>From</td>
+								<td>{{ trans('app.from') }}</td>
 								<td>ID </td>
 							</tr>
 							<tr>
-								<td>To</td>
+								<td>{{ trans('app.to') }}</td>
 								<td>{{ $resultTrackAndTrace['data']['order']->address->country }}</td>
 							</tr>
 							</tbody>
@@ -46,16 +46,16 @@
 						<table class="uk-table uk-table-small uk-table-striped ">
 							<thead>
 							<tr>
-								<th class="uk-table-small">Detail Status</th>
+								<th class="uk-table-small"><b>{{trans('app.detail_status')}}</b></th>
 							</tr>
 							</thead>
 							<tbody>
 							<tr>
-								<th>No</th>
-								<th>Office</th>
-								<th>Date</th>
-								<th>Time</th>
-								<th>Status</th>
+								<th>{{trans('app.no')}}</th>
+								<th>{{trans('app.office')}}</th>
+								<th>{{trans('app.date')}}</th>
+								<th>{{trans('app.time')}}</th>
+								<th>{{trans('app.status')}}</th>
 							</tr>
 							
 							@foreach ($resultTrackAndTrace['data']['tracking'] as $key => $trackingData)
@@ -73,38 +73,23 @@
 					</div>
 
 				@endif
-			
+
 				@if(\Request::route()->getName() == 'tracking-result')
-					
-					<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">
-						<div class="uk-panel uk-text-center">
-							<a href="{{ route('tracking-page') }}">#Click here to Input other order code</a>
-						</div>
-					</div>
 
 					<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">
 						<div class="uk-panel uk-text-center">
-							<a href="{{ route('index') }}"><button class="uk-button uk-button-secondary">Back To Home</button></a>
+							<a href="{{ route('tracking-page') }}"><button class="uk-button uk-button-secondary">{{ trans('app.back_to_tracking') }}</button></a>
+							<a href="{{ route('index') }}"><button class="uk-button uk-button-secondary">{{ trans('app.back_to_home') }}</button></a>
 						</div>
 					</div>
 				
 				@else
-					
 					<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">
 						<div class="uk-panel uk-text-center">
-							<a href="{{ url('account/history') }}">#Click here back to history</a>
+							<a href="{{ url('account/history') }}"><button class="uk-button uk-button-secondary">{{ trans('app.back_to_history') }}</button></a>
 						</div>
 					</div>
-
-					<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">
-						<div class="uk-panel uk-text-center">
-							<a href="{{ route('index') }}"><button class="uk-button uk-button-secondary">Back To Home</button></a>
-						</div>
-					</div>
-
 				@endif
-
-				
 			</div>
 		</div>
   	</div>

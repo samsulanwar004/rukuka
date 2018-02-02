@@ -21,7 +21,8 @@
       'profile_link',
       'bag_link',
       'login_link',
-      'auth'
+      'auth',
+      'locale'
     ],
 
     created () {
@@ -42,7 +43,8 @@
 
     data () {
       return {
-        bagCount: {}
+        bagCount: {},
+        trans: JSON.parse(this.locale,true)
       }
     }
   }

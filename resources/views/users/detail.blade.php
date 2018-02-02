@@ -8,8 +8,7 @@
 <div class="uk-grid uk-margin-top uk-margin-bottom" uk-grid>
 	@include('partials.user_menu')
 	<div class="uk-width-3-4@m">
-      <b class="uk-text-uppercase">{{ trans('app.edit_personal_info') }}</b>
-			<hr class="uk-margin-small">
+      <h4 class="uk-text-uppercase uk-margin-small">{{ trans('app.edit_personal_info') }}</h4>
       <div class="uk-grid-small" uk-grid>
           <div class="uk-panel">
           <!-- <h3>SIGN IN</h3> -->
@@ -84,7 +83,7 @@
                   </div>
               </div>
             </div>
-            <button class="uk-button uk-button-secondary uk-text-uppercase" type="submit">{{ trans('app.save') }}</button>
+            <button class="uk-button uk-button-secondary uk-width-1-1" type="submit">{{ trans('app.save') }}</button>
 
             </form>
           </div>

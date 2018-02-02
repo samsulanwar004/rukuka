@@ -3,42 +3,42 @@
   <div class="uk-container uk-container-small">
     <div class="uk-grid-small uk-margin-top uk-flex uk-flex-center" uk-grid>
       <div class="uk-width-3-4@m">
-        <h3>Your Checkout Process is almost done!</h3>
-        <div class="uk-card uk-card-default uk-card-border">
+        <h3>{{ trans('app.checkout_almost') }}</h3>
+        <div class="uk-card uk-card-default uk-background-muted uk-box-shadow-small uk-margin-bottom">
             <div class="uk-card-body">
                 <form role="form" id="payment-form" method="POST" action="javascript:void(0);" class="form_class">
-                  Order Number :
+                  {{ trans('app.order_number') }} :
                     <br>
-                    <span class="uk-label uk-text-lead uk-light uk-visible@m">{{ $order->order_code }}</span>
-                    <span class="uk-label uk-text-small uk-light uk-hidden@m">{{ $order->order_code }}</span>
+                    <h4 class="uk-margin-small uk-visible@m">{{ $order->order_code }}</h4>
+                    <h6 class="uk-margin-small uk-hidden@m">{{ $order->order_code }}</h6>
                   <div class="uk-margin-small uk-grid-small" >
                       <div>
-                        Card Number :
-                        <input class="uk-input uk-input-small" name="card_number" type="text" id="card-number" placeholder="insert your card number" size="18" maxlength="16" />
+                          <label> {{trans('app.card_number')}}</label>
+                        <input class="uk-input uk-form-large" name="card_number" type="text" id="card-number" placeholder="{{ trans('app.card_help') }}" maxlength="16" />
                       </div>
                   </div>
                   <div class="uk-margin-small uk-grid-small" >
                       <div>
-                        Card Holder :
-                        <input class="uk-input uk-input-small" name="card_holder" type="text" id="card_holder"  placeholder="insert card holder"/>
+                          <label> {{trans('app.card_holder')}}</label>
+                        <input class="uk-input uk-form-large" name="card_holder" type="text" id="card_holder"  placeholder="{{ trans('app.holder_help') }}"/>
                       </div>
                   </div>
                   <div class="uk-margin-small uk-grid-small " uk-grid>
                       <div >
                           <div class="form-group">
-                            <label for="card-exp-month"><span class="hidden-xs">Exp </span>Year</label>
+                            <label for="card-exp-month"><span class="hidden-xs">{{ trans('app.expired') }} </span>{{ trans('app.year') }}</label>
                             <input class="uk-input uk-input-small" type="text" name="card_exp_month" id="card-exp-year" placeholder="YYYY" size="5" maxlength="4"/>
                           </div>
                       </div>
                       <div >
                           <div class="form-group">
-                              <label for="card-exp-year"><span class="hidden-xs">Exp </span>Month</label>
+                              <label for="card-exp-year"><span class="hidden-xs">{{ trans('app.expired') }} </span>{{ trans('app.month') }}</label>
                               <input class="uk-input uk-input-small" type="text" name="card_exp_month" id="card-exp-month" placeholder="MM" size="3" maxlength="2"/>
                           </div>
                       </div>
                       <div >
                           <div class="form-group">
-                              <label for="card-cvn">CVN CODE</label>
+                              <label for="card-cvn">{{ trans('app.cvn_code') }}</label>
                               <input class="uk-input uk-input-small" type="password" id="card-cvn" placeholder="CVN" size="4" maxlength="3"/>
                           </div>
                       </div>
@@ -47,11 +47,11 @@
                     <table class="uk-table uk-table-divider uk-table-hover">
                       <thead>
                           <tr>
-                            <th>Product Name</th><th>Product Price</th><th>Qty</th><th>Subtotal</th>
+                            <th>{{ trans('app.item') }}</th><th>{{ trans('app.price') }}</th><th>{{ trans('app.qty') }}</th><th>{{ trans('app.subtotal') }}</th>
                           </tr>
                       </thead>
                       <tbody>
-      
+
                           @foreach($detail as $product)
                             @php
                               $subtotal = $product['price'] * $product['qty'];
@@ -61,19 +61,19 @@
                             </tr>
                           @endforeach
                             <tr>
-                              <td colspan="3">Shipping Cost</td><td>{{ $shipping }}</td>
+                              <td colspan="3">{{ trans('app.shipping_cost_label') }}</td><td>{{ $shipping }}</td>
                             </tr>
                             <tr>
-                              <td colspan="3"><h4><b>Total</b></h4></td><td><h4><b>{{ $total  +  $shipping}}</b></h4></td>
+                              <td colspan="3"><h4><b>{{ trans('app.total') }}</b></h4></td><td><h4><b>{{ $total  +  $shipping}}</b></h4></td>
                             </tr>
                       </tbody>
                     </table>
                     </div>
                     <div class="uk-text-center">
-                        <button class="uk-button uk-button-danger uk-width-1-2 uk-text-center" type="submit">Pay Now</button>
+                        <button class="uk-button uk-button-secondary uk-width-1-2 uk-text-center" type="submit">{{ trans('app.pay_now') }}</button>
                     </div>
-                   
-                   
+
+
           </form>
         </div>
       </div>
@@ -87,7 +87,7 @@
 </div>
 
         <?php $orderCode = $order->order_code;
-        $userId    = $order->users_id; ?>   
+        $userId    = $order->users_id; ?>
 
 @endsection
 
@@ -109,10 +109,10 @@
 
               // Request a token from Xendit:
               var tokenData = getTokenData();
-              
-              
+
+
               Xendit.card.createToken(tokenData, xenditResponseHandler);
-              
+
 
               // Prevent the form from being submitted:
               return false;
@@ -128,7 +128,7 @@
 
           function xenditResponseHandler (err, creditCardCharge) {
               $form.find('.submit').prop('disabled', false);
-              
+
               if (err) {
                   alert(err.error_code +" : "+err.message);
                   window.location = "{!! route('bag') !!}";
@@ -141,7 +141,7 @@
 
                   $.ajaxSetup({
                   headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')}
-                  });   
+                  });
 
                   var request = $.ajax({
                       type: "POST",
@@ -149,23 +149,23 @@
                       data: { order: orderData, request: tokenData, response: creditCardCharge, _token: getTokenValue()},
                   });
 
-                  request.done(function(msg) 
-                  {   
+                  request.done(function(msg)
+                  {
                       if(msg.status == "CAPTURED" ||msg.status == "AUTHORIZED")
-                      {  
+                      {
                            window.location = "{!! route('user.history') !!}";
                       }
                       else
-                      {   
+                      {
                           //alert(err.error_code +" : "+err.message);
                           window.location = "{!! route('user.history') !!}";
-                          
+
                       }
                   });
 
                   displaySuccess(creditCardCharge);
 
-                  
+
               } else if (creditCardCharge.status === 'IN_REVIEW') {
                   window.open(creditCardCharge.payer_authentication_url, 'sample-inline-frame');
                   $('.overlay').show();
@@ -177,12 +177,12 @@
               }
           }
 
-          
+
 
           function displaySuccess (creditCardCharge) {
               $('#three-ds-container').hide();
               $('.overlay').hide();
-             
+
 
               var requestData = {};
               $.extend(requestData, getTokenData(), getFraudData());
