@@ -2,7 +2,7 @@
     <div class="uk-grid-small uk-child-width-1-3@m uk-child-width-1-2" uk-grid>
         <!-- start product -->
         <div class="uk-panel uk-text-left" v-for="product in products">
-            <div class="uk-card uk-card-small uk-card-default uk-box-shadow uk-visible@m">
+            <div class="uk-card uk-card-small uk-card-default uk-box-shadow-small uk-visible@m">
                 <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
                     <a :href="'/product/'+ product.slug">
                         <img v-if="product.photo" :src="product.photo | awsLink(aws_link)" :alt="product.name">
@@ -128,7 +128,7 @@
                         {{ currency }} {{ price }}
                     </span>
                   </h4>
-                  
+
                   <h5 class="uk-margin-small">Color : {{ color }}</h5>
                   <div v-if="stocks.length > 0">
                     <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-small">
@@ -229,11 +229,11 @@
 
             Event.listen('bags', function (response) {
               self.bagCount = response.data.bagCount;
-            });  
+            });
 
             Event.listen('addBag', function (response) {
               self.bagCount = response.data.bagCount;
-            });       
+            });
         },
 
         data () {

@@ -108,7 +108,7 @@
             </div> -->
         </div>
     </div>
-      <div v-if="wishlists == 0" class="uk-text-left">You have no items in your wishlist</div>
+      <div v-if="wishlists == 0" class="uk-text-center"><h3>You have no items in your wishlist</h3></div>
   </div>
 </template>
 

@@ -8,8 +8,7 @@
     <div class="uk-grid uk-margin-top" uk-grid>
       @include('partials.user_menu')
       <div class="uk-width-3-4@m">
-        <b class="uk-text-uppercase">{{trans('app.my_address')}}</b>
-        <hr class="uk-margin-small">
+        <h4 class="uk-text-uppercase">{{trans('app.my_address')}}</h4>
         <p>{{ trans('app.hi') }} <b>{{ ucfirst($user->first_name).' '.ucfirst($user->last_name) }}</b>, {{ trans('app.hi_text') }} <br>
         </p>
         <p>

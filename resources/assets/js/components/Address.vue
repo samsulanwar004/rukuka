@@ -256,6 +256,7 @@
 
               var first_name = e.target.elements.first_name.value;
               var last_name = e.target.elements.last_name.value;
+              var company = e.target.elements.company.value;
               var address_line = e.target.elements.address_line.value;
               var city = e.target.elements.city.value;
               var province = e.target.elements.province.value;
@@ -272,6 +273,7 @@
                   requestUpdate = {
                                     first_name : first_name,
                                     last_name : last_name,
+                                    company : company,
                                     address_line : address_line,
                                     city : city,
                                     province : province,
@@ -287,6 +289,7 @@
                 requestUpdate = {
                                     first_name : first_name,
                                     last_name : last_name,
+                                    company : company,
                                     address_line : address_line,
                                     city : city,
                                     province : province,
