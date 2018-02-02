@@ -178,7 +178,7 @@ class UserController extends BaseController
                 ];
 
         if ($request->input('country') == 'ID') {
-             
+
              $rules =  $rules + [
                                     'sub_district' => 'required|string|max:255',
                                     'village' => 'required|string|max:255',
@@ -517,7 +517,7 @@ class UserController extends BaseController
     }
 
     public function showShippingOptionPage()
-    {   
+    {
         $bag = new BagService;
         $courierServices = new CourierRepository;
 
@@ -529,7 +529,7 @@ class UserController extends BaseController
         $availableCouriersService = $courierServices->setCheckoutBag($bag->get(self::INSTANCE_SHOP))
                         ->setDestinationAddress($defaultAddress)
                         ->getAvailableCouriers();
-        
+
         return view('pages.checkout.shipping_option', compact('defaultAddress','availableCouriersService'));
     }
 
@@ -578,7 +578,7 @@ class UserController extends BaseController
                             ->saveShippingCostChoosed($request->input('shipping'));
 
             if ($courir['error'] != "000") {
-                throw new Exception($courir['message'], 1); 
+                throw new Exception($courir['message'], 1);
             }
         } catch (Exception $e) {
             return back()->withErrors($e->getMessage());
@@ -655,6 +655,7 @@ class UserController extends BaseController
         $rules = [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
+            'company' => 'string|max:255',
             'phone_number' => 'required|numeric',
             'postal' => 'required|numeric',
             'address_line' => 'required',
@@ -664,7 +665,7 @@ class UserController extends BaseController
         ];
 
         if ($request->input('country') == 'ID') {
-            
+
             $rules = $rules + [
                         'sub_district' => 'required',
                         'village' => 'required'
@@ -789,7 +790,7 @@ class UserController extends BaseController
 
     public function history()
     {
-        
+
         $user = $this->getUserActive();
 
         $onPaid = $user->orders->filter(function ($entry) {
@@ -890,7 +891,7 @@ class UserController extends BaseController
                     ';
                 }
 
-                $review .= '      
+                $review .= '
                 <div class="uk-width-1-3@m">
                     <div class="uk-card uk-card-border uk-card-small">
                         <div class="uk-card-body" style="min-height: 250px">
@@ -914,12 +915,12 @@ class UserController extends BaseController
                                     <p class="uk-hidden" id=more-'. $data['id'] .'>'. $data['review'] .'
                                         <a onclick="more('. $data['id'] .')" class="uk-text-bold uk-text-small"> show less</a>
                                     </p>
-                                    <p id="less-'. $data['id'] .'">'. str_limit($data['review'],120) .' 
+                                    <p id="less-'. $data['id'] .'">'. str_limit($data['review'],120) .'
                                         '.$showless.'
                                     </p>
                                 </div>
                                 <div class="uk-text-small uk-text-left uk-margin-small-top">
-                                    '.ucfirst($data['first_name']).''." ".''.ucfirst($data['last_name']).' 
+                                    '.ucfirst($data['first_name']).''." ".''.ucfirst($data['last_name']).'
                                 </div>
                                 <div class="uk-text-small uk-text-muted uk-text-left">
                                      '.$data['location'].'
@@ -944,7 +945,7 @@ class UserController extends BaseController
     }
 
     public function postFinalPage(Request $request)
-    {  
+    {
         try {
             $data = $request->all();
             $signature1 = $data["order"]["signature"];
@@ -953,7 +954,7 @@ class UserController extends BaseController
 
             if($signature1 == $signature2)
             {
-                $external_id = $data["order"]["order_code"]; 
+                $external_id = $data["order"]["order_code"];
                 $token_id = $data['response']['id'];
                 $amount = $data['request']['amount'];
                 $capture_options['authentication_id'] = $data['response']['authentication_id'];
@@ -1014,7 +1015,7 @@ class UserController extends BaseController
                 DB::table('response_payments')->insert(
                     [
                         'order_code'    => $data["order"]["order_code"],
-                        'response_json' => $response, 
+                        'response_json' => $response,
                         'created_at'    => date("Y-m-d H:i:s"),
                         'updated_at'    => date("Y-m-d H:i:s")
                     ]
@@ -1079,10 +1080,10 @@ class UserController extends BaseController
                         $message = "error";
                     }
 
-                    
+
                 }
-                
-                 
+
+
                 // DB::table('payments')->insert(
                 //     [
                 //         'user_id' => $data["order"]["user_id"],
@@ -1102,22 +1103,22 @@ class UserController extends BaseController
                 //         'created'=> $response_cc["created"]
                 //     ]
                 // );
-              
-              
+
+
             } else {
                 $message = "error" ;
             }
 
             session(['payment_status' => $response_cc["status"]]);
             session(['payment_message' => $message]);
-             
-            return $responseObject;       
+
+            return $responseObject;
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ],400);
-        }       
+        }
     }
 
 }
