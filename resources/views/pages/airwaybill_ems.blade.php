@@ -75,15 +75,10 @@
 				@endif
 
 				@if(\Request::route()->getName() == 'tracking-result')
-					
-					<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">
-						<div class="uk-panel uk-text-center">
-							<a href="{{ route('tracking-page') }}"><button class="uk-button uk-button-secondary">{{ trans('app.back_to_tracking') }}</button></a>
-						</div>
-					</div>
 
 					<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">
 						<div class="uk-panel uk-text-center">
+							<a href="{{ route('tracking-page') }}"><button class="uk-button uk-button-secondary">{{ trans('app.back_to_tracking') }}</button></a>
 							<a href="{{ route('index') }}"><button class="uk-button uk-button-secondary">{{ trans('app.back_to_home') }}</button></a>
 						</div>
 					</div>

@@ -59,6 +59,7 @@
             'id',
             'bag_link',
             'wishlist_link',
+            'locale,'
         ],
 
         created () {
@@ -73,7 +74,8 @@
             return {
                 prod: {},
                 stocks: {},
-                size: {} 
+                size: {},
+                trans: JSON.parse(this.locale,true)
             }
         },
 

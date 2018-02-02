@@ -115,7 +115,7 @@
 <script>
   import axios from 'axios';
   export default {
-    props: ['wishlist_api', 'bag_api', 'wishlist_delete', 'product_link', 'aws_link','default_image'],
+    props: ['wishlist_api', 'bag_api', 'wishlist_delete', 'product_link', 'aws_link','default_image','locale'],
     created () {
       var self = this;
       self.getWishlist();
@@ -124,7 +124,8 @@
     data () {
       return {
         wishlists: {},
-        defaultImage: JSON.parse(this.default_image,true)
+        defaultImage: JSON.parse(this.default_image,true),
+        trans: JSON.parse(this.locale,true)
       }
     },
 

@@ -18,6 +18,7 @@
         product_link="{{ route('product') }}"
         aws_link="{{ config('filesystems.s3url') }}"
 		default_image="{{ json_encode(config('common.default')) }}"
+		locale="{{ json_encode(trans('app')) }}"
 	  ></wishlist>
   </div>
 </div>

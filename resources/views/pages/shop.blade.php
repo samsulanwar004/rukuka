@@ -60,6 +60,7 @@
                                     slug="{{ $slug == null ? $category:$slug }}"
                                     category_slug="{{ $category }}"
                                     sale="{{ $sale == null ? $category:$sale }}"
+                                    locale="{{ json_encode(trans('app')) }}"
                             ></categories>
                         </div>
                       </div>
@@ -88,6 +89,7 @@
                                 slug="{{ $slug == null ? $category:$slug }}"
                                 category_slug="{{ $category }}"
                                 sale="{{ $sale == null ? $category:$sale }}"
+                                locale="{{ json_encode(trans('app')) }}"
                         ></categories>
                     </div>
                 </div>
@@ -102,6 +104,7 @@
                   aws_link="{{ config('filesystems.s3url') }}"
                   default_image="{{ json_encode(config('common.default')) }}"
                   bag_link="{{ route('bag') }}"
+                  locale="{{ json_encode(trans('app')) }}"
                 ></shop>
             </div>
         </div>
@@ -127,6 +130,7 @@
                 default_image="{{ json_encode(config('common.default')) }}"
                 recently="{{ json_encode($recently) }}"
                 bag_link="{{ route('bag') }}"
+                locale="{{ json_encode(trans('app')) }}"
         ></related>
 
         <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">

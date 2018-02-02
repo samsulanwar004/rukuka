@@ -47,6 +47,7 @@
                                         category="{{ $category }}"
                                         subcategory="{{ $subcategory }}"
                                         productcategory="{{ $productcategory }}"
+                                        locale="{{ json_encode(trans('app')) }}"
                                 ></search>
                             </div>
                         </div>
@@ -66,6 +67,7 @@
                                 category="{{ $category }}"
                                 subcategory="{{ $subcategory }}"
                                 productcategory="{{ $productcategory }}"
+                                locale="{{ json_encode(trans('app')) }}"
                         ></search>
                     </div>
                 </div>
@@ -80,6 +82,7 @@
                         aws_link="{{ config('filesystems.s3url') }}"
                         default_image="{{ json_encode(config('common.default')) }}"
                         bag_link="{{ route('bag') }}"
+                        locale="{{ json_encode(trans('app')) }}"
                 ></shop>
             </div>
         </div>

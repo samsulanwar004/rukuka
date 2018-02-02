@@ -12,6 +12,7 @@
     checkout_link="{{ route('checkout') }}"
     aws_link="{{ config('filesystems.s3url') }}"
     default_image="{{ json_encode(config('common.default')) }}"
+    locale="{{ json_encode(trans('app')) }}"
   ></bag>
   <hr class="uk-margin-large uk-padding-large" style="border-color: #333; border-width: 3px">
   @if($recently)
@@ -30,6 +31,7 @@
           default_image="{{ json_encode(config('common.default')) }}"
           recently="{{ json_encode($recently) }}"
           bag_link="{{ route('bag') }}"
+          locale="{{ json_encode(trans('app')) }}"
   ></related>
   @endif
   <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">

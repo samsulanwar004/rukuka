@@ -27,11 +27,12 @@
          @if (count($address))
          <h6 class="uk-margin-small">SELECT YOUR SHIPPING ADDRESS:</h6>
           <address-list
-            address="{{ $address }}"
-            address_default="{{ route('user.address.default') }}"
-            address_destroy="{{ route('user.address.destroy') }}"
-            address_edit="{{ route('user.address.edit') }}"
-            address_update="{{ route('user.address.update') }}"
+                address="{{ $address }}"
+                address_default="{{ route('user.address.default') }}"
+                address_destroy="{{ route('user.address.destroy') }}"
+                address_edit="{{ route('user.address.edit') }}"
+                address_update="{{ route('user.address.update') }}"
+                locale="{{ json_encode(trans('app')) }}"
           ></address-list>
          <div id="modal-sections" uk-modal>
             <div class="uk-modal-dialog">
@@ -200,10 +201,12 @@
                bag_api="{{ route('persist.bag') }}"
                aws_link="{{ config('filesystems.s3url') }}"
                default_image="{{ json_encode(config('common.default')) }}"
+               locale="{{ json_encode(trans('app')) }}"
             ></item-checkout>
       </div>
       <summary-checkout
         shipping_cost="0"
+        locale="{{ json_encode(trans('app')) }}"
       ></summary-checkout>
    </div>
 </div>

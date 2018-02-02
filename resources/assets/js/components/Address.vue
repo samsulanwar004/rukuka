@@ -161,13 +161,15 @@
           'address_default',
           'address_destroy',
           'address_edit',
-          'address_update'
+          'address_update',
+          'locale',
         ],
 
         data () {
             return {
                 data: {},
                 add: {},
+                trans: JSON.parse(this.locale,true)
             }
         },
 

@@ -84,7 +84,7 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['bag_link', 'wishlist_link', 'auth', 'checkout_link', 'aws_link','default_image'],
+        props: ['bag_link', 'wishlist_link', 'auth', 'checkout_link', 'aws_link','default_image','locale'],
         created () {
             var self = this;
             Event.listen('bags', function (response) {
@@ -109,6 +109,7 @@
                 bags: {},
                 subtotal: {},
                 defaultImage: JSON.parse(this.default_image,true),
+                trans: JSON.parse(this.locale,true)
             }
         },
 

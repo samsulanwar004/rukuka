@@ -31,11 +31,12 @@
 
 <script>
     export default {
-        props :['shipping_cost'],
+        props :['shipping_cost','locale'],
         data () {
             return {
                 subtotal: {},
-                total: {}
+                total: {},
+                trans: JSON.parse(this.locale,true)
             }
         },
 

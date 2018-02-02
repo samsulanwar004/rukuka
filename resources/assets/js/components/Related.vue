@@ -194,7 +194,8 @@
       'aws_link',
       'default_image',
       'recently',
-      'bag_link'
+      'bag_link',
+      'locale'
     ],
 
     created() {
@@ -256,7 +257,8 @@
             deliveryReturns: null,
             defaultImage: JSON.parse(this.default_image,true),
             bagCount: {},
-            isLoading: false
+            isLoading: false,
+            trans: JSON.parse(this.locale,true),
         }
     },
 

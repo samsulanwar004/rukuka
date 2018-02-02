@@ -57,7 +57,7 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['api','keyword','category','subcategory','productcategory'],
+        props: ['api','keyword','category','subcategory','productcategory','locale'],
         created() {
             var self = this;
             var api = this.api;
@@ -127,6 +127,7 @@
                 productsCategory: {},
                 category: {},
                 subcategory: {},
+                trans: JSON.parse(this.locale,true)
             }
         }
     }

@@ -81,11 +81,13 @@
                  bag_api="{{ route('persist.bag') }}"
                  aws_link="{{ config('filesystems.s3url') }}"
                  default_image="{{ json_encode(config('common.default')) }}"
+                 locale="{{ json_encode(trans('app')) }}"
               ></item-checkout>
 
         </div>
         <summary-checkout
           shipping_cost="{{ $shippingCost['data']->total_fee_usd }}"
+          locale="{{ json_encode(trans('app')) }}"
         ></summary-checkout>
     </div>
 </div>

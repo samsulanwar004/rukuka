@@ -201,10 +201,13 @@ return [
     'time'                      =>  '時間',
     'status'                    =>  '状態',
     'back_to_history'           =>  '履歴に戻る',
-    'back_to_tracking'          =>  'Track another order code',
+    'back_to_tracking'          =>  '別の注文コードを追跡する',
 
     //resources/views/pages/airwaybill_order.blade.php
     'check_shipment'            =>  '貨物の状態を確認する',
     'process'                   =>  'プロセス',
     'input_order'               =>  '注文コードを入力してください',
+
+    //resources/views/pages/bag.blade.php
+    'recently'                  =>  '最近閲覧した',
 ];

@@ -75,6 +75,7 @@
                         id="{{ $id }}"
                         bag_link="{{ route('bag') }}"
                         wishlist_link="{{ route('user.wishlist') }}"
+                        locale="{{ json_encode(trans('app')) }}"
                 ></button-buy>
                 <hr>
                 <p class="uk-margin-remove uk-text-meta">
@@ -219,6 +220,7 @@
                 aws_link="{{ config('filesystems.s3url') }}"
                 default_image="{{ json_encode(config('common.default')) }}"
                 bag_link="{{ route('bag') }}"
+                locale="{{ json_encode(trans('app')) }}"
         ></related>
         <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">
             <div class="uk-panel uk-text-center">

@@ -42,11 +42,12 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['bag_api','aws_link','default_image'],
+        props: ['bag_api','aws_link','default_image','locale'],
         data () {
             return {
                 bags: {},
-                defaultImage: JSON.parse(this.default_image,true)
+                defaultImage: JSON.parse(this.default_image,true),
+                trans: JSON.parse(this.locale,true)
             }
         },
 
