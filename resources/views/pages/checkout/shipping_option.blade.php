@@ -6,30 +6,29 @@
     </div>
 
     <div class="uk-grid-small uk-margin-top" uk-grid>
-        <div class="uk-width-3-4@m">
+        <div class="uk-width-2-3@m">
+          <div class="uk-card uk-card-default uk-card-small uk-background-muted uk-box-shadow-small" uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
+            <div class="uk-card-body">
+             <div class="uk-grid uk-grid-divider uk-child-width-1-3 uk-margin-small" uk-grid>
+               <div class="uk-text-center">
+                   <a href="{{ route('checkout') }}" class="uk-button uk-button-text">SHIPPING ADDRESS</a>
+               </div>
+               <div class="uk-text-center">
+                   <button class="uk-button uk-button-text" disabled><b>SHIPPING OPTION</b></button>
+               </div>
+               <div class="uk-text-center">
+                   <button class="uk-button uk-button-text" disabled>REVIEW</button>
+               </div>
+             </div>
+           </div>
+           </div>
             <h4>CHECKOUT</h4>
-            <div class="uk-grid uk-grid-divider uk-child-width-1-3@m uk-margin-small" uk-grid>
-                <div class="uk-text-center">
-                    <a href="{{ route('checkout') }}" class="uk-button uk-button-text">SHIPPING ADDRESS</a>
-                </div>
-                <div class="uk-text-center">
-                    <button class="uk-button uk-button-text" disabled><b>SHIPPING OPTION</b></button>
-                </div>
-{{--                 <div class="uk-text-center">
-                    <button class="uk-button uk-button-text" disabled>BILLING</button>
-                </div> --}}
-                <div class="uk-text-center">
-                    <button class="uk-button uk-button-text" disabled>REVIEW</button>
-                </div>
-            </div>
-            <hr class="uk-margin-small">
-            <span class="uk-text-meta">CHOOSE A SHIPPING METHOD</span>
-            <hr class="uk-margin-small">
-            <span class="uk-text-meta"><b>TODAY : </b>{{ \Carbon\Carbon::now()->toDayDateTimeString() }}</span>
+            <h6 class="uk-margin-small">CHOOSE A SHIPPING METHOD</h6>
+            <h6 class="uk-margin-small"> <b>TODAY : </b>{{ \Carbon\Carbon::now()->toDayDateTimeString() }}</h6>
 
             <form action="{{ route('checkout.shipping') }}" method="POST">
               {{ csrf_field() }}
-            <table class="uk-table uk-table-divider uk-table-hover">
+            <table class="uk-table uk-table-striped uk-table-hover">
                 <tbody>
                     <!-- <tr class="uk-active">
                         <td>
@@ -51,7 +50,7 @@
                           @if(count($availableCouriersService_val['data']) > 0 )
 
                             @foreach($availableCouriersService_val['data'] as $dataServices_key => $dataServices_val)
-                     
+
                               <tr>
                                   <td>
                                       <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{$dataServices_val->optionValue}}" required="" onclick="getTotal({{ $dataServices_val->totalFeeDollar }})"> </td>
@@ -88,27 +87,48 @@
               <input type="submit" name="submit" id="submit">
             </div>
             <form>
-            <hr class="uk-margin-small">
-            <span class="uk-text-meta"><b>SHIPPING DETAILS</b></span>
-            <hr class="uk-margin-small">
+
+            <h6 class="'uk-margin-small'">SHIPPING DETAILS</h6>
             <div>
-                <ul class="uk-list uk-text-meta">
-                    <li>{{ $defaultAddress->first_name }} {{ $defaultAddress->last_name}}</li>
-                    <li>{{ $defaultAddress->company }}</li>
-                    <li>{{ $defaultAddress->address_line }}</li>
-                    <li>{{ $defaultAddress->city }}</li>
-                    <li>{{ $defaultAddress->city }}, {{ $defaultAddress->country }} {{ $defaultAddress->postal }}</li>
-                    <li>{{ $defaultAddress->country }}</li>
-                    <li>{{ $defaultAddress->phone_number }}</li>
-                </ul>
+              <table class="uk-table uk-table-divider uk-table-small uk-background-muted uk-text-meta uk-table-hover">
+                  <tbody>
+                    <tr>
+                      <td class="uk-width-small">Full Name</td>
+                      <td>{{ $defaultAddress->first_name }} {{ $defaultAddress->last_name}}</td>
+                    </tr>
+                    <tr>
+                      <td>Company  </td>
+                      <td>{{ $defaultAddress->company }}</td>
+                    </tr>
+                    <tr>
+                      <td>Address  </td>
+                      <td>{{ $defaultAddress->address_line }}</td>
+                    </tr>
+                    <tr>
+                      <td>City     </td>
+                      <td>{{ $defaultAddress->city }}</td>
+                    </tr>
+                    <tr>
+                      <td>City and Postal Code</td>
+                      <td>{{ $defaultAddress->city }}, {{ $defaultAddress->country }} {{ $defaultAddress->postal }}</td>
+                    </tr>
+                    <tr>
+                      <td>Country Code </td>
+                      <td>{{ $defaultAddress->country }}</td>
+                    </tr>
+                    <tr>
+                      <td>Phone Number </td>
+                      <td>{{ $defaultAddress->phone_number }}</td>
+                    </tr>
+                  </tbody>
+                </table>
             </div>
-            <hr class="uk-margin-small">
+            <hr class="uk-margin" style="border-color: #333; border-width: 3px">
               <item-checkout
                  bag_api="{{ route('persist.bag') }}"
                  aws_link="{{ config('filesystems.s3url') }}"
                  default_image="{{ json_encode(config('common.default')) }}"
               ></item-checkout>
-            <hr class="uk-margin-small">
         </div>
         <summary-checkout
           shipping_cost="0"

@@ -10,16 +10,16 @@
 	<div class="uk-width-3-4@m">
 	  <h3>Order History</h3>
 	  <ul class="uk-child-width-1-5 uk-margin" uk-tab="animation: uk-animation-slide-bottom">
-	    <li><a href="#"><b>UNPAID</b> </a> </li>
-      <li><a href="#"><b>UNSENT</b> </a> </li>
-      <li><a href="#"><b>UNRECEIVED</b> </a> </li>
-      <li><a href="#"><b>DONE</b> </a> </li>
-      <li><a href="#"><b>CANCELED</b> </a> </li>
+	    <li><a href="#"><b><h5>UNPAID</h5></b> </a> </li>
+      <li><a href="#"><b><h5>UNSENT</h5></b> </a> </li>
+      <li><a href="#"><b><h5>UNRECEIVED</h5></b> </a> </li>
+      <li><a href="#"><b><h5>DONE</h5></b> </a> </li>
+      <li><a href="#"><b><h5>CANCELED</h5></b> </a> </li>
 	  </ul>
     <ul class="uk-switcher">
       <li>
         @if (count($onPaid))
-        <table class="uk-table uk-table-middle uk-table-divider">
+        <table class="uk-table uk-table-middle uk-table-divider uk-table-hover">
             <thead>
                 <tr>
                     <th class="uk-width-small">Order Number</th>
@@ -58,7 +58,7 @@
                       <input type="hidden" name="order_code" value="{{ $item->order_code }}">
                       <input type="hidden" name="signature" value="{{ sha1($item->order_code) }}">
                       {{ csrf_field() }}
-                      <input  class="uk-button uk-button-default" type="submit" value="Pay"></form></td>
+                      <input  class="uk-button uk-button-secondary uk-width-1-1" type="submit" value="Pay"></form></td>
                   </tr>
                 @endforeach
             </tbody>
@@ -69,7 +69,7 @@
       </li>
       <li>
         @if (count($onSent))
-        <table class="uk-table uk-table-middle uk-table-divider">
+        <table class="uk-table uk-table-middle uk-table-divider uk-table-hover">
             <thead>
                 <tr>
                     <th class="uk-width-small">Order Number</th>
@@ -115,7 +115,7 @@
       </li>
       <li>
         @if (count($onReceived))
-        <table class="uk-table uk-table-middle uk-table-divider">
+        <table class="uk-table uk-table-middle uk-table-divider uk-table-hover">
             <thead>
                 <tr>
                     <th class="uk-width-small">Order Number</th>
@@ -161,7 +161,7 @@
       </li>
       <li>
         @if (count($onDone))
-        <table class="uk-table uk-table-middle uk-table-divider">
+        <table class="uk-table uk-table-middle uk-table-divider uk-table-hover">
             <thead>
                 <tr>
                     <th class="uk-width-small">Order Number</th>
@@ -196,7 +196,7 @@
                           </tbody>
                       </table>
                       </td>
-                      <td><button class="uk-button uk-button-default" type="button">Review</button></td>
+                      <td><button class="uk-button uk-button-seconday uk-width-1-1" type="button">Review</button></td>
                   </tr>
                 @endforeach
             </tbody>
@@ -207,7 +207,7 @@
       </li>
       <li>
         @if (count($onCanceled))
-        <table class="uk-table uk-table-middle uk-table-divider">
+        <table class="uk-table uk-table-middle uk-table-divider uk-table-hover">
             <thead>
                 <tr>
                     <th class="uk-width-small">Order Number</th>
@@ -242,7 +242,7 @@
                           </tbody>
                       </table>
                       </td>
-                      <td><button class="uk-button uk-button-default" type="button">Buy Again</button></td>
+                      <td><button class="uk-button uk-button-seconday uk-width-1-1" type="button">Buy Again</button></td>
                   </tr>
                 @endforeach
             </tbody>

@@ -4,23 +4,23 @@
     <div class="uk-grid-small uk-margin-top uk-flex uk-flex-center" uk-grid>
       <div class="uk-width-3-4@m">
         <h3>Your Checkout Process is almost done!</h3>
-        <div class="uk-card uk-card-default uk-card-border">
+        <div class="uk-card uk-card-default uk-background-muted uk-box-shadow-small uk-margin-bottom">
             <div class="uk-card-body">
                 <form role="form" id="payment-form" method="POST" action="javascript:void(0);" class="form_class">
                   Order Number :
                     <br>
-                    <span class="uk-label uk-text-lead uk-light uk-visible@m">{{ $order->order_code }}</span>
-                    <span class="uk-label uk-text-small uk-light uk-hidden@m">{{ $order->order_code }}</span>
+                    <h4 class="uk-margin-small uk-visible@m">{{ $order->order_code }}</h4>
+                    <h6 class="uk-margin-small uk-hidden@m">{{ $order->order_code }}</h6>
                   <div class="uk-margin-small uk-grid-small" >
                       <div>
                         Card Number :
-                        <input class="uk-input uk-input-small" name="card_number" type="text" id="card-number" placeholder="insert your card number" size="18" maxlength="16" />
+                        <input class="uk-input uk-form-large" name="card_number" type="text" id="card-number" placeholder="insert your card number" maxlength="16" />
                       </div>
                   </div>
                   <div class="uk-margin-small uk-grid-small" >
                       <div>
                         Card Holder :
-                        <input class="uk-input uk-input-small" name="card_holder" type="text" id="card_holder"  placeholder="insert card holder"/>
+                        <input class="uk-input uk-form-large" name="card_holder" type="text" id="card_holder"  placeholder="insert card holder"/>
                       </div>
                   </div>
                   <div class="uk-margin-small uk-grid-small " uk-grid>
@@ -51,7 +51,7 @@
                           </tr>
                       </thead>
                       <tbody>
-      
+
                           @foreach($detail as $product)
                             @php
                               $subtotal = $product['price'] * $product['qty'];
@@ -70,10 +70,10 @@
                     </table>
                     </div>
                     <div class="uk-text-center">
-                        <button class="uk-button uk-button-danger uk-width-1-2 uk-text-center" type="submit">Pay Now</button>
+                        <button class="uk-button uk-button-secondary uk-width-1-2 uk-text-center" type="submit">Pay Now</button>
                     </div>
-                   
-                   
+
+
           </form>
         </div>
       </div>
@@ -87,7 +87,7 @@
 </div>
 
         <?php $orderCode = $order->order_code;
-        $userId    = $order->users_id; ?>   
+        $userId    = $order->users_id; ?>
 
 @endsection
 
@@ -109,10 +109,10 @@
 
               // Request a token from Xendit:
               var tokenData = getTokenData();
-              
-              
+
+
               Xendit.card.createToken(tokenData, xenditResponseHandler);
-              
+
 
               // Prevent the form from being submitted:
               return false;
@@ -128,7 +128,7 @@
 
           function xenditResponseHandler (err, creditCardCharge) {
               $form.find('.submit').prop('disabled', false);
-              
+
               if (err) {
                   alert(err.error_code +" : "+err.message);
                   window.location = "{!! route('bag') !!}";
@@ -141,7 +141,7 @@
 
                   $.ajaxSetup({
                   headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')}
-                  });   
+                  });
 
                   var request = $.ajax({
                       type: "POST",
@@ -149,23 +149,23 @@
                       data: { order: orderData, request: tokenData, response: creditCardCharge, _token: getTokenValue()},
                   });
 
-                  request.done(function(msg) 
-                  {   
+                  request.done(function(msg)
+                  {
                       if(msg.status == "CAPTURED" ||msg.status == "AUTHORIZED")
-                      {  
+                      {
                            window.location = "{!! route('user.history') !!}";
                       }
                       else
-                      {   
+                      {
                           //alert(err.error_code +" : "+err.message);
                           window.location = "{!! route('user.history') !!}";
-                          
+
                       }
                   });
 
                   displaySuccess(creditCardCharge);
 
-                  
+
               } else if (creditCardCharge.status === 'IN_REVIEW') {
                   window.open(creditCardCharge.payer_authentication_url, 'sample-inline-frame');
                   $('.overlay').show();
@@ -177,12 +177,12 @@
               }
           }
 
-          
+
 
           function displaySuccess (creditCardCharge) {
               $('#three-ds-container').hide();
               $('.overlay').hide();
-             
+
 
               var requestData = {};
               $.extend(requestData, getTokenData(), getFraudData());

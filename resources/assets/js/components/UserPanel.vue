@@ -43,14 +43,14 @@
                   </div>
                 </div>
               </div>
-              <div class="uk-card-footer uk-padding-remove uk-background-muted">
+              <div class="uk-card-footer uk-background-muted">
                 <div class="uk-text-center">
-                  <a :href="bag_link">{{ trans.your_shop}}</a>
+                  <a :href="bag_link" class="uk-button uk-button-text">{{ trans.your_shop}}</a>
                 </div>
               </div>
               <div class="uk-card-footer uk-padding-small">
                 <div class="uk-text-center">
-                  <b class="uk-text-uppercase">{{ trans.subtotal}}: {{ subtotal }}</b>
+                  <h4 class="uk-text-uppercase">{{ trans.subtotal}}: {{ subtotal }}</h4>
                   <a :href="checkout_link" class="uk-button-secondary uk-button uk-button-small uk-width-1-1 uk-text-uppercase">{{ trans.checkout_now}}</a>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 <progress id="progressbar" class="uk-progress" value="0" max="100" hidden></progress>
 <div class="uk-width-1-4@m">
-  <div class="uk-card uk-card-border uk-card-small uk-card-border uk-margin-bottom uk-visible@m">
+  <div class="uk-card uk-card-default uk-card-small uk-box-shadow-small uk-background-muted uk-margin-bottom uk-visible@m">
       <div class="uk-card-body">
         <h3 class="uk-margin-small">{{ ucfirst($user->first_name).' '.ucfirst($user->last_name) }}</h3>
         <ul class="uk-nav uk-navbar-dropdown-nav">

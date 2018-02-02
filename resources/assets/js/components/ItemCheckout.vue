@@ -1,9 +1,9 @@
 <template>
-    <div class="uk-overflow-auto">
-    <table class="uk-table uk-table-divider">
+    <div class="uk-overflow-auto uk-margin-bottom">
+    <table class="uk-table uk-table-striped">
         <thead>
             <tr>
-                <th class="uk-table-shrink" colspan="3"><b>ITEMS ({{ bags.length }})</b></th>
+                <th class="uk-table-shrink" colspan="3"><h4 class="uk-margin-remove">ITEMS ({{ bags.length }})</h4></th>
             </tr>
         </thead>
         <thead>
@@ -22,7 +22,7 @@
                 </td>
                 <td class="uk-table-link">
                   <ul class="uk-list uk-margin-small-top">
-                    <li><b>{{ bag.name }}</b></li>
+                    <li><h4>{{ bag.name }}</h4></li>
                     <li class="uk-margin-remove"><span class="uk-text-small">Color: {{ bag.options.color }}</span></li>
                     <li class="uk-margin-remove"><span class="uk-text-small">Size : {{ bag.options.size }}</span></li>
                   </ul>
@@ -32,7 +32,7 @@
                   <li>{{ bag.qty }}</li>
                 </ul>
                 </td>
-                <td class="uk-text-nowrap">{{ bag.price | round }}</td>
+                <td class="uk-text-nowrap"><h4>{{ bag.price | round }}</h4></td>
             </tr>
         </tbody>
     </table>
@@ -81,7 +81,7 @@
             var money = function(n, currency) {
               return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
             };
-            
+
             return money(Number(Math.round(value+'e'+2)+'e-'+2), '$');
           }
         }
