@@ -31,8 +31,6 @@
                                 :alt="designersNav.designer_designer_of_the_week_text"
                                 :loading-image="loadingImage"
                                 :error-image="errorImage"
-                                :image-success-callback="successCallback"
-                                :image-error-callback="errorCallback"
                                 image-style="height: 180px">
                               </lazy-background>
                             </a>
@@ -54,8 +52,6 @@
                                           alt="rukuka"
                                           :loading-image="loadingImage"
                                           :error-image="errorImage"
-                                          :image-success-callback="successCallback"
-                                          :image-error-callback="errorCallback"
                                           image-style="height: 150px">
                                         </lazy-background>
                                     </a>
@@ -119,8 +115,6 @@
                                         alt="rukuka"
                                         :loading-image="loadingImage"
                                         :error-image="errorImage"
-                                        :image-success-callback="successCallback"
-                                        :image-error-callback="errorCallback"
                                         image-style="height: 150px">
                                       </lazy-background>
                                   </a>
@@ -183,8 +177,6 @@
                                             alt="rukuka"
                                             :loading-image="loadingImage"
                                             :error-image="errorImage"
-                                            :image-success-callback="successCallback"
-                                            :image-error-callback="errorCallback"
                                             image-style="height: 150px">
                                           </lazy-background>
                                       </a>
@@ -247,8 +239,6 @@
                                     :alt="salesNav.sale_text"
                                     :loading-image="loadingImage"
                                     :error-image="errorImageSale"
-                                    :image-success-callback="successCallback"
-                                    :image-error-callback="errorCallback"
                                     image-style="height: 100px; width: 800px">
                                   </lazy-background>
                               </a>
@@ -383,7 +373,8 @@
                 defaultImage: JSON.parse(this.default_image,true),
                 trans: JSON.parse(this.locale,true),
                 errorImage: {},
-                loadingImage: {}
+                loadingImage: {},
+                errorImageSale: {}
             }
         },
 

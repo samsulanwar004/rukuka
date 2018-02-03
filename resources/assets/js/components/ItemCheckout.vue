@@ -19,11 +19,8 @@
                 <td>
                     <lazy-background
                       :image-source="bag.options.photo | awsLink(aws_link)"
-                      :alt="product.name"
                       :loading-image="loadingImage"
                       :error-image="errorImage"
-                      :image-success-callback="successCallback"
-                      :image-error-callback="errorCallback"
                       :alt="bag.name"
                       image-class="uk-preserve-width"
                       width="130px">

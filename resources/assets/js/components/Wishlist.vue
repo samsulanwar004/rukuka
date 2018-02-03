@@ -7,11 +7,8 @@
             <div class="uk-card-media-top">
                 <lazy-background
                   :image-source="wish.photo | awsLink(aws_link)"
-                  :alt="product.name"
                   :loading-image="loadingImage"
                   :error-image="errorImage"
-                  :image-success-callback="successCallback"
-                  :image-error-callback="errorCallback"
                   :alt="wish.name">
                 </lazy-background>
             </div>
@@ -37,11 +34,8 @@
                   </div>
                     <lazy-background
                       :image-source="wish.photo | awsLink(aws_link)"
-                      :alt="product.name"
                       :loading-image="loadingImage"
                       :error-image="errorImage"
-                      :image-success-callback="successCallback"
-                      :image-error-callback="errorCallback"
                       :alt="wish.name">
                     </lazy-background>
                 </div>
@@ -90,11 +84,8 @@
               </div>
                 <lazy-background
                   :image-source="wish.photo | awsLink(aws_link)"
-                  :alt="product.name"
                   :loading-image="loadingImage"
                   :error-image="errorImage"
-                  :image-success-callback="successCallback"
-                  :image-error-callback="errorCallback"
                   :alt="wish.name">
                 </lazy-background>
             </div>

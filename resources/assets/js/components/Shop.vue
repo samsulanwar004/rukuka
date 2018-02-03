@@ -10,9 +10,7 @@
                           :image-source="product.photo | awsLink(aws_link)"
                           :alt="product.name"
                           :loading-image="loadingImage"
-                          :error-image="errorImage"
-                          :image-success-callback="successCallback"
-                          :image-error-callback="errorCallback">
+                          :error-image="errorImage">
                         </lazy-background>
                     </a>
                     <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default">
@@ -44,9 +42,7 @@
                           :image-source="product.photo | awsLink(aws_link)"
                           :alt="product.name"
                           :loading-image="loadingImage"
-                          :error-image="errorImage"
-                          :image-success-callback="successCallback"
-                          :image-error-callback="errorCallback">
+                          :error-image="errorImage">
                         </lazy-background>
                     </a>
                 </div>
@@ -97,13 +93,17 @@
                     <div class="">
                       <ul class="uk-switcher uk-margin" id="component-tab-left">
                         <li v-for="image in images">
-                            <lazy-background
+                            <lazy-background v-if="isLoading"
+                              :image-source="loadingImage"
+                              :alt="image.name"
+                              :loading-image="loadingImage"
+                              :error-image="errorImage">
+                            </lazy-background>
+                            <lazy-background v-else
                               :image-source="image.photo | awsLink(aws_link)"
                               :alt="image.name"
                               :loading-image="loadingImage"
-                              :error-image="errorImage"
-                              :image-success-callback="successCallback"
-                              :image-error-callback="errorCallback">
+                              :error-image="errorImage">
                             </lazy-background>
                           <div class="uk-position uk-position-small uk-position-center-left">
                             <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="previous" uk-icon="icon: chevron-left"></a>
@@ -118,13 +118,18 @@
                       <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" uk-grid>
                         <li class="uk-padding-remove" v-for="image in images">
                             <a href="#"  class="uk-padding-remove">
-                                <lazy-background
+                                <lazy-background v-if="isLoading"
+                                  :image-source="loadingImage"
+                                  :alt="image.name"
+                                  :loading-image="loadingImage"
+                                  :error-image="errorImage"
+                                  width="55px">
+                                </lazy-background>
+                                <lazy-background v-else
                                   :image-source="image.photo | awsLink(aws_link)"
                                   :alt="image.name"
                                   :loading-image="loadingImage"
                                   :error-image="errorImage"
-                                  :image-success-callback="successCallback"
-                                  :image-error-callback="errorCallback"
                                   width="55px">
                                 </lazy-background>
                             </a>
