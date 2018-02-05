@@ -129,7 +129,7 @@
               </h4>
               <h5 class="uk-margin-small">Color : {{ color }}</h5>
               <div v-if="stocks.length > 0">
-                <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-small">
+                <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-medium">
                   <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
                     {{ stock.size }} {{ stock.unit | unit }}
                   </option>
