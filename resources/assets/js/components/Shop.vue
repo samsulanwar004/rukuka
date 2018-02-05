@@ -153,7 +153,7 @@
                     </span>
                   </h4>
 
-                  <h5 class="uk-margin-small">{{ trans.color }} : {{ color }}</h5>
+                  <h5 class="uk-margin-small"> {{ trans.color }} : <img src="/images/BLACK.png" alt="" width="20px" class="uk-border-rounded uk-box-shadow-small"> {{ color }}</h5>
                   <div v-if="stocks.length > 0">
                     <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-medium">
                       <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
