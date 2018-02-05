@@ -4,41 +4,61 @@
     <div class="uk-grid-small uk-margin-top">
         @include('partials.alert')
     </div>
-    <div class="uk-grid-small uk-margin-top" uk-grid>
-        <div class="uk-width-3-4@m">
-            <h4>CHECKOUT</h4>
-            <div class="uk-grid uk-grid-small uk-grid-divider uk-child-width-1-3@m uk-margin-small" uk-grid>
-                <div class="uk-text-center">
-                    <a href="{{ route('checkout') }}" class="uk-button uk-button-text">SHIPPING ADDRESS</a>
-                </div>
-                <div class="uk-text-center">
-                    <a href="{{ route('checkout.shipping') }}" class="uk-button uk-button-text">SHIPPING OPTION</a>
-                </div>
-{{--                 <div class="uk-text-center">
-                    <a href="{{ route('checkout.billing') }}" class="uk-button uk-button-text">BILLING</a>
-                </div> --}}
-                <div class="uk-text-center">
-                    <button class="uk-button uk-button-text" disabled><b>REVIEW</b></button>
-                </div>
+    <div class="uk-grid uk-margin-top" uk-grid>
+        <div class="uk-width-2-3@m">
+            <div class="uk-card uk-card-default uk-card-small uk-background-muted uk-box-shadow-small" uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
+              <div class="uk-card-body">
+               <div class="uk-grid uk-grid-divider uk-child-width-1-3 uk-margin-small" uk-grid>
+                 <div class="uk-text-center">
+                     <a href="{{ route('checkout') }}" class="uk-button uk-button-text">{{ trans('app.shipping_address') }}</a>
+                 </div>
+                 <div class="uk-text-center">
+                     <a href="{{ route('checkout.shipping') }}" class="uk-button uk-button-text">{{ trans('app.shipping_option') }}</a>
+                 </div>
+                 <div class="uk-text-center">
+                     <button class="uk-button uk-button-text" disabled><b>{{ trans('app.review') }}</b></button>
+                 </div>
+               </div>
+             </div>
+             </div>
+            <h4 class="uk-text-uppercase">{{ trans('app.confirm_order') }}</h4>
+            <h6 class="uk-margin-small uk-text-uppercase">{{ trans('app.shipping_detail') }}</h6>
+            <div>
+              <table class="uk-table uk-table-divider uk-table-small uk-text-meta uk-table-hover uk-background-muted">
+                  <tbody>
+                    <tr>
+                      <td class="uk-width-small">{{ trans('app.full_name') }}</td>
+                      <td>{{ $defaultAddress->first_name }} {{ $defaultAddress->last_name}}</td>
+                    </tr>
+                    <tr>
+                      <td>{{ trans('app.company') }}  </td>
+                      <td>{{ $defaultAddress->company }}</td>
+                    </tr>
+                    <tr>
+                      <td>{{ trans('app.address_line') }}  </td>
+                      <td>{{ $defaultAddress->address_line }}</td>
+                    </tr>
+                    <tr>
+                      <td>{{ trans('app.city') }}     </td>
+                      <td>{{ $defaultAddress->city }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ trans('app.country') }} </td>
+                        <td>{{ $defaultAddress->country }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ trans('app.postal') }}</td>
+                        <td>{{ $defaultAddress->postal }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ trans('app.phone') }}</td>
+                        <td>{{ $defaultAddress->phone_number }}</td>
+                    </tr>
+                  </tbody>
+                </table>
             </div>
-            <hr class="uk-margin-small">
-            <h4>PLEASE CONFIRM YOUR ORDER</h4>
-            SHIPPING DETAILS
-            <hr class="uk-margin-small">
-            <div class="uk-grid uk-grid-small" grid>
-              <div class="uk-width-1-3@m">
-                <ul class="uk-list uk-text-meta">
-                  <li>{{ $defaultAddress->first_name }} {{ $defaultAddress->last_name}}</li>
-                  <li>{{ $defaultAddress->company }}</li>
-                  <li>{{ $defaultAddress->address_line }}</li>
-                  <li>{{ $defaultAddress->city }}</li>
-                  <li>{{ $defaultAddress->city }}, {{ $defaultAddress->country }} {{ $defaultAddress->postal }}</li>
-                  <li>{{ $defaultAddress->country }}</li>
-                  <li>{{ $defaultAddress->phone_number }}</li>
-                </ul>
-              </div>
-              <div class="uk-margin-small-top uk-width-2-3@m">
-                TODAY: {{ \Carbon\Carbon::now()->toDayDateTimeString() }}
+              <div class="uk-margin-small-top">
+                <h6>{{ trans('app.today') }}: {{ \Carbon\Carbon::now()->toDayDateTimeString() }}</h6>
                 <table class="uk-table uk-table-divider uk-table-hover">
                     <tbody>
                         <tr class="uk-active">
@@ -55,17 +75,18 @@
                   <input type="submit" name="submit" id="submit" style="display: none;">
                 </form>
               </div>
-            </div>
-            <hr class="uk-margin-small">
+              <hr class="uk-margin" style="border-color: #333; border-width: 3px">
               <item-checkout
                  bag_api="{{ route('persist.bag') }}"
                  aws_link="{{ config('filesystems.s3url') }}"
                  default_image="{{ json_encode(config('common.default')) }}"
+                 locale="{{ json_encode(trans('app')) }}"
               ></item-checkout>
-            <hr class="uk-margin-small">
+
         </div>
         <summary-checkout
           shipping_cost="{{ $shippingCost['data']->total_fee_usd }}"
+          locale="{{ json_encode(trans('app')) }}"
         ></summary-checkout>
     </div>
 </div>

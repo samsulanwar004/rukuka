@@ -7,8 +7,8 @@
 		<div>
 			<div class="uk-card uk-card-default uk-card-large uk-card-body">
 
-				<h3 class="uk-card-title uk-text-center">
-				CHECK THE STATUS OF THE SHIPMENT
+				<h3 class="uk-card-title uk-text-center uk-text-uppercase">
+				{{ trans('app.check_shipment') }}
 				</h3>
 
 				<div class="uk-overflow-auto">
@@ -16,8 +16,8 @@
 		            	{{ csrf_field() }}
 		            	<ul class="uk-list uk-text-center">
 				            <li>
-				                <input class="uk-input uk-form-width-medium " id="" type="text" placeholder="*Input your order code" required="required" name="order_code" value="">
-				                <button class="uk-button uk-button-medium uk-button-secondary" type="submit">PROCESS</button>
+				                <input class="uk-input uk-form-width-medium " id="" type="text" placeholder="{{ trans('app.input_order') }}" required="required" name="order_code" value="">
+				                <button class="uk-button uk-button-medium uk-button-secondary" type="submit">{{ trans('app.process') }}</button>
 				            </li>
 				        </ul>
 	                </form>
@@ -25,7 +25,7 @@
 				
 				<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">
 					<div class="uk-panel uk-text-center">
-						<a href="{{ route('index') }}"><button class="uk-button uk-button-secondary">Back To Home</button></a>
+						<a href="{{ route('index') }}"><button class="uk-button uk-button-secondary">{{ trans('app.back_to_home') }}</button></a>
 					</div>
 				</div>
 			</div>

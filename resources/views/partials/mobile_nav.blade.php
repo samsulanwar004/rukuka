@@ -17,6 +17,7 @@
               bag_link="{{ route('bag') }}"
               login_link="{{ route('login') }}"
               auth="{{ Auth::check() ? 1 : 0 }}"
+              locale="{{ json_encode(trans('app')) }}"
             ></user-panel-mobile>
             <div id="offcanvas-overlay-slide" uk-offcanvas="overlay: true">
               <navigation-mobile
@@ -28,7 +29,7 @@
               ></navigation-mobile>
             </div>
             <div class="uk-navbar-left uk-flex-1 test-overlay" hidden>
-              <div class="uk-navbar-item uk-width-expand">
+              <div class="uk-width-expand">
                 {{ Form::open(array('url' => '/search', 'method' =>'get','files' => true,'class' => 'uk-search uk-search-navbar uk-width-1-1')) }}
                 <input class="uk-search-input" name="keyword" type="search" placeholder="find our product" autofocus>
                 {{ Form::close() }}

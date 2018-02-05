@@ -8,8 +8,7 @@
     <div class="uk-grid uk-margin-top" uk-grid>
       @include('partials.user_menu')
       <div class="uk-width-3-4@m">
-        <b class="uk-text-uppercase">{{trans('app.my_address')}}</b>
-        <hr class="uk-margin-small">
+        <h4 class="uk-text-uppercase">{{trans('app.my_address')}}</h4>
         <p>{{ trans('app.hi') }} <b>{{ ucfirst($user->first_name).' '.ucfirst($user->last_name) }}</b>, {{ trans('app.hi_text') }} <br>
         </p>
         <p>
@@ -59,15 +58,12 @@
                       <div>
                         <label>{{ trans('app.province') }}</label>
                         <input class="uk-input uk-input-small" name="province" id="form-province-empty" type="text" value="{{ old('province') }}" required="required">
-                      <!-- <select id="form-province-empty" name="province" class="uk-input uk-input-small {{ $errors->has('province') ? ' uk-form-danger' : '' }}">
-                    </select> -->
                       </div>
                     </div>
                     <div class="uk-margin-small uk-grid-small" uk-grid>
                       <div>
                         <label>{{ trans('app.city') }}</label>
                         <input id="form-city-empty" class="uk-input uk-input-small" name="city" id="form-s-tel" type="text" value="{{ old('city') }}" required="required">
-                      <!-- <select id="form-city-empty" name="city" class="uk-input uk-input-small {{ $errors->has('city') ? ' uk-form-danger' : '' }}"></select> -->
                       </div>
                     </div>
                     <div id="div-sub-district" class="uk-margin-small uk-grid-small" uk-grid>

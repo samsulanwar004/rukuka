@@ -75,6 +75,7 @@
                         id="{{ $id }}"
                         bag_link="{{ route('bag') }}"
                         wishlist_link="{{ route('user.wishlist') }}"
+                        locale="{{ json_encode(trans('app')) }}"
                 ></button-buy>
                 <hr>
                 <p class="uk-margin-remove uk-text-meta">
@@ -91,7 +92,7 @@
                 <hr class="uk-margin-small">
                 <div class="uk-child-width-1-2 uk-margin-top uk-grid-divider uk-flex-middle uk-flex-center" uk-grid>
                     <div class="uk-text-center">
-                        Product Code: <br>
+                        {{ trans('app.product_code') }} <br>
                         <h5 class="uk-margin-remove">{{ $product->product_code }}</h5>
                     </div>
                     <div class="uk-text-center">
@@ -103,7 +104,7 @@
                 <hr class="uk-margin-small">
                 <div class="uk-card uk-card-small uk-card-border">
                     <div class="uk-card-body">
-                        <h4>DELIVERY & FREE RETURNS</h4>
+                        <h4>{{ trans('app.delivery_returns') }}</h4>
                         {!!  $deliveryReturns !!}
                     </div>
                 </div>
@@ -112,11 +113,11 @@
         <hr>
         <div class="uk-panel uk-grid" uk-grid>
             <div class="uk-width-1-4@m">
-                <a href="/{{'review/'.$product->slug}}" class="uk-button uk-button-default">WRITE A REVIEW</a>
+                <a href="/{{'review/'.$product->slug}}" class="uk-button uk-button-default uk-text-uppercase">{{ trans ('app.write_review') }}</a>
             </div>
             @if($rating)
                 <div class="uk-width-3-4@m">
-                    <span class="uk-margin-remove-right">RATING FOR THIS PRODUCT :</span>
+                    <span class="uk-margin-remove-right uk-text-uppercase">{{ trans('app.rating_text') }}</span>
                     <div class="stars-product stars-position">
                         <input disabled type="radio" name="star" class="star-1" value="1" {{$rating == 1? 'checked':'' }}/>
                         <input disabled type="radio" name="star" class="star-2" value="2" {{$rating == 2? 'checked':'' }}/>
@@ -128,12 +129,12 @@
                     <div class="stars-count-position">
                         {{$rating}}/5
                     </div>
-                    <span><i>Based on {{count($product->review)}} Reviews</i></span>
+                    <span><i>{{ trans('app.based_on') }} {{count($product->review)}} {{ trans('app.reviews') }}</i></span>
                 </div>
             @else
               <div class="uk-panel">
-                WHAT OTHER SHOPPERS THINK: <br>
-                There are no reviews for this product. Be the first to comment.
+                  <label class="uk-text-uppercase">{{ trans('app.shopper_text') }}</label> <br>
+                {{ trans('app.comment_text') }}
               </div>
             @endif
         </div>
@@ -160,11 +161,11 @@
                             </div>
                             <div class="uk-text-left uk-margin-small-top">
                                 <p class="uk-hidden" id="more-{{$review->id}}">{{ $review->review}}
-                                    <a onclick="more({{$review->id}})" class="uk-text-bold uk-text-small"> show less</a>
+                                    <a onclick="more({{$review->id}})" class="uk-text-bold uk-text-small"> {{ trans('app.show_less') }}</a>
                                 </p>
                                 <p id="less-{{$review->id}}">{!! str_limit($review->review,120) !!}
                                     @if(strlen($review->review) > 120)
-                                        <a onclick="less({{$review->id}})" class="uk-text-bold uk-text-small"> show more</a>
+                                        <a onclick="less({{$review->id}})" class="uk-text-bold uk-text-small"> {{ trans('app.show_more') }}</a>
                                     @endif
                                 </p>
                             </div>
@@ -177,7 +178,7 @@
                             @if($review->comment)
                                 <div class="uk-card uk-card-body uk-margin-small-top uk-text-small" style="background: #EEEEEE">
                                     <div class="uk-text-bold uk-text-center">
-                                        Response From rukuka
+                                        {{ trans('app.rukuka_response') }}
                                     </div>
                                     <div class="uk-text-left uk-text-small uk-margin-small-top">
                                         {{$review->comment}}
@@ -196,7 +197,7 @@
                 <div id="remove-row">
                     <h2>
                         @if(count($reviews) == 3)
-                            <a onclick="myFunction({{ $reviews[2]->id .','. $product->id}})" id="btn-more" class="uk-button uk-button-default" > SEE MORE REVIEW </a>
+                            <a onclick="myFunction({{ $reviews[2]->id .','. $product->id}})" id="btn-more" class="uk-button uk-button-default uk-text-uppercase" > {{ trans('app.more_review') }} </a>
                         @endif
                     </h2>
                 </div>
@@ -207,7 +208,7 @@
         <hr>
         <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
             <div class="uk-panel">
-                <h3 class="uk-margin-small">RELATED PRODUCT</h3>
+                <h4 class="uk-margin-small uk-text-uppercase">{{ trans('app.related') }}</h4>
             </div>
         </div>
         <related
@@ -219,10 +220,11 @@
                 aws_link="{{ config('filesystems.s3url') }}"
                 default_image="{{ json_encode(config('common.default')) }}"
                 bag_link="{{ route('bag') }}"
+                locale="{{ json_encode(trans('app')) }}"
         ></related>
         <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">
             <div class="uk-panel uk-text-center">
-                <a  href="{{route('shop',['categories' => 'designers', 'category' => 'all' ])}}" class="uk-button uk-button-small uk-button-text">SHOW ALL PRODUCT</a>
+                <a  href="{{route('shop',['categories' => 'designers', 'category' => 'all' ])}}" class="uk-button uk-button-small uk-button-text uk-text-uppercase">{{ trans('app.show_all_product') }}</a>
             </div>
         </div>
     </div>
@@ -239,7 +241,7 @@
     }
 
     function myFunction(id_review,id_product) {
-        $("#btn-more").html("Loading....");
+        $("#btn-more").html("{{trans('app.loading')}}");
 
         $.ajax({
             url : '{{ url("review-ajax") }}',

@@ -26,8 +26,13 @@
                                 <li><h5 class="uk-margin-small">{{designersNav.designer_designer_of_the_week_text}}</h5></li>
                             </ul>
                             <a :href="designersNav.designer_designer_of_the_week_url">
-                              <img v-if="designersNav.designer_of_the_week" style="height: 180px" :src="designersNav.designer_of_the_week | awsLink(aws_link)" :alt="designersNav.designer_designer_of_the_week_text">
-                              <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_4" :alt="rukuka">
+                              <lazy-background
+                                :image-source="designersNav.designer_of_the_week | awsLink(aws_link)"
+                                :alt="designersNav.designer_designer_of_the_week_text"
+                                :loading-image="loadingImage"
+                                :error-image="errorImage"
+                                image-style="height: 180px">
+                              </lazy-background>
                             </a>
                         </div>
                     </div>
@@ -42,8 +47,13 @@
                                 <li class="uk-parent"><a :href="womenLink"><h5 class="uk-margin-small">{{ trans.new_arrival }}</h5></a></li>
                                 <li>
                                     <a :href="womensNav.women_blog_url">
-                                        <img v-if="womensNav.women_blog_image" style="height: 150px" :src="womensNav.women_blog_image | awsLink(aws_link)" :alt="rukuka">
-                                        <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
+                                        <lazy-background
+                                          :image-source="womensNav.women_blog_image | awsLink(aws_link)"
+                                          alt="rukuka"
+                                          :loading-image="loadingImage"
+                                          :error-image="errorImage"
+                                          image-style="height: 150px">
+                                        </lazy-background>
                                     </a>
                                 </li>
                             </ul>
@@ -51,11 +61,11 @@
                           <div class="uk-width-3-5@m" uk-grid>
                             <div class="uk-width-2-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'"><h5 class="uk-margin-small">{{ cloth.name.toUpperCase() }}</h5></li>
+                                <li v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'"><h5 class="uk-margin-small">{{ trans.clothing }}</h5></li>
                               </ul>
                               <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
                                 <li class="uk-parent uk-active">
-                                  <a href="/shop/womens/all">All</a>
+                                  <a href="/shop/womens/all">{{ trans.all }}</a>
                                 </li>
                                 <li class="uk-parent" v-for="cat in cloth.child">
                                     <a :href="'/shop/womens/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
@@ -64,11 +74,11 @@
                             </div>
                             <div class="uk-width-1-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'accessories'"><h5 class="uk-margin-small">{{ cloth.name.toUpperCase() }}</h5></li>
+                                <li v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'accessories'"><h5 class="uk-margin-small">{{ trans.accessories }}</h5></li>
                               </ul>
                               <ul class="uk-nav uk-navbar-dropdown-nav" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
                                 <li class="uk-parent uk-active">
-                                  <a href="/shop/womens/all">All</a>
+                                  <a href="/shop/womens/all">{{ trans.all }}</a>
                                 </li>
                                 <li class="uk-parent" v-for="cat in cloth.child">
                                     <a :href="'/shop/womens/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
@@ -100,8 +110,13 @@
 
                               <li>
                                   <a :href="mensNav.men_blog_url">
-                                      <img v-if="mensNav.men_blog_image" style="height: 150px" :src="mensNav.men_blog_image | awsLink(aws_link)" :alt="Rukuka">
-                                      <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
+                                      <lazy-background
+                                        :image-source="mensNav.men_blog_image | awsLink(aws_link)"
+                                        alt="rukuka"
+                                        :loading-image="loadingImage"
+                                        :error-image="errorImage"
+                                        image-style="height: 150px">
+                                      </lazy-background>
                                   </a>
                               </li>
                           </ul>
@@ -110,11 +125,11 @@
                         <div class="uk-width-3-5@m" uk-grid>
                             <div class="uk-width-2-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'"><h5 class="uk-margin-small">{{ cloth.name.toUpperCase() }}</h5></li>
+                                <li v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'"><h5 class="uk-margin-small">{{ trans.clothing }}</h5></li>
                               </ul>
                               <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2" v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
                                 <li class="uk-parent uk-active">
-                                  <a href="/shop/mens/all">All</a>
+                                  <a href="/shop/mens/all">{{ trans.all }}</a>
                                 </li>
                                 <li class="uk-parent" v-for="cat in cloth.child">
                                     <a :href="'/shop/mens/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
@@ -123,11 +138,11 @@
                             </div>
                             <div class="uk-width-1-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'accessories'"><h5 class="uk-margin-small">{{ cloth.name.toUpperCase() }}</h5></li>
+                                <li v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'accessories'"><h5 class="uk-margin-small">{{ trans.accessories }}</h5></li>
                               </ul>
                               <ul class="uk-nav uk-navbar-dropdown-nav" v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
                                 <li class="uk-parent uk-active">
-                                  <a href="/shop/mens/all">All</a>
+                                  <a href="/shop/mens/all">{{ trans.all }}</a>
                                 </li>
                                 <li class="uk-parent" v-for="cat in cloth.child">
                                     <a :href="'/shop/mens/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
@@ -157,8 +172,13 @@
                                   <li class="uk-parent"><a :href="kidLink"><h5 class="uk-margin-small">{{ trans.new_arrival }}</h5></a></li>
                                   <li>
                                       <a :href="kidsNav.kid_blog_url">
-                                          <img v-if="" style="height: 150px" :src="kidsNav.kid_blog_image | awsLink(aws_link)" :alt="Rukuka">
-                                          <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
+                                          <lazy-background
+                                            :image-source="kidsNav.kid_blog_image | awsLink(aws_link)"
+                                            alt="rukuka"
+                                            :loading-image="loadingImage"
+                                            :error-image="errorImage"
+                                            image-style="height: 150px">
+                                          </lazy-background>
                                       </a>
                                   </li>
                               </ul>
@@ -167,11 +187,11 @@
                           <div class="uk-width-3-5@m" uk-grid>
                               <div class="uk-width-2-3">
                                   <ul class="uk-nav uk-navbar-dropdown-nav">
-                                      <li v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'clothing'"><h5 class="uk-margin-small">{{ cloth.name.toUpperCase() }}</h5></li>
+                                      <li v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'clothing'"><h5 class="uk-margin-small">{{ trans.clothing }}</h5></li>
                                   </ul>
                                   <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2" v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
                                       <li class="uk-parent uk-active">
-                                          <a href="/shop/kids/all">All</a>
+                                          <a href="/shop/kids/all">{{ trans.all }}</a>
                                       </li>
                                       <li class="uk-parent" v-for="cat in cloth.child">
                                           <a :href="'/shop/kids/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
@@ -180,11 +200,11 @@
                               </div>
                               <div class="uk-width-1-3">
                                   <ul class="uk-nav uk-navbar-dropdown-nav">
-                                      <li v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'accessories'"><h5 class="uk-margin-small">{{ cloth.name.toUpperCase() }}</h5></li>
+                                      <li v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'accessories'"><h5 class="uk-margin-small">{{ trans.accessories }}</h5></li>
                                   </ul>
                                   <ul class="uk-nav uk-navbar-dropdown-nav" v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
                                       <li class="uk-parent uk-active">
-                                          <a href="/shop/kids/all">All</a>
+                                          <a href="/shop/kids/all">{{ trans.all }}</a>
                                       </li>
                                       <li class="uk-parent" v-for="cat in cloth.child">
                                           <a :href="'/shop/kids/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
@@ -214,8 +234,13 @@
                                   <li><h5 class="uk-margin-small">{{salesNav.sale_text}}</h5></li>
                               </ul>
                               <a :href="salesNav.sale_url">
-                                  <img v-if="salesNav.sale_image" style="height: 100px; width: 800px" :src="salesNav.sale_image | awsLink(aws_link)" :alt="salesNav.sale_text">
-                                  <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_5" :alt="rukuka">
+                                  <lazy-background
+                                    :image-source="salesNav.sale_image | awsLink(aws_link)"
+                                    :alt="salesNav.sale_text"
+                                    :loading-image="loadingImage"
+                                    :error-image="errorImageSale"
+                                    image-style="height: 100px; width: 800px">
+                                  </lazy-background>
                               </a>
                           </div>
                           <div class="uk-width-1-5@m" uk-grid>
@@ -244,6 +269,8 @@
 
 <script>
     import axios from 'axios';
+    import VueLazyBackgroundImage from '../components/VueLazyBackgroundImage.vue';
+
     export default {
         props: [
           'api',
@@ -255,6 +282,10 @@
           'default_image',
           'locale'
         ],
+
+        components: {
+          'lazy-background': VueLazyBackgroundImage
+        },
 
         created() {
             var self = this;
@@ -318,6 +349,10 @@
             .catch(function (error) {
               console.log(error);
             });
+
+            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;      
+            self.errorImageSale = this.aws_link+'/images/'+this.defaultImage.image_5;      
+            self.loadingImage = this.aws_link+'/images/loading-image.gif';   
         },
 
         data() {
@@ -337,6 +372,9 @@
                 salesNav: {},
                 defaultImage: JSON.parse(this.default_image,true),
                 trans: JSON.parse(this.locale,true),
+                errorImage: {},
+                loadingImage: {},
+                errorImageSale: {}
             }
         },
 

@@ -29,7 +29,7 @@
 
 <script>
     export default {
-        props: ['api', 'parent', 'category_slug', 'slug', 'sale'],
+        props: ['api', 'parent', 'category_slug', 'slug', 'sale','locale'],
         created() {
             var self = this;
             var api = this.api;
@@ -58,7 +58,8 @@
 
         data() {
             return {
-                categories: {}
+                categories: {},
+                trans: JSON.parse(this.locale,true)
             }
         },
 

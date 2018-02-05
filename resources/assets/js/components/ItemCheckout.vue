@@ -3,28 +3,34 @@
     <table class="uk-table uk-table-striped">
         <thead>
             <tr>
-                <th class="uk-table-shrink" colspan="3"><h4 class="uk-margin-remove">ITEMS ({{ bags.length }})</h4></th>
+                <th class="uk-table-shrink" colspan="3"><h4 class="uk-margin-remove uk-text-uppercase">{{ trans.items }} ({{ bags.length }})</h4></th>
             </tr>
         </thead>
         <thead>
         <tr>
             <th class="uk-table-shrink"></th>
-            <th class="uk-table-expand">ITEM</th>
-            <th class="uk-width-medium">QTY</th>
-            <th class="uk-table-shrink uk-text-nowrap">UNIT PRICE</th>
+            <th class="uk-table-expand uk-text-uppercase">{{ trans.item }}</th>
+            <th class="uk-width-medium uk-text-uppercase">{{ trans.qty }}</th>
+            <th class="uk-table-shrink uk-text-nowrap uk-text-uppercase">{{ trans.unit_price }}</th>
         </tr>
         </thead>
         <tbody v-for="bag in bags">
             <tr>
                 <td>
-                    <img v-if="bag.options.photo" class="uk-preserve-width" :src="bag.options.photo | awsLink(aws_link)" width="130" alt="rukuka product">
-                    <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka" width="130">
+                    <lazy-background
+                      :image-source="bag.options.photo | awsLink(aws_link)"
+                      :loading-image="loadingImage"
+                      :error-image="errorImage"
+                      :alt="bag.name"
+                      image-class="uk-preserve-width"
+                      width="130px">
+                    </lazy-background>
                 </td>
                 <td class="uk-table-link">
                   <ul class="uk-list uk-margin-small-top">
                     <li><h4>{{ bag.name }}</h4></li>
-                    <li class="uk-margin-remove"><span class="uk-text-small">Color: {{ bag.options.color }}</span></li>
-                    <li class="uk-margin-remove"><span class="uk-text-small">Size : {{ bag.options.size }}</span></li>
+                    <li class="uk-margin-remove"><span class="uk-text-small">{{ trans.color }} : {{ bag.options.color }}</span></li>
+                    <li class="uk-margin-remove"><span class="uk-text-small">{{ trans.size }} : {{ bag.options.size }}</span></li>
                   </ul>
                 </td>
                 <td class="uk-text-nowrap">
@@ -41,18 +47,31 @@
 
 <script>
     import axios from 'axios';
+    import VueLazyBackgroundImage from '../components/VueLazyBackgroundImage.vue';
+
     export default {
-        props: ['bag_api','aws_link','default_image'],
+        props: ['bag_api','aws_link','default_image','locale'],
+
+        components: {
+          'lazy-background': VueLazyBackgroundImage
+        },
+
         data () {
             return {
                 bags: {},
-                defaultImage: JSON.parse(this.default_image,true)
+                defaultImage: JSON.parse(this.default_image,true),
+                errorImage: {},
+                loadingImage: {},
+                trans: JSON.parse(this.locale,true)
             }
         },
 
         created () {
             var self = this;
             self.getBag();
+
+            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;      
+            self.loadingImage = this.aws_link+'/images/loading-image.gif'; 
         },
 
         methods: {

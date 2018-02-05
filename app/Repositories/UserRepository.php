@@ -72,7 +72,7 @@ class UserRepository
 		$verificationToken = strtolower(str_random(60));
 		$verificationExpired = $this->date->addDay(self::EXPIRED_VERIFICATION_TOKEN_IN);
 
-		
+
 		$user = $this->model();
 		$user->email = $this->getEmail();
 		$user->password = $this->getPassword();
@@ -260,7 +260,7 @@ class UserRepository
 	{
 		return is_null($user) ?
 		Auth::attempt([
-            'email' => $this->getEmail(), 
+            'email' => $this->getEmail(),
             'password' => $this->getPassword(),
             'status' => 1,
             'is_verified' => 1,
@@ -298,11 +298,11 @@ class UserRepository
 		$user = $this->getUserByActivationCode($this->getToken());
 
 		if (!$user) {
-            throw new Exception("Token code not found!", 1);   
+            throw new Exception("Token code not found!", 1);
         }
 
         if ($user->verification_expired <= $this->date) {
-            throw new Exception("Token code expired!", 1);                
+            throw new Exception("Token code expired!", 1);
         }
 
 		$user->password = $this->getPassword();
@@ -325,7 +325,7 @@ class UserRepository
 			$user->social_media_type = $this->getSocialMediaType();
 
 			$user->update();
-			
+
 			$user->passwordString = $this->getPassword();
 			$emailService = (new EmailService);
 			$emailService->sendActivationCode($user);
@@ -441,7 +441,7 @@ class UserRepository
 
 	public function updatePassword($request)
 	{
-		
+
 		$user = $this->getUser();
 
 		if(Hash::check($request->input('old_password'), $user->password)){
@@ -458,7 +458,7 @@ class UserRepository
 	{
 		$wishlist = is_null($id) ? new Wishlist : $this->getWishlistById($id);
 		$wishlist->content = $product;
-		
+
 
 		if (is_null($id)) {
 			$wishlist->user()->associate($this->getUser());
@@ -511,7 +511,7 @@ class UserRepository
             })->save($path));
 
         $oldFile = $this->linkMergeOrUnMerge($link, $user->avatar);
-		
+
 		if ($oldFile) {
 			Storage::delete($link . $oldFile);
 		}
@@ -547,7 +547,7 @@ class UserRepository
 				$subcriber->user()->associate($user);
 				$subcriber->save();
 			}
-			
+
 		} else {
 			$subcriber = new Subcriber;
 			$subcriber->email = $this->getEmail();

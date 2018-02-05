@@ -286,7 +286,7 @@
           </div>
       </div>
 
-  	<h4>MOST POPULAR</h4>
+    <h4 class="uk-text-uppercase">{{ trans('app.popular') }}</h4>
   	<popular
       api="{{ route('populer', 'Homepage')}}"
       product_api="{{ route('product.api') }}"
@@ -296,6 +296,7 @@
       aws_link="{{ config('filesystems.s3url') }}"
       default_image="{{ json_encode(config('common.default')) }}"
       bag_link="{{ route('bag') }}"
+      locale="{{ json_encode(trans('app')) }}"
     ></popular>
     </div>
 @endsection

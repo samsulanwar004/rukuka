@@ -28,8 +28,12 @@
               <div class="uk-card-body uk-card-small">
                 <div class="uk-grid-small" uk-grid v-for="bag in filteredBags">
                   <div class="uk-width-1-3">
-                    <img v-if="bag.options.photo" :src="bag.options.photo | awsLink(aws_link)" :alt="bag.name">
-                    <img v-else :src="aws_link+'/'+'images/'+defaultImage.image_2" :alt="rukuka">
+                    <lazy-background
+                      :image-source="bag.options.photo | awsLink(aws_link)"
+                      :alt="bag.name"
+                      :loading-image="loadingImage"
+                      :error-image="errorImage">
+                    </lazy-background>
                   </div>
                   <div class="uk-width-2-3">
                     <div class="uk-panel">
@@ -43,14 +47,14 @@
                   </div>
                 </div>
               </div>
-              <div class="uk-card-footer uk-padding-remove uk-background-muted">
+              <div class="uk-card-footer uk-background-muted">
                 <div class="uk-text-center">
-                  <a :href="bag_link">{{ trans.your_shop}}</a>
+                  <a :href="bag_link" class="uk-button uk-button-text">{{ trans.your_shop}}</a>
                 </div>
               </div>
               <div class="uk-card-footer uk-padding-small">
                 <div class="uk-text-center">
-                  <b class="uk-text-uppercase">{{ trans.subtotal}}: {{ subtotal }}</b>
+                  <h4 class="uk-text-uppercase">{{ trans.subtotal}}: {{ subtotal }}</h4>
                   <a :href="checkout_link" class="uk-button-secondary uk-button uk-button-small uk-width-1-1 uk-text-uppercase">{{ trans.checkout_now}}</a>
                 </div>
               </div>
@@ -76,6 +80,8 @@
 
 <script>
   import axios from 'axios';
+  import VueLazyBackgroundImage from '../components/VueLazyBackgroundImage.vue';
+
   export default {
     props: [
       'profile_link',
@@ -94,6 +100,10 @@
       'default_image',
       'locale'
     ],
+
+    components: {
+      'lazy-background': VueLazyBackgroundImage
+    },
 
     created () {
       var self = this;
@@ -123,6 +133,9 @@
       });
 
       Event.fire('user', this.accounts);
+
+      self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;      
+      self.loadingImage = this.aws_link+'/images/loading-image.gif'; 
     },
 
     data () {
@@ -133,6 +146,8 @@
         accounts: {},
         subtotal: {},
         defaultImage: JSON.parse(this.default_image,true),
+        errorImage: {},
+        loadingImage: {},
         trans: JSON.parse(this.locale,true)
       }
     },

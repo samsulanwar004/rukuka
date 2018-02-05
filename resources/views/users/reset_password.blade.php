@@ -8,9 +8,8 @@
 <div class="uk-grid uk-margin-top" uk-grid>
 	@include('partials.user_menu')
 	<div class="uk-width-3-4@m">
-      <b class="uk-text-uppercase">{{ trans('app.edit_personal_password') }}</b>
-			<hr class="uk-margin-small">
-      <div class="uk-grid-small" uk-grid>
+      <h4 class="uk-text-uppercase">{{ trans('app.edit_personal_password') }}</h4>
+
           <div class="uk-panel">
           <form class="uk-form-stacked" action="{{ route('user.reset.password') }}" method="post">
             {{ csrf_field() }}
@@ -39,8 +38,6 @@
             </form>
           </div>
 
-
-      </div>
     </div>
 </div>
 </div>

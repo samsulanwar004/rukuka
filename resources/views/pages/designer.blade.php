@@ -4,7 +4,7 @@
    <div class="uk-grid-small uk-margin-top uk-margin-bottom">
       {{--MAIN BANNER--}}
       <div class="uk-text-center">
-         <h3 class="uk-heading-line"><span>DESIGNERS</span></h3>
+         <h3 class="uk-heading-line uk-text-uppercase"><span>{{ trans('app.designers_nav') }}</span></h3>
       </div>
       {{--END MAIN BANNER--}}
         @foreach($alpabeths as $abjad)
