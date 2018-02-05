@@ -35,10 +35,6 @@ class OrderController extends BaseController
 			$user = $this->getUserActive();
 			$bag = new BagService;
 
-			// $creditCard = $this->user
-   //          ->setUser($user)
-   //          ->getCreditCardDefault();
-
             $address = $this->user
             ->setUser($user)
             ->getAddressDefault();
@@ -76,7 +72,20 @@ class OrderController extends BaseController
 
 	        $orderDate = Carbon::now();
 	        $expiredDate = Carbon::now()->addDay();
-	        $rupiah =DB::table('exchange_rates')->select('conversion_value')->where('currency_code_from', 'idr')->get()->last();
+	        // check language 
+	        // Japan 
+	        // if ($language == "Japan")
+	        // {
+	        // 	$rupiah =DB::table('exchange_rates')->select('conversion_value')->where('currency_code_from', 'idr')->where('currency_code_to', 'yen')->get()->last();
+	        //	$currency = "¥";
+	        // }
+	        
+	        // other
+	        // else 
+	        // {
+	        	$rupiah =DB::table('exchange_rates')->select('conversion_value')->where('currency_code_from', 'idr')->where('currency_code_to', 'usd')->get()->last();
+	        	$currency = "$";
+	        // }
 	        $rupiah = $rupiah->conversion_value; // nanti dari database diedit admin
 	        $totalwithshipping = round(($total+$shipping)*$rupiah);
 	        $secret = config('common.order_key_signature');
@@ -112,6 +121,8 @@ class OrderController extends BaseController
 				'shipping',
 				'rupiah',
 				'signature',
+				'currency',
+				'repayment',
 				'totalwithshipping'
 			));
 
@@ -149,7 +160,20 @@ class OrderController extends BaseController
 
 			$total = $data_order->order_subtotal_after_coupon;
 			$shipping = $data_order->shipping_cost;
-			$rupiah =DB::table('exchange_rates')->select('conversion_value')->where('currency_code_from', 'idr')->get()->last();
+			// check language 
+	        // Japan 
+	        // if ($language == "Japan")
+	        // {
+	        // 	$rupiah =DB::table('exchange_rates')->select('conversion_value')->where('currency_code_from', 'idr')->where('currency_code_to', 'yen')->get()->last();
+	        //	$currency = "¥";
+	        // }
+	        
+	        // other
+	        // else 
+	        // {
+	        	$rupiah =DB::table('exchange_rates')->select('conversion_value')->where('currency_code_from', 'idr')->where('currency_code_to', 'usd')->get()->last();
+	        	$currency = "$";
+	        // }
 	        $rupiah = $rupiah->conversion_value; // nanti dari database diedit admin
 	        $totalwithshipping = round(($total+$shipping)*$rupiah);
 	        $secret = config('common.order_key_signature');
@@ -174,6 +198,7 @@ class OrderController extends BaseController
 	        });	   
 
 	        $year = intval(date('Y'));
+	        $repayment = 1;
 			
 			return view('pages.checkout.checkout_finish', compact( 
 				'year',
@@ -183,6 +208,8 @@ class OrderController extends BaseController
 				'shipping',
 				'rupiah',
 				'signature',
+				'currency',
+				'repayment',
 				'totalwithshipping'
 			));
 
