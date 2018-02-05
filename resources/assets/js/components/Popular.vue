@@ -1,5 +1,5 @@
 <template>
-  <div class="uk-grid-small uk-child-width-1-4@m uk-child-width-1-2 uk-margin-large-bottom" uk-grid>
+  <div class="uk-grid-small uk-padding-remove uk-child-width-1-6@m uk-child-width-1-2 uk-margin-large-bottom" uk-grid>
     <!-- start product -->
     <div class="uk-panel uk-text-left uk-margin-small-bottom" v-for="product in products">
       <div class="uk-card uk-card-small uk-padding-remove">
@@ -207,11 +207,11 @@
 
   export default {
     props: [
-      'api', 
-      'product_api', 
-      'bag_api', 
-      'wishlist_api', 
-      'auth', 
+      'api',
+      'product_api',
+      'bag_api',
+      'wishlist_api',
+      'auth',
       'aws_link',
       'default_image',
       'bag_link',
@@ -237,14 +237,14 @@
 
       Event.listen('bags', function (response) {
         self.bagCount = response.data.bagCount;
-      });  
+      });
 
       Event.listen('addBag', function (response) {
         self.bagCount = response.data.bagCount;
-      });  
+      });
 
-      self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;      
-      self.loadingImage = this.aws_link+'/images/loading-image.gif'; 
+      self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;
+      self.loadingImage = this.aws_link+'/images/loading-image.gif';
     },
 
     data() {

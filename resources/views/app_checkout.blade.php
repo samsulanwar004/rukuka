@@ -114,8 +114,8 @@
   <body>
     <div id="app">
       <!-- Preloader -->
-      <div id="preloader">
-        <div id="status">&nbsp;</div>
+      <div id="preloader" class="uk-inline">
+        <div class="uk-position-center" uk-spinner="ratio: 4"></div>
       </div>
       @include('partials.header_checkout')
       @yield('content')

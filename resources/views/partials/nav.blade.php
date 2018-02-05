@@ -1,3 +1,8 @@
+<div class="uk-section-xsmall uk-background-secondary uk-padding-remove">
+  <div class="uk-container uk-container-small uk-light">
+    <h6 class="uk-padding-xsmall uk-text-center">welcome to ruKuKa, now we can show you how indonesian made really beautiful on you!</h6>
+  </div>
+</div>
 <div class="uk-section-xsmall uk-background-default uk-margin-remove uk-padding-remove" uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
     <div class="uk-section uk-section-default uk-section-xsmall uk-padding-remove-vertical">
         <div class="uk-container uk-container-small">

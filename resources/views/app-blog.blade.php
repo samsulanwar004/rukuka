@@ -18,8 +18,8 @@
   <body>
     <div id="app">
       <!-- Preloader -->
-      <div id="preloader">
-        <div id="status">&nbsp;</div>
+      <div id="preloader" class="uk-inline">
+        <div class="uk-position-center" uk-spinner="ratio: 4"></div>
       </div>
       <div class="uk-visible@m">
         @include('partials.nav')
@@ -34,7 +34,7 @@
         @yield('content')
       @include('partials.footer')
       </div>
-    </div>    
+    </div>
     <script src="{{ elixirCDN('js/main.js') }}"></script>
     <script src="{{ elixirCDN('js/app.js') }}"></script>
     @section('footer_scripts')

@@ -2,18 +2,11 @@
 
 @section('content')
     <div class="uk-container uk-container-small">
-        <div class="uk-grid-small uk-margin-top" uk-grid>
+
 
             {{--MAIN BANNER--}}
-            <div class="uk-text-center">
+            {{-- <div class="uk-text-center">
                 <h3 class="uk-heading-line"><span>{{$men['men_main_title']}}</span></h3>
-                {{-- <a href="{{ $men['men_main_url'] }}" class="uk-link-reset">
-                    <div class="uk-inline-clip uk-transition-toggle uk-dark">
-                        <img src="{{ uploadCDN($men['men_main_banner']) }}" alt="rukuka mens" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
-                        <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
-                        <div class="uk-transition-fade uk-overlay-default uk-position-cover"></div>
-                    </div>
-                </a> --}}
                 <div class="uk-inline">
                     <ul id="component-tab-left" class="uk-switcher">
                         @foreach ($slider as $item)
@@ -32,9 +25,32 @@
                         </ul>
                     </div>
                 </div>
+            </div> --}}
+            <div uk-slideshow="ratio: 10:3; min-height: 200; max-height: 600; animation:scale; autoplay: true;" class="uk-margin-top">
+
+                <div class="uk-position-relative uk-visible-toggle uk-light">
+
+                    <ul class="uk-slideshow-items">
+                      @foreach ($slider as $item)
+                        <li>
+                            <div class="uk-position-cover" uk-slideshow-parallax="scale: 1.2,1.2,1">
+                                <img src="{{ uploadCDN($item->banner) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'" uk-cover>
+                            </div>
+                            <div class="uk-position-cover" uk-slideshow-parallax="opacity: 0,0,0.2; background-color: #000,#000"></div>
+                        </li>
+                      @endforeach
+
+                    </ul>
+
+                    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+                    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+
+                </div>
+
+                
             </div>
             {{--END MAIN BANNER--}}
-        </div>
+
 
         {{--2 ROW BANNER  --}}
         <div class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
