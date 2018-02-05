@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="uk-card-body uk-padding-small">
-                    <a :href="'/product/'+ product.slug" alt="product.name" class="uk-text-meta">{{ product.name.substring(0,35) }}</a>
+                    <a :href="'/product/'+ product.slug" alt="product.name" class="uk-text-meta">{{ product.name.substring(0,30) }}</a>
                     <br>
                     <span v-if="product.price_before_discount > 0 ">
                         <del class="uk-text-small">
@@ -155,7 +155,7 @@
 
                   <h5 class="uk-margin-small">{{ trans.color }} : {{ color }}</h5>
                   <div v-if="stocks.length > 0">
-                    <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-small">
+                    <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-medium">
                       <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
                         {{ stock.size }} {{ stock.unit | unit }}
                       </option>
@@ -256,10 +256,10 @@
 
             Event.listen('addBag', function (response) {
               self.bagCount = response.data.bagCount;
-            }); 
+            });
 
-            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;      
-            self.loadingImage = this.aws_link+'/images/loading-image.gif';      
+            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;
+            self.loadingImage = this.aws_link+'/images/loading-image.gif';
         },
 
         data () {
