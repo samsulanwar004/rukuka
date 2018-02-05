@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ elixirCDN('css/app.css') }}">
     <script src="{{ elixirCDN('js/vendor.js') }}"></script>
     <script src="{{ elixirCDN('js/custom.js') }}"></script>
-     <style type="text/css">
+    <style type="text/css">
          .credit-card-box .panel-title {
                 display: inline;
                 font-weight: bold;
@@ -44,33 +44,49 @@
             }
 
             .overlay {
-                position: absolute;
+                position: fixed;
+                display: none;
+                width: 100%;
+                height: 100%;
                 top: 0;
                 left: 0;
-                height: 100%;
-                width: 100%;
+                right: 0;
+                bottom: 0;
                 background-color: rgba(0,0,0,0.5);
-                z-index: 10;
+                z-index: 2;
             }
 
-            #three-ds-container {
-                width: 550px;
-                height: 450px;
-                line-height: 200px;
+
+            #loading {
                 position: fixed;
-                top: 25%;
-                left: 40%;
-                margin-top: -100px;
-                margin-left: -150px;
+                display: none;
+                width: 100%;
+                height: 100%;
+                top: 60px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+            }
+
+            #three-ds-container{
+              
+                position: absolute;
+                top: 60%;
+                left: 50%;
+                font-size: 50px;
+                color: white;
+                transform: translate(-50%,-50%);
+                -ms-transform: translate(-50%,-50%);
                 background-color: #ffffff;
                 border-radius: 5px;
-                text-align: center;
-                z-index: 11; /* 1px higher than the overlay layer */
+                z-index: 11;
             }
+
+          
 
             #payment {
                 width: 550px;
-                height: 450px;
+                height: 400px;
                 line-height: 200px;
                 position: fixed;
                 top: 25%;
@@ -97,17 +113,17 @@
             }
 
             .credit-card-div  span {
-    padding-top:10px;
-        }
-.credit-card-div img {
-    padding-top:30px;
-}
-.credit-card-div .small-font {
-    font-size:9px;
-}
-.credit-card-div .pad-adjust {
-    padding-top:10px;
-}
+                padding-top:10px;
+            }
+            .credit-card-div img {
+                padding-top:30px;
+            }
+            .credit-card-div .small-font {
+                font-size:9px;
+            }
+            .credit-card-div .pad-adjust {
+                padding-top:10px;
+            }
     </style>
 
   </head>
