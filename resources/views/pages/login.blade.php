@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-<section class="uk-section uk-section-muted uk-section-xsmall">
+<section class="uk-section uk-section-xsmall uk-background-norepeat uk-background-image@m uk-background-top-right" style="background-image: url('images/rukuka_is_coming.jpg'); background-color:#dadada; background-size: 400px">
 <div class="uk-container">
   <div class="uk-grid-small uk-margin-top">
       @include('partials.alert')
@@ -116,7 +116,6 @@
       {{-- </div> --}}
     {{-- </div> --}}
   </div>
-<hr>
 </div>
 </section>
 @endsection

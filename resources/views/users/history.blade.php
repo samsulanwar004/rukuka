@@ -7,7 +7,7 @@
 </div>
 <div class="uk-grid uk-margin-top" uk-grid>
 	@include('partials.user_menu')
-	<div class="uk-width-3-4@m">
+	<div class="uk-width-3-4@m uk-visible@m">
 	  <h3>Order History</h3>
 	  <ul class="uk-child-width-1-5 uk-margin" uk-tab="animation: uk-animation-slide-bottom">
 	    <li><a href="#"><b><h5>UNPAID</h5></b> </a> </li>
