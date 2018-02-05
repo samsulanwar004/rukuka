@@ -32,10 +32,12 @@
                     <ul class="uk-slideshow-items">
                       @foreach ($slider as $item)
                         <li>
+                          <a href="{{ $item->url }}" class="uk-link-reset">
                             <div class="uk-position-cover" uk-slideshow-parallax="scale: 1.2,1.2,1">
                                 <img src="{{ uploadCDN($item->banner) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'" uk-cover>
                             </div>
                             <div class="uk-position-cover" uk-slideshow-parallax="opacity: 0,0,0.2; background-color: #000,#000"></div>
+                          </a>
                         </li>
                       @endforeach
 
@@ -46,7 +48,7 @@
 
                 </div>
 
-              
+
             </div>
             {{--END MAIN BANNER--}}
 
@@ -186,8 +188,9 @@
             </div>
         </div>
         {{--END 3 ROW BANNER--}}
-        <hr>
-
+      </div>
+        <div class="uk-container">
+          <hr class="uk-margin-large-top">
         <h4 class="uk-margin-small uk-text-uppercase">{{ trans('app.trending') }}</h4>
         <popular
                 api="{{ route('populer', 'Women')}}"
