@@ -13,29 +13,24 @@
                       </td>
                    </tr>
                    <tr>
-
                       <td>{{ add.address_line }}</td>
                    </tr>
                    <tr>
-
                       <td>
                          {{ add.city }}, {{ add.province }} {{ add.postal }}
                       </td>
                    </tr>
                    <tr>
-
                       <td>
                          {{ add.country }}
                       </td>
                    </tr>
                    <tr>
-
                       <td>
                          <h5>{{ add.phone_number }}</h5>
                       </td>
                    </tr>
                    <tr>
-
                       <td>
                         <a href="#modal-edit" class="uk-icon-link" uk-icon="icon: file-edit" uk-toggle v-on:click.prevent="editAddress(add.id)"></a>
                         <a href="#" v-on:click.prevent="removeAddress(add.id)" class="uk-icon-link" uk-icon="icon: trash"></a>
@@ -49,72 +44,68 @@
          <div class="uk-panel uk-width-1-1">
 
          </div>
-        <a href="#modal-sections" class="uk-button uk-button-default-warm uk-button-small uk-width-1-1" uk-toggle> <span class="uk-icon" uk-icon="icon: plus"></span> ADD NEW SHIPPING ADDRESS </a>
+        <a href="#modal-sections" class="uk-button uk-button-default-warm uk-button-small uk-width-1-1" uk-toggle> <span class="uk-icon" uk-icon="icon: plus"></span> {{ trans.add_new_address}} </a>
        </div>
        <div id="modal-edit" uk-modal>
         <div class="uk-modal-dialog">
           <button class="uk-modal-close-default" type="button" uk-close></button>
           <div class="uk-modal-body" uk-overflow-auto>
-            <h4>EDIT ADDRESS</h4>
+            <h4 class="uk-text-uppercase">{{ trans.edit_address }}</h4>
             <div class="uk-width-1-1">
-
-
             <form class="uk-form-stacked" v-on:submit.prevent="updateAddress">
               <input type="hidden" name="id" :value="add.id">
               <div class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
-                  First name
-                  <input class="uk-input uk-form-small" name="first_name" id="form-s-tel" type="text" :value="add.first_name" required="required">
+                    <label> {{ trans.first_name }}</label>
+                  <input class="uk-input uk-form-small" name="first_name"  type="text" :value="add.first_name" required="required">
                 </div>
               </div>
               <div class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
-                  Last name
-                  <input class="uk-input uk-form-small" name="last_name" id="form-s-tel" type="text" :value="add.last_name" required="required">
+                    <label> {{ trans.last_name }}</label>
+                  <input class="uk-input uk-form-small" name="last_name" type="text" :value="add.last_name" required="required">
                 </div>
               </div>
               <div class="uk-margin-small uk-text-meta uk-width-1-1">
               <div>
-                Company
-                <input class="uk-input uk-form-small" name="company" id="form-s-tel" type="text" :value="add.company"></div>
+                  <label> {{ trans.company }}</label>
+                <input class="uk-input uk-form-small" name="company" type="text" :value="add.company"></div>
               </div>
               <div class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
-                  Address line
-                  <input class="uk-input uk-form-small" name="address_line" id="form-s-tel" type="text" :value="add.address_line" required="required">
+                    <label> {{ trans.address_line }}</label>
+                  <input class="uk-input uk-form-small" name="address_line" type="text" :value="add.address_line" required="required">
                 </div>
               </div>
               <div class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
-                  Country
-                  <!-- <input class="uk-input uk-form-small" name="country" id="form-s-tel" type="text" :value="add.country" required="required"> -->
+                    <label> {{ trans.country }}]</label>
                   <select class="uk-input uk-form-small" name="country" id="form-country-vue" type="text" required="required" @change="changeCountryAddress">
                   </select>
                 </div>
               </div>
               <div class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
-                  Province
+                    <label> {{ trans.province }}</label>
                   <input class="uk-input uk-form-small" name="province" id="form-province-vue" type="text" :value="add.province" required="required" @change="showVueListCities()">
                 </div>
               </div>
               <div class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
-                  City
-                  <input class="uk-input uk-form-small" name="city" id="form-city-vue" type="text" :value="add.city" required="required">
+                    <label> {{ trans.city }}</label>
+                    <input class="uk-input uk-form-small" name="city" id="form-city-vue" type="text" :value="add.city" required="required">
                 </div>
               </div>
-
               <!-- only indonesia's address-->
               <div id="div-sub-district-vue" class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
-                  Sub district
+                    <label> {{ trans.sub_district }}</label>
                   <input class="uk-input uk-form-small " name="sub_district" id="form-subdistrict-vue" type="text" value="" required>
                 </div>
               </div>
               <div  id="div-village-vue" class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
-                  Village
+                    <label> {{ trans.village }}</label>
                   <input class="uk-input uk-form-small " name="village" id="form-village-vue" type="text" value="" required>
                 </div>
               </div>
@@ -122,15 +113,15 @@
 
               <div class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
-                  Postal
+                    <label> {{ trans.postal }}</label>
                   <input class="uk-input uk-form-small" name="postal" id="form-postal-vue" type="text" :value="add.postal" required="required">
                 </div>
               </div>
 
               <div class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
-                  Phone number
-                  <input class="uk-input uk-form-small" name="phone_number" id="form-s-tel" type="text" :value="add.phone_number" required="required">
+                    <label> {{ trans.phone }}</label>
+                  <input class="uk-input uk-form-small" name="phone_number" type="text" :value="add.phone_number" required="required">
                 </div>
               </div>
               <input type="submit" id="submit-edit" style="display: none">
@@ -140,13 +131,12 @@
           <div class="uk-modal-footer uk-text-right">
             <div class="uk-grid uk-child-width-1-2" uk-grid>
               <div>
-                <button class="uk-button uk-button-default uk-button-small uk-modal-close uk-width-1-1" type="button">Cancel</button>
+                <button class="uk-button uk-button-default uk-button-small uk-modal-close uk-width-1-1" type="button">{{ trans.cancel }}</button>
               </div>
               <div>
-                <button class="uk-button uk-button-secondary uk-button-small uk-width-1-1" v-on:click="submitUpdate">Save</button>
+                <button class="uk-button uk-button-secondary uk-button-small uk-width-1-1" v-on:click="submitUpdate">{{ trans.save }}</button>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -161,13 +151,15 @@
           'address_default',
           'address_destroy',
           'address_edit',
-          'address_update'
+          'address_update',
+          'locale',
         ],
 
         data () {
             return {
                 data: {},
                 add: {},
+                trans: JSON.parse(this.locale,true)
             }
         },
 

@@ -11,62 +11,63 @@
            <div class="uk-grid uk-grid-divider uk-child-width-1-3 uk-margin-small" uk-grid>
 
                <div class="uk-text-center">
-                  <button class="uk-button uk-button-text" disabled><b>SHIPPING ADDRESS</b></button>
+                  <button class="uk-button uk-button-text" disabled><b>{{ trans('app.shipping_address') }}</b></button>
                </div>
                <div class="uk-text-center">
-                  <button class="uk-button uk-button-text" disabled>SHIPPING OPTION</button>
+                  <button class="uk-button uk-button-text" disabled>{{ trans('app.shipping_option') }}</button>
                </div>
                <div class="uk-text-center">
-                  <button class="uk-button uk-button-text" disabled>REVIEW</button>
+                  <button class="uk-button uk-button-text" disabled>{{ trans('app.review') }}</button>
                </div>
 
            </div>
          </div>
          </div>
-         <h4 class="uk-margin-small">CHECKOUT</h4>
+         <h4 class="uk-margin-small uk-text-uppercase">{{ trans('app.checkout') }}</h4>
          @if (count($address))
-         <h6 class="uk-margin-small">SELECT YOUR SHIPPING ADDRESS:</h6>
+         <h6 class="uk-margin-small uk-text-uppercase">{{ trans('app.select_shipping') }}:</h6>
           <address-list
-            address="{{ $address }}"
-            address_default="{{ route('user.address.default') }}"
-            address_destroy="{{ route('user.address.destroy') }}"
-            address_edit="{{ route('user.address.edit') }}"
-            address_update="{{ route('user.address.update') }}"
+                address="{{ $address }}"
+                address_default="{{ route('user.address.default') }}"
+                address_destroy="{{ route('user.address.destroy') }}"
+                address_edit="{{ route('user.address.edit') }}"
+                address_update="{{ route('user.address.update') }}"
+                locale="{{ json_encode(trans('app')) }}"
           ></address-list>
          <div id="modal-sections" uk-modal>
             <div class="uk-modal-dialog">
               <button class="uk-modal-close-default" type="button" uk-close></button>
               <div class="uk-modal-body">
-                <h4>ADD A NEW ADDRESS</h4>
+                <h4 class="uk-modal-title">{{ trans('app.add_address') }}</h4>
                 <form class="uk-form-stacked" action="{{ route('user.address') }}" method="post">
                   {{ csrf_field() }}
                   <input type="hidden" name="checkout" value="ok">
                   <div class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
-                      First name
+                        <label>{{ trans('app.first_name') }}</label>
                       <input class="uk-input uk-form-small" name="first_name" id="form-s-tel" type="text" value="{{ old('first_name') }}" required="required">
                     </div>
                   </div>
                   <div class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
-                      Last name
+                        <label>{{ trans('app.last_name') }}</label>
                       <input class="uk-input uk-form-small" name="last_name" id="form-s-tel" type="text" value="{{ old('last_name') }}" required="required">
                     </div>
                   </div>
                   <div class="uk-margin-small uk-text-meta uk-width-1-1">
                   <div>
-                    Company
+                      <label>{{ trans('app.company') }}</label>
                     <input class="uk-input uk-form-small" name="company" id="form-s-tel" type="text" value="{{ old('company') }}"></div>
                   </div>
                   <div class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
-                      Address line
+                        <label>{{ trans('app.address_line') }}</label>
                       <input class="uk-input uk-form-small" name="address_line" id="form-s-tel" type="text" value="{{ old('address_line') }}" required="required">
                     </div>
                   </div>
                   <div class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
-                      Country
+                        <label>{{ trans('app.country') }}</label>
                       <select id="form-country-empty" name="country" class="uk-input uk-form-small {{ $errors->has('country') ? ' uk-form-danger' : '' }}" required="required" onchange="handleLocalAddress();showListProvices();">
                         <option></option>
                       </select>
@@ -74,37 +75,37 @@
                   </div>
                   <div class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
-                      Province
+                        <label>{{ trans('app.province') }}</label>
                       <input class="uk-input uk-form-small" name="province" id="form-province-empty" type="text" value="{{ old('province') }}" required="required">
                     </div>
                   </div>
                   <div class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
-                      City
+                        <label>{{ trans('app.city') }}</label>
                       <input id="form-city-empty" class="uk-input uk-form-small" name="city" id="form-s-tel" type="text" value="{{ old('city') }}" required="required">
                     </div>
                   </div>
                   <div id="div-sub-district" class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
-                      Sub district
+                        <label>{{ trans('app.sub_district') }}</label>
                       <input class="uk-input uk-form-small {{ $errors->has('sub_district') ? ' uk-form-danger' : '' }}" name="sub_district" id="form-subdistrict-empty" type="text" value="{{ old('sub_district') }}" required>
                     </div>
                   </div>
                   <div  id="div-village" class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
-                      Village
+                        <label>{{ trans('app.village') }}</label>
                       <input class="uk-input uk-form-small {{ $errors->has('village') ? ' uk-form-danger' : '' }}" name="village" id="form-village-empty" type="text" value="{{ old('village') }}" required>
                     </div>
                   </div>
                   <div class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
-                      Postal
+                        <label>{{ trans('app.postal') }}</label>
                       <input class="uk-input uk-form-small {{ $errors->has('postal') ? ' uk-form-danger' : '' }}" name="postal" id="form-postal-empty" type="text" value="{{ old('postal') }}" required="required">
                     </div>
                   </div>
                   <div class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
-                      Phone number
+                        <label>{{ trans('app.phone') }}</label>
                       <input class="uk-input uk-form-small" name="phone_number" id="form-s-tel" type="text" value="{{ old('phone_number') }}" required="required">
                     </div>
                   </div>
@@ -114,82 +115,78 @@
               <div class="uk-modal-footer uk-text-right">
                 <div class="uk-child-width-1-2" uk-grid>
                   <div>
-                    <button class="uk-button uk-button-default uk-button-small uk-modal-close uk-width-1-1" type="button">Cancel</button>
+                    <button class="uk-button uk-button-default uk-button-small uk-modal-close uk-width-1-1" type="button">{{ trans('app.cancel') }}</button>
                   </div>
                   <div>
-                    <button class="uk-button uk-button-secondary uk-button-small uk-width-1-1" id="modal-submit">Save</button>
+                    <button class="uk-button uk-button-secondary uk-button-small uk-width-1-1" id="modal-submit">{{ trans('app.save') }}</button>
                   </div>
                 </div>
-
-
               </div>
             </div>
           </div>
          @else
-         <h5 class="uk-margin-small-top">YOUR SHIPPING INFORMATION</h5>
+         <h5 class="uk-margin-small-top uk-text-uppercase">{{ trans('app.shipping_info') }}</h5>
          <div class="uk-grid uk-width-1-2@m">
             <form action="{{ route('user.address') }}" method="post">
                {{ csrf_field() }}
                <input type="hidden" name="checkout" value="ok">
                <div class="uk-grid uk-grid-small uk-child-width-1-2@m uk-text-meta" uk-grid>
                   <div>
-                     First Name *
+                      <label>{{ trans('app.first_name') }}*</label>
                      <input type="text" name="first_name" value="{{ old('first_name') }}" class="uk-input uk-form-small {{ $errors->has('first_name') ? ' uk-form-danger' : '' }}" required="required">
                   </div>
                   <div>
-                     Last Name *
+                      <label>{{ trans('app.last_name') }}*</label>
                      <input type="text" name="last_name" value="{{ old('last_name') }}" class="uk-input uk-form-small {{ $errors->has('last_name') ? ' uk-form-danger' : '' }}" required="required">
                   </div>
                </div>
                <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
-                  Company / Care Of (Optional)
+                   <label>{{ trans('app.company') }}</label>
                   <input type="text" name="company" value="{{ old('company') }}" class="uk-input uk-form-small">
                </div>
                <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
-                  Address *
+                   <label>{{ trans('app.address_line') }}*</label>
                   <input type="text" name="address_line" value="{{ old('address_line') }}" class="uk-input uk-form-small {{ $errors->has('address_line') ? ' uk-form-danger' : '' }}" required="required">
                </div>
                <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
-                  Country
+                   <label>{{ trans('app.country') }}</label>
                   <select id="form-country-empty" name="country" class="uk-input uk-form-small uk-from-width-small {{ $errors->has('country') ? ' uk-form-danger' : '' }}" required="required" onchange="handleLocalAddress();showListProvices();">
                     <option></option>
                   </select>
               </div>
               <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
-                  Province / State / Country *
+                  <label>{{ trans('app.province') }}</label>
                   <input class="uk-input uk-form-small uk-from-width-small" name="province" id="form-province-empty" type="text" value="{{ old('province') }}" required="required">
               </div>
                <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
-                  Town / City *
+                   <label>{{ trans('app.city') }}</label>
                   <input id="form-city-empty" class="uk-input uk-form-small uk-from-width-small" name="city" id="form-s-tel" type="text" value="{{ old('city') }}" required="required">
                </div>
                <div id="div-sub-district" class="uk-margin-small uk-grid-small" uk-grid>
                     <div>
-                      Sub district
+                        <label>{{ trans('app.sub_district') }}</label>
                       <input class="uk-input uk-form-small {{ $errors->has('sub_district') ? ' uk-form-danger' : '' }}" name="sub_district" id="form-subdistrict-empty" type="text" value="{{ old('sub_district') }}" required>
                     </div>
                   </div>
                   <div  id="div-village" class="uk-margin-small uk-grid-small" uk-grid>
                     <div>
-                      Village
+                        <label>{{ trans('app.village') }}</label>
                       <input class="uk-input uk-form-small {{ $errors->has('village') ? ' uk-form-danger' : '' }}" name="village" id="form-village-empty" type="text" value="{{ old('village') }}" required>
                     </div>
                </div>
                <div class="uk-text-meta uk-margin-small-top">
-                  Postal Code *
+                   <label>{{ trans('app.postal') }}*</label>
                   <input type="text" id="form-postal-empty" name="postal" value="{{ old('postal') }}" class="uk-input uk-form-small uk-from-width-small {{ $errors->has('postal') ? ' uk-form-danger' : '' }}" required="required">
                </div>
                <div class="uk-text-meta uk-margin-small-top">
-                  Phone Number *
+                   <label>{{ trans('app.phone') }}*</label>
                   <input type="text" name="phone_number" value="{{ old('phone_number') }}" class="uk-input uk-form-small uk-from-width-small {{ $errors->has('phone_number') ? ' uk-form-danger' : '' }}" required="required">
                </div>
-
                <div class="uk-text-meta uk-margin-top">
-{{--                   <input type="checkbox" class="uk-checkbox" name="is_billing" value="ok"> This address is also my billing address --}}
-                  <p> <b>* Required</b> </p>
+                  <p> <b>* {{ trans('app.required') }}</b> </p>
                </div>
                 <div class="uk-panel uk-margin-small-top">
-                  <input type="submit" name="submit" id="submit" value="SUBMIT" class="uk-button uk-button-default uk-button-small uk-width-1-1">
+                  <input type="submit" name="submit" id="submit" value="{{ trans('app.submit') }}" class="uk-button uk-button-default uk-button-small uk-width-1-1">
                </div>
             </form>
          </div>
@@ -200,10 +197,12 @@
                bag_api="{{ route('persist.bag') }}"
                aws_link="{{ config('filesystems.s3url') }}"
                default_image="{{ json_encode(config('common.default')) }}"
+               locale="{{ json_encode(trans('app')) }}"
             ></item-checkout>
       </div>
       <summary-checkout
         shipping_cost="0"
+        locale="{{ json_encode(trans('app')) }}"
       ></summary-checkout>
    </div>
 </div>

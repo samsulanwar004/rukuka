@@ -58,15 +58,12 @@
                       <div>
                         <label>{{ trans('app.province') }}</label>
                         <input class="uk-input uk-input-small" name="province" id="form-province-empty" type="text" value="{{ old('province') }}" required="required">
-                      <!-- <select id="form-province-empty" name="province" class="uk-input uk-input-small {{ $errors->has('province') ? ' uk-form-danger' : '' }}">
-                    </select> -->
                       </div>
                     </div>
                     <div class="uk-margin-small uk-grid-small" uk-grid>
                       <div>
                         <label>{{ trans('app.city') }}</label>
                         <input id="form-city-empty" class="uk-input uk-input-small" name="city" id="form-s-tel" type="text" value="{{ old('city') }}" required="required">
-                      <!-- <select id="form-city-empty" name="city" class="uk-input uk-input-small {{ $errors->has('city') ? ' uk-form-danger' : '' }}"></select> -->
                       </div>
                     </div>
                     <div id="div-sub-district" class="uk-margin-small uk-grid-small" uk-grid>

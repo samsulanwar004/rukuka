@@ -13,12 +13,7 @@
         <div class="uk-grid-small uk-text-left">
             @include('partials.alert')
         </div>
-        {{-- <div class="uk-panel uk-padding-small uk-visible@m">
-          <span class="uk-text-lead">{{$home['homepage_main_title']}}</span>
-        </div>
-        <div class="uk-panel uk-padding-small uk-hidden@m">
-            <h5>{{$home['homepage_main_title']}}</h5>
-        </div> --}}
+
       </div>
       <div class="uk-margin js-slideshow-animation" uk-slideshow="ratio: 10:3; min-height: 150; max-height: 600; animation:scale; autoplay: true;">
 
@@ -32,8 +27,7 @@
                       </div>
                       <div class="uk-position-cover" uk-slideshow-parallax="opacity: 0,0,0.2; background-color: #000,#000"></div>
                         <div class="uk-position-center uk-position-medium uk-text-center">
-                            {{-- <h1 class="uk-heading-primary" uk-slideshow-parallax="x: 200,-200">Heading</h1>
-                            <p class="uk-text-lead" uk-slideshow-parallax="x: 400,-400">Lorem ipsum dolor sit amet.</p> --}}
+
                         </div>
                     </li>
                   @endforeach
@@ -49,24 +43,6 @@
             </div>
 
         </div>
-      {{-- <div class="uk-inline">
-          <ul id="component-tab-left" class="uk-switcher">
-            @foreach ($slider as $item)
-              <a href="{{ $item->url }}" class="uk-link-reset">
-              <li>
-                <img src="{{ uploadCDN($item->banner) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
-              </li>
-            </a>
-            @endforeach
-          </ul>
-          <div class="uk-position-small uk-position-bottom-center">
-            <ul class="uk-dotnav" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" >
-              @foreach ($slider as $item)
-                <li><a href="#">item1</a></li>
-              @endforeach
-            </ul>
-          </div>
-      </div> --}}
     </div>
   <div class="uk-container uk-container-small">
       {{--BLOG--}}
@@ -74,7 +50,7 @@
     <h2 class="uk-text-center uk-margin-top-large uk-visible@m">New Arrival</h2>
     <h4 class="uk-text-center uk-margin-small-top uk-hidden@m">New Arrival</h4>
 {{--END BLOG--}}
-<div uk-slider="clsActivated: uk-transition-active; autoplay: true">
+    <div uk-slider="clsActivated: uk-transition-active; autoplay: true">
 
             <div class="uk-position-relative uk-visible-toggle">
 
@@ -166,7 +142,7 @@
 
                 </div>
 
-                {{-- <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul> --}}
+                
 
             </div>
       {{-- <div class="uk-grid-small" uk-grid>
@@ -305,21 +281,23 @@
                   </a>
               </div>
           </div>
-      </div> --}}
-    </div>
-    <div class="uk-container">
-      <hr class="uk-margin-large-top">
-      <h4>MOST POPULAR</h4>
-    	<popular
-        api="{{ route('populer', 'Homepage')}}"
-        product_api="{{ route('product.api') }}"
-        bag_api="{{ route('persist.bag') }}"
-        wishlist_api="{{ route('persist.wishlist') }}"
-        auth="{{ Auth::check() ? 1 : 0 }}"
-        aws_link="{{ config('filesystems.s3url') }}"
-        default_image="{{ json_encode(config('common.default')) }}"
-        bag_link="{{ route('bag') }}"
-      ></popular>
+      </div>
+--}}
+</div>
+  <div class="uk-container">
+    <hr class="uk-margin-large-top">
+    <h4 class="uk-text-uppercase">{{ trans('app.popular') }}</h4>
+  	<popular
+      api="{{ route('populer', 'Homepage')}}"
+      product_api="{{ route('product.api') }}"
+      bag_api="{{ route('persist.bag') }}"
+      wishlist_api="{{ route('persist.wishlist') }}"
+      auth="{{ Auth::check() ? 1 : 0 }}"
+      aws_link="{{ config('filesystems.s3url') }}"
+      default_image="{{ json_encode(config('common.default')) }}"
+      bag_link="{{ route('bag') }}"
+      locale="{{ json_encode(trans('app')) }}"
+    ></popular>
     </div>
 
 

@@ -188,7 +188,7 @@
         {{--END 3 ROW BANNER--}}
         <hr>
 
-        <h4 class="uk-margin-small">TRENDING NOW</h4>
+        <h4 class="uk-margin-small uk-text-uppercase">{{ trans('app.trending') }}</h4>
         <popular
                 api="{{ route('populer', 'Women')}}"
                 product_api="{{ route('product.api') }}"
@@ -197,6 +197,7 @@
                 auth="{{ Auth::check() ? 1 : 0 }}"
                 aws_link="{{ config('filesystems.s3url') }}"
                 default_image="{{ json_encode(config('common.default')) }}"
+                locale="{{ json_encode(trans('app')) }}"
         ></popular>
     </div>
 @endsection

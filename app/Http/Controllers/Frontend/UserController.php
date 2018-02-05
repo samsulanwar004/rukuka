@@ -875,14 +875,14 @@ class UserController extends BaseController
             foreach($reviews as $data)
             {
                 if (strlen($data['review'])>120){
-                    $showless = '<a onclick="less('. $data['id'] .')" class="uk-text-bold uk-text-small"> show more</a>';
+                    $showless = '<a onclick="less('. $data['id'] .')" class="uk-text-bold uk-text-small"> '.trans('app.show_more').' </a>';
                 }
 
                 if ($data['comment']) {
                     $comment = '
                                 <div class="uk-card uk-card-body uk-margin-small-top uk-text-small" style="background: #EEEEEE">
                                     <div class="uk-text-bold uk-text-center">
-                                        Response From rukuka
+                                        '.trans('app.rukuka_response').'
                                     </div>
                                     <div class="uk-text-left uk-text-small uk-margin-small-top">
                                       '. $data['review'].'
@@ -913,7 +913,7 @@ class UserController extends BaseController
                                 </div>
                                     <div class="uk-text-left uk-margin-small-top">
                                     <p class="uk-hidden" id=more-'. $data['id'] .'>'. $data['review'] .'
-                                        <a onclick="more('. $data['id'] .')" class="uk-text-bold uk-text-small"> show less</a>
+                                        <a onclick="more('. $data['id'] .')" class="uk-text-bold uk-text-small">'.trans('app.show_less').'</a>
                                     </p>
                                     <p id="less-'. $data['id'] .'">'. str_limit($data['review'],120) .'
                                         '.$showless.'
@@ -934,7 +934,7 @@ class UserController extends BaseController
             $loader .= '
                             <div id="remove-row">
                                 <h2>
-                                        <a onclick="myFunction('. $reviews[count($reviews)-1]['id'] .','.$reviews[count($reviews)-1]['products_id'].')" id="btn-more" class="uk-button uk-button-default" > SEE MORE REVIEW </a>
+                                        <a onclick="myFunction('. $reviews[count($reviews)-1]['id'] .','.$reviews[count($reviews)-1]['products_id'].')" id="btn-more" class="uk-button uk-button-default" > '.trans('app.more_review').' </a>
                                 </h2>
                             </div>
                         ';

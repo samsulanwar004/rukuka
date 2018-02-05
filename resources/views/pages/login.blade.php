@@ -7,7 +7,7 @@
       @include('partials.alert')
   </div>
   @if($checkout)
-    <h4 class="uk-margin-small-top uk-text-center">YOUR CHECKOUT PROCESS START HERE!</h4>
+    <h4 class="uk-margin-small-top uk-text-center uk-text-uppercase">{{ trans('app.checkout_text') }}</h4>
   @endif
   <div class="uk-flex uk-flex uk-flex-center" uk-grid>
     {{-- <div class="uk-width-4-5@m"> --}}
@@ -15,37 +15,37 @@
         <div class="uk-width-1-3@m">
           <div class="uk-card uk-card-default">
             <div class="uk-card-body">
-              <h4>LOGIN</h4>
+              <h4>{{ trans('app.login') }}</h4>
                 <form class="form-horizontal" method="POST" action="{{ route('authenticate') }}">
                     {{ csrf_field() }}
                   <ul class="uk-list">
                     <li>
-                        <input class="uk-input {{ $errors->has('email_login') ? ' uk-form-danger' : '' }}" id="form-s-email" type="email" placeholder="Email" required="required" name="email_login" value="{{ old('email_login') }}">
+                        <input class="uk-input {{ $errors->has('email_login') ? ' uk-form-danger' : '' }}" id="form-s-email" type="email" placeholder="{{ trans('app.email') }}" required="required" name="email_login" value="{{ old('email_login') }}">
                     </li>
                     <li>
-                        <input class="uk-input" id="form-s-password" type="password" placeholder="Password" required="required" name="password_login">
+                        <input class="uk-input" id="form-s-password" type="password" placeholder="{{ trans('app.password') }}" required="required" name="password_login">
                     </li>
                     <li>
                         <div class="checkbox uk-text-meta">
                             <label>
-                                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ trans('app.remember') }}
                             </label>
                         </div>
                     </li>
                     <li>
-                        <button class="uk-button uk-button-secondary uk-width-1-1" type="submit">LOGIN</button>
+                        <button class="uk-button uk-button-secondary uk-width-1-1 uk-text-uppercase" type="submit">{{ trans('app.login') }}</button>
                     </li>
 
                     <li>
                       <a href="{{ route('social.login', ['provider' => 'facebook']) }}" class="uk-button uk-button-primary uk-width-1-1 uk-button-small">
-                        <span class="uk-margin-small-right uk-icon" uk-icon="icon: facebook"></span>Login with Facebook</a>
+                        <span class="uk-margin-small-right uk-icon" uk-icon="icon: facebook"></span>{{ trans('app.login_facebook') }}</a>
                     </li>
                     <li>
                       <a href="{{ route('social.login', ['provider' => 'google']) }}" class="uk-button uk-button-danger uk-width-1-1 uk-button-small">
-                        <span class="uk-margin-small-right uk-icon" uk-icon="icon: google"></span>Login with Google</a>
+                        <span class="uk-margin-small-right uk-icon" uk-icon="icon: google"></span> {{ trans('app.login_google') }} </a>
                     </li>
                     <li class="uk-text-right">
-                        <a href="{{ route('page.forgot') }}" class="uk-text-meta"><i>forgot your password?</i></a>
+                        <a href="{{ route('page.forgot') }}" class="uk-text-meta"><i>{{ trans('app.forgot_password') }}</i></a>
                     </li>
                   </ul>
                 </form>
@@ -55,34 +55,31 @@
         <div class="uk-width-1-3@m">
           <div class="uk-card uk-card-default">
             <div class="uk-card-body">
-              <h4>REGISTER</h4>
-                  <!-- <h3>SIGN IN</h3> -->
+              <h4>{{ trans('app.register') }}</h4>
                 <form class="uk-form-stacked" action="{{ route('register') }}" method="POST">
                   {{ csrf_field() }}
-                    <!-- <legend class="uk-legend">PERSONAL INFORMATION</legend> -->
                   <ul class="uk-list">
-                    {{-- <li>Full Name</li> --}}
-                    <li><input name="first_name" class="uk-input {{ $errors->has('first_name') ? ' uk-form-danger' : '' }}" type="text" placeholder="First Name" required="required" value="{{ old('first_name') }}"></li>
-                    <li><input name="last_name" class="uk-input {{ $errors->has('last_name') ? ' uk-form-danger' : '' }}" type="text" placeholder="Last Name" required="required" value="{{ old('last_name') }}"></li>
+                    <li><input name="first_name" class="uk-input {{ $errors->has('first_name') ? ' uk-form-danger' : '' }}" type="text" placeholder="{{ trans('app.first_name') }}" required="required" value="{{ old('first_name') }}"></li>
+                    <li><input name="last_name" class="uk-input {{ $errors->has('last_name') ? ' uk-form-danger' : '' }}" type="text" placeholder="{{ trans('app.last_name') }}" required="required" value="{{ old('last_name') }}"></li>
                   </ul>
                   <ul class="uk-list">
-                    <li class="uk-text-muted">Set Email and Password</li>
-                    <li><input name="email" class="uk-input {{ $errors->has('email') ? ' uk-form-danger' : '' }}" id="email" type="email" placeholder="Email Address" required="required" value="{{ old('email') }}"></li>
-                    <li><input name="password" class="uk-input {{ $errors->has('password') ? ' uk-form-danger' : '' }}" id="password" type="password" placeholder="Password" required="required"></li>
-                    <li><input name="confirmed" class="uk-input {{ $errors->has('confirmed') ? ' uk-form-danger' : '' }}" id="confirmed" type="password" placeholder="Confirm Password" required="required"></li>
+                    <li class="uk-text-muted">{{ trans('app.set_email_password') }}</li>
+                    <li><input name="email" class="uk-input {{ $errors->has('email') ? ' uk-form-danger' : '' }}" id="email" type="email" placeholder="{{ trans('app.email') }}" required="required" value="{{ old('email') }}"></li>
+                    <li><input name="password" class="uk-input {{ $errors->has('password') ? ' uk-form-danger' : '' }}" id="password" type="password" placeholder="{{ trans('app.password') }}" required="required"></li>
+                    <li><input name="confirmed" class="uk-input {{ $errors->has('confirmed') ? ' uk-form-danger' : '' }}" id="confirmed" type="password" placeholder="{{ trans('app.confirm_password') }}" required="required"></li>
                   </ul>
                   <ul class="uk-list">
                     <li><input class="uk-checkbox" type="checkbox" name="subcriber" required="required" {{ old('subcriber') ? 'checked' : '' }}>
-                    <span class="uk-text-meta">By clicking the "register" button, I agree to recieve ruKuKa news by e-mail, sms or telephone.
-                    See our <a href="#">Privacy Policy</a> for further information.</span></li>
-                    <li><button class="uk-button uk-button-secondary uk-width-1-1" type="submit">REGISTER</button></li>
+                    <span class="uk-text-meta">{{ trans('app.agreement_text_1') }}
+                    {{ trans('app.agreement_text_2') }} <a href="/page/terms-privacy">{{ trans('app.terms_privacy') }} {{ trans('app.agreement_text_3') }}</a> </span></li>
+                    <li><button class="uk-button uk-button-secondary uk-width-1-1 uk-text-uppercase" type="submit">{{ trans('app.register') }}</button></li>
                     <li>
                       <a href="{{ route('social.login', ['provider' => 'facebook']) }}" class="uk-button uk-button-primary uk-button-small uk-width-1-1">
-                        <span class="uk-margin-small-right uk-icon" uk-icon="icon: facebook"></span>Register with Facebook</a>
+                        <span class="uk-margin-small-right uk-icon" uk-icon="icon: facebook"></span>{{ trans('app.login_facebook') }}</a>
                     </li>
                     <li>
                       <a href="{{ route('social.login', ['provider' => 'google']) }}" class="uk-button uk-button-danger uk-width-1-1 uk-button-small">
-                        <span class="uk-margin-small-right uk-icon" uk-icon="icon: google"></span>Register with Google</a>
+                        <span class="uk-margin-small-right uk-icon" uk-icon="icon: google"></span>{{ trans('app.login_google') }}</a>
                     </li>
                   </ul>
                 </form>
