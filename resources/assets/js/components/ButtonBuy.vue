@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h5 class="uk-margin-small">{{ trans.color_label}} : {{ prod.color }}</h5>
+        <h5 class="uk-margin-small">{{ trans.color_label}} : <img src="/images/BLACK.png" alt="" width="20px" class="uk-border-rounded uk-box-shadow-small"> {{ prod.color }}</h5>
         <div v-if="stocks.length > 0">
             <select :class="{'uk-select uk-form-width-small uk-form-small': true, 'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
               <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">{{ stock.size }} {{ stock.unit | unit }}</option>
