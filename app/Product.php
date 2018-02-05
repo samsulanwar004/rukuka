@@ -37,4 +37,9 @@ class Product extends Model
     {
         return $this->belongsTo(Popular::class, 'products_id');
     }
+
+    public function palette()
+    {
+        return $this->belongsTo(Color::class, 'product_colors_id');
+    }
 }

@@ -84,6 +84,16 @@ class CmsModulsSeeder extends Seeder {
         ],[ 
             
             'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Colors',
+            'icon'=>'fa fa-circle-o',
+            'path'=>'product-colors',
+            'table_name'=>'product_colors',
+            'controller'=>'AdminProductColorsController',
+            'is_protected'=>0,                                
+            'is_active'=>0
+        ],[ 
+            
+            'created_at'=>date('Y-m-d H:i:s'),
             'name'=>'Homestay Owners',
             'icon'=>'fa fa-circle-o',
             'path'=>'homestay-owners',
@@ -358,7 +368,7 @@ class CmsMenusSeeder extends Seeder {
         ],[
             
             'created_at'=>date('Y-m-d H:i:s'),
-            'name'=>'Product Stocks',
+            'name'=>'Stocks',
             'type'=>'Route',
             'path'=>'AdminProductStocksControllerGetIndex',
             'color' => 'normal',
@@ -368,6 +378,19 @@ class CmsMenusSeeder extends Seeder {
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 4
+        ],[
+            
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Colors',
+            'type'=>'Route',
+            'path'=>'AdminProductColorsControllerGetIndex',
+            'color' => 'normal',
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>1,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 5
         ],[
             
             'created_at'=>date('Y-m-d H:i:s'),
