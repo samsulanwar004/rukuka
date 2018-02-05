@@ -76,6 +76,7 @@
                         bag_link="{{ route('bag') }}"
                         wishlist_link="{{ route('user.wishlist') }}"
                         locale="{{ json_encode(trans('app')) }}"
+                        aws_link="{{ config('filesystems.s3url') }}"
                 ></button-buy>
                 <hr>
                 <p class="uk-margin-remove uk-text-meta">

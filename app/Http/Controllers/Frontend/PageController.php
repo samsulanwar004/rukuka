@@ -112,7 +112,10 @@ class PageController extends BaseController
     {
         try {
             $product = (new ProductRepository)->getProductBySlug($slug);
-            $product->color = $product->palette->name;
+            $color = $product->palette;
+            $product->color = $color->name;
+            $product->color_palette = $color->palette;
+
             $sumRating= collect($product->review)->sum('rating');
             $reviews = collect($product->review)->take(3);
 

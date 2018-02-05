@@ -125,7 +125,24 @@
                     {{ currency }} {{ price }}
                 </span>
               </h4>
-              <h5 class="uk-margin-small">{{ trans.color }} : <img src="/images/BLACK.png" alt="" width="20px" class="uk-border-rounded uk-box-shadow-small"> {{ color }}</h5>
+              <h5 class="uk-margin-small">{{ trans.color }} : 
+                <lazy-background v-if="isLoading"
+                  :image-source="loadingImage"
+                  alt="rukuka palette"
+                  :loading-image="loadingImage"
+                  :error-image="errorImage"
+                  width="20px">
+                </lazy-background>
+                <lazy-background v-else
+                  :image-source="palette | awsLink(aws_link)"
+                  alt="rukuka palette"
+                  :loading-image="loadingImage"
+                  :error-image="errorImage"
+                  width="20px"
+                  image-class="uk-border-rounded uk-box-shadow-small">
+                </lazy-background>
+               {{ color }}
+              </h5>
               <div v-if="stocks.length > 0">
                 <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-medium">
                   <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
@@ -270,6 +287,7 @@
             price: {},
             priceBeforeDiscount: {},
             color: {},
+            palette: null,
             images: {},
             stocks: {},
             content: {},
@@ -301,6 +319,7 @@
             self.price = data.sell_price;
             self.priceBeforeDiscount = data.price_before_discount;
             self.color = data.color;
+            self.palette = data.color_palette;
             self.images = data.images;
             self.stocks = data.stocks;
             self.content = data.content;
