@@ -38,7 +38,7 @@
                   <li>{{ bag.qty }}</li>
                 </ul>
                 </td>
-                <td class="uk-text-nowrap"><h4>{{ bag.price | round }}</h4></td>
+                <td class="uk-text-nowrap"><h4>{{ bag.price | round(exchangeRate.currency, exchangeRate.value) }}</h4></td>
             </tr>
         </tbody>
     </table>
@@ -50,7 +50,7 @@
     import VueLazyBackgroundImage from '../components/VueLazyBackgroundImage.vue';
 
     export default {
-        props: ['bag_api','aws_link','default_image','locale'],
+        props: ['bag_api','aws_link','default_image','locale', 'exchange_api'],
 
         components: {
           'lazy-background': VueLazyBackgroundImage
@@ -62,12 +62,16 @@
                 defaultImage: JSON.parse(this.default_image,true),
                 errorImage: {},
                 loadingImage: {},
-                trans: JSON.parse(this.locale,true)
+                trans: JSON.parse(this.locale,true),
+                exchangeRate: {}
             }
         },
 
         created () {
             var self = this;
+
+            self.getExchange();
+
             self.getBag();
 
             self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;      
@@ -87,6 +91,20 @@
                 .catch(function (error) {
                   console.log(error);
                 });
+            },
+
+            getExchange: function () {
+                var self = this;
+                axios.get(this.exchange_api, {
+                })
+                .then(function (response) {
+                  self.exchangeRate = response.data.data;
+
+                  Event.fire('exchange', response);
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
             }
         },
 
@@ -96,12 +114,13 @@
             return link;
           },
 
-          round: function(value) {
+          round: function(value, currency, rate) {
+            var value = value / rate;
             var money = function(n, currency) {
               return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
             };
 
-            return money(Number(Math.round(value+'e'+2)+'e-'+2), '$');
+            return money(Number(Math.round(value+'e'+2)+'e-'+2), currency);
           }
         }
     }

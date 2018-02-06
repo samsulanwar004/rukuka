@@ -44,12 +44,12 @@
                 <h3 class="uk-margin-remove">{{ $product->name }}</h3>
                 @if($product->price_before_discount > 0)
                     <b>
-                        <h4 class="uk-margin-remove"><del>{{ $product->currency }} {{ number_format($product->price_before_discount) }}</del>
-                            <span class="uk-text-danger">{{ $product->currency }} {{ number_format($product->sell_price) }}</span>
+                        <h4 class="uk-margin-remove"><del>{{ $product->currency }} {{ number_format($product->price_before_discount, 2) }}</del>
+                            <span class="uk-text-danger">{{ $product->currency }} {{ number_format($product->sell_price, 2) }}</span>
                         </h4>
                     </b>
                 @else
-                    <h4 class="uk-margin-remove">{{ $product->currency }} {{ number_format($product->sell_price) }} </h4>
+                    <h4 class="uk-margin-remove">{{ $product->currency }} {{ number_format($product->sell_price, 2) }} </h4>
                 @endif
 
                 <br>

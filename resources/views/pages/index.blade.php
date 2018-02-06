@@ -302,6 +302,7 @@
       default_image="{{ json_encode(config('common.default')) }}"
       bag_link="{{ route('bag') }}"
       locale="{{ json_encode(trans('app')) }}"
+      exchange="{{ json_encode($exchange) }}"
     ></popular>
     </div>
 

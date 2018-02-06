@@ -26,14 +26,14 @@
           <br>
           <span v-if="product.price_before_discount > 0 ">
             <del class="uk-text-small">
-                {{ product.currency }} {{ product.price_before_discount }}
+                {{ product.price_before_discount | round(exchangeRate.currency, exchangeRate.value) }}
             </del>
           </span>
           <span class="uk-text-danger uk-text-small" v-if="product.price_before_discount > 0 ">
-             &nbsp;{{ product.currency }} {{ product.price }}
+             &nbsp;{{ product.price | round(exchangeRate.currency, exchangeRate.value) }}
           </span>
           <span v-else class="uk-text-small">
-              {{ product.currency }} {{ product.price }}
+              {{ product.price | round(exchangeRate.currency, exchangeRate.value) }}
           </span>
 
         </div>
@@ -115,14 +115,14 @@
               <h4 class="uk-margin-remove">
                 <span v-if="priceBeforeDiscount > 0 ">
                   <del>
-                      {{ currency }} {{ priceBeforeDiscount }}
+                      {{ priceBeforeDiscount | round(exchangeRate.currency, exchangeRate.value) }}
                   </del>
                 </span>
                 <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
-                    &nbsp; {{ currency }} {{ price }}
+                    &nbsp; {{ price | round(exchangeRate.currency, exchangeRate.value) }}
                 </span>
                 <span v-else>
-                    {{ currency }} {{ price }}
+                    {{ price | round(exchangeRate.currency, exchangeRate.value) }}
                 </span>
               </h4>
               <h5 class="uk-margin-small">{{ trans.color }} : 
@@ -266,6 +266,10 @@
         });
       }
 
+      Event.listen('exchange', function (response) {
+        self.exchangeRate = response.data.data;
+      });
+
       Event.listen('bags', function (response) {
         self.bagCount = response.data.bagCount;
       });
@@ -283,7 +287,6 @@
         return {
             products: {},
             name: {},
-            currency: {},
             price: {},
             priceBeforeDiscount: {},
             color: {},
@@ -301,7 +304,8 @@
             isLoading: false,
             errorImage: {},
             loadingImage: {},
-            trans: JSON.parse(this.locale,true)
+            trans: JSON.parse(this.locale,true),
+            exchangeRate: {}
         }
     },
 
@@ -315,7 +319,6 @@
           if (typeof response.data.data !== 'undefined') {
             var data = response.data.data;
             self.name = data.name;
-            self.currency = data.currency;
             self.price = data.sell_price;
             self.priceBeforeDiscount = data.price_before_discount;
             self.color = data.color;
@@ -447,6 +450,15 @@
       awsLink: function (value, aws) {
         var link = value == null ? '#' : aws+'/'+value;
         return link;
+      },
+
+      round: function(value, currency, rate) {
+        var value = value / rate;
+        var money = function(n, currency) {
+          return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+        };
+
+        return money(Number(Math.round(value+'e'+2)+'e-'+2), currency);
       }
     }
   }

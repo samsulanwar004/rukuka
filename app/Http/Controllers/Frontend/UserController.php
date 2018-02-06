@@ -11,6 +11,7 @@ use App\Repositories\ProductStockRepository;
 use App\Services\BagService;
 use App\Services\EmailService;
 use App\Services\XenditService;
+use App\Services\CurrencyService;
 use App\Repositories\CourierRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\PaymentRepository;
