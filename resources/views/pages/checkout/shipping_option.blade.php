@@ -41,7 +41,7 @@
 
                               <tr>
                                   <td>
-                                      <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{$dataServices_val->optionValue}}" required="" onclick="getTotal({{ $dataServices_val->totalFeeDollar }})"> </td>
+                                      <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{$dataServices_val->optionValue}}" required="" onclick="getTotal({{ $dataServices_val->totalFeeIdr }})"> </td>
                                   <td> {{ $dataServices_val->serviceName }} </td>
                                   <td> $ {{ $dataServices_val->totalFeeDollar }}</td>
                               </tr>
@@ -52,7 +52,7 @@
 
                             <tr>
                                 <td>
-                                    <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{$dataServices_val->optionValue}}" required="" onclick="getTotal({{ $availableCouriersService_val['data']->totalFeeDollar }})"> </td>
+                                    <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{$dataServices_val->optionValue}}" required="" onclick="getTotal({{ $availableCouriersService_val['data']->totalFeeIdr }})"> </td>
                                 <td> {{ $availableCouriersService_val['data']->serviceName }} </td>
                                 <td> $ {{ $availableCouriersService_val['data']->totalFeeDollar }} </td>
                             </tr>
@@ -117,6 +117,7 @@
                  aws_link="{{ config('filesystems.s3url') }}"
                  default_image="{{ json_encode(config('common.default')) }}"
                  locale="{{ json_encode(trans('app')) }}"
+                 exchange_api="{{ route('exchange') }}"
               ></item-checkout>
         </div>
         <summary-checkout
@@ -133,18 +134,22 @@
 
    function getTotal(shipingCost){
     var subTotal = $('#sub_total').val();
+    var currency = $('#currency').val();
+    var rate = $('#rate').val();
+
     var total = parseFloat(subTotal) + parseFloat(shipingCost);
 
-    $('#shiping_fee').html(round(shipingCost));
-    $('#total_fee').html(round(total));
+    $('#shiping_fee').html(round(shipingCost, currency, rate));
+    $('#total_fee').html(round(total, currency, rate));
    }
 
-   function round(value) {
+   function round(value, currency, rate) {
+    var value = value / rate;
     var money = function(n, currency) {
       return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
     };
 
-      return money(Number(Math.round(value+'e'+2)+'e-'+2), '$');
+    return money(Number(Math.round(value+'e'+2)+'e-'+2), currency);
    }
 
    $(function () {

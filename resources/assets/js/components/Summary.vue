@@ -7,18 +7,20 @@
     <div class="uk-card-body">
        <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
          <div class="uk-text-small"><h6 class="uk-text-uppercase">{{ trans.subtotal }}</h6></div>
-         <div class="uk-text-right">{{ subtotal | round }}</div>
+         <div class="uk-text-right">{{ subtotal | round(exchangeRate.currency, exchangeRate.value) }}</div>
           <input type="hidden" id="sub_total" :value="subtotal">
+          <input type="hidden" id="currency" :value="exchangeRate.currency">
+          <input type="hidden" id="rate" :value="exchangeRate.value">
        </div>
        <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
           <div class="uk-text-small"><h6 class="uk-text-uppercase">{{ trans.shipping_cost_label }}</h6></div>
-          <div id="shiping_fee" class="uk-text-right">{{ shipping_cost | round }}</div>
+          <div id="shiping_fee" class="uk-text-right">{{ shipping_cost | round(exchangeRate.currency, exchangeRate.value) }}</div>
        </div>
     </div>
     <div class="uk-card-footer">
        <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
           <div class="uk-text-uppercase"> <h4><b>{{ trans.total }}</b></h4> </div>
-          <div id="total_fee" class="uk-text-right"><h4>{{ total | round }}</h4></div>
+          <div id="total_fee" class="uk-text-right"><h4>{{ total | round(exchangeRate.currency, exchangeRate.value) }}</h4></div>
        </div>
     </div>
     <div class="uk-card-footer">
@@ -36,12 +38,18 @@
             return {
                 subtotal: {},
                 total: {},
-                trans: JSON.parse(this.locale,true)
+                trans: JSON.parse(this.locale,true),
+                exchangeRate: {},
             }
         },
 
         created () {
             var self = this;
+
+            Event.listen('exchange', function (response) {
+              self.exchangeRate = response.data.data;
+            });
+
             var shipping_cost = parseFloat(this.shipping_cost.replace(/,/g, ''));
             Event.listen('bags', function (response) {
               var subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
@@ -52,12 +60,13 @@
         },
 
         filters: {
-          round: function(value) {
+          round: function(value, currency, rate) {
+            var value = value / rate;
             var money = function(n, currency) {
               return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
             };
 
-            return money(Number(Math.round(value+'e'+2)+'e-'+2), '$');
+            return money(Number(Math.round(value+'e'+2)+'e-'+2), currency);
           }
         }
     }
