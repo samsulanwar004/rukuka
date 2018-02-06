@@ -39,5 +39,7 @@ return [
 	// signature for order to payment
 	'order_key_signature' => env('ORDER_KEY_SIGNATURE'),
 
-	'maintance_whitelist' => env('MAINTENANCE_WHITELIST')		
+	'maintance_whitelist' => env('MAINTENANCE_WHITELIST'),
+
+	'video_slide' => env('VIDEO_SLIDE')		
 ];

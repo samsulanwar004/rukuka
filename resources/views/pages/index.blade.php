@@ -20,13 +20,12 @@
             <div class="uk-position-relative uk-visible-toggle uk-light">
 
                 <ul class="uk-slideshow-items">
+                  <li>
+                    <video playsinline uk-cover uk-video="automute: true; autoplay: true" loop>
+                      <source src="{{ config('common.video_slide') }}" type="video/mp4">
+                    </video>
+                  </li>
                   @foreach ($slider as $item)
-                    <li>
-                      <video playsinline uk-cover uk-video="automute: true">
-                        <source src="/images/Render Comp_x264.mp4" type="video/mp4">
-                      </video>
-
-                    </li>
                     <li>
                       <a href="{{ $item->url }}" class="uk-link-reset">
                       <div class="uk-position-cover" uk-slideshow-parallax="scale: 1.2,1.2,1">
