@@ -26,16 +26,16 @@
                                     <li>
                                       <div class="uk-inline uk-dark">
                                         <img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="530" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'">
-                                        <a class="uk-position-absolute uk-transform-center" style="left: 90%; top: 90%" href="#modal-media-image" uk-toggle uk-marker uk-tooltip="title: full view; pos: left"></a>
+                                        <a class="uk-position-absolute uk-transform-center" style="left: 90%; top: 90%" href="#modal-media-image-{{ $image->id }}" uk-toggle uk-marker uk-tooltip="title: full view; pos: left"></a>
                                       </div>
-                                    </li>
-                                    {{-- modal view --}}
-                                    <div id="modal-media-image" class="uk-flex-top" uk-modal>
-                                        <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
-                                            <button class="uk-modal-close-outside" type="button" uk-close></button>
-                                            <img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" style="max-height: 750px" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'">
+                                      {{-- modal view --}}
+                                        <div id="modal-media-image-{{ $image->id }}" class="uk-flex-top" uk-modal>
+                                            <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
+                                                <button class="uk-modal-close-outside" type="button" uk-close></button>
+                                                <img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" style="max-height: 750px" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'">
+                                            </div>
                                         </div>
-                                    </div>
+                                    </li>
                                 @endforeach
                             @else
                                 <li style="margin-bottom: 10px"><a href="#"><img src="{{ imageCDN(config('common.default.image_2')) }}" alt="{{ $image->name }}" width="530" ></a></li>
