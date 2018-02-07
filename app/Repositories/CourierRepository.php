@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Services\PosIndonesiaCourierService;
 use App\Services\BagService;
+use App\Services\CurrencyService;
+
 use Symfony\Component\HttpFoundation\Session\Session;
 
 use DB;
@@ -382,20 +384,22 @@ class CourierRepository{
 		if ($courierName == self::POS_INDONESIA) {
 
 			// kurensi
-			$usdToIdrRate = ExchangeRate::where('currency_code_from','=','idr')
-							->where('currency_code_to','=','usd')
-							->get()
-							->last();
-			
-			if ($usdToIdrRate == null) {
+			$currency = (new CurrencyService)->getCurrentCurrency();
+
+			if ($currency == null) {
 				
-				return $this->formatResponse('887', 'error exchange rate not set', null, null);
+				return $this->formatResponse('887', 'error currency rate not set', null, null);
+
+			}else if(is_numeric($currency->value) == false){
+
+				return $this->formatResponse('801', 'error currency is not number', null, null);	
+			
+			}else if ($currency->value <= 0) {
+				
+				return $this->formatResponse('822', 'Someting wrong in currency value lower than 0', null, null);
 
 			}
 
-
-			$oneUsdToIdr = $usdToIdrRate->conversion_value;
-			
 			// reforming structur
 			if (is_array($resultFromCourierProvider->r_fee)) {
 				
@@ -410,8 +414,9 @@ class CourierRepository{
 											$resultFromCourierProviderValue->insuranceTax, 
 											$resultFromCourierProviderValue->totalFee, 
 											$resultFromCourierProviderValue->itemValue,
-											round($resultFromCourierProviderValue->totalFee / $oneUsdToIdr, 2),
-											self::POS_INDONESIA
+											0,
+											self::POS_INDONESIA,
+											$currency
 										);
 
 				}
@@ -427,8 +432,9 @@ class CourierRepository{
 										$resultFromCourierProvider->r_fee->insuranceTax, 
 										$resultFromCourierProvider->r_fee->totalFee, 
 										$resultFromCourierProvider->r_fee->itemValue,
-										round($resultFromCourierProviderValue->totalFee / $oneUsdToIdr, 2),
-										self::POS_INDONESIA
+										0,
+										self::POS_INDONESIA,
+										$currency
 									);
 
 			}
@@ -478,8 +484,8 @@ class CourierRepository{
 
 	}
 
-	private function defaultTemplateResponseCourier($serviceCode, $serviceName, $fee, $feeTax, $insurance, $insuranceTax, $totalFee, $itemValue, $notes, $courierName){
-
+	private function defaultTemplateResponseCourier($serviceCode, $serviceName, $fee, $feeTax, $insurance, $insuranceTax, $totalFee, $itemValue, $totalFeeDollar, $courierName, $currency){
+			
 		return (object) [
 					'serviceCode' 	=> $serviceCode,
 					'serviceName' 	=> $serviceName,
@@ -489,8 +495,9 @@ class CourierRepository{
 					'insuranceTax' 	=> $insuranceTax,
 					'totalFeeIdr' 	=> $totalFee,
 					'itemValue' 	=> $itemValue,
-					'totalFeeDollar'=> $notes,
-					'optionValue'	=> $courierName . self::CHOOSED_SEPARATOR . $serviceCode 
+					'totalFeeDollar'=> $totalFeeDollar,
+					'optionValue'	=> $courierName . self::CHOOSED_SEPARATOR . $serviceCode,
+					'optionCurrencyLabel' => $currency->symbol . round(($totalFee / $currency->value), 2)
 				];
 	}
 
