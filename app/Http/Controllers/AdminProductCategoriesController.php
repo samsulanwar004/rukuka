@@ -255,7 +255,10 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-
+	        if ($postdata['parent_product_categories_id'] == null)
+	        {
+	        	$postdata['parent_product_categories_id'] = 0;
+	        }
 	    }
 
 	    /* 
