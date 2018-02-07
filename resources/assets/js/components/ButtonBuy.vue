@@ -2,7 +2,7 @@
     <div>
         <h5 class="uk-margin-small">{{ trans.color_label}} : 
             <lazy-background
-              :image-source="palette | awsLink(aws_link)"
+              :image-source="prod.color_palette | awsLink(aws_link)"
               alt="rukuka palette"
               :error-image="aws_link+'/images/default-600x600.jpg'"
               width="20px"

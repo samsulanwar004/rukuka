@@ -89,7 +89,6 @@ class PageController extends BaseController
                 'slug' => $entry->slug,
                 'price' => $entry->sell_price,
                 'price_before_discount' => $entry->price_before_discount,
-                'currency' => $entry->currency,
                 'photo' => $entry->images->first()->photo,
             ];
         });
@@ -125,7 +124,7 @@ class PageController extends BaseController
             //inject currency
             $product->sell_price = $product->sell_price / $exchange->value;
             $product->price_before_discount = $product->price_before_discount <= 0 ? $product->price_before_discount : $product->price_before_discoun / $exchange->value;
-            $product->currency = strtoupper($exchange->currency);
+            $product->currency = $exchange->symbol;
 
             $sumRating= collect($product->review)->sum('rating');
             $reviews = collect($product->review)->take(3);
@@ -275,7 +274,6 @@ class PageController extends BaseController
                             'color' => $stock->product->palette->name,
                             'photo' => $stock->product->images->first()->photo,
                             'description' => $stock->product->content,
-                            'currency' => $stock->product->currency,
                             'slug' => $stock->product->slug,
                             'product_id' => $stock->product->id,
                             'category_id' => $stock->product->category->id,
@@ -441,7 +439,6 @@ class PageController extends BaseController
                 'slug' => $entry->slug,
                 'price' => $entry->sell_price,
                 'price_before_discount' => $entry->price_before_discount,
-                'currency' => $entry->currency,
                 'photo' => $entry->images->first()->photo,
             ];
         });
