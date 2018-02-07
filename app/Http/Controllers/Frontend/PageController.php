@@ -16,6 +16,7 @@ use App\Contact;
 use Share;
 use DB;
 use Validator;
+use App\Services\CurrencyService;
 
 class PageController extends BaseController
 {
@@ -31,6 +32,7 @@ class PageController extends BaseController
 
     public function index()
     {
+
         $settings = (new SettingRepository)->getSettingByGroup('Home Page');
 
         $home = collect($settings)->mapWithKeys(function ($item) {
@@ -39,7 +41,7 @@ class PageController extends BaseController
 
         $slider = (new SettingRepository())->getSliderByGroup('Homepage');
 
-    	return view('pages.index', compact('home','slider'));
+    	return view('pages.index', compact('home','slider', 'exchange'));
     }
 
     public function shop(Request $request, $categories, $category, $slug = null, $sale = null)
@@ -80,6 +82,7 @@ class PageController extends BaseController
         }
 
         $shops = $products->map(function ($entry) {
+
             return [
                 'id' => $entry->id,
                 'name' => $entry->name,
@@ -111,7 +114,19 @@ class PageController extends BaseController
     public function product($slug, $method = null, $sku = null, $id = null)
     {
         try {
+            $exchange = (new CurrencyService)->getCurrentCurrency();
             $product = (new ProductRepository)->getProductBySlug($slug);
+
+            //inject color
+            $color = $product->palette;
+            $product->color = $color->name;
+            $product->color_palette = $color->palette;
+
+            //inject currency
+            $product->sell_price = $product->sell_price / $exchange->value;
+            $product->price_before_discount = $product->price_before_discount <= 0 ? $product->price_before_discount : $product->price_before_discoun / $exchange->value;
+            $product->currency = strtoupper($exchange->currency);
+
             $sumRating= collect($product->review)->sum('rating');
             $reviews = collect($product->review)->take(3);
 
@@ -257,7 +272,7 @@ class PageController extends BaseController
                         'price' => $stock->product->sell_price,
                         'options' => [
                             'size' => $stock->size,
-                            'color' => $stock->product->color,
+                            'color' => $stock->product->palette->name,
                             'photo' => $stock->product->images->first()->photo,
                             'description' => $stock->product->content,
                             'currency' => $stock->product->currency,
@@ -417,7 +432,8 @@ class PageController extends BaseController
             $products->appends($key, $value);
         }
 
-        $shops = $products->map(function ($entry) {
+        $shops = $products->map(function ($entry) use ($exchange) {
+
             return [
                 'id' => $entry->id,
                 'product_categories_id' => $entry->product_categories_id,
@@ -488,6 +504,23 @@ class PageController extends BaseController
         );
         
         return $content;
+    }
+
+    public function exchange()
+    {
+        try {
+           $exchange = (new CurrencyService)->getCurrentCurrency(); 
+           return response()->json([
+                'status' => 'ok',
+                'message' => 'success',
+                'data' => $exchange
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 400);
+        }
     }
 
 }

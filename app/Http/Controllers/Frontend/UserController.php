@@ -10,8 +10,11 @@ use App\Repositories\UserRepository;
 use App\Repositories\ProductStockRepository;
 use App\Services\BagService;
 use App\Services\EmailService;
+use App\Services\XenditService;
+use App\Services\CurrencyService;
 use App\Repositories\CourierRepository;
 use App\Repositories\ProductRepository;
+use App\Repositories\PaymentRepository;
 use App\Review;
 
 class UserController extends BaseController
@@ -954,55 +957,28 @@ class UserController extends BaseController
 
             if($signature1 == $signature2)
             {
-                $external_id = $data["order"]["order_code"];
+                $payment = new PaymentRepository;
+                $options['secret_api_key'] = config('common.xendit_secret_key');
+
+                $xenditPHPClient = new XenditService($options);
+                if($data["order"]["repayment"] = 1)
+                {
+                    $key = date('H:i:s');
+                    $external_id = base64_encode($data["order"]["order_code"]."/".$key); 
+                }  
+                else
+                {
+                     $external_id = $data["order"]["order_code"]; 
+                }
+
                 $token_id = $data['response']['id'];
                 $amount = $data['request']['amount'];
                 $capture_options['authentication_id'] = $data['response']['authentication_id'];
 
-                $curl = curl_init();
+                $response = $xenditPHPClient->captureCreditCardPayment($external_id, $token_id, $amount, $capture_options);
 
-                $headers = array();
-                $headers[] = 'Content-Type: application/json';
-                $secret_api_key = config('common.xendit_secret_key');
-                $server_domain = 'https://api.xendit.co';
-
-
-                $end_point = $server_domain.'/credit_card_charges';
-
-                $data['external_id'] = $external_id;
-                $data['token_id'] = $token_id;
-                $data['amount'] = $amount;
-
-
-                if (!empty($capture_options['authentication_id'])) {
-                    $data['authentication_id'] = $capture_options['authentication_id'];
-                }
-
-                if (!empty($capture_options['card_cvn'])) {
-                    $data['card_cvn'] = $capture_options['card_cvn'];
-                }
-
-                if (!empty($capture_options['capture'])) {
-                    $data['capture'] = $capture_options['capture'];
-                }
-
-                $payload = json_encode($data);
-
-                curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-                curl_setopt($curl, CURLOPT_USERPWD, $secret_api_key.":");
-                curl_setopt($curl, CURLOPT_URL, $end_point);
-                curl_setopt($curl, CURLOPT_POST, true);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $payload);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-                $response = curl_exec($curl);
-                curl_close($curl);
-
-                $responseObject = json_decode($response, true);
-                //return $responseObject;
-
-
-                $response_cc = $responseObject;
+                 $responseObject =  json_decode($response, true);
+                 $response_cc = $responseObject;
                  if(!isset($response_cc["capture_amount"]))
                  {
                     $response_cc["capture_amount"] = null ;
@@ -1012,21 +988,11 @@ class UserController extends BaseController
                     $response_cc["failure_reason"] = null ;
                  }
 
-                DB::table('response_payments')->insert(
-                    [
-                        'order_code'    => $data["order"]["order_code"],
-                        'response_json' => $response,
-                        'created_at'    => date("Y-m-d H:i:s"),
-                        'updated_at'    => date("Y-m-d H:i:s")
-                    ]
-                );
+                $payment->createResponsePayment($responseObject,$data["order"]["order_code"]);
+
                 if($response_cc["status"] == "CAPTURED")
                 {
-                    $order = (new OrderRepository)->getOrderbyOrderCode($data["order"]["order_code"]);
-                    $order->payment_status = 1;
-                    $order->payment_name = $data["order"]["card_holder"];
-                    $order->pending_reason = 'already paid';
-                    $order->update();
+                    $payment->updateOrder($data);
 
                     $message = "Charge is successfully captured and the funds will be settled according to the settlement schedule.";
 
@@ -1036,13 +1002,10 @@ class UserController extends BaseController
                     $emailService->sendInvoicePaid($order);
                 }
 
-                if($response_cc["status"] == "AUTHORIZED") // MASIH RAGU DI GANTI STATUSNYA GA
+                if($response_cc["status"] == "AUTHORIZED")
                 {
-                    DB::table('orders')
-                    ->where('order_code', $data["order"]["order_code"])
-                    ->update(['payment_status' => 1,'payment_status' => 1,'updated_at' => date("Y-m-d H:i:s")]);
-
-                     $message = "Charge is successfully authorized.";
+                    $payment->updateOrder($data);
+                    $message = "Charge is successfully authorized.";
                 }
 
                 if($response_cc["status"] == "FAILED")

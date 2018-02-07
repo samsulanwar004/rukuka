@@ -1,6 +1,15 @@
 <template>
     <div>
-        <h5 class="uk-margin-small">{{ trans.color_label}} : {{ prod.color }}</h5>
+        <h5 class="uk-margin-small">{{ trans.color_label}} : 
+            <lazy-background
+              :image-source="palette | awsLink(aws_link)"
+              alt="rukuka palette"
+              :error-image="aws_link+'/images/default-600x600.jpg'"
+              width="20px"
+              image-class="uk-border-rounded uk-box-shadow-small">
+            </lazy-background> 
+            {{ prod.color }}
+        </h5>
         <div v-if="stocks.length > 0">
             <select :class="{'uk-select uk-form-width-small uk-form-small': true, 'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
               <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">{{ stock.size }} {{ stock.unit | unit }}</option>
@@ -47,6 +56,8 @@
 
 <script>
     import axios from 'axios';
+    import VueLazyBackgroundImage from '../components/VueLazyBackgroundImage.vue';
+
     export default {
         props: [
             'api_bag',
@@ -60,7 +71,12 @@
             'bag_link',
             'wishlist_link',
             'locale',
+            'aws_link'
         ],
+
+        components: {
+          'lazy-background': VueLazyBackgroundImage
+        },
 
         created () {
             var self = this;
@@ -285,6 +301,11 @@
                         return '(Only '+unit+' Left)';
                     }
                 }
+            },
+
+            awsLink: function (value, aws) {
+                var link = value == null ? '#' : aws+'/'+value;
+                return link;
             }
         }
     }

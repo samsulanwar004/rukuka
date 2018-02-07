@@ -166,6 +166,11 @@ class PageController extends BaseApiController
 
             $product->stocks->toArray();
 
+            $color = $product->palette;
+
+            $product->color = $color->name;
+            $product->color_palette = $color->palette;
+
             //get Delivery & Free Returns
             $slug = 'delivery-free-returns';
             $result = (new PageRepository)->getHelp($slug);

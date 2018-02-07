@@ -1,3 +1,8 @@
+<div class="uk-section-xsmall uk-background-secondary uk-padding-remove">
+  <div class="uk-container uk-container-small uk-light">
+    <h6 class="uk-padding-xsmall uk-text-center">{{ trans('app.welcome_in') }}</h6>
+  </div>
+</div>
 <div class="uk-section-xsmall uk-background-default uk-margin-remove uk-padding-remove" uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
     <div class="uk-section uk-section-default uk-section-xsmall uk-padding-remove-vertical">
         <div class="uk-container uk-container-small">
@@ -31,6 +36,7 @@
                 aws_link="{{ config('filesystems.s3url') }}"
                 default_image="{{ json_encode(config('common.default')) }}"
                 locale="{{ json_encode(trans('app')) }}"
+                exchange_api="{{ route('exchange') }}"
               ></user-panel>
           </div>
 

@@ -1,5 +1,5 @@
 <template>
-    <nav class="uk-container uk-container-small uk-section-default uk-background-default" uk-navbar="dropbar: true; align: center; boundary-align: true; delay-hide: 100; duration:50">
+    <nav class="uk-container uk-container-small uk-section-default uk-background-default" uk-navbar="dropbar: true; align: center; boundary-align: true; delay-hide: 100; duration:200">
       <div class="uk-navbar-center">
 
           <ul class="uk-navbar-nav">
@@ -164,68 +164,6 @@
                     </div>
                 </div>
               </li>
-              <li><a :href="kidLink">{{ trans.kids_nav }}</a>
-                  <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
-                      <div uk-grid>
-                          <div class="uk-width-1-5@m">
-                              <ul class="uk-nav uk-navbar-dropdown-nav">
-                                  <li class="uk-parent"><a :href="kidLink"><h5 class="uk-margin-small">{{ trans.new_arrival }}</h5></a></li>
-                                  <li>
-                                      <a :href="kidsNav.kid_blog_url">
-                                          <lazy-background
-                                            :image-source="kidsNav.kid_blog_image | awsLink(aws_link)"
-                                            alt="rukuka"
-                                            :loading-image="loadingImage"
-                                            :error-image="errorImage"
-                                            image-style="height: 150px">
-                                          </lazy-background>
-                                      </a>
-                                  </li>
-                              </ul>
-                          </div>
-
-                          <div class="uk-width-3-5@m" uk-grid>
-                              <div class="uk-width-2-3">
-                                  <ul class="uk-nav uk-navbar-dropdown-nav">
-                                      <li v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'clothing'"><h5 class="uk-margin-small">{{ trans.clothing }}</h5></li>
-                                  </ul>
-                                  <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2" v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
-                                      <li class="uk-parent uk-active">
-                                          <a href="/shop/kids/all">{{ trans.all }}</a>
-                                      </li>
-                                      <li class="uk-parent" v-for="cat in cloth.child">
-                                          <a :href="'/shop/kids/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
-                                      </li>
-                                  </ul>
-                              </div>
-                              <div class="uk-width-1-3">
-                                  <ul class="uk-nav uk-navbar-dropdown-nav">
-                                      <li v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'accessories'"><h5 class="uk-margin-small">{{ trans.accessories }}</h5></li>
-                                  </ul>
-                                  <ul class="uk-nav uk-navbar-dropdown-nav" v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
-                                      <li class="uk-parent uk-active">
-                                          <a href="/shop/kids/all">{{ trans.all }}</a>
-                                      </li>
-                                      <li class="uk-parent" v-for="cat in cloth.child">
-                                          <a :href="'/shop/kids/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
-                                      </li>
-                                  </ul>
-                              </div>
-                          </div>
-
-                          <div class="uk-width-1-5@m">
-                              <ul class="uk-nav uk-navbar-dropdown-nav">
-                                  <li><h5 class="uk-margin-small">{{ trans.our_designer }}</h5></li>
-                                  <li class="uk-parent"><a :href="kidsNav.kid_designer_1_url" >{{kidsNav.kid_designer_1_text}}</a></li>
-                                  <li class="uk-parent"><a :href="kidsNav.kid_designer_2_url" >{{kidsNav.kid_designer_2_text}}</a></li>
-                                  <li class="uk-parent"><a :href="kidsNav.kid_designer_3_url" >{{kidsNav.kid_designer_3_text}}</a></li>
-                                  <li class="uk-parent"><a :href="kidsNav.kid_designer_4_url" >{{kidsNav.kid_designer_4_text}}</a></li>
-                                  <li class="uk-parent"><a :href="kidsNav.kid_designer_5_url" >{{kidsNav.kid_designer_5_text}}</a></li>
-                              </ul>
-                          </div>
-                      </div>
-                  </div>
-              </li>
               <li><a>{{ trans.sale_nav }}</a>
                   <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                       <div uk-grid>
@@ -262,6 +200,7 @@
               </li>
               <li><a href="/blog">{{ trans.blog_nav }}</a>
               </li>
+              <li><a href="#">Eco Tourism</a></li>
           </ul>
       </div>
     </nav>
@@ -350,9 +289,9 @@
               console.log(error);
             });
 
-            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;      
-            self.errorImageSale = this.aws_link+'/images/'+this.defaultImage.image_5;      
-            self.loadingImage = this.aws_link+'/images/loading-image.gif';   
+            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;
+            self.errorImageSale = this.aws_link+'/images/'+this.defaultImage.image_5;
+            self.loadingImage = this.aws_link+'/images/loading-image.gif';
         },
 
         data() {

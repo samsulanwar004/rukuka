@@ -38,7 +38,7 @@
                   <div class="uk-width-2-3">
                     <div class="uk-panel">
                       <span class="uk-text-small"><b>{{ bag.name }}</b></span><br>
-                      <span class="uk-text-small">{{ bag.options.currency }} {{ bag.price }} </span><br>
+                      <span class="uk-text-small">{{ bag.price | round(exchangeRate.currency, exchangeRate.value) }} </span><br>
                       <span class="uk-text-meta">{{ trans.color }} : {{ bag.options.color }}</span><br>
                       <span class="uk-text-meta">{{ trans.size }}  : {{ bag.options.size }}</span><br>
                       <a :href="product_link+'/'+bag.options.slug+'/bag/'+bag.id" class="uk-button uk-button-text uk-button-small" name="button"><span class="uk-icon" uk-icon="icon: pencil; ratio: 0.8"></span>{{ trans.edit }}</a>
@@ -54,7 +54,7 @@
               </div>
               <div class="uk-card-footer uk-padding-small">
                 <div class="uk-text-center">
-                  <h4 class="uk-text-uppercase">{{ trans.subtotal}}: {{ subtotal }}</h4>
+                  <h4 class="uk-text-uppercase">{{ trans.subtotal}}: {{ subtotal | round(exchangeRate.currency, exchangeRate.value) }}</h4>
                   <a :href="checkout_link" class="uk-button-secondary uk-button uk-button-small uk-width-1-1 uk-text-uppercase">{{ trans.checkout_now}}</a>
                 </div>
               </div>
@@ -98,7 +98,8 @@
       'logout_link',
       'aws_link',
       'default_image',
-      'locale'
+      'locale',
+      'exchange_api'
     ],
 
     components: {
@@ -112,6 +113,8 @@
         self.getWishlist();
       }
 
+      self.getExchange();
+
       self.accounts = this.account ? JSON.parse(this.account) : {};
 
       self.getBag();
@@ -119,13 +122,13 @@
       Event.listen('addBag', function (response) {
         self.bagCount = response.data.bagCount;
         self.bags = response.data.bags;
-        self.subtotal = response.data.subtotal;
+        self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
       });
 
       Event.listen('removePopUp', function (response) {
         self.bagCount = response.data.bagCount;
         self.bags = response.data.bags;
-        self.subtotal = response.data.subtotal;
+        self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
       });
 
       Event.listen('addWishlist', function (response) {
@@ -148,7 +151,8 @@
         defaultImage: JSON.parse(this.default_image,true),
         errorImage: {},
         loadingImage: {},
-        trans: JSON.parse(this.locale,true)
+        trans: JSON.parse(this.locale,true),
+        exchangeRate: {}
       }
     },
 
@@ -163,7 +167,7 @@
         .then(function (response) {
           self.bagCount = response.data.bagCount;
           self.bags = response.data.bags;
-          self.subtotal = response.data.subtotal;
+          self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
 
           Event.fire('removeBag', response);
         })
@@ -179,7 +183,7 @@
         .then(function (response) {
           self.bagCount = response.data.bagCount;
           self.bags = response.data.bags;
-          self.subtotal = response.data.subtotal;
+          self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
 
           Event.fire('bags', response);
         })
@@ -204,6 +208,20 @@
         });
       },
 
+      getExchange: function () {
+        var self = this;
+        axios.get(this.exchange_api, {
+        })
+        .then(function (response) {
+          self.exchangeRate = response.data.data;
+
+          Event.fire('exchange', response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      },
+
       goBag: function () {
         window.location.href = this.bag_link;
       }
@@ -219,6 +237,15 @@
       awsLink: function (value, aws) {
         var link = value == null ? '#' : aws+'/'+value;
         return link;
+      },
+
+      round: function(value, currency, rate) {
+        var value = value / rate;
+        var money = function(n, currency) {
+          return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+        };
+
+        return money(Number(Math.round(value+'e'+2)+'e-'+2), currency);
       }
     }
   }

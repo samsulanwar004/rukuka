@@ -1,5 +1,5 @@
 <template>
-  <div class="uk-grid-small uk-child-width-1-4@m uk-child-width-1-2 uk-margin-large-bottom" uk-grid>
+  <div class="uk-grid-small uk-padding-remove uk-child-width-1-6@m uk-child-width-1-2 uk-margin-large-bottom" uk-grid>
     <!-- start product -->
     <div class="uk-panel uk-text-left uk-margin-small-bottom" v-for="product in products">
       <div class="uk-card uk-card-small uk-padding-remove">
@@ -9,9 +9,7 @@
               :image-source="product.photo | awsLink(aws_link)"
               :alt="product.name"
               :loading-image="loadingImage"
-              :error-image="errorImage"
-              :image-success-callback="successCallback"
-              :image-error-callback="errorCallback">
+              :error-image="errorImage">
             </lazy-background>
           </a>
           <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default uk-visible@m">
@@ -28,14 +26,14 @@
           <br>
             <span v-if="product.price_before_discount > 0 ">
               <del class="uk-text-small">
-                  {{ product.currency }} {{ product.price_before_discount }}
+                  {{ product.price_before_discount | round(exchangeRate.currency, exchangeRate.value) }}
               </del>
             </span>
             <span class="uk-text-danger uk-text-small" v-if="product.price_before_discount > 0 ">
-               &nbsp;{{ product.currency }} {{ product.price }}
+               &nbsp;{{ product.price | round(exchangeRate.currency, exchangeRate.value) }}
             </span>
             <span v-else class="uk-text-small">
-                {{ product.currency }} {{ product.price }}
+                {{ product.price | round(exchangeRate.currency, exchangeRate.value) }}
             </span>
 
         </div>
@@ -117,19 +115,36 @@
               <h4 class="uk-margin-remove">
                 <span v-if="priceBeforeDiscount > 0 ">
                   <del>
-                      {{ currency }} {{ priceBeforeDiscount }}
+                      {{ priceBeforeDiscount | round(exchangeRate.currency, exchangeRate.value) }}
                   </del>
                 </span>
                 <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
-                    &nbsp; {{ currency }} {{ price }}
+                    &nbsp; {{ price | round(exchangeRate.currency, exchangeRate.value) }}
                 </span>
                 <span v-else>
-                    {{ currency }} {{ price }}
+                    {{ price | round(exchangeRate.currency, exchangeRate.value) }}
                 </span>
               </h4>
-              <h5 class="uk-margin-small">Color : {{ color }}</h5>
+              <h5 class="uk-margin-small">{{ trans.color }} : 
+                <lazy-background v-if="isLoading"
+                  :image-source="loadingImage"
+                  alt="rukuka palette"
+                  :loading-image="loadingImage"
+                  :error-image="errorImage"
+                  width="20px">
+                </lazy-background>
+                <lazy-background v-else
+                  :image-source="palette | awsLink(aws_link)"
+                  alt="rukuka palette"
+                  :loading-image="loadingImage"
+                  :error-image="errorImage"
+                  width="20px"
+                  image-class="uk-border-rounded uk-box-shadow-small">
+                </lazy-background>
+                {{ color }}
+              </h5>
               <div v-if="stocks.length > 0">
-                <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-small">
+                <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-medium">
                   <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
                     {{ stock.size }} {{ stock.unit | unit }}
                   </option>
@@ -207,15 +222,15 @@
 
   export default {
     props: [
-      'api', 
-      'product_api', 
-      'bag_api', 
-      'wishlist_api', 
-      'auth', 
+      'api',
+      'product_api',
+      'bag_api',
+      'wishlist_api',
+      'auth',
       'aws_link',
       'default_image',
       'bag_link',
-      'locale',
+      'locale'
     ],
 
     components: {
@@ -235,26 +250,31 @@
         console.log(error);
       });
 
+      Event.listen('exchange', function (response) {
+        self.exchangeRate = response.data.data;
+      });
+
       Event.listen('bags', function (response) {
         self.bagCount = response.data.bagCount;
-      });  
+      });
 
       Event.listen('addBag', function (response) {
         self.bagCount = response.data.bagCount;
-      });  
+      });
 
-      self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;      
-      self.loadingImage = this.aws_link+'/images/loading-image.gif'; 
+      self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;
+      self.loadingImage = this.aws_link+'/images/loading-image.gif';
+
     },
 
     data() {
         return {
             products: {},
             name: {},
-            currency: {},
             price: {},
             priceBeforeDiscount: {},
             color: {},
+            palette: null,
             images: {},
             stocks: {},
             content: {},
@@ -268,7 +288,8 @@
             isLoading: false,
             errorImage: {},
             loadingImage: {},
-            trans: JSON.parse(this.locale,true)
+            trans: JSON.parse(this.locale,true),
+            exchangeRate: {},
         }
     },
 
@@ -282,10 +303,10 @@
           if (typeof response.data.data !== 'undefined') {
             var data = response.data.data;
             self.name = data.name;
-            self.currency = data.currency;
             self.price = data.sell_price;
             self.priceBeforeDiscount = data.price_before_discount;
             self.color = data.color;
+            self.palette = data.color_palette;
             self.images = data.images;
             self.stocks = data.stocks;
             self.content = data.content;
@@ -412,6 +433,15 @@
       awsLink: function (value, aws) {
         var link = value == null ? '#' : aws+'/'+value;
         return link;
+      },
+
+      round: function(value, currency, rate) {
+        var value = value / rate;
+        var money = function(n, currency) {
+          return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+        };
+
+        return money(Number(Math.round(value+'e'+2)+'e-'+2), currency);
       }
     }
   }

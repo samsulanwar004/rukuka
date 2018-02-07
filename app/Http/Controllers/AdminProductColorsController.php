@@ -5,52 +5,45 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminExchangeRatesController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminProductColorsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "id";
+			$this->title_field = "name";
 			$this->limit = "20";
 			$this->orderby = "id,desc";
 			$this->global_privilege = false;
-			$this->button_table_action = false;
+			$this->button_table_action = true;
 			$this->button_bulk_action = false;
 			$this->button_action_style = "button_icon";
 			$this->button_add = true;
-			$this->button_edit = false;
-			$this->button_delete = false;
+			$this->button_edit = true;
+			$this->button_delete = true;
 			$this->button_detail = false;
 			$this->button_show = false;
 			$this->button_filter = false;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "exchange_rates";
+			$this->table = "product_colors";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Created By","name"=>"cms_users_id","join"=>"cms_users,name"];
-			$this->col[] = ["label"=>"Currency Code From","name"=>"currency_code_from"];
-			$this->col[] = ["label"=>"Currency Code To","name"=>"currency_code_to"];
-			$this->col[] = ["label"=>"Conversion Value","name"=>"conversion_value"];
-			$this->col[] = ["label"=>"Inverse Conversion Value","name"=>"inverse_conversion_value"];
+			$this->col[] = ["label"=>"Name","name"=>"name"];
+			$this->col[] = ["label"=>"Palette","name"=>"palette"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Currency Code From','name'=>'currency_code_from','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'idr'];
-			$this->form[] = ['label'=>'Currency Code To','name'=>'currency_code_to','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'usd;jpy'];
-			$this->form[] = ['label'=>'Conversion Value','name'=>'conversion_value','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Inverse Conversion Value','name'=>'inverse_conversion_value','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
+			$this->form[] = ['label'=>'Palette','name'=>'palette','type'=>'upload','validation'=>'required|image|max:200','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Currency Code From','name'=>'currency_code_from','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'usd;idr'];
-			//$this->form[] = ['label'=>'Currency Code To','name'=>'currency_code_to','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'usd;idr'];
-			//$this->form[] = ['label'=>'Conversion Value','name'=>'conversion_value','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Inverse Conversion Value','name'=>'inverse_conversion_value','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			//$this->form[] = ["label"=>"Name","name"=>"name","type"=>"text","required"=>TRUE,"validation"=>"required|string|min:3|max:70","placeholder"=>"You can only enter the letter only"];
+			//$this->form[] = ["label"=>"Palette","name"=>"palette","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
 			# OLD END FORM
 
 			/* 
@@ -249,6 +242,9 @@
 	    */    
 	    public function hook_row_index($column_index,&$column_value) {	        
 	    	//Your code here
+	    	if($column_index==1){
+                $column_value = '<img src="'.uploadCDN($column_value).'" alt="-" height="40">';
+            }
 	    }
 
 	    /*
@@ -260,7 +256,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-	        $postdata['cms_users_id'] = CRUDBooster::myId();
+
 	    }
 
 	    /* 
