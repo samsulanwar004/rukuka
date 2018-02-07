@@ -38,7 +38,7 @@
                   <li>{{ bag.qty }}</li>
                 </ul>
                 </td>
-                <td class="uk-text-nowrap"><h4>{{ bag.price | round(exchangeRate.currency, exchangeRate.value) }}</h4></td>
+                <td class="uk-text-nowrap"><h4>{{ bag.price | round(exchangeRate.symbol, exchangeRate.value) }}</h4></td>
             </tr>
         </tbody>
     </table>
