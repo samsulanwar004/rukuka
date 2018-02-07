@@ -43,7 +43,7 @@
                                   <td>
                                       <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{$dataServices_val->optionValue}}" required="" onclick="getTotal({{ $dataServices_val->totalFeeIdr }})"> </td>
                                   <td> {{ $dataServices_val->serviceName }} </td>
-                                  <td> $ {{ $dataServices_val->totalFeeDollar }}</td>
+                                  <td> {{ $dataServices_val->optionCurrencyLabel }}</td>
                               </tr>
 
                             @endforeach
@@ -54,7 +54,7 @@
                                 <td>
                                     <input type="radio" class="uk-radio radio-shipping-cost" name="shipping" value="{{$dataServices_val->optionValue}}" required="" onclick="getTotal({{ $availableCouriersService_val['data']->totalFeeIdr }})"> </td>
                                 <td> {{ $availableCouriersService_val['data']->serviceName }} </td>
-                                <td> $ {{ $availableCouriersService_val['data']->totalFeeDollar }} </td>
+                                <td> {{ $availableCouriersService_val['data']->optionCurrencyLabel }} </td>
                             </tr>
 
                           @endif
