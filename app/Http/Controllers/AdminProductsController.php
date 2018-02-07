@@ -46,7 +46,6 @@
 			$this->form[] = ['label'=>'Product Designers','name'=>'product_designers_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_designers,name'];
             $this->form[] = ['label'=>'Product Categories','name'=>'product_categories_id','type'=>'custom','validation'=>'required','width'=>'col-sm-10', 'html' => $this->categories()];
             $this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Color','name'=>'color','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Color','name'=>'product_colors_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_colors,name'];
 			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Detail And Care','name'=>'detail_and_care','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
