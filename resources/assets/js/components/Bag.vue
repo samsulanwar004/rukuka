@@ -52,7 +52,7 @@
                           <li><a class="uk-icon-link" uk-icon="icon: plus" v-on:click.prevent="plus(bag.id)"></a></li>
                         </ul>
                         </td>
-                        <td class="uk-text-nowrap"><h4>{{ bag.price | round(exchangeRate.currency, exchangeRate.value) }}</h4></td>
+                        <td class="uk-text-nowrap"><h4>{{ bag.price | round(exchangeRate.symbol, exchangeRate.value) }}</h4></td>
                     </tr>
                 </tbody>
                 <tbody v-if="bags == 0">
@@ -69,13 +69,13 @@
           <div class="uk-card-body">
             <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
               <div class="uk-text-small"><h6>{{ trans.subtotal }}</h6></div>
-              <div class="uk-text-right">{{ subtotal | round(exchangeRate.currency, exchangeRate.value) }}</div>
+              <div class="uk-text-right">{{ subtotal | round(exchangeRate.symbol, exchangeRate.value) }}</div>
             </div>
           </div>
           <div class="uk-card-footer">
             <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
               <div><h4 class="uk-text-uppercase"> <b>{{ trans.total }}</b></h4></div>
-              <div class="uk-text-right"><h4>{{ subtotal | round(exchangeRate.currency, exchangeRate.value) }}</h4></div>
+              <div class="uk-text-right"><h4>{{ subtotal | round(exchangeRate.symbol, exchangeRate.value) }}</h4></div>
             </div>
           </div>
           <div class="uk-card-footer">

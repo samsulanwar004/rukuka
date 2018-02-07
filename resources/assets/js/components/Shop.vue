@@ -24,14 +24,14 @@
                     <br>
                     <span v-if="product.price_before_discount > 0 ">
                         <del class="uk-text-small">
-                            {{ product.price_before_discount | round(exchangeRate.currency, exchangeRate.value) }}
+                            {{ product.price_before_discount | round(exchangeRate.symbol, exchangeRate.value) }}
                         </del>
                     </span>
                     <span class="uk-text-danger uk-text-small" v-if="product.price_before_discount > 0 ">
-                       &nbsp;{{ product.price | round(exchangeRate.currency, exchangeRate.value) }}
+                       &nbsp;{{ product.price | round(exchangeRate.symbol, exchangeRate.value) }}
                     </span>
                     <span v-else class="uk-text-small">
-                        {{ product.price | round(exchangeRate.currency, exchangeRate.value) }}
+                        {{ product.price | round(exchangeRate.symbol, exchangeRate.value) }}
                     </span>
                 </div>
             </div>
@@ -54,14 +54,14 @@
                   <br>
                   <span v-if="product.price_before_discount > 0 ">
                     <del class="uk-text-small">
-                        {{ product.currency }} {{ product.price_before_discount }}
+                        {{ product.price_before_discount | round(exchangeRate.symbol, exchangeRate.value) }}
                     </del>
                   </span>
                   <span class="uk-text-danger uk-text-small" v-if="product.price_before_discount > 0 ">
-                     &nbsp;{{ product.currency }} {{ product.price }}
+                     &nbsp;{{ product.price | round(exchangeRate.symbol, exchangeRate.value) }}
                   </span>
                   <span v-else class="uk-text-small">
-                      {{ product.currency }} {{ product.price }}
+                      {{ product.price | round(exchangeRate.symbol, exchangeRate.value) }}
                   </span>
 
                 </div>
@@ -142,14 +142,14 @@
                   <h4 class="uk-margin-remove">
                     <span v-if="priceBeforeDiscount > 0 ">
                       <del>
-                          {{ priceBeforeDiscount | round(exchangeRate.currency, exchangeRate.value) }}
+                          {{ priceBeforeDiscount | round(exchangeRate.symbol, exchangeRate.value) }}
                       </del>
                     </span>
                     <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
-                        &nbsp;{{ price | round(exchangeRate.currency, exchangeRate.value) }}
+                        &nbsp;{{ price | round(exchangeRate.symbol, exchangeRate.value) }}
                     </span>
                     <span v-else>
-                        {{ price | round(exchangeRate.currency, exchangeRate.value) }}
+                        {{ price | round(exchangeRate.symbol, exchangeRate.value) }}
                     </span>
                   </h4>
 
