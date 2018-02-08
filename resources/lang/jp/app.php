@@ -21,8 +21,8 @@ return [
 
     //resources/views/partials/nav.blade.php
     'search'                    =>  'サーチ',
-    'welcome_in'         =>  'ruKuKaへようこそ。今、インドネシアがどのようにあなたを本当に美しく見せてくれるのか教えてください。
-',
+    'search_label'              =>  'サーチ',
+    'welcome_in'                =>  'ruKuKaへようこそ。今、インドネシアがどのようにあなたを本当に美しく見せてくれるのか教えてください。',
 
     //resources/assets/js/components/UserPanel.vue
     'hallo'                     =>  'ハロー,',

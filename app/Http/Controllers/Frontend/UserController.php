@@ -796,6 +796,8 @@ class UserController extends BaseController
 
         $user = $this->getUserActive();
 
+        (new UserRepository)->updateExpiredDate($user);
+
         $onPaid = $user->orders->filter(function ($entry) {
             return $entry->payment_status == 0 && $entry->order_status == 0;
         });
@@ -992,7 +994,7 @@ class UserController extends BaseController
 
                 if($response_cc["status"] == "CAPTURED")
                 {
-                    $payment->updateOrder($data);
+                    $order = $payment->updateOrder($data);
 
                     $message = "Charge is successfully captured and the funds will be settled according to the settlement schedule.";
 

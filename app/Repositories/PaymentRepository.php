@@ -21,7 +21,6 @@ class PaymentRepository
                         'updated_at'    => date("Y-m-d H:i:s")
                     ]
                 );
-        return $result;
     }
 
     public function updateOrder($data)
@@ -31,6 +30,8 @@ class PaymentRepository
                     $order->payment_name = $data["order"]["card_holder"];
                     $order->pending_reason = 'already paid';
                     $order->update();
+
+        return $order;
     }
 
     
