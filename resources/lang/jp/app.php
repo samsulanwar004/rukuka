@@ -40,7 +40,7 @@ return [
     'connect_us'                =>  '私たちとつながる',
     'copyright'                 =>  'Copyright © 2017 rukuka.com - All Rights Reseved.',
     'order_status'              =>  '注文の状況',
-    'shipping_handling'         =>  '出荷処理',
+    'shipping'                  =>  '出荷処理',
     'returns_exchanges'         =>  '返品と交換',
     'international_orders'      =>  '国際注文',
     'need_some_help'            =>  '助けが要る',
@@ -70,6 +70,7 @@ return [
     'kids_nav'                  =>  '子供たち',
     'sale_nav'                  =>  '販売',
     'blog_nav'                  =>  'ブログ',
+    'eco_tourism_nav'           =>  'エコツーリズム',
     'all'                       =>  'すべて',
     'new_arrival'               =>  '新参者',
     'our_designer'              =>  '私たちのデザイナー',
@@ -296,7 +297,7 @@ return [
 
     //resources/views/pages/checkout/checkout_finish.blade.php
     'checkout_almost'           =>  'あなたのチェックアウトプロセスはほぼ完了しています!',
-    'price'                     =>  '価格',
+    'unit_price'                =>  '価格',
     'pay_now'                   =>  '今払う',
     'card_number'               =>  'カード番号 :',
     'card_help'                 =>  'あなたのカード番号を挿入する',
@@ -315,6 +316,36 @@ return [
     'another_keyword'           =>  '他のキーワードで検索しよう',
     'other_people'              =>  '他の人も読む',
 
+    //email common
+    'invoice'                   =>  'Invoice',
+    'note'                      =>  'Note',
+    'note_currency'             =>  'charge will be change in IDR currency.',
+    'please'                    =>  'Please',
+    'contact_label'             =>  'contact us',
+    'contact_text'              =>  'with any questions regarding this invoice.',
+    'sincerely'                 =>  'Sincerely',
+    'rukuka_team'               =>  'ruKuKa Team',
 
+    //resources/views/emails/invoice_unpaid.blade.php
+    'unpaid_subject'            =>  'Invoice Unpaid',
+    'unpaid_title'              =>  'Thank you for your order.',
+    'unpaid_subtitle_1'         =>  'Your order has been approved,',
+    'unpaid_subtitle_2'         =>  'please review your order below',
+    'unpaid_text_1'             =>  'Thank you for ordering from us, Your order has been approved and is waiting for your payment. We will confirm you shortly once payment has been completed.',
+    'unpaid_text_2'             =>  'You can review complete details of your order on the Order History page.',
 
+    //resources/views/emails/invoice_paid.blade.php
+    'paid_subject'            =>  'Invoice Paid',
+    'paid_title'              =>  'Thank you for your order.',
+    'paid_subtitle_1'         =>  'Your payment has been confirmed, ',
+    'paid_subtitle_2'         =>  'please review your order below',
+    'paid_text_1'             =>  'Thank you for ordering from us, Your order has been approved and is waiting for your payment. We will confirm you shortly once payment has been completed.',
+    'paid_text_2'             =>  'You can review complete details of your order on the Order History page.',
+
+    //resources/views/emails/shipping.blade.php
+    'shipping_subject'        =>  'Invoice Paid',
+    'shipping_title'          =>  'Thank you for your order.',
+    'shipping_subtitle_1'     =>  'please review your order below',
+    'shipping_text_1'         =>  'Thank you for ordering from us, Your order has been approved and is waiting for your payment. We will confirm you shortly once payment has been completed.',
+    'shipping_text_2'         =>  'You can review complete details of your order on the Order History page.',
 ];

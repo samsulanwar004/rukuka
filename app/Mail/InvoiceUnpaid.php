@@ -32,6 +32,6 @@ class InvoiceUnpaid extends Mailable
         return $this->markdown('emails.invoice_unpaid', [
             'order' => $this->order
         ])
-            ->subject('Invoice Unpaid');
+            ->subject( trans('app.unpaid_subject'));
     }
 }

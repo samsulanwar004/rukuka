@@ -185,6 +185,7 @@
                                   <td>{{ $detail->price }}</td>
                                   <td>x {{ $detail->qty }}</td>
                                   <td>{{ $detail->subtotal }}</td>
+                                  <td><a href="/{{'review/'.$detail->productStock->product->slug}}" class="uk-button uk-button-default uk-text-uppercase">{{ trans ('app.review') }}</a></td>
                               </tr>
                               @php
                                 $total += $detail->subtotal;
@@ -196,7 +197,6 @@
                           </tbody>
                       </table>
                       </td>
-                      <td><button class="uk-button uk-button-seconday uk-width-1-1" type="button">{{ trans('app.review') }}</button></td>
                   </tr>
                 @endforeach
             </tbody>
