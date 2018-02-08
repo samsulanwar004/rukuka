@@ -26,7 +26,7 @@ class EmailService
     {
         $exchange = (new CurrencyService)->getCurrentCurrency();
         //inject currency
-        $order->order_subtotal_idr = $order->order_subtotal;
+        $order->order_total_idr = $order->order_subtotal + $order->shipping_cost;
         $order->order_subtotal = $order->order_subtotal / $exchange->value;
         $order->shipping_cost = $order->shipping_cost / $exchange->value;
         $order->symbol = $exchange->symbol;
@@ -47,7 +47,7 @@ class EmailService
     {
         $exchange = (new CurrencyService)->getCurrentCurrency();
         //inject currency
-        $order->order_subtotal_idr = $order->order_subtotal;
+        $order->order_total_idr = $order->order_subtotal + $order->shipping_cost;
         $order->order_subtotal = $order->order_subtotal / $exchange->value;
         $order->shipping_cost = $order->shipping_cost / $exchange->value;
         $order->symbol = $exchange->symbol;
@@ -68,7 +68,7 @@ class EmailService
     {
         $exchange = (new CurrencyService)->getCurrentCurrency();
         //inject currency
-        $order->order_subtotal_idr = $order->order_subtotal;
+        $order->order_total_idr = $order->order_subtotal + $order->shipping_cost;
         $order->order_subtotal = $order->order_subtotal / $exchange->value;
         $order->shipping_cost = $order->shipping_cost / $exchange->value;
         $order->symbol = $exchange->symbol;

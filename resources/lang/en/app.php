@@ -339,7 +339,7 @@ return [
     'paid_title'                =>  'Thank you for your order.',
     'paid_subtitle_1'           =>  'Your payment has been confirmed, ',
     'paid_subtitle_2'           =>  'please review your order below',
-    'paid_text_1'               =>  'Thank you for ordering from us, Your order has been approved and is waiting for your payment. We will confirm you shortly once payment has been completed.',
+    'paid_text_1'               =>  'Thank you for ordering from us, We\'ll get started on it right away and you\'ll receive a shipping confirmation email soon.',
     'paid_text_2'               =>  'You can review complete details of your order on the Order History page.',
 
     //resources/views/emails/shipping.blade.php
