@@ -38,9 +38,10 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['popular_search','locale'],
+        props: ['api','popular_search','locale'],
         created() {
             var self = this;
+            var api = this.api;
 
             let popular_search = this.popular_search;
             axios.get(popular_search)
@@ -53,19 +54,27 @@
                     console.log(error);
                 });
 
-            Event.listen('navigation', function (response) {
+            axios.get(api)
+                .then(function (navigations) {
+                    if (typeof navigations.data.data !== 'undefined') {
+                        Event.fire('navigation', navigations.data.data);
 
-                if (typeof response.mens !== 'undefined') {
-                    self.menCloths = response.mens;
-                }
-                if (typeof response.womens !== 'undefined') {
-                    self.womenCloths = response.womens;
-                }
-                if (typeof response.kids !== 'undefined') {
-                    self.kidCloths = response.kids;
-                }
+                        if (typeof navigations.data.data.mens !== 'undefined') {
+                            self.menCloths = navigations.data.data.mens;
+                        }
 
-            });
+                        if (typeof navigations.data.data.womens !== 'undefined') {
+                            self.womenCloths = navigations.data.data.womens;
+                        }
+
+                        if (typeof navigations.data.data.kids !== 'undefined') {
+                            self.kidCloths = navigations.data.data.kids;
+                        }
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
 
         },
 
