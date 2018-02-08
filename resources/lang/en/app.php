@@ -38,7 +38,7 @@ return [
     'helpyou'                   =>  'Help and Care',
     'about_rukuka'              =>  'About ruKuKa',
     'connect_us'                =>  'Connect With Us',
-    'copyright'                 =>  'Copyright © 2017 rukuka.com - All Rights Reseved.',
+    'copyright'                 =>  'rukuka.com',
     'order_status'              =>  'Order Status',
     'shipping'                  =>  'Shipping',
     'returns_exchanges'         =>  'Sale Items',
@@ -70,6 +70,7 @@ return [
     'kids_nav'                  =>  'Kids',
     'sale_nav'                  =>  'Sale',
     'blog_nav'                  =>  'Blog',
+    'eco_tourism_nav'           =>  'Eco Tourism',
     'all'                       =>  'All',
     'new_arrival'               =>  'New Arrival',
     'our_designer'              =>  'Our Designer',
@@ -222,8 +223,8 @@ return [
     //resources/assets/js/components/Bag.vue
     'no_bag'                    =>  'You have no items in the shopping bag',
     'your_bag'                  =>  'Your Bag',
-    'item'                      =>  'item',
-    'qty'                       =>  'qty',
+    'item'                      =>  'Item',
+    'qty'                       =>  'Qty',
     'move_wishlist'             =>  'Move to Wishlist',
     'summary'                   =>  'Summary',
     'total'                     =>  'Total',
@@ -296,7 +297,7 @@ return [
 
     //resources/views/pages/checkout/checkout_finish.blade.php
     'checkout_almost'           =>  'Your Checkout Process is almost done!',
-    'price'                     =>  'Price',
+    'unit_price'                =>  'Unit Price',
     'pay_now'                   =>  'Pay Now',
     'card_number'               =>  'Card Number :',
     'card_help'                 =>  'Insert your card number',
@@ -314,5 +315,40 @@ return [
     'nothing_found'             =>  'Sorry, Nothing Found.',
     'another_keyword'           =>  'try searching with other keywords',
     'other_people'              =>  'Other people also read',
+
+    //email common
+    'invoice'                   =>  'Invoice',
+    'note'                      =>  'Note',
+    'note_currency'             =>  'charge will be change in IDR currency.',
+    'please'                    =>  'Please',
+    'contact_label'             =>  'contact us',
+    'contact_text'              =>  'with any questions regarding this invoice.',
+    'sincerely'                 =>  'Sincerely',
+    'rukuka_team'               =>  'ruKuKa Team',
+
+    //resources/views/emails/invoice_unpaid.blade.php
+    'unpaid_subject'            =>  'Invoice Unpaid',
+    'unpaid_title'              =>  'Thank you for your order.',
+    'unpaid_subtitle_1'         =>  'Your order has been approved,',
+    'unpaid_subtitle_2'         =>  'please review your order below',
+    'unpaid_text_1'             =>  'Thank you for ordering from us, Your order has been approved and is waiting for your payment. We will confirm you shortly once payment has been completed.',
+    'unpaid_text_2'             =>  'You can review complete details of your order on the Order History page.',
+
+    //resources/views/emails/invoice_paid.blade.php
+    'paid_subject'              =>  'Invoice Paid',
+    'paid_title'                =>  'Thank you for your order.',
+    'paid_subtitle_1'           =>  'Your payment has been confirmed, ',
+    'paid_subtitle_2'           =>  'please review your order below',
+    'paid_text_1'               =>  'Thank you for ordering from us, We\'ll get started on it right away and you\'ll receive a shipping confirmation email soon.',
+    'paid_text_2'               =>  'You can review complete details of your order on the Order History page.',
+
+    //resources/views/emails/shipping.blade.php
+    'shipping_subject'          =>  'Shipping Confirmation',
+    'shipping_title'            =>  'Your Order Has Shipped.',
+    'shipping_subtitle_1'       =>  'please review your order below',
+    'shipping_text_1'           =>  'Thank you for ordering from us. We wanted to let you know that we just shipped off your order. ',
+    'shipping_text_2'           =>  'You can review complete details of your order on the Order History page.',
+
+
 
 ];

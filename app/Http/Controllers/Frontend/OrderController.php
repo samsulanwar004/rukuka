@@ -68,7 +68,7 @@ class OrderController extends BaseController
 	        		'product_photo' => $entry->options->photo,
 	        	];
 	        });
-	        
+
 	        $shipping = $courir['data']->total_fee_idr;
 
 	        $orderDate = Carbon::now();

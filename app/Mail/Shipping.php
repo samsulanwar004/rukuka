@@ -32,6 +32,6 @@ class Shipping extends Mailable
         return $this->markdown('emails.shipping', [
             'order' => $this->order
         ])
-            ->subject('Shipping Confirmation');
+            ->subject(trans('app.shipping_subject'));
     }
 }

@@ -31,6 +31,6 @@ class InvoicePaid extends Mailable
         return $this->markdown('emails.invoice_paid', [
             'order' => $this->order,
         ])
-            ->subject('Invoice Paid');
+            ->subject(trans('app.paid_subject'));
     }
 }
