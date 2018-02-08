@@ -6,6 +6,7 @@
 	use CRUDBooster;
 	use App\Repositories\OrderRepository;
     use App\Services\EmailService;
+    use Carbon\Carbon;
 
 	class AdminOrdersController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -269,6 +270,7 @@
 	    */
 	    public function hook_query_index(&$query) {
 	        //Your code here
+            $this->updateExpiredDate();
 	            
 	    }
 
@@ -339,10 +341,9 @@
             //EMAILSENT
             //Send shipping Notification to buyer
             $order = (new OrderRepository)->getOrderById($id);
-            if($order->order_status == 0){
+            if($order->order_status == 0 && $postdata['order_status'] == 1){
                 $emailService = (new EmailService);
                 $emailService->sendShipping($order);
-
             }
 	    }
 
@@ -400,6 +401,15 @@
 		  //Please use cbView method instead view method from laravel
 		  $this->cbView('admin.order_details',$data);
 		}
+
+		public function updateExpiredDate()
+        {
+            $now = Carbon::now();
+            DB::table('orders')
+            ->whereDate('expired_date', '<', $now->toDateString())
+            ->where('payment_status',0)
+            ->update(['payment_status' => 2,'order_status' => 3]);
+        }
 
 
 	}

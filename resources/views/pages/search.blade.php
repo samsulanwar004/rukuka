@@ -21,7 +21,7 @@
                 <div class="uk-panel">
                     <ul class="uk-breadcrumb">
                         <li><a href="/">{{ trans('app.home') }}</a></li>
-                        <li><a>{{ trans('app.search') }}</a></li>
+                        <li><a>{{ trans('app.search_label') }}</a></li>
                     </ul>
                 </div>
             </div>
