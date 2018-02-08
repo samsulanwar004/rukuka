@@ -18,6 +18,7 @@
               <h4>{{ trans('app.login') }}</h4>
                 <form class="form-horizontal" method="POST" action="{{ route('authenticate') }}">
                     {{ csrf_field() }}
+                    <input type="hidden" name="return_url" value="{{ $ref }}">
                   <ul class="uk-list">
                     <li>
                         <input class="uk-input {{ $errors->has('email_login') ? ' uk-form-danger' : '' }}" id="form-s-email" type="email" placeholder="{{ trans('app.email') }}" required="required" name="email_login" value="{{ old('email_login') }}">
@@ -37,11 +38,11 @@
                     </li>
 
                     <li>
-                      <a href="{{ route('social.login', ['provider' => 'facebook']) }}" class="uk-button uk-button-primary uk-width-1-1 uk-button-small">
+                      <a href="{{ route('social.login', ['provider' => 'facebook', 'return_url' => $ref]) }}" class="uk-button uk-button-primary uk-width-1-1 uk-button-small">
                         <span class="uk-margin-small-right uk-icon" uk-icon="icon: facebook"></span>{{ trans('app.login_facebook') }}</a>
                     </li>
                     <li>
-                      <a href="{{ route('social.login', ['provider' => 'google']) }}" class="uk-button uk-button-danger uk-width-1-1 uk-button-small">
+                      <a href="{{ route('social.login', ['provider' => 'google', 'return_url' => $ref]) }}" class="uk-button uk-button-danger uk-width-1-1 uk-button-small">
                         <span class="uk-margin-small-right uk-icon" uk-icon="icon: google"></span> {{ trans('app.login_google') }} </a>
                     </li>
                     <li class="uk-text-right">
