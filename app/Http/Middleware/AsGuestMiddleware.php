@@ -20,6 +20,8 @@ class AsGuestMiddleware
     {
 
         if (!Auth::check() && !$request->session()->has('as.guest')) {
+            session()->flash('as.checkout', 'ok');
+
             return redirect('login');
         }
 

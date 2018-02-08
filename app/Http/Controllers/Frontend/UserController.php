@@ -755,6 +755,7 @@ class UserController extends BaseController
 
     public function showReviewPage()
     {
+
         $user = $this->getUserActive();
         $bag = new BagService;
         // $creditCard = $this->user
@@ -775,6 +776,11 @@ class UserController extends BaseController
         // $defaultCreditcard->phone_number = $creditCard->address->phone_number;
 
         $shippingCost = (new CourierRepository)->getSavedSessionShippingChoosed();
+        $exchange = (new CurrencyService)->getCurrentCurrency();
+
+        //inject currency
+        $cost = $shippingCost['data']->total_fee_idr / $exchange->value;
+        $shippingCost['data']->total_fee_label = $exchange->symbol.' '.number_format($cost, 2);
 
         $defaultAddress = $this->user
             ->setUser($user)
@@ -795,6 +801,8 @@ class UserController extends BaseController
     {
 
         $user = $this->getUserActive();
+
+        (new UserRepository)->updateExpiredDate($user);
 
         $onPaid = $user->orders->filter(function ($entry) {
             return $entry->payment_status == 0 && $entry->order_status == 0;
@@ -992,7 +1000,7 @@ class UserController extends BaseController
 
                 if($response_cc["status"] == "CAPTURED")
                 {
-                    $payment->updateOrder($data);
+                    $order = $payment->updateOrder($data);
 
                     $message = "Charge is successfully captured and the funds will be settled according to the settlement schedule.";
 

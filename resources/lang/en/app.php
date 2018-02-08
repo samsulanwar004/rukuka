@@ -21,7 +21,8 @@ return [
 
     //resources/views/partials/nav.blade.php
     'search'                    =>  'S E A R C H . . .',
-    'welcome_in'         =>  'welcome to ruKuKa, now we can show you how indonesian made really beautiful on you!',
+    'search_label'              =>  'Search',
+    'welcome_in'                =>  'welcome to ruKuKa, now we can show you how indonesian made really beautiful on you!',
 
     //resources/assets/js/components/UserPanel.vue
     'hallo'                     =>  'Hallo,',

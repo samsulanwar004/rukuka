@@ -20,7 +20,7 @@
             <li v-if="category == 'womens'" :class="{'uk-parent':true, 'uk-parent uk-open': subcategory}">
 
                 <hr class="uk-margin-small-top">
-                <a>{{ trans.category }}</a>
+                <a class="uk-text-uppercase">{{ trans.category }}</a>
                 <ul class="uk-nav-sub">
                 <span v-for="cloth in womenCloths">
                     <li v-for="cat in cloth.child" :class="{'uk-text-bold': subcategory == cat.slug}">
@@ -31,7 +31,7 @@
             </li>
             <li v-if="category == 'mens'" :class="{'uk-parent':true, 'uk-parent uk-open': subcategory}">
                 <hr class="uk-margin-small-top">
-                <a>{{ trans.category }}</a>
+                <a class="uk-text-uppercase">{{ trans.category }}</a>
                 <ul class="uk-nav-sub">
                 <span v-for="cloth in menCloths">
                     <li v-for="cat in cloth.child" :class="{'uk-text-bold': subcategory == cat.slug}">
@@ -42,7 +42,7 @@
             </li>
             <li v-if="category == 'kids'" :class="{'uk-parent':true, 'uk-parent uk-open': subcategory}">
                 <hr class="uk-margin-small-top">
-                <a>{{ trans.category }}</a>
+                <a class="uk-text-uppercase">{{ trans.category }}</a>
                 <ul class="uk-nav-sub">
                 <span v-for="cloth in kidCloths">
                     <li v-for="cat in cloth.child" :class="{'uk-text-bold': subcategory == cat.slug}">
