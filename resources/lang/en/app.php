@@ -34,13 +34,13 @@ return [
 
     //resources/views/partials/footer.blade.php
     //resources/views/partials/footer_checkout.blade.php
-    'helpyou'                   =>  'Let Us Help You',
+    'helpyou'                   =>  'Help and Care',
     'about_rukuka'              =>  'About ruKuKa',
     'connect_us'                =>  'Connect With Us',
     'copyright'                 =>  'Copyright © 2017 rukuka.com - All Rights Reseved.',
     'order_status'              =>  'Order Status',
-    'shipping_handling'         =>  'Shipping & Handling',
-    'returns_exchanges'         =>  'Returns & Exchanges',
+    'shipping'                  =>  'Shipping',
+    'returns_exchanges'         =>  'Sale Items',
     'international_orders'      =>  'International Orders',
     'need_some_help'            =>  'Need Some Help',
     'our_services'              =>  'Our Services',
@@ -54,7 +54,7 @@ return [
     'help'                      =>  'Help!',
 
     //resources/assets/js/components/PopularSearch.vue
-    'popular_searches'          =>  'Popular Searches',
+    'popular_searches'          =>  'Most Searches',
 
     //resources/assets/js/components/Subcriber.vue
     'stay_update'               =>  'Stay Updated With Us',
