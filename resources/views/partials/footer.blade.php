@@ -27,6 +27,7 @@
       </div>
       <div class="uk-width-1-5@m">
           <popular-search
+          api="{{ route('menu')}}"
           popular_search="{{ route('popular-search') }}"
           locale="{{ json_encode(trans('app')) }}"
           ></popular-search>
