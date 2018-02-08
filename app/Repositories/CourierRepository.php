@@ -498,6 +498,7 @@ class CourierRepository{
 					'totalFeeDollar'=> $totalFeeDollar,
 					'optionValue'	=> $courierName . self::CHOOSED_SEPARATOR . $serviceCode,
 					'optionCurrencyLabel' => $currency->symbol . ' ' . round(($totalFee / $currency->value), 2)
+
 				];
 	}
 

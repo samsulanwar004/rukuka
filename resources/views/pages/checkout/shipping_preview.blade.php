@@ -65,7 +65,7 @@
                             <td>
                                 <input type="radio" class="uk-radio" name="shipping" value="1" required="required" checked> </td>
                             <td> {{ $shippingCost['data']->origin->serviceName }} </td>
-                            <td> $ {{ $shippingCost['data']->total_fee_usd }}</td>
+                            <td> {{ $shippingCost['data']->origin->optionCurrencyLabel }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -86,7 +86,7 @@
 
         </div>
         <summary-checkout
-          shipping_cost="{{ $shippingCost['data']->total_fee_usd }}"
+          shipping_cost="{{ $shippingCost['data']->total_fee_idr }}"
           locale="{{ json_encode(trans('app')) }}"
         ></summary-checkout>
     </div>
