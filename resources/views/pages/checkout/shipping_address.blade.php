@@ -207,7 +207,6 @@
       ></summary-checkout>
    </div>
 </div>
-</div>
 @endsection
 @section('footer_scripts')
 <script type="text/javascript">
