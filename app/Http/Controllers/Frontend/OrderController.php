@@ -68,7 +68,7 @@ class OrderController extends BaseController
 	        	];
 	        });
 
-	        $shipping = $courir['data']->total_fee_usd;
+	        $shipping = $courir['data']->total_fee_idr;
 
 	        $orderDate = Carbon::now();
 	        $expiredDate = Carbon::now()->addDay();
