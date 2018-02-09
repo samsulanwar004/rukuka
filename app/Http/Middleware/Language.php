@@ -18,8 +18,20 @@ class Language
             App::setLocale(Session::get('applocale'));
         }
         else { // This is optional as Laravel will automatically set the fallback language if there is none specified
-            App::setLocale(Config::get('app.fallback_locale'));
+            $availableLangs = ['jp', 'en'];
+            $userLangs = preg_split('/,|;/', $request->server('HTTP_ACCEPT_LANGUAGE'));
+
+            foreach ($availableLangs as $lang) {
+                if(in_array($lang, $userLangs)) {
+                    App::setLocale($lang);
+                    Session::put('applocale', $lang);
+                    break;
+                } 
+            }
+
+            //App::setLocale(Config::get('app.fallback_locale'));         
         }
+
         return $next($request);
     }
 }
