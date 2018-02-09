@@ -300,6 +300,8 @@ return [
     'pay'                       =>  '支払う',
     'track'                     =>  'トラック',
     'buy_again'                 =>  'もう一度買う',
+    'cancel_reason'             =>  '理由を取り消す',
+    'expired_date'              =>  '有効期限',
 
     //resources/views/pages/checkout/checkout_finish.blade.php
     'checkout_almost'           =>  'あなたのチェックアウトプロセスはほぼ完了しています!',
@@ -354,4 +356,22 @@ return [
     'shipping_subtitle_1'       =>  '下記のご注文を確認してください',
     'shipping_text_1'           =>  '私たちからご注文いただきありがとうございます。 私たちはあなたの注文を出荷したばかりであることをお知らせしたいと思います。',
     'shipping_text_2'           =>  '注文履歴ページで、注文の詳細を確認できます。',
+
+    //resources/views/emails/activation.blade.php
+    'activation_subject'        =>  'アクティベーションアカウント',
+    'activation_title'          =>  'ruKuKaへようこそ',
+    'activation_subtitle_1'     =>  '私たちはあなたが',
+    'activation_subtitle_2'     =>  '素晴らしい時間!',
+    'activation_text'           =>  'サインアップしていただきありがとうございます。 ワンクリックでアカウントを有効にできます。',
+    'activation_activate_now'   =>  '今すぐアクティブにする',
+    'activation_account'        =>  'あなたのアカウント情報:',
+
+    //resources/views/emails/forgot.blade.php
+    'forgot_subject'            =>  'パスワードを再設定する',
+    'forgot_title'              =>  'パスワードをお忘れですか ?',
+    'forgot_subtitle_1'         =>  'あなたを手放しましょう',
+    'forgot_subtitle_2'         =>  '新しいもの.',
+    'forgot_text_1'             =>  '私たちはあなたのrukukaパスワードをリセットするよう要求しました。',
+    'forgot_text_2'             =>  'このメッセージを無視すると、パスワードは変更されません',
+    'forgot_reset'              =>  'パスワードを再設定する',
 ];
