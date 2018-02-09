@@ -344,7 +344,7 @@
                                             <tr>
                                                 <td class="mobile-padding" style="text-align:left;">
                                                     <br>
-                                                    {{ trans('app.please') }} <a href="{{URL::to('/help/contact-us')}}">{{ trans('app.contact_label') }}</a> {{ trans('contact_text') }}
+                                                    {{ trans('app.please') }} <a href="{{URL::to('/help/contact-us')}}">{{ trans('app.contact_label') }}</a> {{ trans('app.contact_text') }}
                                                     <br>
                                                     <br>
                                                     {{ trans('app.sincerely') }},<br>

@@ -19,6 +19,11 @@ return [
     'related'                   =>  '関連商品',
     'quick_shop'                =>  'クイックショップ',
 
+    //contact and social media
+    'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',
+    'facebook'                  =>  'https://www.facebook.com/Rukuka-333650107116878/',
+    'email_to'                  =>  'mailto:customercare@rukuka.com',
+
     //resources/views/partials/nav.blade.php
     'search'                    =>  'サーチ',
     'search_label'              =>  'サーチ',
@@ -38,7 +43,7 @@ return [
     'helpyou'                   =>  'お手伝いしましょう',
     'about_rukuka'              =>  'ruKuKa について',
     'connect_us'                =>  '私たちとつながる',
-    'copyright'                 =>  'Copyright © 2017 rukuka.com - All Rights Reseved.',
+    'copyright'                 =>  'rukuka.com',
     'order_status'              =>  '注文の状況',
     'shipping'                  =>  '出荷処理',
     'returns_exchanges'         =>  '返品と交換',
@@ -53,6 +58,7 @@ return [
     'contact_us'                =>  'お問い合わせ',
     'investor_relations'        =>  '投資家向け広報',
     'help'                      =>  '助けて!',
+    'language'                  =>  '言語',
 
     //resources/assets/js/components/PopularSearch.vue
     'popular_searches'          =>  '人気のある検索',

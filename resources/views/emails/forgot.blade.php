@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Reset Password</title>
+    <title>{{ trans(app('app.forgot_subject')) }}</title>
     <style type="text/css">
         @import url(http://fonts.googleapis.com/css?family=Lato:400);
 
@@ -121,8 +121,8 @@
                                 <table cellspacing="0" cellpadding="0" width="530" height="303" class="w320">
                                     <tr>
                                         <td valign="middle" style="vertical-align:middle; padding-right: 15px; padding-left: 15px; text-align:left;" class="mobile-center" height="303">
-                                            <h1 class="font-white">FORGOT YOUR PASSWORD ?</h1><br>
-                                            <h2 class="font-white">Let's get you<br> a new one.</h2>
+                                            <h1 class="font-white">{{ trans('app.forgot_title') }}</h1><br>
+                                            <h2 class="font-white">{{ trans('app.forgot_subtitle_1') }}<br> {{ trans('app.forgot_subtitle_2') }}</h2>
                                         </td>
                                     </tr>
                                 </table>
@@ -144,9 +144,9 @@
                                             <tr>
                                                 <td class="mobile-padding" style="text-align:left;">
                                                     <br>
-                                                    Hi , {{ $user->first_name }}
+                                                    {{ trans('app.hi') }} , {{ $user->first_name }}
                                                     <br>
-                                                    We got a request to reset your rukuka password.
+                                                    {{  trans('app.forgot_text_1')}}
                                                     <br>
                                                 </td>
                                             </tr>
@@ -160,7 +160,7 @@
                                                 <td>
                                                     <div>
                                                         @component('mail::button', ['url' => route('page.reset', ['code' => $user->verification_token ])])
-                                                            Reset Password
+                                                            {{ trans('app.forgot_reset') }}
                                                         @endcomponent
                                                     </div>
                                                 </td>
@@ -173,10 +173,10 @@
                                         <table cellspacing="0" cellpadding="0" class="force-full-width">
                                             <tr>
                                                 <td class="mobile-padding" style="text-align:left;">
-                                                    If you ignore this message, your password won't be changed
+                                                    {{ trans('app.forgot_text_2') }}
                                                     <br><br>
-                                                    Sincerely,<br>
-                                                    rukuka Team
+                                                    {{ trans('app.sincerely') }},<br>
+                                                    {{ trans('app.rukuka_team') }}
                                                 </td>
                                             </tr>
                                         </table>
@@ -212,7 +212,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align:center; margin:0 auto;" width="100%">
-                                                        © 2018 rukuka - All Rights Reserved.
+                                                        {{ trans('app.copyright') }}
                                                     </td>
                                                 </tr>
                                             </table>
