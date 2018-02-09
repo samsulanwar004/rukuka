@@ -2,20 +2,6 @@
 
 @section('content')
     <div class="uk-container uk-container-small">
-        @if($search == 'designers' && $category != 'all')
-            <div class="uk-grid-small uk-margin-top" uk-grid>
-                <div class="uk-panel uk-width-1-4 uk-flex uk-flex-middle uk-flex-center">
-                    <img src="{{ uploadCDN($designer->photo) }}" width="60" alt="" class="uk-box-shadow-medium">
-                </div>
-                <div class="uk-panel uk-width-3-4">
-                    <span class="uk-text-lead">{{ $designer->name }}</span><br>
-                    {{ $designer->content }}
-                </div>
-            </div>
-            <hr class="uk-margin-small">
-        @else
-
-        @endif
         <div class="uk-grid-small uk-margin-small-top" uk-grid>
             <div class="uk-width-1-4@m uk-visible@m">
                 <div class="uk-panel">
@@ -58,9 +44,9 @@
 
         <div class="uk-grid-small uk-margin-small-top" uk-grid>
             <div class="uk-width-1-4@m uk-visible@m">
-                <div class="uk-card uk-card-border uk-card-small uk-panel">
+                <div class="uk-card uk-card-default uk-card-small uk-box-shadow-small uk-panel uk-background-muted">
                     <div class="uk-card-body">
-                      <h4>Search :  <b> {{$keyword}} </b> </h4>
+                      <h5>{{ trans('app.search_label') }} :  <b> {{$keyword}} </b> </h5>
                         <search
                                 api="{{ route('search.api',['keyword' => $keyword])}}"
                                 keyword="{{$keyword}}"

@@ -423,7 +423,7 @@ class PageController extends BaseController
     public function search(Request $request)
     {
         $product = (new ProductRepository);
-
+        $exchange = (new CurrencyService)->getCurrentCurrency();
         $products = $product->getSearch($request);
 
         foreach ($request->all() as $key => $value) {
