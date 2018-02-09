@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Activation Account</title>
+    <title>{{ trans('app.activation_subject') }}</title>
     <style type="text/css">
         @import url(http://fonts.googleapis.com/css?family=Lato:400);
 
@@ -122,8 +122,8 @@
                                 <table cellspacing="0" cellpadding="0" width="530" height="303" class="w320">
                                     <tr>
                                         <td valign="middle" style="vertical-align:middle; padding-right: 15px; padding-left: 15px; text-align:left;" class="mobile-center" height="303">
-                                            <h1 class="font-white">WELCOME TO RUKUKA</h1><br>
-                                            <h2 class="font-white">We hope you will have<br> an Awesome time!</h2>
+                                            <h1 class="font-white">{{ trans('app.activation_title') }}</h1><br>
+                                            <h2 class="font-white">{{ trans('app.activation_subtitle_1') }}<br> {{ trans('app.activation_subtitle_2') }}</h2>
                                         </td>
                                     </tr>
                                 </table>
@@ -145,9 +145,9 @@
                                             <tr>
                                                 <td class="mobile-padding" style="text-align:left;">
                                                     <br>
-                                                    Hi , {{ $user->first_name }}
+                                                    {{ trans('app.hi') }} , {{ $user->first_name }}
                                                     <br>
-                                                    Thank you for signing up. Just one click away from activating your account.
+                                                    {{ trans('app.activation_text') }}
                                                     <br>
                                                 </td>
                                             </tr>
@@ -161,7 +161,7 @@
                                                 <td>
                                                     <div>
                                                         @component('mail::button', ['url' => route('activation', ['code' => $user->verification_token ])])
-                                                            Activate Now
+                                                            {{ trans('app.activate_now') }}
                                                         @endcomponent
                                                     </div>
                                                 </td>
@@ -177,14 +177,14 @@
                                         <table cellspacing="0" cellpadding="0" class="force-full-width">
                                             <tr>
                                                 <td class="mobile-padding" style="text-align:left;">
-                                                    <b>Your account information:</b><br>
+                                                    <b>{{ trans('app.account') }}</b><br>
                                                     <table border="0">
-                                                        <tr><td>Email</td><td>:</td><td>{{ $user->email }}</td></tr>
-                                                        <tr><td>Password</td><td>:</td><td>{{ $user->passwordString }}</td></tr>
+                                                        <tr><td>{{ trans('app.email') }}</td><td>:</td><td>{{ $user->email }}</td></tr>
+                                                        <tr><td>{{ trans('app.password') }}</td><td>:</td><td>{{ $user->passwordString }}</td></tr>
                                                     </table>
                                                     <br><br>
-                                                    Sincerely,<br>
-                                                    rukuka Team
+                                                    {{ trans('app.sincerely') }},<br>
+                                                    {{ trans('app.rukuka_team') }}
                                                 </td>
                                             </tr>
                                         </table>
@@ -220,7 +220,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align:center; margin:0 auto;" width="100%">
-                                                        © 2018 rukuka - All Rights Reserved.
+                                                        {{ trans('app.copyright') }}
                                                     </td>
                                                 </tr>
                                             </table>
