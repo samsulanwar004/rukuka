@@ -1,5 +1,5 @@
 <?php
 return [
-    'en' => 'ENGLISH',
-    'jp' => 'JAPANESE',
+    'en' => 'English',
+    'jp' => 'Japanese',
 ];
