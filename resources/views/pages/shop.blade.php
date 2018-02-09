@@ -93,6 +93,93 @@
                         ></categories>
                     </div>
                 </div>
+
+                <div class="uk-card uk-card-border uk-card-small uk-margin-top">
+                  <div class="uk-card-body">
+                      <h4>Color Palette</h4>
+                        <ul class="uk-grid uk-grid-collapse">
+                          <li>
+                            <label>
+                              <input type="radio" name="fb" value="small" />
+                              <img src="/images/maroon.png" alt="" width="27">
+                            </label>
+                          </li>
+                          <li>
+                            <label>
+                              <input type="radio" name="fb" value="small" />
+                              <img src="/images/maroon.png" alt="" width="27">
+                            </label>
+                          </li>
+                          <li>
+                            <label>
+                              <input type="radio" name="fb" value="small" />
+                              <img src="/images/maroon.png" alt="" width="27">
+                            </label>
+                          </li>
+                          <li>
+                            <label>
+                              <input type="radio" name="fb" value="small" />
+                              <img src="/images/maroon.png" alt="" width="27">
+                            </label>
+                          </li>
+                          <li>
+                            <label>
+                              <input type="radio" name="fb" value="small" />
+                              <img src="/images/maroon.png" alt="" width="27">
+                            </label>
+                          </li>
+                          <li>
+                            <label>
+                              <input type="radio" name="fb" value="small" />
+                              <img src="/images/maroon.png" alt="" width="27">
+                            </label>
+                          </li>
+                          <li>
+                            <label>
+                              <input type="radio" name="fb" value="small" />
+                              <img src="/images/maroon.png" alt="" width="27">
+                            </label>
+                          </li>
+                          <li>
+                            <label>
+                              <input type="radio" name="fb" value="small" />
+                              <img src="/images/maroon.png" alt="" width="27">
+                            </label>
+                          </li>
+                          <li>
+                            <label>
+                              <input type="radio" name="fb" value="small" />
+                              <img src="/images/maroon.png" alt="" width="27">
+                            </label>
+                          </li>
+                          <li>
+                            <label>
+                              <input type="radio" name="fb" value="small" />
+                              <img src="/images/maroon.png" alt="" width="27">
+                            </label>
+                          </li>
+                          <li>
+                            <label>
+                              <input type="radio" name="fb" value="small" />
+                              <img src="/images/maroon.png" alt="" width="27">
+                            </label>
+                          </li>
+                          <li>
+                            <label>
+                              <input type="radio" name="fb" value="small" />
+                              <img src="/images/maroon.png" alt="" width="27">
+                            </label>
+                          </li>
+                          <li>
+                            <label>
+                              <input type="radio" name="fb" value="small" />
+                              <img src="/images/maroon.png" alt="" width="27">
+                            </label>
+                          </li>
+                        </ul>
+
+                  </div>
+                </div>
             </div>
             <div class="uk-width-expand@m">
                 <shop
