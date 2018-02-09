@@ -19,6 +19,11 @@ return [
     'related'                   =>  'Related Product',
     'quick_shop'                =>  'Quick Shop',
 
+    //contact and social media
+    'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',
+    'facebook'                  =>  'https://www.facebook.com/Rukuka-333650107116878/',
+    'email_to'                  =>  'mailto:customercare@rukuka.com',
+
     //resources/views/partials/nav.blade.php
     'search'                    =>  'S E A R C H . . .',
     'search_label'              =>  'Search',
@@ -53,6 +58,7 @@ return [
     'contact_us'                =>  'Contact Us',
     'investor_relations'        =>  'Investor Relations',
     'help'                      =>  'Help!',
+    'language'                  =>  'Language',
 
     //resources/assets/js/components/PopularSearch.vue
     'popular_searches'          =>  'Most Searches',
@@ -349,6 +355,22 @@ return [
     'shipping_text_1'           =>  'Thank you for ordering from us. We wanted to let you know that we just shipped off your order. ',
     'shipping_text_2'           =>  'You can review complete details of your order on the Order History page.',
 
+    //resources/views/emails/activation.blade.php
+    'activation_subject'        =>  'Activation Account',
+    'activation_title'          =>  'Welcome to ruKuKa',
+    'activation_subtitle_1'     =>  'We hope you will have',
+    'activation_subtitle_2'     =>  'an Awesome time!',
+    'activation_text'           =>  'Thank you for signing up. Just one click away from activating your account.',
+    'activation_activate_now'   =>  'Activate Now',
+    'activation_account'        =>  'Your account information:',
 
+    //resources/views/emails/forgot.blade.php
+    'forgot_subject'            =>  'Reset Password',
+    'forgot_title'              =>  'Forgot Your Password ?',
+    'forgot_subtitle_1'         =>  'Let\'s get you',
+    'forgot_subtitle_2'         =>  'a new one.',
+    'forgot_text_1'             =>  'We got a request to reset your rukuka password.',
+    'forgot_text_2'             =>  'If you ignore this message, your password won\'t be changed',
+    'forgot_reset'              =>  'Reset Password',
 
 ];

@@ -31,6 +31,6 @@ class Forgot extends Mailable
     public function build()
     {
         return $this->markdown('emails.forgot', ['user' => $this->user])
-            ->subject('Reset Password');
+            ->subject(trans('app.forgot_subject'));
     }
 }
