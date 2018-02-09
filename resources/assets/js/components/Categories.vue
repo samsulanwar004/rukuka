@@ -3,7 +3,7 @@
         <li class="uk-active">
           <a :href="'/shop/'+parent+'/all'">ALL</a>
         </li>
-        <li :class="{'uk-parent':true, 'uk-parent uk-open': slug != 'all'}">
+        <li :class="{'uk-parent':true, 'uk-parent uk-open uk-active': slug != 'all'}">
             <a href="#">{{ parent.toUpperCase() }}</a>
             <ul class="uk-nav-sub ">
                 <li v-for="category in categories" :class="{'uk-text-bold': slug == category.slug}">
@@ -16,7 +16,7 @@
         <li class="uk-active">
           <a :href="'/shop/'+parent+'/all'">ALL</a>
         </li>
-        <li :class="{'uk-parent':true, 'uk-parent uk-open': category_slug == category.name.toLowerCase() }" v-for="category in categories">
+        <li :class="{'uk-parent':true, 'uk-parent uk-open uk-active': category_slug == category.name.toLowerCase() }" v-for="category in categories">
             <a href="#">{{ category.name.toUpperCase() }}</a>
             <ul class="uk-nav-sub">
                 <li v-for="cat in category.child" :class="{'uk-text-bold': slug == cat.slug}">
@@ -25,6 +25,7 @@
             </ul>
         </li>
     </ul>
+    
 </template>
 
 <script>
