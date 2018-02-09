@@ -14,12 +14,20 @@ class EmailService
 {
 	public function sendActivationCode($user)
 	{
-		Mail::to($user->email)->send(new Activation($user));
+        $mail = (new Activation($user))
+            ->onConnection(config('common.queue_active'))
+            ->onQueue(config('common.queue_list.user_mail'));
+
+		Mail::to($user->email)->queue($mail);
 	}
 
 	public function sendForgotCode($user)
 	{
-		Mail::to($user->email)->send(new Forgot($user));
+        $mail = (new Forgot($user))
+            ->onConnection(config('common.queue_active'))
+            ->onQueue(config('common.queue_list.user_mail'));
+
+		Mail::to($user->email)->queue($mail);
 	}
 
 	public function sendInvoiceUnpaid($order)
@@ -40,7 +48,11 @@ class EmailService
             ];
         });
 
-        Mail::to($order->user->email)->send(new InvoiceUnpaid($order));
+        $mail = (new InvoiceUnpaid($order))
+            ->onConnection(config('common.queue_active'))
+            ->onQueue(config('common.queue_list.user_mail'));
+
+        Mail::to($order->user->email)->queue($mail);
     }
 
     public function sendInvoicePaid($order)
@@ -61,7 +73,11 @@ class EmailService
             ];
         });
 
-        Mail::to($order->user->email)->send(new InvoicePaid($order));
+        $mail = (new InvoicePaid($order))
+            ->onConnection(config('common.queue_active'))
+            ->onQueue(config('common.queue_list.user_mail'));
+
+        Mail::to($order->user->email)->queue($mail);
     }
 
     public function sendShipping($order)
@@ -82,7 +98,11 @@ class EmailService
             ];
         });
 
-        Mail::to($order->user->email)->send(new Shipping($order));
+        $mail = (new Shipping($order))
+            ->onConnection(config('common.queue_active'))
+            ->onQueue(config('common.queue_list.user_mail'));
+
+        Mail::to($order->user->email)->queue($mail);
     }
 
 
