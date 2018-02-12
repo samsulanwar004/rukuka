@@ -19,6 +19,10 @@ return [
     'related'                   =>  '関連商品',
     'quick_shop'                =>  'クイックショップ',
 
+    //Title Page
+    'rukuka'                    =>  'ruKuKa',
+    'title_homepage'            =>  'Indonesian Local Brands',
+
     //contact and social media
     'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',
     'facebook'                  =>  'https://www.facebook.com/Rukuka-333650107116878/',
