@@ -168,6 +168,10 @@ return [
     'high'                      =>  '高い',
     'low'                       =>  '低い',
     'recently_view'             =>  '最近見た',
+    'all_you_need'              =>  '必要なものすべて',
+    'filter_nav'                =>  'フィルタナビゲーション',
+    'filter'                    =>  'フィルタ',
+    'color_filter'              =>  '色',
 
     //resources/views/pages/product.blade.php
     'product_code'              =>  '製品コード:',
