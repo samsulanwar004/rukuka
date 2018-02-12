@@ -81,6 +81,8 @@ class PageController extends BaseController
             $products->appends($key, $value);
         }
 
+        $colorId = $request->has('color_id') ? $request->input('color_id') : null;
+
         $shops = $products->map(function ($entry) {
 
             return [
@@ -105,7 +107,8 @@ class PageController extends BaseController
             'designer',
             'shops',
             'sale',
-            'recently'
+            'recently',
+            'colorId'
         ));
 
     }
@@ -423,7 +426,6 @@ class PageController extends BaseController
     public function search(Request $request)
     {
         $product = (new ProductRepository);
-        $exchange = (new CurrencyService)->getCurrentCurrency();
         $products = $product->getSearch($request);
 
         foreach ($request->all() as $key => $value) {
