@@ -7,7 +7,7 @@
           <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ $designer->name }}</h3>
       @else
           @if($category == 'all')
-              <h3 class="uk-margin-small-top uk-margin-remove-bottom ">All You Need</h3>
+              <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ trans('app.all_you_need') }}</h3>
           @else
               <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ isset($products->first()->category->name) ? $products->first()->category->name : 'Product not available' }}</h3>
           @endif
@@ -51,15 +51,13 @@
 
                 <a href="#" uk-toggle="target: #nav1; animation: uk-animation-fade" class="uk-button uk-button-small uk-button-secondary uk-width-1-1">
                   <span class="uk-icon uk-margin-small-right" uk-icon="icon: menu"></span>
-                  FILTER NAVIGATION
+                    <label>{{ trans('app.filter_nav') }}</label>
                 </a>
 
             </div>
             <div class="uk-width-3-4@m">
 
                 <div class="uk-grid-small uk-child-width-1-2 uk-flex-center" uk-grid >
-
-
                       <div class="uk-text-left uk-flex uk-flex-middle">
                           <h6 class="uk-text-uppercase">{{ trans('app.sort_by_price') }} : <a href="?price=desc">{{ trans('app.high') }}</a>
                             | <a href="?price=asc">{{ trans('app.low') }}</a></h6>
@@ -72,7 +70,7 @@
                         </div>
                       </div>
                     <div class="uk-hidden@m uk-text-right">
-                      <a href="#modal" class="uk-button uk-button-default-warm uk-button-small" uk-toggle>Filter</a>
+                      <a href="#modal" class="uk-button uk-button-default-warm uk-button-small" uk-toggle>{{ trans('app.filter') }}</a>
                       <div id="modal" uk-modal>
                         <div class="uk-modal-dialog uk-modal-body">
                             <categories
@@ -95,15 +93,6 @@
             <div id="nav1" class="uk-width-1-4@m uk-visible@m">
                 <div class="uk-card uk-background-muted uk-card-small uk-box-shadow-small">
                     <div class="uk-card-body">
-                      {{-- @if($categories == 'designers' && $category != 'all')
-                          <h4>{{ $designer->name }}</h4>
-                      @else
-                          @if($category == 'all')
-                              <h4>Browse Here</h4>
-                          @else
-                              <h5>{{ isset($products->first()->category->name) ? $products->first()->category->name : 'Product not available' }}</h5>
-                          @endif
-                      @endif --}}
                         <categories
                                 api="{{ route('menu', ['parent' => $categories]) }}"
                                 parent="{{ $categories }}"
@@ -117,7 +106,7 @@
 
                 <div class="uk-card uk-background-muted uk-box-shadow-small uk-card-small uk-margin-top">
                   <div class="uk-card-body">
-                      <h4>Color Palette</h4>
+                      <h4>{{ trans('app.color') }}</h4>
                         <ul class="uk-grid uk-grid-collapse">
                           <li>
                             <label>
