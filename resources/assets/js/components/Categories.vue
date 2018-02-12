@@ -21,8 +21,12 @@
 
     <div v-else>
         <ul class="uk-accordion">
-            <li class="uk-open">
-                <h4 :href="'/shop/'+parent+'/all'">{{ trans.all }}</h4>
+            <li>
+                <h4 class="uk-link-reset uk-text-uppercase">
+                    <a :href="'/shop/'+parent+'/all'">
+                        {{ trans.all }}
+                    </a>
+                </h4>
             </li>
         </ul>
         <ul class="uk-accordion" uk-accordion="multiple: true" >
