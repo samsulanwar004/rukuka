@@ -1,32 +1,43 @@
 <template>
-    <ul class="uk-nav-default uk-nav-parent-icon" uk-nav="multiple: true" v-if="parent == 'designers'">
-        <li class="uk-active">
-          <a :href="'/shop/'+parent+'/all'">ALL</a>
-        </li>
-        <li :class="{'uk-parent':true, 'uk-parent uk-open': slug != 'all'}">
-            <a href="#">{{ parent.toUpperCase() }}</a>
-            <ul class="uk-nav-sub ">
-                <li v-for="category in categories" :class="{'uk-text-bold': slug == category.slug}">
-                  <a :href="'/shop/'+parent+'/'+ category.slug ">{{ category.name }}</a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-    <ul class="uk-accordion" uk-accordion="multiple: true" v-else>
-        <li class="uk-open">
-          <a :href="'/shop/'+parent+'/all'"><h4>ALL</h4></a>
-        </li>
-        <li :class="{'uk-open': category_slug == category.name.toLowerCase() }" class="uk-open" v-for="category in categories">
-            <h5 href="#" class="uk-accordion-title">{{ category.name.toUpperCase() }}</h5>
-            <div class="uk-accordion-content">
-            <ul class="uk-nav uk-footer-nav">
-                <li v-for="cat in category.child" :class="{'uk-text-bold': slug == cat.slug}">
-                  <a :href="'/shop/'+parent+'/'+ category.name.toLowerCase() +'/'+ cat.slug + sales">{{ cat.name }}</a>
-                </li>
-            </ul>
-            </div>
-        </li>
-    </ul>
+    <div v-if="parent == 'designers'">
+        <ul class="uk-accordion">
+            <li class="uk-open">
+                <h4 :href="'/shop/'+parent+'/all'">{{ trans.all }}</h4>
+            </li>
+        </ul>
+        <ul class="uk-accordion" uk-accordion="multiple: true" >
+            <li class="uk-open">
+                <h5 href="#" class="uk-accordion-title">{{ parent.toUpperCase() }}</h5>
+                <div class="uk-accordion-content">
+                    <ul class="uk-nav uk-footer-nav">
+                        <li v-for="category in categories" :class="{'uk-text-bold': slug == category.slug}">
+                            <a :href="'/shop/'+parent+'/'+ category.slug ">{{ category.name }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div v-else>
+        <ul class="uk-accordion">
+            <li class="uk-open">
+                <h4 :href="'/shop/'+parent+'/all'">{{ trans.all }}</h4>
+            </li>
+        </ul>
+        <ul class="uk-accordion" uk-accordion="multiple: true" >
+            <li class="uk-open" v-for="category in categories">
+                <h5 href="#" class="uk-accordion-title">{{ category.name.toUpperCase() }}</h5>
+                <div class="uk-accordion-content">
+                <ul class="uk-nav uk-footer-nav">
+                    <li v-for="cat in category.child" :class="{'uk-text-bold': slug == cat.slug}">
+                      <a :href="'/shop/'+parent+'/'+ category.name.toLowerCase() +'/'+ cat.slug + sales">{{ cat.name }}</a>
+                    </li>
+                </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
 
 </template>
 
@@ -51,7 +62,7 @@
             self.parent = this.parent;
             $.get(api, function(categories) {
               if (typeof categories.data !== 'undefined') {
-                self.categories = categories.data.sort(sort_by('name', false, function(result){
+                self.categories = categories.data.sort(sort_by('id', false, function(result){
                     return result;
                 }));
               }

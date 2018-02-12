@@ -168,6 +168,10 @@ return [
     'high'                      =>  'high',
     'low'                       =>  'low',
     'recently_view'             =>  'Recently View',
+    'all_you_need'              =>  'All You Need',
+    'filter_nav'                =>  'Filter Navigation',
+    'filter'                    =>  'Filter',
+    'color_filter'              =>  'Color',
 
     //resources/views/pages/product.blade.php
     'product_code'              =>  'Product Code:',
