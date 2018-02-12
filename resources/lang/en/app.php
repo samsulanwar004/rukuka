@@ -300,6 +300,8 @@ return [
     'pay'                       =>  'Pay',
     'track'                     =>  'Track',
     'buy_again'                 =>  'Buy Again',
+    'cancel_reason'             =>  'Cancel Reason',
+    'expired_date'              =>  'Expired Date',
 
     //resources/views/pages/checkout/checkout_finish.blade.php
     'checkout_almost'           =>  'Your Checkout Process is almost done!',

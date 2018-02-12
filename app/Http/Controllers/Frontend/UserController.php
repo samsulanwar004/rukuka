@@ -799,6 +799,7 @@ class UserController extends BaseController
 
     public function history()
     {
+        $exchange = (new CurrencyService)->getCurrentCurrency();
 
         $user = $this->getUserActive();
 
@@ -832,8 +833,8 @@ class UserController extends BaseController
             'onDone',
             'onCanceled',
             'status',
-            'status_message'
-
+            'status_message',
+            'exchange'
         ));
     }
 

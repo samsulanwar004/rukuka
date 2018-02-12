@@ -1,24 +1,19 @@
 <template>
         <ul class="uk-nav uk-nav-small uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
-            <li class="uk-parent">
-                <a class="uk-text-uppercase">{{ trans.designers_nav }} ({{designers.length}})</a>
-                <ul class="uk-nav-sub">
-                    <li class="uk-parent" v-for="design in designers">
-                        <a :href="'/shop/designers/'+ design.slug ">{{ design.name }}</a>
-                    </li>
-                </ul>
+            <hr class="uk-margin-small-top">
+            <li>
+                <a :class="{'uk-text-bold': category == ''}" :href="'/search?keyword='+keyword"> <label class="uk-text-uppercase">{{ trans.all }}</label> ({{womenCounts+menCounts+kidCounts}})</a>
             </li>
             <li v-if="womenCounts">
-                <a :class="{'uk-text-bold': category == 'womens'}" :href="'/search?keyword='+keyword+'&category=womens'">WOMENS ({{womenCounts}})</a>
+                <a :class="{'uk-text-bold': category == 'womens'}" :href="'/search?keyword='+keyword+'&category=womens'"><label class="uk-text-uppercase">{{ trans.women_nav }}</label> ({{womenCounts}})</a>
             </li>
             <li v-if="menCounts">
-                <a :class="{'uk-text-bold': category == 'mens'}" :href="'/search?keyword='+keyword+'&category=mens'">MENS ({{menCounts}})</a>
+                <a :class="{'uk-text-bold': category == 'mens'}" :href="'/search?keyword='+keyword+'&category=mens'"><label class="uk-text-uppercase">{{ trans.men_nav }}</label> ({{menCounts}})</a>
             </li>
             <li v-if="kidCounts">
-                <a :class="{'uk-text-bold': category == 'kids'}" :href="'/search?keyword='+keyword+'&category=kids'">KIDS ({{kidCounts}})</a>
+                <a :class="{'uk-text-bold': category == 'kids'}" :href="'/search?keyword='+keyword+'&category=kids'"><label class="uk-text-uppercase">{{ trans.kids_nav }}</label> ({{kidCounts}})</a>
             </li>
             <li v-if="category == 'womens'" :class="{'uk-parent':true, 'uk-parent uk-open': subcategory}">
-
                 <hr class="uk-margin-small-top">
                 <a class="uk-text-uppercase">{{ trans.category }}</a>
                 <ul class="uk-nav-sub">
@@ -49,6 +44,15 @@
                         <a v-for="productCat in productsCategory" :href="'/search?keyword='+keyword+'&category=kids&subcategory='+ cat.slug" v-if="productCat.product_categories_id == cat.id" >{{ cat.name }}</a>
                     </li>
                 </span>
+                </ul>
+            </li>
+            <li class="uk-parent">
+                <hr class="uk-margin-small-top">
+                <a class="uk-text-uppercase">{{ trans.designers_nav }} ({{designers.length}})</a>
+                <ul class="uk-nav-sub">
+                    <li class="uk-parent" v-for="design in designers">
+                        <a :href="'/shop/designers/'+ design.slug ">{{ design.name }}</a>
+                    </li>
                 </ul>
             </li>
          </ul>
