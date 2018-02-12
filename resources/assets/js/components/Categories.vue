@@ -3,7 +3,7 @@
         <li class="uk-active">
           <a :href="'/shop/'+parent+'/all'">ALL</a>
         </li>
-        <li :class="{'uk-parent':true, 'uk-parent uk-open uk-active': slug != 'all'}">
+        <li :class="{'uk-parent':true, 'uk-parent uk-open': slug != 'all'}">
             <a href="#">{{ parent.toUpperCase() }}</a>
             <ul class="uk-nav-sub ">
                 <li v-for="category in categories" :class="{'uk-text-bold': slug == category.slug}">
@@ -12,20 +12,22 @@
             </ul>
         </li>
     </ul>
-    <ul class="uk-nav-default uk-nav-parent-icon" uk-nav="multiple: true" v-else>
-        <li class="uk-active">
-          <a :href="'/shop/'+parent+'/all'">ALL</a>
+    <ul class="uk-accordion" uk-accordion="multiple: true" v-else>
+        <li class="uk-open">
+          <a :href="'/shop/'+parent+'/all'"><h4>ALL</h4></a>
         </li>
-        <li :class="{'uk-parent':true, 'uk-parent uk-open uk-active': category_slug == category.name.toLowerCase() }" v-for="category in categories">
-            <a href="#">{{ category.name.toUpperCase() }}</a>
-            <ul class="uk-nav-sub">
+        <li :class="{'uk-open': category_slug == category.name.toLowerCase() }" class="uk-open" v-for="category in categories">
+            <h5 href="#" class="uk-accordion-title">{{ category.name.toUpperCase() }}</h5>
+            <div class="uk-accordion-content">
+            <ul class="uk-nav uk-footer-nav">
                 <li v-for="cat in category.child" :class="{'uk-text-bold': slug == cat.slug}">
                   <a :href="'/shop/'+parent+'/'+ category.name.toLowerCase() +'/'+ cat.slug + sales">{{ cat.name }}</a>
                 </li>
             </ul>
+            </div>
         </li>
     </ul>
-    
+
 </template>
 
 <script>

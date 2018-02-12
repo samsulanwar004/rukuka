@@ -1,5 +1,5 @@
 <template>
-  <div class="uk-grid-small uk-padding-remove uk-child-width-1-6@m uk-child-width-1-2 uk-margin-large-bottom" uk-grid>
+  <div class="uk-grid-small uk-grid-collapse uk-padding-remove uk-child-width-1-6@m uk-child-width-1-2 uk-margin-large-bottom" uk-grid>
     <!-- start product -->
     <div class="uk-panel uk-text-left uk-margin-small-bottom" v-for="product in products">
       <div class="uk-card uk-card-small uk-padding-remove">
@@ -18,9 +18,9 @@
             </div>
           </div>
         </div>
-        <div class="uk-card-body uk-padding-remove uk-margin-small-top">
-          <div class="uk-hidden@m">
-            <a href="#modal-popular" class="uk-button uk-button-small uk-button-default-warm uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
+        <div class="uk-card-body uk-padding-remove">
+          <div>
+            <a href="#modal-popular" class="uk-button uk-button-small uk-button-secondary uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">QUICK SHOP</a>
           </div>
           <a :href="'/product/'+ product.slug" class="uk-text-meta">{{ product.name.substring(0,35) }}</a>
           <br>
@@ -125,7 +125,7 @@
                     {{ price | round(exchangeRate.symbol, exchangeRate.value) }}
                 </span>
               </h4>
-              <h5 class="uk-margin-small">{{ trans.color }} : 
+              <h5 class="uk-margin-small">{{ trans.color }} :
                 <lazy-background v-if="isLoading"
                   :image-source="loadingImage"
                   alt="rukuka palette"
