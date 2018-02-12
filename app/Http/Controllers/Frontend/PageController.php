@@ -123,7 +123,7 @@ class PageController extends BaseController
 
             //inject currency
             $product->sell_price = $product->sell_price / $exchange->value;
-            $product->price_before_discount = $product->price_before_discount <= 0 ? $product->price_before_discount : $product->price_before_discoun / $exchange->value;
+            $product->price_before_discount = $product->price_before_discount <= 0 ? $product->price_before_discount : $product->price_before_discount / $exchange->value;
             $product->currency = $exchange->symbol;
 
             $sumRating= collect($product->review)->sum('rating');
@@ -423,7 +423,7 @@ class PageController extends BaseController
     public function search(Request $request)
     {
         $product = (new ProductRepository);
-
+        $exchange = (new CurrencyService)->getCurrentCurrency();
         $products = $product->getSearch($request);
 
         foreach ($request->all() as $key => $value) {

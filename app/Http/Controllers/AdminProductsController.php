@@ -48,10 +48,9 @@
             $this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
             $this->form[] = ['label'=>'Color','name'=>'color','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Color','name'=>'product_colors_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_colors,name'];
-			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Detail And Care','name'=>'detail_and_care','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Size And Fit','name'=>'size_and_fit','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Technical Specification','name'=>'technical_specification','type'=>'textarea','validation'=>'string','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'wysiwyg','validation'=>'string','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Detail And Care','name'=>'detail_and_care','type'=>'wysiwyg','validation'=>'string','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Size And Fit','name'=>'size_and_fit','type'=>'wysiwyg','validation'=>'string','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Currency','name'=>'currency','type'=>'select','validation'=>'required','width'=>'col-sm-10','dataenum'=>'IDR'];
 			$this->form[] = ['label'=>'Price','name'=>'price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Starting Price'];
 			$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Selling Price'];

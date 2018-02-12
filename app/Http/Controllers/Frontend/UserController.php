@@ -755,6 +755,7 @@ class UserController extends BaseController
 
     public function showReviewPage()
     {
+
         $user = $this->getUserActive();
         $bag = new BagService;
         // $creditCard = $this->user
@@ -775,6 +776,11 @@ class UserController extends BaseController
         // $defaultCreditcard->phone_number = $creditCard->address->phone_number;
 
         $shippingCost = (new CourierRepository)->getSavedSessionShippingChoosed();
+        $exchange = (new CurrencyService)->getCurrentCurrency();
+
+        //inject currency
+        $cost = $shippingCost['data']->total_fee_idr / $exchange->value;
+        $shippingCost['data']->total_fee_label = $exchange->symbol.' '.number_format($cost, 2);
 
         $defaultAddress = $this->user
             ->setUser($user)
@@ -793,6 +799,7 @@ class UserController extends BaseController
 
     public function history()
     {
+        $exchange = (new CurrencyService)->getCurrentCurrency();
 
         $user = $this->getUserActive();
 
@@ -826,8 +833,8 @@ class UserController extends BaseController
             'onDone',
             'onCanceled',
             'status',
-            'status_message'
-
+            'status_message',
+            'exchange'
         ));
     }
 

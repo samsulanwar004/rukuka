@@ -54,17 +54,17 @@
       
                           @foreach($detail as $product)
                             @php
-                              $subtotal = $product['price'] * $product['qty'];
+                              $subtotal = number_format(($product['price'] * $product['qty']) / $kurs->value,2);
                             @endphp
                             <tr>
-                              <td>{{ $product['product_name'] }}</td><td>{{$currency}} {{ $product['price'] }}</td><td>{{ $product['qty'] }}</td><td>{{$currency}} {{ $subtotal }}</td>
+                              <td>{{ $product['product_name'] }}</td><td>{{$kurs->symbol}} {{ number_format($product['price'] / $kurs->value,2) }}</td><td>{{ $product['qty'] }}</td><td>{{$kurs->symbol}} {{ $subtotal }}</td>
                             </tr>
                           @endforeach
                             <tr>
-                              <td colspan="3">Shipping Cost</td><td>{{$currency}} {{ $shipping }}</td>
+                              <td colspan="3">Shipping Cost</td><td>{{$kurs->symbol}} {{ number_format($shipping/ $kurs->value,2) }}</td>
                             </tr>
                             <tr>
-                              <td colspan="3"><h4><b>Total</b></h4></td><td><h4><b>{{$currency}} {{ $total  +  $shipping}} </b><br> <h5>* (IDR {{$totalwithshipping}})</h5></h4></td>
+                              <td colspan="3"><h4><b>Total</b></h4></td><td><h4><b>{{$kurs->symbol}} {{ number_format(($total  +  $shipping)/ $kurs->value,2)}} </b><br> <h5>* (IDR {{number_format($totalwithshipping,2)}})</h5></h4></td>
                             </tr>
                       </tbody>
                     </table>
@@ -115,8 +115,7 @@
               $('#loading').show();
 
               // Request a token from Xendit:
-              var tokenData = getTokenData();
-              
+              var tokenData = getTokenData(); 
               
               Xendit.card.createToken(tokenData, xenditResponseHandler);
               
@@ -206,9 +205,7 @@
 
           }
 
-          function getTokenData () {
-            var total = Math.round(({{$total}} + {{$shipping}}) * {{$rupiah}});
-
+          function getTokenData () { 
               total = {{$totalwithshipping}};
               var amount = total.toString();
               return {

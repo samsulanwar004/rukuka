@@ -390,7 +390,24 @@ class NavContentSeeder extends Seeder
                 "group_setting" => "Sale Navigation",
                 "label" => "Sale - Text",
             ],
-
+            [
+                "name" => "meta_description",
+                "content_input_type" => "text",
+                "dataenum" => null,
+                "helper" => null,
+                "created_at" => date('Y-m-d H:i:s'),
+                "group_setting" => "Meta Tag",
+                "label" => "Meta Description",
+            ],
+            [
+                "name" => "meta_keyword",
+                "content_input_type" => "text",
+                "dataenum" => null,
+                "helper" => null,
+                "created_at" => date('Y-m-d H:i:s'),
+                "group_setting" => "Meta Tag",
+                "label" => "Meta Keyword",
+            ]
         ];
 
         foreach($data as $k=>$d) {

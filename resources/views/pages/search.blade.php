@@ -1,40 +1,33 @@
 @extends('app')
 
 @section('content')
-    <div class="uk-container uk-container-small">
-        @if($search == 'designers' && $category != 'all')
-            <div class="uk-grid-small uk-margin-top" uk-grid>
-                <div class="uk-panel uk-width-1-4 uk-flex uk-flex-middle uk-flex-center">
-                    <img src="{{ uploadCDN($designer->photo) }}" width="60" alt="" class="uk-box-shadow-medium">
-                </div>
-                <div class="uk-panel uk-width-3-4">
-                    <span class="uk-text-lead">{{ $designer->name }}</span><br>
-                    {{ $designer->content }}
-                </div>
-            </div>
-            <hr class="uk-margin-small">
-        @else
+    <div class="uk-container">
+        <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ trans('app.all_you_need') }}</h3>
+        <div class="uk-panel">
+            <ul class="uk-breadcrumb">
+                <li><a href="/">{{ trans('app.home') }}</a></li>
+                <li><a>{{ trans('app.search_label') }}</a></li>
+            </ul>
+        </div>
 
-        @endif
         <div class="uk-grid-small uk-margin-small-top" uk-grid>
             <div class="uk-width-1-4@m uk-visible@m">
-                <div class="uk-panel">
-                    <ul class="uk-breadcrumb">
-                        <li><a href="/">{{ trans('app.home') }}</a></li>
-                        <li><a>{{ trans('app.search_label') }}</a></li>
-                    </ul>
-                </div>
+                <a href="#" uk-toggle="target: #nav1; animation: uk-animation-fade" class="uk-button uk-button-small uk-button-secondary uk-width-1-1">
+                    <span class="uk-icon uk-margin-small-right" uk-icon="icon: menu"></span>
+                    <label>{{ trans('app.filter_nav') }}</label>
+                </a>
             </div>
             <div class="uk-width-3-4@m">
                 <div class="uk-grid-small uk-child-width-1-2 uk-flex-center" uk-grid>
-                    <div class="uk-text-left">
-                        <span class="uk-text-meta">{{ trans('app.sort_by_price') }} : <a href="?price=desc&keyword={{$keyword}}">{{ trans('app.high') }}</a> | <a href="?price=asc&keyword={{$keyword}}">{{ trans('app.low') }}</a></span>
+                    <div class="uk-text-left uk-flex uk-flex-middle">
+                        <h6 class="uk-text-uppercase">{{ trans('app.sort_by_price') }} : <a href="?price=desc">{{ trans('app.high') }}</a>
+                            | <a href="?price=asc">{{ trans('app.low') }}</a></h6>
                     </div>
                     <div class="uk-visible@m">
                         <div class="uk-text-right">
-                        <span class="uk-text-meta">
-                        @include('pagination.default', ['paginator' => $products])
-                        </span>
+                            <h6 class="uk-text-uppercase uk-margin-remove-vertical">
+                                @include('pagination.default', ['paginator' => $products])
+                            </h6>
                         </div>
                     </div>
                     <div class="uk-hidden@m uk-text-right">
@@ -57,10 +50,11 @@
         </div>
 
         <div class="uk-grid-small uk-margin-small-top" uk-grid>
-            <div class="uk-width-1-4@m uk-visible@m">
-                <div class="uk-card uk-card-border uk-card-small uk-panel">
+            <div id="nav1" class="uk-width-1-4@m uk-visible@m">
+                <div class="uk-card uk-background-muted uk-card-small uk-box-shadow-small">
                     <div class="uk-card-body">
-                      <h4>Search :  <b> {{$keyword}} </b> </h4>
+                      <h4 class="uk-text-uppercase">{{ trans('app.search_label') }} :  <b> {{$keyword}} </b> </h4>
+                        <hr class="uk-margin-small-bottom">
                         <search
                                 api="{{ route('search.api',['keyword' => $keyword])}}"
                                 keyword="{{$keyword}}"
@@ -71,6 +65,94 @@
                         ></search>
                     </div>
                 </div>
+
+                <div class="uk-card uk-background-muted uk-box-shadow-small uk-card-small uk-margin-top">
+                    <div class="uk-card-body">
+                        <h4>{{ trans('app.color') }}</h4>
+                        <ul class="uk-grid uk-grid-collapse">
+                            <li>
+                                <label>
+                                    <input type="radio" name="fb" value="small" />
+                                    <img src="/images/maroon.png" alt="" width="27">
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="fb" value="small" />
+                                    <img src="/images/maroon.png" alt="" width="27">
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="fb" value="small" />
+                                    <img src="/images/maroon.png" alt="" width="27">
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="fb" value="small" />
+                                    <img src="/images/maroon.png" alt="" width="27">
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="fb" value="small" />
+                                    <img src="/images/maroon.png" alt="" width="27">
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="fb" value="small" />
+                                    <img src="/images/maroon.png" alt="" width="27">
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="fb" value="small" />
+                                    <img src="/images/maroon.png" alt="" width="27">
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="fb" value="small" />
+                                    <img src="/images/maroon.png" alt="" width="27">
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="fb" value="small" />
+                                    <img src="/images/maroon.png" alt="" width="27">
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="fb" value="small" />
+                                    <img src="/images/maroon.png" alt="" width="27">
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="fb" value="small" />
+                                    <img src="/images/maroon.png" alt="" width="27">
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="fb" value="small" />
+                                    <img src="/images/maroon.png" alt="" width="27">
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="fb" value="small" />
+                                    <img src="/images/maroon.png" alt="" width="27">
+                                </label>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
             </div>
             <div class="uk-width-expand@m">
                 <shop

@@ -1,12 +1,11 @@
 <div class="uk-section uk-section-muted uk-section-xsmall uk-visible@m">
-  <div class="uk-container uk-container-small">
+  <div class="uk-container">
     <div class="uk-panel uk-grid" uk-grid>
       <div class="uk-width-1-5@m">
         <ul class="uk-nav uk-footer-nav">
           <li class="uk-text-uppercase"><b>{{ trans('app.helpyou') }}</b></li>
           <li><a href="{{ URL::to('help/order-status') }}">{{ trans('app.order_status') }}</a></li>
-          <li><a href="{{ URL::to('help/shipping-handling') }}">{{ trans('app.shipping_handling') }}</a></li>
-          <li><a href="{{ URL::to('help/returns-exchanges') }}">{{ trans('app.returns_exchanges') }}</a></li>
+          <li><a href="{{ URL::to('help/shipping') }}">{{ trans('app.shipping') }}</a></li>
           <li><a href="{{ URL::to('help/international-orders') }}">{{ trans('app.international_orders') }}</a></li>
           <li><a href="{{ URL::to('help/need-some-help') }}">{{ trans('app.need_some_help') }}</a></li>
           <li><a href="{{ URL::to('help/our-services') }}">{{ trans('app.our_services') }}</a></li>
@@ -37,42 +36,52 @@
                 api="{{ route('subcriber') }}"
                 locale="{{ json_encode(trans('app')) }}"
         ></subcriber>
-        <p class="uk-margin-large">
+        <p class="uk-margin-small">
           <ul class="uk-nav uk-footer-nav">
             <li class="uk-text-uppercase">{{ trans('app.connect_us') }}</li>
           </ul>
         <ul class="uk-grid-small" uk-grid>
-          <li><a class="uk-icon-link" uk-icon="icon: twitter"></a></li>
-          <li><a class="uk-icon-link" uk-icon="icon: pinterest"></a></li>
-          <li><a class="uk-icon-link" uk-icon="icon: facebook"></a></li>
-          <li><a class="uk-icon-link" uk-icon="icon: google-plus"></a></li>
-          <li><a class="uk-icon-link" uk-icon="icon: instagram"></a></li>
-          <li><a class="uk-icon-link" uk-icon="icon: tumblr"></a></li>
-          <li><a class="uk-icon-link" uk-icon="icon: mail"></a></li>
+          <li><a href="{{ trans('app.facebook') }}" target="_blank"   class="uk-icon-link" uk-icon="icon: facebook"></a></li>
+          <li><a href="{{ trans('app.instagram') }}" target="_blank" class="uk-icon-link" uk-icon="icon: instagram"></a></li>
+          <li><a href="{{ trans('app.email_to') }}" class="uk-icon-link" uk-icon="icon: mail"></a></li>
         </ul>
-      </p>
-        <li class="uk-nav uk-footer-nav">
-            <a class="uk-button uk-button-text uk-button-small" href="#">{{ Config::get('languages')[App::getLocale()] }}</a>
-            <div class="uk-drop uk-drop-bottom-left" uk-drop="delay-hide:0; mode: click" style="width: 150px">
-              <div class="uk-card uk-card-border uk-background-default uk-card-small">
-                <div class="uk-card-body">
-                  <ul class="uk-list uk-text-meta">
-                    @foreach (Config::get('languages') as $lang => $language)
-                      @if ($lang != App::getLocale())
-                        <li>
-                          <a href="{{ route('lang.switch', $lang) }}">{{$language}}</a>
-                        </li>
-                      @endif
-                    @endforeach
-                  </ul>
-                </div>
-              </div>
-            </div>
-        </li>
+        </p>
+        <ul class="uk-nav uk-footer-nav">
+          <li class="uk-text-uppercase">{{ trans('app.language') }}</li>
+        </ul>
+        <div class="uk-nav uk-footer-nav">
+          @foreach (Config::get('languages') as $lang => $language)
+            @if ($lang == App::getLocale())
+              <u> <a class="uk-text-small" href="{{ route('lang.switch', $lang) }}">{{$language}}</a> </u>
+            @endif
+              @if ($lang != App::getLocale())
+                <a class="uk-text-small" href="{{ route('lang.switch', $lang) }}"> {{$language}} </a>
+              @endif
+              {{ $loop->last ? '' : '| ' }}
+          @endforeach
+        </div>
+        {{--<div class="uk-nav uk-footer-nav">--}}
+            {{--<div class="uk-button uk-button-text uk-button-small" >{{ Config::get('languages')[App::getLocale()] }}</div>--}}
+            {{--<div class="uk-drop uk-drop-bottom-left" uk-drop="delay-hide:0;" style="width: 150px">--}}
+              {{--<div class="uk-card uk-card-border uk-background-default uk-card-small">--}}
+                {{--<div class="uk-card-header" style="height: auto">--}}
+                  {{--<ul class="uk-list uk-text-meta">--}}
+                    {{--@foreach (Config::get('languages') as $lang => $language)--}}
+                      {{--@if ($lang != App::getLocale())--}}
+                        {{--<li>--}}
+                          {{--<a href="{{ route('lang.switch', $lang) }}">{{$language}}</a>--}}
+                        {{--</li>--}}
+                      {{--@endif--}}
+                    {{--@endforeach--}}
+                  {{--</ul>--}}
+                {{--</div>--}}
+              {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
       </div>
     </div>
     <p>
-    <span class="uk-text-meta uk-margin-top">Copyright © 2017 rukuka.com - All Rights Reseved.</span>
+    <span class="uk-text-meta uk-margin-top">{{ trans('app.copyright') }}</span>
     </p>
   </div>
 </div>
@@ -83,6 +92,19 @@
       <li><a href="{{ URL::to('page/about-rukuka')}}">{{ trans('app.about_rukuka') }}</a></li>
       <li><a href="{{ URL::to('page/terms-privacy')}}">{{ trans('app.terms_privacy') }}</a></li>
     </ul>
-    <p>Copyright © 2017 rukuka.com - All Rights Reseved.</p>
+    <ul class="uk-grid" uk-grid>
+      <li>{{ trans('app.copyright') }}</li>
+      <li>
+        @foreach (Config::get('languages') as $lang => $language)
+          @if ($lang == App::getLocale())
+            <u> <a class="uk-text-small" href="{{ route('lang.switch', $lang) }}">{{$language}}</a> </u>
+          @endif
+          @if ($lang != App::getLocale())
+            <a class="uk-text-small" href="{{ route('lang.switch', $lang) }}"> {{$language}} </a>
+          @endif
+          {{ $loop->last ? '' : '| ' }}
+        @endforeach
+      </li>
+    </ul>
   </div>
 </div>

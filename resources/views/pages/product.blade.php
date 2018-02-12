@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-    <div class="uk-container uk-container-small">
+    <div class="uk-container">
         <div class="uk-grid-small uk-margin-top">
             @include('partials.alert')
         </div>
@@ -12,7 +12,7 @@
                         <ul class="uk-tab-left" uk-tab="connect: #component-tab-left; animation: uk-animation-fade">
                             @if($product->images[0])
                                 @foreach($product->images as $image)
-                                    <li style="margin-bottom: 10px"><a href="#"><img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="80" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'"></a></li>
+                                    <li style="margin-bottom: 10px"><a href="#"><img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="100" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'"></a></li>
                                 @endforeach
                             @else
                                 <li style="margin-bottom: 10px"><a href="#"><img src="{{ imageCDN(config('common.default.image_2')) }}" alt="{{ $image->name }}" width="80" ></a></li>
@@ -25,14 +25,26 @@
                                 @foreach($product->images as $image)
                                     <li>
                                       <div class="uk-inline uk-dark">
-                                        <img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="530" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'">
-                                        <a class="uk-position-absolute uk-transform-center" style="left: 90%; top: 90%" href="#modal-media-image-{{ $image->id }}" uk-toggle uk-marker uk-tooltip="title: full view; pos: left"></a>
+                                        <img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="630" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'">
+                                        <a class="uk-position-absolute uk-transform-center" style="left: 90%; top: 90%" href="#modal-full-split-{{ $image->id }}" uk-toggle uk-marker uk-tooltip="title: full view; pos: left"></a>
                                       </div>
                                       {{-- modal view --}}
                                         <div id="modal-media-image-{{ $image->id }}" class="uk-flex-top" uk-modal>
                                             <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
                                                 <button class="uk-modal-close-outside" type="button" uk-close></button>
                                                 <img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" style="max-height: 750px" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'">
+                                            </div>
+                                        </div>
+                                        <div id="modal-full-split-{{ $image->id }}" class="uk-modal-full" uk-modal>
+                                            <div class="uk-modal-dialog">
+                                                <button class="uk-modal-close-full" type="button" uk-close></button>
+                                                <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+                                                    <div class="uk-background-cover" style="background-image: url('{{ uploadCDN($image->photo) }}');" uk-height-viewport></div>
+                                                    <div class="uk-padding-large">
+                                                        <h1>Headline</h1>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </li>

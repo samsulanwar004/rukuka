@@ -408,7 +408,7 @@
             DB::table('orders')
             ->whereDate('expired_date', '<', $now->toDateString())
             ->where('payment_status',0)
-            ->update(['payment_status' => 2,'order_status' => 3]);
+            ->update(['payment_status' => 2,'order_status' => 3,'cancel_reason' => 'Payment Expired']);
         }
 
 

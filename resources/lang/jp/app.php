@@ -19,6 +19,15 @@ return [
     'related'                   =>  '関連商品',
     'quick_shop'                =>  'クイックショップ',
 
+    //Title Page
+    'rukuka'                    =>  'ruKuKa',
+    'title_homepage'            =>  'Indonesian Local Brands',
+
+    //contact and social media
+    'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',
+    'facebook'                  =>  'https://www.facebook.com/Rukuka-333650107116878/',
+    'email_to'                  =>  'mailto:customercare@rukuka.com',
+
     //resources/views/partials/nav.blade.php
     'search'                    =>  'サーチ',
     'search_label'              =>  'サーチ',
@@ -38,9 +47,9 @@ return [
     'helpyou'                   =>  'お手伝いしましょう',
     'about_rukuka'              =>  'ruKuKa について',
     'connect_us'                =>  '私たちとつながる',
-    'copyright'                 =>  'Copyright © 2017 rukuka.com - All Rights Reseved.',
+    'copyright'                 =>  'rukuka.com',
     'order_status'              =>  '注文の状況',
-    'shipping_handling'         =>  '出荷処理',
+    'shipping'                  =>  '出荷処理',
     'returns_exchanges'         =>  '返品と交換',
     'international_orders'      =>  '国際注文',
     'need_some_help'            =>  '助けが要る',
@@ -53,6 +62,7 @@ return [
     'contact_us'                =>  'お問い合わせ',
     'investor_relations'        =>  '投資家向け広報',
     'help'                      =>  '助けて!',
+    'language'                  =>  '言語',
 
     //resources/assets/js/components/PopularSearch.vue
     'popular_searches'          =>  '人気のある検索',
@@ -70,6 +80,7 @@ return [
     'kids_nav'                  =>  '子供たち',
     'sale_nav'                  =>  '販売',
     'blog_nav'                  =>  'ブログ',
+    'eco_tourism_nav'           =>  'エコツーリズム',
     'all'                       =>  'すべて',
     'new_arrival'               =>  '新参者',
     'our_designer'              =>  '私たちのデザイナー',
@@ -161,6 +172,10 @@ return [
     'high'                      =>  '高い',
     'low'                       =>  '低い',
     'recently_view'             =>  '最近見た',
+    'all_you_need'              =>  '必要なものすべて',
+    'filter_nav'                =>  'フィルタナビゲーション',
+    'filter'                    =>  'フィルタ',
+    'color_filter'              =>  '色',
 
     //resources/views/pages/product.blade.php
     'product_code'              =>  '製品コード:',
@@ -293,10 +308,12 @@ return [
     'pay'                       =>  '支払う',
     'track'                     =>  'トラック',
     'buy_again'                 =>  'もう一度買う',
+    'cancel_reason'             =>  '理由を取り消す',
+    'expired_date'              =>  '有効期限',
 
     //resources/views/pages/checkout/checkout_finish.blade.php
     'checkout_almost'           =>  'あなたのチェックアウトプロセスはほぼ完了しています!',
-    'price'                     =>  '価格',
+    'unit_price'                =>  '価格',
     'pay_now'                   =>  '今払う',
     'card_number'               =>  'カード番号 :',
     'card_help'                 =>  'あなたのカード番号を挿入する',
@@ -315,6 +332,54 @@ return [
     'another_keyword'           =>  '他のキーワードで検索しよう',
     'other_people'              =>  '他の人も読む',
 
+    //email common
+    'invoice'                   =>  '請求書',
+    'note'                      =>  '注意',
+    'note_currency'             =>  '料金はIDR通貨で変更されます。',
+    'please'                    =>  'お願いします',
+    'contact_label'             =>  'お問い合わせ',
+    'contact_text'              =>  'この請求書に関するご質問をお待ちしております。',
+    'sincerely'                 =>  '敬具',
+    'rukuka_team'               =>  'ruKuKa チーム',
 
+    //resources/views/emails/invoice_unpaid.blade.php
+    'unpaid_subject'            =>  '未払いの請求書',
+    'unpaid_title'              =>  '注文いただきありがとうございます。',
+    'unpaid_subtitle_1'         =>  'あなたの注文は承認されました,',
+    'unpaid_subtitle_2'         =>  '下記のご注文を確認してください',
+    'unpaid_text_1'             =>  '私たちから注文していただきありがとうございます、あなたの注文は承認されてお支払いを待っています。 支払いが完了したら、まもなくご連絡いたします。',
+    'unpaid_text_2'             =>  '注文履歴ページで、注文の詳細を確認できます。',
 
+    //resources/views/emails/invoice_paid.blade.php
+    'paid_subject'              =>  '支払われた請求書',
+    'paid_title'                =>  '注文いただきありがとうございます。',
+    'paid_subtitle_1'           =>  'お支払いが確認されました,',
+    'paid_subtitle_2'           =>  '下記のご注文を確認してください',
+    'paid_text_1'               =>  '私たちから注文いただきありがとうございます。すぐに開始されますので、すぐに配送確認メールが届きます。',
+    'paid_text_2'               =>  '注文履歴ページで、注文の詳細を確認できます。',
+
+    //resources/views/emails/shipping.blade.php
+    'shipping_subject'          =>  '出荷確認',
+    'shipping_title'            =>  'ご注文は出荷されています。',
+    'shipping_subtitle_1'       =>  '下記のご注文を確認してください',
+    'shipping_text_1'           =>  '私たちからご注文いただきありがとうございます。 私たちはあなたの注文を出荷したばかりであることをお知らせしたいと思います。',
+    'shipping_text_2'           =>  '注文履歴ページで、注文の詳細を確認できます。',
+
+    //resources/views/emails/activation.blade.php
+    'activation_subject'        =>  'アクティベーションアカウント',
+    'activation_title'          =>  'ruKuKaへようこそ',
+    'activation_subtitle_1'     =>  '私たちはあなたが',
+    'activation_subtitle_2'     =>  '素晴らしい時間!',
+    'activation_text'           =>  'サインアップしていただきありがとうございます。 ワンクリックでアカウントを有効にできます。',
+    'activation_activate_now'   =>  '今すぐアクティブにする',
+    'activation_account'        =>  'あなたのアカウント情報:',
+
+    //resources/views/emails/forgot.blade.php
+    'forgot_subject'            =>  'パスワードを再設定する',
+    'forgot_title'              =>  'パスワードをお忘れですか ?',
+    'forgot_subtitle_1'         =>  'あなたを手放しましょう',
+    'forgot_subtitle_2'         =>  '新しいもの.',
+    'forgot_text_1'             =>  '私たちはあなたのrukukaパスワードをリセットするよう要求しました。',
+    'forgot_text_2'             =>  'このメッセージを無視すると、パスワードは変更されません',
+    'forgot_reset'              =>  'パスワードを再設定する',
 ];

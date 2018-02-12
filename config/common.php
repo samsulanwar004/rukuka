@@ -41,5 +41,11 @@ return [
 
 	'maintance_whitelist' => env('MAINTENANCE_WHITELIST'),
 
-	'video_slide' => env('VIDEO_SLIDE')		
+	'video_slide' => env('VIDEO_SLIDE'),
+
+	'queue_active' => env('QUEUE_ACTIVE'),
+
+	'queue_list' => [
+		'user_mail' => 'userMail'
+	]		
 ];

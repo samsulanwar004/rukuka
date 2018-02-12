@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Shipping Confirmation</title>
+    <title>{{ trans('app.shipping_subject') }}</title>
     <style type="text/css">
         @import url(http://fonts.googleapis.com/css?family=Lato:400);
 
@@ -197,8 +197,8 @@
                                             <table cellspacing="0" cellpadding="0" width="100%">
                                                 <tr>
                                                     <td valign="middle" style="vertical-align:middle; padding-right: 15px; padding-left: 15px; text-align:left;" class="mobile-center font-white" height="303">
-                                                        <h1 class="font-white">YOUR ORDER HAS SHIPPED!</h1><br>
-                                                        <h2 class="font-white">Please review your order below</h2>
+                                                        <h1 class="font-white">{{ trans('app.shipping_title') }}</h1><br>
+                                                        <h2 class="font-white">{{ trans('app.shipping_subtitle_1') }}</h2>
                                                         <br>
                                                     </td>
                                                 </tr>
@@ -224,7 +224,7 @@
                                             <tr>
                                                 <td style="text-align: left; vertical-align:top;">
                                                   <span class="important-font">
-                                                    Invoice :  {{$order->order_code}} <br>
+                                                    {{ trans('app.invoice') }} :  {{$order->order_code}} <br>
                                                   </span>
                                                 </td>
                                             </tr>
@@ -250,16 +250,16 @@
                                         <table cellspacing="0" cellpadding="0" width="100%">
                                             <tr>
                                                 <td class="title-dark" width="300">
-                                                    Item
+                                                    {{ trans('app.item') }}
                                                 </td>
                                                 <td class="title-dark" width="163">
-                                                    Qty
+                                                    {{ trans('app.qty') }}
                                                 </td>
                                                 <td class="title-dark" width="97">
-                                                    Unit Price
+                                                    {{ trans('app.unit_price') }}
                                                 </td>
                                                 <td class="title-dark" width="97">
-                                                    Subtotal
+                                                    {{ trans('app.subtotal') }}
                                                 </td>
                                             </tr>
 
@@ -269,7 +269,7 @@
                                                         <table cellspacing="0" cellpadding="0" width="100%">
                                                             <tr>
                                                                 <td class="mobile-hide-img">
-                                                                    <a href=""><img width="110" height="92" src="{{ uploadCDN($item->productStock->product->images->first()->photo) }}" alt="item1"></a>
+                                                                    <a href=""><img width="110" height="92" src="{{ uploadCDN($item['image']) }}" alt="item1"></a>
                                                                 </td>
                                                                 <td class="product">
                                                                     <span style="color: #4d4d4d; font-weight:bold;">{{$item['product_name']}}</span> <br />
@@ -281,10 +281,10 @@
                                                         {{$item['qty']}}
                                                     </td>
                                                     <td class="item-col">
-                                                        ${{$item['price']}}
+                                                        {{$order->symbol}} {{number_format($item['price'],2)}}
                                                     </td>
                                                     <td class="item-col">
-                                                        ${{$item['price']*$item['qty']}}
+                                                        {{$order->symbol}} {{number_format($item['price']*$item['qty'],2)}}
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -294,22 +294,20 @@
                                                 <td class="item-col quantity"></td>
                                                 <td class="item-col price"></td>
                                             </tr>
-
-
                                             <tr>
                                                 <td class="item-col item">
                                                 </td>
                                                 <td class="item-col item">
                                                 </td>
                                                 <td class="item-col quantity" style="text-align:right; padding-right: 10px; border-top: 1px solid #cccccc;">
-                                                    <span class="total-space">Subtotal</span> <br />
-                                                    <span class="total-space">Shipping</span> <br />
-                                                    <span class="total-space" style="font-weight: bold; color: #4d4d4d">Total</span>
+                                                    <span class="total-space">{{ trans('app.subtotal') }}</span> <br />
+                                                    <span class="total-space">{{ trans('app.shipping') }}</span> <br />
+                                                    <span class="total-space" style="font-weight: bold; color: #4d4d4d">{{ trans('app.total') }}</span>
                                                 </td>
                                                 <td class="item-col price" style="text-align: left; border-top: 1px solid #cccccc;">
-                                                    <span class="total-space">${{$order->order_subtotal_after_discount}}</span> <br />
-                                                    <span class="total-space">${{$order->shipping_cost}}</span>  <br />
-                                                    <span class="total-space" style="font-weight:bold; color: #4d4d4d">${{$order->order_subtotal_after_discount + $order->shipping_cost }}</span>
+                                                    <span class="total-space">{{ $order->symbol }} {{number_format($order->order_subtotal,2)}}</span> <br />
+                                                    <span class="total-space">{{ $order->symbol }} {{number_format($order->shipping_cost,2)}}</span>  <br />
+                                                    <span class="total-space" style="font-weight:bold; color: #4d4d4d">{{ $order->symbol }} {{number_format($order->order_subtotal + $order->shipping_cost,2) }}</span>
                                                 </td>
                                             </tr>
                                         </table>
@@ -321,8 +319,16 @@
                                         <table cellspacing="0" cellpadding="0" width="100%">
                                             <tr>
                                                 <td style="text-align: left;">
-                                                    Thank you for ordering from us. We wanted to let you know that we just shipped off your order.
-                                                    <br>You can review complete details of your order on the Order History page.
+                                                    {{trans('app.note')}} :
+                                                    <br>{{ trans('app.note_currency') }} (IDR. {{ $order->order_total_idr }})
+                                                    <br>
+                                                    <br>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">
+                                                    {{ trans('app.shipping_text_1') }}
+                                                    <br>{{ trans('app.shipping_text_2') }}
                                                     <br>
                                                     <br>
                                                 </td>
@@ -339,11 +345,11 @@
                                             <tr>
                                                 <td class="mobile-padding" style="text-align:left;">
                                                     <br>
-                                                    Please <a href="{{URL::to('/help/contact-us')}}">contact us</a> with any questions regarding this shipping confirmation.
+                                                    {{ trans('app.please') }} <a href="{{URL::to('/help/contact-us')}}">{{ trans('app.contact_label') }}</a> {{ trans('app.contact_text') }}
                                                     <br>
                                                     <br>
-                                                    Sincerely,<br>
-                                                    rukuka Team
+                                                    {{ trans('app.sincerely') }},<br>
+                                                    {{ trans('app.rukuka_team') }}
                                                     <br>
                                                     <br>
                                                     <br>
@@ -370,7 +376,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align:center; margin:0 auto;" width="100%">
-                                                        © 2018 rukuka - All Rights Reserved.
+                                                        {{ trans('app.copyright') }}
                                                     </td>
                                                 </tr>
                                             </table>
