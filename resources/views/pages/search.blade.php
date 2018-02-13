@@ -42,6 +42,15 @@
                                         productcategory="{{ $productcategory }}"
                                         locale="{{ json_encode(trans('app')) }}"
                                 ></search>
+
+                                <color-palette
+                                        api="{{ route('color') }}"
+                                        default_image="{{ json_encode(config('common.default')) }}"
+                                        aws_link="{{ config('filesystems.s3url') }}"
+                                        color_id="{{ $colorId }}"
+                                        filter="{{ http_build_query($filter) }}"
+                                        locale="{{ json_encode(trans('app')) }}"
+                                ></color-palette>
                             </div>
                         </div>
                     </div>
