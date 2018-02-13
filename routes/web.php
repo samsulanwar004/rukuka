@@ -363,11 +363,6 @@ Route::middleware(['auth'])->group(function () {
     //     'uses' => 'Frontend\UserController@ccUpdate',
     // ]);
 
-    Route::post('/repayment', [
-        'as'   => 'repayment',
-        'uses' => 'Frontend\OrderController@restore',
-    ]);
-
     Route::get('/order', [
         'as'   => 'order',
         'uses' => 'Frontend\OrderController@store',

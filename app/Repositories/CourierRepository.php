@@ -704,10 +704,10 @@ class CourierRepository{
 
 	}
 
-	public function formatResponse($erroCode, $message, $data, $separator){
+	public function formatResponse($errorCode, $message, $data, $separator){
 
 		return [
-			'error'	=>	$erroCode, 
+			'error'	=>	$errorCode,
 			'message' => $message,
 			'data' => $data,
 			'separator' =>$separator,

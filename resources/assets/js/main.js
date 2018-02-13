@@ -37,6 +37,8 @@ import Search from './components/Search.vue';
 
 import PopularSearch from './components/PopularSearch.vue';
 
+import ColorPalette from './components/ColorPalette.vue';
+
 
 Vue.config.devtools = true
 Vue.config.debug = true
@@ -80,6 +82,7 @@ new Vue({
     'navigation-mobile' : NavigationMobile,
     'user-panel-mobile' : UserPanelMobile,
     'search' : Search,
-    'popular-search' : PopularSearch
+    'popular-search' : PopularSearch,
+    'color-palette' : ColorPalette
 	}
 });

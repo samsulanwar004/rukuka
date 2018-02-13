@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', trans('app.title_homepage') )
 @section('content')
     @php
       $leftTitle = explode('|', $home['left_title']);

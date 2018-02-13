@@ -19,6 +19,10 @@ return [
     'related'                   =>  'Related Product',
     'quick_shop'                =>  'Quick Shop',
 
+    //Title Page
+    'rukuka'                    =>  'ruKuKa',
+    'title_homepage'            =>  'Indonesian Local Brands',
+
     //contact and social media
     'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',
     'facebook'                  =>  'https://www.facebook.com/Rukuka-333650107116878/',
@@ -218,12 +222,15 @@ return [
     'time'                      =>  'Time',
     'status'                    =>  'Status',
     'back_to_history'           =>  'Back to History',
-    'back_to_tracking'          =>  'Track another order code',
+    'back_to_tracking'          =>  'Track another order number',
+    'payment_confirm_unpaid'    =>  'Thank you for ordering from us, Your order has been approved and is waiting for your payment. We will confirm you shortly once payment has been completed.',
 
     //resources/views/pages/airwaybill_order.blade.php
-    'check_shipment'            =>  'Check the Status of The Shipment',
+    'check_order'               =>  'Track Your Order',
     'process'                   =>  'Process',
-    'input_order'               =>  'Input your order code',
+    'input_order'               =>  'Input your order number',
+    'input_email'               =>  'Input your email',
+    'input_title'               =>  'Set Your Email and Order Number',
 
     //resources/views/pages/bag.blade.php
     'recently'                  =>  'Recently Vieweds',
