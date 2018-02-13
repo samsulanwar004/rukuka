@@ -7,6 +7,7 @@ use App\Repositories\CategoryRepository;
 use App\Designer;
 use App\ProductCategory;
 use App\Popular;
+use App\Color;
 
 class ProductRepository
 {
@@ -25,6 +26,13 @@ class ProductRepository
 	            $query->where('slug', '=', $slug);
 	        })->where('is_active',1)->whereNull('deleted_at');
 
+        if ($request->has('color_id')) {
+            $colorId = $request->input('color_id');
+            $query->whereHas('palette', function ($query) use ($colorId) {
+                $query->where('id', $colorId);
+            });
+        }
+
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
         } else {
@@ -40,6 +48,13 @@ class ProductRepository
             ->whereHas('category', function ($query) use ($slug) {
                 $query->where('slug', '=', $slug);
             })->where('price_before_discount','>',0)->where('is_active',1)->whereNull('deleted_at');
+
+        if ($request->has('color_id')) {
+            $colorId = $request->input('color_id');
+            $query->whereHas('palette', function ($query) use ($colorId) {
+                $query->where('id', $colorId);
+            });
+        }
 
         if ($request->has('price')) {
             $query->orderBy('sell_price', $request->input('price'));
@@ -67,6 +82,13 @@ class ProductRepository
 			->whereHas('category', function ($query) use ($ids) {
 	            $query->whereIn('id', $ids);
 	        })->where('is_active',1)->where('is_active',1)->whereNull('deleted_at');
+
+        if ($request->has('color_id')) {
+            $colorId = $request->input('color_id');
+            $query->whereHas('palette', function ($query) use ($colorId) {
+                $query->where('id', $colorId);
+            });
+        }
 
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
@@ -96,6 +118,13 @@ class ProductRepository
 	            $query->whereIn('id', $ids);
 	        })->where('price_before_discount','>',0)->where('is_active',1)->whereNull('deleted_at');
 
+        if ($request->has('color_id')) {
+            $colorId = $request->input('color_id');
+            $query->whereHas('palette', function ($query) use ($colorId) {
+                $query->where('id', $colorId);
+            });
+        }
+
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
         } else {
@@ -115,6 +144,13 @@ class ProductRepository
 	            	$query->where('slug', $category);
 	            }
 	        })->where('is_active',1)->whereNull('deleted_at');
+
+        if ($request->has('color_id')) {
+            $colorId = $request->input('color_id');
+            $query->whereHas('palette', function ($query) use ($colorId) {
+                $query->where('id', $colorId);
+            });
+        }
 
         if ($request->has('price')) {
         	$query->orderBy('sell_price', $request->input('price'));
@@ -260,6 +296,13 @@ class ProductRepository
                 ->whereNull('deleted_at');
         }
 
+        if ($request->has('color_id')) {
+            $colorId = $request->input('color_id');
+            $query->whereHas('palette', function ($query) use ($colorId) {
+                $query->where('id', $colorId);
+            });
+        }
+
         if ($request->has('price')) {
             $query->orderBy('sell_price', $request->input('price'));
         } else {
@@ -296,6 +339,11 @@ class ProductRepository
             ->orderByRaw(\DB::raw("FIELD(id, $orders)"))
             ->take(4)
             ->get();
+    }
+
+    public function getColorPalette()
+    {
+        return Color::get();
     }
 
 }

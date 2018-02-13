@@ -63,6 +63,8 @@ return [
     'investor_relations'        =>  'Investor Relations',
     'help'                      =>  'Help!',
     'language'                  =>  'Language',
+    'order_shipping'            =>  'Order and Shipping',
+    'track_order'               =>  'Track Your Order',
 
     //resources/assets/js/components/PopularSearch.vue
     'popular_searches'          =>  'Most Searches',

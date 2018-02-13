@@ -219,4 +219,24 @@ class PageController extends BaseApiController
             return $this->error($e, 400, true);
         }
     }
+
+    public function colorPalette()
+    {
+        try {
+            $color = (new ProductRepository)->getColorPalette();
+
+            $color = $color->map(function ($entry) {
+                return [
+                    'id' => $entry->id,
+                    'name' => $entry->name,
+                    'palette' => uploadCDN($entry->palette)
+                ];
+            })->toArray();
+
+            return $this->success($color, 200, true);
+
+        } catch (Exception $e) {
+            return $this->error($e, 400, true);
+        }
+    }
 }
