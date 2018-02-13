@@ -8,17 +8,23 @@
 			<div class="uk-card uk-card-default uk-card-large uk-card-body">
 
 				<h3 class="uk-card-title uk-text-center uk-text-uppercase">
-				{{ trans('app.check_shipment') }}
+				{{ trans('app.check_order') }}
 				</h3>
 
 				<div class="uk-overflow-auto">
 					<form class="form-horizontal" method="post" action="{{ route('tracking-result') }}">
 		            	{{ csrf_field() }}
 		            	<ul class="uk-list uk-text-center">
+							<label>{{ trans('app.input_title') }}</label>
+							<li>
+								<input class="uk-input uk-form-width-medium " type="text" placeholder="{{ trans('app.input_email') }}" required="required" name="email" value="">
+							</li>
 				            <li>
-				                <input class="uk-input uk-form-width-medium " id="" type="text" placeholder="{{ trans('app.input_order') }}" required="required" name="order_code" value="">
-				                <button class="uk-button uk-button-medium uk-button-secondary" type="submit">{{ trans('app.process') }}</button>
+								<input class="uk-input uk-form-width-medium " type="text" placeholder="{{ trans('app.input_order') }}" required="required" name="order_code" value="">
 				            </li>
+							<li>
+								<button class="uk-button uk-button-medium uk-button-secondary" type="submit">{{ trans('app.submit') }}</button>
+							</li>
 				        </ul>
 	                </form>
 				</div>

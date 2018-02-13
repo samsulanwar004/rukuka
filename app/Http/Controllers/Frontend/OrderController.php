@@ -196,28 +196,31 @@ class OrderController extends BaseController
 	
 	public function trackingTrace($ordeCode){
 
-		$resultTrackAndTrace = $this->order
-									->setOrderCode($ordeCode)
-									->setUser($this->getUserActive())
-									->getProcessTrackAndTraceOrder();
+		$tracking = $this->order
+                    ->setOrderCode($ordeCode)
+                    ->setUser($this->getUserActive())
+                    ->getTrackingAirwaybill();
 			
-		return view('pages.airwaybill_ems', compact('resultTrackAndTrace'));
+		return view('pages.tracking_ems', compact('tracking'));
 	}
 
 	public function trackingOrder(){
 
-		return view('pages.airwaybill_order');
+		return view('pages.tracking_order_index');
 	
 	}
 
 	public function trackingOrderCode(Request $request){
 
-		$resultTrackAndTrace = $this->order
-									->setOrderCode($request->input('order_code'))
-									->setUser($this->getUserActive())
-									->getProcessTrackAndTraceOrder();
-			
-		return view('pages.airwaybill_ems', compact('resultTrackAndTrace'));
+        $tracking = $this->order
+                    ->setOrderCode($request->input('order_code'))
+                    ->setUser($this->getUserActive())
+                    ->setUserEmail($request->input('email'))
+                    ->getTrackingOrder();
+
+        $exchange = (new CurrencyService)->getCurrentCurrency();
+
+		return view('pages.tracking_order_status', compact('tracking','exchange'));
 
 	}
 }

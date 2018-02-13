@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Order;
 use App\OrderDetail;
 use App\Repositories\CourierRepository;
+use App\Repositories\UserRepository;
 
 class OrderRepository
 {
@@ -25,6 +26,18 @@ class OrderRepository
 	private $orderDate;
 	private $expiredDate;
 	private $detail;
+
+    public function setUserEmail($value)
+    {
+        $this->user = $value;
+
+        return $this;
+    }
+
+    public function getUserEmail()
+    {
+        return $this->user;
+    }
 
 	public function setOrderCode($value)
 	{
@@ -289,14 +302,14 @@ class OrderRepository
 			->first();
 	}
 
-	public function getProcessTrackAndTraceOrder(){
+	public function getTrackingAirwaybill(){
 		
 		$order = Order::with('user')
 						->with('address')
 						->where('order_code', $this->getOrderCode())
 						->first();
 
-		// adakah ordenya atau adakah airwaybill numbernya
+		// check order
 		if ($order == null) {
 			
 			return (new CourierRepository)->formatResponse('806', 'Order not found', null, null);
@@ -307,6 +320,7 @@ class OrderRepository
 		
 		}
 
+		//get airwaybill ems info
 		$resultTracking = (new CourierRepository)->getTrackingAndTracePosIndonesia($order->airwaybill);
 		
 		$data = [
@@ -317,6 +331,48 @@ class OrderRepository
 		return 	(new CourierRepository)->formatResponse($resultTracking['error'], $resultTracking['message'], $data, null);
 		
 	}
+
+	public function getTrackingOrder(){
+        $order = Order::with('user')
+            ->with('address')
+            ->join('users', 'orders.users_id', '=', 'users.id')
+            ->where('users.email', $this->getUserEmail())
+            ->where('order_code', $this->getOrderCode())
+            ->first();
+
+        // check order code status and airwaybill
+        if ($order == null) {
+
+            return (new CourierRepository)->formatResponse('806', 'Order not found', null, null);
+
+        }else if ($order->payment_status == 0 && $order->order_status == 0) {
+
+            $userData = (new UserRepository)->getUserByEmail($this->getUserEmail());
+
+            $userData =  [
+                'id' => $userData->id,
+                'email' => $userData->email
+            ];
+
+            session()->put('as.guest', $userData);
+
+            return (new CourierRepository)->formatResponse('100', 'Please finish your payment before payment is expired', $order, null);
+
+        }else if ($order->airwaybill == null) {
+
+            return (new CourierRepository)->formatResponse('801', 'Airwaybill code not available in your order please contact customer service', null, null);
+        }
+
+        //get airwaybill ems info
+        $resultTracking = (new CourierRepository)->getTrackingAndTracePosIndonesia($order->airwaybill);
+
+        $data = [
+            'tracking' => $resultTracking['data'],
+            'order' => $order
+        ];
+
+        return 	(new CourierRepository)->formatResponse($resultTracking['error'], $resultTracking['message'], $data, null);
+    }
 
 	public function getOrderbyOrderCode($code){
         return Order::where('order_code', $code)
