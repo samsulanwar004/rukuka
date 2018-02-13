@@ -101,16 +101,15 @@
                                 sale="{{ $sale == null ? $category:$sale }}"
                                 locale="{{ json_encode(trans('app')) }}"
                         ></categories>
+                        <color-palette
+                                api="{{ route('color') }}"
+                                default_image="{{ json_encode(config('common.default')) }}"
+                                aws_link="{{ config('filesystems.s3url') }}"
+                                color_id="{{ $colorId }}"
+                                locale="{{ json_encode(trans('app')) }}"
+                        ></color-palette>
                     </div>
                 </div>
-
-                <color-palette
-                  api="{{ route('color') }}"
-                  default_image="{{ json_encode(config('common.default')) }}"
-                  aws_link="{{ config('filesystems.s3url') }}"
-                  color_id="{{ $colorId }}"
-                ></color-palette>
-
             </div>
             <div class="uk-width-expand@m">
                 <shop

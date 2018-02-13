@@ -432,7 +432,7 @@ class PageController extends BaseController
             $products->appends($key, $value);
         }
 
-        $shops = $products->map(function ($entry) use ($exchange) {
+        $shops = $products->map(function ($entry) {
 
             return [
                 'id' => $entry->id,
@@ -450,6 +450,9 @@ class PageController extends BaseController
         $productcategory = $product->getSearchCategory($request);
         $category = $request->input('category');
         $subcategory = $request->input('subcategory');
+        $filter = request()->query();
+        unset($filter['color_id']);
+        $colorId = $request->has('color_id') ? $request->input('color_id') : null;
 
         return view('pages.search', compact(
             'products',
@@ -457,7 +460,9 @@ class PageController extends BaseController
             'keyword',
             'productcategory',
             'category',
-            'subcategory'
+            'subcategory',
+            'filter',
+            'colorId'
         ));
     }
 

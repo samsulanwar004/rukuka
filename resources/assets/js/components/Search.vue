@@ -2,41 +2,41 @@
     <div>
         <ul class="uk-accordion">
             <li>
-                <h4 :class="{'uk-text-bold': category == ''}" >
+                <h5 :class="{'uk-text-bold': category == ''}" >
                     <a :href="'/search?keyword='+keyword" class="uk-link-reset uk-text-uppercase">
                         {{ trans.all }}({{womenCounts+menCounts+kidCounts}})
                     </a>
-                </h4>
+                </h5>
             </li>
             <li v-if="womenCounts">
-                <h4 :class="{'uk-text-bold': category == 'womens'}" >
+                <h5 :class="{'uk-text-bold': category == 'womens'}" >
                     <a :href="'/search?keyword='+keyword+'&category=womens'" class="uk-link-reset uk-text-uppercase">
                         {{ trans.women_nav }} ({{womenCounts}})
                     </a>
-                </h4>
+                </h5>
             </li>
             <li v-if="menCounts">
-                <h4 :class="{'uk-text-bold': category == 'mens'}" >
+                <h5 :class="{'uk-text-bold': category == 'mens'}" >
                     <a :href="'/search?keyword='+keyword+'&category=mens'" class="uk-link-reset uk-text-uppercase">
                         {{ trans.men_nav }} ({{menCounts}})
                     </a>
-                </h4>
+                </h5>
             </li>
             <li v-if="kidCounts">
-                <h4 :class="{'uk-text-bold': category == 'kids'}" >
+                <h5 :class="{'uk-text-bold': category == 'kids'}" >
                     <a :href="'/search?keyword='+keyword+'&category=kids'" class="uk-link-reset uk-text-uppercase">
                         {{ trans.kids_nav }} ({{kidCounts}})
                     </a>
-                </h4>
+                </h5>
             </li>
         </ul>
 
         <ul class="uk-accordion" uk-accordion="multiple: true" >
             <li v-if="category == 'womens'" class="uk-open">
                 <hr class="uk-margin-small-top">
-                <h4 href="#" class="uk-accordion-title">{{ trans.category }}</h4>
+                <h5 href="#" class="uk-accordion-title uk-text-uppercase">{{ trans.category }}</h5>
                 <div class="uk-accordion-content">
-                    <ul class="uk-nav uk-footer-nav" v-for="cloth in womenCloths">
+                    <ul class="uk-nav uk-filter-nav" v-for="cloth in womenCloths">
                         <li v-for="cat in cloth.child" :class="{'uk-text-bold': subcategory == cat.slug}">
                             <a v-for="productCat in productsCategory" :href="'/search?keyword='+keyword+'&category=womens&subcategory='+ cat.slug" v-if="productCat.product_categories_id == cat.id" >{{ cat.name }}</a>
                         </li>
@@ -46,9 +46,9 @@
 
             <li v-if="category == 'mens'" class="uk-open">
                 <hr class="uk-margin-small-top">
-                <h4 href="#" class="uk-accordion-title uk-text-uppercase">{{ trans.category }}</h4>
+                <h5 href="#" class="uk-accordion-title uk-text-uppercase">{{ trans.category }}</h5>
                 <div class="uk-accordion-content">
-                    <ul class="uk-nav uk-footer-nav" v-for="cloth in menCloths">
+                    <ul class="uk-nav uk-filter-nav" v-for="cloth in menCloths">
                         <li v-for="cat in cloth.child" :class="{'uk-text-bold': subcategory == cat.slug}">
                             <a v-for="productCat in productsCategory" :href="'/search?keyword='+keyword+'&category=mens&subcategory='+ cat.slug" v-if="productCat.product_categories_id == cat.id" >{{ cat.name }}</a>
                         </li>
@@ -60,7 +60,7 @@
                 <hr class="uk-margin-small-top">
                 <h4 href="#" class="uk-accordion-title uk-text-uppercase">{{ trans.category }}</h4>
                 <div class="uk-accordion-content">
-                    <ul class="uk-nav uk-footer-nav" v-for="cloth in kidCloths">
+                    <ul class="uk-nav uk-filter-nav" v-for="cloth in kidCloths">
                         <li v-for="cat in cloth.child" :class="{'uk-text-bold': subcategory == cat.slug}">
                             <a v-for="productCat in productsCategory" :href="'/search?keyword='+keyword+'&category=kids&subcategory='+ cat.slug" v-if="productCat.product_categories_id == cat.id" >{{ cat.name }}</a>
                         </li>
@@ -74,7 +74,7 @@
                 <hr class="uk-margin-small-top">
                 <h5 href="#" class="uk-accordion-title uk-text-uppercase">{{ trans.designers_nav }} ({{designers.length}})</h5>
                 <div class="uk-accordion-content">
-                    <ul class="uk-nav uk-footer-nav">
+                    <ul class="uk-nav uk-filter-nav">
                         <li class="uk-parent" v-for="design in designers">
                             <a :href="'/shop/designers/'+ design.slug ">{{ design.name }}</a>
                         </li>
@@ -160,7 +160,7 @@
                 productsCategory: {},
                 category: {},
                 subcategory: {},
-                trans: JSON.parse(this.locale,true)
+                trans: JSON.parse(this.locale,true),
             }
         }
     }

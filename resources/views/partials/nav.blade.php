@@ -11,7 +11,7 @@
                 <div class="uk-panel">
                     {{ Form::open(array('url' => '/search', 'method' =>'get','files' => true,'class' => 'uk-search uk-form-width-medium uk-first-column')) }}
                     <button type="submit" class="uk-search-icon-flip uk-search-icon uk-icon" uk-search-icon></button>
-                    <input type="text" class=" uk-search-input" name="keyword"  placeholder="{{ trans('app.search') }}">
+                    <input type="text" class=" uk-search-input" name="keyword" required placeholder="{{ trans('app.search') }}">
                     {{ Form::close() }}
                 </div>
               </div>
