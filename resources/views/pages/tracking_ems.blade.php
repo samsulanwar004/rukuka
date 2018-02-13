@@ -6,10 +6,10 @@
   	<div class="uk-grid-small uk-margin-top uk-margin-bottom">
 		<div>
 			<div class="uk-card uk-card-default uk-card-large uk-card-body">
-				@if($resultTrackAndTrace['error'] != '000')
+				@if($tracking['error'] != '000')
 
 					<h3 class="uk-card-title uk-text-center">
-						{{ $resultTrackAndTrace['message'] }}
+						{{ $tracking['message'] }}
 					</h3>
 
 				@else
@@ -28,7 +28,7 @@
 							<tbody>
 							<tr>
 								<td>{{ trans('app.barcode') }}</td>
-								<td>{{ $resultTrackAndTrace['data']['order']->airwaybill }}</td>
+								<td>{{ $tracking['data']['order']->airwaybill }}</td>
 							</tr>
 							<tr>
 								<td>{{ trans('app.from') }}</td>
@@ -36,7 +36,7 @@
 							</tr>
 							<tr>
 								<td>{{ trans('app.to') }}</td>
-								<td>{{ $resultTrackAndTrace['data']['order']->address->country }}</td>
+								<td>{{ $tracking['data']['order']->address->country }}</td>
 							</tr>
 							</tbody>
 						</table>
@@ -58,7 +58,7 @@
 								<th>{{trans('app.status')}}</th>
 							</tr>
 							
-							@foreach ($resultTrackAndTrace['data']['tracking'] as $key => $trackingData)
+							@foreach ($tracking['data']['tracking'] as $key => $trackingData)
 							    <tr>
 									<td>{{++$key}}</td>
 									<td>{{$trackingData->office}}</td>
@@ -71,25 +71,24 @@
 							</tbody>
 						</table>
 					</div>
-
 				@endif
 
-				@if(\Request::route()->getName() == 'tracking-result')
+				{{--@if(\Request::route()->getName() == 'tracking-result')--}}
 
-					<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">
-						<div class="uk-panel uk-text-center">
-							<a href="{{ route('tracking-page') }}"><button class="uk-button uk-button-secondary">{{ trans('app.back_to_tracking') }}</button></a>
-							<a href="{{ route('index') }}"><button class="uk-button uk-button-secondary">{{ trans('app.back_to_home') }}</button></a>
-						</div>
-					</div>
-				
-				@else
+					{{--<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">--}}
+						{{--<div class="uk-panel uk-text-center">--}}
+							{{--<a href="{{ route('tracking-page') }}"><button class="uk-button uk-button-secondary">{{ trans('app.back_to_tracking') }}</button></a>--}}
+							{{--<a href="{{ route('index') }}"><button class="uk-button uk-button-secondary">{{ trans('app.back_to_home') }}</button></a>--}}
+						{{--</div>--}}
+					{{--</div>--}}
+				{{----}}
+				{{--@else--}}
 					<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">
 						<div class="uk-panel uk-text-center">
 							<a href="{{ url('account/history') }}"><button class="uk-button uk-button-secondary">{{ trans('app.back_to_history') }}</button></a>
 						</div>
 					</div>
-				@endif
+
 			</div>
 		</div>
   	</div>

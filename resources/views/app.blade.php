@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta id="csrf-token" content="{{ csrf_token() }}">
 
-    <title>rukuka</title>
+    <title>{{ trans('app.rukuka') }} | @yield('title') </title>
 
     <!-- jQuery is required -->
     <link rel="stylesheet" href="{{ elixirCDN('css/app.css') }}">
