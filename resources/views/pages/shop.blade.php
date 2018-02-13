@@ -59,8 +59,8 @@
 
                 <div class="uk-grid-small uk-child-width-1-2 uk-flex-center" uk-grid >
                       <div class="uk-text-left uk-flex uk-flex-middle">
-                          <h6 class="uk-text-uppercase">{{ trans('app.sort_by_price') }} : <a href="?price=desc">{{ trans('app.high') }}</a>
-                            | <a href="?price=asc">{{ trans('app.low') }}</a></h6>
+                          <h6 class="uk-text-uppercase">{{ trans('app.sort_by_price') }} : <a href="{{ actionLink(['price' => 'desc']) }}">{{ trans('app.high') }}</a>
+                            | <a href="{{ actionLink(['price' => 'asc']) }}">{{ trans('app.low') }}</a></h6>
                       </div>
                       <div class="uk-visible@m">
                         <div class="uk-text-right">
@@ -110,7 +110,7 @@
                   aws_link="{{ config('filesystems.s3url') }}"
                   color_id="{{ $colorId }}"
                 ></color-palette>
-                
+
             </div>
             <div class="uk-width-expand@m">
                 <shop
