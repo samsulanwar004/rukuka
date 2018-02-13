@@ -25,7 +25,7 @@
             <div class="uk-width-1-6 uk-flex uk-flex-right">
                 <a href="#" class="uk-icon uk-icon-link" uk-icon="icon: more"></a>
                 <div uk-drop="mode: click; pos: bottom-right" style="width: 200px">
-                    <div class="uk-card uk-card-default uk-card-small">
+                    <div class="uk-card uk-background-muted uk-box-shadow-small uk-card-small">
                         <div class="uk-card-body">
                             <ul class="uk-list uk-text-uppercase uk-text-meta">
                                 <li><a href="{{ URL::to('help/order-status') }}">{{ trans('app.order_status') }}</a></li>

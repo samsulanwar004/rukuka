@@ -63,6 +63,8 @@ return [
     'investor_relations'        =>  '投資家向け広報',
     'help'                      =>  '助けて!',
     'language'                  =>  '言語',
+    'order_shipping'             =>  '注文と出荷',
+    'track_order'               =>  '注文を追跡する',
 
     //resources/assets/js/components/PopularSearch.vue
     'popular_searches'          =>  '人気のある検索',

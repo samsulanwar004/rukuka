@@ -9,7 +9,7 @@
             <li class="uk-open">
                 <h5 href="#" class="uk-accordion-title">{{ parent.toUpperCase() }}</h5>
                 <div class="uk-accordion-content">
-                    <ul class="uk-nav uk-footer-nav">
+                    <ul class="uk-nav uk-filter-nav">
                         <li v-for="category in categories" :class="{'uk-text-bold': slug == category.slug}">
                             <a :href="'/shop/'+parent+'/'+ category.slug ">{{ category.name }}</a>
                         </li>
@@ -33,7 +33,7 @@
             <li class="uk-open" v-for="category in categories">
                 <h5 href="#" class="uk-accordion-title">{{ category.name.toUpperCase() }}</h5>
                 <div class="uk-accordion-content">
-                <ul class="uk-nav uk-footer-nav">
+                <ul class="uk-nav uk-filter-nav">
                     <li v-for="cat in category.child" :class="{'uk-text-bold': slug == cat.slug}">
                       <a :href="'/shop/'+parent+'/'+ category.name.toLowerCase() +'/'+ cat.slug + sales">{{ cat.name }}</a>
                     </li>

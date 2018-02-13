@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-    <div class="uk-container uk-container-small">
+    <div class="uk-container">
 
 
             {{--MAIN BANNER--}}
