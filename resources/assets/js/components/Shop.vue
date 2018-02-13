@@ -314,6 +314,10 @@
               self.bagCount = response.data.bagCount;
             });
 
+            Event.listen('removeBag', function (response) {
+                self.bagCount = response.data.bagCount;
+            });
+
             self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;
             self.loadingImage = this.aws_link+'/images/loading-image.gif';
         },
