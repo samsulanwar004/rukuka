@@ -221,11 +221,14 @@ return [
     'status'                    =>  '状態',
     'back_to_history'           =>  '履歴に戻る',
     'back_to_tracking'          =>  '別の注文コードを追跡する',
+    'payment_confirm_unpaid'    =>  '私たちから注文していただきありがとうございます、あなたの注文は承認されてお支払いを待っています。 支払いが完了したら、まもなくご連絡いたします。',
 
     //resources/views/pages/airwaybill_order.blade.php
-    'check_shipment'            =>  '貨物の状態を確認する',
+    'check_order'               =>  '貨物の状態を確認する',
     'process'                   =>  'プロセス',
     'input_order'               =>  '注文コードを入力してください',
+    'input_email'               =>  'あなたの電子メールを入力',
+    'input_title'               =>  'あなたの電子メールと注文番号を設定する',
 
     //resources/views/pages/bag.blade.php
     'recently'                  =>  '最近閲覧した',
