@@ -33,6 +33,8 @@ Route::get('v1/product/{id?}', 'Api\PageController@product')->name('product.api'
 
 Route::post('v1/recently', 'Api\PageController@recently')->name('recently');
 
+Route::get('v1/color', 'Api\PageController@colorPalette')->name('color');
+
 Route::group([
 	'prefix' => 'v1', 
 	'middleware' => 'auth:api'

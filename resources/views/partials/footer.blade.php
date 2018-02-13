@@ -1,7 +1,7 @@
 <div class="uk-section uk-section-muted uk-section-xsmall uk-visible@m">
   <div class="uk-container">
     <div class="uk-panel uk-grid" uk-grid>
-      <div class="uk-width-1-5@m">
+      <div class="uk-width-1-6@m">
         <ul class="uk-nav uk-footer-nav">
           <li class="uk-text-uppercase"><b>{{ trans('app.helpyou') }}</b></li>
           <li><a href="{{ URL::to('help/order-status') }}">{{ trans('app.order_status') }}</a></li>
@@ -12,7 +12,13 @@
           <li><a href="{{ URL::to('help/size-charts') }}">{{ trans('app.size_chart') }}</a></li>
         </ul>
       </div>
-      <div class="uk-width-1-5@m">
+      <div class="uk-width-1-6@m">
+        <ul class="uk-nav uk-footer-nav">
+          <li class="uk-text-uppercase"><b>{{ trans('app.order_shipping') }}</b></li>
+          <li><a href="{{ route('tracking-page')}}"> {{trans('app.track_order') }}</a> </li>
+        </ul>
+      </div>
+      <div class="uk-width-1-6@m">
         <ul class="uk-nav uk-footer-nav">
           <li class="uk-text-uppercase"><b>{{ trans('app.about_rukuka') }}</b></li>
           <li><a href="{{ URL::to('page/about-rukuka')}}">{{ trans('app.about_rukuka') }}</a></li>
@@ -22,9 +28,8 @@
           <li><a href="{{ URL::to('page/payment')}}">{{ trans('app.payment') }}</a></li>
           <li><a href="{{ URL::to('help/contact-us')}}">{{ trans('app.contact_us') }}</a></li>
         </ul>
-
       </div>
-      <div class="uk-width-1-5@m">
+      <div class="uk-width-1-6@m">
           <popular-search
           api="{{ route('menu')}}"
           popular_search="{{ route('popular-search') }}"
@@ -87,13 +92,14 @@
 </div>
 <div class="uk-section uk-section-muted uk-section-xsmall uk-text-small uk-hidden@m">
   <div class="uk-container uk-container-small uk-text-meta">
-    <ul class="uk-grid" uk-grid>
+    <ul class="uk-grid uk-grid-small" uk-grid>
       <li><a href="{{ URL::to('help/need-some-help')}}">{{ trans('app.need_some_help') }}</a></li>
       <li><a href="{{ URL::to('page/about-rukuka')}}">{{ trans('app.about_rukuka') }}</a></li>
       <li><a href="{{ URL::to('page/terms-privacy')}}">{{ trans('app.terms_privacy') }}</a></li>
     </ul>
-    <ul class="uk-grid" uk-grid>
+    <ul class="uk-grid uk-grid-small" uk-grid>
       <li>{{ trans('app.copyright') }}</li>
+      <li><a href="{{ route('tracking-page')}}"> {{trans('app.track_order') }}</a> </li>
       <li>
         @foreach (Config::get('languages') as $lang => $language)
           @if ($lang == App::getLocale())
