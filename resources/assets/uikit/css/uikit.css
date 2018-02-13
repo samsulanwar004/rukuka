@@ -1,4 +1,5 @@
 /*! UIkit 3.0.0-beta.39 | http://www.getuikit.com | (c) 2014 - 2017 YOOtheme | MIT License */
+@import url('https://fonts.googleapis.com/css?family=Work+Sans');
 /* ========================================================================
    Component: Base
  ========================================================================== */
@@ -10,7 +11,7 @@
  */
 html {
   /* 1 */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-size: 14px;
   font-weight: normal;
   line-height: 1.5;
@@ -101,7 +102,7 @@ strong {
   /* 2 */
   font-family: Consolas, monaco, monospace;
   /* 3 */
-  color: #f0506e;
+  color: #ec9dac;
   white-space: nowrap;
   padding: 2px 6px;
   background: #f8f8f8;
@@ -110,7 +111,7 @@ strong {
  * Emphasize
  */
 em {
-  color: #f0506e;
+  color: #ec9dac;
 }
 /*
  * Insert
@@ -238,7 +239,7 @@ h5,
 h6,
 .uk-h6 {
   margin: 0 0 20px 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-weight: 400;
   color: #000;
   letter-spacing: 2px;
@@ -284,7 +285,7 @@ h4,
 }
 h5,
 .uk-h5 {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-size: 14px;
   line-height: 1.4;
 }
@@ -1498,8 +1499,8 @@ button.uk-icon:not(:disabled) {
  */
 .uk-form-danger,
 .uk-form-danger:focus {
-  color: #f0506e;
-  border-color: #f0506e;
+  color: #ec9dac;
+  border-color: #ec9dac;
 }
 /*
  * Success
@@ -1975,20 +1976,20 @@ select.uk-form-width-xsmall {
  * Danger
  */
 .uk-button-danger {
-  background-color: #f0506e;
+  background-color: #ec9dac;
   color: #fff;
   border: 1px solid transparent;
 }
 /* Hover + Focus */
 .uk-button-danger:hover,
 .uk-button-danger:focus {
-  background-color: #ee395b;
+  background-color: #e8889a;
   color: #fff;
 }
 /* OnClick + Active */
 .uk-button-danger:active,
 .uk-button-danger.uk-active {
-  background-color: #ec2147;
+  background-color: #000000;
   color: #fff;
 }
 /*
@@ -3139,8 +3140,8 @@ select.uk-form-width-xsmall {
  * Danger
  */
 .uk-alert-danger {
-  background: #fef4f6;
-  color: #f0506e;
+  background: #ffffff;
+  color: #ec9dac;
 }
 /*
      * Content
@@ -3228,7 +3229,7 @@ select.uk-form-width-xsmall {
  * Danger
  */
 .uk-label-danger {
-  background-color: #f0506e;
+  background-color: #ec9dac;
   color: #fff;
 }
 /* ========================================================================
@@ -3914,7 +3915,7 @@ ul.uk-nav-sub {
   padding: 0 40px;
   /* 3 */
   font-size: 12px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Work Sans', sans-serif;
   /* 4 */
   text-decoration: none;
   font-weight: 600;
@@ -4088,6 +4089,27 @@ ul.uk-nav-sub {
  */
 .uk-navbar-dropdown-nav .uk-nav-header {
   color: #333;
+}
+.uk-filter-nav > li {
+  font-size: 12px;
+  line-height: 1;
+  color: #666;
+}
+.uk-filter-nav > li > a {
+  font-size: 12px;
+  line-height: 1;
+  color: #666;
+}
+/* Hover + Focus */
+.uk-filter-nav > li > a:hover,
+.uk-filter-nav > li > a:focus {
+  color: #000;
+}
+/* Active */
+.uk-filter-nav > li.uk-active > a {
+  font-size: 12px;
+  font-weight: bold;
+  color: #000;
 }
 .uk-footer-nav > li {
   font-size: 12px;
@@ -4740,7 +4762,7 @@ ul.uk-nav-sub {
  ========================================================================== */
 .uk-accordion-title {
   margin: 0;
-  font-size: 17px;
+  font-size: 14px;
   line-height: 1;
   border-bottom: 0px solid #c3c3c3;
   padding-bottom: 10px;
@@ -5846,7 +5868,7 @@ ul.uk-nav-sub {
  * Danger
  */
 .uk-notification-message-danger {
-  color: #f0506e;
+  color: #ec9dac;
 }
 /* ========================================================================
    Component: Tooltip
@@ -7026,7 +7048,7 @@ ul.uk-nav-sub {
   color: #faa05a !important;
 }
 .uk-text-danger {
-  color: #f0506e !important;
+  color: #ec9dac !important;
 }
 /* Background modifier
  ========================================================================== */
@@ -7929,7 +7951,7 @@ iframe.uk-cover {
  */
 .uk-logo {
   font-size: 25px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Work Sans', sans-serif;
   color: #000;
   /* 1 */
   text-decoration: none;

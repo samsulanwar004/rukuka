@@ -132,13 +132,13 @@
             {{-- <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul> --}}
 
         </div>
-        <hr class="uk-margin-large-top" style="border-color: #333; border-width: 3px">
+        <hr class="uk-margin" style="border-color: #333; border-width: 3px">
         <h2 class="uk-text-center uk-visible@m">Happenings Right Now!</h2>
-        <h4 class="uk-text-center uk-hidden@m">Happenings Right Now!</h4>
+        <h4 class="uk-text-center uk-margin-small uk-hidden@m">Happenings Right Now!</h4>
 
         <div uk-slider="clsActivated: uk-transition-active;">
                 <div class="uk-position-relative uk-visible-toggle">
-                    <ul class="uk-slider-items uk-child-width-1-3" uk-grid>
+                    <ul class="uk-slider-items uk-grid uk-grid-small uk-child-width-1-3" uk-grid>
                         <li>
                           <div class="uk-panel uk-transition-toggle">
                             <a href="{{ $home['homepage_url_7'] }}" class="uk-link-reset">

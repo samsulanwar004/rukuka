@@ -59,8 +59,8 @@
 
                 <div class="uk-grid-small uk-child-width-1-2 uk-flex-center" uk-grid >
                       <div class="uk-text-left uk-flex uk-flex-middle">
-                          <h6 class="uk-text-uppercase">{{ trans('app.sort_by_price') }} : <a href="?price=desc">{{ trans('app.high') }}</a>
-                            | <a href="?price=asc">{{ trans('app.low') }}</a></h6>
+                          <h6 class="uk-text-uppercase">{{ trans('app.sort_by_price') }} : <a href="{{ actionLink(['price' => 'desc']) }}">{{ trans('app.high') }}</a>
+                            | <a href="{{ actionLink(['price' => 'asc']) }}">{{ trans('app.low') }}</a></h6>
                       </div>
                       <div class="uk-visible@m">
                         <div class="uk-text-right">
@@ -104,92 +104,13 @@
                     </div>
                 </div>
 
-                <div class="uk-card uk-background-muted uk-box-shadow-small uk-card-small uk-margin-top">
-                  <div class="uk-card-body">
-                      <h4>{{ trans('app.color') }}</h4>
-                        <ul class="uk-grid uk-grid-collapse">
-                          <li>
-                            <label>
-                              <input type="radio" name="fb" value="small" />
-                              <img src="/images/maroon.png" alt="" width="27">
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" name="fb" value="small" />
-                              <img src="/images/maroon.png" alt="" width="27">
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" name="fb" value="small" />
-                              <img src="/images/maroon.png" alt="" width="27">
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" name="fb" value="small" />
-                              <img src="/images/maroon.png" alt="" width="27">
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" name="fb" value="small" />
-                              <img src="/images/maroon.png" alt="" width="27">
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" name="fb" value="small" />
-                              <img src="/images/maroon.png" alt="" width="27">
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" name="fb" value="small" />
-                              <img src="/images/maroon.png" alt="" width="27">
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" name="fb" value="small" />
-                              <img src="/images/maroon.png" alt="" width="27">
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" name="fb" value="small" />
-                              <img src="/images/maroon.png" alt="" width="27">
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" name="fb" value="small" />
-                              <img src="/images/maroon.png" alt="" width="27">
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" name="fb" value="small" />
-                              <img src="/images/maroon.png" alt="" width="27">
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" name="fb" value="small" />
-                              <img src="/images/maroon.png" alt="" width="27">
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" name="fb" value="small" />
-                              <img src="/images/maroon.png" alt="" width="27">
-                            </label>
-                          </li>
-                        </ul>
+                <color-palette
+                  api="{{ route('color') }}"
+                  default_image="{{ json_encode(config('common.default')) }}"
+                  aws_link="{{ config('filesystems.s3url') }}"
+                  color_id="{{ $colorId }}"
+                ></color-palette>
 
-                  </div>
-                </div>
             </div>
             <div class="uk-width-expand@m">
                 <shop
@@ -206,9 +127,9 @@
             </div>
         </div>
           <div class="uk-text-right uk-margin-bottom uk-margin-top">
-            <span class="uk-text-meta">
+            <h6 class="uk-text-uppercase uk-margin-remove-vertical">
             @include('pagination.default', ['paginator' => $products])
-            </span>
+          </h6>
           </div>
         <hr>
         @if($recently)

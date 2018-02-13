@@ -15,13 +15,12 @@
       </div>
   </div>
   <div class="uk-grid uk-hidden@m" uk-grid>
-    <div class="uk-width-2-3">
+    <div class="uk-width-4-5">
       <h4>{{ ucfirst($user->first_name).' '.ucfirst($user->last_name) }}</h4>
     </div>
-    <div class="uk-width-1-3">
-      <div class="uk-inline uk-width-1-1 uk-text-right">
-          <a href="#" class="uk-button uk-button-text "><span class="uk-icon" uk-icon="icon: triangle-down"></span> MENU</a>
-
+    <div class="uk-width-1-5 uk-flex uk-flex-right">
+      <div class="uk-inline">
+        <a href="#" class="uk-icon uk-icon-link" uk-icon="icon: more"></a>
         <div uk-drop="mode: click; pos: bottom-right" style="width: 150px">
           <div class="uk-card uk-background-muted uk-box-shadow-small uk-card-small">
             <div class="uk-card-body">
