@@ -1,9 +1,30 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
   <head>
+    
+    @php
+      $metaTag = (new Symfony\Component\HttpFoundation\Session\Session)->get('meta_tag');
+    @endphp
+
+    <!-- SEO and Responsive -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="{{ $metaTag['web_meta_tag']['description'] }}">
+    
+    <meta name="robots" content="all" />
+    <meta name="googlebot" content="all" />
+    <meta name='language' content='EN'/>    
+    
+    <meta property="og:title" content="{{ $metaTag['sosial_media_meta_tag']['title'] }}" />
+    <meta property="og:description" content="{{ $metaTag['sosial_media_meta_tag']['description'] }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="{{ strtoupper(App::getLocale()) }}" />
+    <meta property="og:url" content="http://www.rukuka.com" />
+    <meta property="og:site_name" content="{{ trans('app.rukuka') }} @yield('title')" />
+    <meta property="og:image" content="" />
+  
     <!-- CSRF Token -->
     <meta id="csrf-token" content="{{ csrf_token() }}">
 

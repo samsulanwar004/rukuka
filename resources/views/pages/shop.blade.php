@@ -73,14 +73,13 @@
                       <a href="#modal" class="uk-button uk-button-default-warm uk-button-small" uk-toggle>{{ trans('app.filter') }}</a>
                       <div id="modal" uk-modal>
                         <div class="uk-modal-dialog uk-modal-body">
-                            <categories
-                                    api="{{ route('menu', ['parent' => $categories]) }}"
+                            <categories-mobile
                                     parent="{{ $categories }}"
                                     slug="{{ $slug == null ? $category:$slug }}"
                                     category_slug="{{ $category }}"
                                     sale="{{ $sale == null ? $category:$sale }}"
                                     locale="{{ json_encode(trans('app')) }}"
-                            ></categories>
+                            ></categories-mobile>
                         </div>
                       </div>
                     </div>

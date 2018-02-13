@@ -17,6 +17,7 @@ use Share;
 use DB;
 use Validator;
 use App\Services\CurrencyService;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class PageController extends BaseController
 {
@@ -525,6 +526,50 @@ class PageController extends BaseController
                 'message' => $e->getMessage()
             ], 400);
         }
+    }
+
+    public function getMetaTag(){
+
+        $session = new Session;
+
+        $defaultDesc  = 'rukuka is the original shopping center of indonesian goods made by expert craftsmen in their fields, visit rukuka.com you will be amazed';
+        $defaultTitle = 'ruKuKa | how indonesian made really beautiful';
+
+        $currentUrl = explode('/', \URL::current());
+
+        if (count($currentUrl) >= 4) {
+            
+            if ($currentUrl[3] == 'product') {
+                
+                $product = DB::table('products')->where('slug','=', $currentUrl[4])->get()->last();
+
+                $specialDesc = $product->name . ' ' . $product->content . ', price: ' . $product->sell_price . ', specification: ' .  $product->technical_specification . ', categories: ' . $product->tags;
+                
+                $metaTag['meta_tag']['web_meta_tag']['description'] = $specialDesc;
+
+                $metaTag['meta_tag']['sosial_media_meta_tag']['title']       = $product->name;
+                $metaTag['meta_tag']['sosial_media_meta_tag']['description'] = $specialDesc;
+
+            }else{
+
+                $metaTag['meta_tag']['web_meta_tag']['description'] = $defaultDesc;
+
+                $metaTag['meta_tag']['sosial_media_meta_tag']['title']       = $defaultTitle;
+                $metaTag['meta_tag']['sosial_media_meta_tag']['description'] = $defaultDesc;
+
+            }
+
+        }else{
+
+            $metaTag['meta_tag']['web_meta_tag']['description'] = $defaultDesc;
+
+            $metaTag['meta_tag']['sosial_media_meta_tag']['title']       = $defaultTitle;
+            $metaTag['meta_tag']['sosial_media_meta_tag']['description'] = $defaultDesc;
+
+        }
+
+       $session->set('meta_tag', $metaTag['meta_tag']);
+
     }
 
 }
