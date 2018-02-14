@@ -540,10 +540,21 @@ class PageController extends BaseController
 
                 $specialDesc = $product->name . ' ' . $product->content . ', price: ' . $product->sell_price . ', specification: ' .  $product->technical_specification . ', categories: ' . $product->tags;
                 
-                $metaTag['meta_tag']['web_meta_tag']['description'] = $specialDesc;
+                if (count($product) > 0 ) {
+                    
+                    $metaTag['meta_tag']['web_meta_tag']['description'] = $specialDesc;
 
-                $metaTag['meta_tag']['sosial_media_meta_tag']['title']       = $product->name;
-                $metaTag['meta_tag']['sosial_media_meta_tag']['description'] = $specialDesc;
+                    $metaTag['meta_tag']['sosial_media_meta_tag']['title']       = $product->name;
+                    $metaTag['meta_tag']['sosial_media_meta_tag']['description'] = $specialDesc;
+
+                }else{
+
+                    $metaTag['meta_tag']['web_meta_tag']['description'] = $defaultDesc;
+
+                    $metaTag['meta_tag']['sosial_media_meta_tag']['title']       = $defaultTitle;
+                    $metaTag['meta_tag']['sosial_media_meta_tag']['description'] = $defaultDesc;
+                
+                }
 
             }else{
 
