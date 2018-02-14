@@ -34,23 +34,21 @@
                         <a href="#modal" class="uk-button uk-button-default-warm uk-button-small" uk-toggle>Filter</a>
                         <div id="modal" uk-modal>
                             <div class="uk-modal-dialog uk-modal-body">
-                                <search
-                                        api="{{ route('search.api',['keyword' => $keyword])}}"
+                                <search-mobile
                                         keyword="{{$keyword}}"
                                         category="{{ $category }}"
                                         subcategory="{{ $subcategory }}"
                                         productcategory="{{ $productcategory }}"
                                         locale="{{ json_encode(trans('app')) }}"
-                                ></search>
-
-                                <color-palette
-                                        api="{{ route('color') }}"
+                                ></search-mobile>
+                                <hr class="uk-margin-small-top">
+                                <color-palette-mobile
                                         default_image="{{ json_encode(config('common.default')) }}"
                                         aws_link="{{ config('filesystems.s3url') }}"
                                         color_id="{{ $colorId }}"
                                         filter="{{ http_build_query($filter) }}"
                                         locale="{{ json_encode(trans('app')) }}"
-                                ></color-palette>
+                                ></color-palette-mobile>
                             </div>
                         </div>
                     </div>
@@ -72,7 +70,7 @@
                                 productcategory="{{ $productcategory }}"
                                 locale="{{ json_encode(trans('app')) }}"
                         ></search>
-
+                        <hr class="uk-margin-small-top">
                         <color-palette
                                 api="{{ route('color') }}"
                                 default_image="{{ json_encode(config('common.default')) }}"

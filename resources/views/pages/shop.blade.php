@@ -81,13 +81,12 @@
                                     locale="{{ json_encode(trans('app')) }}"
                             ></categories-mobile>
 
-                            <color-palette
-                                    api="{{ route('color') }}"
+                            <color-palette-mobile
                                     default_image="{{ json_encode(config('common.default')) }}"
                                     aws_link="{{ config('filesystems.s3url') }}"
                                     color_id="{{ $colorId }}"
                                     locale="{{ json_encode(trans('app')) }}"
-                            ></color-palette>
+                            ></color-palette-mobile>
                         </div>
                       </div>
                     </div>

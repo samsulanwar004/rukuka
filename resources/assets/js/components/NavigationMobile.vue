@@ -136,7 +136,6 @@
         props: ['men_link', 'women_link', 'kid_link','designer_link','locale'],
         created() {
             var self = this;
-            var api = this.api;
             var sort_by = function(field, reverse, primer){
 
                 var key = primer ?
@@ -148,7 +147,7 @@
                 return function (a, b) {
                     return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
                 }
-            }
+            };
 
             Event.listen('navigation', function (response) {
 
