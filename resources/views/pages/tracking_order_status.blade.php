@@ -6,7 +6,7 @@
   	<div class="uk-grid-small uk-margin-top uk-margin-bottom">
 		<div>
 			<div class="uk-card uk-card-default uk-card-large uk-card-body">
-				@if($tracking['error'] == '000')
+				@if($tracking['error'] == '000' || $tracking['error'] == '804')
 					<h3 class="uk-card-title uk-text-center uk-text-uppercase">
 						{{ trans('app.status_shipment') }}
 					</h3>
@@ -25,7 +25,7 @@
 							</tr>
 							<tr>
 								<td>{{ trans('app.from') }}</td>
-								<td>ID </td>
+								<td>{{ trans('app.indonesia') }} </td>
 							</tr>
 							<tr>
 								<td>{{ trans('app.to') }}</td>
@@ -185,6 +185,108 @@
 					</div>
 					{{--end mobile--}}
 
+				@elseif($tracking['error'] == '801')
+
+					<div class="uk-visible@m">
+						<h3 class="uk-text-center uk-text-uppercase">
+							{{ trans('app.order_status') }}
+						</h3>
+						<label>{{ trans('app.shipment_note') }}</label>
+						<table class="uk-table uk-table-middle uk-table-divider uk-table-hover">
+							<thead>
+							<tr>
+								<th class="uk-width-small">{{ trans('app.order_number') }}</th>
+								<th class="uk-text-center">{{ trans('app.details') }}</th>
+								<th></th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr class="uk-text-small">
+								<td><a>{{ $tracking['data']->order_code }}</a>
+									<label>{{ trans('app.expired_date') }}</label> <br>{{ date('d-m-Y', strtotime($tracking['data']->expired_date)) }}
+								</td>
+								<td>
+									<table class="uk-table uk-table-small uk-table-divider">
+										<tbody>
+										@php
+											$total = null;
+										@endphp
+										@foreach($tracking['data']->details as $detail)
+											<tr>
+												<td>{{ $detail->product_name }} ({{ $detail->productStock->size }})</td>
+												<td>{{ $exchange->symbol }} {{ number_format($detail->price/$exchange->value,2) }}</td>
+												<td>x {{ $detail->qty }}</td>
+												<td>{{ $exchange->symbol }} {{ number_format($detail->subtotal/$exchange->value,2) }}</td>
+											</tr>
+											@php
+												$total += $detail->subtotal;
+											@endphp
+										@endforeach
+										<tr>
+											<td class="uk-text-right" colspan="3">{{ trans('app.subtotal') }}</td>
+											<td>{{ $exchange->symbol }} {{ number_format($total/$exchange->value,2) }}</td>
+										</tr>
+										<tr>
+											<td class="uk-text-right" colspan="3">{{ trans('app.shipping_cost_label') }}</td>
+											<td>{{ $exchange->symbol }} {{ number_format($tracking['data']->shipping_cost/$exchange->value,2) }}</td>
+										</tr>
+										<tr class="uk-text-bold">
+											<td class="uk-text-right" colspan="3">{{ trans('app.total') }}</td>
+											<td>{{ $exchange->symbol }} {{ number_format(($total+$tracking['data']->shipping_cost)/$exchange->value,2) }}</td>
+										</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+
+							</tbody>
+						</table>
+					</div>
+
+					{{--mobile--}}
+					<div class="uk-hidden@m">
+						<h4 class="uk-text-center uk-text-uppercase">
+							{{ trans('app.order_status') }}
+						</h4>
+						<label>{{ trans('app.payment_confirm_unpaid') }}</label>
+						<h6 class="uk-margin-small">{{ trans('app.order_number') }} : {{ $tracking['data']->order_code }}</h6>
+						<h6 class="uk-margin-small"><label>{{ trans('app.expired_date') }}</label> {{ date('d-m-Y', strtotime($tracking['data']->expired_date)) }}</h6>
+						<div>
+							@php
+								$total = null;
+							@endphp
+							<table class="uk-table uk-table-striped uk-table-small uk-background-muted uk-box-shadow-small">
+
+
+								@foreach($tracking['data']->details as $detail)
+									<tr>
+										<td>{{ $detail->product_name }} ({{ $detail->productStock->size }})</td>
+										<td>{{ $exchange->symbol }} {{ number_format($detail->price/$exchange->value,2) }}</td>
+										<td>x {{ $detail->qty }}</td>
+										<td>{{ $exchange->symbol }} {{ number_format($detail->subtotal/$exchange->value,2) }}</td>
+									</tr>
+									@php
+										$total += $detail->subtotal;
+									@endphp
+								@endforeach
+								<tr>
+									<td class="uk-text-right" colspan="3">{{ trans('app.subtotal') }}</td>
+									<td>{{ $exchange->symbol }} {{ number_format($total/$exchange->value,2) }}</td>
+								</tr>
+								<tr>
+									<td class="uk-text-right" colspan="3">{{ trans('app.shipping_cost_label') }}</td>
+									<td>{{ $exchange->symbol }} {{ number_format($tracking['data']->shipping_cost/$exchange->value,2) }}</td>
+								</tr>
+								<tr class="uk-text-bold">
+									<td class="uk-text-right" colspan="3">{{ trans('app.total') }}</td>
+									<td>{{ $exchange->symbol }} {{ number_format(($total+$tracking['data']->shipping_cost)/$exchange->value,2) }}</td>
+								</tr>
+							</table>
+							<hr class="uk-margin" style="border-color: #333; border-width: 3px">
+
+						</div>
+					</div>
+					{{--end mobile--}}
 
 				@else
 					<h3 class="uk-card-title uk-text-center">

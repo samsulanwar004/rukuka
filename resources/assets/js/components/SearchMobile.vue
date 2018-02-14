@@ -90,10 +90,9 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['api','keyword','category','subcategory','productcategory','locale'],
+        props: ['keyword','category','subcategory','productcategory','locale'],
         created() {
             var self = this;
-            var api = this.api;
             self.productsCategory = this.productcategory ? JSON.parse(this.productcategory) : {};
             var sort_by = function(field, reverse, primer){
 
@@ -106,35 +105,28 @@
                 return function (a, b) {
                     return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
                 }
-            }
+            };
 
-            axios.get(api)
-            .then(function (navigations) {
-                if (typeof navigations.data.data !== 'undefined') {
+            Event.listen('api-search', function (response) {
 
-                    Event.fire('api-search', navigations.data.data);
-
-                    if (typeof navigations.data.data.mens !== 'undefined') {
-                        self.menCounts = navigations.data.data.mens;
+                    if (typeof response.mens !== 'undefined') {
+                        self.menCounts = response.mens;
                     }
 
-                    if (typeof navigations.data.data.womens !== 'undefined') {
-                        self.womenCounts = navigations.data.data.womens;
+                    if (typeof response.womens !== 'undefined') {
+                        self.womenCounts = response.womens;
                     }
 
-                    if (typeof navigations.data.data.kids !== 'undefined') {
-                        self.kidCounts = navigations.data.data.kids;
+                    if (typeof response.kids !== 'undefined') {
+                        self.kidCounts = response.kids;
                     }
 
-                    if (typeof navigations.data.data.designers !== 'undefined') {
-                        self.designers = navigations.data.data.designers.sort(sort_by('created_at', true, function(result){
+                    if (typeof response.designers !== 'undefined') {
+                        self.designers = response.designers.sort(sort_by('created_at', true, function(result){
                             return result;
                         }));
                     }
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
+
             });
 
             Event.listen('navigation', function (response) {

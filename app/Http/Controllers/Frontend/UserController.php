@@ -1093,4 +1093,9 @@ class UserController extends BaseController
         }
     }
 
+    public function afterPaymentPage(Request $request)
+    {
+        return view('pages.landing');
+    }
+
 }

@@ -405,6 +405,11 @@ Route::middleware(['as.guest'])->group(function () {
         'uses' => 'Frontend\UserController@postFinalPage',
     ]); 
 
+    Route::get('/payment/finish', [
+        'as'   => 'payment.finish',
+        'uses' => 'Frontend\UserController@afterPaymentPage',
+    ]); 
+
     //Route Address
     Route::post('/account/address', [
         'as'   => 'user.address',

@@ -217,6 +217,7 @@ return [
     'to'                        =>  'に',
     'detail_status'             =>  '詳細ステータス',
     'no'                        =>  '数',
+    'id'                        =>  'ID',
     'office'                    =>  'オフィス',
     'date'                      =>  '日付',
     'time'                      =>  '時間',
