@@ -18,9 +18,6 @@
           <div>
             <a href="#modal-related" class="uk-button uk-button-small uk-button-danger uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
           </div>
-          <div class="uk-hidden@m">
-            <a href="#modal-related" class="uk-button uk-button-small uk-button-default-warm uk-width-1-1 uk-text-uppercase" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
-          </div>
           <a :href="'/product/'+ product.slug" class="uk-text-muted">{{ product.name.substring(0,35) }}</a>
           <br>
           <span v-if="product.price_before_discount > 0 ">
