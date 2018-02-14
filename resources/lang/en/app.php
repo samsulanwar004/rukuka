@@ -89,6 +89,8 @@ return [
     'on_sale'                   =>  'On Sale',
     'clothing'                  =>  'Clothing',
     'accessories'               =>  'Accessories',
+    'discover'                  =>  'Discover',
+    'new_in_blog'               =>  'New in Blog',
 
     //resources/views/partials/user_menu.blade.php
     'home'                      =>  'Home',
@@ -390,5 +392,4 @@ return [
     'forgot_text_1'             =>  'We got a request to reset your rukuka password.',
     'forgot_text_2'             =>  'If you ignore this message, your password won\'t be changed',
     'forgot_reset'              =>  'Reset Password',
-
 ];
