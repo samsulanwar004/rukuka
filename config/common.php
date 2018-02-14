@@ -27,6 +27,7 @@ return [
         'image_4' => env('DEFAULT_IMAGE_4'),
         'image_5' => env('DEFAULT_IMAGE_5'),
         'image_6' => env('DEFAULT_IMAGE_6'),
+        'image_7' => env('DEFAULT_IMAGE_7'),
     ],
 
     'logo' => env('LOGO'),

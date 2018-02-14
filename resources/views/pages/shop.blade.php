@@ -73,14 +73,20 @@
                       <a href="#modal" class="uk-button uk-button-default-warm uk-button-small" uk-toggle>{{ trans('app.filter') }}</a>
                       <div id="modal" uk-modal>
                         <div class="uk-modal-dialog uk-modal-body">
-                            <categories
-                                    api="{{ route('menu', ['parent' => $categories]) }}"
+                            <categories-mobile
                                     parent="{{ $categories }}"
                                     slug="{{ $slug == null ? $category:$slug }}"
                                     category_slug="{{ $category }}"
                                     sale="{{ $sale == null ? $category:$sale }}"
                                     locale="{{ json_encode(trans('app')) }}"
-                            ></categories>
+                            ></categories-mobile>
+
+                            <color-palette-mobile
+                                    default_image="{{ json_encode(config('common.default')) }}"
+                                    aws_link="{{ config('filesystems.s3url') }}"
+                                    color_id="{{ $colorId }}"
+                                    locale="{{ json_encode(trans('app')) }}"
+                            ></color-palette-mobile>
                         </div>
                       </div>
                     </div>
@@ -101,16 +107,15 @@
                                 sale="{{ $sale == null ? $category:$sale }}"
                                 locale="{{ json_encode(trans('app')) }}"
                         ></categories>
+                        <color-palette
+                                api="{{ route('color') }}"
+                                default_image="{{ json_encode(config('common.default')) }}"
+                                aws_link="{{ config('filesystems.s3url') }}"
+                                color_id="{{ $colorId }}"
+                                locale="{{ json_encode(trans('app')) }}"
+                        ></color-palette>
                     </div>
                 </div>
-
-                <color-palette
-                  api="{{ route('color') }}"
-                  default_image="{{ json_encode(config('common.default')) }}"
-                  aws_link="{{ config('filesystems.s3url') }}"
-                  color_id="{{ $colorId }}"
-                ></color-palette>
-
             </div>
             <div class="uk-width-expand@m">
                 <shop

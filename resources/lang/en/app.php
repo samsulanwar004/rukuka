@@ -89,6 +89,8 @@ return [
     'on_sale'                   =>  'On Sale',
     'clothing'                  =>  'Clothing',
     'accessories'               =>  'Accessories',
+    'discover'                  =>  'Discover',
+    'new_in_blog'               =>  'New in Blog',
 
     //resources/views/partials/user_menu.blade.php
     'home'                      =>  'Home',
@@ -209,7 +211,7 @@ return [
     'write_your_help'           =>  'You must enter at least 50 characters in this field and no more than 1,000.',
     'location_review'           =>  '*Your location:',
 
-    //resources/views/pages/airwaybill_ems.blade.php
+    //resources/views/pages/tracking_order_status.blade.php
     'status_shipment'           =>  'The Status of Shipment',
     'the_shipment'              =>  'The Shipment',
     'barcode'                   =>  'Barcode',
@@ -217,6 +219,7 @@ return [
     'to'                        =>  'To',
     'detail_status'             =>  'Detail Status',
     'no'                        =>  'No',
+    'indonesia'                 =>  'ID',
     'office'                    =>  'Office',
     'date'                      =>  'Date',
     'time'                      =>  'Time',
@@ -224,8 +227,10 @@ return [
     'back_to_history'           =>  'Back to History',
     'back_to_tracking'          =>  'Track another order number',
     'payment_confirm_unpaid'    =>  'Thank you for ordering from us, Your order has been approved and is waiting for your payment. We will confirm you shortly once payment has been completed.',
+    'payment_note'              =>  'Please finish your payment before payment is expired',
+    'shipment_note'             =>  'Thank you for ordering from us, We\'ll get started on it right away and you\'ll receive a shipping confirmation email soon.',
 
-    //resources/views/pages/airwaybill_order.blade.php
+    //resources/views/pages/tracking_order_index.blade.php
     'check_order'               =>  'Track Your Order',
     'process'                   =>  'Process',
     'input_order'               =>  'Input your order number',
@@ -387,5 +392,4 @@ return [
     'forgot_text_1'             =>  'We got a request to reset your rukuka password.',
     'forgot_text_2'             =>  'If you ignore this message, your password won\'t be changed',
     'forgot_reset'              =>  'Reset Password',
-
 ];

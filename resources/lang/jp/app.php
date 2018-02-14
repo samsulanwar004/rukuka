@@ -89,6 +89,8 @@ return [
     'on_sale'                   =>  '発売中',
     'clothing'                  =>  '衣類',
     'accessories'               =>  'アクセサリーa',
+    'discover'                  =>  '発見',
+    'new_in_blog'               =>  'ブログの新機能',
 
     //resources/views/partials/user_menu.blade.php
     'home'                      =>  'ホーム',
@@ -209,7 +211,7 @@ return [
     'write_your_help'           =>  'このフィールドには少なくとも50文字を入力し、1,000文字を超えないようにしてください',
     'location_review'           =>  '*あなたの場所:',
 
-    //resources/views/pages/airwaybill_ems.blade.php
+    //resources/views/pages/tracking_order_status.blade.php
     'status_shipment'           =>  '出荷状況',
     'the_shipment'              =>  '出荷',
     'barcode'                   =>  'バーコード',
@@ -217,6 +219,7 @@ return [
     'to'                        =>  'に',
     'detail_status'             =>  '詳細ステータス',
     'no'                        =>  '数',
+    'id'                        =>  'ID',
     'office'                    =>  'オフィス',
     'date'                      =>  '日付',
     'time'                      =>  '時間',
@@ -224,8 +227,10 @@ return [
     'back_to_history'           =>  '履歴に戻る',
     'back_to_tracking'          =>  '別の注文コードを追跡する',
     'payment_confirm_unpaid'    =>  '私たちから注文していただきありがとうございます、あなたの注文は承認されてお支払いを待っています。 支払いが完了したら、まもなくご連絡いたします。',
+    'payment_note'              =>  '支払いが期限切れになる前にお支払いを完了してください',
+    'shipment_note'             =>  '私たちから注文いただきありがとうございます。すぐに開始されますので、すぐに配送確認メールが届きます。',
 
-    //resources/views/pages/airwaybill_order.blade.php
+    //resources/views/pages/tracking_order_index.blade.php
     'check_order'               =>  '貨物の状態を確認する',
     'process'                   =>  'プロセス',
     'input_order'               =>  '注文コードを入力してください',

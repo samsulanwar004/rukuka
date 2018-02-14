@@ -47,14 +47,16 @@
                         <div class="uk-inline-clip uk-transition-toggle uk-light">
                             <a href="{{ URL::to('blog/'.$post->slug)}}" class="uk-link-reset">
                                 <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
-                                    <img src="{{ uploadCDN($post->photo_1) }}" alt="{{$post->title}}" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'">
+                                    <img src="{{ uploadCDN($post->photo_1) }}" alt="{{$post->title}}" onerror="this.src = '{{imageCDN(config('common.default.image_7'))}}'">
                                 <div class="uk-card uk-position-bottom-left uk-card-small">
                                     <div class="uk-card-body">
                                         <div class="uk-transition-slide-left-small uk-visible@m">
                                             <h1 class="uk-margin-remove uk-text-bold blog-subtitle">{{$post->title}}</h1>
                                         </div>
                                         <div class="uk-hidden@m">
-                                            <h4 class="uk-margin-remove">{{$post->title}}</h4>
+                                            <div class="uk-transition-slide-left-small">
+                                                <h5 class="uk-margin-remove uk-text-bold uk-text-small">{{$post->title}}</h5>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

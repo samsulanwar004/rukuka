@@ -162,12 +162,12 @@
                   {   
                       if(msg.status == "CAPTURED" ||msg.status == "AUTHORIZED")
                       {  
-                           window.location = "{!! route('user.history') !!}";
+                           window.location = "{!! route('payment.finish') !!}";
                       }
                       else
                       {   
                           //alert(err.error_code +" : "+err.message);
-                          window.location = "{!! route('user.history') !!}";
+                          window.location = "{!! route('payment.finish') !!}";
                           
                       }
                   });

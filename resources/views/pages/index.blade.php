@@ -138,7 +138,7 @@
 
         <div uk-slider="clsActivated: uk-transition-active;">
                 <div class="uk-position-relative uk-visible-toggle">
-                    <ul class="uk-slider-items uk-child-width-1-3" uk-grid>
+                    <ul class="uk-slider-items uk-grid uk-grid-small uk-child-width-1-3" uk-grid>
                         <li>
                           <div class="uk-panel uk-transition-toggle">
                             <a href="{{ $home['homepage_url_7'] }}" class="uk-link-reset">

@@ -44,7 +44,7 @@ class BlogController extends Controller
             {
                 $url = url('blog/'.$post->slug);
 
-                $image = '<img src="'. uploadCDN($post->photo_1) .'" alt="'.$post->title.'" onerror="this.src = \''.imageCDN(config('common.default.image_2')).'\'">';
+                $image = '<img src="'. uploadCDN($post->photo_1) .'" alt="'.$post->title.'" onerror="this.src = \''.imageCDN(config('common.default.image_7')).'\'">';
 
                 $blog .= '<div class="uk-width-1-3@m uk-width-1-2 uk-inline">
                                 <div class="uk-inline">
@@ -58,7 +58,9 @@ class BlogController extends Controller
                                                         <h1 class="uk-margin-remove uk-text-bold blog-subtitle">'.$post->title.'</h1>
                                                     </div>
                                                     <div class="uk-hidden@m">
-                                                        <h4 class="uk-margin-remove">'.$post->title.'</h4>
+                                                        <div class="uk-transition-slide-left-small">
+                                                            <h5 class="uk-margin-remove uk-text-bold uk-text-small">'. $post->title .'</h5>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

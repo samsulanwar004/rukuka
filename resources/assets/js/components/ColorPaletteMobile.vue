@@ -23,34 +23,22 @@
     import axios from 'axios';
     import VueLazyBackgroundImage from '../components/VueLazyBackgroundImage.vue';
     export default {
-        props: ['api', 'default_image', 'aws_link', 'color_id','filter','locale'],
+        props: ['default_image', 'aws_link', 'color_id','filter','locale'],
 
         components: {
           'lazy-background': VueLazyBackgroundImage
         },
 
-        created () {
+        created() {
             var self = this;
-            var api = this.api;
 
-            axios.get(api)
-                .then(function (response) {
+            Event.listen('api-color', function (response){
 
-                    if (typeof response.data.data !== 'undefined') {
-
-                        Event.fire('api-color', response.data.data);
-
-                        if (typeof response.data.data !== 'undefined') {
-                            self.palette = response.data.data;
-                        }
-
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;      
+                if (typeof response !== 'undefined') {
+                    self.palette = response;
+                }
+            });
+            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;
             self.loadingImage = this.aws_link+'/images/loading-image.gif';
         },
 

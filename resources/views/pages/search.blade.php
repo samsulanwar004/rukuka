@@ -20,8 +20,8 @@
             <div class="uk-width-3-4@m">
                 <div class="uk-grid-small uk-child-width-1-2 uk-flex-center" uk-grid>
                     <div class="uk-text-left uk-flex uk-flex-middle">
-                        <h6 class="uk-text-uppercase">{{ trans('app.sort_by_price') }} : <a href="?price=desc">{{ trans('app.high') }}</a>
-                            | <a href="?price=asc">{{ trans('app.low') }}</a></h6>
+                        <h6 class="uk-text-uppercase">{{ trans('app.sort_by_price') }} : <a href="{{ actionLink(['price' => 'desc']) }}">{{ trans('app.high') }}</a>
+                            | <a href="{{ actionLink(['price' => 'asc']) }}">{{ trans('app.low') }}</a></h6>
                     </div>
                     <div class="uk-visible@m">
                         <div class="uk-text-right">
@@ -34,14 +34,21 @@
                         <a href="#modal" class="uk-button uk-button-default-warm uk-button-small" uk-toggle>Filter</a>
                         <div id="modal" uk-modal>
                             <div class="uk-modal-dialog uk-modal-body">
-                                <search
-                                        api="{{ route('search.api',['keyword' => $keyword])}}"
+                                <search-mobile
                                         keyword="{{$keyword}}"
                                         category="{{ $category }}"
                                         subcategory="{{ $subcategory }}"
                                         productcategory="{{ $productcategory }}"
                                         locale="{{ json_encode(trans('app')) }}"
-                                ></search>
+                                ></search-mobile>
+                                <hr class="uk-margin-small-top">
+                                <color-palette-mobile
+                                        default_image="{{ json_encode(config('common.default')) }}"
+                                        aws_link="{{ config('filesystems.s3url') }}"
+                                        color_id="{{ $colorId }}"
+                                        filter="{{ http_build_query($filter) }}"
+                                        locale="{{ json_encode(trans('app')) }}"
+                                ></color-palette-mobile>
                             </div>
                         </div>
                     </div>
@@ -53,7 +60,7 @@
             <div id="nav1" class="uk-width-1-4@m uk-visible@m">
                 <div class="uk-card uk-background-muted uk-card-small uk-box-shadow-small">
                     <div class="uk-card-body">
-                      <h4 class="uk-text-uppercase">{{ trans('app.search_label') }} :  <b> {{$keyword}} </b> </h4>
+                      <h5 class="uk-text-uppercase">{{ trans('app.search_label') }} :  <b> {{$keyword}} </b> </h5>
                         <hr class="uk-margin-small-bottom">
                         <search
                                 api="{{ route('search.api',['keyword' => $keyword])}}"
@@ -63,93 +70,15 @@
                                 productcategory="{{ $productcategory }}"
                                 locale="{{ json_encode(trans('app')) }}"
                         ></search>
-                    </div>
-                </div>
-
-                <div class="uk-card uk-background-muted uk-box-shadow-small uk-card-small uk-margin-top">
-                    <div class="uk-card-body">
-                        <h4>{{ trans('app.color') }}</h4>
-                        <ul class="uk-grid uk-grid-collapse">
-                            <li>
-                                <label>
-                                    <input type="radio" name="fb" value="small" />
-                                    <img src="/images/maroon.png" alt="" width="27">
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="fb" value="small" />
-                                    <img src="/images/maroon.png" alt="" width="27">
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="fb" value="small" />
-                                    <img src="/images/maroon.png" alt="" width="27">
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="fb" value="small" />
-                                    <img src="/images/maroon.png" alt="" width="27">
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="fb" value="small" />
-                                    <img src="/images/maroon.png" alt="" width="27">
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="fb" value="small" />
-                                    <img src="/images/maroon.png" alt="" width="27">
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="fb" value="small" />
-                                    <img src="/images/maroon.png" alt="" width="27">
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="fb" value="small" />
-                                    <img src="/images/maroon.png" alt="" width="27">
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="fb" value="small" />
-                                    <img src="/images/maroon.png" alt="" width="27">
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="fb" value="small" />
-                                    <img src="/images/maroon.png" alt="" width="27">
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="fb" value="small" />
-                                    <img src="/images/maroon.png" alt="" width="27">
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="fb" value="small" />
-                                    <img src="/images/maroon.png" alt="" width="27">
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="fb" value="small" />
-                                    <img src="/images/maroon.png" alt="" width="27">
-                                </label>
-                            </li>
-                        </ul>
-
+                        <hr class="uk-margin-small-top">
+                        <color-palette
+                                api="{{ route('color') }}"
+                                default_image="{{ json_encode(config('common.default')) }}"
+                                aws_link="{{ config('filesystems.s3url') }}"
+                                color_id="{{ $colorId }}"
+                                filter="{{ http_build_query($filter) }}"
+                                locale="{{ json_encode(trans('app')) }}"
+                        ></color-palette>
                     </div>
                 </div>
 

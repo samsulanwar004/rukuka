@@ -10,34 +10,23 @@ import Navigation from './components/Navigation.vue';
 import Popular from './components/Popular.vue';
 import Related from './components/Related.vue';
 import Categories from './components/Categories.vue';
-
+import CategoriesMobile from './components/CategoriesMobile.vue';
 import Subcriber from './components/Subcriber.vue';
-
 import ButtonBuy from './components/ButtonBuy.vue';
-
 import Bag from './components/Bag.vue';
-
 import Wishlist from './components/Wishlist.vue';
-
 import Shop from './components/Shop.vue';
-
 import Item from './components/ItemCheckout.vue';
-
 import Summary from './components/Summary.vue';
-
 import Address from './components/Address.vue';
-
 import CreditCard from './components/CreditCard.vue';
-
 import NavigationMobile from './components/NavigationMobile.vue';
-
 import UserPanelMobile from './components/UserPanelMobile.vue';
-
 import Search from './components/Search.vue';
-
+import SearchMobile from './components/SearchMobile.vue';
 import PopularSearch from './components/PopularSearch.vue';
-
 import ColorPalette from './components/ColorPalette.vue';
+import ColorPaletteMobile from './components/ColorPaletteMobile.vue';
 
 
 Vue.config.devtools = true
@@ -60,7 +49,7 @@ window.Event = new class {
   listen(event, callback) {
     this.vue.$on(event, callback);
   }
-}
+};
 
 new Vue({
   el: '#app',
@@ -70,6 +59,7 @@ new Vue({
     'popular': Popular,
     'related': Related,
     'categories': Categories,
+    'categories-mobile': CategoriesMobile,
     'button-buy': ButtonBuy,
     'subcriber': Subcriber,
     'bag': Bag,
@@ -82,7 +72,9 @@ new Vue({
     'navigation-mobile' : NavigationMobile,
     'user-panel-mobile' : UserPanelMobile,
     'search' : Search,
+    'search-mobile' : SearchMobile,
     'popular-search' : PopularSearch,
-    'color-palette' : ColorPalette
+    'color-palette' : ColorPalette,
+    'color-palette-mobile' : ColorPaletteMobile,
 	}
 });

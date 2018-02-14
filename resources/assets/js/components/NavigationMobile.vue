@@ -7,7 +7,7 @@
                 <a :href="designerLink" class="uk-text-uppercase" >{{ trans.designers_nav }}</a>
                 <ul class="uk-nav-sub">
                     <li class="uk-parent uk-active">
-                        <a href="/shop/designers/all">All</a>
+                        <a href="/shop/designers/all">{{ trans.all }}</a>
                     </li>
                     <li class="uk-parent" v-for="design in designers">
                         <a :href="'/shop/designers/'+ design.slug ">{{ design.name }}</a>
@@ -18,10 +18,10 @@
                 <a :href="womenLink" class="uk-text-uppercase">{{ trans.women_nav }}</a>
                 <ul class="uk-nav uk-nav-sub uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
                     <li>
-                        <a class="uk-text-bold uk-text-uppercase" :href="womenLink">{{ trans.whats_new}}</a>
+                        <a class="uk-text-bold uk-text-uppercase" :href="womenLink">{{ trans.new_arrival}}</a>
                     </li>
                     <li class="uk-parent">
-                        <a v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'" class="uk-text-bold" >{{ trans.clothing }}</a>
+                        <a v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'" class="uk-text-bold uk-text-uppercase" >{{ trans.clothing }}</a>
                         <ul class="uk-nav-sub">
                             <span v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
                                 <li>
@@ -34,7 +34,7 @@
                         </ul>
                     </li>
                     <li class="uk-parent">
-                        <a v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'accessories'" class="uk-text-bold">{{ cloth.name.toUpperCase() }}</a>
+                        <a v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'accessories'" class="uk-text-bold uk-text-uppercase">{{ cloth.name.toUpperCase() }}</a>
                         <ul class="uk-nav-sub">
                             <span v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
                                 <li>
@@ -52,10 +52,10 @@
                 <a :href="menLink" class="uk-text-uppercase">{{ trans.men_nav }}</a>
                 <ul class="uk-nav uk-nav-sub uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
                     <li>
-                        <a class="uk-text-bold uk-text-uppercase" :href="menLink">{{ trans.whats_new}}</a>
+                        <a class="uk-text-bold uk-text-uppercase" :href="menLink">{{ trans.new_arrival}}</a>
                     </li>
                     <li class="uk-parent">
-                        <a v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'" class="uk-text-bold" >{{ trans.clothing }}</a>
+                        <a v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'" class="uk-text-bold uk-text-uppercase" >{{ trans.clothing }}</a>
                         <ul class="uk-nav-sub">
                             <span v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
                                 <li>
@@ -68,7 +68,7 @@
                         </ul>
                     </li>
                     <li class="uk-parent">
-                        <a v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'accessories'" class="uk-text-bold">{{ trans.accessories }}</a>
+                        <a v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'accessories'" class="uk-text-bold uk-text-uppercase">{{ trans.accessories }}</a>
                         <ul class="uk-nav-sub">
                             <span v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
                                 <li>
@@ -76,40 +76,6 @@
                                 </li>
                                 <li v-for="cat in cloth.child">
                                     <a :href="'/shop/mens/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
-                                </li>
-                            </span>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li class="uk-parent">
-                <a :href="kidLink" class="uk-text-uppercase">{{ trans.kids_nav }}</a>
-                <ul class="uk-nav uk-nav-sub uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
-                    <li>
-                        <a class="uk-text-bold uk-text-uppercase" :href="kidLink">{{ trans.whats_new}}</a>
-                    </li>
-                    <li class="uk-parent">
-                        <a v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'clothing'" class="uk-text-bold" >{{ trans.clothing }}</a>
-                        <ul class="uk-nav-sub">
-                            <span v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
-                                <li>
-                                    <a href="/shop/kids/all">{{ trans.all }}</a>
-                                </li>
-                                <li v-for="cat in cloth.child">
-                                    <a :href="'/shop/kids/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
-                                </li>
-                            </span>
-                        </ul>
-                    </li>
-                    <li class="uk-parent">
-                        <a v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'accessories'" class="uk-text-bold">{{ trans.accessories }}</a>
-                        <ul class="uk-nav-sub">
-                            <span v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
-                                <li>
-                                  <a href="/shop/kids/all">{{ trans.all }}</a>
-                                </li>
-                                <li v-for="cat in cloth.child">
-                                    <a :href="'/shop/kids/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                             </span>
                         </ul>
@@ -136,7 +102,6 @@
         props: ['men_link', 'women_link', 'kid_link','designer_link','locale'],
         created() {
             var self = this;
-            var api = this.api;
             var sort_by = function(field, reverse, primer){
 
                 var key = primer ?
@@ -148,7 +113,7 @@
                 return function (a, b) {
                     return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
                 }
-            }
+            };
 
             Event.listen('navigation', function (response) {
 
