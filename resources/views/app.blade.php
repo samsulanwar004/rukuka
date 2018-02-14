@@ -10,7 +10,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
     <meta name="description" content="{{ $metaTag['web_meta_tag']['description'] }}">
     <meta name="googlebot-news" content="index,follow" />
     <meta name="robots" content="index, follow" />
@@ -23,10 +22,10 @@
     <meta property="og:title" content="{{ $metaTag['sosial_media_meta_tag']['title'] }}" />
     <meta property="og:description" content="{{ $metaTag['sosial_media_meta_tag']['description'] }}" />
     <meta property="og:type" content="article" />
-    <meta property="og:locale" content="{{ strtoupper(App::getLocale()) }}" />
+    <meta property="og:locale" content="EN" />
     <meta property="og:url" content="http://www.rukuka.com" />
     <meta property="og:site_name" content="{{ trans('app.rukuka') }} @yield('title')" />
-    <meta property="og:image" content="" />
+<!--     <meta property="og:image" content="" /> -->
     <!-- end facebook META -->
 
     <!--twitter cards -->
@@ -35,7 +34,7 @@
     <meta name="twitter:title" content="{{ $metaTag['sosial_media_meta_tag']['title'] }}" data-dynamic="true">
     <meta name="twitter:description" content="{{ $metaTag['sosial_media_meta_tag']['description'] }}" data-dynamic="true">
     <meta name="twitter:creator" content="" data-dynamic="true">
-    <meta name="twitter:image" content="" data-dynamic="true">
+    <!-- <meta name="twitter:image" content="" data-dynamic="true"> -->
     <meta name="twitter:url" content="http://www.rukuka.com" data-dynamic="true">
     <meta name="twitter:domain" content="http://www.rukuka.com" data-dynamic="true">
     <!-- end twitter cards -->
