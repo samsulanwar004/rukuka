@@ -54,7 +54,9 @@
                                             <h1 class="uk-margin-remove uk-text-bold blog-subtitle">{{$post->title}}</h1>
                                         </div>
                                         <div class="uk-hidden@m">
-                                            <h4 class="uk-margin-remove">{{$post->title}}</h4>
+                                            <div class="uk-transition-slide-left-small">
+                                                <h5 class="uk-margin-remove uk-text-bold uk-text-small">{{$post->title}}</h5>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
