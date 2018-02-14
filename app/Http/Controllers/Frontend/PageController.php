@@ -542,33 +542,61 @@ class PageController extends BaseController
             if ($currentUrl[3] == 'product') {
                 
                 $product = DB::table('products')->where('slug','=', $currentUrl[4])->get()->last();
-
-                $specialDesc = $product->name . ' ' . $product->content . ', price: ' . $product->sell_price . ', specification: ' .  $product->technical_specification . ', categories: ' . $product->tags;
                 
-                $metaTag['meta_tag']['web_meta_tag']['description'] = $specialDesc;
+                if (count($product) > 0 ) {
 
-                $metaTag['meta_tag']['sosial_media_meta_tag']['title']       = $product->name;
-                $metaTag['meta_tag']['sosial_media_meta_tag']['description'] = $specialDesc;
+                    $currency = (new CurrencyService)->getCurrentCurrency();
+
+                    $specialDesc = $product->name . ' ' . strip_tags($product->content) . ', price: ' . $currency->symbol . number_format(($product->sell_price / $currency->value), 2) . ', specification: ' .  $product->technical_specification . ', categories: ' . $product->tags;
+
+                    $metaTag = $this->getStructurMetaTag($specialDesc, $product->name);
+
+                }else{
+
+                    $metaTag = $this->getStructurMetaTag($defaultDesc, $defaultTitle);
+                
+                }
+
+            }else if($currentUrl[3] == 'blog'){
+
+                $articles = DB::table('blogs')->where('slug','=', $currentUrl[4])->get()->last();
+
+                if (count($articles) > 0 ) {
+
+                    $specialDesc = strip_tags($articles->content);
+
+                    $metaTag = $this->getStructurMetaTag($specialDesc, $articles->title);
+                
+                }else{
+
+                    $metaTag = $this->getStructurMetaTag($defaultDesc, $defaultTitle);
+
+                }
 
             }else{
 
-                $metaTag['meta_tag']['web_meta_tag']['description'] = $defaultDesc;
-
-                $metaTag['meta_tag']['sosial_media_meta_tag']['title']       = $defaultTitle;
-                $metaTag['meta_tag']['sosial_media_meta_tag']['description'] = $defaultDesc;
+                $metaTag = $this->getStructurMetaTag($defaultDesc, $defaultTitle);
 
             }
 
         }else{
 
-            $metaTag['meta_tag']['web_meta_tag']['description'] = $defaultDesc;
-
-            $metaTag['meta_tag']['sosial_media_meta_tag']['title']       = $defaultTitle;
-            $metaTag['meta_tag']['sosial_media_meta_tag']['description'] = $defaultDesc;
+            $metaTag = $this->getStructurMetaTag($defaultDesc, $defaultTitle);
 
         }
 
        $session->set('meta_tag', $metaTag['meta_tag']);
+
+    }
+
+    private function getStructurMetaTag($desc, $title){
+
+        $metaTag['meta_tag']['web_meta_tag']['description']          = $desc;
+
+        $metaTag['meta_tag']['sosial_media_meta_tag']['title']       = $title;
+        $metaTag['meta_tag']['sosial_media_meta_tag']['description'] = $desc;
+
+        return $metaTag;
 
     }
 
