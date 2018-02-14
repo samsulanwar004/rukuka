@@ -10,6 +10,7 @@ import Navigation from './components/Navigation.vue';
 import Popular from './components/Popular.vue';
 import Related from './components/Related.vue';
 import Categories from './components/Categories.vue';
+import CategoriesMobile from './components/CategoriesMobile.vue';
 
 import Subcriber from './components/Subcriber.vue';
 
@@ -70,6 +71,7 @@ new Vue({
     'popular': Popular,
     'related': Related,
     'categories': Categories,
+    'categories-mobile': CategoriesMobile,
     'button-buy': ButtonBuy,
     'subcriber': Subcriber,
     'bag': Bag,

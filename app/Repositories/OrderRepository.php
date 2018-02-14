@@ -26,6 +26,7 @@ class OrderRepository
 	private $orderDate;
 	private $expiredDate;
 	private $detail;
+	private $payment;
 
     public function setUserEmail($value)
     {
@@ -342,11 +343,15 @@ class OrderRepository
 
         // check order code status and airwaybill
         if ($order == null) {
-
+            //Order not found
             return (new CourierRepository)->formatResponse('806', 'Order not found', null, null);
 
-        }else if ($order->payment_status == 0 && $order->order_status == 0) {
+        }else if ($order->order_status == 3) {
+            //Order expired
+            return (new CourierRepository)->formatResponse('806', 'Order expired', null, null);
 
+        }else if ($order->payment_status == 0 && $order->order_status == 0) {
+            // Order Unpaid
             $userData = (new UserRepository)->getUserByEmail($this->getUserEmail());
 
             $userData =  [
@@ -356,11 +361,11 @@ class OrderRepository
 
             session()->put('as.guest', $userData);
 
-            return (new CourierRepository)->formatResponse('100', 'Please finish your payment before payment is expired', $order, null);
+            return (new CourierRepository)->formatResponse('100', trans('app.payment_note'), $order, null);
 
         }else if ($order->airwaybill == null) {
-
-            return (new CourierRepository)->formatResponse('801', 'Airwaybill code not available in your order please contact customer service', null, null);
+            // Order Paid and Airwaybill No Found
+            return (new CourierRepository)->formatResponse('801', trans('app.shipment_note'), $order, null);
         }
 
         //get airwaybill ems info
