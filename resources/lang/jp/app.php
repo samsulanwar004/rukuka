@@ -64,6 +64,7 @@ return [
     'search'                    =>  'サーチ',
     'search_label'              =>  'サーチ',
     'welcome_in'                =>  'ruKuKaへようこそ。今、インドネシアがどのようにあなたを本当に美しく見せてくれるのか教えてください。',
+    'find_label'                =>  '私たちの製品を見つける',
 
     //resources/assets/js/components/UserPanel.vue
     'hallo'                     =>  'ハロー,',
