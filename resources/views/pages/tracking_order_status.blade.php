@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', trans('app.title_tracking') )
 @section('content')
 
 <div class="uk-container uk-container-small">

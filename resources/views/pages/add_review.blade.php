@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', $product->name.' '.trans('app.title_review') )
 @section('content')
 <div class="uk-container uk-container-small">
   <div class="uk-grid-small uk-margin-top">

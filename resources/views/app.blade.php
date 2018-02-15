@@ -10,25 +10,47 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
     <meta name="description" content="{{ $metaTag['web_meta_tag']['description'] }}">
-    
-    <meta name="robots" content="all" />
+    <meta name="googlebot-news" content="index,follow" />
+    <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="all" />
-    <meta name='language' content='EN'/>    
-    
+    <meta name='language' content='EN'/>
+    <meta name="author" content="rukuka">    
+    <!-- end SEO and Responsive -->
+
+    <!-- facebook META -->
     <meta property="og:title" content="{{ $metaTag['sosial_media_meta_tag']['title'] }}" />
     <meta property="og:description" content="{{ $metaTag['sosial_media_meta_tag']['description'] }}" />
     <meta property="og:type" content="article" />
-    <meta property="og:locale" content="{{ strtoupper(App::getLocale()) }}" />
+    <meta property="og:locale" content="EN" />
     <meta property="og:url" content="http://www.rukuka.com" />
     <meta property="og:site_name" content="{{ trans('app.rukuka') }} @yield('title')" />
-    <meta property="og:image" content="" />
-  
+<!--     <meta property="og:image" content="" /> -->
+    <!-- end facebook META -->
+
+    <!--twitter cards -->
+    <meta name="twitter:card" content="summary_large_image" data-dynamic="true">
+    <meta name="twitter:site" content="http://www.rukuka.com" data-dynamic="true">
+    <meta name="twitter:title" content="{{ $metaTag['sosial_media_meta_tag']['title'] }}" data-dynamic="true">
+    <meta name="twitter:description" content="{{ $metaTag['sosial_media_meta_tag']['description'] }}" data-dynamic="true">
+    <meta name="twitter:creator" content="" data-dynamic="true">
+    <!-- <meta name="twitter:image" content="" data-dynamic="true"> -->
+    <meta name="twitter:url" content="http://www.rukuka.com" data-dynamic="true">
+    <meta name="twitter:domain" content="http://www.rukuka.com" data-dynamic="true">
+    <!-- end twitter cards -->
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NRS5V6D');</script>
+    <!-- End Google Tag Manager -->
+
     <!-- CSRF Token -->
     <meta id="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ trans('app.rukuka') }} | @yield('title') </title>
+    <title> @yield('title') </title>
 
     <!-- jQuery is required -->
     <link rel="stylesheet" href="{{ elixirCDN('css/app.css') }}">
@@ -37,6 +59,12 @@
     <script src="{{ elixirCDN('js/custom.js') }}"></script>
   </head>
   <body>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NRS5V6D"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <div id="app">
       <!-- Preloader -->
       <div id="preloader" class="uk-inline">

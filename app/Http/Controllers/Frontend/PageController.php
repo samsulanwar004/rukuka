@@ -152,7 +152,7 @@ class PageController extends BaseController
                     'twitter',
                     'gmail',
                     'pinterest',
-                    'tumblr'
+                    'whatsapp'
                 );        
 
             //get Delivery & Free Returns
@@ -532,43 +532,85 @@ class PageController extends BaseController
 
         $session = new Session;
 
+        $metaTag = $this->processGetMetaTag(\URL::current());
+
+        $session->set('meta_tag', $metaTag['meta_tag']);
+
+    }
+
+    private function processGetMetaTag($currentURL){
+
         $defaultDesc  = 'rukuka is the original shopping center of indonesian goods made by expert craftsmen in their fields, visit rukuka.com you will be amazed';
         $defaultTitle = 'ruKuKa | how indonesian made really beautiful';
 
-        $currentUrl = explode('/', \URL::current());
+        $currentUrl = explode('/', $currentURL);
 
         if (count($currentUrl) >= 4) {
             
             if ($currentUrl[3] == 'product') {
                 
                 $product = DB::table('products')->where('slug','=', $currentUrl[4])->get()->last();
-
-                $specialDesc = $product->name . ' ' . $product->content . ', price: ' . $product->sell_price . ', specification: ' .  $product->technical_specification . ', categories: ' . $product->tags;
                 
-                $metaTag['meta_tag']['web_meta_tag']['description'] = $specialDesc;
+                if (count($product) > 0 ) {
 
-                $metaTag['meta_tag']['sosial_media_meta_tag']['title']       = $product->name;
-                $metaTag['meta_tag']['sosial_media_meta_tag']['description'] = $specialDesc;
+                    $currency = (new CurrencyService)->getCurrentCurrency();
+
+                    $specialDesc = $product->name . ' ' . strip_tags($product->content) . ', price: ' . $currency->symbol . number_format(($product->sell_price / $currency->value), 2) . ', specification: ' .  $product->technical_specification . ', categories: ' . $product->tags;
+
+                    return $this->getStructurMetaTag($specialDesc, $product->name);
+
+                }else{
+
+                    return $this->getStructurMetaTag($defaultDesc, $defaultTitle);
+                
+                }
+
+            }else if($currentUrl[3] == 'blog'){
+
+                if (array_key_exists('4', $currentUrl) == false) {
+
+                    return $this->getStructurMetaTag($defaultDesc, $defaultTitle);
+
+                }else{
+
+                    $articles = DB::table('blogs')->where('slug','=', $currentUrl[4])->get()->last();
+                    
+                    if (count($articles) > 0 ) {
+
+                        $specialDesc = strip_tags($articles->content);
+
+                        return $this->getStructurMetaTag($specialDesc, $articles->title);
+                
+                    }else{
+
+                        return $this->getStructurMetaTag($defaultDesc, $defaultTitle);
+
+                    }
+
+                } 
 
             }else{
 
-                $metaTag['meta_tag']['web_meta_tag']['description'] = $defaultDesc;
-
-                $metaTag['meta_tag']['sosial_media_meta_tag']['title']       = $defaultTitle;
-                $metaTag['meta_tag']['sosial_media_meta_tag']['description'] = $defaultDesc;
+                return $this->getStructurMetaTag($defaultDesc, $defaultTitle);
 
             }
 
         }else{
 
-            $metaTag['meta_tag']['web_meta_tag']['description'] = $defaultDesc;
-
-            $metaTag['meta_tag']['sosial_media_meta_tag']['title']       = $defaultTitle;
-            $metaTag['meta_tag']['sosial_media_meta_tag']['description'] = $defaultDesc;
+            return $this->getStructurMetaTag($defaultDesc, $defaultTitle);
 
         }
 
-       $session->set('meta_tag', $metaTag['meta_tag']);
+    }
+
+    private function getStructurMetaTag($desc, $title){
+
+        $metaTag['meta_tag']['web_meta_tag']['description']          = $desc;
+
+        $metaTag['meta_tag']['sosial_media_meta_tag']['title']       = $title;
+        $metaTag['meta_tag']['sosial_media_meta_tag']['description'] = $desc;
+
+        return $metaTag;
 
     }
 

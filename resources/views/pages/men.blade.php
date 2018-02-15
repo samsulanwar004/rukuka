@@ -1,57 +1,27 @@
 @extends('app')
-
+@section('title', trans('app.title_mens') )
 @section('content')
     <div class="uk-container">
-
-
-            {{--MAIN BANNER--}}
-            {{-- <div class="uk-text-center">
-                <h3 class="uk-heading-line"><span>{{$men['men_main_title']}}</span></h3>
-                <div class="uk-inline">
-                    <ul id="component-tab-left" class="uk-switcher">
-                        @foreach ($slider as $item)
-                            <a href="{{ $item->url }}" class="uk-link-reset">
-                                <li>
-                                    <img src="{{ uploadCDN($item->banner) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
-                                </li>
-                            </a>
-                        @endforeach
-                    </ul>
-                    <div class="uk-position-small uk-position-bottom-center">
-                        <ul class="uk-dotnav" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" >
-                            @foreach ($slider as $item)
-                                <li><a href="#">item1</a></li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div> --}}
-            <div uk-slideshow="ratio: 10:3; min-height: 200; max-height: 600; animation:scale; autoplay: true;" class="uk-margin-top">
-
-                <div class="uk-position-relative uk-visible-toggle uk-light">
-
-                    <ul class="uk-slideshow-items">
-                      @foreach ($slider as $item)
-                        <li>
-                          <a href="{{ $item->url }}" class="uk-link-reset">
-                            <div class="uk-position-cover" uk-slideshow-parallax="scale: 1.2,1.2,1">
-                                <img src="{{ uploadCDN($item->banner) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'" uk-cover>
-                            </div>
-                            <div class="uk-position-cover" uk-slideshow-parallax="opacity: 0,0,0.2; background-color: #000,#000"></div>
-                          </a>
-                        </li>
-                      @endforeach
-
-                    </ul>
-
-                    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-                    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
-
-                </div>
-
-
+        {{--MAIN BANNER--}}
+        <div uk-slideshow="ratio: 10:3; min-height: 200; max-height: 600; animation:scale; autoplay: true;" class="uk-margin-top">
+            <div class="uk-position-relative uk-visible-toggle uk-light">
+                <ul class="uk-slideshow-items">
+                  @foreach ($slider as $item)
+                    <li>
+                      <a href="{{ $item->url }}" class="uk-link-reset">
+                        <div class="uk-position-cover" uk-slideshow-parallax="scale: 1.2,1.2,1">
+                            <img src="{{ uploadCDN($item->banner) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'" uk-cover>
+                        </div>
+                        <div class="uk-position-cover" uk-slideshow-parallax="opacity: 0,0,0.2; background-color: #000,#000"></div>
+                      </a>
+                    </li>
+                  @endforeach
+                </ul>
+                <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+                <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
             </div>
-            {{--END MAIN BANNER--}}
+        </div>
+        {{--END MAIN BANNER--}}
 
 
         {{--2 ROW BANNER  --}}

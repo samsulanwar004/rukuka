@@ -1,5 +1,5 @@
 @extends('app-blog')
-
+@section('title', trans('app.title_blog') )
 @section('content')
 
     @if($status['code'] == '000')

@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', $product->name.' '.trans('app.title_product'))
 @section('content')
     <div class="uk-container">
         <div class="uk-grid-small uk-margin-top">
@@ -111,7 +111,7 @@
                     <li><a class="uk-icon-link" uk-icon="icon: facebook" target="_blank" href="{{ $share['facebook']}}"></a></li>
                     <li><a class="uk-icon-link" uk-icon="icon: google-plus" target="_blank" href="{{ $share['gplus']}}"></a></li>
                     <li><a class="uk-icon-link" uk-icon="icon: instagram"></a></li>
-                    <li><a class="uk-icon-link" uk-icon="icon: tumblr" target="_blank" href="{{ $share['tumblr']}}"></a></li>
+                    <li><a class="uk-icon-link" uk-icon="icon: whatsapp" target="_blank" href="{{ $share['whatsapp']}}"></a></li>
                     <li><a class="uk-icon-link" uk-icon="icon: mail" target="_blank" href="{{ $share['gmail']}}"></a></li>
                 </ul>
                 </p>
