@@ -113,7 +113,6 @@
       <li class="uk-parent">
           <a href="#"><b>{{ trans('app.about_rukuka') }}</b></a>
           <ul class="uk-nav-sub">
-            <li class="uk-text-uppercase"><b>{{ trans('app.about_rukuka') }}</b></li>
             <li><a href="{{ URL::to('page/about-rukuka')}}">{{ trans('app.about_rukuka') }}</a></li>
             <li><a href="{{ URL::to('page/partners')}}">{{ trans('app.partners') }}</a></li>
             <li><a href="{{ URL::to('page/careers')}}">{{ trans('app.careers') }}</a></li>

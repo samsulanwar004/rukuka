@@ -35,8 +35,8 @@ return [
     'title_order_history'       =>  'ruKuKa - Order History',
     'title_wishlist'            =>  'ruKuKa - Wishlist',
     'title_blog'                =>  'ruKuKa - Blog',
-    'title_blog_read'           =>  '- ruKuKa Blog',
-    'title_blog_search'         =>  'at ruKuKa Blog',
+    'title_blog_read'           =>  'at ruKuKa Blog',
+    'title_blog_search'         =>  ' ruKuKa Blog',
 
     //common
     'edit'                      =>  'Edit',
@@ -64,6 +64,7 @@ return [
     'search'                    =>  'S E A R C H . . .',
     'search_label'              =>  'Search',
     'welcome_in'                =>  'welcome to ruKuKa, now we can show you how indonesian made really beautiful on you!',
+    'find_label'                =>  'Find our product',
 
     //resources/assets/js/components/UserPanel.vue
     'hallo'                     =>  'Hallo,',
