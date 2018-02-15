@@ -14,7 +14,8 @@ class EmailService
 {
 	public function sendActivationCode($user)
 	{
-        $mail = (new Activation($user))
+        $lang = (new CurrencyService)->getLang();
+        $mail = (new Activation($user, $lang))
             ->onConnection(config('common.queue_active'))
             ->onQueue(config('common.queue_list.user_mail'));
 
@@ -25,7 +26,8 @@ class EmailService
 
 	public function sendForgotCode($user)
 	{
-        $mail = (new Forgot($user))
+        $lang = (new CurrencyService)->getLang();
+        $mail = (new Forgot($user, $lang))
             ->onConnection(config('common.queue_active'))
             ->onQueue(config('common.queue_list.user_mail'));
 
@@ -35,23 +37,9 @@ class EmailService
 
 	public function sendInvoiceUnpaid($order)
     {
-        $exchange = (new CurrencyService)->getCurrentCurrency();
-        //inject currency
-        $order->order_total_idr = $order->order_subtotal + $order->shipping_cost;
-        $order->order_subtotal = $order->order_subtotal / $exchange->value;
-        $order->shipping_cost = $order->shipping_cost / $exchange->value;
-        $order->symbol = $exchange->symbol;
 
-        $order->details = $order->details->map(function ($entry) use ($exchange){
-            return [
-              'product_name' =>  $entry['product_name'],
-              'qty' =>  $entry['qty'],
-              'image' =>  $entry->productStock->product->images->first()->photo,
-              'price' =>  $entry['price']/ $exchange->value,
-            ];
-        });
-
-        $mail = (new InvoiceUnpaid($order))
+        $lang = (new CurrencyService)->getLang();
+        $mail = (new InvoiceUnpaid($order, $lang))
             ->onConnection(config('common.queue_active'))
             ->onQueue(config('common.queue_list.user_mail'));
 
@@ -62,49 +50,21 @@ class EmailService
 
     public function sendInvoicePaid($order)
     {
-        $exchange = (new CurrencyService)->getCurrentCurrency();
-        //inject currency
-        $order->order_total_idr = $order->order_subtotal + $order->shipping_cost;
-        $order->order_subtotal = $order->order_subtotal / $exchange->value;
-        $order->shipping_cost = $order->shipping_cost / $exchange->value;
-        $order->symbol = $exchange->symbol;
 
-        $order->details = $order->details->map(function ($entry) use ($exchange){
-            return [
-                'product_name' =>  $entry['product_name'],
-                'qty' =>  $entry['qty'],
-                'image' =>  $entry->productStock->product->images->first()->photo,
-                'price' =>  $entry['price']/ $exchange->value,
-            ];
-        });
+        $lang = (new CurrencyService)->getLang();
+        $mail = (new InvoicePaid($order, $lang))
+            ->onConnection(config('common.queue_active'))
+            ->onQueue(config('common.queue_list.user_mail'));
 
-        // $mail = (new InvoicePaid($order))
-        //     ->onConnection(config('common.queue_active'))
-        //     ->onQueue(config('common.queue_list.user_mail'));
-
-        // Mail::to($order->user->email)->queue($mail);
-        Mail::to($order->user->email)->send(new InvoicePaid($order));
+        Mail::to($order->user->email)->queue($mail);
+        //Mail::to($order->user->email)->send(new InvoicePaid($order));
     }
 
     public function sendShipping($order)
     {
-        $exchange = (new CurrencyService)->getCurrentCurrency();
-        //inject currency
-        $order->order_total_idr = $order->order_subtotal + $order->shipping_cost;
-        $order->order_subtotal = $order->order_subtotal / $exchange->value;
-        $order->shipping_cost = $order->shipping_cost / $exchange->value;
-        $order->symbol = $exchange->symbol;
 
-        $order->details = $order->details->map(function ($entry) use ($exchange){
-            return [
-                'product_name' =>  $entry['product_name'],
-                'qty' =>  $entry['qty'],
-                'image' =>  $entry->productStock->product->images->first()->photo,
-                'price' =>  $entry['price']/ $exchange->value,
-            ];
-        });
-
-        $mail = (new Shipping($order))
+        $lang = (new CurrencyService)->getLang();
+        $mail = (new Shipping($order, $lang))
             ->onConnection(config('common.queue_active'))
             ->onQueue(config('common.queue_list.user_mail'));
 

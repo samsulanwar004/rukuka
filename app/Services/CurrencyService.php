@@ -32,4 +32,14 @@ class CurrencyService
 
 		return $result;
 	}
+
+	public function setLang($lang)
+	{
+		return App::setLocale($lang);
+	}
+
+	public function getLang()
+	{
+		return App::getLocale();
+	}
 }
