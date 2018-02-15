@@ -368,7 +368,7 @@ class UserController extends BaseController
                 'price' => $stock->product->sell_price,
                 'options' => [
                     'size' => $stock->size,
-                    'color' => $stock->product->color,
+                    'color' => $stock->product->palette->name,
                     'photo' => $stock->product->images->first()->photo,
                     'description' => $stock->product->content,
                     'slug' => $stock->product->slug
