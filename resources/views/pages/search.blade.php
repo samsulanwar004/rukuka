@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', $keyword.' '.trans('app.title_search') )
 @section('content')
     <div class="uk-container">
         <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ trans('app.all_you_need') }}</h3>
