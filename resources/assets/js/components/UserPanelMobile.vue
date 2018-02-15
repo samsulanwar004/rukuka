@@ -1,18 +1,21 @@
 <template>
-  <div class="uk-width-1-3@m uk-flex uk-flex-middle">
-    <ul class="uk-grid-small uk-width-1-1 uk-flex-between uk-hidden@m" uk-grid>
-      <li><a class="uk-icon-link" uk-icon="icon: more" href="#offcanvas-overlay-slide" uk-toggle></a></li>
-      <li><a class="uk-icon-link" uk-icon="icon: search" uk-toggle="target: .test-overlay; animation: uk-animation-fade" href="#"></a></li>
-      <li><a class="uk-icon-link" uk-icon="icon: cart" :href="bag_link"></a>
+    <div class="uk-grid-small uk-hidden@m" uk-grid>
+      <div class="uk-width-auto"><a class="uk-icon-link" uk-icon="icon: more; ratio: 0.9" href="#offcanvas-overlay-slide" uk-toggle></a></div>
+      <div class="uk-width-auto">
+        <a class="uk-icon-link" uk-icon="icon: search;  ratio: 0.9" uk-toggle="target: .test-overlay; animation: uk-animation-fade" href="#"></a>
+      </div>
+      <div class="uk-width-expand uk-text-center">
+        <img src="{{ imageCDN(config('common.logo')) }}" alt="rukuka" width="90">
+      </div>
+      <div class="uk-width-auto"><a class="uk-icon-link" uk-icon="icon: cart; ratio: 0.9" :href="bag_link"></a>
         <div class="uk-badge" v-if="bagCount > 0">
           {{ bagCount }}
         </div>
-      </li>
-      <li v-if="auth == 0"><a class="uk-icon-link" uk-icon="icon: user" :href="login_link"></a></li>
-      <li v-if="auth == 1" ><a class="uk-icon-link" uk-icon="icon: user" :href="profile_link"></a>
-      </li>
-    </ul>
-  </div>
+      </div>
+      <div v-if="auth == 0" class="uk-width-auto"><a class="uk-icon-link" uk-icon="icon: user;  ratio: 0.9" :href="login_link"></a></div>
+      <div v-if="auth == 1"  class="uk-width-auto"><a class="uk-icon-link" uk-icon="icon: user;  ratio: 0.9" :href="profile_link"></a>
+      </div>
+    </div>
 </template>
 
 <script>
