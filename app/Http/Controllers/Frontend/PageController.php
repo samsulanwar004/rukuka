@@ -152,7 +152,7 @@ class PageController extends BaseController
                     'twitter',
                     'gmail',
                     'pinterest',
-                    'tumblr'
+                    'whatsapp'
                 );        
 
             //get Delivery & Free Returns
@@ -532,10 +532,18 @@ class PageController extends BaseController
 
         $session = new Session;
 
+        $metaTag = $this->processGetMetaTag(\URL::current());
+
+        $session->set('meta_tag', $metaTag['meta_tag']);
+
+    }
+
+    private function processGetMetaTag($currentURL){
+
         $defaultDesc  = 'rukuka is the original shopping center of indonesian goods made by expert craftsmen in their fields, visit rukuka.com you will be amazed';
         $defaultTitle = 'ruKuKa | how indonesian made really beautiful';
 
-        $currentUrl = explode('/', \URL::current());
+        $currentUrl = explode('/', $currentURL);
 
         if (count($currentUrl) >= 4) {
             
@@ -549,43 +557,49 @@ class PageController extends BaseController
 
                     $specialDesc = $product->name . ' ' . strip_tags($product->content) . ', price: ' . $currency->symbol . number_format(($product->sell_price / $currency->value), 2) . ', specification: ' .  $product->technical_specification . ', categories: ' . $product->tags;
 
-                    $metaTag = $this->getStructurMetaTag($specialDesc, $product->name);
+                    return $this->getStructurMetaTag($specialDesc, $product->name);
 
                 }else{
 
-                    $metaTag = $this->getStructurMetaTag($defaultDesc, $defaultTitle);
+                    return $this->getStructurMetaTag($defaultDesc, $defaultTitle);
                 
                 }
 
             }else if($currentUrl[3] == 'blog'){
 
-                $articles = DB::table('blogs')->where('slug','=', $currentUrl[4])->get()->last();
+                if (array_key_exists('4', $currentUrl) == false) {
 
-                if (count($articles) > 0 ) {
+                    return $this->getStructurMetaTag($defaultDesc, $defaultTitle);
 
-                    $specialDesc = strip_tags($articles->content);
-
-                    $metaTag = $this->getStructurMetaTag($specialDesc, $articles->title);
-                
                 }else{
 
-                    $metaTag = $this->getStructurMetaTag($defaultDesc, $defaultTitle);
+                    $articles = DB::table('blogs')->where('slug','=', $currentUrl[4])->get()->last();
+                    
+                    if (count($articles) > 0 ) {
 
-                }
+                        $specialDesc = strip_tags($articles->content);
+
+                        return $this->getStructurMetaTag($specialDesc, $articles->title);
+                
+                    }else{
+
+                        return $this->getStructurMetaTag($defaultDesc, $defaultTitle);
+
+                    }
+
+                } 
 
             }else{
 
-                $metaTag = $this->getStructurMetaTag($defaultDesc, $defaultTitle);
+                return $this->getStructurMetaTag($defaultDesc, $defaultTitle);
 
             }
 
         }else{
 
-            $metaTag = $this->getStructurMetaTag($defaultDesc, $defaultTitle);
+            return $this->getStructurMetaTag($defaultDesc, $defaultTitle);
 
         }
-
-       $session->set('meta_tag', $metaTag['meta_tag']);
 
     }
 
