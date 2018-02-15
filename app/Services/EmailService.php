@@ -78,12 +78,12 @@ class EmailService
             ];
         });
 
-        $mail = (new InvoicePaid($order))
-            ->onConnection(config('common.queue_active'))
-            ->onQueue(config('common.queue_list.user_mail'));
+        // $mail = (new InvoicePaid($order))
+        //     ->onConnection(config('common.queue_active'))
+        //     ->onQueue(config('common.queue_list.user_mail'));
 
-        Mail::to($order->user->email)->queue($mail);
-        //Mail::to($order->user->email)->send(new InvoicePaid($order));
+        // Mail::to($order->user->email)->queue($mail);
+        Mail::to($order->user->email)->send(new InvoicePaid($order));
     }
 
     public function sendShipping($order)
