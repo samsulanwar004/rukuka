@@ -39,7 +39,7 @@ class EmailService
     {
 
         $lang = (new CurrencyService)->getLang();
-        $mail = (new InvoiceUnpaid($order, $lang)
+        $mail = (new InvoiceUnpaid($order, $lang))
             ->onConnection(config('common.queue_active'))
             ->onQueue(config('common.queue_list.user_mail'));
 
