@@ -1,4 +1,5 @@
 @extends('app_checkout')
+@section('title', trans('app.title_shipping_preview') )
 @section('content')
 <div class="uk-container uk-container-small">
     <div class="uk-grid-small uk-margin-top">

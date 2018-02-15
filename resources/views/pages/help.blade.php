@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', $page['title'].' '.trans('app.title_helps') )
 @section('content')
 
     @php

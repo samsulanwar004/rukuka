@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', trans('app.title_not_found') )
 @section('content')
 <div class="uk-container uk-container-small">
   	<div class="uk-grid-small uk-margin-top uk-margin-bottom">
