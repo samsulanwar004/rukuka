@@ -37,6 +37,7 @@ return [
     'title_blog'                =>  'ruKuKa - Blog',
     'title_blog_read'           =>  'at ruKuKa Blog',
     'title_blog_search'         =>  ' ruKuKa Blog',
+    'title_lookbook'            =>  'ruKuKa - Lookbook',
 
     //common
     'edit'                      =>  'Edit',
