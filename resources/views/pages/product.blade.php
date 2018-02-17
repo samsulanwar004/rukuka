@@ -19,7 +19,7 @@
                             @endif
                         </ul>
                     </div>
-                    <div class="uk-width-expand@m">
+                    <div class="uk-width-expand@m uk-visible@m">
                         <ul id="component-tab-left" class="uk-switcher">
                             @if($product->images[0])
                                 @foreach($product->images as $image)
@@ -29,21 +29,69 @@
                                         <a class="uk-position-absolute uk-transform-center" style="left: 90%; top: 90%" href="#modal-full-split-{{ $image->id }}" uk-toggle uk-marker uk-tooltip="title: full view; pos: left"></a>
                                       </div>
                                       {{-- modal view --}}
-                                        <div id="modal-media-image-{{ $image->id }}" class="uk-flex-top" uk-modal>
+                                        {{-- <div id="modal-media-image-{{ $image->id }}" class="uk-flex-top" uk-modal>
                                             <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
                                                 <button class="uk-modal-close-outside" type="button" uk-close></button>
                                                 <img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" style="max-height: 750px" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'">
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div id="modal-full-split-{{ $image->id }}" class="uk-modal-full" uk-modal>
                                             <div class="uk-modal-dialog">
                                                 <button class="uk-modal-close-full" type="button" uk-close></button>
                                                 <div class="uk-flex-middle uk-hidden@m">
-                                                    <div class="uk-background-cover" style="background-image: url('{{ uploadCDN($image->photo) }}');" uk-height-viewport></div>
+                                                    {{-- <div class="uk-background-cover" style="background-image: url('{{ uploadCDN($image->photo) }}');" uk-height-viewport></div> --}}
+                                                    <div class="uk-margin js-slideshow-animation" uk-slideshow="ratio: false">
+
+                                                        <div class="uk-position-relative uk-visible-toggle uk-dark">
+
+                                                            <ul class="uk-slideshow-items" uk-height-viewport="min-height: 300">
+                                                              @if($product->images[0])
+                                                                  @foreach($product->images as $image)
+                                                                <li>
+                                                                    <img src="{{ uploadCDN($image->photo) }}" alt="" uk-cover>
+                                                                </li>
+                                                              @endforeach
+                                                            @endif
+                                                            </ul>
+
+                                                            {{-- <a class="uk-slidenav-large uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+                                                            <a class="uk-slidenav-large uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a> --}}
+
+                                                            <div class="uk-position-bottom-center uk-position-medium">
+                                                                <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                                 <div class="uk-flex-middle uk-visible@m">
                                                     <div class="uk-background-cover">
-                                                      <img src="{{ uploadCDN($image->photo) }}" alt="" width="100%">
+                                                      <div class="uk-margin js-slideshow-animation" uk-slideshow="ratio: 4:5">
+
+                                                          <div class="uk-position-relative uk-visible-toggle uk-dark">
+
+                                                              <ul class="uk-slideshow-items">
+                                                                @if($product->images[0])
+                                                                    @foreach($product->images as $image)
+                                                                  <li>
+                                                                      <img src="{{ uploadCDN($image->photo) }}" alt="" width="100%">
+                                                                  </li>
+                                                                @endforeach
+                                                              @endif
+                                                              </ul>
+
+                                                              <a class="uk-slidenav-large uk-position-center-left uk-hidden-hover uk-height-viewport" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+                                                              <a class="uk-slidenav-large uk-position-center-right uk-hidden-hover uk-height-viewport" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+
+                                                              {{-- <div class="uk-position-bottom-center uk-position-medium">
+                                                                  <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
+                                                              </div> --}}
+
+                                                          </div>
+
+                                                      </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -55,14 +103,36 @@
                             @endif
                         </ul>
                     </div>
-                    <div class="uk-width-auto@m uk-hidden@m uk-margin-small">
+
+                    {{-- <div class="uk-width-auto@m uk-hidden@m uk-margin-small">
                         <ul class="uk-margin-remove uk-padding-remove" uk-tab="connect: #component-tab-left; animation: uk-animation-fade">
                             @foreach($product->images as $image)
                                 <li class="uk-margin-small-right"><a href="#"><img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="50" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'"></a></li>
                             @endforeach
                         </ul>
-                    </div>
+                    </div> --}}
+
                 </div>
+                <div class="js-slideshow-animation uk-hidden@m" uk-slideshow="animation: pull; ratio: 4:5">
+                  <div class="uk-position-relative uk-visible-toggle uk-dark">
+                    <ul class="uk-slideshow-items">
+                      @if($product->images[0])
+                          @foreach($product->images as $image)
+                      <li>
+                        <img src="{{ uploadCDN($image->photo) }}">
+                        <a class="uk-position-absolute uk-transform-center" style="left: 90%; top: 90%" href="#modal-full-split-{{ $image->id }}" uk-toggle uk-marker uk-tooltip="title: full view; pos: left"></a>
+                      </li>
+                    @endforeach
+                  @endif
+                    </ul>
+                    {{-- <a class="uk-slidenav-large uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+                    <a class="uk-slidenav-large uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a> --}}
+
+                    <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin-small uk-dark"></ul>
+
+                  </div>
+
+                  </div>
             </div>
             <div class="uk-width-1-3@m">
                 <a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}">{{ $product->designer->name }}</a><br>
