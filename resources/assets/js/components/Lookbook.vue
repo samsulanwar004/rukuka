@@ -33,7 +33,6 @@
         </div>
     </div>
 
-
 </template>
 
 <script>
@@ -61,9 +60,21 @@
 
         created(){
             var self = this;
-            self.collection = JSON.parse(this.collections);
+            var sort_by = function(field, reverse, primer){
 
-            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_1;
+                var key = primer ?
+                    function(x) {return primer(x[field])} :
+                    function(x) {return x[field]};
+
+                reverse = !reverse ? 1 : -1;
+
+                return function (a, b) {
+                    return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
+                }
+            };
+            self.collection = JSON.parse(this.collections).sort(sort_by('order', false));
+
+            self.errorImage = this.aws_link+'/images/'+this.default_image.image_1;
             self.loadingImage = this.aws_link+'/images/loading-image.gif';
         },
 
