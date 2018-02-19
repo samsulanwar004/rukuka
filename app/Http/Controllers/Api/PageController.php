@@ -7,6 +7,7 @@ use App\Repositories\DesignerRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\PageRepository;
+use App\Repositories\LookbookRepository;
 use Exception;
 
 class PageController extends BaseApiController
@@ -159,8 +160,7 @@ class PageController extends BaseApiController
     public function product($id = null)
     {
         try {
-            $product = (new ProductRepository)
-                ->getProductById($id);
+            $product = (new ProductRepository)->getProductById($id);
 
             $product->images->toArray();
 
@@ -237,6 +237,17 @@ class PageController extends BaseApiController
 
         } catch (Exception $e) {
             return $this->error($e, 400, true);
+        }
+    }
+
+    public function lookbook($slug=null)
+    {
+        try {
+            $lookbook = (new LookbookRepository)->getLookbook($slug);
+
+            return $this->success($lookbook->toArray(), 200, true);
+        }   catch (Exception $e) {
+                return $this->error($e, 400, true);
         }
     }
 }

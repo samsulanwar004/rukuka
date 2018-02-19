@@ -9,6 +9,7 @@ use App\Repositories\SettingRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\ProductStockRepository;
 use App\Repositories\PageRepository;
+use App\Repositories\LookbookRepository;
 use Exception;
 use Carbon\Carbon;
 use App\Services\BagService;
@@ -614,10 +615,32 @@ class PageController extends BaseController
 
     }
 
-    public function lookBook($value='')
+    public function lookbook($slug='')
     {
-      # code...
-      return view ('pages.lookbook');
+    $lookbook = (new LookbookRepository)->getLookbook($slug);
+
+        $collections = $lookbook->lookbookCollections->map(function ($entry) {
+            $ids = [];
+            if($entry->lookbookProducts){
+                foreach ($entry->lookbookProducts as $product){
+                    $ids[] = $product->products_id;
+                }
+            }
+
+            return [
+                'id' => $entry->id,
+                'name' => $entry->name,
+                'title' => $entry->title,
+                'subtitle' => $entry->subtitle,
+                'content' => $entry->content,
+                'photo' => $entry->photo,
+                'order' => $entry->order,
+                'is_active' => $entry->is_active,
+                'product_id'   => json_encode($ids),
+            ];
+        });
+
+    return view ('pages.lookbook',compact('lookbook','collections'));
     }
 
 }
