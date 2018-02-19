@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', trans('app.title_reset') )
 @section('content')
 <div class="uk-container uk-container-small">
 <div class="uk-grid-small uk-margin-top">

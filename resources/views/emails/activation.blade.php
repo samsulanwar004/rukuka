@@ -180,7 +180,8 @@
                                                     <b>{{ trans('app.account') }}</b><br>
                                                     <table border="0">
                                                         <tr><td>{{ trans('app.email') }}</td><td>:</td><td>{{ $user->email }}</td></tr>
-                                                        <tr><td>{{ trans('app.password') }}</td><td>:</td><td>{{ $user->passwordString }}</td></tr>
+                                                        <tr><td>{{ trans('app.first_name') }}</td><td>:</td><td>{{ $user->first_name }}</td></tr>
+                                                        <tr><td>{{ trans('app.last_name') }}</td><td>:</td><td>{{ $user->last_name }}</td></tr>
                                                     </table>
                                                     <br><br>
                                                     {{ trans('app.sincerely') }},<br>

@@ -1,6 +1,42 @@
 <?php
 
 return [
+    //Title Page
+    'rukuka'                    =>  'ruKuKa',
+    'title_homepage'            =>  'ruKuKa - Indonesian Local Brands',
+    'title_designers_list'      =>  'Designers at ruKuKa',
+    'title_designers'           =>  'at ruKuKa',
+    'title_womens'              =>  'Womens - ruKuKa',
+    'title_mens'                =>  'Mens - ruKuKa',
+    'title_kids'                =>  'Kids - ruKuKa',
+    'title_product'             =>  'at ruKuKa',
+    'title_shop_womens'         =>  'Womens at ruKuKa',
+    'title_shop_mens'           =>  'Mens at ruKuKa',
+    'title_shop_category'       =>  'at ruKuKa',
+    'title_tracking'            =>  'Tracking & Trace at ruKuKa',
+    'title_search'              =>  'at ruKuKa',
+    'title_not_found'           =>  'Not Found at ruKuKa',
+    'title_login'               =>  'Login at ruKuKa',
+    'title_helps'               =>  'at ruKuKa',
+    'title_pages'               =>  'at ruKuKa',
+    'title_contact'             =>  'Contact Us at ruKuKa',
+    'title_landing'             =>  'ruKuKa - Indonesian Local Brands',
+    'title_bag'                 =>  'ruKuKa - Shopping Bag',
+    'title_review'              =>  'Review',
+    'title_forgot'              =>  'ruKuKa - Forgot Password',
+    'title_reset'               =>  'ruKuKa - Reset Password',
+    'title_shipping_address'    =>  'ruKuKa - Shipping Address',
+    'title_shipping_option'     =>  'ruKuKa - Shipping Option',
+    'title_shipping_preview'    =>  'ruKuKa - Shipping Preview',
+    'title_payment'             =>  'ruKuKa - Payment',
+    'title_personal_info'       =>  'ruKuKa - Personal Information',
+    'title_account'             =>  'ruKuKa - Welcome',
+    'title_address_book'        =>  'ruKuKa - Address Book',
+    'title_order_history'       =>  'ruKuKa - Order History',
+    'title_wishlist'            =>  'ruKuKa - Wishlist',
+    'title_blog'                =>  'ruKuKa - Blog',
+    'title_blog_read'           =>  '- ruKuKa Blog',
+    'title_blog_search'         =>  'at ruKuKa Blog',
 
     //common
     'edit'                      =>  '編集',
@@ -19,10 +55,6 @@ return [
     'related'                   =>  '関連商品',
     'quick_shop'                =>  'クイックショップ',
 
-    //Title Page
-    'rukuka'                    =>  'ruKuKa',
-    'title_homepage'            =>  'Indonesian Local Brands',
-
     //contact and social media
     'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',
     'facebook'                  =>  'https://www.facebook.com/Rukuka-333650107116878/',
@@ -32,6 +64,7 @@ return [
     'search'                    =>  'サーチ',
     'search_label'              =>  'サーチ',
     'welcome_in'                =>  'ruKuKaへようこそ。今、インドネシアがどのようにあなたを本当に美しく見せてくれるのか教えてください。',
+    'find_label'                =>  '私たちの製品を見つける',
 
     //resources/assets/js/components/UserPanel.vue
     'hallo'                     =>  'ハロー,',
@@ -180,6 +213,7 @@ return [
     'filter_nav'                =>  'フィルタナビゲーション',
     'filter'                    =>  'フィルタ',
     'color_filter'              =>  '色',
+    'product_not_available'     =>  '商品は利用できません',
 
     //resources/views/pages/product.blade.php
     'product_code'              =>  '製品コード:',
@@ -392,4 +426,7 @@ return [
     'forgot_text_1'             =>  '私たちはあなたのrukukaパスワードをリセットするよう要求しました。',
     'forgot_text_2'             =>  'このメッセージを無視すると、パスワードは変更されません',
     'forgot_reset'              =>  'パスワードを再設定する',
+
+    //resources/views/pages/password/reset.blade.php
+    'input_new_password'        =>  '新しいパスワードを入力してください'
 ];

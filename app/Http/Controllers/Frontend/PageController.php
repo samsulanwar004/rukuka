@@ -73,7 +73,7 @@ class PageController extends BaseController
                         ->getProductBySlugCategorySale($request, $slug);
                 } else {
                     $products = (new ProductRepository)
-                        ->getProductBySlugCategory($request, $slug);                       
+                        ->getProductBySlugCategory($request, $slug);
                 }
             }
         }
@@ -153,7 +153,7 @@ class PageController extends BaseController
                     'gmail',
                     'pinterest',
                     'whatsapp'
-                );        
+                );
 
             //get Delivery & Free Returns
             $slug = 'delivery-free-returns';
@@ -238,7 +238,7 @@ class PageController extends BaseController
     {
 
         try {
-            
+
             $bag = new BagService;
 
             //add or update product item to bag
@@ -292,9 +292,9 @@ class PageController extends BaseController
                     ];
                     $bag->save($product, self::INSTANCE_SHOP);
                 } else {
-                    throw new Exception("No stock available!", 1);  
+                    throw new Exception("No stock available!", 1);
                 }
-                
+
 
             }
 
@@ -502,19 +502,19 @@ class PageController extends BaseController
 
     public function callBackXendit(Request $request)
     {
-        
+
         $content = $request->getContent();
         DB::table('callback_payments')->insert(
         ['merchant' => 'xendit', 'response' => $content,'created_at' => date("Y-m-d H:i:s"),'updated_at' => date("Y-m-d H:i:s")]
         );
-        
+
         return $content;
     }
 
     public function exchange()
     {
         try {
-           $exchange = (new CurrencyService)->getCurrentCurrency(); 
+           $exchange = (new CurrencyService)->getCurrentCurrency();
            return response()->json([
                 'status' => 'ok',
                 'message' => 'success',
@@ -546,11 +546,11 @@ class PageController extends BaseController
         $currentUrl = explode('/', $currentURL);
 
         if (count($currentUrl) >= 4) {
-            
+
             if ($currentUrl[3] == 'product') {
-                
+
                 $product = DB::table('products')->where('slug','=', $currentUrl[4])->get()->last();
-                
+
                 if (count($product) > 0 ) {
 
                     $currency = (new CurrencyService)->getCurrentCurrency();
@@ -562,7 +562,7 @@ class PageController extends BaseController
                 }else{
 
                     return $this->getStructurMetaTag($defaultDesc, $defaultTitle);
-                
+
                 }
 
             }else if($currentUrl[3] == 'blog'){
@@ -574,20 +574,20 @@ class PageController extends BaseController
                 }else{
 
                     $articles = DB::table('blogs')->where('slug','=', $currentUrl[4])->get()->last();
-                    
+
                     if (count($articles) > 0 ) {
 
                         $specialDesc = strip_tags($articles->content);
 
                         return $this->getStructurMetaTag($specialDesc, $articles->title);
-                
+
                     }else{
 
                         return $this->getStructurMetaTag($defaultDesc, $defaultTitle);
 
                     }
 
-                } 
+                }
 
             }else{
 
@@ -612,6 +612,12 @@ class PageController extends BaseController
 
         return $metaTag;
 
+    }
+
+    public function lookBook($value='')
+    {
+      # code...
+      return view ('pages.lookbook');
     }
 
 }

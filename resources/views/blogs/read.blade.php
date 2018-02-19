@@ -1,5 +1,5 @@
 @extends('app-blog')
-
+@section('title', $posts[0]['title'].' '.trans('app.title_blog_read') )
 @section('content')
     @if($status['code'] == '010')
     <div class="uk-container uk-container-small">

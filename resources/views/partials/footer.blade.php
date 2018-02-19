@@ -92,14 +92,39 @@
 </div>
 <div class="uk-section uk-section-muted uk-section-xsmall uk-text-small uk-hidden@m">
   <div class="uk-container uk-container-small uk-text-meta">
-    <ul class="uk-grid uk-grid-small" uk-grid>
-      <li><a href="{{ URL::to('help/need-some-help')}}">{{ trans('app.need_some_help') }}</a></li>
-      <li><a href="{{ URL::to('page/about-rukuka')}}">{{ trans('app.about_rukuka') }}</a></li>
-      <li><a href="{{ URL::to('page/terms-privacy')}}">{{ trans('app.terms_privacy') }}</a></li>
-    </ul>
-    <ul class="uk-grid uk-grid-small" uk-grid>
+    <ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
+      <li class="uk-parent">
+          <a href="#"><b>{{ trans('app.helpyou') }}</b></a>
+          <ul class="uk-nav-sub">
+            <li><a href="{{ URL::to('help/order-status') }}">{{ trans('app.order_status') }}</a></li>
+            <li><a href="{{ URL::to('help/shipping') }}">{{ trans('app.shipping') }}</a></li>
+            <li><a href="{{ URL::to('help/international-orders') }}">{{ trans('app.international_orders') }}</a></li>
+            <li><a href="{{ URL::to('help/need-some-help') }}">{{ trans('app.need_some_help') }}</a></li>
+            <li><a href="{{ URL::to('help/our-services') }}">{{ trans('app.our_services') }}</a></li>
+            <li><a href="{{ URL::to('help/size-charts') }}">{{ trans('app.size_chart') }}</a></li>
+          </ul>
+      </li>
+      <li class="uk-parent">
+          <a href="#"><b>{{ trans('app.order_shipping') }}</b></a>
+          <ul class="uk-nav-sub">
+            <li><a href="{{ route('tracking-page')}}"> {{trans('app.track_order') }}</a> </li>
+          </ul>
+      </li>
+      <li class="uk-parent">
+          <a href="#"><b>{{ trans('app.about_rukuka') }}</b></a>
+          <ul class="uk-nav-sub">
+            <li><a href="{{ URL::to('page/about-rukuka')}}">{{ trans('app.about_rukuka') }}</a></li>
+            <li><a href="{{ URL::to('page/partners')}}">{{ trans('app.partners') }}</a></li>
+            <li><a href="{{ URL::to('page/careers')}}">{{ trans('app.careers') }}</a></li>
+            <li><a href="{{ URL::to('page/terms-privacy')}}">{{ trans('app.terms_privacy') }}</a></li>
+            <li><a href="{{ URL::to('page/payment')}}">{{ trans('app.payment') }}</a></li>
+            <li><a href="{{ URL::to('help/contact-us')}}">{{ trans('app.contact_us') }}</a></li>
+          </ul>
+      </li>
+  </ul>
+    <hr class="uk-margin-small">
+    <ul class="uk-grid uk-grid-small uk-flex uk-flex-top uk-flex-between" uk-grid>
       <li>{{ trans('app.copyright') }}</li>
-      <li><a href="{{ route('tracking-page')}}"> {{trans('app.track_order') }}</a> </li>
       <li>
         @foreach (Config::get('languages') as $lang => $language)
           @if ($lang == App::getLocale())

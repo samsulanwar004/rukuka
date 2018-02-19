@@ -370,7 +370,7 @@ Route::middleware(['auth'])->group(function () {
         'as'   => 'order',
         'uses' => 'Frontend\OrderController@store',
     ]);
-  
+
 });
 
 Route::middleware(['as.guest'])->group(function () {
@@ -403,12 +403,12 @@ Route::middleware(['as.guest'])->group(function () {
     Route::post('/checkout/final', [
         'as'   => 'checkout.final',
         'uses' => 'Frontend\UserController@postFinalPage',
-    ]); 
+    ]);
 
     Route::get('/payment/finish', [
         'as'   => 'payment.finish',
         'uses' => 'Frontend\UserController@afterPaymentPage',
-    ]); 
+    ]);
 
     //Route Address
     Route::post('/account/address', [
@@ -434,14 +434,14 @@ Route::middleware(['as.guest'])->group(function () {
     Route::post('/account/address/update/{id?}', [
         'as'   => 'user.address.update',
         'uses' => 'Frontend\UserController@addressUpdate',
-    ]);  
+    ]);
 
     //Route Order
     Route::post('/order', [
         'as'   => 'order',
         'uses' => 'Frontend\OrderController@store',
     ]);
-    
+
     Route::post('/repayment', [
         'as'   => 'repayment',
         'uses' => 'Frontend\OrderController@restore',
@@ -471,3 +471,8 @@ Route::post('/upload-update/{id?}', [
     'uses' => 'AdminProductImagesController@editUploadProduct',
 ]);
 
+// Controller Tambahan Untuk lookBOok
+Route::get('/lookbook', [
+    'as'   => 'lookbook',
+    'uses' => 'Frontend\PageController@lookBook',
+]);

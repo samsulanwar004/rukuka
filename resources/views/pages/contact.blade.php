@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', trans('app.title_contact') )
 @section('content')
 
     @php
