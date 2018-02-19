@@ -33,9 +33,10 @@ Route::get('v1/product/{id?}', 'Api\PageController@product')->name('product.api'
 
 Route::post('v1/recently', 'Api\PageController@recently')->name('recently');
 
+Route::post('v1/lookbook-product', 'Api\PageController@lookbook')->name('lookbook.product');
+
 Route::get('v1/color', 'Api\PageController@colorPalette')->name('color');
 
-Route::get('v1/lookbook/', 'Api\PageController@lookbook')->name('lookbook');
 
 Route::group([
 	'prefix' => 'v1', 

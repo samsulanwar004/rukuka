@@ -62,7 +62,7 @@
             var self = this;
 
             self.collection = JSON.parse(this.collections);
-            self.errorImage = this.aws_link+'/images/'+this.default_image.image_1;
+            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_1;
             self.loadingImage = this.aws_link+'/images/loading-image.gif';
         },
 
@@ -71,6 +71,7 @@
                 collection : {},
                 errorImage: {},
                 loadingImage: {},
+                defaultImage: JSON.parse(this.default_image,true),
             }
         },
 
