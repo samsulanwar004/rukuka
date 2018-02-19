@@ -160,29 +160,16 @@
                 </div>
             </div>
             <h4 class="uk-text-center">Happenings Right Now!</h4>
-            <div uk-slideshow="animation: push; autoplay:true; ratio: 20:9;">
-                      <div class="uk-position-relative uk-visible-toggle uk-light">
-
-                          <ul class="uk-slideshow-items">
-                              <li>
-                                <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
-                                  <div class="uk-position-cover" uk-slideshow-parallax="scale: 1.2,1.2,1">
-                                      <img src="{{ uploadCDN($home['homepage_banner_9']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
-                                  </div>
-                                  <div class="uk-position-cover" uk-slideshow-parallax="opacity: 0,0,0.2; background-color: #000,#000"></div>
-                                  <div class="uk-position-center uk-position-medium uk-text-center">
-                                      <div uk-slideshow-parallax="scale: 1,1,0.8">
-                                          <h1 class="uk-heading-primary" uk-slideshow-parallax="x: 200,0,0">{{ $home['homepage_text_9'] }}</h1>
-
-                                      </div>
-                                  </div>
-                                </a>
-                              </li>
-                          </ul>
-
-                      </div>
-
+            <div>
+              <div class="uk-inline uk-light">
+                <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">                    
+                  <img src="{{ uploadCDN($home['homepage_banner_9']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
+                  <div class="uk-position-center uk-position-medium uk-text-center">
+                    <h1 class="uk-heading-primary">{{ $home['homepage_text_9'] }}</h1>
                   </div>
+                </a>
+              </div>
+            </div>
 
 </div>
   <div class="uk-container">
