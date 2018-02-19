@@ -48,17 +48,17 @@ class BlogController extends Controller
 
                 $blog .= '<div class="uk-width-1-3@m uk-width-1-2 uk-inline">
                                 <div class="uk-inline">
-                                    <div class="uk-inline-clip uk-transition-toggle uk-light"> 
+                                    <div class="uk-inline-clip uk-light">
                                         <a href="'.$url.'" class="uk-link-reset">
                                             <div style="background: rgba(0,0,0,.2);" class="uk-position-cover"></div>
                                             '.$image.'
                                             <div class="uk-card uk-position-bottom-left uk-card-small">
                                                 <div class="uk-card-body">
-                                                    <div class="uk-transition-slide-left-small uk-visible@m">
+                                                    <div class="uk-visible@m">
                                                         <h1 class="uk-margin-remove uk-text-bold blog-subtitle">'.$post->title.'</h1>
                                                     </div>
                                                     <div class="uk-hidden@m">
-                                                        <div class="uk-transition-slide-left-small">
+                                                        <div>
                                                             <h5 class="uk-margin-remove uk-text-bold uk-text-small">'. $post->title .'</h5>
                                                         </div>
                                                     </div>
