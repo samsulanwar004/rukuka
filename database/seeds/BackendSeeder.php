@@ -286,7 +286,7 @@ class CmsModulsSeeder extends Seeder {
             'created_at'=>date('Y-m-d H:i:s'),
             'name'=>'Lookbook Collections',
             'icon'=>'fa fa-circle-o',
-            'path'=>'lookbook_collections',
+            'path'=>'lookbook-collections',
             'table_name'=>'lookbook-collections',
             'controller'=>'AdminLookbookCollectionsController',
             'is_protected'=>0,
