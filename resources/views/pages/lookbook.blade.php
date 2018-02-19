@@ -30,7 +30,7 @@
         <h3 class="uk-text-center">{{ $lookbook->title }}</h3>
         <lookbook
                 collections="{{ json_encode($collections) }}"
-                api="{{ route('recently') }}"
+                api="{{ route('lookbook.product') }}"
                 product_api="{{ route('product.api') }}"
                 bag_api="{{ route('persist.bag') }}"
                 wishlist_api="{{ route('persist.wishlist') }}"

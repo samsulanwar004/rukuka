@@ -240,14 +240,29 @@ class PageController extends BaseApiController
         }
     }
 
-    public function lookbook($slug=null)
+    public function lookbook(Request $request)
     {
         try {
-            $lookbook = (new LookbookRepository)->getLookbook($slug);
 
-            return $this->success($lookbook->toArray(), 200, true);
-        }   catch (Exception $e) {
-                return $this->error($e, 400, true);
+            $product = $request->input('product');
+
+            $recently = (new ProductRepository)->getLookbookProduct($product);
+
+            $recently = $recently->map(function ($entry) {
+                return [
+                    'id' => $entry->id,
+                    'name' => $entry->name,
+                    'slug' => $entry->slug,
+                    'price' => $entry->sell_price,
+                    'price_before_discount' => $entry->price_before_discount,
+                    'currency' => $entry->currency,
+                    'photo' => $entry->images->first()->photo,
+                ];
+            })->toArray();
+
+            return $this->success($recently, 200, true);
+        } catch (Exception $e) {
+            return $this->error($e, 400, true);
         }
     }
 }
