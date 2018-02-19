@@ -6,6 +6,7 @@
     <div class="uk-container uk-container-small">
         <div class="uk-visible@m">
           <ul class="uk-grid" uk-grid>
+            <li><a href="/blog"><h4>{{ trans('app.all') }}</h4></a> </li>
           @foreach($category as $value)
             <li><a href="{{ URL::to('blog/category/'.$value->slug)}}"><h4>{{$value->name}}</h4></a></li>
           @endforeach
@@ -13,6 +14,7 @@
         </div>
         <div class="uk-hidden@m uk-margin-small-top">
           <ul class="uk-grid uk-grid-small" uk-grid>
+            <li><a href="/blog">{{ trans('app.all') }}</a> </li>
           @foreach($category as $value)
             <li><a href="{{ URL::to('blog/category/'.$value->slug)}}">{{$value->name}}</a></li>
           @endforeach
@@ -21,8 +23,7 @@
         <div class="uk-grid-small" uk-grid>
             <div class="uk-width-1-2">
                 <div class="uk-panel uk-margin-small-top">
-                    <h3 class="uk-margin-small uk-visible@m">{{$title}}</h3>
-                    <h4 class="uk-margin-small hidden@m">{{$title}}</h4>
+                    <h4 class="uk-margin-xsmall">{{$title}}</h4>
                 </div>
             </div>
             <div class="uk-width-1-2">
@@ -73,27 +74,20 @@
 
     @else
         <div class="uk-container uk-container-small">
-            <div class="uk-panel uk-margin-top">
-                <div class="uk-card uk-card-border uk-card-small">
-                    <div class="uk-card-body">
-                        <div class="uk-visible@m">
-                            <ul class="uk-grid" uk-grid>
-                                @foreach($category as $value)
-                                    <li><a href="{{ URL::to('blog/category/'.$value->slug)}}"><h3>{{$value->name}}</h3></a></li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        <div class="uk-hidden@m">
-                            <ul class="uk-grid" uk-grid>
-                                @foreach($category as $value)
-                                    <li><a href="{{ URL::to('blog/category/'.$value->slug)}}"><h5>{{$value->name}}</h5></a></li>
-                                @endforeach
-                            </ul>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+          <ul class="uk-grid" uk-grid>
+            <li><a href="/blog"><h4>{{ trans('app.all') }}</h4></a> </li>
+          @foreach($category as $value)
+            <li><a href="{{ URL::to('blog/category/'.$value->slug)}}"><h4>{{$value->name}}</h4></a></li>
+          @endforeach
+          </ul>
+        </div>
+        <div class="uk-hidden@m uk-margin-small-top">
+          <ul class="uk-grid uk-grid-small" uk-grid>
+            <li><a href="/blog">{{ trans('app.all') }}</a> </li>
+          @foreach($category as $value)
+            <li><a href="{{ URL::to('blog/category/'.$value->slug)}}">{{$value->name}}</a></li>
+          @endforeach
+          </ul>
             <h3 class="uk-margin-small">{{$title}}</h3>
             <div class="uk-section uk-section-default uk-section-xlarge uk-text-center">
                 <h1>{{ trans('app.no_content') }}</h1>
