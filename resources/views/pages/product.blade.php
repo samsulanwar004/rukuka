@@ -54,8 +54,8 @@
                                                             @endif
                                                             </ul>
 
-                                                            {{-- <a class="uk-slidenav-large uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-                                                            <a class="uk-slidenav-large uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a> --}}
+                                                            <a class="uk-slidenav-large uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+                                                            <a class="uk-slidenav-large uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
 
                                                             <div class="uk-position-bottom-center uk-position-medium">
                                                                 <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>

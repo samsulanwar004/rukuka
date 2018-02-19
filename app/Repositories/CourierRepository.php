@@ -439,22 +439,34 @@ class CourierRepository{
 
 			}
 
-			// rewrite label
+			// rewrite label to luar negri
 			$rewriteLabel['010'] =  array('mark' => 'R LN ', 'replace' => 'letter service ');
 			$rewriteLabel['312'] =  array('mark' => 'EMS BARANG ', 'replace' => 'Express service');
 			$rewriteLabel['331'] =  array('mark' => 'PAKETPOS CEPAT LN ', 'replace' => 'Quick service ');
 			$rewriteLabel['332'] =  array('mark' => 'PAKETPOS BIASA LN ', 'replace' => 'Normal service ');
 
+			// rewrite label to lokal destination
+			$rewriteLabel['240'] =  array('mark' => 'PAKET KILAT KHUSUS ', 'replace' => 'SPECIAL PACKAGE ');
+			$rewriteLabel['PDG'] =  array('mark' => 'PAKETPOS DANGEROUS GOODS ', 'replace' => 'PACKAGE DANGEROUS GOODS ');
+			$rewriteLabel['PVG'] =  array('mark' => 'PAKET KILAT KHUSUS ', 'replace' => 'SPECIAL PACKAGE (kilat khusus) ');
+
 			foreach ($listServiceCost as $listServiceCostKey => $listServiceCostValue) {
-			
+				
 				$listServiceCost[$listServiceCostKey]->serviceName = str_replace(
 																		$rewriteLabel[$listServiceCostValue->serviceCode]['mark'],  
 																		$rewriteLabel[$listServiceCostValue->serviceCode]['replace'],
 																		$listServiceCost[$listServiceCostKey]->serviceName
 																	);
+
 				$listServiceCost[$listServiceCostKey]->serviceName = str_replace(
 																			'HARI', 
 																			'DAYS', 
+																			$listServiceCost[$listServiceCostKey]->serviceName
+																	);
+
+				$listServiceCost[$listServiceCostKey]->serviceName = str_replace(
+																			'JAM', 
+																			'HOURS', 
 																			$listServiceCost[$listServiceCostKey]->serviceName
 																	);
 
