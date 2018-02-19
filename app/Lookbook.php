@@ -10,6 +10,6 @@ class Lookbook extends Model
 
     public function lookbookCollections()
     {
-        return $this->hasMany(LookbookCollection::class, 'lookbooks_id', 'id');
+        return $this->hasMany(LookbookCollection::class, 'lookbooks_id', 'id')->where('is_active',1)->whereNull('deleted_at')->orderBy('order','ASC');
     }
 }
