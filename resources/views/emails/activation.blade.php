@@ -145,7 +145,7 @@
                                             <tr>
                                                 <td class="mobile-padding" style="text-align:left;">
                                                     <br>
-                                                    {{ trans('app.hi') }} , {{ $user->first_name }}
+                                                    {{ trans('app.hi') }} {{ $user->first_name }}
                                                     <br>
                                                     {{ trans('app.activation_text') }}
                                                     <br>
@@ -161,7 +161,7 @@
                                                 <td>
                                                     <div>
                                                         @component('mail::button', ['url' => route('activation', ['code' => $user->verification_token ])])
-                                                            {{ trans('app.activate_now') }}
+                                                            {{ trans('app.activation_activate_now') }}
                                                         @endcomponent
                                                     </div>
                                                 </td>
