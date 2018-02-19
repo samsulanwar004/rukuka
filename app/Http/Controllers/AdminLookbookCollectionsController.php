@@ -34,6 +34,7 @@
 			$this->col[] = ["label"=>"Name","name"=>"name"];
 			$this->col[] = ["label"=>"Photo","name"=>"photo"];
             $this->col[] = ["label"=>"Order","name"=>"order"];
+            $this->col[] = ["label"=>"Status","name"=>"is_active"];
             # END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
@@ -265,7 +266,14 @@
 	    public function hook_row_index($column_index,&$column_value) {	        
 	    	//Your code here
             if($column_index==2){
-                $column_value = '<img src="'.URL::to('/'.$column_value).'" alt="-" height="40">';
+                $column_value = '<img src="'.uploadCDN($column_value).'" alt="-" height="40">';
+            }
+            if($column_index==4) {
+                if ($column_value == '0') {
+                    $column_value = '<span class="label label-warning">Unpublish</span>';
+                } else {
+                    $column_value = '<span class="label label-success">Publish</span>';
+                }
             }
 	    }
 
