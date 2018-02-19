@@ -42,4 +42,10 @@ class Product extends Model
     {
         return $this->belongsTo(Color::class, 'product_colors_id');
     }
+
+    public function lookbookProducts()
+    {
+        return $this->hasMany(LookbookProduct::class, 'products_id', 'id');
+    }
+
 }
