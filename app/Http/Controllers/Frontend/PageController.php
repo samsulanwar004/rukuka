@@ -617,30 +617,40 @@ class PageController extends BaseController
 
     public function lookbook($slug='')
     {
-    $lookbook = (new LookbookRepository)->getLookbook($slug);
+        try{
+            $lookbook = (new LookbookRepository)->getLookbook($slug);
 
-        $collections = $lookbook->lookbookCollections->map(function ($entry) {
-            $ids = [];
-            if($entry->lookbookProducts){
-                foreach ($entry->lookbookProducts as $product){
-                    $ids[] = $product->products_id;
+            //Validate Deleted
+            $this->validDelete($lookbook);
+
+            $collections = $lookbook->lookbookCollections->map(function ($entry) {
+                $ids = [];
+                if($entry->lookbookProducts){
+                    foreach ($entry->lookbookProducts as $product){
+                        $ids[] = $product->products_id;
+                    }
                 }
-            }
 
-            return [
-                'id' => $entry->id,
-                'name' => $entry->name,
-                'title' => $entry->title,
-                'subtitle' => $entry->subtitle,
-                'content' => $entry->content,
-                'photo' => $entry->photo,
-                'order' => $entry->order,
-                'is_active' => $entry->is_active,
-                'product_id'   => json_encode($ids),
-            ];
-        });
+                return [
+                    'id' => $entry->id,
+                    'name' => $entry->name,
+                    'title' => $entry->title,
+                    'subtitle' => $entry->subtitle,
+                    'content' => $entry->content,
+                    'photo' => $entry->photo,
+                    'order' => $entry->order,
+                    'is_active' => $entry->is_active,
+                    'product_id'   => json_encode($ids),
+                ];
+            });
 
-    return view ('pages.lookbook',compact('lookbook','collections'));
+            return view ('pages.lookbook',compact('lookbook','collections'));
+        }
+        catch (Exception $e) {
+            return view('pages.not_found')->withErrors($e->getMessage());
+        }
+
     }
+
 
 }
