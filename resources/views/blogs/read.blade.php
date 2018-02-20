@@ -1,13 +1,13 @@
 @extends('app-blog')
-@section('title', $posts[0]['title'].' '.trans('app.title_blog_read') )
+@section('title', $posts['title'].' '.trans('app.title_blog_read') )
 @section('content')
     @if($status['code'] == '010')
     <div class="uk-container uk-container-small">
       <div class="uk-grid uk-grid-small" uk-grid>
         <div class="uk-width-5-6@m">
-          <h2 class="uk-margin-top">{{$posts[0]['title']}}</h2>
-          {!! $posts[0]['content']!!}
-          <p><h5> <i>rukuka.com , {{date_format($posts[0]['created_at'],"F j, Y")}}</i></h5></p>
+          <h2 class="uk-margin-top">{{$posts['title']}}</h2>
+          {!! $posts['content']!!}
+          <p><h5> <i>rukuka.com , {{date_format($posts['created_at'],"F j, Y")}}</i></h5></p>
           <hr>
         </div>
         <div class="uk-width-1-6@m uk-margin-top uk-margin-bottom">
@@ -15,8 +15,7 @@
             <div class="uk-grid uk-grid-small" uk-grid>
             @foreach($postsRandom as $post)
 
-
-                <div class="uk-width-1-1@m uk-width-1-2 uk-inline k-position-relative">
+                <div class="uk-width-1-1@m uk-width-1-2 uk-inline uk-position-relative">
                   <div class="uk-inline-clip uk-light">
                       <a href="{{ URL::to('blog/'.$post->slug)}}" class="uk-link-reset">
                           <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>

@@ -156,11 +156,6 @@ class PageController extends BaseController
                     'whatsapp'
                 );
 
-            //get Delivery & Free Returns
-            $slug = 'delivery-free-returns';
-            $result = (new PageRepository)->getHelp($slug);
-            $deliveryReturns = $result['page'][0]['content'];
-
             //Count Product Categories For Popular Search
             $idProductCategory = $product->product_categories_id;
             (new ProductRepository)->updateCountProductCategory($idProductCategory);
