@@ -171,12 +171,6 @@ class PageController extends BaseApiController
             $product->color = $color->name;
             $product->color_palette = $color->palette;
 
-            //get Delivery & Free Returns
-            $slug = 'delivery-free-returns';
-            $result = (new PageRepository)->getHelp($slug);
-            $deliveryReturns = $result['page'][0]['content'];
-            $product['delivery_returns'] = $deliveryReturns;
-
             $product = collect($product)->all();
 
             return $this->success($product, 200, true);
