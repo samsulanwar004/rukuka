@@ -28,9 +28,7 @@
                     </li>
                     <li>
                         <div class="checkbox uk-text-meta">
-                            <label>
-                                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ trans('app.remember') }}
-                            </label>
+                          <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ trans('app.remember') }}
                         </div>
                     </li>
                     <li>

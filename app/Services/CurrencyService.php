@@ -4,25 +4,33 @@ namespace App\Services;
 
 use App\ExchangeRate;
 use App;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Session;
 
 class CurrencyService
 {
 
-	public function getCurrentCurrency()
+	public function getCurrentCurrency($lang = null)
 	{
-		if (App::isLocale('en')) {
+		if (App::isLocale('en') || $lang == 'en') {
 		    $currency = ExchangeRate::where('currency_code_to', 'usd')
 		    	->orderBy('id', 'DESC')
 		    	->first();
 		    $currency->symbol = '$';
 		    $currency->currency_code_to = 'usd';
 
-		} elseif (App::isLocale('jp')) {
+		} elseif (App::isLocale('jp') || $lang == 'jp') {
 			$currency = ExchangeRate::where('currency_code_to', 'jpy')
 		    	->orderBy('id', 'DESC')
 		    	->first();
 		    $currency->symbol = '¥';
 		    $currency->currency_code_to = 'jpy';
+		} else {
+			$currency = ExchangeRate::where('currency_code_to', 'usd')
+		    	->orderBy('id', 'DESC')
+		    	->first();
+		    $currency->symbol = '$';
+		    $currency->currency_code_to = 'usd';
 		}
 
 		$result = new \stdClass();
@@ -35,7 +43,10 @@ class CurrencyService
 
 	public function setLang($lang)
 	{
-		return App::setLocale($lang);
+		//return App::setLocale($lang);
+		if (array_key_exists($lang, Config::get('languages'))) {
+            return Session::put('applocale', $lang);
+        }
 	}
 
 	public function getLang()
