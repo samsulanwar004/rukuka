@@ -15,27 +15,53 @@ class Language
 {
     public function handle($request, Closure $next)
     {
-        $ip = (new IpAddressService)->ipInfo("Visitor", "Country");
-        echo $ip.'<br>';
-        echo print_r($request->server('HTTP_ACCEPT_LANGUAGE'));
+
         if (Session::has('applocale') AND array_key_exists(Session::get('applocale'), Config::get('languages'))) {
             App::setLocale(Session::get('applocale'));
         }
-        else { // This is optional as Laravel will automatically set the fallback language if there is none specified
+        else { 
             $availableLangs = ['jp', 'en'];
-            $userLangs = preg_split('/,|;/', $request->server('HTTP_ACCEPT_LANGUAGE'));
+            $ip = $this->getIpUser();
+            $userLangs = strtolower((new IpAddressService)->ipInfo($ip, "Country Code"));
 
-            foreach ($availableLangs as $lang) {
-                if(in_array($lang, $userLangs)) {
-                    App::setLocale($lang);
-                    Session::put('applocale', $lang);
-                    break;
-                } 
-            }
-
-            //App::setLocale(Config::get('app.fallback_locale'));         
+            if (in_array($userLangs, $availableLangs)) {
+                foreach ($availableLangs as $lang) {
+                    if($lang == $userLangs) {
+                        App::setLocale($lang);
+                        Session::put('applocale', $lang);
+                        break;
+                    } 
+                }
+            } else {
+                $lang = Config::get('app.fallback_locale');
+                App::setLocale($lang);
+                Session::put('applocale', $lang);
+            }   
+     
         }
 
         return $next($request);
+    }
+
+    private function getIpUser()
+    {
+        $client  = @$_SERVER['HTTP_CLIENT_IP'];
+        $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+        $remote  = $_SERVER['REMOTE_ADDR'];
+
+        if(filter_var($client, FILTER_VALIDATE_IP))
+        {
+            $ip = $client;
+        }
+        elseif(filter_var($forward, FILTER_VALIDATE_IP))
+        {
+            $ip = $forward;
+        }
+        else
+        {
+            $ip = $remote;
+        }
+
+        return $ip;
     }
 }
