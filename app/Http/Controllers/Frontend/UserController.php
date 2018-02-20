@@ -1006,7 +1006,7 @@ class UserController extends BaseController
                     $message = "Charge is successfully captured and the funds will be settled according to the settlement schedule.";
 
                     //EMAILSENT
-                    //sent invoice unpaid to buyer
+                    //sent invoice paid to buyer
                     $emailService = (new EmailService);
                     $emailService->sendInvoicePaid($order);
                 }
