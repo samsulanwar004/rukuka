@@ -162,10 +162,10 @@
             <h4 class="uk-text-center">Happenings Right Now!</h4>
             <div>
               <div class="uk-inline uk-light">
-                <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">                    
+                <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
                   <img src="{{ uploadCDN($home['homepage_banner_9']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
                   <div class="uk-position-center uk-position-medium uk-text-center">
-                    <h1 class="uk-heading-primary">{{ $home['homepage_text_9'] }}</h1>
+                    <a href="" class="banner-highlight">{{ $home['homepage_text_9'] }}</a>
                   </div>
                 </a>
               </div>
