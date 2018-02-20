@@ -22,23 +22,25 @@ class BlogRepository
 
     public function getPostsIndexCategory($slug)
     {
-        $category = BlogCategory::where('slug',$slug)->orderBy('created_at', 'desc')->get()->toArray();
-        $result['post'] = Blog::where('is_publish', 1)->where('blog_categories_id',$category[0]['id'])->orderBy('created_at', 'desc')->take(9)->get();
+        $category = BlogCategory::where('slug',$slug)->orderBy('created_at', 'desc')->first();
+        $result['post'] = Blog::where('is_publish', 1)->where('blog_categories_id',$category['id'])->orderBy('created_at', 'desc')->take(9)->get();
 
-        if(count($result['post']) == 0 ){
+        if(count($result['post']) == 0){
+            $result['title']  = $category['name'];
             $result['status'] = $this->status('001');
             return $result;
         }
-        $result['title']  = $category[0]['name'];
+        $result['title']  = $category['name'];
         $result['status'] = $this->status('000');
         return $result;
     }
 
     public function getPostsRead($slug)
     {
-        $result['post'] = Blog::where('is_publish', 1)->where('slug',$slug)->orderBy('created_at', 'desc')->take(9)->get();
+        $result['post'] = Blog::where('is_publish', 1)->where('slug',$slug)->orderBy('created_at', 'desc')->first();
 
-        if(count($result['post']) == 0 ){
+        if($result ){
+
             $result['status'] = $this->status('001');
             return $result;
         }
