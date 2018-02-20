@@ -312,7 +312,6 @@
             detailAndCare: {},
             slug: {},
             size: {},
-            deliveryReturns: null,
             defaultImage: JSON.parse(this.default_image,true),
             bagCount: {},
             isLoading: false,
@@ -342,7 +341,6 @@
             self.content = data.content;
             self.sizeAndFit = data.size_and_fit;
             self.detailAndCare = data.detail_and_care;
-            self.deliveryReturns = data.delivery_returns;
             self.slug =  data.slug;
             self.size = self.stocks.length > 0 ? self.stocks[0].sku : null;
 

@@ -269,10 +269,10 @@
                 }
             }
             if($column_index==3){
-                $column_value = '<img src="'.URL::to('/'.$column_value).'" alt="-" height="40">';
+                $column_value = '<img src="'.uploadCDN($column_value).'" alt="-" height="40">';
             }
             if($column_index==4){
-                $column_value = '<img src="'.URL::to('/'.$column_value).'" alt="-" height="40">';
+                $column_value = '<img src="'.uploadCDN($column_value).'" alt="-" height="40">';
             }
 	    }
 

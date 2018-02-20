@@ -6,7 +6,6 @@
                 <li class="uk-text-uppercase"><b>{{ trans('app.helpyou') }}</b></li>
                 <li><a href="{{ URL::to('help/order-status') }}">{{ trans('app.order_status') }}</a></li>
                 <li><a href="{{ URL::to('help/shipping-handling') }}">{{ trans('app.shipping_handling') }}</a></li>
-                <li><a href="{{ URL::to('help/returns-exchanges') }}">{{ trans('app.returns_exchanges') }}</a></li>
                 <li><a href="{{ URL::to('help/international-orders') }}">{{ trans('app.international_orders') }}</a></li>
                 <li><a href="{{ URL::to('help/need-some-help') }}">{{ trans('app.need_some_help') }}</a></li>
                 <li><a href="{{ URL::to('help/our-services') }}">{{ trans('app.our_services') }}</a></li>

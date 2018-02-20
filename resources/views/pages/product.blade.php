@@ -198,12 +198,6 @@
                     </div>
                 </div>
                 <hr class="uk-margin-small">
-                <div class="uk-card uk-card-small uk-card-border">
-                    <div class="uk-card-body">
-                        <h4>{{ trans('app.delivery_returns') }}</h4>
-                        {!!  $deliveryReturns !!}
-                    </div>
-                </div>
             </div>
         </div>
         <hr>

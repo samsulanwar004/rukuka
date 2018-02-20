@@ -341,6 +341,15 @@ class ProductRepository
             ->get();
     }
 
+    public function getLookbookProduct($ids)
+    {
+        $orders = implode(',', $ids);
+        return $this->model()
+            ->whereIn('id', $ids)
+            ->orderByRaw(\DB::raw("FIELD(id, $orders)"))
+            ->get();
+    }
+
     public function getColorPalette()
     {
         return Color::get();

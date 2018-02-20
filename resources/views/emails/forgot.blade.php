@@ -144,7 +144,7 @@
                                             <tr>
                                                 <td class="mobile-padding" style="text-align:left;">
                                                     <br>
-                                                    {{ trans('app.hi') }} , {{ $user->first_name }}
+                                                    {{ trans('app.hi') }} {{ $user->first_name }}
                                                     <br>
                                                     {{  trans('app.forgot_text_1')}}
                                                     <br>

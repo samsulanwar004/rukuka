@@ -86,9 +86,24 @@
 
   
   <div class="overlay" style="display: none;"></div>
-  <div id="three-ds-container" style="display: none;">
-      <iframe height="450" width="550" id="sample-inline-frame" name="sample-inline-frame"> </iframe>
-  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="diModalin" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+    
+    
+      <div class="modal-content">
+        
+        <div class="modal-body" style="padding:40px 50px;">
+          
+        </div>
+       
+      </div>
+      
+    </div>
+  </div> 
+
+  <div class="overlay" style="display: none;"></div>
   <div id="loading" style="display: none;"><img src="https://m.popkey.co/fe4ba7/DYALX.gif" width="200px" height="200px"></div>
 </div>
 
@@ -177,10 +192,8 @@
 
                   
               } else if (creditCardCharge.status === 'IN_REVIEW') {
-                  $('#loading').hide();
-                  window.open(creditCardCharge.payer_authentication_url, 'sample-inline-frame');
-                  $('.overlay').show();
-                  $('#three-ds-container').show();
+                  $("#diModalin").modal();
+                  $(".modal-body").html('<iframe height="360" width="500" frameborder="0" scrolling="no" allowtransparency="true" src="'+creditCardCharge.payer_authentication_url+'"></iframe>');
               } else if (creditCardCharge.status === 'FRAUD') {
                   displayError(creditCardCharge);
               } else if (creditCardCharge.status === 'FAILED') {
