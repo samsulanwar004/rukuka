@@ -24,7 +24,7 @@
                           <div class="uk-card uk-position-bottom-left uk-card-small">
                               <div class="uk-card-body">
                                   <div class="uk-visible@m">
-                                      <h5 class="uk-margin-remove uk-text-bold">{{$post->title}}</h5>
+                                      <h5 class="blog-subtitle uk-margin-remove uk-text-bold">{{$post->title}}</h5>
                                   </div>
                                   <div class="uk-hidden@m">
                                       <div>

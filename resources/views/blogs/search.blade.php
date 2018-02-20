@@ -30,7 +30,7 @@
                               <div class="uk-card uk-position-bottom-left uk-card-small">
                                   <div class="uk-card-body">
                                       <div class="uk-visible@m">
-                                          <h1 class="uk-margin-remove uk-text-bold blog-subtitle">{{$post->title}}</h1>
+                                          <h3 class="uk-margin-remove uk-text-bold blog-subtitle">{{$post->title}}</h3>
                                       </div>
                                       <div class="uk-hidden@m">
                                           <div>
