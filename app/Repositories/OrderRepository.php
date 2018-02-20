@@ -336,8 +336,6 @@ class OrderRepository
 	public function getTrackingOrder(){
         $order = Order::with('user')
             ->with('address')
-            ->join('users', 'orders.users_id', '=', 'users.id')
-            ->where('users.email', $this->getUserEmail())
             ->where('order_code', $this->getOrderCode())
             ->first();
 
