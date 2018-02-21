@@ -185,7 +185,7 @@
                       }
                       else
                       {  
-                        
+
                           window.location = "{!! route('payment.finish') !!}";
                           
                       }
@@ -197,10 +197,15 @@
               } else if (creditCardCharge.status === 'IN_REVIEW') {
                  
                   $(".modal-body").html('<iframe height="360" width="500" frameborder="0" scrolling="no" allowtransparency="true" src="'+creditCardCharge.payer_authentication_url+'"></iframe>');
-              } else if (creditCardCharge.status === 'FRAUD') {
-                  displayError(creditCardCharge);
-              } else if (creditCardCharge.status === 'FAILED') {
-                  displayError(creditCardCharge);
+              } //else if (creditCardCharge.status === 'FRAUD') {
+                //   alert(err.error_code +" : "+err.message);
+                //   window.location = "{!! route('user.history') !!}";
+              //} 
+              else if (creditCardCharge.status === 'FAILED') {
+
+                   
+                  alert(creditCardCharge.status +" : "+creditCardCharge.failure_reason);
+                  window.location = "{!! route('user.history') !!}";
               }
           }
 
