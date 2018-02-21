@@ -448,7 +448,7 @@ class CourierRepository{
 			// rewrite label to lokal destination
 			$rewriteLabel['240'] =  array('mark' => 'PAKET KILAT KHUSUS ', 'replace' => 'SPECIAL PACKAGE ');
 			$rewriteLabel['PDG'] =  array('mark' => 'PAKETPOS DANGEROUS GOODS ', 'replace' => 'PACKAGE DANGEROUS GOODS ');
-			$rewriteLabel['PVG'] =  array('mark' => 'PAKET KILAT KHUSUS ', 'replace' => 'SPECIAL PACKAGE (kilat khusus) ');
+			$rewriteLabel['PVG'] =  array('mark' => 'PAKETPOS VALUABLE GOODS ', 'replace' => 'PACKAGE VALUABLE GOODS ');
 
 			foreach ($listServiceCost as $listServiceCostKey => $listServiceCostValue) {
 				
