@@ -5,7 +5,6 @@
             <li><a href="{{ URL::to('help/order-status') }}">{{ trans('app.order_status') }}</a></li>
             <li><a href="{{ URL::to('help/shipping') }}">{{ trans('app.shipping') }}</a></li>
             <li><a href="{{ URL::to('help/international-orders') }}">{{ trans('app.international_orders') }}</a></li>
-            <li><a href="{{ URL::to('help/need-some-help') }}">{{ trans('app.need_some_help') }}</a></li>
             <li><a href="{{ URL::to('help/size-charts') }}">{{ trans('app.size_chart') }}</a></li>
             <li><a href="{{ URL::to('help/our-services') }}">{{ trans('app.our_services') }}</a></li>
             <br>
@@ -31,7 +30,6 @@
                                 <li><a href="{{ URL::to('help/order-status') }}">{{ trans('app.order_status') }}</a></li>
                                 <li><a href="{{ URL::to('help/shipping') }}">{{ trans('app.shipping') }}</a></li>
                                 <li><a href="{{ URL::to('help/international-orders') }}">{{ trans('app.international_orders') }}</a></li>
-                                <li><a href="{{ URL::to('help/need-some-help') }}">{{ trans('app.need_some_help') }}</a></li>
                                 <li><a href="{{ URL::to('help/size-charts') }}">{{ trans('app.size_chart') }}</a></li>
                                 <li><a href="{{ URL::to('help/our-services') }}">{{ trans('app.our_services') }}</a></li>
                                 <br>

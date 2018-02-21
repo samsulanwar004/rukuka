@@ -164,19 +164,19 @@
 
                       <h5 class="uk-accordion-title">{{ trans.editors_notes }}</h5>
                       <div class="uk-accordion-content">
-                        {{ content }}
+                        <span v-html="content"></span>
                       </div>
                   </li>
                   <li>
                       <h5 class="uk-accordion-title">{{ trans.size_fit }}</h5>
                       <div class="uk-accordion-content">
-                        {{ sizeAndFit }}
+                        <span v-html="sizeAndFit"></span>
                       </div>
                   </li>
                   <li>
                       <h5 class="uk-accordion-title">{{ trans.detail_care }}</h5>
                       <div class="uk-accordion-content">
-                        {{ detailAndCare }}
+                        <span v-html="detailAndCare"></span>
                       </div>
                   </li>
               </ul>
@@ -196,7 +196,7 @@
               </div>
               <div class="uk-panel">
                 <div>
-                    <button class="uk-button uk-button-secondary uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                    <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
                     <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="wishlist">{{ trans.wishlist_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
                 </div>
               </div>
@@ -222,7 +222,7 @@
           </div>
           <div class="uk-panel">
             <div>
-                <button class="uk-button uk-button-secondary uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
                 <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="wishlist">{{ trans.wishlist_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
             </div>
           </div>
