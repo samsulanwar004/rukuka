@@ -11,9 +11,6 @@
 |
 */
 
-// load meta tag for SEO and tag Media Social
-(new App\Http\Controllers\Frontend\PageController)->getMetaTag();
-
 Route::get('lang/{lang}', [
     'as'=>'lang.switch',
     'uses'=>'LanguageController@switchLang'
