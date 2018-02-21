@@ -22,6 +22,7 @@
               </div>
               <user-panel
                 profile_link="{{ route('user') }}"
+                history_link="{{ route('user.history') }}"
                 wishlist_link="{{ route('user.wishlist') }}"
                 bag_link="{{ route('bag') }}"
                 login_link="{{ route('login') }}"

@@ -14,11 +14,6 @@
                           image-class="uk-transition-scale-up uk-transition-opaque">
                         </lazy-background>
                     </a>
-                    <!-- <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default">
-                        <div class="uk-text-center">
-                            <a href="#modal-shop" class="uk-button uk-button-small uk-button-secondary" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
-                        </div>
-                    </div> -->
                 </div>
                 <div class="uk-card-body uk-padding-remove">
                   <div>
@@ -75,15 +70,6 @@
         <div id="modal-shop" class="uk-modal-container-small" uk-modal="center: true">
           <div class="uk-modal-dialog uk-margin-auto">
             <button class="uk-modal-close-default" type="button" uk-close></button>
-            <!-- <div class="uk-modal-header uk-visible@m">
-              <transition name="fade">
-                <h3 class="uk-margin-remove" v-if="isLoading">{{ trans.loading }}</h3>
-                <h3 class="uk-margin-remove" v-else>{{ name }}</h3>
-              </transition>
-              <div class="uk-text-right">
-                <a :href="'/product/' +slug" class="uk-button uk-button-text uk-text-right">{{ trans.see_detail }} <span uk-icon="icon: chevron-right"></span> </a>
-              </div>
-            </div> -->
             <div class="uk-modal-body uk-padding-remove" uk-overflow-auto>
               <div class="uk-grid uk-grid-collapse" uk-grid>
                 <div class="uk-width-1-2@m">
@@ -103,45 +89,15 @@
                               :loading-image="loadingImage"
                               :error-image="errorImage">
                             </lazy-background>
-                          <!-- <div class="uk-position uk-position-small uk-position-center-left">
-                            <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="previous" uk-icon="icon: chevron-left"></a>
-                          </div>
-                          <div class="uk-position uk-position-small uk-position-center-right">
-                            <a href="#" class="uk-icon uk-icon-button" uk-switcher-item="next" uk-icon="icon: chevron-right"></a>
-                          </div> -->
                         </li>
                       </ul>
                       <a class="uk-slidenav-large uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
                       <a class="uk-slidenav-large uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
-
                       <div class="uk-position-bottom-center uk-position-medium">
                           <ul class="uk-slideshow-nav uk-dotnav"></ul>
                       </div>
                     </div>
                     </div>
-                    <!-- <div class="">
-                      <ul class="uk-grid-small uk-flex-middle uk-flex-center uk-margin-remove uk-padding-remove" uk-switcher="connect: #component-tab-left; animation: uk-animation-fade" uk-grid>
-                        <li class="uk-padding-remove" v-for="image in images">
-                            <a href="#"  class="uk-padding-remove">
-                                <lazy-background v-if="isLoading"
-                                  :image-source="loadingImage"
-                                  :alt="image.name"
-                                  :loading-image="loadingImage"
-                                  :error-image="errorImage"
-                                  width="55px">
-                                </lazy-background>
-                                <lazy-background v-else
-                                  :image-source="image.photo | awsLink(aws_link)"
-                                  :alt="image.name"
-                                  :loading-image="loadingImage"
-                                  :error-image="errorImage"
-                                  width="55px">
-                                </lazy-background>
-                            </a>
-                        </li>
-                      </ul>
-                    </div> -->
-
                 </div>
                 <div class="uk-width-1-2@m uk-padding-small uk-flex uk-flex-wrap uk-flex-wrap-between">
                   <div class="uk-width-1-1">
@@ -200,19 +156,19 @@
 
                           <h5 class="uk-accordion-title">{{ trans.editors_notes }}</h5>
                           <div class="uk-accordion-content">
-                            {{ content }}
+                            <span v-html="content"></span>
                           </div>
                       </li>
                       <li>
                           <h5 class="uk-accordion-title">{{ trans.size_fit }}</h5>
                           <div class="uk-accordion-content">
-                            {{ sizeAndFit }}
+                            <span v-html="sizeAndFit"></span>
                           </div>
                       </li>
                       <li>
                           <h5 class="uk-accordion-title">{{ trans.detail_care }}</h5>
                           <div class="uk-accordion-content">
-                            {{ detailAndCare }}
+                            <span v-html="detailAndCare"></span>
                           </div>
                       </li>
                   </ul>
@@ -232,7 +188,7 @@
                   </div>
                   <div class="uk-panel">
                     <div>
-                        <button class="uk-button uk-button-secondary uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                        <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
                         <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="wishlist">{{ trans.wishlist_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
                     </div>
                   </div>
@@ -241,11 +197,6 @@
                 </div>
               </div>
             </div>
-
-            <!-- <div class="uk-modal-footer uk-text-right uk-visible@m">
-                <button class="uk-button uk-button-secondary uk-text-uppercase" type="button" v-on:click="bag">{{ trans.add_to_bag}}</button>
-                <button class="uk-button uk-button-default uk-text-uppercase" type="button" v-on:click="wishlist">{{ trans.add_to_wishlist }}</button>
-            </div> -->
             <div class="uk-modal-footer uk-padding-small uk-hidden@m">
               <div class="uk-grid-match uk-child-width-auto uk-flex-between uk-grid" uk-grid>
               <div class="uk-first-column">
@@ -258,7 +209,7 @@
               </div>
               <div class="uk-panel">
                 <div>
-                    <button class="uk-button uk-button-secondary uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                    <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
                     <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="wishlist">{{ trans.wishlist_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
                 </div>
               </div>
