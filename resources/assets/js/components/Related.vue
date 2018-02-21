@@ -16,7 +16,7 @@
         </div>
         <div class="uk-card-body uk-padding-remove">
           <div>
-            <a href="#modal-related" class="uk-button uk-button-small uk-button-danger uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
+            <a :href="'#modal-related'+modal_code" class="uk-button uk-button-small uk-button-danger uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
           </div>
           <a :href="'/product/'+ product.slug" class="uk-text-muted">{{ product.name.substring(0,35) }}</a>
           <br>
@@ -36,7 +36,7 @@
       </div>
     </div>
     <!-- end product single -->
-    <div id="modal-related" class="uk-modal-container-small" uk-modal="center: true">
+    <div :id="'modal-related'+modal_code" class="uk-modal-container-small" uk-modal="center: true">
       <div class="uk-modal-dialog uk-margin-auto">
         <button class="uk-modal-close-default" type="button" uk-close></button>
         <!-- <div class="uk-modal-header uk-visible@m">
@@ -255,7 +255,8 @@
       'default_image',
       'recently',
       'bag_link',
-      'locale'
+      'locale',
+      'modal_code'
     ],
 
     components: {
@@ -329,7 +330,6 @@
             detailAndCare: {},
             slug: {},
             size: {},
-            deliveryReturns: null,
             defaultImage: JSON.parse(this.default_image,true),
             bagCount: {},
             isLoading: false,
@@ -359,10 +359,8 @@
             self.content = data.content;
             self.sizeAndFit = data.size_and_fit;
             self.detailAndCare = data.detail_and_care;
-            self.deliveryReturns = data.delivery_returns;
             self.slug =  data.slug;
             self.size = self.stocks.length > 0 ? self.stocks[0].sku : null;
-
             self.isLoading = false;
 
           }

@@ -4,8 +4,10 @@
 
 <div class="uk-container uk-container-small">
   	<div class="uk-grid-small uk-margin-top uk-margin-bottom">
-		<div>
-			<div class="uk-card uk-card-default uk-card-large uk-card-body">
+			<div class="uk-card uk-card-small uk-background-muted uk-box-shadow-small">
+        <div class="uk-card-body">
+
+
 				@if($tracking['error'] == '000' || $tracking['error'] == '804')
 					<h3 class="uk-card-title uk-text-center uk-text-uppercase">
 						{{ trans('app.status_shipment') }}
@@ -302,9 +304,8 @@
 				</div>
 
 
-
+        </div>
 			</div>
-		</div>
   	</div>
 
 </div>

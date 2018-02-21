@@ -194,6 +194,11 @@ Route::post('/contact', [
     'uses' => 'Frontend\PageController@contact',
 ]);
 
+Route::get('/lookbook/{slug}', [
+    'as'   => 'lookbook',
+    'uses' => 'Frontend\PageController@lookbook',
+]);
+
 
 //MIDDLEWARE
 Route::middleware(['guest'])->group(function () {
@@ -471,8 +476,4 @@ Route::post('/upload-update/{id?}', [
     'uses' => 'AdminProductImagesController@editUploadProduct',
 ]);
 
-// Controller Tambahan Untuk lookBOok
-Route::get('/lookbook', [
-    'as'   => 'lookbook',
-    'uses' => 'Frontend\PageController@lookBook',
-]);
+

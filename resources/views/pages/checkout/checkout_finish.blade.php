@@ -86,10 +86,25 @@
 
   
   <div class="overlay" style="display: none;"></div>
-  <div id="three-ds-container" style="display: none;">
-      <iframe height="450" width="550" id="sample-inline-frame" name="sample-inline-frame"> </iframe>
-  </div>
-  <div id="loading" style="display: none;"><img src="https://m.popkey.co/fe4ba7/DYALX.gif" width="200px" height="200px"></div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="diModalin" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+    
+    
+      <div class="modal-content">
+        
+        <div class="modal-body" style="padding:40px 50px;">
+          
+        </div>
+       
+      </div>
+      
+    </div>
+  </div> 
+
+  <div class="overlay" style="display: none;"></div>
+  <!-- <div id="loading" style="display: none;"><img src="https://m.popkey.co/fe4ba7/DYALX.gif" width="200px" height="200px"></div> -->
 </div>
 
         <?php $orderCode = $order->order_code;
@@ -107,13 +122,15 @@
 
           $form.submit(function (event) {
               hideResults();
-
+              
+              
               <?php echo "Xendit.setPublishableKey('".config('common.xendit_public_key')."')";?>
 
               // Disable the submit button to prevent repeated clicks:
               $form.find('.submit').prop('disabled', true);
               $('.overlay').show();
-              $('#loading').show();
+              $("#diModalin").modal();
+              $(".modal-body").html('<img src="{{ imageCDN('loading-image.gif') }}" width="200px" height="200px">');
 
               // Request a token from Xendit:
               var tokenData = getTokenData(); 
@@ -136,7 +153,7 @@
           function xenditResponseHandler (err, creditCardCharge) {
               $form.find('.submit').prop('disabled', false);
               $('.overlay').show();
-              $('#loading').show();
+              $(".modal-body").html('<img src="{{ imageCDN('loading-image.gif') }}" width="200px" height="200px">');
               
               if (err) {
                   alert(err.error_code +" : "+err.message);
@@ -162,12 +179,13 @@
                   request.done(function(msg) 
                   {   
                       if(msg.status == "CAPTURED" ||msg.status == "AUTHORIZED")
-                      {  
+                      {    
+                     
                            window.location = "{!! route('payment.finish') !!}";
                       }
                       else
-                      {   
-                          //alert(err.error_code +" : "+err.message);
+                      {  
+
                           window.location = "{!! route('payment.finish') !!}";
                           
                       }
@@ -177,14 +195,17 @@
 
                   
               } else if (creditCardCharge.status === 'IN_REVIEW') {
-                  $('#loading').hide();
-                  window.open(creditCardCharge.payer_authentication_url, 'sample-inline-frame');
-                  $('.overlay').show();
-                  $('#three-ds-container').show();
-              } else if (creditCardCharge.status === 'FRAUD') {
-                  displayError(creditCardCharge);
-              } else if (creditCardCharge.status === 'FAILED') {
-                  displayError(creditCardCharge);
+                 
+                  $(".modal-body").html('<iframe height="360" width="500" frameborder="0" scrolling="no" allowtransparency="true" src="'+creditCardCharge.payer_authentication_url+'"></iframe>');
+              } //else if (creditCardCharge.status === 'FRAUD') {
+                //   alert(err.error_code +" : "+err.message);
+                //   window.location = "{!! route('user.history') !!}";
+              //} 
+              else if (creditCardCharge.status === 'FAILED') {
+
+                   
+                  alert(creditCardCharge.status +" : "+creditCardCharge.failure_reason);
+                  window.location = "{!! route('user.history') !!}";
               }
           }
 

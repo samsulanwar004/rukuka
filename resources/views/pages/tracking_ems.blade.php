@@ -4,8 +4,10 @@
 
 <div class="uk-container uk-container-small">
   	<div class="uk-grid-small uk-margin-top uk-margin-bottom">
-		<div>
-			<div class="uk-card uk-card-default uk-card-large uk-card-body">
+			<div class="uk-card uk-card-small uk-background-muted uk-box-shadow-small">
+        <div class=" uk-card-body">
+
+
 				@if($tracking['error'] != '000')
 
 					<h3 class="uk-card-title uk-text-center">
@@ -41,7 +43,7 @@
 							</tbody>
 						</table>
 					</div>
-					
+
 					<div class="uk-overflow-auto">
 						<table class="uk-table uk-table-small uk-table-striped ">
 							<thead>
@@ -57,7 +59,7 @@
 								<th>{{trans('app.time')}}</th>
 								<th>{{trans('app.status')}}</th>
 							</tr>
-							
+
 							@foreach ($tracking['data']['tracking'] as $key => $trackingData)
 							    <tr>
 									<td>{{++$key}}</td>

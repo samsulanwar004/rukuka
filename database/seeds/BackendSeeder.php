@@ -271,6 +271,36 @@ class CmsModulsSeeder extends Seeder {
             'controller'=>'AdminContactsController',
             'is_protected'=>0,
             'is_active'=>0
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Lookbooks',
+            'icon'=>'fa fa-th',
+            'path'=>'lookbooks',
+            'table_name'=>'lookbooks',
+            'controller'=>'AdminLookbooksController',
+            'is_protected'=>0,
+            'is_active'=>0
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Lookbook Collections',
+            'icon'=>'fa fa-circle-o',
+            'path'=>'lookbook-collections',
+            'table_name'=>'lookbook-collections',
+            'controller'=>'AdminLookbookCollectionsController',
+            'is_protected'=>0,
+            'is_active'=>0
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Lookbook Products',
+            'icon'=>'fa fa-circle-o',
+            'path'=>'lookbook-products',
+            'table_name'=>'lookbook_products',
+            'controller'=>'AdminLookbookProductsController',
+            'is_protected'=>0,
+            'is_active'=>0
         ]
         ];
 
@@ -572,7 +602,7 @@ class CmsMenusSeeder extends Seeder {
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 3
+            'sorting' => 4
         ]
         ,[
 
@@ -586,7 +616,7 @@ class CmsMenusSeeder extends Seeder {
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 6
+            'sorting' => 7
         ]
         ,[
 
@@ -600,7 +630,7 @@ class CmsMenusSeeder extends Seeder {
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 4
+            'sorting' => 5
         ]
         ,[
 
@@ -614,7 +644,7 @@ class CmsMenusSeeder extends Seeder {
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 5
+            'sorting' => 6
         ],[
 
             'created_at'=>date('Y-m-d H:i:s'),
@@ -653,7 +683,7 @@ class CmsMenusSeeder extends Seeder {
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 7
+            'sorting' => 8
         ],[
 
             'created_at'=>date('Y-m-d H:i:s'),
@@ -693,6 +723,19 @@ class CmsMenusSeeder extends Seeder {
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 5
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Lookbooks',
+            'type'=>'Route',
+            'path'=>'AdminLookbooksControllerGetIndex',
+            'color' => 'normal',
+            'icon'=>'fa fa-th',
+            'parent_id'=>0,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 3
         ]
     ];
 

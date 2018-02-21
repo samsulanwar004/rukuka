@@ -46,7 +46,8 @@ class InvoicePaid extends Mailable
 
         $currencyService->setLang($this->lang);
 
-        $exchange = $currencyService->getCurrentCurrency();
+        $exchange = $currencyService->getCurrentCurrency($this->lang);
+
         //inject currency
         $order->order_total_idr = $order->order_subtotal + $order->shipping_cost;
         $order->order_subtotal = $order->order_subtotal / $exchange->value;

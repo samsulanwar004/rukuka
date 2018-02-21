@@ -84,7 +84,7 @@ return [
     'copyright'                 =>  'rukuka.com',
     'order_status'              =>  'Order Status',
     'shipping'                  =>  'Shipping',
-    'returns_exchanges'         =>  'Sale Items',
+    'returns_exchanges'         =>  'Return & Exchange',
     'international_orders'      =>  'International Orders',
     'need_some_help'            =>  'Need Some Help',
     'our_services'              =>  'Our Services',

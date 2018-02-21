@@ -15,7 +15,7 @@
         </div>
 
       </div>
-      <div class="uk-margin js-slideshow-animation" uk-slideshow="ratio: 10:3; min-height: 150; max-height: 600;">
+      <div class="js-slideshow-animation" uk-slideshow="ratio: 10:3; min-height: 150; max-height: 600;">
 
             <div class="uk-position-relative uk-visible-toggle uk-light">
 
@@ -54,14 +54,14 @@
   <div class="uk-container">
       {{--BLOG--}}
 
-    <h4 class="uk-margin-top-large uk-visible@m">New Arrival</h4>
-    <h4 class="uk-text-center uk-margin-small-top uk-hidden@m">New Arrival</h4>
-{{--END BLOG--}}
+    {{-- <h4 class="uk-margin-top-large uk-visible@m">New Arrival</h4> --}}
+    {{-- <h4 class="uk-text-center uk-margin-small-top uk-hidden@m">New Arrival</h4> --}}
+    <h4 class="uk-text-center uk-margin-top">New Arrival</h4>
     <div uk-slider="clsActivated: uk-transition-active; autoplay: true">
 
             <div class="uk-position-relative uk-visible-toggle">
 
-                <ul class="uk-slider-items uk-child-width-1-3 uk-child-width-1-5@m">
+                <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-4@m">
                   <li>
                     <a href="{{ $home['homepage_url_1'] }}" class="uk-link-reset">
                       <div class="uk-inline">
@@ -128,17 +128,10 @@
                 <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
 
             </div>
-
-            {{-- <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul> --}}
-
         </div>
-        <hr class="uk-margin" style="border-color: #333; border-width: 3px">
-        <h2 class="uk-text-center uk-visible@m">Happenings Right Now!</h2>
-        <h4 class="uk-text-center uk-margin-small uk-hidden@m">Happenings Right Now!</h4>
-
-        <div uk-slider="clsActivated: uk-transition-active;">
+        <div uk-slider="clsActivated: uk-transition-active;" class="uk-margin-top">
                 <div class="uk-position-relative uk-visible-toggle">
-                    <ul class="uk-slider-items uk-grid uk-grid-small uk-child-width-1-3" uk-grid>
+                    <ul class="uk-slider-items uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
                         <li>
                           <div class="uk-panel uk-transition-toggle">
                             <a href="{{ $home['homepage_url_7'] }}" class="uk-link-reset">
@@ -163,169 +156,24 @@
                               </a>
                             </div>
                         </li>
-                        <li>
-                          <div class="uk-panel uk-transition-toggle">
-                            <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
-                              <div class="uk-inline">
-                                <div class="uk-overlay uk-overlay-primary-dark uk-position-bottom uk-visible@m"></div>
-                                  <img src="{{ uploadCDN($home['homepage_banner_9']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                                  <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m"><h4 class="uk-transition-slide-bottom-small">{{ $home['homepage_text_9'] }}</h4></div>
-                                </div>
-                                <h5 class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_9'] }}</h5>
-                              </a>
-                            </div>
-                        </li>
                     </ul>
-
-                    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-                    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
-
                 </div>
-
-
-
             </div>
-      {{-- <div class="uk-grid-small" uk-grid>
-          <div class="uk-width-1-3 uk-inline">
-              <div class="uk-inline uk-visible@m">
-                  <div class="uk-inline-clip uk-transition-toggle uk-light">
-                      <a href="{{ $home['homepage_url_1'] }}" class="uk-link-reset">
-                          <img src="{{ uploadCDN($home['homepage_banner_1']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div style="background: rgba(0,0,0,.1);" class="uk-position-cover">
-                          </div>
-                          <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small">
-                              <div class="uk-card-body">
-                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove uk-text-center"><b>{{ $home['homepage_text_1'] }}</b></h3></div>
-                              </div>
-                          </div>
-                      </a>
+            <h4 class="uk-text-center">Happenings Right Now!</h4>
+            <div>
+              <div class="uk-inline uk-light">
+                <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
+                  <img src="{{ uploadCDN($home['homepage_banner_9']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
+                  <div class="uk-position-center uk-position-medium uk-text-center">
+                    <a href="" class="banner-highlight">{{ $home['homepage_text_9'] }}</a>
                   </div>
+                </a>
               </div>
-              <div class="uk-inline uk-hidden@m">
-                  <a href="{{ $home['homepage_url_1'] }}" class="uk-link-reset">
-                      <img src="{{ uploadCDN($home['homepage_banner_1']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                      <h5 class="uk-margin-remove">{{ $home['homepage_text_1'] }}</h5>
-                  </a>
-              </div>
-          </div>
-          <div class="uk-width-1-3 uk-inline">
-              <div class="uk-inline uk-visible@m">
-                  <div class="uk-inline-clip uk-transition-toggle uk-light">
-                      <a href="{{ $home['homepage_url_2'] }}" class="uk-link-reset">
-                          <img src="{{ uploadCDN($home['homepage_banner_2']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div style="background: rgba(0,0,0,.1);" class="uk-position-cover">
-                          </div>
-                          <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small">
-                              <div class="uk-card-body">
-                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove uk-text-center"><b>{{ $home['homepage_text_2'] }}</b></h3></div>
-                              </div>
-                          </div>
-                      </a>
-                  </div>
-              </div>
-              <div class="uk-inline uk-hidden@m">
-                  <a href="{{ $home['homepage_url_2'] }}" class="uk-link-reset">
-                      <img src="{{ uploadCDN($home['homepage_banner_2']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                      <h5 class="uk-margin-remove">{{ $home['homepage_text_2'] }}</h5>
-                  </a>
-              </div>
-          </div>
-          <div class="uk-width-1-3 uk-inline">
-              <div class="uk-inline uk-visible@m">
-                  <div class="uk-inline-clip uk-transition-toggle uk-light">
-                      <a href="{{ $home['homepage_url_3'] }}" class="uk-link-reset">
-                          <img src="{{ uploadCDN($home['homepage_banner_3']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div style="background: rgba(0,0,0,.1);" class="uk-position-cover">
-                          </div>
-                          <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small">
-                              <div class="uk-card-body">
-                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove uk-text-center"><b>{{ $home['homepage_text_3'] }}</b></h3></div>
-                              </div>
-                          </div>
-                      </a>
-                  </div>
-              </div>
-              <div class="uk-inline uk-hidden@m">
-                  <a href="{{ $home['homepage_url_3'] }}" class="uk-link-reset">
-                      <img src="{{ uploadCDN($home['homepage_banner_3']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                      <h5 class="uk-margin-remove">{{ $home['homepage_text_3'] }}</h5>
-                  </a>
-              </div>
-          </div>
-      </div> --}}
+            </div>
 
-      {{-- <div class="uk-grid-small" uk-grid>
-          <div class="uk-width-1-3 uk-inline">
-              <div class="uk-inline uk-visible@m">
-                  <div class="uk-inline-clip uk-transition-toggle uk-light">
-                      <a href="{{ $home['homepage_url_7'] }}" class="uk-link-reset">
-                          <img src="{{ uploadCDN($home['homepage_banner_7']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div style="background: rgba(0,0,0,.1);" class="uk-position-cover">
-                          </div>
-                          <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small">
-                              <div class="uk-card-body">
-                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove uk-text-center"><b>{{ $home['homepage_text_7'] }}</b></h3></div>
-                              </div>
-                          </div>
-                      </a>
-                  </div>
-              </div>
-              <div class="uk-inline uk-hidden@m">
-                  <a href="{{ $home['homepage_url_7'] }}" class="uk-link-reset">
-                      <img src="{{ uploadCDN($home['homepage_banner_7']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                      <h5 class="uk-margin-remove">{{ $home['homepage_text_7'] }}</h5>
-                  </a>
-              </div>
-          </div>
-          <div class="uk-width-1-3 uk-inline">
-              <div class="uk-inline uk-visible@m">
-                  <div class="uk-inline-clip uk-transition-toggle uk-light">
-                      <a href="{{ $home['homepage_url_8'] }}" class="uk-link-reset">
-                          <img src="{{ uploadCDN($home['homepage_banner_8']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div style="background: rgba(0,0,0,.1);" class="uk-position-cover">
-                          </div>
-                          <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small">
-                              <div class="uk-card-body">
-                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove uk-text-center"><b>{{ $home['homepage_text_8'] }}</b></h3></div>
-                              </div>
-                          </div>
-                      </a>
-                  </div>
-              </div>
-              <div class="uk-inline uk-hidden@m">
-                  <a href="{{ $home['homepage_url_8'] }}" class="uk-link-reset">
-                      <img src="{{ uploadCDN($home['homepage_banner_8']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                      <h5 class="uk-margin-remove">{{ $home['homepage_text_8'] }}</h5>
-                  </a>
-              </div>
-          </div>
-          <div class="uk-width-1-3 uk-inline">
-              <div class="uk-inline uk-visible@m">
-                  <div class="uk-inline-clip uk-transition-toggle uk-light">
-                      <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
-                          <img src="{{ uploadCDN($home['homepage_banner_9']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div style="background: rgba(0,0,0,.1);" class="uk-position-cover">
-                          </div>
-                          <div class="uk-card uk-position-bottom center uk-position-medium uk-card-small">
-                              <div class="uk-card-body">
-                                  <div class="uk-transition-slide-left-small"><h3 class="uk-margin-remove uk-text-center"><b>{{ $home['homepage_text_9'] }}</b></h3></div>
-                              </div>
-                          </div>
-                      </a>
-                  </div>
-              </div>
-              <div class="uk-inline uk-hidden@m">
-                  <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
-                      <img src="{{ uploadCDN($home['homepage_banner_9']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                      <h5 class="uk-margin-remove">{{ $home['homepage_text_9'] }}</h5>
-                  </a>
-              </div>
-          </div>
-      </div>
---}}
 </div>
   <div class="uk-container">
-    <hr class="uk-margin-large-top">
+    <hr class="uk-margin" style="border-color: #333; border-width: 5px">
     <h4 class="uk-text-uppercase">{{ trans('app.popular') }}</h4>
   	<popular
       api="{{ route('populer', 'Homepage')}}"

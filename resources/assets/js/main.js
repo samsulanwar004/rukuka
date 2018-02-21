@@ -27,6 +27,7 @@ import SearchMobile from './components/SearchMobile.vue';
 import PopularSearch from './components/PopularSearch.vue';
 import ColorPalette from './components/ColorPalette.vue';
 import ColorPaletteMobile from './components/ColorPaletteMobile.vue';
+import Lookbook from './components/Lookbook.vue';
 
 
 Vue.config.devtools = true
@@ -76,5 +77,6 @@ new Vue({
     'popular-search' : PopularSearch,
     'color-palette' : ColorPalette,
     'color-palette-mobile' : ColorPaletteMobile,
+    'lookbook' : Lookbook,
 	}
 });

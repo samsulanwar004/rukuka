@@ -1891,21 +1891,25 @@ select.uk-form-width-xsmall {
  * Default
  */
 .uk-button-default {
-  background-color: transparent;
+  background-color: #fff;
   color: #000;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
   border: 1px solid #000;
 }
 /* Hover + Focus */
 .uk-button-default:hover,
 .uk-button-default:focus {
-  background-color: transparent;
-  color: #333;
+  background-color: #000;
+  color: #fff;
   border-color: #b2b2b2;
 }
 /* OnClick + Active */
 .uk-button-default:active,
 .uk-button-default.uk-active {
-  background-color: transparent;
+  background-color: #fff;
   color: #333;
   border-color: #999999;
 }
@@ -1913,7 +1917,7 @@ select.uk-form-width-xsmall {
  * Default
  */
 .uk-button-default-warm {
-  background-color: transparent;
+  background-color: #fff;
   color: #000;
   border: 1px solid #000;
   border: 1px solid #b2b2b2;
@@ -1921,14 +1925,14 @@ select.uk-form-width-xsmall {
 /* Hover + Focus */
 .uk-button-default-warm:hover,
 .uk-button-default-warm:focus {
-  background-color: transparent;
-  color: #333;
+  background-color: #000;
+  color: #fff;
   border-color: #000;
 }
 /* OnClick + Active */
 .uk-button-default-warm:active,
 .uk-button-default-warm.uk-active {
-  background-color: transparent;
+  background-color: #fff;
   color: #333;
   border-color: #999999;
 }
@@ -1958,19 +1962,27 @@ select.uk-form-width-xsmall {
 .uk-button-secondary {
   background-color: #000;
   color: #fff;
-  border: 1px solid transparent;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  border: 1px solid #000;
 }
 /* Hover + Focus */
 .uk-button-secondary:hover,
 .uk-button-secondary:focus {
-  background-color: #333;
-  color: #fff;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  border-color: #000;
 }
 /* OnClick + Active */
 .uk-button-secondary:active,
 .uk-button-secondary.uk-active {
   background-color: #000000;
   color: #fff;
+  border: 1px solid #000;
+  border-color: #000;
 }
 /*
  * Danger
@@ -1978,6 +1990,10 @@ select.uk-form-width-xsmall {
 .uk-button-danger {
   background-color: #ec9dac;
   color: #fff;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
   border: 1px solid transparent;
 }
 /* Hover + Focus */

@@ -320,7 +320,7 @@
                                             <tr>
                                                 <td style="text-align: left;">
                                                     {{trans('app.note')}} :
-                                                    <br>{{ trans('app.note_currency') }} (IDR. {{ $order->order_total_idr }})
+                                                    <br>{{ trans('app.note_currency') }} (IDR. {{ number_format($order->order_total_idr) }})
                                                     <br>
                                                     <br>
                                                 </td>

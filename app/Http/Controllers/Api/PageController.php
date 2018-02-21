@@ -7,6 +7,7 @@ use App\Repositories\DesignerRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\PageRepository;
+use App\Repositories\LookbookRepository;
 use Exception;
 
 class PageController extends BaseApiController
@@ -159,8 +160,7 @@ class PageController extends BaseApiController
     public function product($id = null)
     {
         try {
-            $product = (new ProductRepository)
-                ->getProductById($id);
+            $product = (new ProductRepository)->getProductById($id);
 
             $product->images->toArray();
 
@@ -170,12 +170,6 @@ class PageController extends BaseApiController
 
             $product->color = $color->name;
             $product->color_palette = $color->palette;
-
-            //get Delivery & Free Returns
-            $slug = 'delivery-free-returns';
-            $result = (new PageRepository)->getHelp($slug);
-            $deliveryReturns = $result['page'][0]['content'];
-            $product['delivery_returns'] = $deliveryReturns;
 
             $product = collect($product)->all();
 
@@ -235,6 +229,32 @@ class PageController extends BaseApiController
 
             return $this->success($color, 200, true);
 
+        } catch (Exception $e) {
+            return $this->error($e, 400, true);
+        }
+    }
+
+    public function lookbook(Request $request)
+    {
+        try {
+
+            $product = $request->input('product');
+
+            $recently = (new ProductRepository)->getLookbookProduct($product);
+
+            $recently = $recently->map(function ($entry) {
+                return [
+                    'id' => $entry->id,
+                    'name' => $entry->name,
+                    'slug' => $entry->slug,
+                    'price' => $entry->sell_price,
+                    'price_before_discount' => $entry->price_before_discount,
+                    'currency' => $entry->currency,
+                    'photo' => $entry->images->first()->photo,
+                ];
+            })->toArray();
+
+            return $this->success($recently, 200, true);
         } catch (Exception $e) {
             return $this->error($e, 400, true);
         }
