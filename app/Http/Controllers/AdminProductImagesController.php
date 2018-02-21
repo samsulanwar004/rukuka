@@ -151,7 +151,7 @@
 	        | $this->script_js = "function() { ... }";
 	        |
 	        */
-	        $this->script_js = NULL;
+	        $this->script_js = null;
 
 
             /*
@@ -186,7 +186,7 @@
 	        | $this->load_js[] = asset("myfile.js");
 	        |
 	        */
-	        $this->load_js = array();
+	        $this->load_js = array(elixirCDN('js/custom.js'));
 	        
 	        
 	        
@@ -352,25 +352,30 @@
 					throw new Exception("Error Processing Request", 1);	
 				}
 
-				if ($request->hasFile('image')) {
-					$file = $request->file('image');
-					$name = $request->input('name');
-				    $filename = sprintf(
-				                "%s-%s.%s",
-				                str_slug($name),
-				                date('YmdHis'),
-				                $file->getClientOriginalExtension()
-				            );
-				    $driver = config('filesystems.s3url') == null ? 'local' : 's3';
+				$countInput = $this->countInput($request);
 
-				    (new UploadService)->uploadProductImage($driver, $userId, $file, $filename);
+				for ($i = 0; $i <= $countInput; ++$i) { 
+
+					if ($request->hasFile('image')) {
+						$file = $request->file('image')[$i];
+						$name = $request->input('name')[$i];
+					    $filename = sprintf(
+					                "%s-%s.%s",
+					                str_slug($name),
+					                date('YmdHis'),
+					                $file->getClientOriginalExtension()
+					            );
+					    $driver = config('filesystems.default') == 'local' ? 'local' : 's3';
+
+					    (new UploadService)->uploadProductImage($driver, $userId, $file, $filename);
+
+					    $image = new ProductImage;
+						$image->name = $name;
+						$image->photo = 'uploads/'.$userId.'/'.date('Y-m').'/'.$filename;
+						$image->product()->associate($request->input('parent_id'));
+						$image->save();
+					}
 				}
-
-				$image = new ProductImage;
-				$image->name = $name;
-				$image->photo = 'uploads/'.$userId.'/'.date('Y-m').'/'.$filename;
-				$image->product()->associate($request->input('parent_id'));
-				$image->save();
 
 			    return redirect($request->input('return_url'))->with(['message' => 'Upload image product successfully!','message_type' => 'success']);
 
@@ -424,6 +429,12 @@
 			} catch (Exception $e) {
 				return back()->with(['message' => $e->getMessage(), 'message_type' => 'danger']);
 			}
+		}
+
+		private function countInput($request)
+		{
+			$count = count($request->input('name'));
+        	return 0 === $count ? 0 : $count - 1;
 		}
 
 
