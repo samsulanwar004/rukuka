@@ -39,7 +39,7 @@ class BlogRepository
     {
         $result['post'] = Blog::where('is_publish', 1)->where('slug',$slug)->orderBy('created_at', 'desc')->first();
 
-        if($result ){
+        if(!$result ){
 
             $result['status'] = $this->status('001');
             return $result;
