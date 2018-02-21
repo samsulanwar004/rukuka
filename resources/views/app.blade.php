@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
   <head>
-    
+    <title> @yield('title') </title>
+
     @php
       $metaTag = (new Symfony\Component\HttpFoundation\Session\Session)->get('meta_tag');
     @endphp
@@ -25,7 +26,7 @@
     <meta property="og:locale" content="EN" />
     <meta property="og:url" content="http://www.rukuka.com" />
     <meta property="og:site_name" content="{{ trans('app.rukuka') }} @yield('title')" />
-<!--     <meta property="og:image" content="" /> -->
+    <!--<meta property="og:image" content="" /> -->
     <!-- end facebook META -->
 
     <!--twitter cards -->
@@ -39,6 +40,10 @@
     <meta name="twitter:domain" content="http://www.rukuka.com" data-dynamic="true">
     <!-- end twitter cards -->
 
+    <!--pavicon-->
+    @include('partials.pavicon')
+    <!--end pavicon-->
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -50,11 +55,8 @@
     <!-- CSRF Token -->
     <meta id="csrf-token" content="{{ csrf_token() }}">
 
-    <title> @yield('title') </title>
-
     <!-- jQuery is required -->
     <link rel="stylesheet" href="{{ elixirCDN('css/app.css') }}">
-    <link rel="shortcut icon" href="{{ imageCDN('favicon.png') }}">
     <script src="{{ elixirCDN('js/vendor.js') }}"></script>
     <script src="{{ elixirCDN('js/custom.js') }}"></script>
   </head>
