@@ -46,15 +46,14 @@
 			$this->form[] = ['label'=>'Product Designers','name'=>'product_designers_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_designers,name'];
             $this->form[] = ['label'=>'Product Categories','name'=>'product_categories_id','type'=>'custom','validation'=>'required','width'=>'col-sm-10', 'html' => $this->categories()];
             $this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
-            $this->form[] = ['label'=>'Color','name'=>'color','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Color','name'=>'product_colors_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_colors,name'];
 			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'wysiwyg','validation'=>'string','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Detail And Care','name'=>'detail_and_care','type'=>'wysiwyg','validation'=>'string','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Size And Fit','name'=>'size_and_fit','type'=>'wysiwyg','validation'=>'string','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Currency','name'=>'currency','type'=>'select','validation'=>'required','width'=>'col-sm-10','dataenum'=>'IDR'];
-			$this->form[] = ['label'=>'Price','name'=>'price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Starting Price'];
-			$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Selling Price'];
-			$this->form[] = ['label'=>'Price Before Discount','name'=>'price_before_discount','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10','help'=>'Discount (Price before Sell Price)'];
+			$this->form[] = ['label'=>'Price','name'=>'price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Starting Price on IDR'];
+            $this->form[] = ['label'=>'Price Before Discount','name'=>'price_before_discount','type'=>'money','validation'=>'integer|min:0','width'=>'col-sm-10','help'=>'Discount (Price before Sell Price on IDR)'];
+            $this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Selling Price on IDR'];
 			$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'required|integer|min:50','width'=>'col-sm-2','help'=>'on Gram, Min. 50 Gram','placeholder'=>'gram'];
 			$this->form[] = ['label'=>'Length','name'=>'length','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Cm','placeholder'=>'cm'];
 			$this->form[] = ['label'=>'Width','name'=>'width','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Cm','placeholder'=>'cm'];
