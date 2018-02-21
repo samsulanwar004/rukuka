@@ -43,6 +43,7 @@
     <!--pavicon-->
     @include('partials.pavicon')
     <!--end pavicon-->
+    <meta name="google-site-verification" content="nFdFuv0V-IaFTa6HdepAZ1hYEsEY02ijn9kUbR2ieMQ" />
 
     <!-- CSRF Token -->
     <meta id="csrf-token" content="{{ csrf_token() }}">

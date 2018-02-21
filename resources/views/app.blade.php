@@ -54,7 +54,7 @@
 
     <!-- CSRF Token -->
     <meta id="csrf-token" content="{{ csrf_token() }}">
-
+    <meta name="google-site-verification" content="nFdFuv0V-IaFTa6HdepAZ1hYEsEY02ijn9kUbR2ieMQ" />
     <!-- jQuery is required -->
     <link rel="stylesheet" href="{{ elixirCDN('css/app.css') }}">
     <script src="{{ elixirCDN('js/vendor.js') }}"></script>
