@@ -2,6 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
   <head>
     <title> @yield('title') </title>
+    <meta name="google-site-verification" content="nFdFuv0V-IaFTa6HdepAZ1hYEsEY02ijn9kUbR2ieMQ" />
 
     <!--pavicon-->
     @include('partials.pavicon')
