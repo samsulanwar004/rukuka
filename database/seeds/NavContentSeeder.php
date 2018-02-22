@@ -407,6 +407,15 @@ class NavContentSeeder extends Seeder
                 "created_at" => date('Y-m-d H:i:s'),
                 "group_setting" => "Meta Tag",
                 "label" => "Meta Keyword",
+            ],
+            [
+                "name" => "login_background_image",
+                "content_input_type" => "upload_image",
+                "dataenum" => null,
+                "helper" => null,
+                "created_at" => date('Y-m-d H:i:s'),
+                "group_setting" => "Application Setting",
+                "label" => "Login Background Image",
             ]
         ];
 
