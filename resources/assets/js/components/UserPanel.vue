@@ -9,6 +9,7 @@
             <div class="uk-card-body">
               <ul class="uk-list uk-text-meta">
                 <li><a :href="profile_link">{{trans.account}}</a> </li>
+                <li><a :href="history_link">{{trans.order_history}}</a> </li>
                 <li><a :href="logout_link">{{trans.sign_out}}</a> </li>
               </ul>
             </div>
@@ -85,6 +86,7 @@
   export default {
     props: [
       'profile_link',
+      'history_link',
       'wishlist_link',
       'bag_link',
       'login_link',
@@ -137,8 +139,8 @@
 
       Event.fire('user', this.accounts);
 
-      self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;      
-      self.loadingImage = this.aws_link+'/images/loading-image.gif'; 
+      self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;
+      self.loadingImage = this.aws_link+'/images/loading-image.gif';
     },
 
     data () {

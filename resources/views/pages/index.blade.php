@@ -165,7 +165,7 @@
                 <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
                   <img src="{{ uploadCDN($home['homepage_banner_9']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
                   <div class="uk-position-center uk-position-medium uk-text-center">
-                    <a href="" class="banner-highlight">{{ $home['homepage_text_9'] }}</a>
+                    <span class="banner-highlight">{{ $home['homepage_text_9'] }}</span>
                   </div>
                 </a>
               </div>

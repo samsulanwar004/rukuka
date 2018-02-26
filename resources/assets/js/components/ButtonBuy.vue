@@ -1,13 +1,13 @@
 <template>
     <div>
-        <h5 class="uk-margin-small">{{ trans.color_label}} : 
+        <h5 class="uk-margin-small">{{ trans.color_label}} :
             <lazy-background
               :image-source="prod.color_palette | awsLink(aws_link)"
               alt="rukuka palette"
               :error-image="aws_link+'/images/default-600x600.jpg'"
               width="20px"
               image-class="uk-border-rounded uk-box-shadow-small">
-            </lazy-background> 
+            </lazy-background>
             {{ prod.color }}
         </h5>
         <div v-if="stocks.length > 0">
@@ -23,19 +23,19 @@
                   <li class="uk-open">
                       <h5 class="uk-accordion-title">{{ trans.editors_notes }}</h5>
                       <div class="uk-accordion-content">
-                          {{ prod.content }}
+                          <span v-html="prod.content"></span>
                       </div>
                   </li>
                   <li>
                       <h5 class="uk-accordion-title">{{ trans.size_fit }}</h5>
                       <div class="uk-accordion-content">
-                          {{ prod.size_and_fit }}
+                          <span v-html="prod.size_and_fit"></span>
                       </div>
                   </li>
                   <li>
                       <h5 class="uk-accordion-title">{{ trans.detail_care }}</h5>
                       <div class="uk-accordion-content">
-                          {{ prod.detail_and_care }}
+                          <span v-html="prod.detail_and_care"></span>
                       </div>
                   </li>
                 </ul>

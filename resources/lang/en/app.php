@@ -77,28 +77,23 @@ return [
     'your_shop'                 =>  'See all your shop',
 
     //resources/views/partials/footer.blade.php
-    //resources/views/partials/footer_checkout.blade.php
-    'helpyou'                   =>  'Help and Care',
+    'help_care'                 =>  'Help and Care',
     'about_rukuka'              =>  'About ruKuKa',
+    'order_shipping'            =>  'Order and Shipping',
     'connect_us'                =>  'Connect With Us',
     'copyright'                 =>  'rukuka.com',
-    'order_status'              =>  'Order Status',
-    'shipping'                  =>  'Shipping',
-    'returns_exchanges'         =>  'Return & Exchange',
-    'international_orders'      =>  'International Orders',
-    'need_some_help'            =>  'Need Some Help',
-    'our_services'              =>  'Our Services',
+    'language'                  =>  'Language',
+    'track_order'               =>  'Track Your Order',
+    'shipping_handling'         =>  'Shipping & Handling',
     'size_chart'                =>  'Size Charts',
+    'contact_us'                =>  'Contact Us',
+    'payment'                   =>  'Payment',
+    'sale_item'                 =>  'Sale Item',
+    'returns_exchanges'         =>  'Return & Exchange',
+    'about_us'                  =>  'About Us',
     'partners'                  =>  'Partners',
     'careers'                   =>  'Careers',
     'terms_privacy'             =>  'Terms & Privacy',
-    'payment'                   =>  'Payment',
-    'contact_us'                =>  'Contact Us',
-    'investor_relations'        =>  'Investor Relations',
-    'help'                      =>  'Help!',
-    'language'                  =>  'Language',
-    'order_shipping'            =>  'Order and Shipping',
-    'track_order'               =>  'Track Your Order',
 
     //resources/assets/js/components/PopularSearch.vue
     'popular_searches'          =>  'Most Searches',
@@ -198,6 +193,7 @@ return [
 
     //resources/views/pages/contact.blade.php
     'name'                      =>  'Name',
+    'title'                     =>  'Title',
     'subject'                   =>  'Subject',
     'message'                   =>  'Message',
 
@@ -223,15 +219,15 @@ return [
     'rating_text'               =>  'Rating for this product :',
     'based_on'                  =>  'Based on',
     'reviews'                   =>  'Reviews',
-    'shopper_text'              =>  'What Other Shoppers Think :',
-    'comment_text'              =>  'There are no reviews for this product. Be the first to comment.',
+    'shopper_text'              =>  'Give your impression : ',
+    'comment_text'              =>  'There are no reviews. Be the first',
     'show_more'                 =>  'show more',
     'show_less'                 =>  'show less',
     'rukuka_response'           =>  'Response from ruKuKa',
     'more_review'               =>  'See More Review',
 
     //resources/views/pages/add_review.blade.php
-    'tell_text'                 =>  'Tell me what you think',
+    'tell_text'                 =>  'Tell me your impression',
     'overall_rating'            =>  '*Overall Rating',
     'review_purchase'           =>  'Review Your Purchase',
     'writing_guide'             =>  'Writing Guidelines',
@@ -355,6 +351,7 @@ return [
     'buy_again'                 =>  'Buy Again',
     'cancel_reason'             =>  'Cancel Reason',
     'expired_date'              =>  'Expired Date',
+    'order_status'              =>  'Order Status',
 
     //resources/views/pages/checkout/checkout_finish.blade.php
     'checkout_almost'           =>  'Your Checkout Process is almost done!',

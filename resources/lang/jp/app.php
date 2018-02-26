@@ -35,8 +35,9 @@ return [
     'title_order_history'       =>  'ruKuKa - Order History',
     'title_wishlist'            =>  'ruKuKa - Wishlist',
     'title_blog'                =>  'ruKuKa - Blog',
-    'title_blog_read'           =>  '- ruKuKa Blog',
-    'title_blog_search'         =>  'at ruKuKa Blog',
+    'title_blog_read'           =>  'at ruKuKa Blog',
+    'title_blog_search'         =>  ' ruKuKa Blog',
+    'title_lookbook'            =>  'ruKuKa - Lookbook',
 
     //common
     'edit'                      =>  '編集',
@@ -76,28 +77,23 @@ return [
     'your_shop'                 =>  '今すぐチェックアウト',
 
     //resources/views/partials/footer.blade.php
-    //resources/views/partials/footer_checkout.blade.php
-    'helpyou'                   =>  'お手伝いしましょう',
+    'help_care'                 =>  'ヘルプとケア',
     'about_rukuka'              =>  'ruKuKa について',
+    'order_shipping'            =>  '注文と出荷',
     'connect_us'                =>  '私たちとつながる',
     'copyright'                 =>  'rukuka.com',
-    'order_status'              =>  '注文の状況',
-    'shipping'                  =>  '出荷処理',
-    'returns_exchanges'         =>  '返品と交換',
-    'international_orders'      =>  '国際注文',
-    'need_some_help'            =>  '助けが要る',
-    'our_services'              =>  '私たちのサービス',
+    'language'                  =>  '言語',
+    'track_order'               =>  '注文を追跡する',
+    'shipping_handling'         =>  '出荷処理',
     'size_chart'                =>  'サイズチャート',
+    'contact_us'                =>  'お問い合わせ',
+    'payment'                   =>  '支払い',
+    'sale_item'                 =>  '販売アイテム',
+    'returns_exchanges'         =>  '返品と交換',
+    'about_us'                  =>  '私たちに関しては',
     'partners'                  =>  'パートナー',
     'careers'                   =>  'キャリア',
     'terms_privacy'             =>  '利用規約とプライバシー',
-    'payment'                   =>  '支払い',
-    'contact_us'                =>  'お問い合わせ',
-    'investor_relations'        =>  '投資家向け広報',
-    'help'                      =>  '助けて!',
-    'language'                  =>  '言語',
-    'order_shipping'             =>  '注文と出荷',
-    'track_order'               =>  '注文を追跡する',
 
     //resources/assets/js/components/PopularSearch.vue
     'popular_searches'          =>  '人気のある検索',
@@ -197,6 +193,7 @@ return [
 
     //resources/views/pages/contact.blade.php
     'name'                      =>  '名',
+    'title'                     =>  'タイトル',
     'subject'                   =>  '主題',
     'message'                   =>  'メッセージ',
 
@@ -222,15 +219,15 @@ return [
     'rating_text'               =>  'この商品の評価 :',
     'based_on'                  =>  'に基づく',
     'reviews'                   =>  'レビュー',
-    'shopper_text'              =>  '他の買い物客が考えるもの :',
-    'comment_text'              =>  'この商品のレビューはありません。最初にコメントする',
+    'shopper_text'              =>  'あなたの印象を与える :',
+    'comment_text'              =>  'レビューはありません。 最初の人',
     'show_more'                 =>  'もっと見せる',
     'show_less'                 =>  'あまり見せない',
     'rukuka_response'           =>  'ruKuKa からの応答',
     'more_review'               =>  'レビューをもっと見る',
 
     //resources/views/pages/add_review.blade.php
-    'tell_text'                 =>  'あなたの考えを教えてください',
+    'tell_text'                 =>  'あなたの印象を教えてください',
     'overall_rating'            =>  '*総合評価',
     'review_purchase'           =>  '購入のレビュー',
     'writing_guide'             =>  '執筆ガイドライン',
@@ -354,6 +351,7 @@ return [
     'buy_again'                 =>  'もう一度買う',
     'cancel_reason'             =>  '理由を取り消す',
     'expired_date'              =>  '有効期限',
+    'order_status'              =>  '注文の状況',
 
     //resources/views/pages/checkout/checkout_finish.blade.php
     'checkout_almost'           =>  'あなたのチェックアウトプロセスはほぼ完了しています!',
