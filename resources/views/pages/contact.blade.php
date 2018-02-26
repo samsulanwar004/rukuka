@@ -23,8 +23,8 @@
 
                   <div class="uk-width-3-4@m">
                       <div class="scroll">
-                          <h3>{!! $page[0]['title'] !!}</h3>
-                          {!! $page[0]['content']!!}
+                          <h3>{!! $page['title'] !!}</h3>
+                          {!! $page['content']!!}
                       </div>
 
                       {{ Form::open(array('url' => '/contact','class' => 'uk-margin-small-top')) }}
@@ -32,7 +32,7 @@
                       <div class="uk-margin-small" uk-grid>
                           <div class="uk-width-1-3">
                               <select name="title" class="uk-select" required>
-                                  <option value="" disabled selected>Title</option>
+                                  <option value="" disabled selected>{{ trans('app.title') }}</option>
                                   <option value="Mr.">Mr.</option>
                                   <option value="Mrs.">Mrs</option>
                               </select>

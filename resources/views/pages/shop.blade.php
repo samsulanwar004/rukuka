@@ -1,6 +1,10 @@
 @extends('app')
 @if($categories == 'designers')
-    @section('title',  $designer->name.' '.trans('app.title_designers') )
+    @if($category == 'all')
+        @section('title', trans('app.title_designers_list') )
+    @else
+        @section('title',  $designer->name.' '.trans('app.title_designers') )
+    @endif
 @else
     @if($categories == 'womens' && $category == 'all')
         @section('title', trans('app.title_shop_womens') )

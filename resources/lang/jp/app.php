@@ -193,6 +193,7 @@ return [
 
     //resources/views/pages/contact.blade.php
     'name'                      =>  '名',
+    'title'                     =>  'タイトル',
     'subject'                   =>  '主題',
     'message'                   =>  'メッセージ',
 
