@@ -88,7 +88,7 @@ return [
     'size_chart'                =>  'Size Charts',
     'contact_us'                =>  'Contact Us',
     'payment'                   =>  'Payment',
-    'sale_item'                 =>  'Sale Item',
+    'sale_item'                 =>  'Sale Items',
     'returns_exchanges'         =>  'Return & Exchange',
     'about_us'                  =>  'About Us',
     'partners'                  =>  'Partners',

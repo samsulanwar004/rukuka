@@ -8,7 +8,7 @@
           <li><a href="{{ URL::to('help/returns-exchanges') }}">{{ trans('app.returns_exchanges') }}</a></li>
           <li><a href="{{ URL::to('help/size-charts') }}">{{ trans('app.size_chart') }}</a></li>
           <li><a href="{{ URL::to('help/payment')}}">{{ trans('app.payment') }}</a></li>
-          <li><a href="{{ URL::to('help/sale-item')}}">{{ trans('app.sale_item') }}</a></li>
+          <li><a href="{{ URL::to('help/sale-items')}}">{{ trans('app.sale_item') }}</a></li>
         </ul>
       </div>
       <div class="uk-width-1-6@m">
@@ -84,7 +84,7 @@
             <li><a href="{{ URL::to('help/returns-exchanges') }}">{{ trans('app.returns_exchanges') }}</a></li>
             <li><a href="{{ URL::to('help/size-charts') }}">{{ trans('app.size_chart') }}</a></li>
             <li><a href="{{ URL::to('help/payment')}}">{{ trans('app.payment') }}</a></li>
-            <li><a href="{{ URL::to('help/sale-item')}}">{{ trans('app.sale_item') }}</a></li>
+            <li><a href="{{ URL::to('help/sale-items')}}">{{ trans('app.sale_item') }}</a></li>
           </ul>
       </li>
       <li class="uk-parent">
