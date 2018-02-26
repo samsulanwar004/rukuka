@@ -383,6 +383,7 @@ return [
     'contact_text'              =>  'with any questions regarding this invoice.',
     'sincerely'                 =>  'Sincerely',
     'rukuka_team'               =>  'ruKuKa Team',
+    'shipping_label'            =>  'Shipping',
 
     //resources/views/emails/invoice_unpaid.blade.php
     'unpaid_subject'            =>  'Invoice Unpaid',
