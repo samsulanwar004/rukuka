@@ -193,7 +193,7 @@ return [
 
     //resources/views/pages/contact.blade.php
     'name'                      =>  'Name',
-    'title'                     =>  'title',
+    'title'                     =>  'Title',
     'subject'                   =>  'Subject',
     'message'                   =>  'Message',
 
