@@ -272,7 +272,7 @@
                                                                 <a href=""><img width="110" height="92" src="{{ uploadCDN($item['image']) }}" alt="item1"></a>
                                                             </td>
                                                             <td class="product">
-                                                                <span style="color: #4d4d4d; font-weight:bold;">{{$item['product_name']}}</span> <br />
+                                                                <span style="color: #4d4d4d; font-weight:bold;">{{$item['product_name']}} ({{$item['size']}})</span> <br />
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -301,7 +301,7 @@
                                                 </td>
                                                 <td class="item-col quantity" style="text-align:right; padding-right: 10px; border-top: 1px solid #cccccc;">
                                                     <span class="total-space">{{ trans('app.subtotal') }}</span> <br />
-                                                    <span class="total-space">{{ trans('app.shipping') }}</span> <br />
+                                                    <span class="total-space">{{ trans('app.shippinglabel') }}</span> <br />
                                                     <span class="total-space" style="font-weight: bold; color: #4d4d4d">{{ trans('app.total') }}</span>
                                                 </td>
                                                 <td class="item-col price" style="text-align: left; border-top: 1px solid #cccccc;">

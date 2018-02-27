@@ -383,6 +383,7 @@ return [
     'contact_text'              =>  'この請求書に関するご質問をお待ちしております。',
     'sincerely'                 =>  '敬具',
     'rukuka_team'               =>  'ruKuKa チーム',
+    'shipping_label'            =>  '輸送費',
 
     //resources/views/emails/invoice_unpaid.blade.php
     'unpaid_subject'            =>  '未払いの請求書',

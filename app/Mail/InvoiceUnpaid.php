@@ -59,6 +59,7 @@ class InvoiceUnpaid extends Mailable
         $order->details = $order->details->map(function ($entry) use ($exchange){
             return [
               'product_name' =>  $entry['product_name'],
+              'size'  =>  $entry->productStock->size,
               'qty' =>  $entry['qty'],
               'image' =>  $entry->productStock->product->images->first()->photo,
               'price' =>  $entry['price']/ $exchange->value,
