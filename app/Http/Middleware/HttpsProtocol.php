@@ -20,7 +20,7 @@ class HttpsProtocol
         if (in_array(env('APP_ENV'), array('developer', 'production'))) {
             // for Proxies
             Request::setTrustedProxies([$request->getClientIp()]);
-
+echo $request->getClientIp();
             if (!$request->isSecure()) {
                 return redirect()->secure($request->getRequestUri());
             }
