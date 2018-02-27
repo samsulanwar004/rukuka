@@ -299,8 +299,8 @@
 	        //Your code here
             $popups = DB::table('popups');
             $popup = $popups->where('id', $id)->first();
-            $postdata['slug'] = str_slug($popup->title);
-            $popup->update($postdata);
+            $postdata['slug'] = str_slug($popup->name);
+            $popups->update($postdata);
 
 	    }
 
