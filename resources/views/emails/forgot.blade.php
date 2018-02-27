@@ -103,6 +103,7 @@
         }
     </style>
 </head>
+{{$locale}}
 <body class="body" style="padding:0; margin:0; display:block; background:#ffffff; -webkit-text-size-adjust:none" bgcolor="#ffffff">
 <table align="center" cellpadding="0" cellspacing="0" width="100%" height="100%" >
     <tr>
