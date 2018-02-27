@@ -35,9 +35,7 @@ class Forgot extends Mailable
     public function build()
     {
 
-        (new CurrencyService)->setLang($this->lang);
-
-        return $this->markdown('emails.forgot', ['user' => $this->user])
-            ->subject(trans('app.forgot_subject'));
+        return $this->markdown('emails.forgot', ['user' => $this->user, 'locale' => $this->lang])
+            ->subject(trans('app.forgot_subject',[], $this->lang));
     }
 }
