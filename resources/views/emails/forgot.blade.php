@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ trans('app.forgot_subject',[], null, $locale) }}</title>
+    <title>{{ trans('app.forgot_subject', null, $locale) }}</title>
     <style type="text/css">
         @import url(http://fonts.googleapis.com/css?family=Lato:400);
 
@@ -103,7 +103,6 @@
         }
     </style>
 </head>
-{{$locale}}
 <body class="body" style="padding:0; margin:0; display:block; background:#ffffff; -webkit-text-size-adjust:none" bgcolor="#ffffff">
 <table align="center" cellpadding="0" cellspacing="0" width="100%" height="100%" >
     <tr>
@@ -122,8 +121,8 @@
                                 <table cellspacing="0" cellpadding="0" width="530" height="303" class="w320">
                                     <tr>
                                         <td valign="middle" style="vertical-align:middle; padding-right: 15px; padding-left: 15px; text-align:left;" class="mobile-center" height="303">
-                                            <h1 class="font-white">{{ trans('app.forgot_title',[], null, $locale) }}</h1><br>
-                                            <h2 class="font-white">{{ trans('app.forgot_subtitle_1',[], null, $locale) }}<br> {{ trans('app.forgot_subtitle_2',[], null, $locale) }}</h2>
+                                            <h1 class="font-white">{{ trans('app.forgot_title', null, $locale) }}</h1><br>
+                                            <h2 class="font-white">{{ trans('app.forgot_subtitle_1', null, $locale) }}<br> {{ trans('app.forgot_subtitle_2', null, $locale) }}</h2>
                                         </td>
                                     </tr>
                                 </table>
@@ -145,9 +144,9 @@
                                             <tr>
                                                 <td class="mobile-padding" style="text-align:left;">
                                                     <br>
-                                                    {{ trans('app.hi',[], null, $locale) }} {{ $user->first_name }}
+                                                    {{ trans('app.hi', null, $locale) }} {{ $user->first_name }}
                                                     <br>
-                                                    {{  trans('app.forgot_text_1',[], null, $locale)}}
+                                                    {{  trans('app.forgot_text_1', null, $locale)}}
                                                     <br>
                                                 </td>
                                             </tr>
@@ -161,7 +160,7 @@
                                                 <td>
                                                     <div>
                                                         @component('mail::button', ['url' => route('page.reset', ['code' => $user->verification_token ])])
-                                                            {{ trans('app.forgot_reset',[], null, $locale) }}
+                                                            {{ trans('app.forgot_reset', null, $locale) }}
                                                         @endcomponent
                                                     </div>
                                                 </td>
@@ -174,10 +173,10 @@
                                         <table cellspacing="0" cellpadding="0" class="force-full-width">
                                             <tr>
                                                 <td class="mobile-padding" style="text-align:left;">
-                                                    {{ trans('app.forgot_text_2',[], null, $locale) }}
+                                                    {{ trans('app.forgot_text_2', null, $locale) }}
                                                     <br><br>
-                                                    {{ trans('app.sincerely',[], null, $locale) }},<br>
-                                                    {{ trans('app.rukuka_team',[], null, $locale) }}
+                                                    {{ trans('app.sincerely', null, $locale) }},<br>
+                                                    {{ trans('app.rukuka_team', null, $locale) }}
                                                 </td>
                                             </tr>
                                         </table>
@@ -213,7 +212,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align:center; margin:0 auto;" width="100%">
-                                                        {{ trans('app.copyright',[], null, $locale) }}
+                                                        {{ trans('app.copyright', null, $locale) }}
                                                     </td>
                                                 </tr>
                                             </table>
