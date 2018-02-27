@@ -301,7 +301,7 @@
                                                 </td>
                                                 <td class="item-col quantity" style="text-align:right; padding-right: 10px; border-top: 1px solid #cccccc;">
                                                     <span class="total-space">{{ trans('app.subtotal') }}</span> <br />
-                                                    <span class="total-space">{{ trans('app.shippinglabel') }}</span> <br />
+                                                    <span class="total-space">{{ trans('app.shipping_label') }}</span> <br />
                                                     <span class="total-space" style="font-weight: bold; color: #4d4d4d">{{ trans('app.total') }}</span>
                                                 </td>
                                                 <td class="item-col price" style="text-align: left; border-top: 1px solid #cccccc;">
