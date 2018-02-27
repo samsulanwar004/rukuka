@@ -36,6 +36,6 @@ class Forgot extends Mailable
     {
 
         return $this->markdown('emails.forgot', ['user' => $this->user, 'locale' => $this->lang])
-            ->subject(trans('app.forgot_subject', null, $this->lang));
+            ->subject(trans('app.forgot_subject',[], $this->lang));
     }
 }
