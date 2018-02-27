@@ -364,7 +364,7 @@ return [
     'expired'                   =>  'Expired',
     'year'                      =>  'Year',
     'month'                     =>  'Month',
-    'cvn_code'                  =>  'Cvn Code',
+    'cvn_code'                  =>  'CVN Code',
 
     //resources/views/blogs/home.blade.php
     'load_more'                 =>  'Load More',
@@ -377,7 +377,7 @@ return [
     //email common
     'invoice'                   =>  'Invoice',
     'note'                      =>  'Note',
-    'note_currency'             =>  'charge will be change in IDR currency.',
+    'note_currency'             =>  '* charge will be change in IDR currency.',
     'please'                    =>  'Please',
     'contact_label'             =>  'contact us',
     'contact_text'              =>  'with any questions regarding this invoice.',
