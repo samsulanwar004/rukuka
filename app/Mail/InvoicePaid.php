@@ -34,19 +34,16 @@ class InvoicePaid extends Mailable
     {
 
         return $this->markdown('emails.invoice_paid', [
-            'order' => $this->paid(),
+            'order' => $this->paid(), 'locale' => $this->lang
         ])
-            ->subject(trans('app.paid_subject'));
+            ->subject(trans('app.paid_subject',[], $this->lang));
     }
 
     private function paid()
     {
         $order = $this->order;
-        $currencyService = (new CurrencyService);
 
-        $currencyService->setLang($this->lang);
-
-        $exchange = $currencyService->getCurrentCurrency($this->lang);
+        $exchange = (new CurrencyService)->getCurrentCurrency($this->lang);
 
         //inject currency
         $order->order_total_idr = $order->order_subtotal + $order->shipping_cost;

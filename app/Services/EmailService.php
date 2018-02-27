@@ -57,8 +57,7 @@ class EmailService
     public function sendShipping($order)
     {
 
-        $lang = (new CurrencyService)->getLang();
-        $mail = (new Shipping($order, $lang))
+        $mail = (new Shipping($order))
             ->onConnection(config('common.queue_active'))
             ->onQueue(config('common.queue_list.user_mail'));
 

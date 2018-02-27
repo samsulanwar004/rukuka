@@ -20,10 +20,9 @@ class Shipping extends Mailable
      *
      * @return void
      */
-    public function __construct(Order $order, $lang)
+    public function __construct(Order $order)
     {
         $this->order = $order;
-        $this->lang = $lang;
     }
 
     /**
@@ -42,11 +41,8 @@ class Shipping extends Mailable
     private function shipping()
     {
         $order = $this->order;
-        $currencyService = (new CurrencyService);
 
-        $currencyService->setLang($this->lang);
-
-        $exchange = $currencyService->getCurrentCurrency();
+        $exchange = (new CurrencyService)->getCurrentCurrency();
         //inject currency
         $order->order_total_idr = $order->order_subtotal + $order->shipping_cost;
         $order->order_subtotal = $order->order_subtotal / $exchange->value;
