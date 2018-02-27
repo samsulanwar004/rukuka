@@ -34,7 +34,7 @@ class Forgot extends Mailable
      */
     public function build()
     {
-
+logger(serialize($this->lang));
         return $this->markdown('emails.forgot', ['user' => $this->user, 'locale' => $this->lang])
             ->subject(trans('app.forgot_subject',
                [], null, $this->lang));
