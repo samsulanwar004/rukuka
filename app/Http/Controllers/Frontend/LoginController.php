@@ -101,6 +101,12 @@ class LoginController extends BaseController
         try {
             //delete session as guest
             session()->forget('as.guest');
+
+            $userExist = $this->user->getUserByEmail($request->input('email_login'));
+
+            if (in_array($userExist->social_media_type, array('facebook', 'google'))) {
+                throw new Exception("Your account has been registered by ".$userExist->social_media_type.". Please, login with ".$userExist->social_media_type, 1);
+            }
             
             $auth = $this->user
             	->setEmail($request->input('email_login'))
