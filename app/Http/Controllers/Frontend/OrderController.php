@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\OrderDetail;
+use App\Order;
 use Illuminate\Http\Request;
 use App\Repositories\OrderRepository;
 use App\Services\BagService;
@@ -66,6 +68,7 @@ class OrderController extends BaseController
 	        		'product_code' => $entry->options->product_code,
 	        		'product_stocks_id' => $entry->options->product_stocks_id,
 	        		'product_photo' => $entry->options->photo,
+	        		'size' => $entry->options->size,
 	        	];
 	        });
 
@@ -133,10 +136,8 @@ class OrderController extends BaseController
 			{
 	         	throw new Exception("access denied.", 1);	
 	        }
-	
-			$data_order = DB::table('orders')
-			 			   ->where('order_code',$order_id)
-			 			   ->first();
+
+            $data_order = Order::where('order_code',$order_id) ->first();
 			 			   
 			if (!isset($data_order->order_code)) {
 				throw new Exception("order code not found.", 1);
@@ -156,9 +157,7 @@ class OrderController extends BaseController
 	        
 	        $order = (object) array('order_code' => $data_order->order_code,'users_id' => $data_order->users_id);
 
-	        $detail = DB::table('order_details')
-			 			   ->where('orders_id',$data_order->id)
-			 			   ->get();
+            $detail = OrderDetail::where('orders_id',$data_order->id)->get();
 
 			$detail = $detail->map(function ($entry) use ($detail){
 	        	return [
@@ -169,6 +168,7 @@ class OrderController extends BaseController
 	        		'product_id' => $entry->product_stocks_id,
 	        		'product_code' => $entry->product_code,
 	        		'product_stocks_id' => $entry->product_stocks_id,
+                    'size'  =>  $entry->productStock->size,
 	        	];
 	        });	   
 
