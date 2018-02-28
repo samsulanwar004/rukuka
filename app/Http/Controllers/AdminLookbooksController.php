@@ -285,7 +285,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-
+            $postdata['slug']= str_slug($postdata['name']);
 	    }
 
 	    /* 
@@ -297,10 +297,6 @@
 	    */
 	    public function hook_after_add($id) {        
 	        //Your code here
-            $lookbooks = DB::table('lookbooks');
-            $lookbook = $lookbooks->where('id', $id)->first();
-            $postdata['slug'] = str_slug($lookbook->name);
-            $lookbooks->update($postdata);
 
 	    }
 
@@ -314,6 +310,7 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
 	        //Your code here
+            $postdata['slug']= str_slug($postdata['name']);
 
 	    }
 
@@ -325,11 +322,7 @@
 	    | 
 	    */
 	    public function hook_after_edit($id) {
-	        //Your code here 
-            $lookbooks = DB::table('lookbooks');
-            $lookbook = $lookbooks->where('id', $id)->first();
-            $postdata['slug'] = str_slug($lookbook->name);
-            $lookbooks->update($postdata);
+	        //Your code here
 
 	    }
 
