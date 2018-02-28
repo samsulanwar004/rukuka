@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Foundation\Application;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use App\Services\IpAddressService;
 
 class CheckForMaintenanceMode
 {
@@ -16,7 +17,7 @@ class CheckForMaintenanceMode
 
     public function handle($request, Closure $next)
     {
-        if ($this->app->isDownForMaintenance() && !$this->ipIsWhiteListed($request))
+        if ($this->app->isDownForMaintenance() && !$this->ipIsWhiteListed())
         {
             throw new HttpException(503);
         }
@@ -24,9 +25,9 @@ class CheckForMaintenanceMode
         return $next($request);
     }
 
-    private function ipIsWhiteListed($request)
+    private function ipIsWhiteListed()
     {
-        $ip = $request->getClientIp(); echo 'Your Ip :'.$ip;
+        $ip = (new IpAddressService)->getIpUser();
         $allowed = explode(',', config('common.maintance_whitelist'));
         return in_array($ip, $allowed);
     }

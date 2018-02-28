@@ -21,8 +21,9 @@ class Language
         }
         else { 
             $availableLangs = ['jp', 'en'];
-            $ip = $this->getIpUser();
-            $userLangs = strtolower((new IpAddressService)->ipInfo($ip, "Country Code"));
+            $ipService = (new IpAddressService);
+            $ip = $ipService->getIpUser();
+            $userLangs = strtolower($ipService->ipInfo($ip, "Country Code"));
 
             if (in_array($userLangs, $availableLangs)) {
                 foreach ($availableLangs as $lang) {
@@ -43,25 +44,4 @@ class Language
         return $next($request);
     }
 
-    private function getIpUser()
-    {
-        $client  = @$_SERVER['HTTP_CLIENT_IP'];
-        $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
-        $remote  = $_SERVER['REMOTE_ADDR'];
-
-        if(filter_var($client, FILTER_VALIDATE_IP))
-        {
-            $ip = $client;
-        }
-        elseif(filter_var($forward, FILTER_VALIDATE_IP))
-        {
-            $ip = $forward;
-        }
-        else
-        {
-            $ip = $remote;
-        }
-
-        return $ip;
-    }
 }
