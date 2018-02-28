@@ -31,6 +31,12 @@
                       <input class="uk-input {{ $errors->has('last_name') ? ' uk-form-danger' : '' }}" name="last_name" value="{{ $user->last_name }}" type="text" placeholder="*{{ trans('app.last_name') }}" required="required">
                   </div>
               </div>
+                <label class="uk-text-uppercase">{{ trans('app.email') }}</label>
+                <div class="uk-margin-small uk-grid-small" uk-grid>
+                    <div>
+                        <input class="uk-input uk-width-large" name="email" id="form-s-tel" placeholder="*{{ trans('app.phone') }}" value="{{ $user->email }}" readonly>
+                    </div>
+                </div>
                 <label class="uk-text-uppercase">{{ trans('app.phone') }}</label>
               <div class="uk-margin-small uk-grid-small" uk-grid>
                   <div>

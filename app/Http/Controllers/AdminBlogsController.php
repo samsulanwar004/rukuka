@@ -10,7 +10,6 @@
 
     class AdminBlogsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
-        private $categoryId;
 
 	    public function cbInit() {
 
@@ -50,8 +49,7 @@
 			$this->form[] = ['label'=>'Photo 2','name'=>'photo_2','type'=>'upload','validation'=>'image|max:2000','width'=>'col-sm-10','help'=>'Max Size 2 Mb,  Recommendation Size 2000px*600px'];
 			$this->form[] = ['label'=>'Title','name'=>'title','type'=>'text','validation'=>'required|string|unique:blogs','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'wysiwyg','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Tags','name'=>'tags','type'=>'multitext','width'=>'col-sm-8'];
-			$this->form[] = ['label'=>'Publish','name'=>'is_publish','type'=>'radio','validation'=>'required|integer','width'=>'col-sm-10','dataenum'=>'0|Unpublished;1|Publish'];
+			$this->form[] = ['label'=>'Publish','name'=>'is_publish','type'=>'radio','validation'=>'required|integer','width'=>'col-sm-10','dataenum'=>'0|Unpublished;1|Publish','value'=>'0'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -286,7 +284,9 @@
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
             $postdata['cms_users_id'] = CRUDBooster::myId();
-	    }
+            $postdata['slug']= str_slug($postdata['title']);
+
+        }
 
 	    /* 
 	    | ---------------------------------------------------------------------- 
@@ -297,10 +297,6 @@
 	    */
 	    public function hook_after_add($id) {        
 	        //Your code here
-            $blogs = DB::table('blogs');
-            $blog = $blogs->where('id', $id)->first();
-            $postdata['slug'] = str_slug($blog->title);
-            $blogs->update($postdata);
 
 	    }
 
@@ -314,7 +310,7 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
 	        //Your code here
-
+            $postdata['slug']= str_slug($postdata['title']);
 	    }
 
 	    /* 
@@ -325,11 +321,7 @@
 	    | 
 	    */
 	    public function hook_after_edit($id) {
-	        //Your code here 
-            $blogs = DB::table('blogs');
-            $blog = $blogs->where('id', $id)->first();
-            $postdata['slug'] = str_slug($blog->title);
-            $blogs->update($postdata);
+	        //Your code here
 
 	    }
 

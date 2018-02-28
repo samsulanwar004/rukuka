@@ -35,12 +35,13 @@
 			$this->col[] = ["label"=>"Currency Code To","name"=>"currency_code_to"];
 			$this->col[] = ["label"=>"Conversion Value","name"=>"conversion_value"];
 			$this->col[] = ["label"=>"Inverse Conversion Value","name"=>"inverse_conversion_value"];
+			$this->col[] = ["label"=>"Created At","name"=>"created_at"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Currency Code From','name'=>'currency_code_from','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'idr'];
-			$this->form[] = ['label'=>'Currency Code To','name'=>'currency_code_to','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'usd;jpy'];
+			$this->form[] = ['label'=>'Currency Code From','name'=>'currency_code_from','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'IDR'];
+			$this->form[] = ['label'=>'Currency Code To','name'=>'currency_code_to','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'USD;JPY'];
 			$this->form[] = ['label'=>'Conversion Value','name'=>'conversion_value','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Inverse Conversion Value','name'=>'inverse_conversion_value','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
