@@ -26,7 +26,7 @@ class CheckForMaintenanceMode
 
     private function ipIsWhiteListed($request)
     {
-        $ip = $request->getClientIp();
+        $ip = $request->getClientIp(); echo 'Your Ip :'.$ip;
         $allowed = explode(',', config('common.maintance_whitelist'));
         return in_array($ip, $allowed);
     }
