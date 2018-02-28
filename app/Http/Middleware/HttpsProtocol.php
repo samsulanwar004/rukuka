@@ -22,7 +22,7 @@ class HttpsProtocol
             Request::setTrustedProxies([$request->getClientIp()]);
             
             if (!$request->isSecure()) {
-                return redirect()->secure($request->getRequestUri());
+                return redirect()->secure($request->getRequestUri(), 301);
             }
         }
 

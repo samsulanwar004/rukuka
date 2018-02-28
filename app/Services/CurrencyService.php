@@ -41,13 +41,6 @@ class CurrencyService
 		return $result;
 	}
 
-	public function setLang($lang)
-	{
-		if (array_key_exists($lang, Config::get('languages'))) {
-            return Session::put('applocale', $lang);
-        }
-	}
-
 	public function getLang()
 	{
 		return App::getLocale();
