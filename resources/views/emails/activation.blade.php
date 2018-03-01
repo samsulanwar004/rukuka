@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ trans('app.activation_subject') }}</title>
+    <title>{{ trans('app.activation_subject',[], $locale) }}</title>
     <style type="text/css">
         @import url(http://fonts.googleapis.com/css?family=Raleway:400);
 
@@ -122,8 +122,8 @@
                                 <table cellspacing="0" cellpadding="0" width="530" height="303" class="w320">
                                     <tr>
                                         <td valign="middle" style="vertical-align:middle; padding-right: 15px; padding-left: 15px; text-align:left;" class="mobile-center" height="303">
-                                            <h1 class="font-white">{{ trans('app.activation_title') }}</h1><br>
-                                            <h2 class="font-white">{{ trans('app.activation_subtitle_1') }}<br> {{ trans('app.activation_subtitle_2') }}</h2>
+                                            <h1 class="font-white">{{ trans('app.activation_title',[], $locale) }}</h1><br>
+                                            <h2 class="font-white">{{ trans('app.activation_subtitle_1',[], $locale) }}<br> {{ trans('app.activation_subtitle_2',[], $locale) }}</h2>
                                         </td>
                                     </tr>
                                 </table>
@@ -145,9 +145,9 @@
                                             <tr>
                                                 <td class="mobile-padding" style="text-align:left;">
                                                     <br>
-                                                    {{ trans('app.hi') }} {{ $user->first_name }}
+                                                    {{ trans('app.hi',[], $locale) }} {{ $user->first_name }}
                                                     <br>
-                                                    {{ trans('app.activation_text') }}
+                                                    {{ trans('app.activation_text',[], $locale) }}
                                                     <br>
                                                 </td>
                                             </tr>
@@ -161,7 +161,7 @@
                                                 <td>
                                                     <div>
                                                         @component('mail::button', ['url' => route('activation', ['code' => $user->verification_token ])])
-                                                            {{ trans('app.activation_activate_now') }}
+                                                            {{ trans('app.activation_activate_now',[], $locale) }}
                                                         @endcomponent
                                                     </div>
                                                 </td>
@@ -177,15 +177,15 @@
                                         <table cellspacing="0" cellpadding="0" class="force-full-width">
                                             <tr>
                                                 <td class="mobile-padding" style="text-align:left;">
-                                                    <b>{{ trans('app.account') }}</b><br>
+                                                    <b>{{ trans('app.account',[], $locale) }}</b><br>
                                                     <table border="0">
-                                                        <tr><td>{{ trans('app.email') }}</td><td>:</td><td>{{ $user->email }}</td></tr>
-                                                        <tr><td>{{ trans('app.first_name') }}</td><td>:</td><td>{{ $user->first_name }}</td></tr>
-                                                        <tr><td>{{ trans('app.last_name') }}</td><td>:</td><td>{{ $user->last_name }}</td></tr>
+                                                        <tr><td>{{ trans('app.email',[], $locale) }}</td><td>:</td><td>{{ $user->email }}</td></tr>
+                                                        <tr><td>{{ trans('app.first_name',[], $locale) }}</td><td>:</td><td>{{ $user->first_name }}</td></tr>
+                                                        <tr><td>{{ trans('app.last_name',[], $locale) }}</td><td>:</td><td>{{ $user->last_name }}</td></tr>
                                                     </table>
                                                     <br><br>
-                                                    {{ trans('app.sincerely') }},<br>
-                                                    {{ trans('app.rukuka_team') }}
+                                                    {{ trans('app.sincerely',[], $locale) }},<br>
+                                                    {{ trans('app.rukuka_team',[], $locale) }}
                                                 </td>
                                             </tr>
                                         </table>
@@ -221,7 +221,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align:center; margin:0 auto;" width="100%">
-                                                        {{ trans('app.copyright') }}
+                                                        {{ trans('app.copyright',[], $locale) }}
                                                     </td>
                                                 </tr>
                                             </table>

@@ -1,10 +1,10 @@
 <?php 
 namespace App\Http\Middleware;
 
-use Request;
 use Closure;
 use Illuminate\Contracts\Foundation\Application;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use App\Services\IpAddressService;
 
 class CheckForMaintenanceMode
 {
@@ -27,7 +27,7 @@ class CheckForMaintenanceMode
 
     private function ipIsWhiteListed()
     {
-        $ip = Request::getClientIp();
+        $ip = (new IpAddressService)->getIpUser();
         $allowed = explode(',', config('common.maintance_whitelist'));
         return in_array($ip, $allowed);
     }

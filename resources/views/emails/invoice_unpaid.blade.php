@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ trans('app.unpaid_subject') }}</title>
+    <title>{{ trans('app.unpaid_subject',[], $locale) }}</title>
     <style type="text/css">
         @import url(http://fonts.googleapis.com/css?family=Lato:400);
 
@@ -197,8 +197,8 @@
                                             <table cellspacing="0" cellpadding="0" width="100%">
                                                 <tr>
                                                     <td valign="middle" style="vertical-align:middle; padding-right: 15px; padding-left: 15px; text-align:left;" class="mobile-center font-white" height="303">
-                                                        <h1 class="font-white">{{ trans('app.unpaid_title') }}</h1><br>
-                                                        <h2 class="font-white">{{ trans('app.unpaid_subtitle_1') }} <br>{{ trans('app.unpaid_subtitle_2')  }}</h2>
+                                                        <h1 class="font-white">{{ trans('app.unpaid_title',[], $locale) }}</h1><br>
+                                                        <h2 class="font-white">{{ trans('app.unpaid_subtitle_1',[], $locale) }} <br>{{ trans('app.unpaid_subtitle_2',[], $locale) }}</h2>
                                                         <br>
                                                     </td>
                                                 </tr>
@@ -224,7 +224,7 @@
                                             <tr>
                                                 <td style="text-align: left; vertical-align:top;">
                                                   <span class="important-font">
-                                                    {{ trans('app.invoice') }} :  {{$order->order_code}} <br>
+                                                    {{ trans('app.invoice',[], $locale) }} :  {{$order->order_code}} <br>
                                                   </span>
                                                 </td>
                                             </tr>
@@ -250,16 +250,16 @@
                                         <table cellspacing="0" cellpadding="0" width="100%">
                                             <tr>
                                                 <td class="title-dark" width="300">
-                                                    {{ trans('app.item') }}
+                                                    {{ trans('app.item',[], $locale) }}
                                                 </td>
                                                 <td class="title-dark" width="163">
-                                                    {{ trans('app.qty') }}
+                                                    {{ trans('app.qty',[], $locale) }}
                                                 </td>
                                                 <td class="title-dark" width="97">
-                                                    {{ trans('app.unit_price') }}
+                                                    {{ trans('app.unit_price',[], $locale) }}
                                                 </td>
                                                 <td class="title-dark" width="97">
-                                                    {{ trans('app.subtotal') }}
+                                                    {{ trans('app.subtotal',[], $locale) }}
                                                 </td>
                                             </tr>
 
@@ -300,9 +300,9 @@
                                                 <td class="item-col item">
                                                 </td>
                                                 <td class="item-col quantity" style="text-align:right; padding-right: 10px; border-top: 1px solid #cccccc;">
-                                                    <span class="total-space">{{ trans('app.subtotal') }}</span> <br />
-                                                    <span class="total-space">{{ trans('app.shippinglabel') }}</span> <br />
-                                                    <span class="total-space" style="font-weight: bold; color: #4d4d4d">{{ trans('app.total') }}</span>
+                                                    <span class="total-space">{{ trans('app.subtotal',[], $locale) }}</span> <br />
+                                                    <span class="total-space">{{ trans('app.shipping_label',[], $locale) }}</span> <br />
+                                                    <span class="total-space" style="font-weight: bold; color: #4d4d4d">{{ trans('app.total',[], $locale) }}</span>
                                                 </td>
                                                 <td class="item-col price" style="text-align: left; border-top: 1px solid #cccccc;">
                                                     <span class="total-space">{{ $order->symbol }} {{number_format($order->order_subtotal,2)}}</span> <br />
@@ -319,16 +319,16 @@
                                         <table cellspacing="0" cellpadding="0" width="100%">
                                             <tr>
                                                 <td style="text-align: left;">
-                                                    {{trans('app.note')}} :
-                                                    <br>{{ trans('app.note_currency') }} (IDR. {{ number_format($order->order_total_idr) }})
+                                                    {{trans('app.note',[], $locale)}} :
+                                                    <br>{{ trans('app.note_currency',[], $locale) }} (IDR. {{ number_format($order->order_total_idr) }})
                                                     <br>
                                                     <br>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left;">
-                                                    {{ trans('app.unpaid_text_1') }}
-                                                    <br>{{ trans('app.unpaid_text_2') }}
+                                                    {{ trans('app.unpaid_text_1',[], $locale) }}
+                                                    <br>{{ trans('app.unpaid_text_2',[], $locale) }}
                                                     <br>
                                                 </td>
                                             </tr>
@@ -344,11 +344,11 @@
                                             <tr>
                                                 <td class="mobile-padding" style="text-align:left;">
                                                     <br>
-                                                    {{ trans('app.please') }} <a href="{{URL::to('/help/contact-us')}}">{{ trans('app.contact_label') }}</a> {{ trans('app.contact_text') }}
+                                                    {{ trans('app.please',[], $locale) }} <a href="{{URL::to('/help/contact-us')}}">{{ trans('app.contact_label',[], $locale) }}</a> {{ trans('app.contact_text',[], $locale) }}
                                                     <br>
                                                     <br>
-                                                    {{ trans('app.sincerely') }},<br>
-                                                    {{ trans('app.rukuka_team') }}
+                                                    {{ trans('app.sincerely',[], $locale) }},<br>
+                                                    {{ trans('app.rukuka_team',[], $locale) }}
                                                     <br>
                                                     <br>
                                                     <br>
@@ -375,7 +375,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align:center; margin:0 auto;" width="100%">
-                                                        {{ trans('app.copyright') }}
+                                                        {{ trans('app.copyright',[], $locale) }}
                                                     </td>
                                                 </tr>
                                             </table>

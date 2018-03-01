@@ -35,20 +35,16 @@ class InvoiceUnpaid extends Mailable
     {
 
         return $this->markdown('emails.invoice_unpaid', [
-            'order' => $this->unpaid()
+            'order' => $this->unpaid(), 'locale' => $this->lang
         ])
-            ->subject( trans('app.unpaid_subject'));
+            ->subject(trans('app.unpaid_subject',[], $this->lang));
     }
 
     private function unpaid()
     {
         $order = $this->order;
 
-        $currencyService = (new CurrencyService);
-
-        $currencyService->setLang($this->lang);
-
-        $exchange = $currencyService->getCurrentCurrency($this->lang);
+        $exchange = (new CurrencyService)->getCurrentCurrency($this->lang);
 
         //inject currency
         $order->order_total_idr = $order->order_subtotal + $order->shipping_cost;
