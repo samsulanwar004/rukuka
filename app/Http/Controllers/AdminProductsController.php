@@ -6,6 +6,7 @@
 	use CRUDBooster;
 	use App\Category;
 	use App\Product;
+	use Validator;
 
 	class AdminProductsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -316,7 +317,9 @@
 	    */
 	    public function hook_before_add(&$postdata) {
 	        //Your code here
-	        $postdata['product_code'] = 'P'.date('Ymd').rand(0,99);
+            $product_code = $this->generateProductDate();
+	        $postdata['product_code'] = $product_code;
+
 
 	    }
 
@@ -345,6 +348,14 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {
 	        //Your code here
+            $product = Product::where('id', $id)->first();
+            $product_code = strtoupper(substr($product->product_code,0,2));
+
+            if($product_code == 'P2' || $product_code == 'KP'){
+                $pc = $this->generateProductDate();
+                $postdata['product_code'] = $pc;
+            }
+
 	    }
 
 	    /*
@@ -438,5 +449,15 @@
 	    {
 	    	return $this->categoryId;
 	    }
+
+	    public function generateProductDate(){
+            $product_code = 'PC'.date('ym').rand(1000,9999);
+            $validator = \Validator::make(['product_code'=>$product_code],['product_code'=>'unique:products,product_code']);
+
+            if($validator->fails()){
+                $this->generateProductDate();
+            }
+            return $product_code;
+        }
 
 	}
