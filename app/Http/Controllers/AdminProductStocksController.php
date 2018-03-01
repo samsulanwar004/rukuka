@@ -4,6 +4,9 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+	use App\Product;
+	use App\ProductStock;
+	use Validator;
 
 	class AdminProductStocksController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -37,10 +40,19 @@
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
-			$this->form = [];
-			$this->form[] = ['label'=>'Product Code','name'=>'products_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'products,product_code','datatable_format'=>'product_code,\' - \',name'];
-			$this->form[] = ['label'=>'Size','name'=>'size','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'35;36;37;38;39;40;40F;40M;41;41F;41M;42;43;44;45;46;47;XS;S;M;L;XL;XXL;ALL SIZE'];
-			$this->form[] = ['label'=>'Unit','name'=>'unit','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+            if(CRUDBooster::getCurrentMethod() == 'getEdit' && CRUDBooster::getCurrentId()) {
+                $this->form = [];
+                $this->form[] = ['label'=>'Unit','name'=>'unit','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+            }
+            else{
+                $this->form = [];
+                $this->form[] = ['label'=>'Product Code','name'=>'products_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'products,product_code','datatable_format'=>'product_code,\' - \',name'];
+                $this->form[] = ['label'=>'Size','name'=>'size','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'35;36;37;38;39;40;40F;40M;41;41F;41M;42;43;44;45;46;47;XS;S;M;L;XL;XXL;ALL SIZE'];
+                $this->form[] = ['label'=>'Unit','name'=>'unit','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+            }
+
+
+
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -257,7 +269,12 @@
 	    */
 	    public function hook_before_add(&$postdata) {
 	        //Your code here
-	        $postdata['sku'] = 'KUKA'.rand(0,99).date('YmdHis');
+            $product = Product::where('id', $postdata['products_id'])->first();
+            $desaignerName = $this->generateDesignerName($product->designer->slug);
+            $productName = $this->generateProductName($product->name);
+            $productSize = $this->generateSize($postdata['size']);
+            $sku = $this->generateSku($desaignerName,$productName,$productSize);
+	        $postdata['sku'] = $sku;
 
 	    }
 
@@ -271,6 +288,7 @@
 	    public function hook_after_add($id) {
 	        //Your code here
 
+
 	    }
 
 	    /*
@@ -283,7 +301,19 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {
 	        //Your code here
+            $productStock = ProductStock::where('id', $id)->first();
+            $sku = strtoupper(substr($productStock->sku,0,4));
 
+            if($sku == 'KUKA'){
+                $product = Product::where('id', $productStock->products_id)->first();
+                $desaignerName = $this->generateDesignerName($product->designer->slug);
+                $productName = $this->generateProductName($product->name);
+                $productSize = $this->generateSize($productStock->size);
+                $sku = $this->generateSku($desaignerName,$productName,$productSize);
+                $postdata['sku'] = $sku;
+            }
+            $postdata['products_id'] = $productStock->products_id;
+            $postdata['size'] = $productStock->size;
 	    }
 
 	    /*
@@ -326,5 +356,36 @@
 
 	    //By the way, you can still create your own method in here... :)
 
+        public function generateSku($desaignerName,$productNameAcronym,$productSize){
 
+            $id = rand(1000,9999);
+            $sku = 'SKU'.$id.'-'.$desaignerName.$productNameAcronym.'-'.$productSize;
+            $validator = \Validator::make(['sku'=>$sku],['sku'=>'unique:product_stocks,sku']);
+
+            if($validator->fails()){
+                $this->sku($desaignerName,$productNameAcronym,$productSize);
+            }
+
+            return $sku;
+        }
+
+        public function generateDesignerName($slug){
+            return strtoupper(substr($slug,0,3));
+        }
+
+        public function generateProductName($name){
+            $productName = explode("-", str_slug($name));
+            $productNameAcronym = "";
+
+            foreach ($productName as $word) {
+                $productNameAcronym .= strtoupper($word[0]);
+            }
+
+            return $productNameAcronym;
+
+        }
+
+        public function generateSize($size){
+	        return strtoupper($size);
+        }
 	}
