@@ -14,6 +14,7 @@ use App\Repositories\CourierRepository;
 use DB;
 use Carbon\Carbon;
 use Exception;
+use Validator;
 
 class OrderController extends BaseController
 {
@@ -84,7 +85,7 @@ class OrderController extends BaseController
 	        $signature = sha1($totalwithshipping.$secret);
 
 	        $order = $this->order
-	        	->setOrderCode('ON'.date('YmdHis').rand(000,999))
+	        	->setOrderCode($this->generateOrderCode())
 	        	->setUser($user)
 	        	->setPaymentMethod('creditcard')
 	        	->setPaymentName($address->first_name)
@@ -223,4 +224,14 @@ class OrderController extends BaseController
 		return view('pages.tracking_order_status', compact('tracking','exchange'));
 
 	}
+
+	public function generateOrderCode(){
+	    $order_code = date('ym').rand(1000,9999);
+        $validator = \Validator::make(['order_code'=>$order_code],['order_code'=>'unique:orders,order_code']);
+
+        if($validator->fails()){
+            $this->generateProductDate();
+        }
+	    return $order_code;
+    }
 }
