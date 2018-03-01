@@ -59,7 +59,7 @@ return [
     //contact and social media
     'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',
     'facebook'                  =>  'https://www.facebook.com/Rukuka-333650107116878/',
-    'email_to'                  =>  'mailto:customercare@rukuka.com',
+    'email_to'                  =>  'mailto:info@rukuka.com',
 
     //resources/views/partials/nav.blade.php
     'search'                    =>  'サーチ',
@@ -408,6 +408,12 @@ return [
     'shipping_text_1'           =>  '私たちからご注文いただきありがとうございます。 私たちはあなたの注文を出荷したばかりであることをお知らせしたいと思います。',
     'shipping_text_2'           =>  '注文履歴ページで、注文の詳細を確認できます。',
 
+    // resource/views/emails/ general email footer
+    'footmail_question'         =>  'ご不明な点がございましたら、メールでお問い合わせください',
+    'footmail_email_sup'        =>  'infot@rukuka.com',
+    'footmail_city'             =>  'Jakarta, Indonesia',
+    'footmail_copyright'        =>  '© 2018 ruKuKa',
+
     //resources/views/emails/activation.blade.php
     'activation_subject'        =>  'アクティベーションアカウント',
     'activation_title'          =>  'ruKuKaへようこそ',
@@ -422,9 +428,9 @@ return [
     'forgot_title'              =>  'パスワードをお忘れですか ?',
     'forgot_subtitle_1'         =>  'あなたを手放しましょう',
     'forgot_subtitle_2'         =>  '新しいもの.',
-    'forgot_text_1'             =>  '私たちはあなたのrukukaパスワードをリセットするよう要求しました。',
-    'forgot_text_2'             =>  'このメッセージを無視すると、パスワードは変更されません',
-    'forgot_reset'              =>  'パスワードを再設定する',
+    'forgot_text_1'             =>  'パスワードを忘れてしまったとお伝えしました。 あなたが実際に行った場合は、ここをクリックして新しいものを選択してください：',
+    'forgot_text_2'             =>  'パスワードをリセットするつもりがない場合は、このメールを無視することができます。 パスワードは変更されません。',
+    'forgot_reset'              =>  '新しいパスワードを選択する',
 
     //resources/views/pages/password/reset.blade.php
     'input_new_password'        =>  '新しいパスワードを入力してください'

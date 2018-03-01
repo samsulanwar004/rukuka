@@ -59,7 +59,7 @@ return [
     //contact and social media
     'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',
     'facebook'                  =>  'https://www.facebook.com/Rukuka-333650107116878/',
-    'email_to'                  =>  'mailto:customercare@rukuka.com',
+    'email_to'                  =>  'mailto:info@rukuka.com',
 
     //resources/views/partials/nav.blade.php
     'search'                    =>  'S E A R C H . . .',
@@ -404,9 +404,15 @@ return [
     //resources/views/emails/shipping.blade.php
     'shipping_subject'          =>  'Shipping Confirmation',
     'shipping_title'            =>  'Your Order Has Shipped.',
-    'shipping_subtitle_1'       =>  'please review your order below',
+    'shipping_subtitle_1'       =>  'Please review your order below',
     'shipping_text_1'           =>  'Thank you for ordering from us. We wanted to let you know that we just shipped off your order. ',
     'shipping_text_2'           =>  'You can review complete details of your order on the Order History page.',
+
+    // resource/views/emails/ general email footer
+    'footmail_question'         =>  'if you have any question, please email us at',
+    'footmail_email_sup'        =>  'info@rukuka.com',
+    'footmail_city'             =>  'Jakarta, Indonesia',
+    'footmail_copyright'        =>  '© 2018 ruKuKa',
 
     //resources/views/emails/activation.blade.php
     'activation_subject'        =>  'Activation Account',
@@ -414,7 +420,7 @@ return [
     'activation_subtitle_1'     =>  'We hope you will have',
     'activation_subtitle_2'     =>  'an Awesome time!',
     'activation_text'           =>  'Thank you for signing up. Just one click away from activating your account.',
-    'activation_activate_now'   =>  'Activate Now',
+    'activation_activate_now'   =>  'Activate',
     'activation_account'        =>  'Your account information:',
 
     //resources/views/emails/forgot.blade.php
@@ -422,9 +428,9 @@ return [
     'forgot_title'              =>  'Forgot Your Password ?',
     'forgot_subtitle_1'         =>  'Let\'s get you',
     'forgot_subtitle_2'         =>  'a new one.',
-    'forgot_text_1'             =>  'We got a request to reset your rukuka password.',
-    'forgot_text_2'             =>  'If you ignore this message, your password won\'t be changed',
-    'forgot_reset'              =>  'Reset Password',
+    'forgot_text_1'             =>  'You told us you forgot you pasword. If you really did, click here to choose a new one:',
+    'forgot_text_2'             =>  'If you did not mean to reset your password, then you can just ignore this email; your password will not change.',
+    'forgot_reset'              =>  'Choose a new password',
 
     //resources/views/pages/password/reset.blade.php
     'input_new_password'        =>'Please input your new password'
