@@ -404,7 +404,7 @@ return [
     //resources/views/emails/shipping.blade.php
     'shipping_subject'          =>  'Shipping Confirmation',
     'shipping_title'            =>  'Your Order Has Shipped.',
-    'shipping_subtitle_1'       =>  'please review your order below',
+    'shipping_subtitle_1'       =>  'Please review your order below',
     'shipping_text_1'           =>  'Thank you for ordering from us. We wanted to let you know that we just shipped off your order. ',
     'shipping_text_2'           =>  'You can review complete details of your order on the Order History page.',
 

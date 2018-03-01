@@ -324,7 +324,7 @@
             <tr>
               <td style="word-wrap:break-word;padding:10px 25px;" align="center">
                 <div style="cursor:auto;color:#333;font-size:18px;line-height:22px;text-align:center;">
-                  {{ trans('app.hi') }} {{ $user->first_name }} {{ $user->first_name }}
+                  {{ trans('app.hi') }} {{ $user->first_name }} {{ $user->last_name }}
                 </div>
               </td>
             </tr>
