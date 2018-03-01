@@ -35,13 +35,18 @@
                                                     <div class="uk-margin js-slideshow-animation" uk-slideshow="ratio: false">
                                                         <div class="uk-position-relative uk-visible-toggle uk-dark">
                                                             <ul class="uk-slideshow-items" uk-height-viewport="min-height: 300">
-                                                              @if($product->images[0])
-                                                                  @foreach($product->images as $image)
-                                                                <li>
-                                                                    <img src="{{ uploadCDN($image->photo) }}" alt="" uk-cover>
-                                                                </li>
-                                                              @endforeach
-                                                            @endif
+                                                                @if($product->images[0])
+                                                                    <li>
+                                                                        <img src="{{ uploadCDN($image->photo) }}" alt="" uk-cover>
+                                                                    </li>
+                                                                    @foreach($product->images as $imageMobile)
+                                                                        @if($image->id != $imageMobile->id)
+                                                                            <li>
+                                                                                <img src="{{ uploadCDN($imageMobile->photo) }}" alt="" uk-cover>
+                                                                            </li>
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
                                                             </ul>
                                                             <a class="uk-slidenav-large uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
                                                             <a class="uk-slidenav-large uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
@@ -59,12 +64,17 @@
 
                                                               <ul class="uk-slideshow-items">
                                                                 @if($product->images[0])
-                                                                    @foreach($product->images as $image)
-                                                                  <li>
+                                                                    <li>
                                                                       <img src="{{ uploadCDN($image->photo) }}" alt="" width="100%">
-                                                                  </li>
-                                                                @endforeach
-                                                              @endif
+                                                                    </li>
+                                                                    @foreach($product->images as $imageBrowser)
+                                                                        @if($image->id != $imageBrowser->id)
+                                                                            <li>
+                                                                              <img src="{{ uploadCDN($imageBrowser->photo) }}" alt="" width="100%">
+                                                                            </li>
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
                                                               </ul>
 
                                                               <a class="uk-slidenav-large uk-position-center-left uk-hidden-hover uk-height-viewport" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
@@ -95,12 +105,12 @@
                     <ul class="uk-slideshow-items">
                       @if($product->images[0])
                           @foreach($product->images as $image)
-                      <li>
-                        <img src="{{ uploadCDN($image->photo) }}">
-                        <a class="uk-position-absolute uk-transform-center" style="left: 90%; top: 90%" href="#modal-full-split-{{ $image->id }}" uk-toggle uk-marker uk-tooltip="title: full view; pos: left"></a>
-                      </li>
-                    @endforeach
-                  @endif
+                          <li>
+                            <img src="{{ uploadCDN($image->photo) }}">
+                            <a class="uk-position-absolute uk-transform-center" style="left: 90%; top: 90%" href="#modal-full-split-{{ $image->id }}" uk-toggle uk-marker uk-tooltip="title: full view; pos: left"></a>
+                          </li>
+                        @endforeach
+                      @endif
                     </ul>
                     <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin-small uk-dark"></ul>
                   </div>
@@ -291,7 +301,6 @@
             </div>
         </div>
     </div>
-
 
 @endsection
 
