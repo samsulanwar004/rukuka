@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+{{-- <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -392,11 +392,11 @@
     </tr>
 </table>
 </body>
-</html>
+</html> --}}
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
-  <title></title>
+  <title>{{trans('app.paid_subject',[], $locale)}} , {{$order->order_code}}</title>
   <!--[if !mso]><!-- -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!--<![endif]-->
@@ -478,15 +478,15 @@
                   <tbody>
                     <tr>
                       <td style="word-wrap:break-word;padding:10px 25px;" align="center">
-                        <div style="cursor:auto;color:#333;font-size:16px;line-height:22px;text-align:center;">
-                          {{ trans('app.paid_subject') }}
+                        <div style="cursor:auto;color:#333;font-size:22px;line-height:22px;text-align:center;font-weight:800">
+                          {{ trans('app.paid_subject',[], $locale) }}
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td style="word-wrap:break-word;padding:10px 25px;" align="center">
                         <div style="cursor:auto;color:#333;font-size:20px;line-height:22px;text-align:center;">
-                          {{ trans('app.paid_subtitle_1') }} {{ trans('app.paid_subtitle_2') }}
+                          {{ trans('app.paid_subtitle_1',[], $locale) }} {{ trans('app.paid_subtitle_2',[], $locale) }}
                         </div>
                       </td>
                     </tr>
@@ -503,12 +503,12 @@
         <tbody>
           <tr>
             <td style="text-align:center;vertical-align:top;direction:ltr;padding:20px 0px;padding-bottom:0px;">
-              <div class="mj-column-per-50 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
+
                 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
                   <tbody>
                     <tr>
                       <td style="word-wrap:break-word;padding:10px 25px;" align="left">
-                        <div style="cursor:auto;color:#333;font-size:11px;line-height:22px;text-align:left;">
+                        <div style="cursor:auto;color:#333;font-size:13px;line-height:22px;text-align:left;">
                           {{$order->address->first_name}} {{$order->address->last_name}} <br>
                           {{$order->address->address_line}} <br>
                           {{$order->address->city}},{{$order->address->province}} <br>
@@ -519,20 +519,19 @@
                     </tr>
                   </tbody>
                 </table>
-              </div>
-              <div class="mj-column-per-50 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
+
                 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
                   <tbody>
                     <tr>
                       <td style="word-wrap:break-word;padding:10px 25px;" align="left">
                         <div style="cursor:auto;color:#333;font-size:14px;line-height:22px;text-align:left;">
-                          Invoice <br> <b>ON20180219192430999</b>
+                            {{ trans('app.invoice',[], $locale) }} :  <br> {{$order->order_code}}
                         </div>
                       </td>
                     </tr>
                   </tbody>
                 </table>
-              </div>
+
             </td>
           </tr>
         </tbody>
@@ -548,42 +547,48 @@
                   <tbody>
                     <tr>
                       <td style="word-wrap:break-word;padding:10px 25px;" align="left">
-                        <table cellpadding="0" cellspacing="0" style="cellspacing:0px;color:#333;font-size:11px;line-height:30px;table-layout:auto;" width="100%" border="0">
+                        <table cellpadding="0" cellspacing="0" style="cellspacing:0px;color:#333;font-size:13px;line-height:30px;table-layout:auto;" width="100%" border="0">
                           <tr style="border-bottom:2px solid lightgrey;text-align:left;padding:15px 0;">
-                            <th style="padding: 0 15px 0 0;">Item</th>
-                            <th>Qty</th>
-                            <th style="padding: 0 0 0 15px;">Unit Price</th>
-                            <th style="padding: 0 0 0 15px;">Subtotal</th>
+                            <th style="padding: 0 15px 0 0;">{{ trans('app.item',[], $locale) }} ({{ trans('app.size',[], $locale) }})</th>
+                            <th>{{ trans('app.qty',[], $locale) }}</th>
+                            <th style="padding: 0 0 0 15px;">{{ trans('app.unit_price',[], $locale) }}</th>
+                            <th style="padding: 0 0 0 15px;">{{ trans('app.subtotal',[], $locale) }}</th>
                           </tr>
+                          @foreach($order->details as $item)
                           <tr style="border-bottom:1px dashed lightgrey;text-align:left;padding:15px 0;">
-                            <td style="padding: 0 15px 0 0;">Zahiya Stripe Long Sleeve Blue Dress</td>
-                            <td>1</td>
-                            <td style="padding: 0 0 0 15px;"> Rp.475,000.00 </td>
-                            <td style="padding: 0 0 0 15px;"> Rp.475,000.00 </td>
+                            <td style="padding: 0 15px 0 0;">{{$item['product_name']}} <b>({{$item['size']}})</b></td>
+                            <td>{{$item['qty']}}</td>
+                            <td style="padding: 0 0 0 15px;"> {{$order->symbol}} {{number_format($item['price'],2)}} </td>
+                            <td style="padding: 0 0 0 15px;"> {{$order->symbol}} {{number_format($item['price']*$item['qty'],2)}} </td>
                           </tr>
-                          <tr style="border-bottom:1px dashed lightgrey;text-align:left;padding:15px 0;">
-                            <td style="padding: 0 15px 0 0;">Zahiya Stripe Long Sleeve Blue Dress</td>
-                            <td>1</td>
-                            <td style="padding: 0 0 0 15px;"> Rp.475,000.00 </td>
-                            <td style="padding: 0 0 0 15px;"> Rp.475,000.00 </td>
-                          </tr>
+                        @endforeach
                           <tr>
-                            <td style="padding: 0 0 0 15px;" colspan="3" align="right"><b>Subtotal</b></td>
-                            <td style="padding: 0 0 0 15px;"> Rp.955,000.00 </td>
+                            <td style="padding: 0 0 0 15px;" colspan="3" align="right"><b>{{ trans('app.subtotal',[], $locale) }}</b></td>
+                            <td style="padding: 0 0 0 15px;"> {{ $order->symbol }} {{number_format($order->order_subtotal,2)}} </td>
                           </tr>
                           <tr style="border-bottom:2px solid lightgrey;text-align:left;padding:15px 0;">
-                            <td style="padding: 0 0 0 15px;" colspan="3" align="right"><b>Shipping</b></td>
-                            <td style="padding: 0 0 0 15px;"> Rp.100,000.00 </td>
+                            <td style="padding: 0 0 0 15px;" colspan="3" align="right"><b>{{ trans('app.shipping_label',[], $locale) }}</b></td>
+                            <td style="padding: 0 0 0 15px;"> {{ $order->symbol }} {{number_format($order->shipping_cost,2)}} </td>
                           </tr>
                           <tr style="border-bottom:2px solid lightgrey;text-align:left;padding:15px 0;">
-                            <td style="padding: 0 0 0 15px;" font-size="20" colspan="3" align="center"><b>TOTAL</b></td>
-                            <td style="padding: 0 0 0 15px;"> <b> Rp.1.055,000.00 </b></td>
+                            <td style="padding: 0 0 0 15px;" font-size="20" colspan="3" align="center"><b>{{ trans('app.total',[], $locale) }}</b></td>
+                            <td style="padding: 0 0 0 15px;"> <b>{{ $order->symbol }} {{number_format($order->order_subtotal + $order->shipping_cost,2) }} </b></td>
                           </tr>
                         </table>
                       </td>
                     </tr>
                     <tr>
-                      <td style="word-wrap:break-word;padding:10px 25px;padding-top:10px;padding-bottom:0px;padding-right:0px;padding-left:0px;">
+                      <td style="word-wrap:break-word;padding:10px 25px;" align="left">
+                        <div style="cursor:auto;color:#666;font-size:12px;line-height:22px;text-align:left;">
+                          <p style="margin:0px">
+                          {{trans('app.note',[], $locale)}} :
+                          <br>{{ trans('app.note_currency',[], $locale) }} (IDR.{{ number_format($order->order_total_idr) }})
+                        </P>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="word-wrap:break-word;padding-bottom:0px;padding-right:0px;padding-left:0px;">
                         <p style="font-size:1px;margin:0px auto;border-top:1px solid #f8f8f8;width:100%;"></p>
                       </td>
                     </tr>
@@ -606,13 +611,13 @@
                               <tr>
                                 <td style="word-wrap:break-word;padding:10px 25px;" align="left">
                                   <div style="cursor:auto;color:#666;font-size:12px;line-height:22px;text-align:left;">
-                                    Note : <br>
-                                    Charge will be change in IDR currency. (IDR. ) <br>
-
-                                    Thank you for ordering from us, Your order has been approved and is waiting for your payment. We will confirm you shortly once payment has been completed.
-                                    You can review complete details of your order on the Order History page.
-                                    <br>
-                                    Please <a href="http://rukuka.com/help/contact-us" name="unsubscribe" style="color:#666; text-decoration:underline;">contact us</a> with any questions regarding this invoice.
+                                    <p>
+                                      {{ trans('app.paid_text_1',[], $locale) }}
+                                    <br>{{ trans('app.paid_text_2',[], $locale) }}
+                                  </p>
+                                    <p>
+                                    {{ trans('app.please',[], $locale) }} <a href="{{URL::to('/help/contact-us')}}">{{ trans('app.contact_label',[], $locale) }}</a> {{ trans('app.contact_text') }}
+                                  </p>
                                   </div>
                                 </td>
                               </tr>
@@ -639,11 +644,11 @@
                               </tr>
                               <tr>
                                 <td style="word-wrap:break-word;padding:10px 25px;" align="center">
-                                  <div style="cursor:auto;color:#999;font-size:10px;line-height:22px;text-align:center;">
-                                     {{ trans('app.footmail_question') }} {{ trans('app.footmail_email_sup') }} <br>
+                                  <div style="cursor:auto;color:#999;font-size:11px;line-height:22px;text-align:center;">
+                                     {{ trans('app.footmail_question',[], $locale) }} {{ trans('app.footmail_email_sup',[], $locale) }} <br>
                                  {{-- Don't want to receive email from us? <a href="http://rukuka.com/" name="unsubscribe" style="color:#999; text-decoration:underline;">unsubscribe</a> <br> --}}
-                                  {{ trans('app.footmail_city') }} <br>
-                                 {{ trans('app.footmail_copyright') }} </div>
+                                  {{ trans('app.footmail_city',[], $locale) }} <br>
+                                 {{ trans('app.footmail_copyright',[], $locale) }} </div>
                                </td>
                              </tr>
                            </tbody>

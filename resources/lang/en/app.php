@@ -59,7 +59,7 @@ return [
     //contact and social media
     'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',
     'facebook'                  =>  'https://www.facebook.com/Rukuka-333650107116878/',
-    'email_to'                  =>  'mailto:customercare@rukuka.com',
+    'email_to'                  =>  'mailto:info@rukuka.com',
 
     //resources/views/partials/nav.blade.php
     'search'                    =>  'S E A R C H . . .',
@@ -394,7 +394,7 @@ return [
     'unpaid_text_2'             =>  'You can review complete details of your order on the Order History page.',
 
     //resources/views/emails/invoice_paid.blade.php
-    'unpaid_subject'              =>  'Invoice Paid',
+    'paid_subject'              =>  'Invoice Paid',
     'paid_title'                =>  'Thank you for your order.',
     'paid_subtitle_1'           =>  'Your payment has been confirmed, ',
     'paid_subtitle_2'           =>  'please review your order below',
@@ -410,7 +410,7 @@ return [
 
     // resource/views/emails/ general email footer
     'footmail_question'         =>  'if you have any question, please email us at',
-    'footmail_email_sup'        =>  'support@rukuka.com',
+    'footmail_email_sup'        =>  'info@rukuka.com',
     'footmail_city'             =>  'Jakarta, Indonesia',
     'footmail_copyright'        =>  '© 2018 ruKuKa',
 

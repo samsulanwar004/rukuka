@@ -232,7 +232,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
-  <title></title>
+  <title>{{ trans('app.forgot_subject',[], $locale) }}</title>
   <!--[if !mso]><!-- -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!--<![endif]-->
@@ -382,12 +382,12 @@
                   </td>
                 </tr>
                 <tr>
-                  <td style="word-wrap:break-word;padding:10px 25px;" align="center">
+                  <td style="word-wrap:break-word;padding:11px 25px;" align="center">
                     <div style="cursor:auto;color:#999;font-size:10px;line-height:22px;text-align:center;">
-                       {{ trans('app.footmail_question') }} {{ trans('app.footmail_email_sup') }} <br>
+                       {{ trans('app.footmail_question',[], $locale) }} {{ trans('app.footmail_email_sup',[], $locale) }} <br>
                    {{-- Don't want to receive email from us? <a href="http://rukuka.com/" name="unsubscribe" style="color:#999; text-decoration:underline;">unsubscribe</a> <br> --}}
-                    {{ trans('app.footmail_city') }} <br>
-                   {{ trans('app.footmail_copyright') }} </div>
+                    {{ trans('app.footmail_city',[], $locale) }} <br>
+                   {{ trans('app.footmail_copyright',[], $locale) }} </div>
                  </td>
                </tr>
              </tbody>

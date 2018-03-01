@@ -59,7 +59,7 @@ return [
     //contact and social media
     'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',
     'facebook'                  =>  'https://www.facebook.com/Rukuka-333650107116878/',
-    'email_to'                  =>  'mailto:customercare@rukuka.com',
+    'email_to'                  =>  'mailto:info@rukuka.com',
 
     //resources/views/partials/nav.blade.php
     'search'                    =>  'サーチ',
@@ -410,7 +410,7 @@ return [
 
     // resource/views/emails/ general email footer
     'footmail_question'         =>  'ご不明な点がございましたら、メールでお問い合わせください',
-    'footmail_email_sup'        =>  'support@rukuka.com',
+    'footmail_email_sup'        =>  'infot@rukuka.com',
     'footmail_city'             =>  'Jakarta, Indonesia',
     'footmail_copyright'        =>  '© 2018 ruKuKa',
 
