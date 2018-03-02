@@ -35,7 +35,7 @@ class Shipping extends Mailable
         return $this->markdown('emails.shipping', [
             'order' => $this->shipping()
         ])
-            ->subject(trans('app.shipping_subject'))
+            ->subject(trans('app.shipping_subject').'-'.$this->order->order_code)
             ->replyTo(config('mail.replyto.address'));
     }
 

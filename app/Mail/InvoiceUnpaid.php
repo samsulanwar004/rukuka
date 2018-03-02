@@ -37,7 +37,7 @@ class InvoiceUnpaid extends Mailable
         return $this->markdown('emails.invoice_unpaid', [
             'order' => $this->unpaid(), 'locale' => $this->lang
         ])
-            ->subject(trans('app.unpaid_subject',[], $this->lang))
+            ->subject(trans('app.unpaid_subject',[], $this->lang).'-'.$this->order->order_code)
             ->replyTo(config('mail.replyto.address'));
     }
 

@@ -36,7 +36,7 @@ class InvoicePaid extends Mailable
         return $this->markdown('emails.invoice_paid', [
             'order' => $this->paid(), 'locale' => $this->lang
         ])
-            ->subject(trans('app.paid_subject',[], $this->lang))
+            ->subject(trans('app.paid_subject',[], $this->lang).'-'.$this->order->order_code)
             ->replyTo(config('mail.replyto.address'));
     }
 
