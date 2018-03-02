@@ -21,6 +21,7 @@ class LoginController extends BaseController
     protected $redirectAfterRegister = '/login';
     protected $redirectAfterForgot = '/forgot';
     protected $redirectAfterAsGuest = '/checkout';
+    protected $redirectToHistory = '/account/history';
 
     public function __construct(SocialMediaService $social, UserRepository $user)
     {
@@ -127,6 +128,8 @@ class LoginController extends BaseController
             return redirect($this->redirectAfterLogin)->with('success', 'Login successfully!');
         } elseif ($request->input('return_url') == url('logout')) {
             return redirect($this->redirectAfterLogin)->with('success', 'Login successfully!');
+        } elseif ($request->input('return_url') == url('tracking/order/result')) {
+            return redirect($this->redirectToHistory)->with('success', 'Login successfully!');
         } else {
             return redirect($request->input('return_url'))->with('success', 'Login successfully!');
         }

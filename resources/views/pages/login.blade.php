@@ -1,7 +1,7 @@
 @extends('app')
 @section('title', trans('app.title_login') )
 @section('content')
-<section class="uk-section uk-section-xsmall uk-background-norepeat uk-background-image@m uk-background-top-right" style="background-image: url('images/rukuka_is_coming.jpg'); background-color:#dadada; background-size: 400px">
+<section class="uk-section uk-section-xsmall uk-background-norepeat uk-background-image@m uk-background-top-right" style=" background-color:#dadada; background-size: 400px">
 <div class="uk-container">
   <div class="uk-grid-small uk-margin-top">
       @include('partials.alert')
