@@ -36,6 +36,7 @@ class Activation extends Mailable
     {
 
         return $this->markdown('emails.activation', ['user' => $this->user, 'locale' => $this->lang])
-            ->subject(trans('app.activation_subject',[], $this->lang));
+            ->subject(trans('app.activation_subject',[], $this->lang))
+            ->replyTo(config('mail.replyto.address'));
     }
 }
