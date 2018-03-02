@@ -334,22 +334,30 @@ class OrderRepository
 	}
 
 	public function getTrackingOrder(){
-        $order = Order::with('user')
-            ->with('address')
-            ->where('order_code', $this->getOrderCode())
-            ->first();
 
+        $order= $this->getOrderbyOrderCode($this->getOrderCode());
+        $user = (new UserRepository)->getUserByEmail($this->getUserEmail());
+
+        //check validasi email and order code
+        if($order->users_id != $user->id){
+            return (new CourierRepository)->formatResponse('806', 'Order not found, please try another order number', null, null);
+        }
         // check order code status and airwaybill
-        if ($order == null) {
+        else if ($order == null) {
             //Order not found
-            return (new CourierRepository)->formatResponse('806', 'Order not found', null, null);
+            return (new CourierRepository)->formatResponse('806', 'Order not found, please try another order number', null, null);
 
         }else if ($order->order_status == 3) {
             //Order expired
             return (new CourierRepository)->formatResponse('806', 'Order expired', null, null);
 
-        }else if ($order->payment_status == 0 && $order->order_status == 0) {
-            // Order Unpaid
+        }else if ($order->payment_status == 0 && $order->order_status == 0 && $user->social_media_type != 'guest' ) {
+            // Order Unpaid As Registered
+            return (new CourierRepository)->formatResponse('101', trans('app.payment_note_login'), $order, null);
+
+        }
+        else if ($order->payment_status == 0 && $order->order_status == 0 && $user->social_media_type == 'guest' ) {
+            // Order Unpaid as Guest
             $userData = (new UserRepository)->getUserByEmail($this->getUserEmail());
 
             $userData =  [
@@ -364,17 +372,19 @@ class OrderRepository
         }else if ($order->airwaybill == null) {
             // Order Paid and Airwaybill No Found
             return (new CourierRepository)->formatResponse('801', trans('app.shipment_note'), $order, null);
+
+        }else{
+            //get airwaybill ems info
+            $resultTracking = (new CourierRepository)->getTrackingAndTracePosIndonesia($order->airwaybill);
+
+            $data = [
+                'tracking' => $resultTracking['data'],
+                'order' => $order
+            ];
+
+            return 	(new CourierRepository)->formatResponse($resultTracking['error'], $resultTracking['message'], $data, null);
         }
 
-        //get airwaybill ems info
-        $resultTracking = (new CourierRepository)->getTrackingAndTracePosIndonesia($order->airwaybill);
-
-        $data = [
-            'tracking' => $resultTracking['data'],
-            'order' => $order
-        ];
-
-        return 	(new CourierRepository)->formatResponse($resultTracking['error'], $resultTracking['message'], $data, null);
     }
 
 	public function getOrderbyOrderCode($code){

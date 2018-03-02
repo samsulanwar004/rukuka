@@ -206,7 +206,9 @@ class OrderController extends BaseController
 	}
 
 	public function trackingOrder(){
-
+        if(auth()->check()){
+            return redirect('/account/history');
+        }
 		return view('pages.tracking_order_index');
 	
 	}
@@ -215,7 +217,6 @@ class OrderController extends BaseController
 
         $tracking = $this->order
                     ->setOrderCode($request->input('order_code'))
-                    ->setUser($this->getUserActive())
                     ->setUserEmail($request->input('email'))
                     ->getTrackingOrder();
 

@@ -36,7 +36,7 @@ return [
     'title_wishlist'            =>  'ruKuKa - Wishlist',
     'title_blog'                =>  'ruKuKa - Blog',
     'title_blog_read'           =>  'at ruKuKa Blog',
-    'title_blog_search'         =>  ' ruKuKa Blog',
+    'title_blog_search'         =>  'ruKuKa Blog',
     'title_lookbook'            =>  'ruKuKa - Lookbook',
 
     //common
@@ -81,7 +81,7 @@ return [
     'about_rukuka'              =>  'ruKuKa について',
     'order_shipping'            =>  '注文と出荷',
     'connect_us'                =>  '私たちとつながる',
-    'copyright'                 =>  'rukuka.com',
+    'copyright'                 =>  'rukuka.com 2018',
     'language'                  =>  '言語',
     'track_order'               =>  '注文を追跡する',
     'shipping_handling'         =>  '出荷処理',
@@ -259,6 +259,7 @@ return [
     'back_to_tracking'          =>  '別の注文コードを追跡する',
     'payment_confirm_unpaid'    =>  '私たちから注文していただきありがとうございます、あなたの注文は承認されてお支払いを待っています。 支払いが完了したら、まもなくご連絡いたします。',
     'payment_note'              =>  '支払いが期限切れになる前にお支払いを完了してください',
+    'payment_note_login'        =>  '注文が期限切れになる前にお支払いを完了するには、アカウントにログインしてください',
     'shipment_note'             =>  '私たちから注文いただきありがとうございます。すぐに開始されますので、すぐに配送確認メールが届きます。',
 
     //resources/views/pages/tracking_order_index.blade.php
@@ -410,7 +411,7 @@ return [
 
     // resource/views/emails/ general email footer
     'footmail_question'         =>  'ご不明な点がございましたら、メールでお問い合わせください',
-    'footmail_email_sup'        =>  'infot@rukuka.com',
+    'footmail_email_sup'        =>  'info@rukuka.com',
     'footmail_city'             =>  'Jakarta, Indonesia',
     'footmail_copyright'        =>  '© 2018 ruKuKa',
 

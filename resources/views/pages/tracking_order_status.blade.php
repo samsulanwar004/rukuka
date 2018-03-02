@@ -119,11 +119,13 @@
 										</tbody>
 									</table>
 								</td>
-								<td><form action="/repayment" method="POST">
+								<td>
+									<form action="/repayment" method="POST">
 										<input type="hidden" name="order_code" value="{{ $tracking['data']->order_code }}">
 										<input type="hidden" name="signature" value="{{ sha1($tracking['data']->order_code) }}">
 										{{ csrf_field() }}
-										<input  class="uk-button uk-button-secondary uk-button-small" type="submit" value="{{ trans('app.pay') }}"></form>
+										<input  class="uk-button uk-button-secondary uk-button-small" type="submit" value="{{ trans('app.pay') }}">
+									</form>
 								</td>
 							</tr>
 
@@ -176,7 +178,8 @@
 											<input type="hidden" name="order_code" value="{{ $tracking['data']->order_code }}">
 											<input type="hidden" name="signature" value="{{ sha1($tracking['data']->order_code) }}">
 											{{ csrf_field() }}
-											<input  class="uk-button uk-button-secondary uk-button-small" type="submit" value="{{ trans('app.pay') }}"></form>
+											<input  class="uk-button uk-button-secondary uk-button-small" type="submit" value="{{ trans('app.pay') }}">
+										</form>
 									</td>
 								</tr>
 							</table>
@@ -186,6 +189,116 @@
 						<label>*{{ $tracking['message'] }}</label>
 					</div>
 					{{--end mobile--}}
+
+				@elseif($tracking['error'] == '101')
+
+				<div class="uk-visible@m">
+					<h3 class="uk-text-center uk-text-uppercase">
+						{{ trans('app.order_status') }}
+					</h3>
+					<label>{{ trans('app.payment_confirm_unpaid') }}</label>
+					<table class="uk-table uk-table-middle uk-table-divider uk-table-hover">
+						<thead>
+						<tr>
+							<th class="uk-width-small">{{ trans('app.order_number') }}</th>
+							<th class="uk-text-center">{{ trans('app.details') }}</th>
+							<th></th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr class="uk-text-small">
+							<td><a>{{ $tracking['data']->order_code }}</a>
+								<label>{{ trans('app.expired_date') }}</label> <br>{{ date('d-m-Y', strtotime($tracking['data']->expired_date)) }}
+							</td>
+							<td>
+								<table class="uk-table uk-table-small uk-table-divider">
+									<tbody>
+									@php
+										$total = null;
+									@endphp
+									@foreach($tracking['data']->details as $detail)
+										<tr>
+											<td>{{ $detail->product_name }} ({{ $detail->productStock->size }})</td>
+											<td>{{ $exchange->symbol }} {{ number_format($detail->price/$exchange->value,2) }}</td>
+											<td>x {{ $detail->qty }}</td>
+											<td>{{ $exchange->symbol }} {{ number_format($detail->subtotal/$exchange->value,2) }}</td>
+										</tr>
+										@php
+											$total += $detail->subtotal;
+										@endphp
+									@endforeach
+									<tr>
+										<td class="uk-text-right" colspan="3">{{ trans('app.subtotal') }}</td>
+										<td>{{ $exchange->symbol }} {{ number_format($total/$exchange->value,2) }}</td>
+									</tr>
+									<tr>
+										<td class="uk-text-right" colspan="3">{{ trans('app.shipping_cost_label') }}</td>
+										<td>{{ $exchange->symbol }} {{ number_format($tracking['data']->shipping_cost/$exchange->value,2) }}</td>
+									</tr>
+									<tr class="uk-text-bold">
+										<td class="uk-text-right" colspan="3">{{ trans('app.total') }}</td>
+										<td>{{ $exchange->symbol }} {{ number_format(($total+$tracking['data']->shipping_cost)/$exchange->value,2) }}</td>
+									</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<label>*{{ $tracking['message'] }}</label>
+					<div class="uk-text-center uk-margin-medium-top">
+						<a class="uk-button uk-button-secondary uk-button-small" href="{{ route('user.history') }}">{{trans('app.login')}}</a>
+					</div>
+				</div>
+
+				{{--mobile--}}
+				<div class="uk-hidden@m">
+					<h4 class="uk-text-center uk-text-uppercase">
+						{{ trans('app.order_status') }}
+					</h4>
+					<label>{{ trans('app.payment_confirm_unpaid') }}</label>
+					<h6 class="uk-margin-small">{{ trans('app.order_number') }} : {{ $tracking['data']->order_code }}</h6>
+					<h6 class="uk-margin-small"><label>{{ trans('app.expired_date') }}</label> {{ date('d-m-Y', strtotime($tracking['data']->expired_date)) }}</h6>
+					<div>
+						@php
+							$total = null;
+						@endphp
+						<table class="uk-table uk-table-striped uk-table-small uk-background-muted uk-box-shadow-small">
+
+
+							@foreach($tracking['data']->details as $detail)
+								<tr>
+									<td>{{ $detail->product_name }} ({{ $detail->productStock->size }})</td>
+									<td>{{ $exchange->symbol }} {{ number_format($detail->price/$exchange->value,2) }}</td>
+									<td>x {{ $detail->qty }}</td>
+									<td>{{ $exchange->symbol }} {{ number_format($detail->subtotal/$exchange->value,2) }}</td>
+								</tr>
+								@php
+									$total += $detail->subtotal;
+								@endphp
+							@endforeach
+							<tr>
+								<td class="uk-text-right" colspan="3">{{ trans('app.subtotal') }}</td>
+								<td>{{ $exchange->symbol }} {{ number_format($total/$exchange->value,2) }}</td>
+							</tr>
+							<tr>
+								<td class="uk-text-right" colspan="3">{{ trans('app.shipping_cost_label') }}</td>
+								<td>{{ $exchange->symbol }} {{ number_format($tracking['data']->shipping_cost/$exchange->value,2) }}</td>
+							</tr>
+							<tr class="uk-text-bold">
+								<td class="uk-text-right" colspan="3">{{ trans('app.total') }}</td>
+								<td>{{ $exchange->symbol }} {{ number_format(($total+$tracking['data']->shipping_cost)/$exchange->value,2) }}</td>
+							</tr>
+						</table>
+						<hr class="uk-margin" style="border-color: #333; border-width: 3px">
+
+					</div>
+					<label>*{{ $tracking['message'] }}</label>
+					<div class="uk-text-center uk-margin-medium-top">
+						<a class="uk-button uk-button-secondary uk-button-small" href="{{ route('user.history') }}">{{trans('app.login')}}</a>
+					</div>
+				</div>
+				{{--end mobile--}}
 
 				@elseif($tracking['error'] == '801')
 
@@ -296,10 +409,12 @@
 					</h3>
 				@endif
 
-				<div class="uk-grid-small uk-margin-xlarge-top uk-margin-small-bottom">
-					<div class="uk-panel uk-text-center">
-						<a href="{{ route('tracking-page') }}"><button class="uk-button uk-button-secondary">{{ trans('app.back_to_tracking') }}</button></a>
-						<a href="{{ route('index') }}"><button class="uk-button uk-button-secondary">{{ trans('app.back_to_home') }}</button></a>
+				<div class="uk-grid-small uk-margin-medium-top uk-margin-small-bottom uk-child-width-1-2@s" uk-grid>
+					<div class="uk-text-right">
+						<a class="uk-panel" href="{{ route('tracking-page') }}"><button class="uk-button uk-button-secondary">{{ trans('app.back_to_tracking') }}</button></a>
+					</div>
+					<div class="uk-text-left">
+						<a class="uk-panel" href="{{ route('index') }}"><button class="uk-button uk-button-secondary">{{ trans('app.back_to_home') }}</button></a>
 					</div>
 				</div>
 

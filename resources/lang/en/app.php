@@ -81,7 +81,7 @@ return [
     'about_rukuka'              =>  'About ruKuKa',
     'order_shipping'            =>  'Order and Shipping',
     'connect_us'                =>  'Connect With Us',
-    'copyright'                 =>  'rukuka.com',
+    'copyright'                 =>  'rukuka.com 2018',
     'language'                  =>  'Language',
     'track_order'               =>  'Track Your Order',
     'shipping_handling'         =>  'Shipping & Handling',
@@ -258,7 +258,8 @@ return [
     'back_to_history'           =>  'Back to History',
     'back_to_tracking'          =>  'Track another order number',
     'payment_confirm_unpaid'    =>  'Thank you for ordering from us, Your order has been approved and is waiting for your payment. We will confirm you shortly once payment has been completed.',
-    'payment_note'              =>  'Please finish your payment before payment is expired',
+    'payment_note'              =>  'Please finish your payment before your order is expired',
+    'payment_note_login'        =>  'Please login to your account to finish your payment before your order is expired',
     'shipment_note'             =>  'Thank you for ordering from us, We\'ll get started on it right away and you\'ll receive a shipping confirmation email soon.',
 
     //resources/views/pages/tracking_order_index.blade.php
@@ -429,7 +430,7 @@ return [
     'forgot_subtitle_1'         =>  'Let\'s get you',
     'forgot_subtitle_2'         =>  'a new one.',
     'forgot_text_1'             =>  'You told us you forgot you pasword. If you really did, click here to choose a new one:',
-    'forgot_text_2'             =>  'If you did not mean to reset your password, then you can just ignore this email; your password will not change.',
+    'forgot_text_2'             =>  'If you did not mean to reset your password, then you can just ignore this email, your password will not change.',
     'forgot_reset'              =>  'Choose a new password',
 
     //resources/views/pages/password/reset.blade.php
