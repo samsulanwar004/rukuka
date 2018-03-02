@@ -206,7 +206,7 @@
               </li>
               <li><a href="/blog">{{ trans.blog_nav }}</a>
               </li>
-              <li><a href="#">{{ trans.eco_tourism_nav }}</a></li>
+              <li><a href="/eco-tourism">{{ trans.eco_tourism_nav }}</a></li>
           </ul>
       </div>
     </nav>

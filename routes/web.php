@@ -16,6 +16,10 @@ Route::get('lang/{lang}', [
     'uses'=>'LanguageController@switchLang'
 ]);
 
+Route::get('eco-tourism', function () {
+    return view('errors.503');
+});
+
 Route::get('/tracking/order/', [
     'as'   => 'tracking-page',
     'uses' => 'Frontend\OrderController@trackingOrder',
