@@ -209,6 +209,9 @@ class OrderController extends BaseController
         if(auth()->check()){
             return redirect('/account/history');
         }
+        //delete session as guest
+        session()->forget('as.guest');
+
 		return view('pages.tracking_order_index');
 	
 	}
