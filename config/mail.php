@@ -60,6 +60,10 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Rukuka'),
     ],
 
+    'replyto' => [
+        'address' => env('MAIL_REPLY_TO_ADDRESS', 'info@rukuka.com'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | E-Mail Encryption Protocol

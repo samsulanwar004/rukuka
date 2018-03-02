@@ -645,7 +645,7 @@
                               <tr>
                                 <td style="word-wrap:break-word;padding:10px 25px;" align="center">
                                   <div style="cursor:auto;color:#999;font-size:11px;line-height:22px;text-align:center;">
-                                     {{ trans('app.footmail_question',[], $locale) }} {{ trans('app.footmail_email_sup',[], $locale) }} <br>
+                                     {{ trans('app.footmail_question',[], $locale) }} {{ config('mail.replyto.address') }} <br>
                                  {{-- Don't want to receive email from us? <a href="http://rukuka.com/" name="unsubscribe" style="color:#999; text-decoration:underline;">unsubscribe</a> <br> --}}
                                   {{ trans('app.footmail_city',[], $locale) }} <br>
                                  {{ trans('app.footmail_copyright',[], $locale) }} </div>
