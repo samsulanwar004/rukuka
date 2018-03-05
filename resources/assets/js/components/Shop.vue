@@ -13,10 +13,10 @@
                           :error-image="errorImage"
                           image-class="uk-transition-scale-up uk-transition-opaque">
                         </lazy-background>
-                        <div class="uk-postion-small uk-position-top-right">
+                        <div class="uk-postion-small uk-position-top-right" v-if="product.price_before_discount > 0">
                           <span class="uk-label uk-label-danger">SALE</span>
                         </div>
-                        <div class="uk-postion-small uk-position-top-left">
+                        <div class="uk-postion-small uk-position-top-left" v-if="product.is_new">
                           <span class="uk-label uk-label-success">NEW</span>
                         </div>
                     </a>

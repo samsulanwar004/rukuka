@@ -94,6 +94,7 @@ class PageController extends BaseController
                 'price' => $entry->sell_price,
                 'price_before_discount' => $entry->price_before_discount,
                 'photo' => $entry->images->first()->photo,
+                'is_new' => $this->date->diffInDays($entry->created_at) <= 7 ? true : false,
             ];
         });
 
