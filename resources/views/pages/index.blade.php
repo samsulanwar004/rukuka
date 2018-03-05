@@ -67,9 +67,9 @@
                       <div class="uk-inline">
                         <div class="uk-overlay uk-overlay-primary-dark uk-position-bottom uk-visible@m"></div>
                           <img src="{{ uploadCDN($home['homepage_banner_1']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m"><h4 class="uk-transition-slide-bottom-small  uk-visible@m">{{ $home['homepage_text_1'] }}</h4></div>
+                          <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m"><span class="uk-transition-slide-bottom-small  uk-visible@m">{{ $home['homepage_text_1'] }}</span></div>
                         </div>
-                        <h5 class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_1'] }}</h5>
+                        <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_1'] }}</span>
                       </a>
                     </li>
                   <li>
@@ -77,9 +77,9 @@
                       <div class="uk-inline">
                         <div class="uk-overlay uk-overlay-primary-dark uk-position-bottom uk-visible@m"></div>
                           <img src="{{ uploadCDN($home['homepage_banner_2']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m"><h4 class="uk-transition-slide-bottom-small  uk-visible@m">{{ $home['homepage_text_2'] }}</h4></div>
+                          <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m"><span class="uk-transition-slide-bottom-small  uk-visible@m">{{ $home['homepage_text_2'] }}</span></div>
                         </div>
-                        <h5 class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_2'] }}</h5>
+                        <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_2'] }}</span>
                       </a>
                     </li>
                   <li>
@@ -87,9 +87,9 @@
                       <div class="uk-inline">
                         <div class="uk-overlay uk-overlay-primary-dark uk-position-bottom uk-visible@m"></div>
                           <img src="{{ uploadCDN($home['homepage_banner_3']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m"><h4 class="uk-transition-slide-bottom-small  uk-visible@m">{{ $home['homepage_text_3'] }}</h4></div>
+                          <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m"><span class="uk-transition-slide-bottom-small  uk-visible@m">{{ $home['homepage_text_3'] }}</span></div>
                         </div>
-                        <h5 class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_3'] }}</h5>
+                        <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_3'] }}</span>
                       </a>
                     </li>
                   <li>
@@ -97,9 +97,9 @@
                       <div class="uk-inline">
                         <div class="uk-overlay uk-overlay-primary-dark uk-position-bottom uk-visible@m"></div>
                           <img src="{{ uploadCDN($home['homepage_banner_4']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m"><h4 class="uk-transition-slide-bottom-small  uk-visible@m">{{ $home['homepage_text_4'] }}</h4></div>
+                          <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m"><span class="uk-transition-slide-bottom-small  uk-visible@m">{{ $home['homepage_text_4'] }}</span></div>
                         </div>
-                        <h5 class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_4'] }}</h5>
+                        <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_4'] }}</span>
                       </a>
                     </li>
                   <li>
@@ -107,9 +107,9 @@
                       <div class="uk-inline">
                         <div class="uk-overlay uk-overlay-primary-dark uk-position-bottom uk-visible@m"></div>
                           <img src="{{ uploadCDN($home['homepage_banner_5']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m"><h4 class="uk-transition-slide-bottom-small  uk-visible@m">{{ $home['homepage_text_5'] }}</h4></div>
+                          <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m"><span class="uk-transition-slide-bottom-small  uk-visible@m">{{ $home['homepage_text_5'] }}</span></div>
                         </div>
-                        <h5 class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_5'] }}</h5>
+                        <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_5'] }}</span>
                       </a>
                     </li>
                   <li>
@@ -117,9 +117,9 @@
                       <div class="uk-inline">
                         <div class="uk-overlay uk-overlay-primary-dark uk-position-bottom uk-visible@m"></div>
                           <img src="{{ uploadCDN($home['homepage_banner_6']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                          <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m"><h4 class="uk-transition-slide-bottom-small  uk-visible@m">{{ $home['homepage_text_6'] }}</h4></div>
+                          <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m"><span class="uk-transition-slide-bottom-small  uk-visible@m">{{ $home['homepage_text_6'] }}</span></div>
                         </div>
-                        <h5 class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_6'] }}</h5>
+                        <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_6'] }}</span>
                       </a>
                     </li>
                 </ul>
@@ -136,11 +136,12 @@
                           <div class="uk-panel uk-transition-toggle">
                             <a href="{{ $home['homepage_url_7'] }}" class="uk-link-reset">
                               <div class="uk-inline">
-                                <div class="uk-overlay uk-overlay-primary-dark uk-position-bottom uk-visible@m"></div>
                                   <img src="{{ uploadCDN($home['homepage_banner_7']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                                  <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m"><h4 class="uk-transition-slide-bottom-small">{{ $home['homepage_text_7'] }}</h4></div>
+                                  <div class="uk-position-center uk-panel uk-light uk-visible@m">
+                                    <span class="banner-highlight">{{ $home['homepage_text_7'] }}</span>
+                                  </div>
                                 </div>
-                                <h5 class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_7'] }}</h5>
+                                <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_7'] }}</span>
                               </a>
                             </div>
                         </li>
@@ -148,11 +149,12 @@
                           <div class="uk-panel uk-transition-toggle">
                             <a href="{{ $home['homepage_url_8'] }}" class="uk-link-reset">
                               <div class="uk-inline">
-                                <div class="uk-overlay uk-overlay-primary-dark uk-position-bottom uk-visible@m"></div>
                                   <img src="{{ uploadCDN($home['homepage_banner_8']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                                  <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m"><h4 class="uk-transition-slide-bottom-small">{{ $home['homepage_text_8'] }}</h4></div>
+                                  <div class="uk-position-center uk-panel uk-light uk-visible@m">
+                                    <span class="banner-highlight">{{ $home['homepage_text_8'] }}</span>
+                                  </div>
                                 </div>
-                                <h5 class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_8'] }}</h5>
+                                <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_8'] }}</span>
                               </a>
                             </div>
                         </li>
@@ -161,7 +163,7 @@
             </div>
             <h4 class="uk-text-center">Happenings Right Now!</h4>
             <div>
-              <div class="uk-inline uk-light">
+              <div class="uk-inline uk-light" style="background: rgba(0,0,0,.1);">
                 <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
                   <img src="{{ uploadCDN($home['homepage_banner_9']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
                   <div class="uk-position-center uk-position-medium uk-text-center">
