@@ -2,7 +2,7 @@
       <div>
           <h5 class="uk-text-uppercase">{{ trans.color }}</h5>
             <ul class="uk-grid uk-grid-collapse">
-              <li v-for="color in palette">
+              <li v-for="color in palette" :uk-tooltip="color.name">
                 <label>
                   <input type="radio" name="palette" v-on:click="pickColor(color.id)" :checked="color.id == color_id"/>
                     <lazy-background
@@ -50,7 +50,7 @@
                     console.log(error);
                 });
 
-            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;      
+            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;
             self.loadingImage = this.aws_link+'/images/loading-image.gif';
         },
 

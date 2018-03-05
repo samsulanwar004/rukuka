@@ -13,6 +13,12 @@
                           :error-image="errorImage"
                           image-class="uk-transition-scale-up uk-transition-opaque">
                         </lazy-background>
+                        <div class="uk-postion-small uk-position-top-right">
+                          <span class="uk-label uk-label-danger">SALE</span>
+                        </div>
+                        <div class="uk-postion-small uk-position-top-left">
+                          <span class="uk-label uk-label-success">NEW</span>
+                        </div>
                     </a>
                 </div>
                 <div class="uk-card-body uk-padding-remove">
