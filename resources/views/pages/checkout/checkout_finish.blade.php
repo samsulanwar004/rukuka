@@ -126,9 +126,9 @@
 
               // Disable the submit button to prevent repeated clicks:
               $form.find('.submit').prop('disabled', true);
-              $('.overlay').show();
-              $("#diModalin").modal();
-              $(".modal-body").html('<img src="{{ imageCDN('loading-image.gif') }}" width="200px" height="200px">');
+              // $('.overlay').show();
+              // $("#diModalin").modal();
+              // $(".modal-body").html('<img src="{{ imageCDN('loading-image.gif') }}" width="200px" height="200px">');
 
               // Request a token from Xendit:
               var tokenData = getTokenData(); 
@@ -151,15 +151,19 @@
           function xenditResponseHandler (err, creditCardCharge) {
               $form.find('.submit').prop('disabled', false);
               $('.overlay').show();
+              $("#diModalin").modal();
               $(".modal-body").html('<img src="{{ imageCDN('loading-image.gif') }}" width="200px" height="200px">');
               
               if (err) {
                   alert(err.error_code +" : "+err.message);
-                  window.location = "{!! route('user.history') !!}";
+                  $('#diModalin').modal('hide');
+                  $('.overlay').hide();
+                  //window.location = "{!! route('user.history') !!}";
                   // window.location = "{!! route('bag') !!}";
               }
 
-              if (creditCardCharge.status == 'VERIFIED') {
+              else if (creditCardCharge.status == 'VERIFIED') {
+                 
                   var card_holder = document.getElementById("card_holder").value;
                   <?php echo "orderData = { 'order_code': '".$orderCode."','user_id': '".$userId."','signature': '".$signature."', 'totalwithshipping': '".$totalwithshipping."', 'repayment': '".$repayment."', 'card_holder' : card_holder };"; ?>
                   tokenData = getTokenData();
@@ -183,8 +187,8 @@
                       }
                       else
                       {  
-
-                          window.location = "{!! route('payment.finish') !!}";
+                        
+                          window.location = "{!! route('order-repayment') !!}";
                           
                       }
                   });
@@ -193,6 +197,9 @@
 
                   
               } else if (creditCardCharge.status === 'IN_REVIEW') {
+                 $('.overlay').show();
+              $("#diModalin").modal();
+              $(".modal-body").html('<img src="{{ imageCDN('loading-image.gif') }}" width="200px" height="200px">');
                  
                   $(".modal-body").html('<iframe height="360" width="500" frameborder="0" scrolling="no" allowtransparency="true" src="'+creditCardCharge.payer_authentication_url+'"></iframe>');
               } //else if (creditCardCharge.status === 'FRAUD') {
