@@ -463,6 +463,11 @@ Route::middleware(['as.guest'])->group(function () {
         'uses' => 'Frontend\OrderController@trackingTrace',
     ]);
 
+    Route::get('/order/repayment', [
+        'as'   => 'order-repayment',
+        'uses' => 'Frontend\OrderController@trackingOrder',
+    ]);
+
 });
 
 // Route Admin crudbooster
