@@ -187,8 +187,8 @@
                       }
                       else
                       {  
-
-                          window.location = "{!! route('payment.finish') !!}";
+                        
+                          window.location = "{!! route('order-repayment') !!}";
                           
                       }
                   });
