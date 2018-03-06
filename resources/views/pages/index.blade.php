@@ -15,7 +15,7 @@
         </div>
 
 
-      <div class="js-slideshow-animation" uk-slideshow="ratio: 10:3; min-height: 150; max-height: 600;">
+      <div class="js-slideshow-animation uk-margin-top" uk-slideshow="ratio: 10:3; min-height: 150; max-height: 600;">
 
             <div class="uk-position-relative uk-visible-toggle uk-light">
 
@@ -135,7 +135,7 @@
                                 <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_5'] }}</span>
                               </a>
                             </div>
-                            <hr class="uk-margin-remove-top uk-margin-bottom" style="border-color: #333; border-width: 5px">
+                            <hr class="uk-margin-remove-top uk-margin-bottom uk-visible@m" style="border-color: #333; border-width: 5px">
                         </li>
                         <li>
                           <div class="uk-panel uk-transition-toggle">
@@ -149,7 +149,7 @@
                                 <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_6'] }}</span>
                               </a>
                             </div>
-                            <hr class="uk-margin-remove-top uk-margin-bottom" style="border-color: #333; border-width: 5px">
+                            <hr class="uk-margin-remove-top uk-margin-bottom uk-visible@m" style="border-color: #333; border-width: 5px">
                         </li>
                     </ul>
                 </div>
@@ -161,8 +161,9 @@
                   <img src="{{ uploadCDN($home['homepage_banner_9']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
                   <div class="uk-overlay-primary uk-position-cover"></div>
                   <div class="uk-position-center uk-position-medium uk-text-center">
-                    <h2 class="banner-highlight">{{ $home['homepage_text_9'] }}</h2>
-                    <a href="{{ $home['homepage_url_9'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
+                    <h2 class="banner-highlight uk-visible@m">{{ $home['homepage_text_9'] }}</h2>
+                    <h4 class="blog-subtitle uk-hidden@m">{{ $home['homepage_text_9'] }}</h4>
+                    <a href="{{ $home['homepage_url_9'] }}" class="uk-button uk-button-default uk-visible@m">{{ trans('app.subtitle_index_1') }}</a>
                   </div>
                 </a>
               </div>
@@ -185,7 +186,7 @@
                                     <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_7'] }}</span>
                                   </a>
                                 </div>
-                                <hr class="uk-margin-remove-top uk-margin-bottom" style="border-color: #333; border-width: 5px">
+                                <hr class="uk-margin-remove-top uk-margin-bottom uk-visible@m" style="border-color: #333; border-width: 5px">
                             </li>
                             <li>
                               <div class="uk-panel uk-transition-toggle">
@@ -200,7 +201,7 @@
                                     <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_8'] }}</span>
                                   </a>
                                 </div>
-                                <hr class="uk-margin-remove-top uk-margin-bottom" style="border-color: #333; border-width: 5px">
+                                <hr class="uk-margin-remove-top uk-margin-bottom uk-visible@m" style="border-color: #333; border-width: 5px">
                             </li>
                         </ul>
                     </div>
