@@ -52,11 +52,7 @@
         </div>
     </div>
 
-      {{--BLOG--}}
-
-    {{-- <h4 class="uk-margin-top-large uk-visible@m">New Arrival</h4> --}}
-    {{-- <h4 class="uk-text-center uk-margin-small-top uk-hidden@m">New Arrival</h4> --}}
-    <h4 class="uk-text-center uk-margin-top"><b>NEW ARRIVAL</b></h4>
+    <h4 class="uk-text-center uk-margin-top uk-text-uppercase"><b>{{ trans('app.title_index_1') }}</b></h4>
     <div uk-slider="clsActivated: uk-transition-active; autoplay: true">
 
             <div class="uk-position-relative uk-visible-toggle">
@@ -69,7 +65,7 @@
                           <div class="uk-overlay-primary uk-position-cover"></div>
                           <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m">
                             <h3 class="uk-transition-slide-bottom-small blog-subtitle uk-visible@m">{{ $home['homepage_text_1'] }}</h3>
-                            <a href="#" class="uk-button uk-button-small uk-button-default">SHOP NOW</a>
+                            <a href="#" class="uk-button uk-button-small uk-button-default">{{ trans('app.shop_now') }}</a>
                           </div>
                         </div>
                         <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_1'] }}</span>
@@ -83,7 +79,7 @@
                           <div class="uk-overlay-primary uk-position-cover"></div>
                           <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m">
                             <h3 class="uk-transition-slide-bottom-small blog-subtitle uk-visible@m">{{ $home['homepage_text_2'] }}</h3>
-                            <a href="#" class="uk-button uk-button-small uk-button-default">SHOP NOW</a>
+                            <a href="#" class="uk-button uk-button-small uk-button-default">{{ trans('app.shop_now') }}</a>
                           </div>
                         </div>
                         <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_2'] }}</span>
@@ -97,7 +93,7 @@
                           <div class="uk-overlay-primary uk-position-cover"></div>
                           <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m">
                             <h3 class="uk-transition-slide-bottom-small blog-subtitle uk-visible@m">{{ $home['homepage_text_3'] }}</h3>
-                            <a href="#" class="uk-button uk-button-small uk-button-default">SHOP NOW</a>
+                            <a href="#" class="uk-button uk-button-small uk-button-default">{{ trans('app.shop_now') }}</a>
                           </div>
                         </div>
                         <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_3'] }}</span>
@@ -111,7 +107,7 @@
                           <div class="uk-overlay-primary uk-position-cover"></div>
                           <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m">
                             <h3 class="uk-transition-slide-bottom-small blog-subtitle uk-visible@m">{{ $home['homepage_text_4'] }}</h3>
-                            <a href="#" class="uk-button uk-button-small uk-button-default">SHOP NOW</a>
+                            <a href="#" class="uk-button uk-button-small uk-button-default">{{ trans('app.shop_now') }}</a>
                           </div>
                         </div>
                         <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_4'] }}</span>
@@ -129,28 +125,28 @@
                     <ul class="uk-slider-items uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
                         <li>
                           <div class="uk-panel uk-transition-toggle">
-                            <a href="{{ $home['homepage_url_7'] }}" class="uk-link-reset">
+                            <a href="{{ $home['homepage_url_5'] }}" class="uk-link-reset">
                               <div class="uk-inline">
-                                  <img src="{{ uploadCDN($home['homepage_banner_7']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
+                                  <img src="{{ uploadCDN($home['homepage_banner_5']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_7'))}}'">
                                   <div class="uk-position-center uk-panel uk-light uk-visible@m">
-                                    <span class="banner-highlight">{{ $home['homepage_text_7'] }}</span>
+                                    <span class="banner-highlight">{{ $home['homepage_text_5'] }}</span>
                                   </div>
                                 </div>
-                                <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_7'] }}</span>
+                                <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_5'] }}</span>
                               </a>
                             </div>
                             <hr class="uk-margin-remove-top uk-margin-bottom" style="border-color: #333; border-width: 5px">
                         </li>
                         <li>
                           <div class="uk-panel uk-transition-toggle">
-                            <a href="{{ $home['homepage_url_8'] }}" class="uk-link-reset">
+                            <a href="{{ $home['homepage_url_6'] }}" class="uk-link-reset">
                               <div class="uk-inline">
-                                  <img src="{{ uploadCDN($home['homepage_banner_8']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
+                                  <img src="{{ uploadCDN($home['homepage_banner_6']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_7'))}}'">
                                   <div class="uk-position-center uk-panel uk-light uk-visible@m">
-                                    <span class="banner-highlight">{{ $home['homepage_text_8'] }}</span>
+                                    <span class="banner-highlight">{{ $home['homepage_text_6'] }}</span>
                                   </div>
                                 </div>
-                                <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_8'] }}</span>
+                                <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_6'] }}</span>
                               </a>
                             </div>
                             <hr class="uk-margin-remove-top uk-margin-bottom" style="border-color: #333; border-width: 5px">
@@ -158,7 +154,7 @@
                     </ul>
                 </div>
             </div>
-            <h4 class="uk-text-center"><b>HAPPENINGS RIGHT NOW!</b></h4>
+            <h4 class="uk-text-center uk-text-uppercase"><b>{{ trans('app.title_index_2') }}</b></h4>
             <div>
               <div class="uk-inline uk-light">
                 <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
@@ -166,7 +162,7 @@
                   <div class="uk-overlay-primary uk-position-cover"></div>
                   <div class="uk-position-center uk-position-medium uk-text-center">
                     <h2 class="banner-highlight">{{ $home['homepage_text_9'] }}</h2>
-                    <a href="{{ $home['homepage_url_5'] }}" class="uk-button uk-button-default">GET DISCOVER</a>
+                    <a href="{{ $home['homepage_url_9'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
                   </div>
                 </a>
               </div>
@@ -178,30 +174,30 @@
                         <ul class="uk-slider-items uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
                             <li>
                               <div class="uk-panel uk-transition-toggle">
-                                <a href="{{ $home['homepage_url_5'] }}" class="uk-link-reset">
+                                <a href="{{ $home['homepage_url_7'] }}" class="uk-link-reset">
                                   <div class="uk-inline">
-                                      <img src="{{ uploadCDN($home['homepage_banner_5']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
+                                      <img src="{{ uploadCDN($home['homepage_banner_7']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
                                       <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m">
-                                        <h2 class="blog-subtitle"><b>{{ $home['homepage_text_5'] }}</b></h2>
-                                        <a href="{{ $home['homepage_url_5'] }}" class="uk-button uk-button-default">GET DISCOVER</a>
+                                        <h2 class="blog-subtitle"><b>{{ $home['homepage_text_7'] }}</b></h2>
+                                        <a href="{{ $home['homepage_url_7'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
                                       </div>
                                     </div>
-                                    <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_5'] }}</span>
+                                    <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_7'] }}</span>
                                   </a>
                                 </div>
                                 <hr class="uk-margin-remove-top uk-margin-bottom" style="border-color: #333; border-width: 5px">
                             </li>
                             <li>
                               <div class="uk-panel uk-transition-toggle">
-                                <a href="{{ $home['homepage_url_6'] }}" class="uk-link-reset">
+                                <a href="{{ $home['homepage_url_8'] }}" class="uk-link-reset">
                                   <div class="uk-inline">
-                                      <img src="{{ uploadCDN($home['homepage_banner_6']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
+                                      <img src="{{ uploadCDN($home['homepage_banner_8']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
                                       <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m">
-                                        <h2 class="blog-subtitle"><b>{{ $home['homepage_text_6'] }}</b></h2>
-                                        <a href="{{ $home['homepage_url_5'] }}" class="uk-button uk-button-default">GET DISCOVER</a>
+                                        <h2 class="blog-subtitle"><b>{{ $home['homepage_text_8'] }}</b></h2>
+                                        <a href="{{ $home['homepage_url_8'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
                                       </div>
                                     </div>
-                                    <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_6'] }}</span>
+                                    <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_8'] }}</span>
                                   </a>
                                 </div>
                                 <hr class="uk-margin-remove-top uk-margin-bottom" style="border-color: #333; border-width: 5px">
@@ -209,11 +205,9 @@
                         </ul>
                     </div>
                 </div>
-
-
 </div>
   <div class="uk-container uk-margin-top">
-    <h4 class="uk-text-uppercase uk-text-center"><b>{{ trans('app.popular') }}</b></h4>
+    <h4 class="uk-text-uppercase uk-text-center"><b>{{ trans('app.title_index_3') }}</b></h4>
   	<popular
       api="{{ route('populer', 'Homepage')}}"
       product_api="{{ route('product.api') }}"
