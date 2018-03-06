@@ -12,7 +12,7 @@
         <div class="uk-grid-small" uk-grid>
             <div class="uk-width-1-1">
                 <div class="uk-panel uk-text-right">
-                    {{ Form::open(array('url' => 'search/blog', 'method' =>'get','files' => true,'class' => 'uk-search uk-form-width-medium uk-first-column')) }}
+                    {{ Form::open(array('url' => 'search/editorial', 'method' =>'get','files' => true,'class' => 'uk-search uk-form-width-medium uk-first-column')) }}
                     <button type="submit" class="uk-search-icon-flip uk-search-icon uk-icon" uk-search-icon></button>
                     <input type="text" class=" uk-search-input" name="keyword"  placeholder="{{ trans('app.search') }}">
                     {{ Form::close() }}
@@ -24,7 +24,7 @@
               <div class="uk-width-1-3@m uk-width-1-2 uk-inline">
                   <div class="uk-inline">
                       <div class="uk-inline-clip uk-light">
-                          <a href="{{ URL::to('blog/'.$post->slug)}}" class="uk-link-reset">
+                          <a href="{{ URL::to('editorial/'.$post->slug)}}" class="uk-link-reset">
                               <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
                                   <img src="{{ uploadCDN($post->photo_1) }}" alt="{{$post->title}}" onerror="this.src = '{{imageCDN(config('common.default.image_7'))}}'">
                               <div class="uk-card uk-position-bottom-left uk-card-small">
@@ -58,7 +58,7 @@
             <div class="uk-section uk-section-default uk-text-small uk-text-uppercase uk-section-small uk-text-center">
                 <div><span>{{ trans('app.another_keyword') }}</span></div>
                 <div>
-                    {{ Form::open(array('url' => 'search/blog/','method' =>'get','files' => true,'class' => 'uk-search uk-search-large')) }}
+                    {{ Form::open(array('url' => 'search/editorial/','method' =>'get','files' => true,'class' => 'uk-search uk-search-large')) }}
                         <span style="color: #B4B4B4;" uk-search-icon></span>
                         <input style="font-size: xx-large;color: #B4B4B4;" class="uk-search-input" name="keyword" type="text" placeholder="Search...">
                     {{ Form::close() }}

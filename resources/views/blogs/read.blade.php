@@ -17,7 +17,7 @@
 
                 <div class="uk-width-1-1@m uk-width-1-2 uk-inline uk-position-relative">
                   <div class="uk-inline-clip uk-light">
-                      <a href="{{ URL::to('blog/'.$post->slug)}}" class="uk-link-reset">
+                      <a href="{{ URL::to('editorial/'.$post->slug)}}" class="uk-link-reset">
                           <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
                           <img src="{{ uploadCDN($post->photo_1) }}" alt="{{$post->title}}" onerror="this.src = '{{imageCDN(config('common.default.image_7'))}}'">
                           <div class="uk-card uk-position-bottom-left uk-card-small">

@@ -89,7 +89,6 @@
                 <ul class="uk-nav-sub">
                     <li><a href="/shop/womens/sale">{{ trans.women_nav}}</a></li>
                     <li><a href="/shop/mens/sale">{{ trans.men_nav}}</a></li>
-                    <li><a href="/shop/kids/sale">{{ trans.kids_nav}}</a></li>
                 </ul>
             </li>
             <hr class="uk-margin-small">

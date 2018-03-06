@@ -6,17 +6,17 @@
     <div class="uk-container uk-container-small">
         <div class="uk-visible@m">
           <ul class="uk-grid" uk-grid>
-            <li><a href="/blog"><h4>{{ trans('app.all') }}</h4></a> </li>
+            <li><a href="/editorial"><h4>{{ trans('app.all') }}</h4></a> </li>
           @foreach($category as $value)
-            <li><a href="{{ URL::to('blog/category/'.$value->slug)}}"><h4>{{$value->name}}</h4></a></li>
+            <li><a href="{{ URL::to('editorial/category/'.$value->slug)}}"><h4>{{$value->name}}</h4></a></li>
           @endforeach
           </ul>
         </div>
         <div class="uk-hidden@m uk-margin-small-top">
           <ul class="uk-grid uk-grid-small" uk-grid>
-            <li><a href="/blog">{{ trans('app.all') }}</a> </li>
+            <li><a href="/editorial">{{ trans('app.all') }}</a> </li>
           @foreach($category as $value)
-            <li><a href="{{ URL::to('blog/category/'.$value->slug)}}">{{$value->name}}</a></li>
+            <li><a href="{{ URL::to('editorial/category/'.$value->slug)}}">{{$value->name}}</a></li>
           @endforeach
           </ul>
         </div>
@@ -28,7 +28,7 @@
             </div>
             <div class="uk-width-1-2">
                 <div class="uk-panel uk-text-right uk-margin-small-top">
-                    {{ Form::open(array('url' => 'search/blog', 'method' =>'get','files' => true,'class' => 'uk-search uk-form-width-medium uk-first-column uk-margin-small-top')) }}
+                    {{ Form::open(array('url' => 'search/editorial', 'method' =>'get','files' => true,'class' => 'uk-search uk-form-width-medium uk-first-column uk-margin-small-top')) }}
                     <button type="submit" class="uk-search-icon-flip uk-search-icon uk-icon" uk-search-icon></button>
                     <input type="text" class=" uk-search-input" name="keyword"  placeholder="{{ trans('app.search') }}">
                     {{ Form::close() }}
@@ -40,7 +40,7 @@
                 <div class="uk-width-1-3@m uk-width-1-2 uk-inline">
                     <div class="uk-inline">
                         <div class="uk-inline-clip uk-light">
-                            <a href="{{ URL::to('blog/'.$post->slug)}}" class="uk-link-reset">
+                            <a href="{{ URL::to('editorial/'.$post->slug)}}" class="uk-link-reset">
                                 <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
                                     <img src="{{ uploadCDN($post->photo_1) }}" alt="{{$post->title}}" onerror="this.src = '{{imageCDN(config('common.default.image_7'))}}'">
                                 <div class="uk-card uk-position-bottom-left uk-card-small">
@@ -75,9 +75,9 @@
     @else
         <div class="uk-visible@m uk-container uk-container-small">
           <ul class="uk-grid" uk-grid>
-            <li><a href="/blog"><h4>{{ trans('app.all') }}</h4></a> </li>
+            <li><a href="/editorial"><h4>{{ trans('app.all') }}</h4></a> </li>
           @foreach($category as $value)
-            <li><a href="{{ URL::to('blog/category/'.$value->slug)}}"><h4>{{$value->name}}</h4></a></li>
+            <li><a href="{{ URL::to('editorial/category/'.$value->slug)}}"><h4>{{$value->name}}</h4></a></li>
           @endforeach
           </ul>
             <h3 class="uk-margin-small">{{$title}}</h3>
@@ -87,9 +87,9 @@
         </div>
         <div class="uk-hidden@m uk-margin-small-top">
           <ul class="uk-grid uk-grid-small" uk-grid>
-            <li><a href="/blog">{{ trans('app.all') }}</a> </li>
+            <li><a href="/editorial">{{ trans('app.all') }}</a> </li>
           @foreach($category as $value)
-            <li><a href="{{ URL::to('blog/category/'.$value->slug)}}">{{$value->name}}</a></li>
+            <li><a href="{{ URL::to('editorial/category/'.$value->slug)}}">{{$value->name}}</a></li>
           @endforeach
           </ul>
             <h3 class="uk-margin-small">{{$title}}</h3>
@@ -105,7 +105,7 @@
                 var pathArray = window.location.pathname.split( '/' );
                 var segment_3 = pathArray[3];
                 $.ajax({
-                    url : '{{ url("blog") }}',
+                    url : '{{ url("editorial") }}',
                     method : "POST",
                     data : {id:id,slug:segment_3,_token:"{{csrf_token()}}"},
                     dataType : "text",
