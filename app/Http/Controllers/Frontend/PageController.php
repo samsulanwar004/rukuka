@@ -228,7 +228,8 @@ class PageController extends BaseController
 
         $slider = (new SettingRepository())->getSliderByGroup('Kids');
 
-        return view('pages.kids', compact('kids','slider'));
+//        return view('pages.kids', compact('kids','slider'));
+        return view('errors.404');
     }
 
     public function bag(Request $request)

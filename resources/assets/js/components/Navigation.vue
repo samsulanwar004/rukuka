@@ -289,7 +289,7 @@
               console.log(error);
             });
 
-            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;
+            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_7;
             self.errorImageSale = this.aws_link+'/images/'+this.defaultImage.image_5;
             self.loadingImage = this.aws_link+'/images/loading-image.gif';
         },
