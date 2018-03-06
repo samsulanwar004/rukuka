@@ -27,6 +27,7 @@
                               </ul>
                               <ul class="uk-nav uk-navbar-dropdown-nav">
                                   <li class="uk-parent">
+
                                       <a :href="designersNav.designer_shop_url">
                                           <lazy-background
                                                   :image-source="designersNav.designer_shop_image | awsLink(aws_link)"
@@ -36,13 +37,13 @@
                                                   image-style="height: 340px; width:340px">
                                           </lazy-background>
                                       </a>
-                                  </li>
-                                  <li class="uk-parent">
-                                      <a :href="designersNav.designer_shop_url">
-                                         <h6 class="uk-margin-small uk-text-uppercase"> {{designersNav.designer_shop_text}} </h6>
-                                      </a>
-                                  </li>
-                                  <li class="uk-parent"><a :href="designersNav.designer_shop_url">{{ trans.shop_now}}</a></li>
+
+                                    
+                                    <a :href="designersNav.designer_shop_url">
+                                       <h2 class="uk-margin-small uk-text-uppercase"> {{designersNav.designer_shop_text}} </h2>
+                                       <a :href="designersNav.designer_shop_url" class="uk-button uk-button-small uk-button-default">{{ trans.shop_now}}</a>
+                                    </a>
+
                               </ul>
                           </div>
                     </div>
@@ -50,10 +51,10 @@
               </li>
               <li>
                   <a :href="womenLink">{{ trans.women_nav }}</a>
-                  <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
-                      <div uk-grid>
-                        <div class="uk-width-3-5@m" uk-grid>
-                            <div class="uk-width-1-2">
+                  <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; boundary-align: true; pos: bottom-justify;">
+                      <div class="uk-grid uk-grid-small" uk-grid>
+                        <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
+                            <div class="uk-width-1-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'"><h5 class="uk-margin-small uk-text-uppercase">{{ trans.clothing }}</h5></li>
                               </ul>
@@ -66,7 +67,7 @@
                                 </li>
                               </ul>
                             </div>
-                            <div class="uk-width-1-2">
+                            <div class="uk-width-1-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'accessories'"><h5 class="uk-margin-small uk-text-uppercase">{{ trans.accessories }}</h5></li>
                               </ul>
@@ -108,10 +109,10 @@
                   </div>
               </li>
               <li><a :href="menLink">{{ trans.men_nav }}</a>
-                <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
-                    <div uk-grid>
-                        <div class="uk-width-3-5@m" uk-grid>
-                            <div class="uk-width-1-2">
+                <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; boundary-align: true; pos: bottom-justify;">
+                    <div class="uk-grid uk-grid-small" uk-grid>
+                        <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
+                            <div class="uk-width-1-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'"><h5 class="uk-margin-small uk-text-uppercase">{{ trans.clothing }}</h5></li>
                               </ul>
@@ -124,7 +125,7 @@
                                 </li>
                               </ul>
                             </div>
-                            <div class="uk-width-1-2">
+                            <div class="uk-width-1-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'accessories'"><h5 class="uk-margin-small uk-text-uppercase">{{ trans.accessories }}</h5></li>
                               </ul>
@@ -165,7 +166,7 @@
                     </div>
                 </div>
               </li>
-              <li><a>{{ trans.sale_nav }}</a>
+              <li><a class="uk-text-danger"><b>{{ trans.sale_nav }}</b></a>
                   <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
                       <div uk-grid>
                           <div class="uk-width-4-5@m uk-margin-remove">
@@ -261,7 +262,7 @@
                 if (typeof navigations.data.data.designers !== 'undefined') {
                    self.designers = navigations.data.data.designers.sort(sort_by('created_at', true, function(result){
                     return result;
-                  })).slice(0,37);
+                  })).slice(0,27);
                 }
 
                 if (typeof navigations.data.data.designers_nav !== 'undefined') {
