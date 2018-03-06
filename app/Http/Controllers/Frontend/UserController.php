@@ -776,6 +776,11 @@ class UserController extends BaseController
         // $defaultCreditcard->phone_number = $creditCard->address->phone_number;
 
         $shippingCost = (new CourierRepository)->getSavedSessionShippingChoosed();
+
+        if ($shippingCost['error'] == '991') {
+            return redirect('/checkout/shipping')->with(['success' => $shippingCost['message']]);
+        }
+
         $exchange = (new CurrencyService)->getCurrentCurrency();
 
         //inject currency
