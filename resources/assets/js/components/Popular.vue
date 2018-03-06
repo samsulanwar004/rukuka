@@ -18,7 +18,7 @@
           <div>
             <a href="#modal-popular" class="uk-button uk-button-small uk-button-danger uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
           </div>
-          <a :href="'/product/'+ product.slug" class="uk-text-meta">{{ product.name.substring(0,35) }}</a>
+          <a :href="'/product/'+ product.slug" class="uk-text-meta uk-link-reset">{{ product.name.substring(0,35) }}
           <br>
             <span v-if="product.price_before_discount > 0 ">
               <del class="uk-text-small">
@@ -31,6 +31,7 @@
             <span v-else class="uk-text-small">
                 {{ product.price | round(exchangeRate.symbol, exchangeRate.value) }}
             </span>
+            </a>
 
         </div>
       </div>
