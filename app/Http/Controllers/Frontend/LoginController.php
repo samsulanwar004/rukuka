@@ -36,6 +36,7 @@ class LoginController extends BaseController
 
         if (session()->has('as.checkout')) {
             $ref = url('checkout');
+            session()->forget('as.checkout');
         }
 
         $bag = (new BagService)->get(self::INSTANCE_SHOP);
@@ -145,7 +146,7 @@ class LoginController extends BaseController
 
     public function socialLogin($provider)
     {
-        session()->flash('as.checkout.social', request()->input('return_url'));
+        session()->put('as.checkout.social', request()->input('return_url'));
 
         return $this->social->authenticate($provider);
     }
@@ -161,13 +162,16 @@ class LoginController extends BaseController
         } catch (SocialAuthException $e) {
             return back()->withErrors($e->getMessage());
         }
+
+        $url = session()->get('as.checkout.social');
+        session()->forget('as.checkout.social');
         
-        if (session()->get('as.checkout.social') == url('/')) {
+        if ($url == url('/')) {
             return redirect($this->redirectAfterLogin)->with('success', 'Login successfully!');
-        } elseif (session()->get('as.checkout.social') == url('logout')) {
+        } elseif ($url == url('logout')) {
             return redirect($this->redirectAfterLogin)->with('success', 'Login successfully!');
         } else {
-            return redirect(session()->get('as.checkout.social'))->with('success', 'Login successfully!');
+            return redirect($url)->with('success', 'Login successfully!');
         }
     }
 
