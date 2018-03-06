@@ -34,9 +34,9 @@ return [
     'title_address_book'        =>  'ruKuKa - Address Book',
     'title_order_history'       =>  'ruKuKa - Order History',
     'title_wishlist'            =>  'ruKuKa - Wishlist',
-    'title_blog'                =>  'ruKuKa - Blog',
-    'title_blog_read'           =>  'at ruKuKa Blog',
-    'title_blog_search'         =>  ' ruKuKa Blog',
+    'title_blog'                =>  'ruKuKa - Editorial',
+    'title_blog_read'           =>  'at ruKuKa Editorial',
+    'title_blog_search'         =>  'ruKuKa Editorial',
     'title_lookbook'            =>  'ruKuKa - Lookbook',
 
     //common
@@ -110,7 +110,7 @@ return [
     'men_nav'                   =>  'Men',
     'kids_nav'                  =>  'Kids',
     'sale_nav'                  =>  'Sale',
-    'blog_nav'                  =>  'Blog',
+    'blog_nav'                  =>  'Editorial',
     'eco_tourism_nav'           =>  'Eco Tourism',
     'all'                       =>  'All',
     'new_arrival'               =>  'New Arrival',
@@ -119,7 +119,10 @@ return [
     'clothing'                  =>  'Clothing',
     'accessories'               =>  'Accessories',
     'discover'                  =>  'Discover',
-    'new_in_blog'               =>  'New in Blog',
+    'new_in_blog'               =>  'New in Editorial',
+    'brand_focus'               =>  'Brand Focus',
+    'shop_now'                  =>  'Shop Now',
+    'spotlight'                 =>  'Spotlight On',
 
     //resources/views/partials/user_menu.blade.php
     'home'                      =>  'Home',

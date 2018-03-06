@@ -120,6 +120,9 @@ return [
     'accessories'               =>  'アクセサリーa',
     'discover'                  =>  '発見',
     'new_in_blog'               =>  'ブログの新機能',
+    'brand_focus'               =>  'Brand Focus',
+    'shop_now'                  =>  'Shop Now',
+    'spotlight'                 =>  'Spotlight On',
 
     //resources/views/partials/user_menu.blade.php
     'home'                      =>  'ホーム',
