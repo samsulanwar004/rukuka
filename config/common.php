@@ -47,6 +47,6 @@ return [
 	'queue_active' => env('QUEUE_ACTIVE'),
 
 	'queue_list' => [
-		'user_mail' => 'userMail'
+		'user_mail' => env('QUEUE_MAIL_NAME')
 	]		
 ];

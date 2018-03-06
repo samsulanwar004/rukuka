@@ -32,10 +32,11 @@ class LoginController extends BaseController
     public function showLoginPage()
     {
         $ref = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
-        $ref = rtrim($ref, '/');
+        $ref = $ref === null ? rtrim($ref, '/') : $this->redirectAfterLogin;
 
         if (session()->has('as.checkout')) {
             $ref = url('checkout');
+            session()->forget('as.checkout');
         }
 
         $bag = (new BagService)->get(self::INSTANCE_SHOP);
@@ -124,9 +125,7 @@ class LoginController extends BaseController
             return back()->withErrors($e->getMessage());
         }
 
-        if ($request->input('return_url') == url('/')) {
-            return redirect($this->redirectAfterLogin)->with('success', 'Login successfully!');
-        } elseif ($request->input('return_url') == url('logout')) {
+        if ($request->input('return_url') == url('/') || $request->input('return_url') == url('logout') || $request->input('return_url') == url('login')) {
             return redirect($this->redirectAfterLogin)->with('success', 'Login successfully!');
         } elseif ($request->input('return_url') == url('tracking/order/result')) {
             return redirect($this->redirectToHistory)->with('success', 'Login successfully!');
@@ -145,7 +144,7 @@ class LoginController extends BaseController
 
     public function socialLogin($provider)
     {
-        session()->flash('as.checkout.social', request()->input('return_url'));
+        session()->put('as.checkout.social', request()->input('return_url'));
 
         return $this->social->authenticate($provider);
     }
@@ -161,13 +160,14 @@ class LoginController extends BaseController
         } catch (SocialAuthException $e) {
             return back()->withErrors($e->getMessage());
         }
+
+        $url = session()->get('as.checkout.social');
+        session()->forget('as.checkout.social');
         
-        if (session()->get('as.checkout.social') == url('/')) {
-            return redirect($this->redirectAfterLogin)->with('success', 'Login successfully!');
-        } elseif (session()->get('as.checkout.social') == url('logout')) {
+        if ($url == url('/') || $url == url('logout') || $url == url('login')) {
             return redirect($this->redirectAfterLogin)->with('success', 'Login successfully!');
         } else {
-            return redirect(session()->get('as.checkout.social'))->with('success', 'Login successfully!');
+            return redirect($url)->with('success', 'Login successfully!');
         }
     }
 

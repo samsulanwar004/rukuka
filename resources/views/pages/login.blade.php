@@ -73,11 +73,11 @@
                     {{ trans('app.agreement_text_2') }} <a href="/page/terms-privacy">{{ trans('app.terms_privacy') }} {{ trans('app.agreement_text_3') }}</a> </span></li>
                     <li><button class="uk-button uk-button-secondary uk-width-1-1 uk-text-uppercase" type="submit">{{ trans('app.register') }}</button></li>
                     <li>
-                      <a href="{{ route('social.login', ['provider' => 'facebook']) }}" class="uk-button uk-button-primary uk-button-small uk-width-1-1">
+                      <a href="{{ route('social.login', ['provider' => 'facebook', 'return_url' => $ref]) }}" class="uk-button uk-button-primary uk-button-small uk-width-1-1">
                         <span class="uk-margin-small-right uk-icon" uk-icon="icon: facebook"></span>{{ trans('app.login_facebook') }}</a>
                     </li>
                     <li>
-                      <a href="{{ route('social.login', ['provider' => 'google']) }}" class="uk-button uk-button-danger uk-width-1-1 uk-button-small">
+                      <a href="{{ route('social.login', ['provider' => 'google', 'return_url' => $ref]) }}" class="uk-button uk-button-danger uk-width-1-1 uk-button-small">
                         <span class="uk-margin-small-right uk-icon" uk-icon="icon: google"></span>{{ trans('app.login_google') }}</a>
                     </li>
                   </ul>
