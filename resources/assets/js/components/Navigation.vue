@@ -1,5 +1,5 @@
 <template>
-    <nav class="uk-container uk-container-small uk-section-default uk-background-default" uk-navbar="dropbar: true; align: center; boundary-align: true; delay-hide: 100; duration:200">
+    <nav class="uk-container uk-section-default uk-background-default" uk-navbar="dropbar: true; align: center; boundary-align: true; delay-hide: 100; duration:200">
       <div class="uk-navbar-center">
 
           <ul class="uk-navbar-nav">
@@ -34,7 +34,7 @@
                                                   :alt="designersNav.designer_designer_shop__text"
                                                   :loading-image="loadingImage"
                                                   :error-image="errorImage"
-                                                  image-style="height: 340px; width:340px">
+                                                  image-style="height: 400px; width:400px">
                                           </lazy-background>
                                       </a>
                                       <div class="uk-overlay-primary uk-position-cover"></div>
@@ -97,7 +97,7 @@
                                                   :alt="womensNav.women_shop_text"
                                                   :loading-image="loadingImage"
                                                   :error-image="errorImage"
-                                                  image-style="height: 340px; width:340px">
+                                                  image-style="height: 400px; width:400px">
                                           </lazy-background>
                                       </a>
                                       <div class="uk-overlay-primary uk-position-cover"></div>
@@ -158,7 +158,7 @@
                                                 :alt="mensNav.men_shop_text"
                                                 :loading-image="loadingImage"
                                                 :error-image="errorImage"
-                                                image-style="height: 340px; width:340px">
+                                                image-style="height: 400px; width:400px">
                                         </lazy-background>
                                     </a>
                                     <div class="uk-overlay-primary uk-position-cover"></div>
