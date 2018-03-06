@@ -61,6 +61,12 @@ return [
     'facebook'                  =>  'https://www.facebook.com/Rukuka-333650107116878/',
     'email_to'                  =>  'mailto:info@rukuka.com',
 
+    //resources/views/pages/index.blade.php
+    'title_index_1'             => 'New Arrival',
+    'title_index_2'             => 'Happenings Right Now!',
+    'title_index_3'             => 'editor\'s pick',
+    'subtitle_index_1'          => 'Get Discover',
+
     //resources/views/partials/nav.blade.php
     'search'                    =>  'サーチ',
     'search_label'              =>  'サーチ',
