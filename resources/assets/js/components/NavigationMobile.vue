@@ -93,7 +93,7 @@
             </li>
             <hr class="uk-margin-small">
             <li>
-                <a href="/blog" class="uk-text-uppercase">{{ trans.blog_nav }}</a>
+                <a href="/editorial" class="uk-text-uppercase">{{ trans.blog_nav }}</a>
             </li>
         </ul>
         </div>

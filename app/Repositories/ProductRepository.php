@@ -27,6 +27,9 @@ class ProductRepository
             ->leftJoin('product_images', function ($join) {
             $join->on('products.id', '=', 'product_images.products_id')
             ->take(1);
+        })->join('product_designers', function ($join) {
+            $join->on('products.product_designers_id', '=', 'product_designers.id')
+            ->whereNull('product_designers.deleted_at');
         })->join('product_categories', function ($join) use ($slug) {
             $join->on('products.product_categories_id', '=', 'product_categories.id')
             ->where('product_categories.slug', $slug);
@@ -68,6 +71,9 @@ class ProductRepository
             ->leftJoin('product_images', function ($join) {
             $join->on('products.id', '=', 'product_images.products_id')
             ->take(1);
+        })->join('product_designers', function ($join) {
+            $join->on('products.product_designers_id', '=', 'product_designers.id')
+            ->whereNull('product_designers.deleted_at');
         })->join('product_categories', function ($join) use ($slug) {
             $join->on('products.product_categories_id', '=', 'product_categories.id')
             ->where('product_categories.slug', $slug);
@@ -121,6 +127,9 @@ class ProductRepository
             ->leftJoin('product_images', function ($join) {
             $join->on('products.id', '=', 'product_images.products_id')
             ->take(1);
+        })->join('product_designers', function ($join) {
+            $join->on('products.product_designers_id', '=', 'product_designers.id')
+            ->whereNull('product_designers.deleted_at');
         })->join('product_categories', function ($join) use ($ids) {
             $join->on('products.product_categories_id', '=', 'product_categories.id')
             ->whereIn('product_categories.id', $ids);
@@ -174,6 +183,9 @@ class ProductRepository
             ->leftJoin('product_images', function ($join) {
             $join->on('products.id', '=', 'product_images.products_id')
             ->take(1);
+        })->join('product_designers', function ($join) {
+            $join->on('products.product_designers_id', '=', 'product_designers.id')
+            ->whereNull('product_designers.deleted_at');
         })->join('product_categories', function ($join) use ($ids) {
             $join->on('products.product_categories_id', '=', 'product_categories.id')
             ->whereIn('product_categories.id', $ids);
@@ -218,7 +230,8 @@ class ProductRepository
             $join->on('products.id', '=', 'product_images.products_id')
             ->take(1);
         })->join('product_designers', function ($join) use ($category) {
-            $join->on('products.product_designers_id', '=', 'product_designers.id');
+            $join->on('products.product_designers_id', '=', 'product_designers.id')
+            ->whereNull('product_designers.deleted_at');
             if ($category != 'all') {
                 $join->where('product_designers.slug', $category);
             }
@@ -325,25 +338,67 @@ class ProductRepository
                 }
             }
 
-            $query = $this->model()
-                ->where('name','like','%'.$request->input('keyword').'%')
-                ->whereIn('product_categories_id',$categoryArr)
-                ->where('is_active',1)
-                ->whereNull('deleted_at');
+            $query = \DB::table('products')
+                ->leftJoin('product_images', function ($join) {
+                $join->on('products.id', '=', 'product_images.products_id')
+                ->take(1);
+            })->join('product_designers', function ($join) {
+                $join->on('products.product_designers_id', '=', 'product_designers.id')
+                ->whereNull('product_designers.deleted_at');
+            })
+            ->select(
+                'products.id as id', 
+                'products.name as name', 
+                'products.slug as slug', 
+                'products.sell_price as sell_price', 
+                'products.price_before_discount as price_before_discount', 
+                'products.created_at as created_at',
+                'product_images.photo as photo',
+                'products.product_categories_id as product_categories_id'
+            )
+            ->where('products.name','like','%'.$request->input('keyword').'%')
+            ->whereIn('products.product_categories_id',$categoryArr)
+            ->where('products.is_active',1)
+            ->whereNull('products.deleted_at');
         }
         else
         {
-            $query = $this->model()
-                ->select('product_categories_id')
-                ->where('name','like','%'.$request->input('keyword').'%')
-                ->where('is_active',1)
-                ->whereNull('deleted_at');
+            $query = \DB::table('products')
+                ->leftJoin('product_images', function ($join) {
+                $join->on('products.id', '=', 'product_images.products_id')
+                ->take(1);
+            })->join('product_designers', function ($join) {
+                $join->on('products.product_designers_id', '=', 'product_designers.id')
+                ->whereNull('product_designers.deleted_at');
+            })
+            ->select(
+                'products.id as id', 
+                'products.name as name', 
+                'products.slug as slug', 
+                'products.sell_price as sell_price', 
+                'products.price_before_discount as price_before_discount', 
+                'products.created_at as created_at',
+                'product_images.photo as photo',
+                'products.product_categories_id as product_categories_id'
+            )
+            ->where('products.name','like','%'.$request->input('keyword').'%')
+            ->where('products.is_active',1)
+            ->whereNull('products.deleted_at');
+        }
+
+        if ($request->has('color_id')) {
+            $colorId = $request->input('color_id');
+
+            $query->join('product_colors', function ($join) use ($colorId) {
+                $join->on('products.product_colors_id', '=', 'product_colors.id')
+                ->where('product_colors.id', $colorId);
+            });
         }
 
         if ($request->has('price')) {
-            $query->orderBy('sell_price', $request->input('price'));
+            $query->orderBy('products.sell_price', $request->input('price'));
         } else {
-            $query->orderBy('id', 'desc');
+            $query->orderBy('products.id', 'desc');
         }
 
         return $query->get()->unique('product_categories_id');
@@ -369,31 +424,67 @@ class ProductRepository
                     }
                 }
             }
-            $query = $this->model()
-                ->where('name','like','%'.$request->input('keyword').'%')
-                ->whereIn('product_categories_id',$categoryArr)
-                ->where('is_active',1)
-                ->whereNull('deleted_at');
+            $query = \DB::table('products')
+                ->leftJoin('product_images', function ($join) {
+                $join->on('products.id', '=', 'product_images.products_id')
+                ->take(1);
+            })->join('product_designers', function ($join) {
+                $join->on('products.product_designers_id', '=', 'product_designers.id')
+                ->whereNull('product_designers.deleted_at');
+            })
+            ->select(
+                'products.id as id', 
+                'products.name as name', 
+                'products.slug as slug', 
+                'products.sell_price as sell_price', 
+                'products.price_before_discount as price_before_discount', 
+                'products.created_at as created_at',
+                'product_images.photo as photo',
+                'products.product_categories_id as product_categories_id'
+            )
+            ->where('products.name','like','%'.$request->input('keyword').'%')
+            ->whereIn('products.product_categories_id',$categoryArr)
+            ->where('products.is_active',1)
+            ->whereNull('products.deleted_at');
         }
         else
         {
-            $query = $this->model()
-                ->where('name','like','%'.$request->input('keyword').'%')
-                ->where('is_active',1)
-                ->whereNull('deleted_at');
+            $query = \DB::table('products')
+                ->leftJoin('product_images', function ($join) {
+                $join->on('products.id', '=', 'product_images.products_id')
+                ->take(1);
+            })->join('product_designers', function ($join) {
+                $join->on('products.product_designers_id', '=', 'product_designers.id')
+                ->whereNull('product_designers.deleted_at');
+            })
+            ->select(
+                'products.id as id', 
+                'products.name as name', 
+                'products.slug as slug', 
+                'products.sell_price as sell_price', 
+                'products.price_before_discount as price_before_discount', 
+                'products.created_at as created_at',
+                'product_images.photo as photo',
+                'products.product_categories_id as product_categories_id'
+            )
+            ->where('products.name','like','%'.$request->input('keyword').'%')
+            ->where('products.is_active',1)
+            ->whereNull('products.deleted_at');
         }
 
         if ($request->has('color_id')) {
             $colorId = $request->input('color_id');
-            $query->whereHas('palette', function ($query) use ($colorId) {
-                $query->where('id', $colorId);
+
+            $query->join('product_colors', function ($join) use ($colorId) {
+                $join->on('products.product_colors_id', '=', 'product_colors.id')
+                ->where('product_colors.id', $colorId);
             });
         }
 
         if ($request->has('price')) {
-            $query->orderBy('sell_price', $request->input('price'));
+            $query->orderBy('products.sell_price', $request->input('price'));
         } else {
-            $query->orderBy('id', 'desc');
+            $query->orderBy('products.id', 'desc');
         }
 
         return $query->paginate(self::COUNT_OF_PRODUCT);
