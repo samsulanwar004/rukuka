@@ -1,10 +1,10 @@
 <template>
-    <nav class="uk-container uk-section-default uk-background-default" uk-navbar="dropbar: true; align: center; boundary-align: true; delay-hide: 100; duration:200">
+    <nav class="uk-container uk-section-default uk-background-default" uk-navbar="dropbar: true; align: center; boundary-align: true; duration:100">
       <div class="uk-navbar-center">
 
           <ul class="uk-navbar-nav">
               <li><a :href="designerLink">{{ trans.designers_nav }}</a>
-                  <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; boundary-align: true; pos: bottom-justify;">
+                  <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
                           <div class="uk-width-1-1">
@@ -52,7 +52,7 @@
               </li>
               <li>
                   <a :href="womenLink">{{ trans.women_nav }}</a>
-                  <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; boundary-align: true; pos: bottom-justify;">
+                  <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
                             <div class="uk-width-1-3">
@@ -115,7 +115,7 @@
                   </div>
               </li>
               <li><a :href="menLink">{{ trans.men_nav }}</a>
-                <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; boundary-align: true; pos: bottom-justify;">
+                <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                     <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
                             <div class="uk-width-1-3">
@@ -177,7 +177,7 @@
                 </div>
               </li>
               <li><a class="uk-text-danger"><b>{{ trans.sale_nav }}</b></a>
-                  <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
+                  <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div uk-grid>
                           <div class="uk-width-4-5@m uk-margin-remove">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
