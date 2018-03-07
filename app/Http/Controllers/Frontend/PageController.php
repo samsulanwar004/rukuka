@@ -48,7 +48,6 @@ class PageController extends BaseController
 
     public function shop(Request $request, $categories, $category, $slug = null, $sale = null)
     {
-
         if ($categories == 'designers') {
             try{
                 $product = (new ProductRepository);
@@ -85,7 +84,20 @@ class PageController extends BaseController
 
         $colorId = $request->has('color_id') ? $request->input('color_id') : null;
 
-        $shops = $products->map(function ($entry) {
+        $ids = [];
+        foreach ($products as $value) {
+            $ids[] = $value->id;
+        }
+
+        $image = (new ProductRepository)->getProductImage($ids);
+
+        $shops = $products->map(function ($entry) use ($image){
+
+            foreach ($image as $value) {
+                if ($entry->id == $value->products_id) {
+                    $entry->photo = $value->photo;
+                }
+            }
 
             return [
                 'id' => $entry->id,
@@ -431,7 +443,20 @@ class PageController extends BaseController
             $products->appends($key, $value);
         }
 
-        $shops = $products->map(function ($entry) {
+        $ids = [];
+        foreach ($products as $value) {
+            $ids[] = $value->id;
+        }
+
+        $image = (new ProductRepository)->getProductImage($ids);
+
+        $shops = $products->map(function ($entry) use ($image) {
+
+            foreach ($image as $value) {
+                if ($entry->id == $value->products_id) {
+                    $entry->photo = $value->photo;
+                }
+            }
 
             return [
                 'id' => $entry->id,
