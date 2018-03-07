@@ -283,7 +283,7 @@ class PageController extends BaseApiController
             $recently = (new ProductRepository)->getLookbookProduct($product);
 
             $ids = [];
-            foreach ($related as $value) {
+            foreach ($recently as $value) {
                 $ids[] = $value->id;
             }
 
