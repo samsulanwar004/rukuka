@@ -8,6 +8,7 @@ use App\Designer;
 use App\ProductCategory;
 use App\Popular;
 use App\Color;
+use App\ProductImage;
 
 class ProductRepository
 {
@@ -23,11 +24,7 @@ class ProductRepository
 
 	public function getProductBySlugCategory($request, $slug)
 	{
-		$query = \DB::table('products')
-            ->leftJoin('product_images', function ($join) {
-            $join->on('products.id', '=', 'product_images.products_id')
-            ->take(1);
-        })->join('product_designers', function ($join) {
+		$query = \DB::table('products')->join('product_designers', function ($join) {
             $join->on('products.product_designers_id', '=', 'product_designers.id')
             ->whereNull('product_designers.deleted_at');
         })->join('product_categories', function ($join) use ($slug) {
@@ -41,7 +38,6 @@ class ProductRepository
             'products.sell_price as sell_price', 
             'products.price_before_discount as price_before_discount', 
             'products.created_at as created_at',
-            'product_images.photo as photo',
             'product_categories.name as category_name'
         )
         ->where('products.is_active',1)
@@ -67,11 +63,7 @@ class ProductRepository
 
     public function getProductBySlugCategorySale($request, $slug)
     {
-        $query = \DB::table('products')
-            ->leftJoin('product_images', function ($join) {
-            $join->on('products.id', '=', 'product_images.products_id')
-            ->take(1);
-        })->join('product_designers', function ($join) {
+        $query = \DB::table('products')->join('product_designers', function ($join) {
             $join->on('products.product_designers_id', '=', 'product_designers.id')
             ->whereNull('product_designers.deleted_at');
         })->join('product_categories', function ($join) use ($slug) {
@@ -85,7 +77,6 @@ class ProductRepository
             'products.sell_price as sell_price', 
             'products.price_before_discount as price_before_discount', 
             'products.created_at as created_at',
-            'product_images.photo as photo',
             'product_categories.name as category_name'
         )
         ->where('products.price_before_discount','>',0)
@@ -123,11 +114,7 @@ class ProductRepository
 			}
 		}
 
-        $query = \DB::table('products')
-            ->leftJoin('product_images', function ($join) {
-            $join->on('products.id', '=', 'product_images.products_id')
-            ->take(1);
-        })->join('product_designers', function ($join) {
+        $query = \DB::table('products')->join('product_designers', function ($join) {
             $join->on('products.product_designers_id', '=', 'product_designers.id')
             ->whereNull('product_designers.deleted_at');
         })->join('product_categories', function ($join) use ($ids) {
@@ -141,7 +128,6 @@ class ProductRepository
             'products.sell_price as sell_price', 
             'products.price_before_discount as price_before_discount', 
             'products.created_at as created_at',
-            'product_images.photo as photo',
             'product_categories.name as category_name'
         )
         ->where('products.is_active',1)
@@ -179,11 +165,7 @@ class ProductRepository
 			}
 		}
 
-        $query = \DB::table('products')
-            ->leftJoin('product_images', function ($join) {
-            $join->on('products.id', '=', 'product_images.products_id')
-            ->take(1);
-        })->join('product_designers', function ($join) {
+        $query = \DB::table('products')->join('product_designers', function ($join) {
             $join->on('products.product_designers_id', '=', 'product_designers.id')
             ->whereNull('product_designers.deleted_at');
         })->join('product_categories', function ($join) use ($ids) {
@@ -197,7 +179,6 @@ class ProductRepository
             'products.sell_price as sell_price', 
             'products.price_before_discount as price_before_discount', 
             'products.created_at as created_at',
-            'product_images.photo as photo',
             'product_categories.name as category_name'
         )
         ->where('products.price_before_discount','>',0)
@@ -226,10 +207,7 @@ class ProductRepository
 	public function getProductByDesigner($request, $category)
 	{
 
-        $query = \DB::table('products')->leftJoin('product_images', function ($join) {
-            $join->on('products.id', '=', 'product_images.products_id')
-            ->take(1);
-        })->join('product_designers', function ($join) use ($category) {
+        $query = \DB::table('products')->join('product_designers', function ($join) use ($category) {
             $join->on('products.product_designers_id', '=', 'product_designers.id')
             ->whereNull('product_designers.deleted_at');
             if ($category != 'all') {
@@ -241,8 +219,7 @@ class ProductRepository
             'products.slug as slug', 
             'products.sell_price as sell_price', 
             'products.price_before_discount as price_before_discount', 
-            'products.created_at as created_at',
-            'product_images.photo as photo', 
+            'products.created_at as created_at', 
             'product_designers.id as designer_id'
         )->whereNull('products.deleted_at');   
 
@@ -306,22 +283,39 @@ class ProductRepository
 
     public function getMostProduct($group)
     {
-        return Popular::where('group_setting',$group)
-            ->orderBy('order','asc')
-            ->get();
+        return \DB::table('products')->join('populars', function ($join) {
+            $join->on('populars.products_id', '=', 'products.id');
+        })->select(
+            'products.id as id', 
+            'products.name as name', 
+            'products.slug as slug', 
+            'products.sell_price as sell_price', 
+            'products.price_before_discount as price_before_discount'
+        )
+        ->where('populars.group_setting',$group)
+        ->where('products.is_active',1)
+        ->whereNull('products.deleted_at')
+        ->orderBy('populars.order')
+        ->get();  
     }
 
     public function getRelatedProduct($categoryId)
     {
-        return $this->model()
-            ->whereHas('category', function ($query) use ($categoryId) {
-                $query->where('product_categories_id', '=', $categoryId);
-            })
-            ->inRandomOrder()
-            ->where('is_active',1)
-            ->whereNull('deleted_at')
-            ->take(4)
-            ->get();
+        return \DB::table('products')->join('product_categories', function ($join) use ($categoryId) {
+            $join->on('products.product_categories_id', '=', 'product_categories.id')
+            ->where('product_categories.id', $categoryId);
+        })->select(
+            'products.id as id', 
+            'products.name as name', 
+            'products.slug as slug', 
+            'products.sell_price as sell_price', 
+            'products.price_before_discount as price_before_discount'
+        )
+        ->inRandomOrder()
+        ->whereNull('products.deleted_at')
+        ->where('products.is_active',1)
+        ->take(4)
+        ->get();
     }
 
     public function getSearchCategory($request )
@@ -338,11 +332,7 @@ class ProductRepository
                 }
             }
 
-            $query = \DB::table('products')
-                ->leftJoin('product_images', function ($join) {
-                $join->on('products.id', '=', 'product_images.products_id')
-                ->take(1);
-            })->join('product_designers', function ($join) {
+            $query = \DB::table('products')->join('product_designers', function ($join) {
                 $join->on('products.product_designers_id', '=', 'product_designers.id')
                 ->whereNull('product_designers.deleted_at');
             })
@@ -353,7 +343,6 @@ class ProductRepository
                 'products.sell_price as sell_price', 
                 'products.price_before_discount as price_before_discount', 
                 'products.created_at as created_at',
-                'product_images.photo as photo',
                 'products.product_categories_id as product_categories_id'
             )
             ->where('products.name','like','%'.$request->input('keyword').'%')
@@ -363,11 +352,7 @@ class ProductRepository
         }
         else
         {
-            $query = \DB::table('products')
-                ->leftJoin('product_images', function ($join) {
-                $join->on('products.id', '=', 'product_images.products_id')
-                ->take(1);
-            })->join('product_designers', function ($join) {
+            $query = \DB::table('products')->join('product_designers', function ($join) {
                 $join->on('products.product_designers_id', '=', 'product_designers.id')
                 ->whereNull('product_designers.deleted_at');
             })
@@ -378,7 +363,6 @@ class ProductRepository
                 'products.sell_price as sell_price', 
                 'products.price_before_discount as price_before_discount', 
                 'products.created_at as created_at',
-                'product_images.photo as photo',
                 'products.product_categories_id as product_categories_id'
             )
             ->where('products.name','like','%'.$request->input('keyword').'%')
@@ -424,11 +408,7 @@ class ProductRepository
                     }
                 }
             }
-            $query = \DB::table('products')
-                ->leftJoin('product_images', function ($join) {
-                $join->on('products.id', '=', 'product_images.products_id')
-                ->take(1);
-            })->join('product_designers', function ($join) {
+            $query = \DB::table('products')->join('product_designers', function ($join) {
                 $join->on('products.product_designers_id', '=', 'product_designers.id')
                 ->whereNull('product_designers.deleted_at');
             })
@@ -439,7 +419,6 @@ class ProductRepository
                 'products.sell_price as sell_price', 
                 'products.price_before_discount as price_before_discount', 
                 'products.created_at as created_at',
-                'product_images.photo as photo',
                 'products.product_categories_id as product_categories_id'
             )
             ->where('products.name','like','%'.$request->input('keyword').'%')
@@ -449,11 +428,7 @@ class ProductRepository
         }
         else
         {
-            $query = \DB::table('products')
-                ->leftJoin('product_images', function ($join) {
-                $join->on('products.id', '=', 'product_images.products_id')
-                ->take(1);
-            })->join('product_designers', function ($join) {
+            $query = \DB::table('products')->join('product_designers', function ($join) {
                 $join->on('products.product_designers_id', '=', 'product_designers.id')
                 ->whereNull('product_designers.deleted_at');
             })
@@ -464,7 +439,6 @@ class ProductRepository
                 'products.sell_price as sell_price', 
                 'products.price_before_discount as price_before_discount', 
                 'products.created_at as created_at',
-                'product_images.photo as photo',
                 'products.product_categories_id as product_categories_id'
             )
             ->where('products.name','like','%'.$request->input('keyword').'%')
@@ -531,6 +505,13 @@ class ProductRepository
     public function getColorPalette()
     {
         return Color::get();
+    }
+
+    public function getProductImage($ids)
+    {
+        return ProductImage::whereIn('products_id', $ids)
+            ->orderBy('id', 'DESC')
+            ->get();
     }
 
 }
