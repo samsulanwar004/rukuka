@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-for="collect in collection" class="uk-margin">
-            <div class="uk-inline">
+            <div class="uk-inline" :id="collect.order">
                     <lazy-background
                             :image-source="collect.photo | awsLink(aws_link)"
                             :alt="collect.name"
@@ -10,12 +10,17 @@
                             image-style="max-height:700px">
                         >
                     </lazy-background>
-                <div class="uk-position-top-left uk-position-medium uk-text-center">
+                <div class="uk-position-center-left uk-position-medium uk-text-center">
+                  <div class="uk-width-1-5@m">
                     <div uk-slideshow-parallax="scale: 1,1,0.8">
-                        <p class="uk-text-lead" uk-slideshow-parallax="x: 400,0,0;">{{ collect.title }}</p>
+                      <h1><u>#{{collect.order }}</u></h1>
+                        <p class="uk-text-lead uk-visible@m" uk-slideshow-parallax="x: 400,0,0;">{{ collect.title }}</p>
                     </div>
+                  </div>
+
                 </div>
             </div>
+            <h6 class="uk-text-muted uk-margin-remove uk-hidden@m" uk-slideshow-parallax="x: 400,0,0;">{{ collect.title }}</h6>
             <h4 class="uk-margin-small">{{ collect.name }}</h4>
             <loobook-product
                     :api="api"
