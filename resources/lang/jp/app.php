@@ -12,6 +12,8 @@ return [
     'title_product'             =>  'at ruKuKa',
     'title_shop_womens'         =>  'Womens at ruKuKa',
     'title_shop_mens'           =>  'Mens at ruKuKa',
+    'title_sale_womens'         =>  'Womens Sale - ruKuKa',
+    'title_sale_mens'           =>  'Mens Sale - ruKuKa',
     'title_shop_category'       =>  'at ruKuKa',
     'title_tracking'            =>  'Tracking & Trace at ruKuKa',
     'title_search'              =>  'at ruKuKa',

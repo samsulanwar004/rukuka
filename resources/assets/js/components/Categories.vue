@@ -1,8 +1,12 @@
 <template>
     <div v-if="parent == 'designers'">
         <ul class="uk-accordion">
-            <li class="uk-open">
-                <h4 :href="'/shop/'+parent+'/all'">{{ trans.all }}</h4>
+            <li>
+                <h5 class="uk-link-reset uk-text-uppercase">
+                    <a :href="'/shop/designers/all'">
+                        {{ trans.all }}
+                    </a>
+                </h5>
             </li>
         </ul>
         <ul class="uk-accordion" uk-accordion="multiple: true" >
@@ -23,7 +27,10 @@
         <ul class="uk-accordion">
             <li>
                 <h5 class="uk-link-reset uk-text-uppercase">
-                    <a :href="'/shop/'+parent+'/all'">
+                    <a v-if="sales" :href="'/shop/'+parent+'/sale'">
+                        {{ trans.all }}
+                    </a>
+                    <a v-else :href="'/shop/'+parent+'/all'">
                         {{ trans.all }}
                     </a>
                 </h5>
