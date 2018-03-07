@@ -220,11 +220,11 @@ class PageController extends BaseApiController
         try {
 
             $product = $request->input('product');
-            
+
             $recently = (new ProductRepository)->getRecentlyViewedProduct($product);
 
             $ids = [];
-            foreach ($related as $value) {
+            foreach ($recently as $value) {
                 $ids[] = $value->id;
             }
 
