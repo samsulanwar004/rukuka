@@ -10,8 +10,8 @@
         @section('title', trans('app.title_shop_womens') )
     @elseif($categories == 'mens' && $category == 'all')
         @section('title', trans('app.title_shop_mens') )
-    @elseif($products->first()->category->name)
-        @section('title',$products->first()->category->name.' '.trans('app.title_shop_category') )
+    @elseif($products->first()->category_name)
+        @section('title',$products->first()->category_name.' '.trans('app.title_shop_category') )
     @else
         @section('title',trans('app.product_not_available').' '.trans('app.title_shop_category') )
     @endif
@@ -20,12 +20,12 @@
 
     <div class="uk-container">
       @if($categories == 'designers' && $category != 'all')
-          <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ $designer->name }}</h3>
+          <h3 class="uk-margin-small-top uk-margin-remove-bottom "></h3>
       @else
           @if($category == 'all')
               <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ trans('app.all_you_need') }}</h3>
           @else
-              <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ isset($products->first()->category->name) ? $products->first()->category->name : trans('app.product_not_available') }}</h3>
+              <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ isset($products->first()->category_name) ? $products->first()->category_name : trans('app.product_not_available') }}</h3>
           @endif
       @endif
       <div class="uk-visible@m">
@@ -42,7 +42,7 @@
               ])
           @else
               @include('partials.breadcrumb', [
-                  'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false, isset($products->first()->category->name) ? $products->first()->category->name : 'Product not available' => 'categories']
+                  'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false, isset($products->first()->category_name) ? $products->first()->category_name : 'Product not available' => 'categories']
               ])
           @endif
       @endif

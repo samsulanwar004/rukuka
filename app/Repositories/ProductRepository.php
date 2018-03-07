@@ -14,7 +14,7 @@ class ProductRepository
 
 	public $designer;
 
-    const COUNT_OF_PRODUCT = 36;
+    const COUNT_OF_PRODUCT = 60;
 
 	public function model()
 	{
@@ -28,9 +28,19 @@ class ProductRepository
             $join->on('products.id', '=', 'product_images.products_id')
             ->take(1);
         })->join('product_categories', function ($join) use ($slug) {
-            $join->on('products.product_categories_id', '=', 'product_categories.id')->whereIn('product_categories.slug', $slug);
+            $join->on('products.product_categories_id', '=', 'product_categories.id')
+            ->where('product_categories.slug', $slug);
         })
-        ->select('products.id as id', 'products.name as name', 'products.slug as slug', 'products.sell_price as sell_price', 'products.price_before_discount as price_before_discount', 'products.created_at as created_at','product_images.photo as photo')
+        ->select(
+            'products.id as id', 
+            'products.name as name', 
+            'products.slug as slug', 
+            'products.sell_price as sell_price', 
+            'products.price_before_discount as price_before_discount', 
+            'products.created_at as created_at',
+            'product_images.photo as photo',
+            'product_categories.name as category_name'
+        )
         ->where('products.is_active',1)
         ->whereNull('products.deleted_at');
 
@@ -59,9 +69,19 @@ class ProductRepository
             $join->on('products.id', '=', 'product_images.products_id')
             ->take(1);
         })->join('product_categories', function ($join) use ($slug) {
-            $join->on('products.product_categories_id', '=', 'product_categories.id')->whereIn('product_categories.slug', $slug);
+            $join->on('products.product_categories_id', '=', 'product_categories.id')
+            ->where('product_categories.slug', $slug);
         })
-        ->select('products.id as id', 'products.name as name', 'products.slug as slug', 'products.sell_price as sell_price', 'products.price_before_discount as price_before_discount', 'products.created_at as created_at','product_images.photo as photo')
+        ->select(
+            'products.id as id', 
+            'products.name as name', 
+            'products.slug as slug', 
+            'products.sell_price as sell_price', 
+            'products.price_before_discount as price_before_discount', 
+            'products.created_at as created_at',
+            'product_images.photo as photo',
+            'product_categories.name as category_name'
+        )
         ->where('products.price_before_discount','>',0)
         ->where('products.is_active',1)
         ->whereNull('products.deleted_at');
@@ -102,9 +122,19 @@ class ProductRepository
             $join->on('products.id', '=', 'product_images.products_id')
             ->take(1);
         })->join('product_categories', function ($join) use ($ids) {
-            $join->on('products.product_categories_id', '=', 'product_categories.id')->whereIn('product_categories.id', $ids);
+            $join->on('products.product_categories_id', '=', 'product_categories.id')
+            ->whereIn('product_categories.id', $ids);
         })
-        ->select('products.id as id', 'products.name as name', 'products.slug as slug', 'products.sell_price as sell_price', 'products.price_before_discount as price_before_discount', 'products.created_at as created_at','product_images.photo as photo')
+        ->select(
+            'products.id as id', 
+            'products.name as name', 
+            'products.slug as slug', 
+            'products.sell_price as sell_price', 
+            'products.price_before_discount as price_before_discount', 
+            'products.created_at as created_at',
+            'product_images.photo as photo',
+            'product_categories.name as category_name'
+        )
         ->where('products.is_active',1)
         ->whereNull('products.deleted_at');
 
@@ -145,9 +175,19 @@ class ProductRepository
             $join->on('products.id', '=', 'product_images.products_id')
             ->take(1);
         })->join('product_categories', function ($join) use ($ids) {
-            $join->on('products.product_categories_id', '=', 'product_categories.id')->whereIn('product_categories.id', $ids);
+            $join->on('products.product_categories_id', '=', 'product_categories.id')
+            ->whereIn('product_categories.id', $ids);
         })
-        ->select('products.id as id', 'products.name as name', 'products.slug as slug', 'products.sell_price as sell_price', 'products.price_before_discount as price_before_discount', 'products.created_at as created_at','product_images.photo as photo')
+        ->select(
+            'products.id as id', 
+            'products.name as name', 
+            'products.slug as slug', 
+            'products.sell_price as sell_price', 
+            'products.price_before_discount as price_before_discount', 
+            'products.created_at as created_at',
+            'product_images.photo as photo',
+            'product_categories.name as category_name'
+        )
         ->where('products.price_before_discount','>',0)
         ->where('products.is_active',1)
         ->whereNull('products.deleted_at');
@@ -182,7 +222,16 @@ class ProductRepository
             if ($category != 'all') {
                 $join->where('product_designers.slug', $category);
             }
-        });   
+        })->select(
+            'products.id as id', 
+            'products.name as name', 
+            'products.slug as slug', 
+            'products.sell_price as sell_price', 
+            'products.price_before_discount as price_before_discount', 
+            'products.created_at as created_at',
+            'product_images.photo as photo', 
+            'product_designers.id as designer_id'
+        )->whereNull('products.deleted_at');   
 
         if ($request->has('color_id')) {
             $colorId = $request->input('color_id');
@@ -202,9 +251,6 @@ class ProductRepository
         if ($category != 'all') {
             $this->setDesigner($this->getDesignerBySlug($category));
         }
-
-        $query->select('products.id as id', 'products.name as name', 'products.slug as slug', 'products.sell_price as sell_price', 'products.price_before_discount as price_before_discount', 'products.created_at as created_at','product_images.photo as photo', 'product_designers.id as designer_id')
-        ->whereNull('products.deleted_at');
 
         return $query->paginate(self::COUNT_OF_PRODUCT);
 	}
