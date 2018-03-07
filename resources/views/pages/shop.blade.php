@@ -10,6 +10,10 @@
         @section('title', trans('app.title_shop_womens') )
     @elseif($categories == 'mens' && $category == 'all')
         @section('title', trans('app.title_shop_mens') )
+    @elseif($categories == 'womens' && $category == 'sale')
+        @section('title', trans('app.title_sale_womens') )
+    @elseif($categories == 'mens' && $category == 'sale')
+        @section('title', trans('app.title_sale_mens') )
     @elseif($products->first()->category_name)
         @section('title',$products->first()->category_name.' '.trans('app.title_shop_category') )
     @else
@@ -23,6 +27,8 @@
           <h3 class="uk-margin-small-top uk-margin-remove-bottom "></h3>
       @else
           @if($category == 'all')
+              <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ trans('app.all_you_need') }}</h3>
+          @elseif($category == 'sale')
               <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ trans('app.all_you_need') }}</h3>
           @else
               <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ isset($products->first()->category_name) ? $products->first()->category_name : trans('app.product_not_available') }}</h3>
@@ -39,6 +45,10 @@
           @if($category == 'all')
               @include('partials.breadcrumb', [
                 'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => 'categories']
+              ])
+          @elseif($category == 'sale')
+              @include('partials.breadcrumb', [
+                'breadcrumbs' => [$categories => '/shop/'.$categories.'/sale', $category => 'categories']
               ])
           @else
               @include('partials.breadcrumb', [
