@@ -65,7 +65,7 @@
         {{--END 2 ROW BANNER--}}
 
         {{--3 ROW BANNER--}}
-        <div uk-slider="clsActivated: uk-transition-active;" class="uk-margin-top">
+        <div uk-slider="clsActivated: uk-transition-active;">
             <div class="uk-position-relative uk-visible-toggle">
                 <ul class="uk-slider-items uk-grid uk-grid-small uk-child-width-1-3" uk-grid>
                     <li>
@@ -120,7 +120,7 @@
             </div>
         </div>
         {{--END 3 ROW BANNER--}}
-        
+
       </div>
 
         <div class="uk-container uk-margin-top">

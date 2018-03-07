@@ -15,7 +15,7 @@
         </div>
 
 
-      <div class="js-slideshow-animation uk-margin-top" uk-slideshow="ratio: 10:3; min-height: 150; max-height: 600;">
+      <div class="js-slideshow-animation uk-margin-top" uk-slideshow="ratio: 10:4 ; min-height: 150; max-height: 600;">
 
             <div class="uk-position-relative uk-visible-toggle uk-light">
 
