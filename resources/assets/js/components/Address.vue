@@ -324,7 +324,7 @@
             },
 
             initHandleAddressing: function(existAddress){
-
+alert('asdsad');
               if (existAddress.country == 'ID') {
 
                 $('#form-province-vue').replaceWith('<select id="form-province-vue" onchange="showVueListCities()" name="province" class="uk-input uk-form-small " required><option>Select country first ya</option></select>');
@@ -336,6 +336,7 @@
 
                 $('#div-sub-district-vue').show();
                 $('#div-village-vue').show();
+                $('#form-postal-vue').attr('readonly', true);
 
               }else{
 
