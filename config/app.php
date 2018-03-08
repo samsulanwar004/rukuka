@@ -193,6 +193,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Chencha\Share\ShareServiceProvider::class,
+        Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
 
     ],
 
@@ -250,6 +251,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Share' => Chencha\Share\ShareFacade::class,
+        'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
 
     ],
 

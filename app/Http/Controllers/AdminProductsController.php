@@ -35,11 +35,11 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Product Designers","name"=>"product_designers_id","join"=>"product_designers,name"];
-			$this->col[] = ["label"=>"Product Categories","name"=>"product_categories_id","join"=>"product_categories,name"];
-			$this->col[] = ["label"=>"Product Code","name"=>"product_code"];
+            $this->col[] = ["label"=>"Product Code","name"=>"product_code"];
 			$this->col[] = ["label"=>"Name","name"=>"name"];
-			$this->col[] = ["label"=>"Status","name"=>"is_active"];
+            $this->col[] = ["label"=>"Product Categories","name"=>"product_categories_id","join"=>"product_categories,name"];
+            $this->col[] = ["label"=>"Sell Price","name"=>"sell_price","callback_php"=>'"Rp. ". number_format($row->sell_price)'];
+            $this->col[] = ["label"=>"Status","name"=>"is_active"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE

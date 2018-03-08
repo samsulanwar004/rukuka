@@ -58,7 +58,7 @@ class UserController extends BaseController
     	$this->validate($request, [
     		'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'phone_number' => 'required|numeric',
+            'phone_number' => 'required',
         ]);
 
         try {
@@ -172,7 +172,7 @@ class UserController extends BaseController
         $rules = [
                     'first_name' => 'required|string|max:255',
                     'last_name' => 'required|string|max:255',
-                    'phone_number' => 'required|numeric',
+                    'phone_number' => 'required',
                     'postal' => 'required|string',
                     'address_line' => 'required',
                     'city' => 'required',
@@ -251,10 +251,7 @@ class UserController extends BaseController
         } catch (Exception $e) {
         	DB::rollBack();
 
-        	return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ],400);
+        	return $this->error($e->getMessage(), 400);
         }
     }
 
@@ -281,10 +278,7 @@ class UserController extends BaseController
         } catch (Exception $e) {
         	DB::rollBack();
 
-        	return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ],400);
+        	return $this->error($e->getMessage(), 400);
         }
     }
 
@@ -414,10 +408,7 @@ class UserController extends BaseController
         } catch (Exception $e) {
             DB::rollBack();
 
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ],400);
+            return $this->error($e->getMessage(), 400);
         }
     }
 
@@ -435,10 +426,7 @@ class UserController extends BaseController
             ]);
 
         } catch (Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ],400);
+            return $this->error($e->getMessage(), 400);
         }
     }
 
@@ -498,10 +486,7 @@ class UserController extends BaseController
             ]);
 
         } catch (Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ],400);
+            return $this->error($e->getMessage(), 400);
         }
     }
 
@@ -604,10 +589,7 @@ class UserController extends BaseController
             ]);
 
         } catch (Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ],400);
+            return $this->error($e->getMessage(), 400);
         }
     }
 
@@ -625,10 +607,7 @@ class UserController extends BaseController
             ]);
 
         } catch (Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ],400);
+            return $this->error($e->getMessage(), 400);
         }
     }
 
@@ -646,10 +625,7 @@ class UserController extends BaseController
             ]);
 
         } catch (Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ],400);
+            return $this->error($e->getMessage(), 400);
         }
     }
 
@@ -659,7 +635,7 @@ class UserController extends BaseController
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'company' => 'string|max:255',
-            'phone_number' => 'required|numeric',
+            'phone_number' => 'required',
             'postal' => 'required|string',
             'address_line' => 'required',
             'city' => 'required',
@@ -690,10 +666,7 @@ class UserController extends BaseController
             ]);
 
         } catch (Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ],400);
+            return $this->error($e->getMessage(), 400);
         }
     }
 
@@ -718,10 +691,7 @@ class UserController extends BaseController
             ]);
 
         } catch (Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ],400);
+            return $this->error($e->getMessage(), 400);
         }
     }
 
@@ -746,10 +716,7 @@ class UserController extends BaseController
             ]);
 
         } catch (Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ],400);
+            return $this->error($e->getMessage(), 400);
         }
     }
 
@@ -1091,10 +1058,7 @@ class UserController extends BaseController
 
             return $responseObject;
         } catch (Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ],400);
+            return $this->error($e->getMessage(), 400);
         }
     }
 

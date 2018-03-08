@@ -33,7 +33,7 @@
 			$this->col[] = ["label"=>"Created By","name"=>"cms_users_id","join"=>"cms_users,name"];
 			$this->col[] = ["label"=>"Currency Code From","name"=>"currency_code_from"];
 			$this->col[] = ["label"=>"Currency Code To","name"=>"currency_code_to"];
-			$this->col[] = ["label"=>"Conversion Value","name"=>"conversion_value"];
+			$this->col[] = ["label"=>"Conversion Value","name"=>"conversion_value","callback_php"=>'"Rp. ". number_format($row->conversion_value)'];
 			$this->col[] = ["label"=>"Inverse Conversion Value","name"=>"inverse_conversion_value"];
 			$this->col[] = ["label"=>"Created At","name"=>"created_at"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
