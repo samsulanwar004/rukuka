@@ -39,7 +39,7 @@
             <div class="uk-modal-dialog">
               <button class="uk-modal-close-default" type="button" uk-close></button>
               <div class="uk-modal-body">
-                <h4 class="uk-modal-title">{{ trans('app.add_address') }}</h4>
+                <h4 class="uk-text-uppercase">{{ trans('app.add_address') }}</h4>
                 <form class="uk-form-stacked" action="{{ route('user.address') }}" method="post">
                   {{ csrf_field() }}
                   <input type="hidden" name="checkout" value="ok">
@@ -107,7 +107,7 @@
                   <div class="uk-margin-small uk-text-meta uk-width-1-1">
                     <div>
                         <label>{{ trans('app.phone') }}</label>
-                      <input class="uk-input uk-form-small" name="phone_number" id="form-s-tel" type="text" value="{{ old('phone_number') }}" required="required">
+                      <input class="uk-input uk-form-small" name="phone_number" id="form-s-tel" type="number" value="{{ old('phone_number') }}" required="required">
                     </div>
                   </div>
                   <input type="submit" id="new-address" style="display: none">
@@ -150,28 +150,28 @@
                   <input type="text" name="address_line" value="{{ old('address_line') }}" class="uk-input uk-form-small {{ $errors->has('address_line') ? ' uk-form-danger' : '' }}" required="required">
                </div>
                <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
-                   <label>{{ trans('app.country') }}</label>
+                   <label>{{ trans('app.country') }}*</label>
                   <select id="form-country-empty" name="country" class="uk-input uk-form-small uk-from-width-small {{ $errors->has('country') ? ' uk-form-danger' : '' }}" required="required" onchange="handleLocalAddress();showListProvices();">
                     <option></option>
                   </select>
               </div>
               <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
-                  <label>{{ trans('app.province') }}</label>
+                  <label>{{ trans('app.province') }}*</label>
                   <input class="uk-input uk-form-small uk-from-width-small" name="province" id="form-province-empty" type="text" value="{{ old('province') }}" required="required">
               </div>
                <div class="uk-text-meta uk-margin-small-top uk-width-1-1">
-                   <label>{{ trans('app.city') }}</label>
+                   <label>{{ trans('app.city') }}*</label>
                   <input id="form-city-empty" class="uk-input uk-form-small uk-from-width-small" name="city" id="form-s-tel" type="text" value="{{ old('city') }}" required="required">
                </div>
-               <div id="div-sub-district" class="uk-margin-small uk-grid-small" uk-grid>
+               <div id="div-sub-district" class="uk-text-meta uk-margin-small-top uk-width-1-1">
                     <div>
-                        <label>{{ trans('app.sub_district') }}</label>
+                        <label>{{ trans('app.sub_district') }}*</label>
                       <input class="uk-input uk-form-small {{ $errors->has('sub_district') ? ' uk-form-danger' : '' }}" name="sub_district" id="form-subdistrict-empty" type="text" value="{{ old('sub_district') }}" required>
                     </div>
                   </div>
-                  <div  id="div-village" class="uk-margin-small uk-grid-small" uk-grid>
+                  <div  id="div-village" class="uk-text-meta uk-margin-small-top uk-width-1-1">
                     <div>
-                        <label>{{ trans('app.village') }}</label>
+                        <label>{{ trans('app.village') }}*</label>
                       <input class="uk-input uk-form-small {{ $errors->has('village') ? ' uk-form-danger' : '' }}" name="village" id="form-village-empty" type="text" value="{{ old('village') }}" required>
                     </div>
                </div>
@@ -181,7 +181,7 @@
                </div>
                <div class="uk-text-meta uk-margin-small-top">
                    <label>{{ trans('app.phone') }}*</label>
-                  <input type="text" name="phone_number" value="{{ old('phone_number') }}" class="uk-input uk-form-small uk-from-width-small {{ $errors->has('phone_number') ? ' uk-form-danger' : '' }}" required="required">
+                  <input type="number" name="phone_number" value="{{ old('phone_number') }}" class="uk-input uk-form-small uk-from-width-small {{ $errors->has('phone_number') ? ' uk-form-danger' : '' }}" required="required">
                </div>
                <div class="uk-text-meta uk-margin-top">
                   <p> <b>* {{ trans('app.required') }}</b> </p>
