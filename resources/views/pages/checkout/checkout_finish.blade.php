@@ -126,15 +126,16 @@
 
               // Disable the submit button to prevent repeated clicks:
               $form.find('.submit').prop('disabled', true);
-              // $('.overlay').show();
-              // $("#diModalin").modal();
-              // $(".modal-body").html('<img src="{{ imageCDN('loading-image.gif') }}" width="200px" height="200px">');
+              $('.overlay').show();
+              $("#diModalin").modal();
+              $(".modal-body").html('<img src="{{ imageCDN('loading-image.gif') }}" width="200px" height="200px">');
 
               // Request a token from Xendit:
               var tokenData = getTokenData(); 
               
               Xendit.card.createToken(tokenData, xenditResponseHandler);
-              
+              // $('.overlay').hide();
+              // $('#diModalin').modal('hide');
 
               // Prevent the form from being submitted:
               return false;
