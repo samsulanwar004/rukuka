@@ -265,13 +265,10 @@
                 $('#div-sub-district').show();
                 $('#div-village').show();
 
-<<<<<<< HEAD
-              $('#form-postal-empty').attr('readonly', true);
+
+                $('#form-postal-empty').attr('readonly', true);
 
           }else{
-=======
-            }else{
->>>>>>> 1970f23b0cbcc2cd077739955760a523211566b8
 
                 $('#form-province-empty').replaceWith('<input class="uk-input uk-input-small" name="province" id="form-province-empty" type="text" value="{{ old("province") }}" required>');
                 $('#form-city-empty').replaceWith('<input class="uk-input uk-input-small" name="city" id="form-city-empty" type="text" value="{{ old("city") }}" required>');
@@ -321,11 +318,7 @@
 
             }).fail(function(xhr, status, error) {
 
-<<<<<<< HEAD
               console.log(error + ' when load countries');
-=======
-                alert(error + ' when load countries');
->>>>>>> 1970f23b0cbcc2cd077739955760a523211566b8
 
             });
         }
@@ -365,11 +358,7 @@
 
             }).fail(function(xhr, status, error) {
 
-<<<<<<< HEAD
               console.log(error + ' when load province');
-=======
-                alert(error + ' when load province');
->>>>>>> 1970f23b0cbcc2cd077739955760a523211566b8
 
             });
         }
@@ -416,11 +405,7 @@
 
             }).fail(function(xhr, status, error) {
 
-<<<<<<< HEAD
               console.log(error + ' when load city');
-=======
-                alert(error + ' when load city');
->>>>>>> 1970f23b0cbcc2cd077739955760a523211566b8
 
             });
 
@@ -467,11 +452,7 @@
 
             }).fail(function(xhr, status, error) {
 
-<<<<<<< HEAD
               console.log(error + ' when load subdistrict');
-=======
-                alert(error + ' when load subdistrict');
->>>>>>> 1970f23b0cbcc2cd077739955760a523211566b8
 
             });
 
@@ -518,11 +499,7 @@
 
             }).fail(function(xhr, status, error) {
 
-<<<<<<< HEAD
               console.log(error + ' when load village');
-=======
-                alert(error + ' when load village');
->>>>>>> 1970f23b0cbcc2cd077739955760a523211566b8
 
             });
 
@@ -578,11 +555,7 @@
 
             }).fail(function(xhr, status, error) {
 
-<<<<<<< HEAD
               console.log(error + ' when load city');
-=======
-                alert(error + ' when load city');
->>>>>>> 1970f23b0cbcc2cd077739955760a523211566b8
 
             });
 
@@ -623,11 +596,7 @@
 
             }).fail(function(xhr, status, error) {
 
-<<<<<<< HEAD
               console.log(error + ' when load subdistrict');
-=======
-                alert(error + ' when load subdistrict');
->>>>>>> 1970f23b0cbcc2cd077739955760a523211566b8
 
             });
 
@@ -668,11 +637,7 @@
 
             }).fail(function(xhr, status, error) {
 
-<<<<<<< HEAD
               console.log(error + ' when load subdistrict');
-=======
-                alert(error + ' when load subdistrict');
->>>>>>> 1970f23b0cbcc2cd077739955760a523211566b8
 
             });
 
