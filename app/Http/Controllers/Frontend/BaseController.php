@@ -56,6 +56,38 @@ class BaseController extends Controller
         else {
             return false;
         }
-    }  
+    } 
+
+    protected function error($message, $httpCode = 500, $isValidationMessage = false)
+    {
+        logger($message);
+        if(config('app.debug')) {
+            if ($message instanceof \Exception || $message instanceof \InvalidArgumentException) {
+                $message = $message->getMessage();
+            }
+        } else {
+            $message = 'Something error with your request. Please contact your administrator';
+        }
+
+        return response()->json(
+            $this->generateMessage('Error', $message),
+            $httpCode
+        );
+    }
+
+    /**
+     * Generate response message.
+     *
+     * @param  string $status
+     * @param  mixed $message
+     * @return array
+     */
+    private function generateMessage($status, $message)
+    {
+        return [
+            'status' => $status,
+            'message' => $message,
+        ];
+    } 
 
 }
