@@ -287,6 +287,8 @@
       $('#div-sub-district').show();
       $('#div-village').show();
 
+      $('#form-postal-empty').attr('readonly', true);
+
     }else{
 
       $('#form-province-empty').replaceWith('<input class="uk-input uk-form-small" name="province" id="form-province-empty" type="text" value="{{ old("province") }}" required>');

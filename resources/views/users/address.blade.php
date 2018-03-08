@@ -265,7 +265,10 @@
                 $('#div-sub-district').show();
                 $('#div-village').show();
 
-            }else{
+
+                $('#form-postal-empty').attr('readonly', true);
+
+          }else{
 
                 $('#form-province-empty').replaceWith('<input class="uk-input uk-input-small" name="province" id="form-province-empty" type="text" value="{{ old("province") }}" required>');
                 $('#form-city-empty').replaceWith('<input class="uk-input uk-input-small" name="city" id="form-city-empty" type="text" value="{{ old("city") }}" required>');
@@ -315,7 +318,7 @@
 
             }).fail(function(xhr, status, error) {
 
-                alert(error + ' when load countries');
+              console.log(error + ' when load countries');
 
             });
         }
@@ -355,7 +358,7 @@
 
             }).fail(function(xhr, status, error) {
 
-                alert(error + ' when load province');
+              console.log(error + ' when load province');
 
             });
         }
@@ -402,7 +405,7 @@
 
             }).fail(function(xhr, status, error) {
 
-                alert(error + ' when load city');
+              console.log(error + ' when load city');
 
             });
 
@@ -449,7 +452,7 @@
 
             }).fail(function(xhr, status, error) {
 
-                alert(error + ' when load subdistrict');
+              console.log(error + ' when load subdistrict');
 
             });
 
@@ -496,7 +499,7 @@
 
             }).fail(function(xhr, status, error) {
 
-                alert(error + ' when load village');
+              console.log(error + ' when load village');
 
             });
 
@@ -552,7 +555,7 @@
 
             }).fail(function(xhr, status, error) {
 
-                alert(error + ' when load city');
+              console.log(error + ' when load city');
 
             });
 
@@ -593,7 +596,7 @@
 
             }).fail(function(xhr, status, error) {
 
-                alert(error + ' when load subdistrict');
+              console.log(error + ' when load subdistrict');
 
             });
 
@@ -634,7 +637,7 @@
 
             }).fail(function(xhr, status, error) {
 
-                alert(error + ' when load subdistrict');
+              console.log(error + ' when load subdistrict');
 
             });
 
