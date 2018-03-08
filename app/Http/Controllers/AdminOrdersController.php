@@ -38,7 +38,7 @@
 			$this->col[] = ["label"=>"Payment Method","name"=>"payment_method"];
 			$this->col[] = ["label"=>"Payment Status","name"=>"payment_status"];
 			$this->col[] = ["label"=>"Order Status","name"=>"order_status"];
-			$this->col[] = ["label"=>"Order Subtotal","name"=>"order_subtotal"];
+			$this->col[] = ["label"=>"Order Subtotal","name"=>"order_subtotal","callback_php"=>'"Rp. ". number_format($row->order_subtotal)'];
 			$this->col[] = ["label"=>"Order Date","name"=>"order_date"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
