@@ -265,7 +265,6 @@
                 $('#div-sub-district').show();
                 $('#div-village').show();
 
-
                 $('#form-postal-empty').attr('readonly', true);
 
           }else{
@@ -280,6 +279,9 @@
 
                 $('#form-province-empty').val('');
                 $('#form-city-empty').val('');
+
+                $('#form-postal-empty').attr('readonly', false);
+
             }
 
         }
