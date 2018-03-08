@@ -300,7 +300,7 @@ return [
     //resources/assets/js/components/ButtonBuy.vue
     'choose_size_label'         =>  'Choose your size',
     'no_size'                   =>  'No size available',
-    'contact_cs'                =>  'Please, contact our cuctomer service.',
+    'contact_cs'                =>  'Please, contact our customer service.',
     'editors_notes'             =>  'Editors Notes',
     'size_fit'                  =>  'Size & Fit',
     'detail_care'               =>  'Details & Care',
