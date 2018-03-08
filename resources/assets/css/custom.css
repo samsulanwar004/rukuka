@@ -3,6 +3,17 @@
 
 /* end of google fonts */
 
+.fixed {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 105px;
+	z-index: 2;
+	overflow:visible;
+	background: #fff;
+	padding-top:10px;
+
+}
+
 .custom-badge {
 	margin-left: -22px!important;
 	margin-top: -40px!important;
