@@ -301,6 +301,8 @@
 
       $('#form-province-empty').val('');
       $('#form-city-empty').val('');
+
+      $('#form-postal-empty').attr('readonly', false);
     }
 
   }
