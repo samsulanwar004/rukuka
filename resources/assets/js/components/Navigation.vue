@@ -1,17 +1,17 @@
 <template>
-    <nav class="uk-container uk-section-default uk-background-default" uk-navbar="dropbar: true; align: center; boundary-align: true; delay-hide: 100; duration:200">
+    <nav class="uk-container uk-section-default uk-background-default" uk-navbar="dropbar: true; align: center; boundary-align: true; duration:100">
       <div class="uk-navbar-center">
 
           <ul class="uk-navbar-nav">
               <li><a :href="designerLink">{{ trans.designers_nav }}</a>
-                <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
-                    <div class="uk-grid uk-grid-small" uk-grid>
+                  <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
+                      <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
                           <div class="uk-width-1-1">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                               <li><h5 class="uk-margin-small uk-text-uppercase">{{ trans.designers_nav }}</h5></li>
                             </ul>
-                            <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-3">
+                            <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2 uk-width-1-2">
                                 <li class="uk-parent uk-active">
                                     <a href="/shop/designers/all">{{ trans.all }} </a>
                                 </li>
@@ -20,54 +20,46 @@
                               </li>
                             </ul>
                           </div>
-                      </div>
-                        <div class="uk-width-2-5@m uk-margin-remove">
-                            <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li><h5 class="uk-margin-small">{{designersNav.designer_designer_of_the_week_text}}</h5></li>
-                            </ul>
-                            <a :href="designersNav.designer_designer_of_the_week_url">
-                              <lazy-background
-                                :image-source="designersNav.designer_of_the_week | awsLink(aws_link)"
-                                :alt="designersNav.designer_designer_of_the_week_text"
-                                :loading-image="loadingImage"
-                                :error-image="errorImage"
-                                image-style="height: 180px">
-                              </lazy-background>
-                            </a>
                         </div>
+                        <div class="uk-width-2-5@m">
+                              <ul class="uk-nav uk-navbar-dropdown-nav">
+                                  <h5 class="uk-margin-small uk-text-uppercase"> {{ trans.brand_focus }}</h5>
+                              </ul>
+                              <ul class="uk-nav uk-navbar-dropdown-nav">
+                                  <li class="uk-parent">
+                                    <div class="uk-inline">
+                                      <a :href="designersNav.designer_shop_url">
+                                          <lazy-background
+                                                  :image-source="designersNav.designer_shop_image | awsLink(aws_link)"
+                                                  :alt="designersNav.designer_designer_shop__text"
+                                                  :loading-image="loadingImage"
+                                                  :error-image="errorImage"
+                                                  image-style="height: 400px; width:400px">
+                                          </lazy-background>
+                                      </a>
+                                      <div class="uk-overlay-primary uk-position-cover"></div>
+                                      <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m">
+                                      <a :href="designersNav.designer_shop_url">
+                                         <h2 class="uk-margin-small uk-text-uppercase"> {{designersNav.designer_shop_text}} </h2>
+                                         <a :href="designersNav.designer_shop_url" class="uk-button uk-button-small uk-button-default">{{ trans.shop_now}}</a>
+                                      </a>
+                                    </div>
+                                    </div>
+                              </ul>
+                          </div>
                     </div>
                 </div>
               </li>
               <li>
                   <a :href="womenLink">{{ trans.women_nav }}</a>
-                  <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
-                      <div uk-grid>
-                        <div class="uk-width-1-5@m">
-                            <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <h5 class="uk-margin-small uk-text-uppercase"> {{ trans.discover }}</h5>
-                            </ul>
-                            <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li class="uk-parent"><a :href="womenLink">{{ trans.new_arrival }}</a></li>
-                                <li class="uk-parent"><a :href="womensNav.women_blog_url">{{ trans.new_in_blog }}</a></li>
-                                <li class="uk-parent">
-                                    <a :href="womensNav.women_blog_url">
-                                        <lazy-background
-                                          :image-source="womensNav.women_blog_image | awsLink(aws_link)"
-                                          alt="rukuka"
-                                          :loading-image="loadingImage"
-                                          :error-image="errorImage"
-                                          image-style="height: 150px">
-                                        </lazy-background>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                          <div class="uk-width-3-5@m" uk-grid>
-                            <div class="uk-width-2-3">
+                  <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
+                      <div class="uk-grid uk-grid-small" uk-grid>
+                        <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
+                            <div class="uk-width-1-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'"><h5 class="uk-margin-small uk-text-uppercase">{{ trans.clothing }}</h5></li>
                               </ul>
-                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
+                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
                                 <li class="uk-parent uk-active">
                                   <a href="/shop/womens/all">{{ trans.all }}</a>
                                 </li>
@@ -80,7 +72,7 @@
                               <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'accessories'"><h5 class="uk-margin-small uk-text-uppercase">{{ trans.accessories }}</h5></li>
                               </ul>
-                              <ul class="uk-nav uk-navbar-dropdown-nav" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
+                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
                                 <li class="uk-parent uk-active">
                                   <a href="/shop/womens/all">{{ trans.all }}</a>
                                 </li>
@@ -90,50 +82,47 @@
                               </ul>
                             </div>
                           </div>
+                          <div class="uk-width-2-5@m">
+                              <ul class="uk-nav uk-navbar-dropdown-nav">
+                                  <h5 class="uk-margin-small uk-text-uppercase"> {{ trans.spotlight }}</h5>
+                              </ul>
+                              <ul class="uk-nav uk-navbar-dropdown-nav">
+                                  <li class="uk-parent">
+                                    <div class="uk-inline">
 
-                          <div class="uk-width-1-5@m">
-                            <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li><h5 class="uk-margin-small uk-text-uppercase">{{ trans.our_designer }}</h5></li>
-                                <li class="uk-parent"><a :href="womensNav.women_designer_1_url" >{{womensNav.women_designer_1_text}}</a></li>
-                                <li class="uk-parent"><a :href="womensNav.women_designer_2_url" >{{womensNav.women_designer_2_text}}</a></li>
-                                <li class="uk-parent"><a :href="womensNav.women_designer_3_url" >{{womensNav.women_designer_3_text}}</a></li>
-                                <li class="uk-parent"><a :href="womensNav.women_designer_4_url" >{{womensNav.women_designer_4_text}}</a></li>
-                                <li class="uk-parent"><a :href="womensNav.women_designer_5_url" >{{womensNav.women_designer_5_text}}</a></li>
-                            </ul>
+
+                                      <a :href="womensNav.women_shop_url">
+                                          <lazy-background
+                                                  :image-source="womensNav.women_shop_image | awsLink(aws_link)"
+                                                  :alt="womensNav.women_shop_text"
+                                                  :loading-image="loadingImage"
+                                                  :error-image="errorImage"
+                                                  image-style="height: 400px; width:400px">
+                                          </lazy-background>
+                                      </a>
+                                      <div class="uk-overlay-primary uk-position-cover"></div>
+                                      <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m">
+                                      <a :href="womensNav.women_shop_url">
+                                         <h2 class="uk-margin-small uk-text-uppercase"> {{womensNav.women_shop_text}} </h2>
+                                         <a :href="womensNav.women_shop_url" class="uk-button uk-button-small uk-button-default">{{ trans.shop_now}}</a>
+                                      </a>
+                                    </div>
+                                    </div>
+                                  </li>
+                              </ul>
                           </div>
                       </div>
                   </div>
               </li>
               <li><a :href="menLink">{{ trans.men_nav }}</a>
-                <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
-                    <div uk-grid>
-                      <div class="uk-width-1-5@m">
-                          <ul class="uk-nav uk-navbar-dropdown-nav">
-                              <h5 class="uk-margin-small uk-text-uppercase"> {{ trans.discover }}</h5>
-                          </ul>
-                          <ul class="uk-nav uk-navbar-dropdown-nav">
-                              <li class="uk-parent"><a :href="menLink">{{ trans.new_arrival }}</a></li>
-                              <li class="uk-parent"><a :href="mensNav.men_blog_url">{{ trans.new_in_blog }}</a></li>
-                              <li class="uk-parent">
-                                  <a :href="mensNav.men_blog_url">
-                                      <lazy-background
-                                        :image-source="mensNav.men_blog_image | awsLink(aws_link)"
-                                        alt="rukuka"
-                                        :loading-image="loadingImage"
-                                        :error-image="errorImage"
-                                        image-style="height: 150px">
-                                      </lazy-background>
-                                  </a>
-                              </li>
-                          </ul>
-                      </div>
-
-                        <div class="uk-width-3-5@m" uk-grid>
-                            <div class="uk-width-2-3">
+                <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
+                    <div class="uk-grid uk-grid-small" uk-grid>
+                        <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
+                            <div class="uk-width-1-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'"><h5 class="uk-margin-small uk-text-uppercase">{{ trans.clothing }}</h5></li>
                               </ul>
-                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2" v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
+                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1" v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
                                 <li class="uk-parent uk-active">
                                   <a href="/shop/mens/all">{{ trans.all }}</a>
                                 </li>
@@ -146,7 +135,7 @@
                               <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'accessories'"><h5 class="uk-margin-small uk-text-uppercase">{{ trans.accessories }}</h5></li>
                               </ul>
-                              <ul class="uk-nav uk-navbar-dropdown-nav" v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
+                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1" v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
                                 <li class="uk-parent uk-active">
                                   <a href="/shop/mens/all">{{ trans.all }}</a>
                                 </li>
@@ -156,22 +145,39 @@
                               </ul>
                             </div>
                           </div>
-
-                        <div class="uk-width-1-5@m">
+                        <div class="uk-width-2-5@m">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li><h5 class="uk-margin-small uk-text-uppercase">{{ trans.our_designer }}</h5></li>
-                                <li class="uk-parent"><a :href="mensNav.men_designer_1_url" >{{mensNav.men_designer_1_text}}</a></li>
-                                <li class="uk-parent"><a :href="mensNav.men_designer_2_url" >{{mensNav.men_designer_2_text}}</a></li>
-                                <li class="uk-parent"><a :href="mensNav.men_designer_3_url" >{{mensNav.men_designer_3_text}}</a></li>
-                                <li class="uk-parent"><a :href="mensNav.men_designer_4_url" >{{mensNav.men_designer_4_text}}</a></li>
-                                <li class="uk-parent"><a :href="mensNav.men_designer_5_url" >{{mensNav.men_designer_5_text}}</a></li>
+                                <h5 class="uk-margin-small uk-text-uppercase"> {{ trans.spotlight }}</h5>
+                            </ul>
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li class="uk-parent">
+                                  <div class="uk-inline">
+                                    <a :href="mensNav.men_shop_url">
+                                        <lazy-background
+                                                :image-source="mensNav.men_shop_image | awsLink(aws_link)"
+                                                :alt="mensNav.men_shop_text"
+                                                :loading-image="loadingImage"
+                                                :error-image="errorImage"
+                                                image-style="height: 400px; width:400px">
+                                        </lazy-background>
+                                    </a>
+                                    <div class="uk-overlay-primary uk-position-cover"></div>
+                                    <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m">
+                                    <a :href="mensNav.men_shop_url">
+                                       <h2 class="uk-margin-small uk-text-uppercase"> {{mensNav.men_shop_text}} </h2>
+                                       <a :href="mensNav.men_shop_url" class="uk-button uk-button-small uk-button-default">{{ trans.shop_now}}</a>
+                                    </a>
+                                  </div>
+                                  </div>
+
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
               </li>
-              <li><a>{{ trans.sale_nav }}</a>
-                  <div class="uk-navbar-dropdown uk-navbar-dropdown-width-5">
+              <li><a class="uk-text-danger"><b>{{ trans.sale_nav }}</b></a>
+                  <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div uk-grid>
                           <div class="uk-width-4-5@m uk-margin-remove">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
@@ -196,7 +202,6 @@
                                       <li>
                                           <a href="/shop/womens/sale" class="uk-text-danger">{{ trans.women_nav }}</a>
                                           <a href="/shop/mens/sale" class="uk-text-danger">{{ trans.men_nav }}</a>
-                                          <a href="/shop/kids/sale" class="uk-text-danger">{{ trans.kids_nav }}</a>
                                       </li>
                                   </ul>
                               </div>
@@ -204,9 +209,9 @@
                       </div>
                   </div>
               </li>
-              <li><a href="/blog">{{ trans.blog_nav }}</a>
+              <li><a href="/editorial">{{ trans.blog_nav }}</a>
               </li>
-              <li><a href="#">{{ trans.eco_tourism_nav }}</a></li>
+              <li><a href="/eco-tourism">{{ trans.eco_tourism_nav }}</a></li>
           </ul>
       </div>
     </nav>
@@ -267,7 +272,7 @@
                 if (typeof navigations.data.data.designers !== 'undefined') {
                    self.designers = navigations.data.data.designers.sort(sort_by('created_at', true, function(result){
                     return result;
-                  })).slice(0,17);
+                  })).slice(0,27);
                 }
 
                 if (typeof navigations.data.data.designers_nav !== 'undefined') {
@@ -295,7 +300,7 @@
               console.log(error);
             });
 
-            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;
+            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_7;
             self.errorImageSale = this.aws_link+'/images/'+this.defaultImage.image_5;
             self.loadingImage = this.aws_link+'/images/loading-image.gif';
         },

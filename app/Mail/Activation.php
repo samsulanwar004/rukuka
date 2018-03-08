@@ -35,9 +35,8 @@ class Activation extends Mailable
     public function build()
     {
 
-        (new CurrencyService)->setLang($this->lang);
-
-        return $this->markdown('emails.activation', ['user' => $this->user])
-            ->subject(trans('app.activation_subject'));
+        return $this->markdown('emails.activation', ['user' => $this->user, 'locale' => $this->lang])
+            ->subject(trans('app.activation_subject',[], $this->lang))
+            ->replyTo(config('mail.replyto.address'));
     }
 }

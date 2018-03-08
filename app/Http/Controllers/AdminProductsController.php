@@ -6,6 +6,7 @@
 	use CRUDBooster;
 	use App\Category;
 	use App\Product;
+	use Validator;
 
 	class AdminProductsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -50,8 +51,8 @@
 			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'wysiwyg','validation'=>'string','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Detail And Care','name'=>'detail_and_care','type'=>'wysiwyg','validation'=>'string','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Size And Fit','name'=>'size_and_fit','type'=>'wysiwyg','validation'=>'string','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Currency','name'=>'currency','type'=>'select','validation'=>'required','width'=>'col-sm-10','dataenum'=>'IDR'];
-			$this->form[] = ['label'=>'Price','name'=>'price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Starting Price on IDR'];
+			$this->form[] = ['label'=>'Currency','name'=>'currency','type'=>'select','validation'=>'required','width'=>'col-sm-10','dataenum'=>'IDR','value'=>'IDR'];
+//			$this->form[] = ['label'=>'Price','name'=>'price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Starting Price on IDR'];
             $this->form[] = ['label'=>'Price Before Discount','name'=>'price_before_discount','type'=>'money','validation'=>'integer|min:0','width'=>'col-sm-10','help'=>'Discount (Price before Sell Price on IDR)'];
             $this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help'=>'Selling Price on IDR'];
 			$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'required|integer|min:50','width'=>'col-sm-2','help'=>'on Gram, Min. 50 Gram','placeholder'=>'gram'];
@@ -59,8 +60,7 @@
 			$this->form[] = ['label'=>'Width','name'=>'width','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Cm','placeholder'=>'cm'];
 			$this->form[] = ['label'=>'Height','name'=>'height','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Cm','placeholder'=>'cm'];
 			$this->form[] = ['label'=>'Diameter','name'=>'diameter','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Cm','placeholder'=>'cm'];
-			$this->form[] = ['label'=>'Status','name'=>'is_active','type'=>'radio','width'=>'col-sm-10','dataenum'=>'0|Unactive;1|Active'];
-			$this->form[] = ['label'=>'Tags','name'=>'tags','type'=>'multitext','validation'=>'min:1|max:20','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Status','name'=>'is_active','type'=>'radio','width'=>'col-sm-10','dataenum'=>'0|Unactive;1|Active','value'=>0];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -317,7 +317,9 @@
 	    */
 	    public function hook_before_add(&$postdata) {
 	        //Your code here
-	        $postdata['product_code'] = 'P'.date('Ymd').rand(0,99);
+            $product_code = $this->generateProductDate();
+	        $postdata['product_code'] = $product_code;
+
 
 	    }
 
@@ -346,6 +348,14 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {
 	        //Your code here
+            $product = Product::where('id', $id)->first();
+            $product_code = strtoupper(substr($product->product_code,0,2));
+
+            if($product_code == 'P2' || $product_code == 'KP'){
+                $pc = $this->generateProductDate();
+                $postdata['product_code'] = $pc;
+            }
+
 	    }
 
 	    /*
@@ -439,5 +449,15 @@
 	    {
 	    	return $this->categoryId;
 	    }
+
+	    public function generateProductDate(){
+            $product_code = 'PC'.date('ym').rand(1000,9999);
+            $validator = \Validator::make(['product_code'=>$product_code],['product_code'=>'unique:products,product_code']);
+
+            if($validator->fails()){
+                $this->generateProductDate();
+            }
+            return $product_code;
+        }
 
 	}

@@ -21,6 +21,7 @@ class LoginController extends BaseController
     protected $redirectAfterRegister = '/login';
     protected $redirectAfterForgot = '/forgot';
     protected $redirectAfterAsGuest = '/checkout';
+    protected $redirectToHistory = '/account/history';
 
     public function __construct(SocialMediaService $social, UserRepository $user)
     {
@@ -31,10 +32,11 @@ class LoginController extends BaseController
     public function showLoginPage()
     {
         $ref = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
-        $ref = rtrim($ref, '/');
+        $ref = $ref === null ? rtrim($ref, '/') : $this->redirectAfterLogin;
 
         if (session()->has('as.checkout')) {
             $ref = url('checkout');
+            session()->forget('as.checkout');
         }
 
         $bag = (new BagService)->get(self::INSTANCE_SHOP);
@@ -101,6 +103,12 @@ class LoginController extends BaseController
         try {
             //delete session as guest
             session()->forget('as.guest');
+
+            $userExist = $this->user->getUserByEmail($request->input('email_login'));
+
+            if (in_array($userExist->social_media_type, array('facebook', 'google'))) {
+                throw new Exception("Your account has been registered by ".$userExist->social_media_type.". Please, login with ".$userExist->social_media_type, 1);
+            }
             
             $auth = $this->user
             	->setEmail($request->input('email_login'))
@@ -117,10 +125,10 @@ class LoginController extends BaseController
             return back()->withErrors($e->getMessage());
         }
 
-        if ($request->input('return_url') == url('/')) {
+        if ($request->input('return_url') == url('/') || $request->input('return_url') == url('logout') || $request->input('return_url') == url('login')) {
             return redirect($this->redirectAfterLogin)->with('success', 'Login successfully!');
-        } elseif ($request->input('return_url') == url('logout')) {
-            return redirect($this->redirectAfterLogin)->with('success', 'Login successfully!');
+        } elseif ($request->input('return_url') == url('tracking/order/result')) {
+            return redirect($this->redirectToHistory)->with('success', 'Login successfully!');
         } else {
             return redirect($request->input('return_url'))->with('success', 'Login successfully!');
         }
@@ -136,7 +144,7 @@ class LoginController extends BaseController
 
     public function socialLogin($provider)
     {
-        session()->flash('as.checkout.social', request()->input('return_url'));
+        session()->put('as.checkout.social', request()->input('return_url'));
 
         return $this->social->authenticate($provider);
     }
@@ -152,13 +160,14 @@ class LoginController extends BaseController
         } catch (SocialAuthException $e) {
             return back()->withErrors($e->getMessage());
         }
+
+        $url = session()->get('as.checkout.social');
+        session()->forget('as.checkout.social');
         
-        if (session()->get('as.checkout.social') == url('/')) {
-            return redirect($this->redirectAfterLogin)->with('success', 'Login successfully!');
-        } elseif (session()->get('as.checkout.social') == url('logout')) {
+        if ($url == url('/') || $url == url('logout') || $url == url('login')) {
             return redirect($this->redirectAfterLogin)->with('success', 'Login successfully!');
         } else {
-            return redirect(session()->get('as.checkout.social'))->with('success', 'Login successfully!');
+            return redirect($url)->with('success', 'Login successfully!');
         }
     }
 
@@ -202,6 +211,13 @@ class LoginController extends BaseController
     	]);
 
     	try {
+
+            $userExist = $this->user->getUserByEmail($request->input('email'));
+
+            if (in_array($userExist->social_media_type, array('guest'))) {
+                throw new Exception("Your account is ".$userExist->social_media_type.". Please, register with your ".$userExist->social_media_type." email", 1);
+            }
+
     		$this->user
     		->setEmail($request->input('email'))
     		->forgot();

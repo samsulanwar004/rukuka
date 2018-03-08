@@ -16,6 +16,10 @@ Route::get('lang/{lang}', [
     'uses'=>'LanguageController@switchLang'
 ]);
 
+Route::get('eco-tourism', function () {
+    return view('errors.503');
+});
+
 Route::get('/tracking/order/', [
     'as'   => 'tracking-page',
     'uses' => 'Frontend\OrderController@trackingOrder',
@@ -26,33 +30,28 @@ Route::post('/tracking/order/result', [
     'uses' => 'Frontend\OrderController@trackingOrderCode',
 ]);
 
-Route::get('/blog', [
-    'as'   => 'blog-get-index',
+Route::get('/editorial', [
+    'as'   => 'editorial-get-index',
     'uses' => 'Frontend\BlogController@index',
 ]);
 
-Route::get('/blog', [
-    'as'   => 'blog-get-index',
-    'uses' => 'Frontend\BlogController@index',
-]);
-
-Route::post('/blog', [
-    'as'   => 'blog-post-ajax',
+Route::post('/editorial', [
+    'as'   => 'editorial-post-ajax',
     'uses' => 'Frontend\BlogController@getBlogAjax',
 ]);
 
-Route::get('/blog/category/{slug}', [
-    'as'   => 'blog-get-category',
+Route::get('/editorial/category/{slug}', [
+    'as'   => 'editorial-get-category',
     'uses' => 'Frontend\BlogController@category',
 ]);
 
-Route::get('/blog/{slug}', [
-    'as'   => 'blog-get-read',
+Route::get('/editorial/{slug}', [
+    'as'   => 'editorial-get-read',
     'uses' => 'Frontend\BlogController@blogRead',
 ]);
 
-Route::get('/search/blog', [
-    'as'   => 'blog-get-search',
+Route::get('/search/editorial', [
+    'as'   => 'editorial-get-search',
     'uses' => 'Frontend\BlogController@search',
 ]);
 
@@ -144,46 +143,6 @@ Route::get('/bag', [
 Route::get('/search', [
     'as'   => 'search',
     'uses' => 'Frontend\PageController@search',
-]);
-
-Route::get('/blog', [
-    'as'   => 'blog-get-index',
-    'uses' => 'Frontend\BlogController@index',
-]);
-
-Route::post('/blog', [
-    'as'   => 'blog-post-ajax',
-    'uses' => 'Frontend\BlogController@getBlogAjax',
-]);
-
-Route::get('/blog/category/{slug}', [
-    'as'   => 'blog-get-category',
-    'uses' => 'Frontend\BlogController@category',
-]);
-
-Route::get('/blog/{slug}', [
-    'as'   => 'blog-get-read',
-    'uses' => 'Frontend\BlogController@blogRead',
-]);
-
-Route::get('/search/blog', [
-    'as'   => 'blog-get-search',
-    'uses' => 'Frontend\BlogController@search',
-]);
-
-Route::get('/help/{slug}', [
-    'as'   => 'get-help',
-    'uses' => 'Frontend\PageController@help',
-]);
-
-Route::get('/page/{slug}', [
-    'as'   => 'get-page',
-    'uses' => 'Frontend\PageController@page',
-]);
-
-Route::post('/review-ajax', [
-    'as'   => 'review-post-ajax',
-    'uses' => 'Frontend\UserController@getReviewAjax',
 ]);
 
 Route::post('/contact', [
@@ -457,6 +416,11 @@ Route::middleware(['as.guest'])->group(function () {
     Route::get('tracking/trace/{ordeCode}', [
         'as'   => 'tracking-trace',
         'uses' => 'Frontend\OrderController@trackingTrace',
+    ]);
+
+    Route::get('/order/repayment', [
+        'as'   => 'order-repayment',
+        'uses' => 'Frontend\OrderController@trackingOrder',
     ]);
 
 });

@@ -12,6 +12,8 @@ return [
     'title_product'             =>  'at ruKuKa',
     'title_shop_womens'         =>  'Womens at ruKuKa',
     'title_shop_mens'           =>  'Mens at ruKuKa',
+    'title_sale_womens'         =>  'Womens Sale - ruKuKa',
+    'title_sale_mens'           =>  'Mens Sale - ruKuKa',
     'title_shop_category'       =>  'at ruKuKa',
     'title_tracking'            =>  'Tracking & Trace at ruKuKa',
     'title_search'              =>  'at ruKuKa',
@@ -34,9 +36,9 @@ return [
     'title_address_book'        =>  'ruKuKa - Address Book',
     'title_order_history'       =>  'ruKuKa - Order History',
     'title_wishlist'            =>  'ruKuKa - Wishlist',
-    'title_blog'                =>  'ruKuKa - Blog',
-    'title_blog_read'           =>  'at ruKuKa Blog',
-    'title_blog_search'         =>  ' ruKuKa Blog',
+    'title_blog'                =>  'ruKuKa - Editorial',
+    'title_blog_read'           =>  'at ruKuKa Editorial',
+    'title_blog_search'         =>  'ruKuKa Editorial',
     'title_lookbook'            =>  'ruKuKa - Lookbook',
 
     //common
@@ -59,7 +61,13 @@ return [
     //contact and social media
     'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',
     'facebook'                  =>  'https://www.facebook.com/Rukuka-333650107116878/',
-    'email_to'                  =>  'mailto:customercare@rukuka.com',
+    'email_to'                  =>  'mailto:info@rukuka.com',
+
+    //resources/views/pages/index.blade.php
+    'title_index_1'             => 'New Arrival',
+    'title_index_2'             => 'Happenings Right Now!',
+    'title_index_3'             => 'editor\'s pick',
+    'subtitle_index_1'          => 'Get Discover',
 
     //resources/views/partials/nav.blade.php
     'search'                    =>  'S E A R C H . . .',
@@ -81,14 +89,14 @@ return [
     'about_rukuka'              =>  'About ruKuKa',
     'order_shipping'            =>  'Order and Shipping',
     'connect_us'                =>  'Connect With Us',
-    'copyright'                 =>  'rukuka.com',
+    'copyright'                 =>  'rukuka.com 2018',
     'language'                  =>  'Language',
     'track_order'               =>  'Track Your Order',
     'shipping_handling'         =>  'Shipping & Handling',
     'size_chart'                =>  'Size Charts',
     'contact_us'                =>  'Contact Us',
     'payment'                   =>  'Payment',
-    'sale_item'                 =>  'Sale Item',
+    'sale_item'                 =>  'Sale Items',
     'returns_exchanges'         =>  'Return & Exchange',
     'about_us'                  =>  'About Us',
     'partners'                  =>  'Partners',
@@ -110,7 +118,7 @@ return [
     'men_nav'                   =>  'Men',
     'kids_nav'                  =>  'Kids',
     'sale_nav'                  =>  'Sale',
-    'blog_nav'                  =>  'Blog',
+    'blog_nav'                  =>  'Editorial',
     'eco_tourism_nav'           =>  'Eco Tourism',
     'all'                       =>  'All',
     'new_arrival'               =>  'New Arrival',
@@ -119,7 +127,10 @@ return [
     'clothing'                  =>  'Clothing',
     'accessories'               =>  'Accessories',
     'discover'                  =>  'Discover',
-    'new_in_blog'               =>  'New in Blog',
+    'new_in_blog'               =>  'New in Editorial',
+    'brand_focus'               =>  'Brand Focus',
+    'shop_now'                  =>  'Shop Now',
+    'spotlight'                 =>  'Spotlight On',
 
     //resources/views/partials/user_menu.blade.php
     'home'                      =>  'Home',
@@ -258,7 +269,8 @@ return [
     'back_to_history'           =>  'Back to History',
     'back_to_tracking'          =>  'Track another order number',
     'payment_confirm_unpaid'    =>  'Thank you for ordering from us, Your order has been approved and is waiting for your payment. We will confirm you shortly once payment has been completed.',
-    'payment_note'              =>  'Please finish your payment before payment is expired',
+    'payment_note'              =>  'Please finish your payment before your order is expired',
+    'payment_note_login'        =>  'Please login to your account to finish your payment before your order is expired',
     'shipment_note'             =>  'Thank you for ordering from us, We\'ll get started on it right away and you\'ll receive a shipping confirmation email soon.',
 
     //resources/views/pages/tracking_order_index.blade.php
@@ -364,7 +376,7 @@ return [
     'expired'                   =>  'Expired',
     'year'                      =>  'Year',
     'month'                     =>  'Month',
-    'cvn_code'                  =>  'Cvn Code',
+    'cvn_code'                  =>  'CVN Code',
 
     //resources/views/blogs/home.blade.php
     'load_more'                 =>  'Load More',
@@ -377,12 +389,13 @@ return [
     //email common
     'invoice'                   =>  'Invoice',
     'note'                      =>  'Note',
-    'note_currency'             =>  'charge will be change in IDR currency.',
+    'note_currency'             =>  '* charge will be change in IDR currency.',
     'please'                    =>  'Please',
     'contact_label'             =>  'contact us',
     'contact_text'              =>  'with any questions regarding this invoice.',
     'sincerely'                 =>  'Sincerely',
     'rukuka_team'               =>  'ruKuKa Team',
+    'shipping_label'            =>  'Shipping',
 
     //resources/views/emails/invoice_unpaid.blade.php
     'unpaid_subject'            =>  'Invoice Unpaid',
@@ -403,9 +416,15 @@ return [
     //resources/views/emails/shipping.blade.php
     'shipping_subject'          =>  'Shipping Confirmation',
     'shipping_title'            =>  'Your Order Has Shipped.',
-    'shipping_subtitle_1'       =>  'please review your order below',
+    'shipping_subtitle_1'       =>  'Please review your order below',
     'shipping_text_1'           =>  'Thank you for ordering from us. We wanted to let you know that we just shipped off your order. ',
     'shipping_text_2'           =>  'You can review complete details of your order on the Order History page.',
+
+    // resource/views/emails/ general email footer
+    'footmail_question'         =>  'if you have any question, please email us at',
+    'footmail_email_sup'        =>  'info@rukuka.com',
+    'footmail_city'             =>  'Jakarta, Indonesia',
+    'footmail_copyright'        =>  '© 2018 ruKuKa',
 
     //resources/views/emails/activation.blade.php
     'activation_subject'        =>  'Activation Account',
@@ -413,7 +432,7 @@ return [
     'activation_subtitle_1'     =>  'We hope you will have',
     'activation_subtitle_2'     =>  'an Awesome time!',
     'activation_text'           =>  'Thank you for signing up. Just one click away from activating your account.',
-    'activation_activate_now'   =>  'Activate Now',
+    'activation_activate_now'   =>  'Activate',
     'activation_account'        =>  'Your account information:',
 
     //resources/views/emails/forgot.blade.php
@@ -421,9 +440,9 @@ return [
     'forgot_title'              =>  'Forgot Your Password ?',
     'forgot_subtitle_1'         =>  'Let\'s get you',
     'forgot_subtitle_2'         =>  'a new one.',
-    'forgot_text_1'             =>  'We got a request to reset your rukuka password.',
-    'forgot_text_2'             =>  'If you ignore this message, your password won\'t be changed',
-    'forgot_reset'              =>  'Reset Password',
+    'forgot_text_1'             =>  'You told us you forgot you pasword. If you really did, click here to choose a new one:',
+    'forgot_text_2'             =>  'If you did not mean to reset your password, then you can just ignore this email, your password will not change.',
+    'forgot_reset'              =>  'Choose a new password',
 
     //resources/views/pages/password/reset.blade.php
     'input_new_password'        =>'Please input your new password'

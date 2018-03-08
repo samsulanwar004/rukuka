@@ -254,6 +254,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
+            $postdata['slug']= str_slug($postdata['name']);
 
 	    }
 
@@ -266,10 +267,7 @@
 	    */
 	    public function hook_after_add($id) {        
 	        //Your code here
-            $categories = DB::table('blog_categories');
-            $category = $categories->where('id', $id)->first();
-            $postdata['slug'] = str_slug($category->name);
-            $categories->update($postdata);
+
 	    }
 
 	    /* 
@@ -282,6 +280,7 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
 	        //Your code here
+            $postdata['slug']= str_slug($postdata['name']);
 
 	    }
 
@@ -294,10 +293,7 @@
 	    */
 	    public function hook_after_edit($id) {
 	        //Your code here
-            $categories = DB::table('blog_categories');
-            $category = $categories->where('id', $id)->first();
-            $postdata['slug'] = str_slug($category->name);
-            $categories->update($postdata);
+
 	    }
 
 	    /* 

@@ -16,21 +16,27 @@ class CurrencyService
 		    $currency = ExchangeRate::where('currency_code_to', 'usd')
 		    	->orderBy('id', 'DESC')
 		    	->first();
-		    $currency->symbol = '$';
-		    $currency->currency_code_to = 'usd';
+		    if ($currency) {
+		    	$currency->symbol = '$';
+		    	$currency->currency_code_to = 'usd';
+		    }
 
 		} elseif (App::isLocale('jp') || $lang == 'jp') {
 			$currency = ExchangeRate::where('currency_code_to', 'jpy')
 		    	->orderBy('id', 'DESC')
 		    	->first();
-		    $currency->symbol = '¥';
-		    $currency->currency_code_to = 'jpy';
+		    if ($currency) {
+		    	$currency->symbol = '¥';
+		    	$currency->currency_code_to = 'jpy';
+		    }
 		} else {
 			$currency = ExchangeRate::where('currency_code_to', 'usd')
 		    	->orderBy('id', 'DESC')
 		    	->first();
-		    $currency->symbol = '$';
-		    $currency->currency_code_to = 'usd';
+		    if ($currency) {
+		    	$currency->symbol = '$';
+		    	$currency->currency_code_to = 'usd';
+		    }
 		}
 
 		$result = new \stdClass();
@@ -39,13 +45,6 @@ class CurrencyService
 		$result->value = isset($currency->conversion_value) ? $currency->conversion_value : '1';
 
 		return $result;
-	}
-
-	public function setLang($lang)
-	{
-		if (array_key_exists($lang, Config::get('languages'))) {
-            return Session::put('applocale', $lang);
-        }
 	}
 
 	public function getLang()

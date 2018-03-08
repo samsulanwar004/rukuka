@@ -39,7 +39,7 @@
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
+			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|unique:popups','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
 			$this->form[] = ['label'=>'Url','name'=>'url','type'=>'text','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
@@ -257,7 +257,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-
+            $postdata['slug']= str_slug($postdata['name']);
 	    }
 
 	    /* 
@@ -269,10 +269,6 @@
 	    */
 	    public function hook_after_add($id) {        
 	        //Your code here
-            $popups = DB::table('popups');
-            $popup = $popups->where('id', $id)->first();
-            $postdata['slug'] = str_slug($popup->name);
-            $popups->update($postdata);
 	    }
 
 	    /* 
@@ -285,7 +281,7 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
 	        //Your code here
-
+            $postdata['slug']= str_slug($postdata['name']);
 	    }
 
 	    /* 
@@ -297,10 +293,6 @@
 	    */
 	    public function hook_after_edit($id) {
 	        //Your code here
-            $popups = DB::table('popups');
-            $popup = $popups->where('id', $id)->first();
-            $postdata['slug'] = str_slug($popup->title);
-            $popup->update($postdata);
 
 	    }
 

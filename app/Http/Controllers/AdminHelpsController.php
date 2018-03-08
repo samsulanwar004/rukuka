@@ -38,7 +38,7 @@
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Title','name'=>'title','type'=>'text','validation'=>'required|string','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
+			$this->form[] = ['label'=>'Title','name'=>'title','type'=>'text','validation'=>'required|string|unique:helps','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
 			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'wysiwyg','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
@@ -256,7 +256,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-
+            $postdata['slug']= str_slug($postdata['title']);
 	    }
 
 	    /* 
@@ -268,10 +268,6 @@
 	    */
 	    public function hook_after_add($id) {        
 	        //Your code here
-            $pages = DB::table('helps');
-            $page = $pages->where('id', $id)->first();
-            $postdata['slug'] = str_slug($page->title);
-            $pages->update($postdata);
 
 	    }
 
@@ -285,6 +281,7 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
 	        //Your code here
+            $postdata['slug']= str_slug($postdata['title']);
 
 	    }
 
@@ -297,10 +294,6 @@
 	    */
 	    public function hook_after_edit($id) {
 	        //Your code here
-            $pages = DB::table('helps');
-            $page = $pages->where('id', $id)->first();
-            $postdata['slug'] = str_slug($page->title);
-            $pages->update($postdata);
 
 	    }
 

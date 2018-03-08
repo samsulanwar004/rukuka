@@ -30,8 +30,8 @@ import ColorPaletteMobile from './components/ColorPaletteMobile.vue';
 import Lookbook from './components/Lookbook.vue';
 
 
-Vue.config.devtools = true
-Vue.config.debug = true
+Vue.config.devtools = false
+Vue.config.debug = false
 Vue.config.silent = true
 
 Vue.use(VueResource);

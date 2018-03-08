@@ -48,7 +48,6 @@ class PageController extends BaseController
 
     public function shop(Request $request, $categories, $category, $slug = null, $sale = null)
     {
-
         if ($categories == 'designers') {
             try{
                 $product = (new ProductRepository);
@@ -85,7 +84,20 @@ class PageController extends BaseController
 
         $colorId = $request->has('color_id') ? $request->input('color_id') : null;
 
-        $shops = $products->map(function ($entry) {
+        $ids = [];
+        foreach ($products as $value) {
+            $ids[] = $value->id;
+        }
+
+        $image = (new ProductRepository)->getProductImage($ids);
+
+        $shops = $products->map(function ($entry) use ($image){
+
+            foreach ($image as $value) {
+                if ($entry->id == $value->products_id) {
+                    $entry->photo = $value->photo;
+                }
+            }
 
             return [
                 'id' => $entry->id,
@@ -93,7 +105,8 @@ class PageController extends BaseController
                 'slug' => $entry->slug,
                 'price' => $entry->sell_price,
                 'price_before_discount' => $entry->price_before_discount,
-                'photo' => $entry->images->first()->photo,
+                'photo' => $entry->photo,
+                'is_new' => $this->date->diffInDays(Carbon::parse($entry->created_at)) <= 7 ? true : false,
             ];
         });
 
@@ -227,7 +240,8 @@ class PageController extends BaseController
 
         $slider = (new SettingRepository())->getSliderByGroup('Kids');
 
-        return view('pages.kids', compact('kids','slider'));
+//        return view('pages.kids', compact('kids','slider'));
+        return view('errors.404');
     }
 
     public function bag(Request $request)
@@ -429,7 +443,20 @@ class PageController extends BaseController
             $products->appends($key, $value);
         }
 
-        $shops = $products->map(function ($entry) {
+        $ids = [];
+        foreach ($products as $value) {
+            $ids[] = $value->id;
+        }
+
+        $image = (new ProductRepository)->getProductImage($ids);
+
+        $shops = $products->map(function ($entry) use ($image) {
+
+            foreach ($image as $value) {
+                if ($entry->id == $value->products_id) {
+                    $entry->photo = $value->photo;
+                }
+            }
 
             return [
                 'id' => $entry->id,
@@ -438,7 +465,8 @@ class PageController extends BaseController
                 'slug' => $entry->slug,
                 'price' => $entry->sell_price,
                 'price_before_discount' => $entry->price_before_discount,
-                'photo' => $entry->images->first()->photo,
+                'photo' => $entry->photo,
+                'is_new' => $this->date->diffInDays(Carbon::parse($entry->created_at)) <= 7 ? true : false,
             ];
         });
 

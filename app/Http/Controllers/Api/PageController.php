@@ -116,15 +116,29 @@ class PageController extends BaseApiController
     {
         try {
             $popular = (new ProductRepository)->getMostProduct($group);
-            $popular = $popular->map(function ($entry) {
+
+            $ids = [];
+            foreach ($popular as $value) {
+                $ids[] = $value->id;
+            }
+
+            $image = (new ProductRepository)->getProductImage($ids);
+
+            $popular = $popular->map(function ($entry) use ($image) {
+
+                foreach ($image as $value) {
+                    if ($entry->id == $value->products_id) {
+                        $entry->photo = $value->photo;
+                    }
+                }
+
                 return [
-                    'id' => $entry->product->id,
-                    'name' => $entry->product->name,
-                    'slug' => $entry->product->slug,
-                    'price' => $entry->product->sell_price,
-                    'price_before_discount' => $entry->product->price_before_discount,
-                    'currency' => $entry->product->currency,
-                    'photo' => $entry->product->images->first()->photo,
+                    'id' => $entry->id,
+                    'name' => $entry->name,
+                    'slug' => $entry->slug,
+                    'price' => $entry->sell_price,
+                    'price_before_discount' => $entry->price_before_discount,
+                    'photo' => $entry->photo,
                 ];
             })->toArray();
 
@@ -139,15 +153,28 @@ class PageController extends BaseApiController
         try {
             $related = (new ProductRepository)->getRelatedProduct($categoryId);
 
-            $related = $related->map(function ($entry) {
+            $ids = [];
+            foreach ($related as $value) {
+                $ids[] = $value->id;
+            }
+
+            $image = (new ProductRepository)->getProductImage($ids);
+
+            $related = $related->map(function ($entry) use ($image) {
+
+                foreach ($image as $value) {
+                    if ($entry->id == $value->products_id) {
+                        $entry->photo = $value->photo;
+                    }
+                }
+
                 return [
                     'id' => $entry->id,
                     'name' => $entry->name,
                     'slug' => $entry->slug,
                     'price' => $entry->sell_price,
                     'price_before_discount' => $entry->price_before_discount,
-                    'currency' => $entry->currency,
-                    'photo' => $entry->images->first()->photo,
+                    'photo' => $entry->photo,
                 ];
             })->toArray();
 
@@ -193,18 +220,31 @@ class PageController extends BaseApiController
         try {
 
             $product = $request->input('product');
-            
+
             $recently = (new ProductRepository)->getRecentlyViewedProduct($product);
 
-            $recently = $recently->map(function ($entry) {
+            $ids = [];
+            foreach ($recently as $value) {
+                $ids[] = $value->id;
+            }
+
+            $image = (new ProductRepository)->getProductImage($ids);
+
+            $recently = $recently->map(function ($entry) use ($image) {
+
+                foreach ($image as $value) {
+                    if ($entry->id == $value->products_id) {
+                        $entry->photo = $value->photo;
+                    }
+                }
+
                 return [
                     'id' => $entry->id,
                     'name' => $entry->name,
                     'slug' => $entry->slug,
                     'price' => $entry->sell_price,
                     'price_before_discount' => $entry->price_before_discount,
-                    'currency' => $entry->currency,
-                    'photo' => $entry->images->first()->photo,
+                    'photo' => $entry->photo,
                 ];
             })->toArray();
 
@@ -242,7 +282,21 @@ class PageController extends BaseApiController
 
             $recently = (new ProductRepository)->getLookbookProduct($product);
 
-            $recently = $recently->map(function ($entry) {
+            $ids = [];
+            foreach ($recently as $value) {
+                $ids[] = $value->id;
+            }
+
+            $image = (new ProductRepository)->getProductImage($ids);
+
+            $recently = $recently->map(function ($entry) use ($image) {
+
+                foreach ($image as $value) {
+                    if ($entry->id == $value->products_id) {
+                        $entry->photo = $value->photo;
+                    }
+                }
+
                 return [
                     'id' => $entry->id,
                     'name' => $entry->name,
@@ -250,7 +304,7 @@ class PageController extends BaseApiController
                     'price' => $entry->sell_price,
                     'price_before_discount' => $entry->price_before_discount,
                     'currency' => $entry->currency,
-                    'photo' => $entry->images->first()->photo,
+                    'photo' => $entry->photo,
                 ];
             })->toArray();
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\OrderDetail;
+use App\Order;
 use Illuminate\Http\Request;
 use App\Repositories\OrderRepository;
 use App\Services\BagService;
@@ -12,6 +14,7 @@ use App\Repositories\CourierRepository;
 use DB;
 use Carbon\Carbon;
 use Exception;
+use Validator;
 
 class OrderController extends BaseController
 {
@@ -66,6 +69,7 @@ class OrderController extends BaseController
 	        		'product_code' => $entry->options->product_code,
 	        		'product_stocks_id' => $entry->options->product_stocks_id,
 	        		'product_photo' => $entry->options->photo,
+	        		'size' => $entry->options->size,
 	        	];
 	        });
 
@@ -81,7 +85,7 @@ class OrderController extends BaseController
 	        $signature = sha1($totalwithshipping.$secret);
 
 	        $order = $this->order
-	        	->setOrderCode('ON'.date('YmdHis').rand(000,999))
+	        	->setOrderCode($this->generateOrderCode())
 	        	->setUser($user)
 	        	->setPaymentMethod('creditcard')
 	        	->setPaymentName($address->first_name)
@@ -133,10 +137,8 @@ class OrderController extends BaseController
 			{
 	         	throw new Exception("access denied.", 1);	
 	        }
-	
-			$data_order = DB::table('orders')
-			 			   ->where('order_code',$order_id)
-			 			   ->first();
+
+            $data_order = Order::where('order_code',$order_id) ->first();
 			 			   
 			if (!isset($data_order->order_code)) {
 				throw new Exception("order code not found.", 1);
@@ -156,9 +158,7 @@ class OrderController extends BaseController
 	        
 	        $order = (object) array('order_code' => $data_order->order_code,'users_id' => $data_order->users_id);
 
-	        $detail = DB::table('order_details')
-			 			   ->where('orders_id',$data_order->id)
-			 			   ->get();
+            $detail = OrderDetail::where('orders_id',$data_order->id)->get();
 
 			$detail = $detail->map(function ($entry) use ($detail){
 	        	return [
@@ -169,6 +169,7 @@ class OrderController extends BaseController
 	        		'product_id' => $entry->product_stocks_id,
 	        		'product_code' => $entry->product_code,
 	        		'product_stocks_id' => $entry->product_stocks_id,
+                    'size'  =>  $entry->productStock->size,
 	        	];
 	        });	   
 
@@ -205,6 +206,11 @@ class OrderController extends BaseController
 	}
 
 	public function trackingOrder(){
+        if(auth()->check()){
+            return redirect('/account/history');
+        }
+        //delete session as guest
+        session()->forget('as.guest');
 
 		return view('pages.tracking_order_index');
 	
@@ -214,7 +220,6 @@ class OrderController extends BaseController
 
         $tracking = $this->order
                     ->setOrderCode($request->input('order_code'))
-                    ->setUser($this->getUserActive())
                     ->setUserEmail($request->input('email'))
                     ->getTrackingOrder();
 
@@ -223,4 +228,14 @@ class OrderController extends BaseController
 		return view('pages.tracking_order_status', compact('tracking','exchange'));
 
 	}
+
+	public function generateOrderCode(){
+	    $order_code = date('ym').rand(1000,9999);
+        $validator = \Validator::make(['order_code'=>$order_code],['order_code'=>'unique:orders,order_code']);
+
+        if($validator->fails()){
+            $this->generateProductDate();
+        }
+	    return $order_code;
+    }
 }

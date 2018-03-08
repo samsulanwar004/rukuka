@@ -13,11 +13,17 @@
                           :error-image="errorImage"
                           image-class="uk-transition-scale-up uk-transition-opaque">
                         </lazy-background>
+                        <div class="uk-postion-small uk-position-top-right" v-if="product.price_before_discount > 0">
+                          <span class="uk-label uk-label-danger">SALE</span>
+                        </div>
+                        <div class="uk-postion-small uk-position-top-left" v-if="product.is_new">
+                          <span class="uk-label uk-label-success">NEW</span>
+                        </div>
                     </a>
                 </div>
                 <div class="uk-card-body uk-padding-remove">
                   <div>
-                    <a href="#modal-shop" class="uk-button uk-button-small uk-button-danger uk-width-1-1 uk-text-uppercase" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
+                    <a href="#modal-shop" class="uk-button uk-button-small uk-button-secondary uk-width-1-1 uk-text-uppercase" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
                   </div>
                     <a :href="'/product/'+ product.slug" alt="product.name">{{ product.name.substring(0,30) }}</a>
                     <br>
@@ -68,7 +74,7 @@
         </div>
         <!-- end product single -->
         <div id="modal-shop" class="uk-modal-container-small" uk-modal="center: true">
-          <div class="uk-modal-dialog uk-margin-auto">
+          <div class="uk-modal-dialog uk-margin-auto-vertical">
             <button class="uk-modal-close-default" type="button" uk-close></button>
             <div class="uk-modal-body uk-padding-remove" uk-overflow-auto>
               <div class="uk-grid uk-grid-collapse" uk-grid>
@@ -172,7 +178,7 @@
                           </div>
                       </li>
                   </ul>
-                  <a :href="'/product/' +slug" class="uk-button uk-button-text uk-text-right">{{ trans.see_detail }} <span uk-icon="icon: chevron-right"></span> </a>
+                  <a :href="'/product/' +slug" class="uk-text-danger uk-text-right">{{ trans.see_detail }} <span uk-icon="icon: chevron-right"></span> </a>
                   </div>
                   <div class="uk-width-1-1">
 

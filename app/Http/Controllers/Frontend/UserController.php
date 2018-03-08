@@ -173,7 +173,7 @@ class UserController extends BaseController
                     'first_name' => 'required|string|max:255',
                     'last_name' => 'required|string|max:255',
                     'phone_number' => 'required|numeric',
-                    'postal' => 'required|numeric',
+                    'postal' => 'required|string',
                     'address_line' => 'required',
                     'city' => 'required',
                     'province' => 'required',
@@ -660,7 +660,7 @@ class UserController extends BaseController
             'last_name' => 'required|string|max:255',
             'company' => 'string|max:255',
             'phone_number' => 'required|numeric',
-            'postal' => 'required|numeric',
+            'postal' => 'required|string',
             'address_line' => 'required',
             'city' => 'required',
             'province' => 'required',
@@ -776,6 +776,11 @@ class UserController extends BaseController
         // $defaultCreditcard->phone_number = $creditCard->address->phone_number;
 
         $shippingCost = (new CourierRepository)->getSavedSessionShippingChoosed();
+
+        if ($shippingCost['error'] == '991') {
+            return redirect('/checkout/shipping')->with(['success' => $shippingCost['message']]);
+        }
+
         $exchange = (new CurrencyService)->getCurrentCurrency();
 
         //inject currency

@@ -12,6 +12,8 @@ return [
     'title_product'             =>  'at ruKuKa',
     'title_shop_womens'         =>  'Womens at ruKuKa',
     'title_shop_mens'           =>  'Mens at ruKuKa',
+    'title_sale_womens'         =>  'Womens Sale - ruKuKa',
+    'title_sale_mens'           =>  'Mens Sale - ruKuKa',
     'title_shop_category'       =>  'at ruKuKa',
     'title_tracking'            =>  'Tracking & Trace at ruKuKa',
     'title_search'              =>  'at ruKuKa',
@@ -36,7 +38,7 @@ return [
     'title_wishlist'            =>  'ruKuKa - Wishlist',
     'title_blog'                =>  'ruKuKa - Blog',
     'title_blog_read'           =>  'at ruKuKa Blog',
-    'title_blog_search'         =>  ' ruKuKa Blog',
+    'title_blog_search'         =>  'ruKuKa Blog',
     'title_lookbook'            =>  'ruKuKa - Lookbook',
 
     //common
@@ -59,7 +61,13 @@ return [
     //contact and social media
     'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',
     'facebook'                  =>  'https://www.facebook.com/Rukuka-333650107116878/',
-    'email_to'                  =>  'mailto:customercare@rukuka.com',
+    'email_to'                  =>  'mailto:info@rukuka.com',
+
+    //resources/views/pages/index.blade.php
+    'title_index_1'             => 'New Arrival',
+    'title_index_2'             => 'Happenings Right Now!',
+    'title_index_3'             => 'editor\'s pick',
+    'subtitle_index_1'          => 'Get Discover',
 
     //resources/views/partials/nav.blade.php
     'search'                    =>  'サーチ',
@@ -81,7 +89,7 @@ return [
     'about_rukuka'              =>  'ruKuKa について',
     'order_shipping'            =>  '注文と出荷',
     'connect_us'                =>  '私たちとつながる',
-    'copyright'                 =>  'rukuka.com',
+    'copyright'                 =>  'rukuka.com 2018',
     'language'                  =>  '言語',
     'track_order'               =>  '注文を追跡する',
     'shipping_handling'         =>  '出荷処理',
@@ -120,6 +128,9 @@ return [
     'accessories'               =>  'アクセサリーa',
     'discover'                  =>  '発見',
     'new_in_blog'               =>  'ブログの新機能',
+    'brand_focus'               =>  'Brand Focus',
+    'shop_now'                  =>  'Shop Now',
+    'spotlight'                 =>  'Spotlight On',
 
     //resources/views/partials/user_menu.blade.php
     'home'                      =>  'ホーム',
@@ -259,6 +270,7 @@ return [
     'back_to_tracking'          =>  '別の注文コードを追跡する',
     'payment_confirm_unpaid'    =>  '私たちから注文していただきありがとうございます、あなたの注文は承認されてお支払いを待っています。 支払いが完了したら、まもなくご連絡いたします。',
     'payment_note'              =>  '支払いが期限切れになる前にお支払いを完了してください',
+    'payment_note_login'        =>  '注文が期限切れになる前にお支払いを完了するには、アカウントにログインしてください',
     'shipment_note'             =>  '私たちから注文いただきありがとうございます。すぐに開始されますので、すぐに配送確認メールが届きます。',
 
     //resources/views/pages/tracking_order_index.blade.php
@@ -383,6 +395,7 @@ return [
     'contact_text'              =>  'この請求書に関するご質問をお待ちしております。',
     'sincerely'                 =>  '敬具',
     'rukuka_team'               =>  'ruKuKa チーム',
+    'shipping_label'            =>  '輸送費',
 
     //resources/views/emails/invoice_unpaid.blade.php
     'unpaid_subject'            =>  '未払いの請求書',
@@ -407,6 +420,12 @@ return [
     'shipping_text_1'           =>  '私たちからご注文いただきありがとうございます。 私たちはあなたの注文を出荷したばかりであることをお知らせしたいと思います。',
     'shipping_text_2'           =>  '注文履歴ページで、注文の詳細を確認できます。',
 
+    // resource/views/emails/ general email footer
+    'footmail_question'         =>  'ご不明な点がございましたら、メールでお問い合わせください',
+    'footmail_email_sup'        =>  'info@rukuka.com',
+    'footmail_city'             =>  'Jakarta, Indonesia',
+    'footmail_copyright'        =>  '© 2018 ruKuKa',
+
     //resources/views/emails/activation.blade.php
     'activation_subject'        =>  'アクティベーションアカウント',
     'activation_title'          =>  'ruKuKaへようこそ',
@@ -421,9 +440,9 @@ return [
     'forgot_title'              =>  'パスワードをお忘れですか ?',
     'forgot_subtitle_1'         =>  'あなたを手放しましょう',
     'forgot_subtitle_2'         =>  '新しいもの.',
-    'forgot_text_1'             =>  '私たちはあなたのrukukaパスワードをリセットするよう要求しました。',
-    'forgot_text_2'             =>  'このメッセージを無視すると、パスワードは変更されません',
-    'forgot_reset'              =>  'パスワードを再設定する',
+    'forgot_text_1'             =>  'パスワードを忘れてしまったとお伝えしました。 あなたが実際に行った場合は、ここをクリックして新しいものを選択してください：',
+    'forgot_text_2'             =>  'パスワードをリセットするつもりがない場合は、このメールを無視することができます。 パスワードは変更されません。',
+    'forgot_reset'              =>  '新しいパスワードを選択する',
 
     //resources/views/pages/password/reset.blade.php
     'input_new_password'        =>  '新しいパスワードを入力してください'

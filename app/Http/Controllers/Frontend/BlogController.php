@@ -42,7 +42,7 @@ class BlogController extends Controller
         {
             foreach($posts as $post)
             {
-                $url = url('blog/'.$post->slug);
+                $url = url('editorial/'.$post->slug);
 
                 $image = '<img src="'. uploadCDN($post->photo_1) .'" alt="'.$post->title.'" onerror="this.src = \''.imageCDN(config('common.default.image_7')).'\'">';
 
