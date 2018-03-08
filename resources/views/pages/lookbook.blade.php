@@ -6,7 +6,7 @@
             <div class="uk-position-relative uk-visible-toggle uk-light">
                 <ul class="uk-slideshow-items">
                     <li>
-                        <div class="uk-position-cover" uk-slideshow-parallax="scale: 1.2,1.2,1">
+                        <div class="uk-position-cover">
                             <img src="{{ uploadCDN($lookbook->banner) }}" alt="rukuka lookbook" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'" uk-cover>
                         </div>
                         <div class="uk-position-cover" uk-slideshow-parallax="opacity: 0,0,0.2; background-color: #000,#000"></div>
@@ -20,16 +20,12 @@
                         </div>
                     </li>
                 </ul>
-
                 <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
                 <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
-
             </div>
-
             <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
-
         </div>
-        <div class="uk-card uk-card-secondary uk-card-small">
+        <div class="uk-card uk-card-secondary uk-card-small uk-margin-medium-bottom">
           <div class="uk-card-body">
             <h4 class="uk-text-center"><b> {{ $lookbook->title }}</b></h4>
           </div>
