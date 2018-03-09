@@ -10,6 +10,6 @@ class Blog extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'blog_categories_id');
+        return $this->belongsTo(BlogCategory::class, 'blog_categories_id');
     }
 }
