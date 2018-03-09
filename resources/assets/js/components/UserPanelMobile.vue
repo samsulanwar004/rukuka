@@ -6,6 +6,7 @@
       </div>
       <div class="uk-width-expand uk-text-center">
         <a href="/">
+          <div class="uk-inline">
           <lazy-background
                   :image-source="logoImage | awsLink(aws_link)"
                   :alt="rukukalogo"
@@ -13,6 +14,10 @@
                   :error-image="errorImageSale"
                   image-style="width: 60px">
           </lazy-background>
+            <div class="uk-overlay uk-position-top">
+              <p style="margin-top: -25px;margin-left: 20px;font-size: 12px">BETA</p>
+            </div>
+          </div>
         </a>
       </div>
       <div class="uk-width-auto"><a class="uk-icon-link" uk-icon="icon: cart; ratio: 0.9" :href="bag_link"></a>
