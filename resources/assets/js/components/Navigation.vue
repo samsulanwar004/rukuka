@@ -176,6 +176,9 @@
                     </div>
                 </div>
               </li>
+              <li>
+                  <a href="/shop/home/all">{{ trans.home }}</a>
+              </li>
               <li><a class="uk-text-danger"><b>{{ trans.sale_nav }}</b></a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div uk-grid>
@@ -202,6 +205,7 @@
                                       <li>
                                           <a href="/shop/womens/sale" class="uk-text-danger">{{ trans.women_nav }}</a>
                                           <a href="/shop/mens/sale" class="uk-text-danger">{{ trans.men_nav }}</a>
+                                          <a href="/shop/home/sale" class="uk-text-danger">{{ trans.home_nav }}</a>
                                       </li>
                                   </ul>
                               </div>
