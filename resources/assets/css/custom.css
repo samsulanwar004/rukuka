@@ -1,8 +1,7 @@
 /* google fonts in action */
+@import url('https://fonts.googleapis.com/css?family=Lato:300');
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-@import url('https://fonts.googleapis.com/css?family=Nanum+Pen+Script');
-@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
-@import url('https://fonts.googleapis.com/css?family=Karma');
+
 /* end of google fonts */
 
 .fixed {
@@ -20,6 +19,8 @@
 	margin-left: -22px!important;
 	margin-top: -40px!important;
 }
+
+
 
 /* Preloader */
 #preloader {
@@ -48,8 +49,9 @@
 	font-family: 'Nanum Pen Script', cursive;
 } */
 .blog-body {
-	size: 14px;
-	font-weight: 300;
+	font-family: 'Lato', sans-serif;
+	font-size: 18px;
+	font-weight: 200;
 }
 
 .blog-title{
