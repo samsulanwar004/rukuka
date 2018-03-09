@@ -221,7 +221,8 @@ class ProductRepository
             'products.price_before_discount as price_before_discount', 
             'products.created_at as created_at', 
             'product_designers.id as designer_id'
-        )->whereNull('products.deleted_at');   
+        )->where('products.is_active',1)
+            ->whereNull('products.deleted_at');
 
         if ($request->has('color_id')) {
             $colorId = $request->input('color_id');
