@@ -302,7 +302,7 @@
                           });
 
                           self.data = response.data.address;
-
+                        
                           setTimeout(function () {
                             $('.uk-close').click();
                           }, 2000);
