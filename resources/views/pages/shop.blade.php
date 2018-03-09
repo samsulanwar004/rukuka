@@ -6,6 +6,8 @@
         @section('title', trans('app.title_shop_womens') )
     @elseif($categories == 'mens' && $category == 'all')
         @section('title', trans('app.title_shop_mens') )
+    @elseif($categories == 'home' && $category == 'all')
+        @section('title', trans('app.title_shop_home') )
     @elseif($products->first()->category->name)
         @section('title',$products->first()->category->name.' '.trans('app.title_shop_category') )
     @else
