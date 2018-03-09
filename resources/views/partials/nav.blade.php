@@ -17,7 +17,14 @@
               </div>
               <div class="uk-width-1-3@m">
                 <div class="uk-panel uk-text-center">
-                  <a href="/" class="uk-link-reset"><img src="{{ imageCDN(config('common.logo')) }}" alt="rukuka" width="90"></a>
+                      <a href="/" class="uk-link-reset">
+                        <div class="uk-inline">
+                          <img src="{{ imageCDN(config('common.logo')) }}" alt="rukuka" width="90">
+                          <div class="uk-overlay uk-position-top">
+                            <p style="margin-top: -20px;margin-left: 45px;font-size: 12px;">BETA</p>
+                          </div>
+                        </div>
+                      </a>
                 </div>
               </div>
               <user-panel
