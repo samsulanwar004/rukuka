@@ -52,9 +52,7 @@
         </div>
     </div>
 
-    <h4 class="uk-text-center uk-margin-top uk-text-uppercase"><b>{{ trans('app.title_index_1') }}</b></h4>
-    <div uk-slider="clsActivated: uk-transition-active; autoplay: true">
-
+    <div class="uk-margin-top"  uk-slider="clsActivated: uk-transition-active; autoplay: true">
             <div class="uk-position-relative uk-visible-toggle">
 
                 <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-4@m">
@@ -149,12 +147,11 @@
                                 <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_6'] }}</span>
                               </a>
                             </div>
-                            <hr class="uk-margin-remove-top uk-margin-bottom uk-visible@m" style="border-color: #333; border-width: 5px">
+                            <hr class="uk-margin-remove-top uk-visible@m" style="border-color: #333; border-width: 5px">
                         </li>
                     </ul>
                 </div>
             </div>
-            <h4 class="uk-text-center uk-text-uppercase"><b>{{ trans('app.title_index_2') }}</b></h4>
             <div>
               <div class="uk-inline uk-light">
                 <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
@@ -163,7 +160,6 @@
                   <div class="uk-position-center uk-position-medium uk-text-center">
                     <h2 class="banner-highlight uk-visible@m">{{ $home['homepage_text_9'] }}</h2>
                     <h4 class="blog-subtitle uk-hidden@m">{{ $home['homepage_text_9'] }}</h4>
-                    <a href="{{ $home['homepage_url_9'] }}" class="uk-button uk-button-default uk-visible@m">{{ trans('app.subtitle_index_1') }}</a>
                   </div>
                 </a>
               </div>
