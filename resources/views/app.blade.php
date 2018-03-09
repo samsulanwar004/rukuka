@@ -5,17 +5,26 @@
 
     @php
       $metaTag = (new Symfony\Component\HttpFoundation\Session\Session)->get('meta_tag');
+      $doFollow = (new Symfony\Component\HttpFoundation\Session\Session)->get('do_follow');
     @endphp
 
-    <!-- SEO and Responsive -->
+   <!-- SEO and Responsive -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ $metaTag['web_meta_tag']['description'] }}">
-    <meta name="googlebot-news" content="index,follow" />
-    <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="all" />
     <meta name='language' content='EN'/>
+
+    @if($doFollow == true) 
+      <meta name="googlebot-news" content="index,follow" />
+      <meta name="robots" content="index, follow" />
+      <meta name="googlebot" content="all" />
+    @else
+      <meta name="googlebot-news" content="nofollow" />
+      <meta name="robots" content="nofollow" />
+      <meta name="googlebot" content="nofollow" />
+    @endif  
+    
     <meta name="author" content="rukuka">    
     <!-- end SEO and Responsive -->
 

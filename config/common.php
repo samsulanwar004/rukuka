@@ -14,6 +14,11 @@ return [
 	'password_pos_indonesia_prod' => env('PASSWORD_POS_INDONESIA_PROD'),
 	'wsdl_pos_indonesia_prod' 	  => env('WSDL_POS_INDONESIA_PROD'),
 
+	// meta tag
+	'do_follow' => env('DO_FOLLOW'),
+	'default_desc' => env('DEFAULT_DESC'),
+	'default_title' => env('DEFAULT_TITLE'),
+
 	// config pos indonesia courier service 
 	'xendit_public_key' => env('XENDIT_PUBLIC_KEY'),
 	'xendit_secret_key' => env('XENDIT_SECRET_KEY'),

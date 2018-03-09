@@ -28,6 +28,9 @@ class MetaTag
 
         $session = new Session;
 
+        $doFollow = config('common.do_follow');
+        $session->set('do_follow', $doFollow);
+
         $metaTag = $this->processGetMetaTag(\URL::current());
         $session->set('meta_tag', $metaTag['meta_tag']);
 
@@ -35,8 +38,8 @@ class MetaTag
 
     private function processGetMetaTag($currentURL){
 
-        $defaultDesc  = 'rukuka is the original shopping center of indonesian goods made by expert craftsmen in their fields, visit rukuka.com you will be amazed';
-        $defaultTitle = 'ruKuKa | how indonesian made really beautiful';
+        $defaultDesc  = config('common.default_desc');
+        $defaultTitle = config('common.default_title');
 
         $currentUrl = explode('/', $currentURL);
 
