@@ -1,6 +1,8 @@
 /* google fonts in action */
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-
+@import url('https://fonts.googleapis.com/css?family=Nanum+Pen+Script');
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
+@import url('https://fonts.googleapis.com/css?family=Karma');
 /* end of google fonts */
 
 .fixed {
@@ -40,6 +42,33 @@
 	background-repeat:no-repeat;
 	background-position:center;
 	margin:-100px 0 0 -100px; /* is width and height divided by two */
+}
+
+/* .clock {
+	font-family: 'Nanum Pen Script', cursive;
+} */
+.blog-body {
+	size: 14px;
+	font-weight: 300;
+}
+
+.blog-title{
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 60px;
+	font-weight: 900;
+	text-transform: uppercase;
+	color:#666;
+	-moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+.blog-title:hover {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 50px;
+	font-weight: 900;
+	color:#000;
+	text-decoration: none;
 }
 
 .banner-highlight{

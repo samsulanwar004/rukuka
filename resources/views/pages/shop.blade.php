@@ -60,7 +60,7 @@
 
         @endif
 
-        <div class="uk-grid-small uk-margin-small-top fixed" uk-grid>
+        <div class="uk-grid-small uk-margin-small-top" uk-grid>
             <div class="uk-width-1-4@m uk-visible@m">
 
                 <a href="#" uk-toggle="target: #nav1; animation: uk-animation-fade" class="uk-button uk-button-small uk-button-secondary uk-width-1-1">
