@@ -116,9 +116,6 @@
                   </div>
             </div>
             <div class="uk-width-1-3@m">
-              <div class="fixed">
-
-
                 <a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}">{{ $product->designer->name }}</a><br>
                 <h3 class="uk-margin-remove">{{ $product->name }}</h3>
                 @if($product->price_before_discount > 0)
@@ -182,7 +179,6 @@
                     </div>
                 </div>
                 <hr class="uk-margin-small">
-            </div>
           </div>
         </div>
         <hr>
