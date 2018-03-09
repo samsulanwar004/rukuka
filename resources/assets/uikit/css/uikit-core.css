@@ -1,5 +1,7 @@
 /*! UIkit 3.0.0-beta.39 | http://www.getuikit.com | (c) 2014 - 2017 YOOtheme | MIT License */
 @import url('https://fonts.googleapis.com/css?family=Work+Sans');
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Lato:300');
+@import url('https://fonts.googleapis.com/css?family=Arima+Madurai:200');
 /* ========================================================================
    Component: Base
  ========================================================================== */
@@ -383,6 +385,18 @@ pre {
 }
 pre code {
   font-family: Consolas, monaco, monospace;
+}
+/* blog font */
+.blog-body {
+  font-family: 'Arima Madurai', cursive;
+  color: #333;
+  font-size: 18px;
+  font-weight: 200;
+}
+.blog-heading {
+  font-family: 'Abril Fatface', cursive;
+  size: 70px;
+  color: #333;
 }
 /* Selection pseudo-element
  ========================================================================== */
@@ -4419,7 +4433,7 @@ ul.uk-nav-sub {
   margin: 0;
   font-size: 14px;
   line-height: 1;
-  border-bottom: 0px solid #c3c3c3;
+  font-weight: 700;
   padding-bottom: 10px;
   letter-spacing: 1.5px;
   cursor: pointer;
