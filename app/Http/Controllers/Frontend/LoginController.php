@@ -215,7 +215,9 @@ class LoginController extends BaseController
             $userExist = $this->user->getUserByEmail($request->input('email'));
 
             if (in_array($userExist->social_media_type, array('guest'))) {
-                throw new Exception("Your account is ".$userExist->social_media_type.". Please, register with your ".$userExist->social_media_type." email", 1);
+                throw new Exception("Your account by ".$userExist->social_media_type.". Please, register with your ".$userExist->social_media_type." email", 1);
+            } elseif (in_array($userExist->social_media_type, array('facebook', 'google'))) {
+                throw new Exception("Your account by ".$userExist->social_media_type.". Please, login with ".$userExist->social_media_type, 1);
             }
 
     		$this->user
