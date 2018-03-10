@@ -38,7 +38,7 @@
 			$this->col[] = ["label"=>"Payment Method","name"=>"payment_method"];
 			$this->col[] = ["label"=>"Payment Status","name"=>"payment_status"];
 			$this->col[] = ["label"=>"Order Status","name"=>"order_status"];
-			$this->col[] = ["label"=>"Order Subtotal","name"=>"order_subtotal","callback_php"=>'"Rp. ". number_format($row->order_subtotal)'];
+			$this->col[] = ["label"=>"Order Subtotal","name"=>"id"];
 			$this->col[] = ["label"=>"Order Date","name"=>"order_date"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
@@ -303,6 +303,11 @@
                     $column_value = '<span class="label label-danger">Cancel</span>';
                 }
             }
+
+            if($column_index==4){
+                    $total = $this->sumTotal($column_value);
+                    $column_value = "Rp.". number_format($total);
+            }
 	    }
 
 	    /*
@@ -409,6 +414,12 @@
             ->whereDate('expired_date', '<', $now->toDateString())
             ->where('payment_status',0)
             ->update(['payment_status' => 2,'order_status' => 3,'cancel_reason' => 'Payment Expired']);
+        }
+
+        public function sumTotal($id){
+
+            $order = DB::table('orders')->where('id',$id)->first();
+            return $order->order_subtotal + $order->shipping_cost;
         }
 
 

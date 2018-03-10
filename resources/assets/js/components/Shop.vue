@@ -11,6 +11,7 @@
                           :alt="product.name"
                           :loading-image="loadingImage"
                           :error-image="errorImage"
+                          image-style="height: 380px;width: auto;"
                           image-class="uk-transition-scale-up uk-transition-opaque">
                         </lazy-background>
                         <div class="uk-postion-small uk-position-top-right" v-if="product.price_before_discount > 0">
@@ -93,7 +94,8 @@
                               :image-source="image.photo | awsLink(aws_link)"
                               :alt="image.name"
                               :loading-image="loadingImage"
-                              :error-image="errorImage">
+                              :error-image="errorImage"
+                              image-style="height: 490px;width: auto;">
                             </lazy-background>
                         </li>
                       </ul>

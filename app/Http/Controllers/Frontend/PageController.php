@@ -134,11 +134,6 @@ class PageController extends BaseController
             $exchange = (new CurrencyService)->getCurrentCurrency();
             $product = (new ProductRepository)->getProductBySlug($slug);
 
-            //inject color
-            $color = $product->palette;
-            $product->color = $color->name;
-            $product->color_palette = $color->palette;
-
             //inject currency
             $product->sell_price = $product->sell_price / $exchange->value;
             $product->price_before_discount = $product->price_before_discount <= 0 ? $product->price_before_discount : $product->price_before_discount / $exchange->value;
@@ -152,7 +147,7 @@ class PageController extends BaseController
             }
 
             // Validate Designer Deleted
-            $designer = (new ProductRepository)->getDesignerById($product->product_designers_id);
+            $designer = $product->designer;
             $this->validDelete($designer);
             //Validate Product Active
             $this->validActive($product);
@@ -180,8 +175,16 @@ class PageController extends BaseController
             return view('pages.not_found')->withErrors($e->getMessage());
         }
 
+        $buttonBuy = new \stdClass;
+        $buttonBuy->color = $product->palette->name;
+        $buttonBuy->color_palette = $product->palette->palette;
+        $buttonBuy->content = $product->content;
+        $buttonBuy->size_and_fit = $product->size_and_fit;
+        $buttonBuy->detail_and_care = $product->detail_and_care;
+
     	return view('pages.product', compact(
             'product',
+            'buttonBuy',
             'method',
             'sku',
             'id',
