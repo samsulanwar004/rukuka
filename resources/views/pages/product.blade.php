@@ -143,7 +143,7 @@
                 <button-buy
                         api_bag="{{ route('persist.bag') }}"
                         api_wishlist="{{ route('persist.wishlist') }}"
-                        product="{{ $product }}"
+                        product="{{ json_encode($buttonBuy) }}"
                         sizes="{{ $product->stocks }}"
                         auth="{{ Auth::check() ? 1 : 0 }}"
                         method="{{ $method }}"
