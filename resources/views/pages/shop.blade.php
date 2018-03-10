@@ -1,6 +1,10 @@
 @extends('app')
 @if($categories == 'designers')
-    @section('title',  $designer->name.' '.trans('app.title_designers') )
+    @if($category == 'all')
+        @section('title',  $designer->name.' '.trans('app.title_designers_list') )
+    @else
+        @section('title',  $designer->name.' '.trans('app.title_designers') )
+    @endif
 @else
     @if($categories == 'womens' && $category == 'all')
         @section('title', trans('app.title_shop_womens') )
@@ -18,7 +22,7 @@
 
     <div class="uk-container">
       @if($categories == 'designers' && $category != 'all')
-          <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ $designer->name }}</h3>
+          <h3 class="uk-margin-small-top uk-margin-remove-bottom "></h3>
       @else
           @if($category == 'all')
               <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ trans('app.all_you_need') }}</h3>
