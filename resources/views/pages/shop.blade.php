@@ -90,7 +90,8 @@
                     <div class="uk-hidden@m uk-text-right">
                       <a href="#modal" class="uk-button uk-button-default-warm uk-button-small" uk-toggle>{{ trans('app.filter') }}</a>
                       <div id="modal" uk-modal>
-                        <div class="uk-modal-dialog uk-modal-body">
+                        <div class="uk-modal-dialog uk-margin-auto-vertical">
+                          <div class="uk-modal-body" uk-overflow-auto>
                             <categories-mobile
                                     parent="{{ $categories }}"
                                     slug="{{ $slug == null ? $category:$slug }}"
@@ -105,6 +106,11 @@
                                     color_id="{{ $colorId }}"
                                     locale="{{ json_encode(trans('app')) }}"
                             ></color-palette-mobile>
+                          </div>
+                          <div class="uk-modal-footer">
+                            <a href="#" class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-modal-close">back to shop</a>
+                          </div>
+
                         </div>
                       </div>
                     </div>
