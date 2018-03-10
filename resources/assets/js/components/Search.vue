@@ -29,13 +29,6 @@
                     </a>
                 </h5>
             </li>
-            <!--<li v-if="kidCounts">-->
-                <!--<h5 :class="{'uk-text-bold': category == 'kids'}" >-->
-                    <!--<a :href="'/search?keyword='+keyword+'&category=kids'" class="uk-link-reset uk-text-uppercase">-->
-                        <!--{{ trans.kids_nav }} ({{kidCounts}})-->
-                    <!--</a>-->
-                <!--</h5>-->
-            <!--</li>-->
         </ul>
 
         <ul class="uk-accordion" uk-accordion="multiple: true" >
@@ -62,18 +55,6 @@
                     </ul>
                 </div>
             </li>
-
-            <!--<li v-if="category == 'kids'" class="uk-open">-->
-                <!--<hr class="uk-margin-small-top">-->
-                <!--<h4 href="#" class="uk-accordion-title uk-text-uppercase">{{ trans.category }}</h4>-->
-                <!--<div class="uk-accordion-content">-->
-                    <!--<ul class="uk-nav uk-filter-nav" v-for="cloth in kidCloths">-->
-                        <!--<li v-for="cat in cloth.child" :class="{'uk-text-bold': subcategory == cat.slug}">-->
-                            <!--<a v-for="productCat in productsCategory" :href="'/search?keyword='+keyword+'&category=kids&subcategory='+ cat.slug" v-if="productCat.product_categories_id == cat.id" >{{ cat.name }}</a>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</li>-->
         </ul>
 
         <ul class="uk-accordion" uk-accordion="multiple: true" >

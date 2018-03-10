@@ -3,7 +3,7 @@
 
         <!-- start product -->
         <div class="uk-panel uk-text-left" v-for="product in products">
-            <div class="uk-card uk-card-small uk-visible@m">
+            <div class="uk-card uk-card-small">
                 <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
                     <a :href="'/product/'+ product.slug">
                          <lazy-background
@@ -11,7 +11,6 @@
                           :alt="product.name"
                           :loading-image="loadingImage"
                           :error-image="errorImage"
-                          image-style="height: 380px;width: auto;"
                           image-class="uk-transition-scale-up uk-transition-opaque">
                         </lazy-background>
                         <div class="uk-postion-small uk-position-top-right" v-if="product.price_before_discount > 0">
@@ -41,37 +40,6 @@
                     </span>
                 </div>
             </div>
-            <div class="uk-card uk-card-small uk-padding-remove uk-hidden@m">
-                <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
-                    <a :href="'/product/'+ product.slug">
-                      <lazy-background
-                          :image-source="product.photo | awsLink(aws_link)"
-                          :alt="product.name"
-                          :loading-image="loadingImage"
-                          :error-image="errorImage">
-                        </lazy-background>
-                    </a>
-                </div>
-                <div class="uk-card-body uk-padding-remove">
-                  <div>
-                    <a href="#modal-shop" class="uk-button uk-button-small uk-button-secondary uk-width-1-1 uk-text-uppercase" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
-                  </div>
-                  <a :href="'/product/'+ product.slug" class="uk-text-meta">{{ product.name }}</a>
-                  <br>
-                  <span v-if="product.price_before_discount > 0 ">
-                    <del class="uk-text-small">
-                        {{ product.price_before_discount | round(exchangeRate.symbol, exchangeRate.value) }}
-                    </del>
-                  </span>
-                  <span class="uk-text-danger uk-text-small" v-if="product.price_before_discount > 0 ">
-                     &nbsp;{{ product.price | round(exchangeRate.symbol, exchangeRate.value) }}
-                  </span>
-                  <span v-else class="uk-text-small">
-                      {{ product.price | round(exchangeRate.symbol, exchangeRate.value) }}
-                  </span>
-
-                </div>
-            </div>
         </div>
         <!-- end product single -->
         <div id="modal-shop" class="uk-modal-container-small" uk-modal="center: true">
@@ -94,8 +62,7 @@
                               :image-source="image.photo | awsLink(aws_link)"
                               :alt="image.name"
                               :loading-image="loadingImage"
-                              :error-image="errorImage"
-                              image-style="height: 490px;width: auto;">
+                              :error-image="errorImage">
                             </lazy-background>
                         </li>
                       </ul>

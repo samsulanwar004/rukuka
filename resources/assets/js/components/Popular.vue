@@ -10,7 +10,6 @@
               :alt="product.name"
               :loading-image="loadingImage"
               :error-image="errorImage"
-              image-style="height: 380px;width: auto;"
               image-class="uk-transition-scale-up uk-transition-opaque">
             </lazy-background>
           </a>
@@ -59,7 +58,7 @@
                           :alt="image.name"
                           :loading-image="loadingImage"
                           :error-image="errorImage"
-                          image-style="height: 490px;width: auto;">
+                          image-style="height: 490px;width: auto;overflow:hidden">
                         </lazy-background>
 
                     </li>

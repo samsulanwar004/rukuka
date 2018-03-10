@@ -5,20 +5,15 @@
     <div class="uk-margin-top" uk-grid v-else>
       <div class="uk-width-2-3@m">
         <div class="uk-overflow-auto">
-            <table class="uk-table uk-table-striped">
-                <thead>
-                  <tr>
-                      <th class="uk-table-shrink" colspan="4"><h4 class="uk-margin-remove uk-text-uppercase">{{ trans.your_bag }}({{ bags.length }}) </h4></th>
-                  </tr>
-              </thead>
-                <thead>
-                    <tr>
-                        <th class="uk-table-shrink"></th>
-                        <th class="uk-table-expand uk-text-uppercase">{{ trans.item }}</th>
-                        <th class="uk-width-medium uk-text-uppercase">{{ trans.qty }}</th>
-                        <th class="uk-table-shrink uk-text-nowrap uk-text-uppercase">{{ trans.unit_price }}</th>
-                    </tr>
-                </thead>
+          <h4 class="uk-margin-remove uk-text-uppercase">{{ trans.your_bag }}({{ bags.length }}) </h4>
+          <table class="uk-table uk-table-small uk-margin-remove-bottom">
+            <tr>
+                <td colspan="2" class="uk-table-expand uk-text-uppercase">{{ trans.item }}</td>
+                <td class="uk-width-medium uk-text-uppercase uk-text-center">{{ trans.qty }}</td>
+                <td class="uk-table-shrink uk-text-nowrap uk-text-uppercase uk-text-center">{{ trans.unit_price }}</td>
+            </tr>
+          </table>
+            <table class="uk-table uk-table-striped uk-margin-top-remove">
                 <tbody v-for="bag in bags">
                     <tr>
                         <td>
@@ -62,7 +57,7 @@
         </div>
       </div>
       <div class="uk-width-1-3@m">
-        <div class="uk-card uk-card-default uk-background-muted uk-card-small uk-box-shadow-small">
+        <div class="uk-card uk-card-default uk-background-muted uk-card-small uk-box-shadow-small" uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
           <div class="uk-card-header">
             <h4 class="uk-text-uppercase">{{ trans.summary }}</h4>
           </div>
@@ -93,7 +88,7 @@
 
     export default {
         props: ['bag_link', 'wishlist_link', 'auth', 'checkout_link', 'aws_link','default_image','locale'],
-        
+
         components: {
           'lazy-background': VueLazyBackgroundImage
         },
@@ -120,8 +115,8 @@
                 self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
             });
 
-            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;      
-            self.loadingImage = this.aws_link+'/images/loading-image.gif'; 
+            self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;
+            self.loadingImage = this.aws_link+'/images/loading-image.gif';
 
         },
 

@@ -10,7 +10,7 @@
             </li>
         </ul>
         <ul class="uk-accordion" uk-accordion="multiple: true" >
-            <li class="uk-open">
+            <li >
                 <h5 href="#" class="uk-accordion-title">{{ parent.toUpperCase() }}</h5>
                 <div class="uk-accordion-content">
                     <ul class="uk-nav uk-filter-nav">
@@ -34,7 +34,7 @@
             </li>
         </ul>
         <ul class="uk-accordion" uk-accordion="multiple: true" >
-            <li class="uk-open" v-for="category in categories">
+            <li v-for="category in categories">
                 <h5 href="#" class="uk-accordion-title">{{ category.name.toUpperCase() }}</h5>
                 <div class="uk-accordion-content">
                 <ul class="uk-nav uk-filter-nav">
@@ -55,7 +55,7 @@
         created() {
             var self = this;
             self.parent = this.parent;
-            
+
             Event.listen('categories', function (response) {
                 self.categories = response;
             });
