@@ -387,6 +387,7 @@ return [
     'nothing_found'             =>  '申し訳ありませんが、何も見つかりませんでした.',
     'another_keyword'           =>  '他のキーワードで検索しよう',
     'other_people'              =>  '他の人も読む',
+    'blog_title_home'           =>  'Top Stories',
 
     //email common
     'invoice'                   =>  '請求書',
@@ -447,5 +448,9 @@ return [
     'forgot_reset'              =>  '新しいパスワードを選択する',
 
     //resources/views/pages/password/reset.blade.php
-    'input_new_password'        =>  '新しいパスワードを入力してください'
+    'input_new_password'        =>  '新しいパスワードを入力してください',
+
+    //resources/views/pages/lookbook_index.blade.php
+    'lookbook_title_category'   =>  'Lookbook',
+    'lookbook_title_index'      =>  'Lookbook',
 ];

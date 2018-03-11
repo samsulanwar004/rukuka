@@ -387,6 +387,7 @@ return [
     'nothing_found'             =>  'Sorry, Nothing Found.',
     'another_keyword'           =>  'try searching with other keywords',
     'other_people'              =>  'Other people also read',
+    'blog_title_home'           =>  'Top Stories',
 
     //email common
     'invoice'                   =>  'Invoice',
@@ -447,5 +448,9 @@ return [
     'forgot_reset'              =>  'Choose a new password',
 
     //resources/views/pages/password/reset.blade.php
-    'input_new_password'        =>'Please input your new password'
+    'input_new_password'        =>  'Please input your new password',
+
+    //resources/views/pages/lookbook_index.blade.php
+    'lookbook_title_category'   =>  'Lookbook',
+    'lookbook_title_index'      =>  'Lookbook',
 ];

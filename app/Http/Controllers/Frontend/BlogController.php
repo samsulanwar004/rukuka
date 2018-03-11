@@ -18,8 +18,8 @@ class BlogController extends Controller
         $posts = $result['post'];
         $status= $result['status'];
         $header= $BlogRepository->getHeader();
-        $category = $this->getCategory();
-        $title = 'Top Stories';
+        $category = $BlogRepository->getCategory();
+        $title = trans('app.blog_title_home');
 
         return view('blogs.home', compact('posts','category','title','header','status'));
     }
@@ -141,8 +141,4 @@ class BlogController extends Controller
         return view('blogs.search', compact('posts','category','keyword','header','status'));
     }
 
-    public function getCategory()
-    {
-        return BlogCategory::orderBy('created_at', 'asc')->get();
-    }
 }
