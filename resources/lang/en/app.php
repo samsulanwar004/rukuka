@@ -71,7 +71,7 @@ return [
     'subtitle_index_1'          => 'Get Discover',
 
     //resources/views/partials/nav.blade.php
-    'search'                    =>  'S E A R C H . . .',
+    'search'                    =>  'SEARCH HERE...',
     'search_label'              =>  'Search',
     'welcome_in'                =>  'welcome to ruKuKa, now we can show you how indonesian made really beautiful on you!',
     'find_label'                =>  'Find our product',
