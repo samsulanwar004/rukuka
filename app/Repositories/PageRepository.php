@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Page;
 use App\Help;
 use App\Popup;
+use App\Lookbook;
 
 class PageRepository extends Controller
 {
@@ -26,6 +27,11 @@ class PageRepository extends Controller
     {
         $result = Popup::where('slug',$slug)->first();
         return $result;
+    }
+
+    public function getLookbookIndex()
+    {
+        return Lookbook::where('is_active','1')->whereNull('deleted_at')->get();
     }
 
 }

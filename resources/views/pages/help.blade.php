@@ -16,7 +16,7 @@
 
               <div class="uk-text-justify uk-navbar-dropdown-grid uk-child-width-1-2" uk-grid>
 
-                  @include('partials.help-sidebar')
+                  @include('partials.help_sidebar')
 
                   <div class="uk-width-3-4@m">
                       <div class="scroll">

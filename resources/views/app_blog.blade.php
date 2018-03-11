@@ -94,7 +94,7 @@
         </div>
       </div>
       <div class="uk-offcanvas-content">
-      @include('partials.nav-blog')
+      @include('partials.nav_blog')
         @yield('content')
       @include('partials.footer')
       </div>

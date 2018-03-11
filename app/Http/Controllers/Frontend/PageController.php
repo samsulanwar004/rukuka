@@ -10,6 +10,7 @@ use App\Repositories\UserRepository;
 use App\Repositories\ProductStockRepository;
 use App\Repositories\PageRepository;
 use App\Repositories\LookbookRepository;
+use App\Repositories\BlogRepository;
 use Exception;
 use Carbon\Carbon;
 use App\Services\BagService;
@@ -559,7 +560,20 @@ class PageController extends BaseController
 
     }
 
-    public function lookbook($slug='')
+    public function indexLookbook()
+    {
+        $PageRepository = New PageRepository();
+        $BlogRepository = New BlogRepository();
+
+        $lookbook= $PageRepository->getLookbookIndex();
+        $category = $BlogRepository->getCategory();
+        $title = trans('app.lookbook_title_index');
+
+        return view('pages.lookbook_index', compact('lookbook','title','category'));
+
+    }
+
+    public function getLookbook($slug='')
     {
         try{
             $lookbook = (new LookbookRepository)->getLookbook($slug);
