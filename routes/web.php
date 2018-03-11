@@ -150,9 +150,14 @@ Route::post('/contact', [
     'uses' => 'Frontend\PageController@contact',
 ]);
 
+Route::get('/lookbook', [
+    'as'   => 'lookbook-get-index',
+    'uses' => 'Frontend\PageController@IndexLookbook',
+]);
+
 Route::get('/lookbook/{slug}', [
     'as'   => 'lookbook',
-    'uses' => 'Frontend\PageController@lookbook',
+    'uses' => 'Frontend\PageController@getLookbook',
 ]);
 
 
