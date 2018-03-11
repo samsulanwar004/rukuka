@@ -57,8 +57,7 @@
                           :image-source="image.photo | awsLink(aws_link)"
                           :alt="image.name"
                           :loading-image="loadingImage"
-                          :error-image="errorImage"
-                          image-style="height: 490px;width: auto;overflow:hidden">
+                          :error-image="errorImage">
                         </lazy-background>
 
                     </li>
