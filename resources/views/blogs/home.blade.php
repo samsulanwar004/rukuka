@@ -62,28 +62,10 @@
     </div>
 
     @else
-        <div class="uk-visible@m uk-container uk-container-small">
-          <ul class="uk-grid" uk-grid>
-            <li><a href="/editorial"><h4>{{ trans('app.all') }}</h4></a> </li>
-          @foreach($category as $value)
-            <li><a href="{{ URL::to('editorial/category/'.$value->slug)}}"><h4>{{$value->name}}</h4></a></li>
-          @endforeach
-          </ul>
-            <h3 class="uk-margin-small">{{$title}}</h3>
+        <div class="uk-container uk-container-small">
+            @include('partials.category_blog')
             <div class="uk-section uk-section-default uk-section-xlarge uk-text-center">
-                <h1>{{ trans('app.no_content') }}</h1>
-            </div>
-        </div>
-        <div class="uk-hidden@m uk-margin-small-top">
-          <ul class="uk-grid uk-grid-small" uk-grid>
-            <li><a href="/editorial">{{ trans('app.all') }}</a> </li>
-          @foreach($category as $value)
-            <li><a href="{{ URL::to('editorial/category/'.$value->slug)}}">{{$value->name}}</a></li>
-          @endforeach
-          </ul>
-            <h3 class="uk-margin-small">{{$title}}</h3>
-            <div class="uk-section uk-section-default uk-section-xlarge uk-text-center">
-                <h1>{{ trans('app.no_content') }}</h1>
+                <h2>{{ trans('app.no_content') }}</h2>
             </div>
         </div>
     @endif

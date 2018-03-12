@@ -22,7 +22,7 @@
                 @if($firstLetter == $abjad)
                 <div>
                     <a href="/shop/designers/{{ $value['slug'] }}">
-                    {{ ucfirst(strtolower($value['name'])) }}
+                    {{ ucfirst(ucwords($value['name'])) }}
                     </a>
                     <div uk-drop="pos: right-center">
                         <div class="uk-card uk-card-default uk-card-small">

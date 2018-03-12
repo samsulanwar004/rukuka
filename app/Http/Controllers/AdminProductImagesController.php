@@ -361,7 +361,7 @@
 						$name = $request->input('name')[$i];
 					    $filename = sprintf(
 					                "%s-%s.%s",
-					                str_slug($name),
+					                str_slug($name.'-'.rand(0,99)),
 					                date('YmdHis'),
 					                $file->getClientOriginalExtension()
 					            );
