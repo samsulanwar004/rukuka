@@ -44,7 +44,7 @@
 			$this->form[] = ['label'=>'Title','name'=>'title','type'=>'text','validation'=>'string','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Subtitle','name'=>'subtitle','type'=>'text','validation'=>'string','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'wysiwyg','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP'];
+			$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP', 'upload_encrypt'=>'true'];
 			$this->form[] = ['label'=>'Order','name'=>'order','type'=>'number','validation'=>'','width'=>'col-sm-10','value'=>'0'];
             $this->form[] = ['label'=>'Status','name'=>'is_active','type'=>'radio','validation'=>'required','width'=>'col-sm-10','dataenum'=>'0|Unpublished;1|published','value'=>'1'];
 			# END FORM DO NOT REMOVE THIS LINE
