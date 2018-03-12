@@ -38,8 +38,41 @@ class MetaTag
 
     private function processGetMetaTag($currentURL){
 
-        $defaultDesc  = config('common.default_desc');
-        $defaultTitle = config('common.default_title');
+        $defaultDesc  = DB::table('cms_settings')->where([['name','=','meta_description']])
+                                                 ->get()
+                                                 ->first();
+
+        if ($defaultDesc == null) {
+
+            $defaultDesc = 'No description in system';
+        
+        }else if ($defaultDesc->content == null) {
+            
+            $defaultDesc = 'Please fill content description';
+
+        }else{
+
+            $defaultDesc = $defaultDesc->content;
+
+        }
+
+        $defaultTitle = DB::table('cms_settings')->where([['name','=','meta_title']])
+                                                 ->get()
+                                                 ->first();
+
+        if ($defaultTitle == null) {
+
+            $defaultTitle = 'No title in system';
+        
+        }else if ($defaultTitle->content == null) {
+            
+            $defaultTitle = 'Please fill content title';
+
+        }else{
+
+            $defaultTitle = $defaultTitle->content;
+
+        }
 
         $currentUrl = explode('/', $currentURL);
 
