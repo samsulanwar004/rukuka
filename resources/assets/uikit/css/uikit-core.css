@@ -1,5 +1,5 @@
 /*! UIkit 3.0.0-beta.39 | http://www.getuikit.com | (c) 2014 - 2017 YOOtheme | MIT License */
-@import url('https://fonts.googleapis.com/css?family=Work+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300');
 /* ========================================================================
    Component: Base
  ========================================================================== */
@@ -11,7 +11,7 @@
  */
 html {
   /* 1 */
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   font-weight: 300;
   line-height: 1.5;
@@ -82,12 +82,12 @@ abbr[title] {
 /* 1 */
 b,
 strong {
-  font-weight: inherit;
+  font-weight: 600;
 }
 /* 2 */
 b,
 strong {
-  font-weight: bolder;
+  font-weight: 600;
 }
 /*
  * 1. Correct the odd `em` font sizing in all browsers.
@@ -237,8 +237,8 @@ h5,
 h6,
 .uk-h6 {
   margin: 0 0 20px 0;
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 400;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
   color: #000;
   letter-spacing: 2px;
   text-transform: none;
@@ -283,7 +283,7 @@ h4,
 }
 h5,
 .uk-h5 {
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   line-height: 1.4;
 }
@@ -386,13 +386,13 @@ pre code {
 }
 /* blog font */
 .blog-body {
-  font-family: 'Arima Madurai', cursive;
+  font-family: 'Open Sans', sans-serif;
   color: #333;
   font-size: 18px;
   font-weight: 200;
 }
 .blog-heading {
-  font-family: 'Abril Fatface', cursive;
+  font-family: 'Open Sans', sans-serif;
   size: 70px;
   color: #333;
 }
@@ -3699,7 +3699,7 @@ ul.uk-nav-sub {
   padding: 0 40px;
   /* 3 */
   font-size: 14px;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   /* 4 */
   text-decoration: none;
   font-weight: 400;
@@ -3711,6 +3711,10 @@ ul.uk-nav-sub {
 .uk-navbar-nav > li > a {
   color: #666;
   border-bottom: 3px solid transparent;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
 }
 /*
  * Hover
@@ -7584,7 +7588,7 @@ iframe.uk-cover {
  */
 .uk-logo {
   font-size: 25px;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #000;
   /* 1 */
   text-decoration: none;
