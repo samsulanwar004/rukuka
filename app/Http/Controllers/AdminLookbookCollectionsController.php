@@ -314,6 +314,13 @@
 	        //Your code here
             $postdata['slug']= str_slug($postdata['name']);
 
+            if($postdata['title'] == null){
+                $postdata['title'] = '';
+            }
+            if($postdata['subtitle'] == null){
+                $postdata['subtitle'] = '';
+            }
+
 	    }
 
 	    /* 
