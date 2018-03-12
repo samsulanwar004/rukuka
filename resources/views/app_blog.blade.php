@@ -51,22 +51,22 @@
     <meta name="twitter:domain" content="http://www.rukuka.com" data-dynamic="true">
     <!-- end twitter cards -->
 
+    <!-- Start Global site tag (gtag.js) - Google Analytics -->
+    @if(config('common.google_analytics') == TRUE)
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99161447-3"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-99161447-3');
+        </script>
+    @endif
+    <!-- End Global site tag (gtag.js) - Google Analytics -->
+
     <!--pavicon-->
     @include('partials.pavicon')
     <!--end pavicon-->
-
-    <!-- Histats.com  START  (sync)-->
-    <script type="text/javascript">var _Hasync= _Hasync|| [];
-        _Hasync.push(['Histats.start', '1,4025472,4,0,0,0,00010000']);
-        _Hasync.push(['Histats.fasi', '1']);
-        _Hasync.push(['Histats.track_hits', '']);
-        (function() {
-            var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-            hs.src = ('//s10.histats.com/js15_as.js');
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-        })();</script>
-    <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4025472&101" alt="" border="0"></a></noscript>
-    <!-- Histats.com  END  -->
 
     <meta name="google-site-verification" content="nFdFuv0V-IaFTa6HdepAZ1hYEsEY02ijn9kUbR2ieMQ" />
 
