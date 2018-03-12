@@ -152,7 +152,7 @@
                     </ul>
                 </div>
             </div>
-            <div>
+            <div class="uk-margin-small-top">
               <div class="uk-inline uk-light">
                 <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
                   <img src="{{ uploadCDN($home['homepage_banner_9']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">

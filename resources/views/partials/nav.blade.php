@@ -1,11 +1,6 @@
-<div class="uk-section-xsmall uk-background-secondary uk-padding-remove">
-  <div class="uk-container uk-container-small uk-light">
-    <h6 class="uk-padding-xsmall uk-text-center">{{ trans('app.welcome_in') }}</h6>
-  </div>
-</div>
-<div class="uk-section-xsmall uk-background-default uk-margin-remove uk-padding-remove" uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
+<div class="uk-section-xsmall uk-background-default uk-margin-remove uk-padding-remove" style="border-color: #333; border-width: 5px" uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
     <div class="uk-section uk-section-default uk-section-xsmall uk-padding-remove-vertical">
-        <div class="uk-container uk-container-small">
+        <div class="uk-container">
           <div class="uk-grid-small" uk-grid>
               <div class="uk-width-1-3@m uk-flex uk-flex-middle">
                 <div class="uk-panel">
@@ -60,5 +55,14 @@
       default_image="{{ json_encode(config('common.default')) }}"
       locale="{{ json_encode(trans('app')) }}"
     ></navigation>
-
+  </div>
+  <div class="uk-section uk-section-xsmall uk-padding-remove">
+    <div class="uk-container">
+      <div class="uk-alert-alert" uk-alert>
+          <a href="#" class="uk-alert-close" uk-close></a>
+          <p class="uk-text-center">
+            {{ trans('app.welcome_in') }} Checkout ruKuKa Happening Event <a href="https://rukuka.com/lookbook/amazon-fashion-week"> <b> <u>Amazon Fashion Week</u> </a></b>
+          </p>
+      </div>
+    </div>
   </div>
