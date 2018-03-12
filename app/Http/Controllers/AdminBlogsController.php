@@ -46,7 +46,7 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'Categories','name'=>'blog_categories_id','type'=>'select2','validation'=>'required','width'=>'col-sm-6','datatable'=>'blog_categories,name'];
 			$this->form[] = ['label'=>'Photo 1','name'=>'photo_1','type'=>'upload','validation'=>'image|max:2000','width'=>'col-sm-10','help'=>'Max Size 2 Mb, Recommendation Size 400px*400px'];
-			$this->form[] = ['label'=>'Photo 2','name'=>'photo_2','type'=>'upload','validation'=>'image|max:2000','width'=>'col-sm-10','help'=>'Max Size 2 Mb,  Recommendation Size 2000px*600px'];
+			$this->form[] = ['label'=>'Photo 2','name'=>'photo_2','type'=>'upload','upload_encrypt'=>'true','validation'=>'image|max:2000','width'=>'col-sm-10','help'=>'Max Size 2 Mb,  Recommendation Size 2000px*600px'];
 			$this->form[] = ['label'=>'Title','name'=>'title','type'=>'text','validation'=>'required|string|unique:blogs','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'wysiwyg','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Publish','name'=>'is_publish','type'=>'radio','validation'=>'required|integer','width'=>'col-sm-10','dataenum'=>'0|Unpublished;1|Publish','value'=>'0'];
