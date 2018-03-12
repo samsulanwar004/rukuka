@@ -429,7 +429,12 @@ class PageController extends BaseController
         $PageRepository = new PageRepository();
 
         $result= $PageRepository->getPopup($slug);
+
         if(!$result){
+            abort(404);
+        }
+
+        if(!$result->url){
             abort(404);
         }
         return redirect($result->url);
