@@ -24,6 +24,9 @@ return [
 	'xendit_secret_key' => env('XENDIT_SECRET_KEY'),
 	'xendit_secret_token' => env('XENDIT_VALIDATION_TOKEN'),
 
+    // google analytics
+    'google_analytics' => env('GOOGLE_ANALYTICS'),
+
     // default image
     'default' => [
         'image_1' => env('DEFAULT_IMAGE_1'),
