@@ -109,7 +109,7 @@ class BlogController extends Controller
         $result= $BlogRepository->getPostsRead($slug);
         $posts = $result['post'];
         $status= $result['status'];
-        $category = $this->getCategory();
+        $category = $BlogRepository->getCategory();
         $postsRandom = $BlogRepository->getPostRandom();
         return view('blogs.read', compact('posts','category','postsRandom','status'));
     }
@@ -121,7 +121,7 @@ class BlogController extends Controller
         $result= $BlogRepository->getPostsIndexCategory($slug);
         $posts = $result['post'];
         $status= $result['status'];
-        $category = $this->getCategory();
+        $category = $BlogRepository->getCategory();
         $header= $BlogRepository->getHeader();
         $title = $result['title'];
         return view('blogs.home', compact('posts','category','title','header','status'));
@@ -134,7 +134,7 @@ class BlogController extends Controller
         $result = $BlogRepository->getSearch($request->all());
         $posts = $result['post'];
         $status= $result['status'];
-        $category = $this->getCategory();
+        $category = $BlogRepository->getCategory();
         $header= $BlogRepository->getHeader();
         $keyword = $request->input('keyword');
 
