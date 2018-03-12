@@ -1,5 +1,5 @@
 <div class="uk-section uk-section-xsmall uk-padding-remove uk-margin-reove">
-  <div  uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
+  <div uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
     <div class="uk-section uk-section-default uk-section-xsmall uk-padding-small uk-box-shadow-medium">
       <div class="uk-container uk-container-small">
         <div class="uk-grid-small" uk-grid>
@@ -38,5 +38,11 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="uk-alert-alert" uk-alert>
+      <a href="#" class="uk-alert-close" uk-close></a>
+      <p class="uk-text-center">
+        {{ trans('app.welcome_in') }} Checkout ruKuKa Happening Event <a href="https://rukuka.com/lookbook/amazon-fashion-week"> <b> <u>Amazon Fashion Week</u> </a></b>
+      </p>
   </div>
 </div>
