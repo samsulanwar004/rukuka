@@ -15,7 +15,7 @@
     <meta name="description" content="{{ $metaTag['web_meta_tag']['description'] }}">
     <meta name='language' content='EN'/>
 
-    @if($doFollow == true) 
+    @if($doFollow == true)
       <meta name="googlebot-news" content="index,follow" />
       <meta name="robots" content="index, follow" />
       <meta name="googlebot" content="all" />
@@ -23,9 +23,9 @@
       <meta name="googlebot-news" content="nofollow" />
       <meta name="robots" content="nofollow" />
       <meta name="googlebot" content="nofollow" />
-    @endif  
-    
-    <meta name="author" content="rukuka">    
+    @endif
+
+    <meta name="author" content="rukuka">
     <!-- end SEO and Responsive -->
 
     <!-- facebook META -->
@@ -91,9 +91,9 @@
 
     <div id="app">
       <!-- Preloader -->
-      <div id="preloader" class="uk-inline">
+      {{-- <div id="preloader" class="uk-inline">
         <div class="uk-position-center" uk-spinner="ratio: 4"></div>
-      </div>
+      </div> --}}
       <div class="uk-visible@m">
         @include('partials.nav')
       </div>

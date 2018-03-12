@@ -1,7 +1,3 @@
-/* google fonts in action */
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-
-/* end of google fonts */
 
 .fixed {
 	position: -webkit-sticky;
@@ -18,6 +14,8 @@
 	margin-left: -22px!important;
 	margin-top: -40px!important;
 }
+
+
 
 /* Preloader */
 #preloader {
@@ -42,8 +40,33 @@
 	margin:-100px 0 0 -100px; /* is width and height divided by two */
 }
 
+/* .clock {
+	font-family: 'Nanum Pen Script', cursive;
+} */
+.blog-body {
+	font-family: 'Lato', sans-serif;
+	font-size: 18px;
+	font-weight: 200;
+}
+
+.blog-title{
+	font-size: 60px;
+	font-weight: 900;
+	text-transform: uppercase;
+	color:#666;
+	-moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+.blog-title:hover {
+	font-size: 50px;
+	font-weight: 900;
+	color:#000;
+	text-decoration: none;
+}
+
 .banner-highlight{
-	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 50px;
 	font-weight: 900;
 	text-transform: uppercase;
@@ -54,7 +77,6 @@
     transition: all .2s ease-in;
 }
 .banner-highlight:hover {
-	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 50px;
 	font-weight: 900;
 	color:#000;

@@ -2,15 +2,15 @@
     <div v-if="parent == 'designers'">
         <ul class="uk-accordion">
             <li>
-                <h4 class="uk-link-reset uk-text-uppercase">
+                <h5 class="uk-link-reset uk-text-uppercase">
                     <a :href="'/shop/designers/all'">
                         {{ trans.all }}
                     </a>
-                </h4>
+                </h5>
             </li>
         </ul>
         <ul class="uk-accordion" uk-accordion="multiple: true" >
-            <li class="uk-open">
+            <li >
                 <h5 href="#" class="uk-accordion-title">{{ parent.toUpperCase() }}</h5>
                 <div class="uk-accordion-content">
                     <ul class="uk-nav uk-filter-nav">
@@ -26,15 +26,15 @@
     <div v-else>
         <ul class="uk-accordion">
             <li>
-                <h4 class="uk-link-reset uk-text-uppercase">
+                <h5 class="uk-link-reset uk-text-uppercase">
                     <a :href="'/shop/'+parent+'/all'">
                         {{ trans.all }}
                     </a>
-                </h4>
+                </h5>
             </li>
         </ul>
         <ul class="uk-accordion" uk-accordion="multiple: true" >
-            <li class="uk-open" v-for="category in categories">
+            <li v-for="category in categories">
                 <h5 href="#" class="uk-accordion-title">{{ category.name.toUpperCase() }}</h5>
                 <div class="uk-accordion-content">
                 <ul class="uk-nav uk-filter-nav">
@@ -55,7 +55,7 @@
         created() {
             var self = this;
             self.parent = this.parent;
-            
+
             Event.listen('categories', function (response) {
                 self.categories = response;
             });

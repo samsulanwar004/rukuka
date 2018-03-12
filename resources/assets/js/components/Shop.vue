@@ -3,7 +3,7 @@
 
         <!-- start product -->
         <div class="uk-panel uk-text-left" v-for="product in products">
-            <div class="uk-card uk-card-small uk-visible@m">
+            <div class="uk-card uk-card-small">
                 <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
                     <a :href="'/product/'+ product.slug">
                          <lazy-background
@@ -38,37 +38,6 @@
                     <span v-else>
                         {{ product.price | round(exchangeRate.symbol, exchangeRate.value) }}
                     </span>
-                </div>
-            </div>
-            <div class="uk-card uk-card-small uk-padding-remove uk-hidden@m">
-                <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
-                    <a :href="'/product/'+ product.slug">
-                      <lazy-background
-                          :image-source="product.photo | awsLink(aws_link)"
-                          :alt="product.name"
-                          :loading-image="loadingImage"
-                          :error-image="errorImage">
-                        </lazy-background>
-                    </a>
-                </div>
-                <div class="uk-card-body uk-padding-remove">
-                  <div>
-                    <a href="#modal-shop" class="uk-button uk-button-small uk-button-secondary uk-width-1-1 uk-text-uppercase" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
-                  </div>
-                  <a :href="'/product/'+ product.slug" class="uk-text-meta">{{ product.name }}</a>
-                  <br>
-                  <span v-if="product.price_before_discount > 0 ">
-                    <del class="uk-text-small">
-                        {{ product.price_before_discount | round(exchangeRate.symbol, exchangeRate.value) }}
-                    </del>
-                  </span>
-                  <span class="uk-text-danger uk-text-small" v-if="product.price_before_discount > 0 ">
-                     &nbsp;{{ product.price | round(exchangeRate.symbol, exchangeRate.value) }}
-                  </span>
-                  <span v-else class="uk-text-small">
-                      {{ product.price | round(exchangeRate.symbol, exchangeRate.value) }}
-                  </span>
-
                 </div>
             </div>
         </div>

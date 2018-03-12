@@ -1,13 +1,19 @@
 @extends('app')
 @if($categories == 'designers')
-    @section('title',  $designer->name.' '.trans('app.title_designers') )
+    @if($category == 'all')
+        @section('title',  $designer->name.' '.trans('app.title_designers_list') )
+    @else
+        @section('title',  $designer->name.' '.trans('app.title_designers') )
+    @endif
 @else
     @if($categories == 'womens' && $category == 'all')
         @section('title', trans('app.title_shop_womens') )
     @elseif($categories == 'mens' && $category == 'all')
         @section('title', trans('app.title_shop_mens') )
-    @elseif($products->first()->category->name)
-        @section('title',$products->first()->category->name.' '.trans('app.title_shop_category') )
+    @elseif($categories == 'home' && $category == 'all')
+        @section('title', trans('app.title_shop_home') )
+    @elseif($products->first()->category_name)
+        @section('title',$products->first()->category_name.' '.trans('app.title_shop_category') )
     @else
         @section('title',trans('app.product_not_available').' '.trans('app.title_shop_category') )
     @endif
@@ -16,12 +22,12 @@
 
     <div class="uk-container">
       @if($categories == 'designers' && $category != 'all')
-          <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ $designer->name }}</h3>
+          <h3 class="uk-margin-small-top uk-margin-remove-bottom "></h3>
       @else
           @if($category == 'all')
               <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ trans('app.all_you_need') }}</h3>
           @else
-              <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ isset($products->first()->category->name) ? $products->first()->category->name : trans('app.product_not_available') }}</h3>
+              <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ isset($products->first()->category_name) ? $products->first()->category_name : trans('app.product_not_available') }}</h3>
           @endif
       @endif
       <div class="uk-visible@m">
@@ -38,7 +44,7 @@
               ])
           @else
               @include('partials.breadcrumb', [
-                  'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false, isset($products->first()->category->name) ? $products->first()->category->name : 'Product not available' => 'categories']
+                  'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false, isset($products->first()->category_name) ? $products->first()->category_name : 'Product not available' => 'categories']
               ])
           @endif
       @endif
@@ -58,7 +64,7 @@
 
         @endif
 
-        <div class="uk-grid-small uk-margin-small-top fixed" uk-grid>
+        <div class="uk-grid-small uk-margin-small-top" uk-grid>
             <div class="uk-width-1-4@m uk-visible@m">
 
                 <a href="#" uk-toggle="target: #nav1; animation: uk-animation-fade" class="uk-button uk-button-small uk-button-secondary uk-width-1-1">
@@ -84,7 +90,8 @@
                     <div class="uk-hidden@m uk-text-right">
                       <a href="#modal" class="uk-button uk-button-default-warm uk-button-small" uk-toggle>{{ trans('app.filter') }}</a>
                       <div id="modal" uk-modal>
-                        <div class="uk-modal-dialog uk-modal-body">
+                        <div class="uk-modal-dialog uk-margin-auto-vertical">
+                          <div class="uk-modal-body" uk-overflow-auto>
                             <categories-mobile
                                     parent="{{ $categories }}"
                                     slug="{{ $slug == null ? $category:$slug }}"
@@ -99,6 +106,11 @@
                                     color_id="{{ $colorId }}"
                                     locale="{{ json_encode(trans('app')) }}"
                             ></color-palette-mobile>
+                          </div>
+                          <div class="uk-modal-footer">
+                            <a href="#" class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-modal-close">back to shop</a>
+                          </div>
+
                         </div>
                       </div>
                     </div>

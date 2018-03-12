@@ -1,5 +1,5 @@
 /*! UIkit 3.0.0-beta.39 | http://www.getuikit.com | (c) 2014 - 2017 YOOtheme | MIT License */
-@import url('https://fonts.googleapis.com/css?family=Work+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300');
 /* ========================================================================
    Component: Base
  ========================================================================== */
@@ -11,9 +11,9 @@
  */
 html {
   /* 1 */
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
-  font-weight: normal;
+  font-weight: 300;
   line-height: 1.5;
   /* 2 */
   -webkit-text-size-adjust: 100%;
@@ -82,12 +82,12 @@ abbr[title] {
 /* 1 */
 b,
 strong {
-  font-weight: inherit;
+  font-weight: 600;
 }
 /* 2 */
 b,
 strong {
-  font-weight: bolder;
+  font-weight: 600;
 }
 /*
  * 1. Correct the odd `em` font sizing in all browsers.
@@ -102,7 +102,7 @@ strong {
   /* 2 */
   font-family: Consolas, monaco, monospace;
   /* 3 */
-  color: #ec9dac;
+  color: #bb0000;
   white-space: nowrap;
   padding: 2px 6px;
   background: #f8f8f8;
@@ -111,7 +111,7 @@ strong {
  * Emphasize
  */
 em {
-  color: #ec9dac;
+  color: #bb0000;
 }
 /*
  * Insert
@@ -239,8 +239,8 @@ h5,
 h6,
 .uk-h6 {
   margin: 0 0 20px 0;
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 400;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
   color: #000;
   letter-spacing: 2px;
   text-transform: none;
@@ -285,7 +285,7 @@ h4,
 }
 h5,
 .uk-h5 {
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   line-height: 1.4;
 }
@@ -394,6 +394,18 @@ pre {
 }
 pre code {
   font-family: Consolas, monaco, monospace;
+}
+/* blog font */
+.blog-body {
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  font-size: 18px;
+  font-weight: 200;
+}
+.blog-heading {
+  font-family: 'Open Sans', sans-serif;
+  size: 70px;
+  color: #333;
 }
 /* Selection pseudo-element
  ========================================================================== */
@@ -1499,8 +1511,8 @@ button.uk-icon:not(:disabled) {
  */
 .uk-form-danger,
 .uk-form-danger:focus {
-  color: #ec9dac;
-  border-color: #ec9dac;
+  color: #bb0000;
+  border-color: #bb0000;
 }
 /*
  * Success
@@ -1988,7 +2000,7 @@ select.uk-form-width-xsmall {
  * Danger
  */
 .uk-button-danger {
-  background-color: #ec9dac;
+  background-color: #bb0000;
   color: #fff;
   -moz-transition: all 0.2s ease-in;
   -o-transition: all 0.2s ease-in;
@@ -1999,7 +2011,7 @@ select.uk-form-width-xsmall {
 /* Hover + Focus */
 .uk-button-danger:hover,
 .uk-button-danger:focus {
-  background-color: #e8889a;
+  background-color: #a20000;
   color: #fff;
 }
 /* OnClick + Active */
@@ -3156,8 +3168,8 @@ select.uk-form-width-xsmall {
  * Danger
  */
 .uk-alert-danger {
-  background: #ffffff;
-  color: #ec9dac;
+  background: #ecb7b7;
+  color: #bb0000;
 }
 /*
      * Content
@@ -3245,7 +3257,7 @@ select.uk-form-width-xsmall {
  * Danger
  */
 .uk-label-danger {
-  background-color: #ec9dac;
+  background-color: #bb0000;
   color: #fff;
 }
 /* ========================================================================
@@ -3931,10 +3943,10 @@ ul.uk-nav-sub {
   padding: 0 40px;
   /* 3 */
   font-size: 12px;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   /* 4 */
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 2px;
 }
 /*
@@ -3942,6 +3954,11 @@ ul.uk-nav-sub {
  */
 .uk-navbar-nav > li > a {
   color: #666;
+  border-bottom: 3px solid transparent;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
   text-transform: uppercase;
   transition: 0.1s ease-in-out;
   transition-property: color, background-color;
@@ -3954,6 +3971,7 @@ ul.uk-nav-sub {
 .uk-navbar-nav > li > a:focus,
 .uk-navbar-nav > li > a.uk-open {
   color: #000;
+  border-bottom: 3px solid;
   outline: none;
 }
 /* OnClick */
@@ -4083,18 +4101,18 @@ ul.uk-nav-sub {
  * Adopts `uk-nav`
  ========================================================================== */
 .uk-navbar-dropdown-nav {
-  font-size: 12px;
+  font-size: 13px;
 }
 /*
  * Items
  */
 .uk-navbar-dropdown-nav > li > a {
-  color: #666;
+  color: #000;
 }
 /* Hover + Focus */
 .uk-navbar-dropdown-nav > li > a:hover,
 .uk-navbar-dropdown-nav > li > a:focus {
-  color: #000;
+  color: #666;
 }
 /* Active */
 .uk-navbar-dropdown-nav > li.uk-active > a {
@@ -4780,7 +4798,7 @@ ul.uk-nav-sub {
   margin: 0;
   font-size: 14px;
   line-height: 1;
-  border-bottom: 0px solid #c3c3c3;
+  font-weight: 400;
   padding-bottom: 10px;
   letter-spacing: 1.5px;
   cursor: pointer;
@@ -5884,7 +5902,7 @@ ul.uk-nav-sub {
  * Danger
  */
 .uk-notification-message-danger {
-  color: #ec9dac;
+  color: #bb0000;
 }
 /* ========================================================================
    Component: Tooltip
@@ -7064,7 +7082,7 @@ ul.uk-nav-sub {
   color: #faa05a !important;
 }
 .uk-text-danger {
-  color: #ec9dac !important;
+  color: #bb0000 !important;
 }
 /* Background modifier
  ========================================================================== */
@@ -7967,7 +7985,7 @@ iframe.uk-cover {
  */
 .uk-logo {
   font-size: 25px;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #000;
   /* 1 */
   text-decoration: none;

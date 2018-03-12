@@ -5,7 +5,7 @@
     <div class="uk-grid-small uk-margin-top uk-flex uk-flex-center" uk-grid>
       <div class="uk-width-3-4@m">
         <h3>{{ trans('app.checkout_almost') }} </h3>
-        <div class="uk-card uk-card-default uk-card-border">
+        <div class="uk-card uk-card-default uk-card-border uk-margin-bottom">
             <div class="uk-card-body">
                 <form role="form" id="payment-form" method="POST" action="javascript:void(0);" class="form_class">
                  {{ trans('app.order_number') }} :
@@ -52,7 +52,7 @@
                           </tr>
                       </thead>
                       <tbody>
-      
+
                           @foreach($detail as $product)
                             @php
                               $subtotal = number_format(($product['price'] * $product['qty']) / $kurs->value,2);
@@ -69,7 +69,7 @@
                             </tr>
                       </tbody>
                     </table>
-                                      
+
                     <div class="uk-text-center">
                         <button class="uk-button uk-button-danger uk-width-1-2 uk-text-center" type="submit">{{ trans('app.pay_now') }}</button>
                     </div>
@@ -82,31 +82,31 @@
     </div>
   </div>
 
-  
+
   <div class="overlay" style="display: none;"></div>
 
   <!-- Modal -->
   <div class="modal fade" id="diModalin" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
-    
-    
+
+
       <div class="modal-content">
-        
+
         <div class="modal-body" style="padding:40px 50px;">
-          
+
         </div>
-       
+
       </div>
-      
+
     </div>
-  </div> 
+  </div>
 
   <div class="overlay" style="display: none;"></div>
   <!-- <div id="loading" style="display: none;"><img src="https://m.popkey.co/fe4ba7/DYALX.gif" width="200px" height="200px"></div> -->
 </div>
 
         <?php $orderCode = $order->order_code;
-        $userId    = $order->users_id; ?>   
+        $userId    = $order->users_id; ?>
 
 @endsection
 
@@ -120,8 +120,8 @@
 
           $form.submit(function (event) {
               hideResults();
-              
-              
+
+
               <?php echo "Xendit.setPublishableKey('".config('common.xendit_public_key')."')";?>
 
               // Disable the submit button to prevent repeated clicks:
@@ -131,8 +131,8 @@
               $(".modal-body").html('<img src="{{ imageCDN('loading-image.gif') }}" width="200px" height="200px">');
 
               // Request a token from Xendit:
-              var tokenData = getTokenData(); 
-              
+              var tokenData = getTokenData();
+
               Xendit.card.createToken(tokenData, xenditResponseHandler);
               // $('.overlay').hide();
               // $('#diModalin').modal('hide');
@@ -154,7 +154,7 @@
               $('.overlay').show();
               $("#diModalin").modal();
               $(".modal-body").html('<img src="{{ imageCDN('loading-image.gif') }}" width="200px" height="200px">');
-              
+
               if (err) {
                   alert(err.error_code +" : "+err.message);
                   $('#diModalin').modal('hide');
@@ -164,14 +164,14 @@
               }
 
               else if (creditCardCharge.status == 'VERIFIED') {
-                 
+
                   var card_holder = document.getElementById("card_holder").value;
                   <?php echo "orderData = { 'order_code': '".$orderCode."','user_id': '".$userId."','signature': '".$signature."', 'totalwithshipping': '".$totalwithshipping."', 'repayment': '".$repayment."', 'card_holder' : card_holder };"; ?>
                   tokenData = getTokenData();
 
                   $.ajaxSetup({
                   headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')}
-                  });   
+                  });
 
                   var request = $.ajax({
                       type: "POST",
@@ -179,48 +179,48 @@
                       data: { order: orderData, request: tokenData, response: creditCardCharge, _token: getTokenValue()},
                   });
 
-                  request.done(function(msg) 
-                  {   
+                  request.done(function(msg)
+                  {
                       if(msg.status == "CAPTURED" ||msg.status == "AUTHORIZED")
-                      {    
-                     
+                      {
+
                            window.location = "{!! route('payment.finish') !!}";
                       }
                       else
-                      {  
-                        
+                      {
+
                           window.location = "{!! route('order-repayment') !!}";
-                          
+
                       }
                   });
 
                   displaySuccess(creditCardCharge);
 
-                  
+
               } else if (creditCardCharge.status === 'IN_REVIEW') {
                  $('.overlay').show();
               $("#diModalin").modal();
               $(".modal-body").html('<img src="{{ imageCDN('loading-image.gif') }}" width="200px" height="200px">');
-                 
+
                   $(".modal-body").html('<iframe height="360" width="500" frameborder="0" scrolling="no" allowtransparency="true" src="'+creditCardCharge.payer_authentication_url+'"></iframe>');
               } //else if (creditCardCharge.status === 'FRAUD') {
                 //   alert(err.error_code +" : "+err.message);
                 //   window.location = "{!! route('user.history') !!}";
-              //} 
+              //}
               else if (creditCardCharge.status === 'FAILED') {
 
-                   
+
                   alert(creditCardCharge.status +" : "+creditCardCharge.failure_reason);
                   window.location = "{!! route('user.history') !!}";
               }
           }
 
-          
+
 
           function displaySuccess (creditCardCharge) {
               $('#three-ds-container').hide();
               $('.overlay').hide();
-             
+
 
               var requestData = {};
               $.extend(requestData, getTokenData(), getFraudData());
@@ -233,7 +233,7 @@
 
           }
 
-          function getTokenData () { 
+          function getTokenData () {
               total = {{$totalwithshipping}};
               var amount = total.toString();
               return {

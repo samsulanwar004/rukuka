@@ -90,12 +90,15 @@ class PageController extends BaseApiController
             $mens = 0;
             $womens = 0;
             $kids = 0;
+            $home = 0;
 
             foreach ($product as $prod) {
                 if ($prod['category'] == 'Mens') {
                     $mens++;
                 } else if ($prod['category'] == 'Womens') {
                     $womens++;
+                } else if ($prod['category'] == 'Home') {
+                    $home++;
                 } else {
                     $kids++;
                 }
@@ -103,6 +106,7 @@ class PageController extends BaseApiController
 
             $categories['mens'] = $mens;
             $categories['womens'] = $womens;
+            $categories['home'] = $home;
             $categories['kids'] = $kids;
 
             return $this->success($categories, 200, true);

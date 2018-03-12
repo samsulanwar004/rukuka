@@ -100,4 +100,9 @@ class BlogRepository
 
         return $result;
     }
+
+    public function getCategory()
+    {
+        return BlogCategory::orderBy('created_at', 'asc')->get();
+    }
 }

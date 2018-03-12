@@ -12,6 +12,7 @@ return [
     'title_product'             =>  'at ruKuKa',
     'title_shop_womens'         =>  'Womens at ruKuKa',
     'title_shop_mens'           =>  'Mens at ruKuKa',
+    'title_shop_home'           =>  'Home at ruKuKa',
     'title_sale_womens'         =>  'Womens Sale - ruKuKa',
     'title_sale_mens'           =>  'Mens Sale - ruKuKa',
     'title_shop_category'       =>  'at ruKuKa',
@@ -70,7 +71,7 @@ return [
     'subtitle_index_1'          => 'Get Discover',
 
     //resources/views/partials/nav.blade.php
-    'search'                    =>  'S E A R C H . . .',
+    'search'                    =>  'SEARCH HERE...',
     'search_label'              =>  'Search',
     'welcome_in'                =>  'welcome to ruKuKa, now we can show you how indonesian made really beautiful on you!',
     'find_label'                =>  'Find our product',
@@ -119,6 +120,7 @@ return [
     'kids_nav'                  =>  'Kids',
     'sale_nav'                  =>  'Sale',
     'blog_nav'                  =>  'Editorial',
+    'home_nav'                  =>  'Home',
     'eco_tourism_nav'           =>  'Eco Tourism',
     'all'                       =>  'All',
     'new_arrival'               =>  'New Arrival',
@@ -385,6 +387,7 @@ return [
     'nothing_found'             =>  'Sorry, Nothing Found.',
     'another_keyword'           =>  'try searching with other keywords',
     'other_people'              =>  'Other people also read',
+    'blog_title_home'           =>  'Top Stories',
 
     //email common
     'invoice'                   =>  'Invoice',
@@ -445,5 +448,9 @@ return [
     'forgot_reset'              =>  'Choose a new password',
 
     //resources/views/pages/password/reset.blade.php
-    'input_new_password'        =>'Please input your new password'
+    'input_new_password'        =>  'Please input your new password',
+
+    //resources/views/pages/lookbook_index.blade.php
+    'lookbook_title_category'   =>  'Lookbook',
+    'lookbook_title_index'      =>  'Lookbook',
 ];
