@@ -15,20 +15,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ $metaTag['web_meta_tag']['description'] }}">
     <meta name='language' content='EN'/>
+    <meta name="author" content="rukuka">
 
     @if($doFollow == true)
-      <meta name="googlebot-news" content="index,follow" />
-      <meta name="robots" content="index, follow" />
-      <meta name="googlebot" content="all" />
+    <meta name="googlebot-news" content="index,follow" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="all" />
     @else
-      <meta name="googlebot-news" content="nofollow" />
-      <meta name="robots" content="nofollow" />
-      <meta name="googlebot" content="nofollow" />
-    @endif
-
-    <meta name="author" content="rukuka">
+    <meta name="googlebot-news" content="nofollow" />
+    <meta name="robots" content="nofollow" />
+    <meta name="googlebot" content="nofollow" />
+    @endif   
     <!-- end SEO and Responsive -->
-
 
     <!-- facebook META -->
     <meta property="og:title" content="{{ $metaTag['sosial_media_meta_tag']['title'] }}" />
