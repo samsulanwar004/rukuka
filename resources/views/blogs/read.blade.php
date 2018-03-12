@@ -1,4 +1,4 @@
-@extends('app-blog')
+@extends('app_blog')
 @section('title', $posts['title'].' '.trans('app.title_blog_read') )
 @section('content')
     @if($status['code'] == '010')

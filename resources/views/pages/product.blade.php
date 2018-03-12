@@ -158,12 +158,9 @@
                 <p class="uk-margin-remove uk-text-meta">
                 <ul class="uk-grid-small uk-flex-middle uk-flex-center" uk-grid>
                     <li><a class="uk-icon-link" uk-icon="icon: twitter" target="_blank" href="{{ $share['twitter']}}"></a></li>
-                    <li><a class="uk-icon-link" uk-icon="icon: pinterest" target="_blank" href="{{ $share['pinterest']}}"></a></li>
                     <li><a class="uk-icon-link" uk-icon="icon: facebook" target="_blank" href="{{ $share['facebook']}}"></a></li>
                     <li><a class="uk-icon-link" uk-icon="icon: google-plus" target="_blank" href="{{ $share['gplus']}}"></a></li>
-                    <li><a class="uk-icon-link" uk-icon="icon: instagram"></a></li>
                     <li><a class="uk-icon-link" uk-icon="icon: whatsapp" target="_blank" href="{{ $share['whatsapp']}}"></a></li>
-                    <li><a class="uk-icon-link" uk-icon="icon: mail" target="_blank" href="{{ $share['gmail']}}"></a></li>
                 </ul>
                 </p>
                 <hr class="uk-margin-small">

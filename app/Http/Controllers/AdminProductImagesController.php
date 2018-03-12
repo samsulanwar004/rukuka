@@ -44,7 +44,7 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'Product Code','name'=>'products_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'products,product_code'];
 			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
-			$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'required|image|max:3000','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP'];
+			$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','upload_encrypt'=>'true','validation'=>'required|image|max:3000','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -361,7 +361,7 @@
 						$name = $request->input('name')[$i];
 					    $filename = sprintf(
 					                "%s-%s.%s",
-					                str_slug($name),
+					                str_slug($name.'-'.rand(0,99)),
 					                date('YmdHis'),
 					                $file->getClientOriginalExtension()
 					            );

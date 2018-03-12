@@ -127,16 +127,16 @@ class NavContentSeeder extends Seeder
                 "helper" => null,
                 "created_at" => date('Y-m-d H:i:s'),
                 "group_setting" => "Meta Tag",
-                "label" => "Meta Description",
+                "label" => "Description",
             ],
             [
-                "name" => "meta_keyword",
+                "name" => "meta_title",
                 "content_input_type" => "text",
                 "dataenum" => null,
                 "helper" => null,
                 "created_at" => date('Y-m-d H:i:s'),
                 "group_setting" => "Meta Tag",
-                "label" => "Meta Keyword",
+                "label" => "Title",
             ],
         ];
 

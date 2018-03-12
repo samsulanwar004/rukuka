@@ -44,7 +44,7 @@
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Group Setting','name'=>'group_setting','type'=>'select2','validation'=>'required','width'=>'col-sm-10','dataenum'=>'Homepage|Homepage;Women|Women;Men|Men;Kids|Kids'];
-			$this->form[] = ['label'=>'Banner','name'=>'banner','type'=>'upload','validation'=>'max:3000','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP'];
+			$this->form[] = ['label'=>'Banner','name'=>'banner','type'=>'upload','upload_encrypt'=>'true','validation'=>'max:3000','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP'];
 			$this->form[] = ['label'=>'Url','name'=>'url','type'=>'text','width'=>'col-sm-10','placeholder'=>'Please enter a valid URL'];
 			$this->form[] = ['label'=>'Order','name'=>'order','type'=>'number','validation'=>'required|min:0','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
