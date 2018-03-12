@@ -14,32 +14,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ $metaTag['web_meta_tag']['description'] }}">
     <meta name='language' content='EN'/>
-
+    <meta name="author" content="rukuka">
+    
     @if($doFollow == true)
-      <meta name="googlebot-news" content="index,follow" />
-      <meta name="robots" content="index, follow" />
-      <meta name="googlebot" content="all" />
+    <meta name="googlebot-news" content="index,follow" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="all" />
     @else
-      <meta name="googlebot-news" content="nofollow" />
-      <meta name="robots" content="nofollow" />
-      <meta name="googlebot" content="nofollow" />
+    <meta name="googlebot-news" content="nofollow" />
+    <meta name="robots" content="nofollow" />
+    <meta name="googlebot" content="nofollow" />
     @endif
+    <!-- end SEO and Responsive -->
 
     <!-- Start Global site tag (gtag.js) - Google Analytics -->
-      @if(config('common.google_analytics') == TRUE)
-          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99161447-3"></script>
-          <script>
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
+    @if(config('common.google_analytics') == TRUE)
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99161447-3"></script>
+      <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
 
-              gtag('config', 'UA-99161447-3');
-          </script>
-      @endif
+          gtag('config', 'UA-99161447-3');
+      </script>
+    @endif
     <!-- End Global site tag (gtag.js) - Google Analytics -->
-
-    <meta name="author" content="rukuka">
-    <!-- end SEO and Responsive -->
 
     <!-- facebook META -->
     <meta property="og:title" content="{{ $metaTag['sosial_media_meta_tag']['title'] }}" />
@@ -66,18 +65,7 @@
     @include('partials.pavicon')
     <!--end pavicon-->
 
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99161447-3"></script>
-      <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'UA-99161447-3');
-      </script>
-
-
-      <!-- Google Tag Manager -->
+    <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
