@@ -3,6 +3,7 @@
 return [
     //Title Page
     'rukuka'                    =>  'ruKuKa',
+    'afw'                       =>  'アマゾンファッションウィーク',
     'title_homepage'            =>  'ruKuKa - インドネシア ローカル ブランド',
     'title_designers_list'      =>  'ruKuKaのデザイナー',
     'title_designers'           =>  'ruKuKaで',
@@ -73,7 +74,7 @@ return [
     //resources/views/partials/nav.blade.php
     'search'                    =>  '検索中',
     'search_label'              =>  '検索',
-    'welcome_in'                =>  'ruKuKaでようこそ！あなたにインドネシア製を綺麗に着せると見せることができます！',
+    'header_note'                =>  'ruKuKaでようこそ！あなたにインドネシア製を綺麗に着せると見せることができます！ruKuKa チェックアウト 行われているイベント ',
     'find_label'                =>  '商品を検索',
 
     //resources/assets/js/components/UserPanel.vue
@@ -311,6 +312,7 @@ return [
     'update_wishlist'           =>  '欲しい物をアップデート',
     'wishlist_label'            =>  '欲しい物リスト',
     'color_label'               =>  'カラー',
+    'european'                  =>  'ヨロッパ',
 
     //resources/assets/js/components/ItemCheckout.vue
     'items'                     =>  'アイテム',

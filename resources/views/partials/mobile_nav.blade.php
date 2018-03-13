@@ -42,7 +42,7 @@
   <div class="uk-alert-alert" uk-alert>
       <a href="#" class="uk-alert-close" uk-close></a>
       <p class="uk-text-center">
-        {{ trans('app.welcome_in') }} Checkout ruKuKa Happening Event <a href="https://rukuka.com/lookbook/amazon-fashion-week"> <b> <u>Amazon Fashion Week</u> </a></b>
+        {{ trans('app.header_note') }} <a href="https://rukuka.com/lookbook/amazon-fashion-week"> <b> <u>{{ trans('app.afw') }}</u> </b> </a></b>
       </p>
   </div>
 </div>

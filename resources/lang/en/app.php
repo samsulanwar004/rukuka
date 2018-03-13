@@ -3,6 +3,7 @@
 return [
     //Title Page
     'rukuka'                    =>  'ruKuKa',
+    'afw'                       =>  'Amazon Fashion Week',
     'title_homepage'            =>  'ruKuKa - Indonesian Local Brands',
     'title_designers_list'      =>  'Designers at ruKuKa',
     'title_designers'           =>  'at ruKuKa',
@@ -73,7 +74,7 @@ return [
     //resources/views/partials/nav.blade.php
     'search'                    =>  'SEARCH HERE...',
     'search_label'              =>  'Search',
-    'welcome_in'                =>  'welcome to ruKuKa, now we can show you how indonesian made really beautiful on you!',
+    'header_note'               =>  'welcome to ruKuKa, now we can show you how indonesian made really beautiful on you! Checkout ruKuKa Happening Event',
     'find_label'                =>  'Find our product',
 
     //resources/assets/js/components/UserPanel.vue
@@ -311,6 +312,7 @@ return [
     'update_wishlist'           =>  'Update Wishlist',
     'wishlist_label'            =>  'Wishlist',
     'color_label'               =>  'Color',
+    'european'                  =>  'European',
 
     //resources/assets/js/components/ItemCheckout.vue
     'items'                     =>  'Items',
