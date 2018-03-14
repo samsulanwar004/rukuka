@@ -153,6 +153,9 @@
                   bag_link="{{ route('bag') }}"
                   locale="{{ json_encode(trans('app')) }}"
                 ></shop>
+                <div class="uk-text-center">
+                  <a class="uk-icon-link" href="#" uk-icon="icon: plus; ratio: 1.5"></a>
+                </div>
             </div>
         </div>
           <div class="uk-text-right uk-margin-bottom uk-margin-top">

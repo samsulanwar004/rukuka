@@ -193,6 +193,9 @@
           </div>
         </div>
     </div>
+    <div class="uk-text-center">
+      <a href="#" class="uk-icon-link uk-icon" uk-icon="icon: plus; ratio: 1.5"></a>
+    </div>
 </template>
 <style>
   .fade-enter-active, .fade-leave-active {
