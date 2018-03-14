@@ -56,5 +56,16 @@ return [
 
 	'queue_list' => [
 		'user_mail' => env('QUEUE_MAIL_NAME')
-	]		
+	],
+
+	'image' => [
+		'small' => [
+            'width' => env('IMAGE_SMALL_WIDTH'),
+            'height' => env('IMAGE_SMALL_HEIGHT'),
+        ],
+        'medium' => [
+            'width' => env('IMAGE_MEDIUM_WIDTH'),
+            'height' => env('IMAGE_MEDIUM_HEIGHT'),
+        ],
+	]	
 ];

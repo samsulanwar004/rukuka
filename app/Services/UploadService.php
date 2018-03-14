@@ -4,33 +4,52 @@ namespace App\Services;
 
 use Storage;
 use Exception;
+use App\Libraries\ImageFile;
 
 class UploadService
 {
+    public function imageFromUrl($url)
+    {
+      
+    }
 
-    public function uploadProductImage($driver, $userId, $file, $filename)
+    public function uploadProductImage($file)
     {
 
         try {
             $folder = 'products/';
-            // $folder = 'uploads/'.date('Y-m');
+
+            $random = date('YmdHis').rand(0,99);
+
+            $filenameOriginal = sprintf(
+                "%s-%s.%s",
+                $random,
+                'original',
+                $file->getClientOriginalExtension()
+            );
+
+            $filename = sprintf(
+                "%s.%s",
+                $random,
+                $file->getClientOriginalExtension()
+            );
 
             $images = [
               'original' => [
                 'file' => \Image::make($file)
                   ->encode(),
-                'fileName' => $filename,
+                'fileName' => $filenameOriginal,
               ]
             ];
 
             $sizes = [
               'small' => [
-                'width' => 200,
-                'height' => 250,
+                'width' => config('common.image.small.width'),
+                'height' => config('common.image.small.height'),
               ],
               'medium' => [
-                'width' => 400,
-                'height' => 500,
+                'width' => config('common.image.medium.width'),
+                'height' => config('common.image.medium.height'),
               ],
             ];
 
@@ -47,14 +66,12 @@ class UploadService
               ];
             }
 
-            $driver = Storage::disk($driver);
+            $driver = Storage::disk();
             foreach ($images as $image) {
                 $driver->put($folder . $image['fileName'], $image['file']->stream()->__toString(), 'public');
-                // Storage::disk($driver)->putFileAs($folder, new \File($image['file']->stream()->__toString()), $image['fileName'], 'public');
             }
 
-            return $folder . $filename;
-            // $driver->put($filename, $file, 'public');
+            return $folder . $filenameOriginal;
 
         } catch (Exception $e) {
             throw new Exception($e->getMessage());

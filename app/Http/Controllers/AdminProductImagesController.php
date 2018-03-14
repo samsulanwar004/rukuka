@@ -250,7 +250,7 @@
 	    public function hook_row_index($column_index,&$column_value) {
 	    	//Your code here
             if($column_index==3){
-                $column_value = '<img src="'.uploadCDN($column_value).'" alt="-" height="40">';
+                $column_value = '<img src="'.uploadCDN(str_replace('original', 'small', $column_value)).'" alt="-" height="40">';
             }
 	    }
 
@@ -359,15 +359,8 @@
 					if ($request->hasFile('image')) {
 						$file = $request->file('image')[$i];
 						$name = $request->input('name')[$i];
-					    $filename = sprintf(
-					                "%s-%s.%s",
-					                str_slug($name.'-'.rand(0,99)),
-					                date('YmdHis'),
-					                $file->getClientOriginalExtension()
-					            );
-					    $driver = config('filesystems.default') == 'local' ? 'local' : 's3';
 
-					    $imageName = (new UploadService)->uploadProductImage($driver, $userId, $file, $filename);
+					    $imageName = (new UploadService)->uploadProductImage($file);
 
 					    $image = new ProductImage;
 						$image->name = $name;
@@ -409,15 +402,8 @@
 				if ($request->hasFile('image')) {
 					$file = $request->file('image');
 					$name = $request->input('name');
-				    $filename = sprintf(
-				                "%s-%s.%s",
-				                str_slug($name),
-				                date('YmdHis'),
-				                $file->getClientOriginalExtension()
-				            );
-				    $driver = config('filesystems.s3url') == null ? 'local' : 's3';
 
-				    $imageName = (new UploadService)->uploadProductImage($driver, $userId, $file, $filename);
+				    $imageName = (new UploadService)->uploadProductImage($file);
 				}
 
 				$image = ProductImage::where('id',$id)->first();
