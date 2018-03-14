@@ -187,7 +187,7 @@
                         <div style="cursor:auto;color:#666;font-size:12px;line-height:22px;text-align:left;">
                           <p style="margin:0px">
                           {{trans('app.note',[], $locale)}} :
-                          <br>{{ trans('app.note_currency',[], $locale) }} (IDR.{{ number_format($order->order_total_idr) }})
+                          <br>{{ trans('app.note_currency',[], $locale) }} {{ number_format($order->order_total_idr) }}
                         </P>
                         </div>
                       </td>

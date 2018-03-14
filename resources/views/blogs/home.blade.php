@@ -2,7 +2,6 @@
 @section('title', trans('app.title_blog') )
 @section('content')
 
-    @if($status['code'] == '000')
     <div class="uk-container uk-container-small">
         @include('partials.category_blog')
 
@@ -61,14 +60,6 @@
         </div>
     </div>
 
-    @else
-        <div class="uk-container uk-container-small">
-            @include('partials.category_blog')
-            <div class="uk-section uk-section-default uk-section-xlarge uk-text-center">
-                <h2>{{ trans('app.no_content') }}</h2>
-            </div>
-        </div>
-    @endif
     <script type="text/javascript">
 
         function myFunction(id) {
