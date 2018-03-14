@@ -53,6 +53,7 @@
 </template>
 
 <script>
+    import axios from 'axios';
     export default {
         props: ['api', 'parent', 'category_slug', 'slug', 'sale','locale'],
         created() {
@@ -71,14 +72,20 @@
                 }
             };
             self.parent = this.parent;
-            $.get(api, function(categories) {
-              if (typeof categories.data !== 'undefined') {
-                self.categories = categories.data.sort(sort_by('id', false, function(result){
-                    return result;
-                }));
 
-                Event.fire('categories', self.categories);
-              }
+            axios.get(api)
+            .then(function (response) {
+
+                if (typeof response.data.data !== 'undefined') {
+                    self.categories = response.data.data.sort(sort_by('id', false, function(result){
+                        return result;
+                    }));
+
+                    Event.fire('categories', self.categories);
+                  }
+            })
+            .catch(function (error) {
+                console.log(error);
             });
         },
 
