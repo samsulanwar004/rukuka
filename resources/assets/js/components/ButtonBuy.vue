@@ -6,7 +6,7 @@
               alt="rukuka palette"
               :error-image="aws_link+'/images/default-600x600.jpg'"
               width="20px"
-              image-class="uk-border-rounded uk-box-shadow-small">
+              image-class="uk-border-circle uk-box-shadow-small uk-margin-right-small">
             </lazy-background>
             {{ prod.color }}
         </h5>
