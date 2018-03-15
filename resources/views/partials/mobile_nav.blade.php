@@ -28,8 +28,17 @@
             </div>
             <div class="uk-navbar-left uk-flex-1 uk-margin-top test-overlay" hidden>
               <div class="uk-width-expand">
+
                 {{ Form::open(array('url' => '/search', 'method' =>'get','files' => true,'class' => 'uk-search uk-search-navbar uk-width-1-1')) }}
-                <input class="uk-search-input" name="keyword" type="search" required placeholder="{{ trans('app.find_label') }}" autofocus>
+                <div>
+                  <div class="typeahead__container">
+                    <div class="typeahead__field">
+                        <span class="typeahead__query">
+                          <input class="uk-search-input js-typeahead-designers" name="keyword" type="search" required placeholder="{{ trans('app.find_label') }}" autofocus autocomplete="off">
+                        </span>
+                    </div>
+                  </div>
+                </div>
                 {{ Form::close() }}
               </div>
               <a class="uk-navbar-toggle uk-padding-remove" uk-close uk-toggle="target: .test-overlay; animation: uk-animation-fade" href="#"></a>

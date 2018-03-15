@@ -14,8 +14,12 @@
                 <h5 href="#" class="uk-accordion-title">{{ parent.toUpperCase() }}</h5>
                 <div class="uk-accordion-content">
                     <ul class="uk-nav uk-filter-nav">
-                        <li v-for="category in categories" :class="{'uk-text-bold': slug == category.slug}">
-                            <a :href="'/shop/'+parent+'/'+ category.slug ">{{ category.name }}</a>
+                        <li v-for="category in categories">
+                            <a :href="'/shop/'+parent+'/'+ category.slug ">
+                                <span :class="{'text-underline': slug == category.slug}">
+                                    {{ category.name }}
+                                </span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -41,8 +45,12 @@
                 <h5 href="#" class="uk-accordion-title">{{ category.name.toUpperCase() }}</h5>
                 <div class="uk-accordion-content">
                 <ul class="uk-nav uk-filter-nav">
-                    <li v-for="cat in category.child" :class="{'uk-text-bold': slug == cat.slug}">
-                      <a :href="'/shop/'+parent+'/'+ category.name.toLowerCase() +'/'+ cat.slug + sales">{{ cat.name }}</a>
+                    <li v-for="cat in category.child" >
+                      <a :href="'/shop/'+parent+'/'+ category.name.toLowerCase() +'/'+ cat.slug + sales">
+                          <span :class="{'text-underline': slug == cat.slug}">
+                              {{ cat.name }}
+                          </span>
+                      </a>
                     </li>
                 </ul>
                 </div>
@@ -72,12 +80,11 @@
                 }
             };
             self.parent = this.parent;
-
             axios.get(api)
             .then(function (response) {
 
                 if (typeof response.data.data !== 'undefined') {
-                    self.categories = response.data.data.sort(sort_by('id', false, function(result){
+                    self.categories = response.data.data.sort(sort_by('slug', false, function(result){
                         return result;
                     }));
 

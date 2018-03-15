@@ -37,6 +37,9 @@ Route::post('v1/lookbook-product', 'Api\PageController@lookbook')->name('lookboo
 
 Route::get('v1/color', 'Api\PageController@colorPalette')->name('color');
 
+Route::get('v1/typeahead/{keyword?}', 'Api\PageController@typeahead')->name('typeahead');
+
+
 
 Route::group([
 	'prefix' => 'v1', 
