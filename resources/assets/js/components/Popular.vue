@@ -109,7 +109,7 @@
                   :loading-image="loadingImage"
                   :error-image="errorImage"
                   width="20px"
-                  image-class="uk-border-rounded uk-box-shadow-small">
+                  image-class="uk-border-circle uk-box-shadow-small uk-margin-right-small">
                 </lazy-background>
                {{ color }}
               </h5>
