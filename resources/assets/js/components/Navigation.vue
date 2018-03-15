@@ -3,7 +3,8 @@
       <div class="uk-navbar-center">
 
           <ul class="uk-navbar-nav">
-              <li><a :href="designerLink">{{ trans.designers_nav }}</a>
+              <li>
+                  <a :href="designerLink">{{ trans.designers_nav }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
@@ -114,7 +115,8 @@
                       </div>
                   </div>
               </li>
-              <li><a :href="menLink">{{ trans.men_nav }}</a>
+              <li>
+                  <a :href="menLink">{{ trans.men_nav }}</a>
                 <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                     <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
@@ -179,7 +181,8 @@
               <li>
                   <a href="/shop/home/all">{{ trans.home }}</a>
               </li>
-              <li><a class="uk-text-danger"><b>{{ trans.sale_nav }}</b></a>
+              <li>
+                  <!--<a class="uk-text-danger"><b>{{ trans.sale_nav }}</b></a>-->
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div uk-grid>
                           <div class="uk-width-4-5@m uk-margin-remove">

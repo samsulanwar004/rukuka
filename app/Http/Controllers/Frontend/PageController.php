@@ -84,6 +84,7 @@ class PageController extends BaseController
         }
 
         $colorId = $request->has('color_id') ? $request->input('color_id') : null;
+        $sortByPrice = $request->input('price');
 
         $ids = [];
         foreach ($products as $value) {
@@ -99,6 +100,7 @@ class PageController extends BaseController
                     $entry->photo = $value->photo;
                 }
             }
+
 
             return [
                 'id' => $entry->id,
@@ -124,7 +126,8 @@ class PageController extends BaseController
             'shops',
             'sale',
             'recently',
-            'colorId'
+            'colorId',
+            'sortByPrice'
         ));
 
     }
@@ -484,6 +487,7 @@ class PageController extends BaseController
         $filter = request()->query();
         unset($filter['color_id']);
         $colorId = $request->has('color_id') ? $request->input('color_id') : null;
+        $sortByPrice = $request->input('price');
 
         return view('pages.search', compact(
             'products',
@@ -493,7 +497,8 @@ class PageController extends BaseController
             'category',
             'subcategory',
             'filter',
-            'colorId'
+            'colorId',
+            'sortByPrice'
         ));
     }
 

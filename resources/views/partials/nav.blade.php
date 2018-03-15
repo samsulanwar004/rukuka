@@ -6,7 +6,16 @@
                 <div class="uk-panel">
                     {{ Form::open(array('url' => '/search', 'method' =>'get','files' => true,'class' => 'uk-search uk-form-width-medium uk-first-column')) }}
                     <button type="submit" class="uk-search-icon-flip uk-search-icon uk-icon" uk-search-icon></button>
-                    <input type="text" class=" uk-search-input" name="keyword" required placeholder="{{ trans('app.search') }}">
+                    <div>
+                        <div class="typeahead__container">
+                            <div class="typeahead__field">
+                                <span class="typeahead__query">
+                                    <input class="js-typeahead-designers" type="search" class=" uk-search-input" name="keyword" autocomplete="off" required placeholder="{{ trans('app.search') }}">
+                                    <button type="submit" class="uk-search-icon-flip uk-search-icon uk-icon" uk-search-icon></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                     {{ Form::close() }}
                 </div>
               </div>
@@ -66,3 +75,26 @@
       </div>
     </div>
   </div>
+
+@section('footer_scripts')
+    <script>
+        $.typeahead({
+            input: '.js-typeahead-designers',
+            order: "asc",
+            maxItemPerGroup: 5,
+            source: {
+                designer:
+                    {
+                        ajax: {
+                            url: "{{ route('typeahead') }}", path: "data"
+                        }
+                    }
+            },
+            callback: {
+                onClick: function (node, a, item, event) {
+                    window.location.replace("/shop/designers/"+ item.display.replace(/[\s]|:\s/g, "-").replace("'", "-").toLowerCase() + "/");
+                }
+            }
+        });
+    </script>
+@endsection

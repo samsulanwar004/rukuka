@@ -88,9 +88,8 @@
                 <a href="/shop/home/all" class="uk-text-uppercase">{{ trans.home_nav }}</a>
             </li>
 
-
             <li class="uk-parent">
-                <a href="#" class="uk-text-uppercase"> {{ trans.sale_nav }}</a>
+                <!--<a href="#" class="uk-text-uppercase"> {{ trans.sale_nav }}</a>-->
                 <ul class="uk-nav-sub">
                     <li><a href="/shop/womens/sale">{{ trans.women_nav}}</a></li>
                     <li><a href="/shop/mens/sale">{{ trans.men_nav}}</a></li>
