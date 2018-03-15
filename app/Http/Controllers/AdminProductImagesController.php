@@ -365,6 +365,7 @@
 					    $image = new ProductImage;
 						$image->name = $name;
 						$image->photo = $imageName;
+						$image->is_compress = 1;
 						$image->product()->associate($request->input('parent_id'));
 						$image->save();
 					}
@@ -409,6 +410,7 @@
 				$image = ProductImage::where('id',$id)->first();
 				$image->name = $name;
 				$image->photo = $imageName;
+				$image->is_compress = 1;
 				$image->save();
 
 			    return redirect($request->input('return_url'))->with(['message' => 'Update image product successfully!','message_type' => 'success']);
