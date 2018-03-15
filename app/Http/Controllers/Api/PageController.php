@@ -317,4 +317,28 @@ class PageController extends BaseApiController
             return $this->error($e, 400, true);
         }
     }
+
+    public function typeahead($keyword = null)
+    {
+        try {
+            $designer = (new DesignerRepository())->getDesignersByKeyword($keyword);
+
+            $designerName = array();
+            foreach($designer as $value)
+            {
+                $designerName[] = $value['name'];
+            }
+
+            $datas = [
+                'status' => true,
+                'urlPattern' => "/designer/#id#/#display#/",
+                'data' => $designerName,
+            ];
+            echo  json_encode($datas);
+
+
+        } catch (Exception $e) {
+            return $this->error($e, 400, true);
+        }
+    }
 }
