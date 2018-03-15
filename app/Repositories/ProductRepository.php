@@ -515,4 +515,20 @@ class ProductRepository
             ->get();
     }
 
+    public function getProduct()
+    {
+        return $this->model()
+            ->limit(100)
+            ->where('gender', 'unisex')
+            ->get();
+    }
+
+    public function getProductByCategoryId($id)
+    {
+        return $this->model()
+            ->where('product_categories_id', $id)
+            ->where('gender', 'unisex')
+            ->first();
+    }
+
 }

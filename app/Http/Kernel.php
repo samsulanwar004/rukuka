@@ -43,6 +43,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
+            'acceptHeader'
         ],
     ];
 
@@ -61,5 +62,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'as.guest' => \App\Http\Middleware\AsGuestMiddleware::class,
+        'acceptHeader' => \App\Http\Middleware\VerifyAcceptHeader::class,
     ];
 }

@@ -29,7 +29,7 @@ class AddFieldDimensionInProductsTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             $table->dropColumn('weight');
             $table->dropColumn('length');
             $table->dropColumn('width');

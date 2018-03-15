@@ -18,7 +18,7 @@ class BaseApiController extends Controller
     protected function error($message, $httpCode = 500, $isValidationMessage = false)
     {
         logger($message);
-        if(config('app.debug')) {
+        if(config('app.debug') || !$isValidationMessage) {
             if ($message instanceof \Exception || $message instanceof \InvalidArgumentException) {
                 $message = $message->getMessage();
             }
