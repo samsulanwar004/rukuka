@@ -29,9 +29,4 @@ class PageRepository extends Controller
         return $result;
     }
 
-    public function getLookbookIndex()
-    {
-        return Lookbook::where('is_active','1')->whereNull('deleted_at')->get();
-    }
-
 }

@@ -30,33 +30,6 @@ class BlogRepository
         return Blog::where('is_publish', 1)->where('slug', $slug)->orderBy('created_at', 'desc')->first();
     }
 
-    public function status($code, $custom_msg = null)
-    {
-        switch ($code) {
-            case '000':
-                $msg = "Success";
-                break;
-            case '001':
-                $msg = "No Result";
-                break;
-            case '010':
-                $msg = "Success Get Read Blog";
-                break;
-            default:
-                $msg = "Unknown";
-        }
-
-        if ($msg != null)
-        {
-            $msg =  $msg . " " . $custom_msg;
-        }
-
-        return $response = array(
-            'code' => $code ,
-            'message' =>  $msg
-        );
-
-    }
 
     public function getSearch($keyword)
     {

@@ -151,13 +151,18 @@ Route::post('/contact', [
 ]);
 
 Route::get('/lookbook', [
-    'as'   => 'lookbook-get-index',
-    'uses' => 'Frontend\PageController@IndexLookbook',
-]);
-
-Route::get('/lookbook/{slug}', [
     'as'   => 'lookbook',
     'uses' => 'Frontend\PageController@getLookbook',
+]);
+
+Route::get('/lookbook/{lookbook_slug}', [
+    'as'   => 'lookbook-collection',
+    'uses' => 'Frontend\PageController@getLookbookCollection',
+]);
+
+Route::get('/lookbook/{lookbook_slug}/{collection_slug}', [
+    'as'   => 'lookbook-collection-product',
+    'uses' => 'Frontend\PageController@getLookbookCollectionProduct',
 ]);
 
 
