@@ -73,7 +73,6 @@
                 <a href="{{ URL::previous() }}"><button class="uk-button uk-button-default-warm uk-button-small"><span class="uk-icon" uk-icon="icon: chevron-left"></span>{{ trans('app.back_to_home') }}</button></a>
             </div>
         </div>
-
     </div>
 
 @endsection
