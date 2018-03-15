@@ -63,6 +63,8 @@
       aws_link="{{ config('filesystems.s3url') }}"
       default_image="{{ json_encode(config('common.default')) }}"
       locale="{{ json_encode(trans('app')) }}"
+      segment_1="{{ Request::segment(1) }}"
+      segment_2="{{ Request::segment(2) }}"
     ></navigation>
   </div>
   <div class="uk-section uk-section-xsmall uk-padding-remove">
