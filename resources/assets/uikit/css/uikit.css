@@ -3977,10 +3977,12 @@ ul.uk-nav-sub {
 /* OnClick */
 .uk-navbar-nav > li > a:active {
   color: #333;
+  border-bottom: 3px solid;
 }
 /* Active */
 .uk-navbar-nav > li.uk-active > a {
   color: #333;
+  border-bottom: 3px solid;
 }
 /* Item
  ========================================================================== */
