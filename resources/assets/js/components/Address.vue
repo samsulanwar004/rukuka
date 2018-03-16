@@ -79,7 +79,7 @@
               </div>
               <div class="uk-margin-small uk-text-meta uk-width-1-1">
                 <div>
-                    <label> {{ trans.country }}]</label>
+                    <label> {{ trans.country }}</label>
                   <select class="uk-input uk-form-small" name="country" id="form-country-vue" type="text" required="required" @change="changeCountryAddress">
                   </select>
                 </div>
