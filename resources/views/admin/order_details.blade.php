@@ -29,7 +29,9 @@
             <b>{{ $row->order_code }} </b>
             <br>
             Air Waybill
-            <span class="label label-info"> {{ $row->airwaybill }} </span>
+            <span class="label label-info"> {{ $row->airwaybill }} </span> <br><br>
+            <b>Order Date</b> <br>
+            {{ $row->order_date }} <br>
           </div>
           <div class="col-md-3">
             Payment<hr>
@@ -47,11 +49,13 @@
             <br>
           </div>
           <div class="col-md-6">
-            Shipping Address <hr>
+            Shipping Detail <hr>
+            <b>User Account:</b> <br>
+            {{ $row->address->user->email }} <br><br>
+            <b>Address:</b> <br>
             {{ $row->address->first_name }} {{ $row->address->last_name }} ({{ $row->address->phone_number }}) <br>
-            {{ $row->address->company != null ?  $row->address->company.', ' : ''}}
+            {{ $row->address->company != null ?  $row->address->company.', ' : ''}}<br>
             {{ $row->address->address_line }}, {{ $row->address->city }}, {{ $row->address->province }}, {{ $row->address->postal }}, {{ $row->address->country }} <br>
-            Shipping : EMC<br>
             @php
               if ($row->order_status == '0') {
                   echo '<span class="label label-primary">Sent Pending</span>';
@@ -84,18 +88,18 @@
                     <tr>
                         <td>{{ $detail->product_name }}</td>
                         <td>{{ $detail->sku }}</td>
-                        <td>{{ $detail->price }}</td>
+                        <td>Rp. {{ number_format($detail->price) }}</td>
                         <td>{{ $detail->qty }}</td>
-                        <td>{{ $detail->subtotal }}</td>
+                        <td>Rp. {{ number_format($detail->subtotal) }}</td>
                     </tr>
                     @php                                
                       $total += $detail->subtotal;
                     @endphp
                   @endforeach
                     <tr>
-                      <td colspan="4">Shipping Cost</td><td>{{ $row->shipping_cost }}</td></tr>
-                      <td colspan="4">Subtotal</td><td>{{ $total }}</td></tr>
-                      <td colspan="4">Total</td><td>{{ $total + $row->shipping_cost }}</td></tr>
+                      <td colspan="4">Shipping Cost</td><td>Rp. {{ number_format($row->shipping_cost) }}</td></tr>
+                      <td colspan="4">Subtotal</td><td>Rp. {{ number_format($total) }}</td></tr>
+                      <td colspan="4"><b>Total</b></td><td><b>Rp. {{ number_format($total + $row->shipping_cost) }}</b></td></tr>
                     </tr>
                 </tbody>
               </table>
