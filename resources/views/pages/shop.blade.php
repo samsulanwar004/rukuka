@@ -115,6 +115,7 @@
                                     aws_link="{{ config('filesystems.s3url') }}"
                                     color_id="{{ $colorId }}"
                                     locale="{{ json_encode(trans('app')) }}"
+                                    action_link="{{ actionLink() }}"
                             ></color-palette-mobile>
                           </div>
                           <div class="uk-modal-footer">
@@ -147,6 +148,7 @@
                                 aws_link="{{ config('filesystems.s3url') }}"
                                 color_id="{{ $colorId }}"
                                 locale="{{ json_encode(trans('app')) }}"
+                                action_link="{{ actionLink() }}"
                         ></color-palette>
                     </div>
                 </div>

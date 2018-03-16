@@ -47,75 +47,73 @@ class PageController extends BaseController
     	return view('pages.index', compact('home','slider', 'exchange'));
     }
 
-    public function shop(Request $request, $categories, $category, $slug = null, $sale = null)
+    public function shop(Request $request)
     {
-        if ($categories == 'designers') {
-            try{
+        try {
+            if ($request->input('menu') == 'designers') {
                 $product = (new ProductRepository);
-                $products = $product->getProductByDesigner($request, $category);
+                $products = $product->getProductByDesigner($request);
                 $designer = $product->getDesigner();
-
-                //Validate Deleted
-                $this->validDelete($designer);
-            }
-            catch (Exception $e) {
-                return view('pages.not_found')->withErrors($e->getMessage());
-            }
-        } else {
-            if ($category == 'all') {
-                $products = (new ProductRepository)
-                    ->getProductByCategory($request, $categories);
-            }else if ($category == 'sale') {
-                $products = (new ProductRepository)
-                    ->getProductByCategorySale($request, $categories);
-            } else {
-                if ($sale == 'sale') {
+            } elseif ($request->input('menu') == 'womens') {
+                if (in_array($request->input('parent'), array('clothing', 'accessories'))) {
                     $products = (new ProductRepository)
-                        ->getProductBySlugCategorySale($request, $slug);
+                        ->getProductByCategory($request);
                 } else {
+                    throw new Exception("Error Processing Request", 1);
+                }
+            } elseif ($request->input('menu') == 'mens') {
+                if (in_array($request->input('parent'), array('clothing', 'accessories'))) {
                     $products = (new ProductRepository)
-                        ->getProductBySlugCategory($request, $slug);
+                        ->getProductByCategory($request);
+                } else {
+                    throw new Exception("Error Processing Request", 1);
                 }
-            }
-        }
-
-        foreach ($request->all() as $key => $value) {
-            $products->appends($key, $value);
-        }
-
-        $colorId = $request->has('color_id') ? $request->input('color_id') : null;
-        $sortByPrice = $request->input('price');
-
-        $ids = [];
-        foreach ($products as $value) {
-            $ids[] = $value->id;
-        }
-
-        $image = (new ProductRepository)->getProductImage($ids);
-
-        $shops = $products->map(function ($entry) use ($image){
-
-            foreach ($image as $value) {
-                if ($entry->id == $value->products_id) {
-                    $entry->photo = $value->photo;
-                }
+            } elseif ($request->input('menu') == 'home') {
+                $products = (new ProductRepository)
+                        ->getProductByCategory($request);
+            } else {
+                throw new Exception("Error Processing Request", 1);
             }
 
+            foreach ($request->all() as $key => $value) {
+                $products->appends($key, $value);
+            }
 
-            return [
-                'id' => $entry->id,
-                'name' => $entry->name,
-                'slug' => $entry->slug,
-                'price' => $entry->sell_price,
-                'price_before_discount' => $entry->price_before_discount,
-                'photo' => $entry->photo,
-                'is_new' => $this->date->diffInDays(Carbon::parse($entry->created_at)) <= 7 ? true : false,
-            ];
-        });
+            $colorId = $request->has('color_id') ? $request->input('color_id') : null;
+            $sortByPrice = $request->input('price');
 
-        $recentlyViewed = session()->get('products.recently_viewed');
+            $ids = [];
+            foreach ($products as $value) {
+                $ids[] = $value->id;
+            }
 
-        $recently = $recentlyViewed ? array_keys(array_flip(array_reverse($recentlyViewed))) : [];
+            $image = (new ProductRepository)->getProductImage($ids);
+
+            $shops = $products->map(function ($entry) use ($image){
+
+                foreach ($image as $value) {
+                    if ($entry->id == $value->products_id) {
+                        $entry->photo = $value->photo;
+                    }
+                }
+
+                return [
+                    'id' => $entry->id,
+                    'name' => $entry->name,
+                    'slug' => $entry->slug,
+                    'price' => $entry->sell_price,
+                    'price_before_discount' => $entry->price_before_discount,
+                    'photo' => $entry->photo,
+                    'is_new' => $this->date->diffInDays(Carbon::parse($entry->created_at)) <= 7 ? true : false,
+                ];
+            });
+
+            $recentlyViewed = session()->get('products.recently_viewed');
+
+            $recently = $recentlyViewed ? array_keys(array_flip(array_reverse($recentlyViewed))) : [];
+        } catch (Exception $e) {
+            return abort(404);
+        }
 
         return view('pages.shop', compact(
             'products',

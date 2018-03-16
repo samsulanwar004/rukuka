@@ -23,7 +23,7 @@
     import axios from 'axios';
     import VueLazyBackgroundImage from '../components/VueLazyBackgroundImage.vue';
     export default {
-        props: ['default_image', 'aws_link', 'color_id','filter','locale'],
+        props: ['default_image', 'aws_link', 'color_id', 'locale', 'action_link'],
 
         components: {
           'lazy-background': VueLazyBackgroundImage
@@ -53,14 +53,22 @@
         },
 
         methods: {
-            pickColor: function (colorId) {
-                if(this.filter){
-                    window.location.href = '?'+this.filter+'&color_id='+colorId;
-                }
-                else{
-                    window.location.href = '?color_id='+colorId;
-                }
-            }
+          pickColor: function (colorId) {
+            var search = function searchStringInArray (str, strArray) {
+                  for (var j=0; j<strArray.length; j++) {
+                      if (strArray[j].match(str)) return j;
+                  }
+                  return -1;
+              }
+              var myarr = this.action_link.split("&");
+              var position = search('color',myarr);
+              if(position == -1) {
+                  window.location.href = this.action_link+'&color_id='+colorId;
+              } else {
+                  delete myarr[position];
+                  window.location.href = myarr.join('&')+'&color_id='+colorId;
+              }
+          }
         }
     }
 </script>

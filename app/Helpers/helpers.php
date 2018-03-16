@@ -98,11 +98,11 @@ if (! function_exists('uploadCDN')) {
 }
 
 if (! function_exists('actionLink')) {
-    function actionLink(array $param) {
+    function actionLink(array $param = null) {
         $query = request()->query();
         
         if ($query) {
-            $param = mergeArrays($query, $param);
+            $param = isset($param) ? mergeArrays($query, $param) : $query;
         }
 
         return '?'.http_build_query($param);
