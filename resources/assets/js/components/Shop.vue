@@ -115,11 +115,13 @@
                    {{ color }}
                   </h5>
                   <div v-if="stocks.length > 0">
+                      <p class="uk-margin-small-bottom">
+                          <span class="uk-text-small uk-text-danger"><b> {{ trans.european }} </b> | <a href="/help/size-charts" target="_blank" class="uk-text-primary"><u> {{ trans.size_chart}} </u></a></span>
+                      </p>
                     <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-medium">
                       <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
                         {{ stock.size }} {{ stock.unit | unit }}
                       </option>
-
                     </select>
                     <span class="uk-text-meta"><i> {{ trans.choose_size_label }} </i> </span>
                   </div>

@@ -12,16 +12,7 @@
                         <div class="uk-inline-clip uk-light">
                             <a href="{{ URL::to('editorial/'.$post->slug)}}" class="uk-link-reset">
                                 <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
-                                    <img src="{{ uploadCDN($post->photo_1) }}" alt="{{$post->title}}" onerror="this.src = '{{imageCDN(config('common.default.image_7'))}}'">
-                                <div class="uk-card uk-position-bottom-left uk-card-small">
-                                    <div class="uk-card-body">
-                                        <div class="uk-hidden@m">
-                                            <div>
-                                                <h5 class="uk-margin-remove uk-text-bold uk-text-small">{{$post->title}}</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <img src="{{ uploadCDN($post->photo_1) }}" alt="{{$post->title}}" onerror="this.src = '{{imageCDN(config('common.default.image_7'))}}'">
                             </a>
                         </div>
                         <div class="uk-inline-clip uk-dark uk-position-cover uk-invisible-hover">
@@ -37,11 +28,17 @@
                                             <h4 class="uk-text-muted">{{date_format($post['created_at'],"F j, Y")}}</h4>
                                         </div>
                                     </div>
-                                      <div class="uk-hidden@m">
-                                          <div class="uk-position-bottom-left">
-                                              <h4 class="uk-margin-remove uk-text-bold uk-text-small"><u>{{$post->title}}</u></h4>
+                              <div class="uk-hidden@m">
+                                  <div class="uk-card uk-position-bottom-left uk-card-small">
+                                      <div class="uk-card-body">
+                                          <div class="uk-hidden@m">
+                                              <div>
+                                                  <h5 class="uk-margin-remove uk-text-bold uk-text-small">{{$post->title}}</h5>
+                                              </div>
                                           </div>
                                       </div>
+                                  </div>
+                              </div>
                           </a>
                         </div>
 

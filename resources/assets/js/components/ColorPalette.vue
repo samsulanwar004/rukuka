@@ -10,7 +10,8 @@
                       :loading-image="loadingImage"
                       :error-image="errorImage"
                       :alt="color.name"
-                      width="27px">
+                      width="27px"
+                      image-class="uk-border-circle uk-box-shadow-small">
                     </lazy-background>
                 </label>
               </li>

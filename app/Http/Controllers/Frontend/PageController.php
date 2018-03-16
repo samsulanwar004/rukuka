@@ -568,49 +568,79 @@ class PageController extends BaseController
 
     }
 
-    public function indexLookbook()
+    public function getLookbook()
     {
-        $PageRepository = New PageRepository();
+        $LookbookRepository = New LookbookRepository();
         $BlogRepository = New BlogRepository();
 
-        $lookbook= $PageRepository->getLookbookIndex();
+        $lookbook= $LookbookRepository->getLookbook();
         $category = $BlogRepository->getCategory();
         $title = trans('app.lookbook_title_index');
 
-        return view('pages.lookbook_index', compact('lookbook','title','category'));
+        return view('pages.lookbook', compact('lookbook','title','category'));
 
     }
 
-    public function getLookbook($slug='')
+    public function getLookbookCollection($lookbook_slug='')
     {
+
         try{
-            $lookbook = (new LookbookRepository)->getLookbook($slug);
+            $lookbook = (new LookbookRepository)->getLookbookCollection($lookbook_slug);
+            
+            //Validate Deleted
+            $this->validDelete($lookbook);
+            if($lookbook == null){
+                abort(404);
+            }
 
             //Validate Deleted
             $this->validDelete($lookbook);
 
-            $collections = $lookbook->lookbookCollections->map(function ($entry) {
-                $ids = [];
-                if($entry->lookbookProducts){
-                    foreach ($entry->lookbookProducts as $product){
-                        $ids[] = $product->products_id;
-                    }
+            return view ('pages.lookbook_collection',compact('lookbook'));
+        }
+        catch (Exception $e) {
+            return view('pages.not_found')->withErrors($e->getMessage());
+        }
+
+    }
+
+
+    public function getLookbookCollectionProduct($lookbook_slug='',$collection_slug='')
+    {
+        try{
+            $lookbook = (new LookbookRepository)->getLookbookCollection($lookbook_slug);
+            //Validate Deleted
+            $this->validDelete($lookbook);
+            if($lookbook == null){
+                abort(404);
+            }
+
+            $lookbookCollection = (new LookbookRepository)->getLookbookProduct($collection_slug);
+            //Validate Deleted
+            $this->validDelete($lookbookCollection);
+            if($lookbookCollection == null){
+                abort(404);
+            }
+
+            $ids = [];
+            if($lookbookCollection->lookbookProducts){
+                foreach ($lookbookCollection->lookbookProducts as $product){
+                    $ids[] = $product->products_id;
                 }
+            }
+            $collections =  [
+                'id' => $lookbookCollection->id,
+                'name' => $lookbookCollection->name,
+                'title' => $lookbookCollection->title,
+                'subtitle' => $lookbookCollection->subtitle,
+                'content' => $lookbookCollection->content,
+                'photo' => $lookbookCollection->photo,
+                'order' => $lookbookCollection->order,
+                'is_active' => $lookbookCollection->is_active,
+                'product_id' => json_encode($ids),
+            ];
 
-                return [
-                    'id' => $entry->id,
-                    'name' => $entry->name,
-                    'title' => $entry->title,
-                    'subtitle' => $entry->subtitle,
-                    'content' => $entry->content,
-                    'photo' => $entry->photo,
-                    'order' => $entry->order,
-                    'is_active' => $entry->is_active,
-                    'product_id'   => json_encode($ids),
-                ];
-            });
-
-            return view ('pages.lookbook',compact('lookbook','collections'));
+            return view ('pages.lookbook_product',compact('lookbookCollection','collections'));
         }
         catch (Exception $e) {
             return view('pages.not_found')->withErrors($e->getMessage());
