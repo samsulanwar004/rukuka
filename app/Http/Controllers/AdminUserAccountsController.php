@@ -34,9 +34,11 @@
 			$this->col[] = ["label"=>"First Name","name"=>"first_name"];
 			$this->col[] = ["label"=>"Last Name","name"=>"last_name"];
 			$this->col[] = ["label"=>"Email","name"=>"email"];
+			$this->col[] = ["label"=>"Phone","name"=>"phone_number"];
             $this->col[] = ["label"=>"Type","name"=>"social_media_type"];
 			$this->col[] = ["label"=>"Email Verification","name"=>"is_verified"];
 			$this->col[] = ["label"=>"Status","name"=>"status"];
+			$this->col[] = ["label"=>"Create","name"=>"created_at"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
@@ -267,14 +269,14 @@
 	    */    
 	    public function hook_row_index($column_index,&$column_value) {	        
 	    	//Your code here
-            if($column_index==5) {
+            if($column_index==6) {
                 if ($column_value == '0') {
                     $column_value = '<span class="label label-warning">Unverified</span>';
                 } else {
                     $column_value = '<span class="label label-success">Verified</span>';
                 }
             }
-            if($column_index==6) {
+            if($column_index==7) {
                 if ($column_value == '0') {
                     $column_value = '<span class="label label-warning">Pending</span>';
                 } else if($column_value == '1'){
