@@ -311,6 +311,12 @@
 
     var allOptionsCountry = '';
 
+    $.ajaxSetup({
+       headers:{
+          'Accept': "application/json"
+       }
+    });
+    
     var jqxhr = $.get( "/api/v1/countries", function(response) {
 
       if (response.error == '000') {
