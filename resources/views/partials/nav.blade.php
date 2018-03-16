@@ -1,17 +1,21 @@
-<div class="uk-section-xsmall uk-background-secondary uk-padding-remove">
-  <div class="uk-container uk-container-small uk-light">
-    <h6 class="uk-padding-xsmall uk-text-center">{{ trans('app.welcome_in') }}</h6>
-  </div>
-</div>
-<div class="uk-section-xsmall uk-background-default uk-margin-remove uk-padding-remove" uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
+<div class="uk-section-xsmall uk-background-default uk-margin-remove uk-padding-remove" style="border-color: #333; border-width: 5px" uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
     <div class="uk-section uk-section-default uk-section-xsmall uk-padding-remove-vertical">
-        <div class="uk-container uk-container-small">
+        <div class="uk-container">
           <div class="uk-grid-small" uk-grid>
               <div class="uk-width-1-3@m uk-flex uk-flex-middle">
                 <div class="uk-panel">
                     {{ Form::open(array('url' => '/search', 'method' =>'get','files' => true,'class' => 'uk-search uk-form-width-medium uk-first-column')) }}
                     <button type="submit" class="uk-search-icon-flip uk-search-icon uk-icon" uk-search-icon></button>
-                    <input type="text" class=" uk-search-input" name="keyword" required placeholder="{{ trans('app.search') }}">
+                    <div>
+                        <div class="typeahead__container">
+                            <div class="typeahead__field">
+                                <span class="typeahead__query">
+                                    <input class="js-typeahead-designers" type="search" class=" uk-search-input" name="keyword" autocomplete="off" required placeholder="{{ trans('app.search') }}">
+                                    <button type="submit" class="uk-search-icon-flip uk-search-icon uk-icon" uk-search-icon></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                     {{ Form::close() }}
                 </div>
               </div>
@@ -59,6 +63,40 @@
       aws_link="{{ config('filesystems.s3url') }}"
       default_image="{{ json_encode(config('common.default')) }}"
       locale="{{ json_encode(trans('app')) }}"
+      segment_1="{{ Request::segment(1) }}"
+      segment_2="{{ Request::segment(2) }}"
     ></navigation>
-
   </div>
+  <div class="uk-section uk-section-xsmall uk-padding-remove">
+    <div class="uk-container">
+      <div class="uk-alert-alert" uk-alert>
+          <a href="#" class="uk-alert-close" uk-close></a>
+          <p class="uk-text-center">
+              {{ trans('app.header_note') }} <a href="https://rukuka.com/lookbook/amazon-fashion-week"> <b> <u>{{ trans('app.afw') }}</u> </b> </a></b>
+          </p>
+      </div>
+    </div>
+  </div>
+
+@section('footer_scripts')
+    <script>
+        $.typeahead({
+            input: '.js-typeahead-designers',
+            order: "asc",
+            maxItemPerGroup: 5,
+            source: {
+                designer:
+                    {
+                        ajax: {
+                            url: "{{ route('typeahead') }}", path: "data"
+                        }
+                    }
+            },
+            callback: {
+                onClick: function (node, a, item, event) {
+                    window.location.replace("/shop/designers/"+ item.display.replace(/[\s]|:\s/g, "-").replace("'", "-").toLowerCase() + "/");
+                }
+            }
+        });
+    </script>
+@endsection

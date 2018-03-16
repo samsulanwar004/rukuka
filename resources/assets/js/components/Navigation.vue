@@ -3,7 +3,8 @@
       <div class="uk-navbar-center">
 
           <ul class="uk-navbar-nav">
-              <li><a :href="designerLink">{{ trans.designers_nav }}</a>
+              <li :class="{'uk-active': segment_1 == 'designer' || segment_2 == 'designers'}">
+                  <a :href="designerLink">{{ trans.designers_nav }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
@@ -50,7 +51,7 @@
                     </div>
                 </div>
               </li>
-              <li>
+              <li :class="{'uk-active': segment_1 == 'women' || segment_2 == 'womens'}">
                   <a :href="womenLink">{{ trans.women_nav }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
@@ -89,8 +90,6 @@
                               <ul class="uk-nav uk-navbar-dropdown-nav">
                                   <li class="uk-parent">
                                     <div class="uk-inline">
-
-
                                       <a :href="womensNav.women_shop_url">
                                           <lazy-background
                                                   :image-source="womensNav.women_shop_image | awsLink(aws_link)"
@@ -114,7 +113,8 @@
                       </div>
                   </div>
               </li>
-              <li><a :href="menLink">{{ trans.men_nav }}</a>
+              <li :class="{'uk-active': segment_1 == 'men' || segment_2 == 'mens'}">
+                <a :href="menLink">{{ trans.men_nav }}</a>
                 <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                     <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
@@ -176,10 +176,11 @@
                     </div>
                 </div>
               </li>
-              <li>
+              <li :class="{'uk-active': segment_1 == 'home' || segment_2 == 'home'}">
                   <a href="/shop/home/all">{{ trans.home }}</a>
               </li>
-              <li><a class="uk-text-danger"><b>{{ trans.sale_nav }}</b></a>
+              <li>
+                  <!--<a class="uk-text-danger"><b>{{ trans.sale_nav }}</b></a>-->
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div uk-grid>
                           <div class="uk-width-4-5@m uk-margin-remove">
@@ -213,7 +214,8 @@
                       </div>
                   </div>
               </li>
-              <li><a href="/editorial">{{ trans.blog_nav }}</a>
+              <li :class="{'uk-active': segment_1 == 'editorial' || segment_1 == 'lookbook'}">
+                  <a href="/editorial">{{ trans.blog_nav }}</a>
               </li>
           </ul>
       </div>
@@ -233,7 +235,9 @@
           'designer_link',
           'aws_link',
           'default_image',
-          'locale'
+          'locale',
+          'segment_1',
+          'segment_2',
         ],
 
         components: {
@@ -327,7 +331,9 @@
                 trans: JSON.parse(this.locale,true),
                 errorImage: {},
                 loadingImage: {},
-                errorImageSale: {}
+                errorImageSale: {},
+                segment_1: this.segment_1,
+                segment_2: this.segment_2,
             }
         },
 

@@ -1,9 +1,18 @@
 @extends('app_blog')
 @section('title', $posts['title'].' '.trans('app.title_blog_read') )
 @section('content')
-    @if($status['code'] == '010')
+
     <div class="uk-container uk-container-small">
-      <div class="uk-grid uk-grid-small">
+        <div class="uk-text-center uk-margin-small-top">
+            <div class="uk-inline">
+                <a href="{{ $home['homepage_main_url'] }}" class="uk-link-reset">
+                    <div class="uk-inline-clip uk-transition-toggle uk-light">
+                            <img src="{{ uploadCDN($posts['photo_2']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="uk-grid uk-grid-small">
         <div>
           <h2 class="uk-margin-top">{{$posts['title']}}</h2>
           <span class="blog-body">{!! $posts['content']!!}</span>
@@ -64,13 +73,6 @@
                 <a href="{{ URL::previous() }}"><button class="uk-button uk-button-default-warm uk-button-small"><span class="uk-icon" uk-icon="icon: chevron-left"></span>{{ trans('app.back_to_home') }}</button></a>
             </div>
         </div>
-
     </div>
-    @else
-        <div class="uk-container uk-container-small">
-            <div class="uk-section uk-section-default uk-section-xlarge uk-text-center">
-                <h1>{{ trans('app.no_content') }}</h1>
-            </div>
-        </div>
-    @endif
+
 @endsection

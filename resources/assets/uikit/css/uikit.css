@@ -1,5 +1,5 @@
 /*! UIkit 3.0.0-beta.39 | http://www.getuikit.com | (c) 2014 - 2017 YOOtheme | MIT License */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 /* ========================================================================
    Component: Base
  ========================================================================== */
@@ -3977,10 +3977,12 @@ ul.uk-nav-sub {
 /* OnClick */
 .uk-navbar-nav > li > a:active {
   color: #333;
+  border-bottom: 3px solid;
 }
 /* Active */
 .uk-navbar-nav > li.uk-active > a {
   color: #333;
+  border-bottom: 3px solid;
 }
 /* Item
  ========================================================================== */

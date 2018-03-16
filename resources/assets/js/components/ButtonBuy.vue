@@ -6,39 +6,43 @@
               alt="rukuka palette"
               :error-image="aws_link+'/images/default-600x600.jpg'"
               width="20px"
-              image-class="uk-border-rounded uk-box-shadow-small">
+              image-class="uk-border-circle uk-box-shadow-small uk-margin-right-small">
             </lazy-background>
             {{ prod.color }}
         </h5>
         <div v-if="stocks.length > 0">
-            <select :class="{'uk-select uk-form-width-small uk-form-small': true, 'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
+            <p class="uk-margin-small-bottom">
+              <span class="uk-text-small uk-text-danger"><b> {{ trans.european }} </b> | <a href="/help/size-charts" target="_blank" class="uk-text-primary"><u> {{ trans.size_chart}} </u></a></span>
+            </p>
+            <select :class="{'uk-select uk-form-width-small uk-form-small uk-margin-small-right': true, 'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
               <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">{{ stock.size }} {{ stock.unit | unit }}</option>
             </select>
             <span class="uk-text-meta"><i> {{ trans.choose_size_label }}</i> </span>
+
         </div>
         <div v-else>
             <span class="uk-text-meta"><i class="uk-text-danger">{{ trans.no_size }} </i> <br>{{ trans.contact_cs }} </span>
         </div>
         <ul uk-accordion="animation: true; multiple: false">
-                  <li class="uk-open">
-                      <h5 class="uk-accordion-title">{{ trans.editors_notes }}</h5>
-                      <div class="uk-accordion-content">
-                          <span v-html="prod.content"></span>
-                      </div>
-                  </li>
-                  <li>
-                      <h5 class="uk-accordion-title">{{ trans.size_fit }}</h5>
-                      <div class="uk-accordion-content">
-                          <span v-html="prod.size_and_fit"></span>
-                      </div>
-                  </li>
-                  <li>
-                      <h5 class="uk-accordion-title">{{ trans.detail_care }}</h5>
-                      <div class="uk-accordion-content">
-                          <span v-html="prod.detail_and_care"></span>
-                      </div>
-                  </li>
-                </ul>
+            <li class="uk-open">
+                <h5 class="uk-accordion-title">{{ trans.editors_notes }}</h5>
+                <div class="uk-accordion-content">
+                    <span v-html="prod.content"></span>
+                </div>
+            </li>
+            <li>
+                <h5 class="uk-accordion-title">{{ trans.size_fit }}</h5>
+                <div class="uk-accordion-content">
+                    <span v-html="prod.size_and_fit"></span>
+                </div>
+            </li>
+            <li>
+                <h5 class="uk-accordion-title">{{ trans.detail_care }}</h5>
+                <div class="uk-accordion-content">
+                    <span v-html="prod.detail_and_care"></span>
+                </div>
+            </li>
+          </ul>
         <div class="uk-margin-small-top" v-if="method == 'bag'">
           <button class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right uk-text-uppercase" v-on:click="updateBag(sku)"> {{ trans.update_bag }} </button>
         </div>

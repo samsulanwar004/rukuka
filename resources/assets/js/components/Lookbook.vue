@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div v-for="collect in collection" class="uk-margin">
-            <div class="uk-inline" :id="collect.order">
+        <div class="uk-margin-small-top">
+            <div class="uk-inline">
                     <lazy-background
-                            :image-source="collect.photo | awsLink(aws_link)"
-                            :alt="collect.name"
+                            :image-source="collection.photo | awsLink(aws_link)"
+                            :alt="collection.name"
                             :loading-image="loadingImage"
                             :error-image="errorImage"
                             image-style="max-height:700px">
@@ -13,15 +13,17 @@
                 <div class="uk-position-center-left uk-position-medium uk-text-center">
                   <div class="uk-width-1-5@m">
                     <div uk-slideshow-parallax="scale: 1,1,0.8">
-                      <h1><u>#{{collect.order }}</u></h1>
-                        <p class="uk-text-lead uk-visible@m" uk-slideshow-parallax="x: 400,0,0;">{{ collect.title }}</p>
+                        <p class="uk-text-lead uk-visible@m" uk-slideshow-parallax="x: 400,0,0;">{{ collection.title }}</p>
+                        <p class="uk-text-lead uk-visible@m" uk-slideshow-parallax="x: 400,0,0;">{{ collection.subtitle }}</p>
                     </div>
                   </div>
 
                 </div>
             </div>
-            <h6 class="uk-text-muted uk-margin-remove uk-hidden@m" uk-slideshow-parallax="x: 400,0,0;">{{ collect.title }}</h6>
-            <h4 class="uk-margin-small">{{ collect.name }}</h4>
+            <h6 class="uk-text-muted uk-margin-remove uk-hidden@m" uk-slideshow-parallax="x: 400,0,0;">{{ collection.title }}</h6>
+            <h6 class="uk-text-muted uk-margin-remove uk-hidden@m" uk-slideshow-parallax="x: 400,0,0;">{{ collection.subtitle }}</h6>
+            <p class="uk-text-lead uk-visible@m" uk-slideshow-parallax="x: 400,0,0;">{{ collection.subtitle }}</p>
+            <h4 class="uk-margin-small">{{ collection.name }}</h4>
             <loobook-product
                     :api="api"
                     :product_api="product_api"
@@ -30,10 +32,10 @@
                     :auth="auth"
                     :aws_link="aws_link"
                     :default_image="default_image"
-                    :recently="collect.product_id"
+                    :recently="collection.product_id"
                     :bag_link="bag_link"
                     :locale="locale"
-                    :modal_code="collect.id"
+                    :modal_code="collection.id"
             ></loobook-product>
         </div>
     </div>

@@ -14,14 +14,71 @@ class BlogController extends Controller
     {
         $BlogRepository = new BlogRepository();
 
-        $result= $BlogRepository->getPostsIndex();
-        $posts = $result['post'];
-        $status= $result['status'];
+        $posts= $BlogRepository->getPostsIndex();
         $header= $BlogRepository->getHeader();
         $category = $BlogRepository->getCategory();
         $title = trans('app.blog_title_home');
 
-        return view('blogs.home', compact('posts','category','title','header','status'));
+        if(count($posts) == 0){
+            return view('blogs.blog_404', compact('category','title'));
+        }
+        else{
+            return view('blogs.home', compact('posts','category','title','header'));
+        }
+    }
+
+    public function category($slug)
+    {
+        $BlogRepository = new BlogRepository();
+
+        $result = $BlogRepository->getPostsIndexCategory($slug);
+        $category = $BlogRepository->getCategory();
+        $header= $BlogRepository->getHeader();
+        $posts = $result['posts'];
+        $title = $result['title'];
+
+        if(count($posts) == 0){
+            return view('blogs.blog_404', compact('category','title'));
+        }
+        else{
+            return view('blogs.home', compact('posts','category','title','header'));
+        }
+    }
+
+    public function blogRead($slug)
+    {
+        $BlogRepository = new BlogRepository();
+
+        $posts= $BlogRepository->getPostsRead($slug);
+        $postsRandom = $BlogRepository->getPostRandom();
+        $category = $BlogRepository->getCategory();
+
+        if(count($posts) == 0){
+            return view('blogs.blog_404', compact('category','title'));
+        }
+        else{
+            return view('blogs.read', compact('posts','postsRandom'));
+        }
+
+    }
+
+
+    public function search(Request $request)
+    {
+        $BlogRepository = new BlogRepository();
+
+        $posts  = $BlogRepository->getSearch($request->all());
+        $category = $BlogRepository->getCategory();
+        $header= $BlogRepository->getHeader();
+        $keyword = $request->input('keyword');
+
+        if(count($posts) == 0){
+            return view('blogs.search_404', compact('category','title','keyword'));
+        }
+        else{
+            return view('blogs.search', compact('posts','category','keyword','header'));
+        }
+
     }
 
     public function getBlogAjax(Request $request)
@@ -53,15 +110,6 @@ class BlogController extends Controller
                                         <a href="'.$url.'" class="uk-link-reset">
                                             <div style="background: rgba(0,0,0,.1);" class="uk-position-cover"></div>
                                             '.$image.'
-                                            <div class="uk-card uk-position-bottom-left uk-card-small">
-                                                <div class="uk-card-body">
-                                                    <div class="uk-hidden@m">
-                                                        <div>
-                                                            <h5 class="uk-margin-remove uk-text-bold uk-text-small">'.$post->title.'</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </a>
                                     </div>
                                     <div class="uk-inline-clip uk-dark uk-position-cover uk-invisible-hover">
@@ -78,10 +126,16 @@ class BlogController extends Controller
                                                 </div>
                                             </div>
                                             <div class="uk-hidden@m">
-                                                <div class="uk-position-bottom-left">
-                                                    <h4 class="uk-margin-remove uk-text-bold uk-text-small"><u>'.$post->title.'</u></h4>
-                                                </div>
-                                            </div>
+                                                  <div class="uk-card uk-position-bottom-left uk-card-small">
+                                                      <div class="uk-card-body">
+                                                          <div class="uk-hidden@m">
+                                                              <div>
+                                                                  <h5 class="uk-margin-remove uk-text-bold uk-text-small">'.$post->title.'</h5>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                             </div>
                                         </a>
                                     </div>
                                  </div>
@@ -100,45 +154,6 @@ class BlogController extends Controller
             $response = array('blog' => $blog, 'loader' => $loader, 'count' => count($posts));
             echo json_encode($response);
         }
-    }
-
-    public function blogRead($slug)
-    {
-        $BlogRepository = new BlogRepository();
-
-        $result= $BlogRepository->getPostsRead($slug);
-        $posts = $result['post'];
-        $status= $result['status'];
-        $category = $BlogRepository->getCategory();
-        $postsRandom = $BlogRepository->getPostRandom();
-        return view('blogs.read', compact('posts','category','postsRandom','status'));
-    }
-
-    public function category($slug)
-    {
-        $BlogRepository = new BlogRepository();
-
-        $result= $BlogRepository->getPostsIndexCategory($slug);
-        $posts = $result['post'];
-        $status= $result['status'];
-        $category = $BlogRepository->getCategory();
-        $header= $BlogRepository->getHeader();
-        $title = $result['title'];
-        return view('blogs.home', compact('posts','category','title','header','status'));
-    }
-
-    public function search(Request $request)
-    {
-        $BlogRepository = new BlogRepository();
-
-        $result = $BlogRepository->getSearch($request->all());
-        $posts = $result['post'];
-        $status= $result['status'];
-        $category = $BlogRepository->getCategory();
-        $header= $BlogRepository->getHeader();
-        $keyword = $request->input('keyword');
-
-        return view('blogs.search', compact('posts','category','keyword','header','status'));
     }
 
 }

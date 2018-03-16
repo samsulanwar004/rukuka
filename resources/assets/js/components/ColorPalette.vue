@@ -34,21 +34,21 @@
             var api = this.api;
 
             axios.get(api)
-                .then(function (response) {
+            .then(function (response) {
+
+                if (typeof response.data.data !== 'undefined') {
+
+                    Event.fire('api-color', response.data.data);
 
                     if (typeof response.data.data !== 'undefined') {
-
-                        Event.fire('api-color', response.data.data);
-
-                        if (typeof response.data.data !== 'undefined') {
-                            self.palette = response.data.data;
-                        }
-
+                        self.palette = response.data.data;
                     }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
             self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;
             self.loadingImage = this.aws_link+'/images/loading-image.gif';

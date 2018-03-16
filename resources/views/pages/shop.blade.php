@@ -77,8 +77,18 @@
 
                 <div class="uk-grid-small uk-child-width-1-2" uk-grid >
                       <div class="uk-text-left">
-                          <h6 class="uk-text-uppercase">{{ trans('app.sort_by_price') }} : <a href="{{ actionLink(['price' => 'desc']) }}">{{ trans('app.high') }}</a>
-                            | <a href="{{ actionLink(['price' => 'asc']) }}">{{ trans('app.low') }}</a></h6>
+                          <h6 class="uk-text-uppercase">{{ trans('app.sort_by_price') }} :
+                              <a href="{{ actionLink(['price' => 'desc']) }}" class="uk-link-reset">
+                                  <span class="{{ $sortByPrice == 'desc' ? 'text-underline':'' }}">
+                                      {{ trans('app.high') }}
+                                  </span>
+                              </a>|
+                              <a href="{{ actionLink(['price' => 'asc']) }}" class="uk-link-reset">
+                                  <span class="{{ $sortByPrice == 'asc' ? 'text-underline':'' }}">
+                                      {{ trans('app.low') }}
+                                  </span>
+                              </a>
+                          </h6>
                       </div>
                       <div class="uk-visible@m">
                         <div class="uk-text-right">
@@ -153,6 +163,9 @@
                   bag_link="{{ route('bag') }}"
                   locale="{{ json_encode(trans('app')) }}"
                 ></shop>
+                <div class="uk-text-center">
+                  <a class="uk-icon-link" href="#" uk-icon="icon: plus; ratio: 1.5"></a>
+                </div>
             </div>
         </div>
           <div class="uk-text-right uk-margin-bottom uk-margin-top">

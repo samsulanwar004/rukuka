@@ -1,5 +1,5 @@
 <div class="uk-section uk-section-xsmall uk-padding-remove uk-margin-reove">
-  <div  uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
+  <div uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
     <div class="uk-section uk-section-default uk-section-xsmall uk-padding-small uk-box-shadow-medium">
       <div class="uk-container uk-container-small">
         <div class="uk-grid-small" uk-grid>
@@ -28,8 +28,17 @@
             </div>
             <div class="uk-navbar-left uk-flex-1 uk-margin-top test-overlay" hidden>
               <div class="uk-width-expand">
+
                 {{ Form::open(array('url' => '/search', 'method' =>'get','files' => true,'class' => 'uk-search uk-search-navbar uk-width-1-1')) }}
-                <input class="uk-search-input" name="keyword" type="search" required placeholder="{{ trans('app.find_label') }}" autofocus>
+                <div>
+                  <div class="typeahead__container">
+                    <div class="typeahead__field">
+                        <span class="typeahead__query">
+                          <input class="uk-search-input js-typeahead-designers" name="keyword" type="search" required placeholder="{{ trans('app.find_label') }}" autofocus autocomplete="off">
+                        </span>
+                    </div>
+                  </div>
+                </div>
                 {{ Form::close() }}
               </div>
               <a class="uk-navbar-toggle uk-padding-remove" uk-close uk-toggle="target: .test-overlay; animation: uk-animation-fade" href="#"></a>
@@ -38,5 +47,11 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="uk-alert-alert" uk-alert>
+      <a href="#" class="uk-alert-close" uk-close></a>
+      <p class="uk-text-center">
+        {{ trans('app.header_note') }} <a href="https://rukuka.com/lookbook/amazon-fashion-week"> <b> <u>{{ trans('app.afw') }}</u> </b> </a></b>
+      </p>
   </div>
 </div>

@@ -32,7 +32,6 @@
                 {{ product.price | round(exchangeRate.symbol, exchangeRate.value) }}
             </span>
             </a>
-
         </div>
       </div>
     </div>
@@ -59,7 +58,6 @@
                           :loading-image="loadingImage"
                           :error-image="errorImage">
                         </lazy-background>
-
                     </li>
                   </ul>
                   <a class="uk-slidenav-large uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
@@ -70,8 +68,6 @@
                   </div>
                 </div>
                 </div>
-
-
             </div>
             <div class="uk-width-1-2@m uk-padding-small uk-flex uk-flex-wrap uk-flex-wrap-between">
               <div class="uk-width-1-1">
@@ -109,11 +105,14 @@
                   :loading-image="loadingImage"
                   :error-image="errorImage"
                   width="20px"
-                  image-class="uk-border-rounded uk-box-shadow-small">
+                  image-class="uk-border-circle uk-box-shadow-small uk-margin-right-small">
                 </lazy-background>
                {{ color }}
               </h5>
               <div v-if="stocks.length > 0">
+                  <p class="uk-margin-small-bottom">
+                      <span class="uk-text-small uk-text-danger"><b> {{ trans.european }} </b> | <a href="/help/size-charts" target="_blank" class="uk-text-primary"><u> {{ trans.size_chart}} </u></a></span>
+                  </p>
                 <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-medium">
                   <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
                     {{ stock.size }} {{ stock.unit | unit }}
