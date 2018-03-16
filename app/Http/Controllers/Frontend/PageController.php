@@ -57,20 +57,30 @@ class PageController extends BaseController
             } elseif ($request->input('menu') == 'womens') {
                 if (in_array($request->input('parent'), array('clothing', 'accessories'))) {
                     $products = (new ProductRepository)
-                        ->getProductByCategory($request);
+                        ->getProductByMenu($request);
                 } else {
-                    throw new Exception("Error Processing Request", 1);
+                    if ($request->input('parent') == 'all') {
+                        $products = (new ProductRepository)
+                        ->getProductByMenuAll($request);
+                    } else {
+                        throw new Exception("Error Processing Request", 1);
+                    }
                 }
             } elseif ($request->input('menu') == 'mens') {
                 if (in_array($request->input('parent'), array('clothing', 'accessories'))) {
                     $products = (new ProductRepository)
-                        ->getProductByCategory($request);
+                        ->getProductByMenu($request);
                 } else {
-                    throw new Exception("Error Processing Request", 1);
+                    if ($request->input('parent') == 'all') {
+                        $products = (new ProductRepository)
+                        ->getProductByMenuAll($request);
+                    } else {
+                        throw new Exception("Error Processing Request", 1);   
+                    }
                 }
             } elseif ($request->input('menu') == 'home') {
                 $products = (new ProductRepository)
-                        ->getProductByCategory($request);
+                        ->getProductByMenu($request);
             } else {
                 throw new Exception("Error Processing Request", 1);
             }
@@ -111,6 +121,9 @@ class PageController extends BaseController
             $recentlyViewed = session()->get('products.recently_viewed');
 
             $recently = $recentlyViewed ? array_keys(array_flip(array_reverse($recentlyViewed))) : [];
+
+            $categories = $request->input('menu');
+            $category = $request->input('parent');
         } catch (Exception $e) {
             return abort(404);
         }

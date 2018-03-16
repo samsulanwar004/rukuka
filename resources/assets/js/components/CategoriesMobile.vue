@@ -3,7 +3,7 @@
         <ul class="uk-accordion">
             <li>
                 <h5 class="uk-link-reset uk-text-uppercase">
-                    <a :href="'/shop/designers/all'">
+                    <a :href="'/shop?menu=designers&category=all'">
                         {{ trans.all }}
                     </a>
                 </h5>
@@ -15,7 +15,7 @@
                 <div class="uk-accordion-content">
                     <ul class="uk-nav uk-filter-nav">
                         <li v-for="category in categories" :class="{'uk-text-bold': slug == category.slug}">
-                            <a :href="'/shop/'+parent+'/'+ category.slug ">{{ category.name }}</a>
+                            <a :href="'/shop?menu'+parent+'&category='+ category.slug ">{{ category.name }}</a>
                         </li>
                     </ul>
                 </div>
@@ -27,7 +27,7 @@
         <ul class="uk-accordion">
             <li>
                 <h5 class="uk-link-reset uk-text-uppercase">
-                    <a :href="'/shop/'+parent+'/all'">
+                    <a :href="'/shop?menu='+parent+'&parent=all'">
                         {{ trans.all }}
                     </a>
                 </h5>
@@ -39,7 +39,7 @@
                 <div class="uk-accordion-content">
                 <ul class="uk-nav uk-filter-nav">
                     <li v-for="cat in category.child" :class="{'uk-text-bold': slug == cat.slug}">
-                      <a :href="'/shop/'+parent+'/'+ category.name.toLowerCase() +'/'+ cat.slug + sales">{{ cat.name }}</a>
+                      <a :href="'/shop?menu='+parent+'&parent'+ category.name.toLowerCase() +'&category='+ cat.slug + sales">{{ cat.name }}</a>
                     </li>
                 </ul>
                 </div>

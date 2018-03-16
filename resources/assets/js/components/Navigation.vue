@@ -267,7 +267,7 @@
                 if (typeof navigations.data.data !== 'undefined') {
                   self.categories = navigations.data.data;
                 }
-
+                
                 if (typeof navigations.data.data.designers !== 'undefined') {
                    self.designers = navigations.data.data.designers.sort(sort_by('created_at', true, function(result){
                     return result;

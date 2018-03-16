@@ -3,7 +3,7 @@
         <ul class="uk-accordion">
             <li>
                 <h5 class="uk-link-reset uk-text-uppercase">
-                    <a :href="'/shop/designers/all'">
+                    <a :href="'/shop?menu=designers&category=all'">
                         {{ trans.all }}
                     </a>
                 </h5>
@@ -15,7 +15,7 @@
                 <div class="uk-accordion-content">
                     <ul class="uk-nav uk-filter-nav">
                         <li v-for="category in categories">
-                            <a :href="'/shop/'+parent+'/'+ category.slug ">
+                            <a :href="'/shop?menu='+parent+'&category='+ category.slug ">
                                 <span :class="{'text-underline': slug == category.slug}">
                                     {{ category.name }}
                                 </span>
@@ -31,10 +31,10 @@
         <ul class="uk-accordion">
             <li>
                 <h5 class="uk-link-reset uk-text-uppercase">
-                    <a v-if="sales" :href="'/shop/'+parent+'/sale'">
+                    <a v-if="sales" :href="'/shop?menu='+parent+'&parent=sale'">
                         {{ trans.all }}
                     </a>
-                    <a v-else :href="'/shop/'+parent+'/all'">
+                    <a v-else :href="'/shop?menu='+parent+'&parent=all'">
                         {{ trans.all }}
                     </a>
                 </h5>
@@ -46,7 +46,7 @@
                 <div class="uk-accordion-content">
                 <ul class="uk-nav uk-filter-nav">
                     <li v-for="cat in category.child" >
-                      <a :href="'/shop/'+parent+'/'+ category.name.toLowerCase() +'/'+ cat.slug + sales">
+                      <a :href="'/shop?menu='+parent+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
                           <span :class="{'text-underline': slug == cat.slug}">
                               {{ cat.name }}
                           </span>
