@@ -21,7 +21,7 @@
                 @endphp
                 @if($firstLetter == $abjad)
                 <div>
-                    <a href="/shop/designers/{{ $value['slug'] }}">
+                    <a href="/shop?menu=designers&category={{ $value['slug'] }}">
                     {{ ucfirst(ucwords($value['name'])) }}
                     </a>
                     <div uk-drop="pos: right-center">
@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                             <div class="uk-card-body uk-text-justify">
-                                {!! str_limit(strip_tags($value['content']),100, '... <b><a href="/shop/designers/'.$value['slug'].'">more</a></b>') !!}
+                                {!! str_limit(strip_tags($value['content']),100, '... <b><a href="/shop?menu=designers&category='.$value['slug'].'">more</a></b>') !!}
                             </div>
                         </div>
                     </div>
