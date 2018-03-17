@@ -15,7 +15,7 @@
                 <div class="uk-accordion-content">
                     <ul class="uk-nav uk-filter-nav">
                         <li v-for="category in categories" :class="{'uk-text-bold': slug == category.slug}">
-                            <a :href="'/shop?menu'+parent+'&category='+ category.slug ">{{ category.name }}</a>
+                            <a :href="'/shop?menu='+parent+'&category='+ category.slug ">{{ category.name }}</a>
                         </li>
                     </ul>
                 </div>
@@ -39,7 +39,7 @@
                 <div class="uk-accordion-content">
                 <ul class="uk-nav uk-filter-nav">
                     <li v-for="cat in category.child" :class="{'uk-text-bold': slug == cat.slug}">
-                      <a :href="'/shop?menu='+parent+'&parent'+ category.name.toLowerCase() +'&category='+ cat.slug + sales">{{ cat.name }}</a>
+                      <a :href="'/shop?menu='+parent+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">{{ cat.name }}</a>
                     </li>
                 </ul>
                 </div>

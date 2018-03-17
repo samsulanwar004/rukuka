@@ -48,7 +48,10 @@
               ])
           @endif
       @endif
+
+
       </div>
+        {{-- Start Designer Header  --}}
         @if($categories == 'designers' && $category != 'all')
             <div class="uk-grid-small uk-margin-top" uk-grid>
                 <div class="uk-panel uk-width-1-4 uk-text-center">
@@ -63,6 +66,7 @@
         @else
 
         @endif
+        {{--End Designer Header--}}
 
         <div class="uk-grid-small uk-margin-small-top" uk-grid>
             <div class="uk-width-1-4@m uk-visible@m">

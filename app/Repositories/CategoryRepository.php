@@ -31,6 +31,6 @@ class CategoryRepository
 
 	public function getCategories()
 	{
-		return Category::nested()->get();
+		return Category::nested()->orderBy('slug', 'asc')->get();
 	}
 }
