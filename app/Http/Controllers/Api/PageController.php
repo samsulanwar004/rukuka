@@ -82,7 +82,7 @@ class PageController extends BaseApiController
 
                     return $this->success($categories, 200, true);
                 } else {
-                    $categories = (new CategoryRepository)->getCategoryByParent($parent);
+                    $categories = (new CategoryRepository)->getCategories();
 
                     return $this->success($categories,200, true);
                 }
