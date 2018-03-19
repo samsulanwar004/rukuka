@@ -1,34 +1,24 @@
 <template>
     <ul class="uk-nav uk-footer-nav">
         <li class="uk-text-uppercase"><b>{{ trans.popular_searches}}</b></li>
-        <ul class="uk-nav uk-footer-nav" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
-            <li class="uk-parent" v-for="cat in cloth.child" >
-                <a v-for="data in popularSearch" :href="'/shop/womens/'+cloth.name.toLowerCase()+'/'+ cat.slug" v-if="data.slug == cat.slug">{{ cat.name }}</a>
+        <ul class="uk-nav uk-footer-nav">
+            <li class="uk-parent">
+                <a :href="popularSearch.popular_url_1">{{ popularSearch.popular_name_1 }}</a>
             </li>
-        </ul>
-        <ul class="uk-nav uk-footer-nav" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
-            <li class="uk-parent" v-for="cat in cloth.child">
-                <a v-for="data in popularSearch" :href="'/shop/womens/'+cloth.name.toLowerCase()+'/'+ cat.slug " v-if="data.slug == cat.slug">{{ cat.name }}</a>
+            <li class="uk-parent">
+                <a :href="popularSearch.popular_url_2">{{ popularSearch.popular_name_2 }}</a>
             </li>
-        </ul>
-        <ul class="uk-nav uk-footer-nav" v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
-            <li class="uk-parent" v-for="cat in cloth.child">
-                <a v-for="data in popularSearch" :href="'/shop/mens/'+cloth.name.toLowerCase()+'/'+ cat.slug " v-if="data.slug == cat.slug">{{ cat.name }}</a>
+            <li class="uk-parent">
+                <a :href="popularSearch.popular_url_3">{{ popularSearch.popular_name_3 }}</a>
             </li>
-        </ul>
-        <ul class="uk-nav uk-footer-nav" v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
-            <li class="uk-parent" v-for="cat in cloth.child">
-                <a v-for="data in popularSearch" :href="'/shop/mens/'+cloth.name.toLowerCase()+'/'+ cat.slug " v-if="data.slug == cat.slug">{{ cat.name }}</a>
+            <li class="uk-parent">
+                <a :href="popularSearch.popular_url_4">{{ popularSearch.popular_name_4 }}</a>
             </li>
-        </ul>
-        <ul class="uk-nav uk-footer-nav" v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
-            <li class="uk-parent" v-for="cat in cloth.child">
-                <a v-for="data in popularSearch" :href="'/shop/kids/'+cloth.name.toLowerCase()+'/'+ cat.slug " v-if="data.slug == cat.slug">{{ cat.name }}</a>
+            <li class="uk-parent">
+                <a :href="popularSearch.popular_url_5">{{ popularSearch.popular_name_5 }}</a>
             </li>
-        </ul>
-        <ul class="uk-nav uk-footer-nav" v-for="cloth in kidCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
-            <li class="uk-parent" v-for="cat in cloth.child">
-                <a v-for="data in popularSearch" :href="'/shop/kids/'+cloth.name.toLowerCase()+'/'+ cat.slug " v-if="data.slug == cat.slug">{{ cat.name }}</a>
+            <li class="uk-parent">
+                <a :href="popularSearch.popular_url_6">{{ popularSearch.popular_name_6 }}</a>
             </li>
         </ul>
     </ul>
@@ -38,10 +28,9 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['api','popular_search','locale'],
+        props: ['popular_search','locale'],
         created() {
             var self = this;
-            var api = this.api;
 
             let popular_search = this.popular_search;
             axios.get(popular_search)
@@ -54,36 +43,11 @@
                     console.log(error);
                 });
 
-            axios.get(api)
-                .then(function (navigations) {
-                    if (typeof navigations.data.data !== 'undefined') {
-                        Event.fire('navigation', navigations.data.data);
-
-                        if (typeof navigations.data.data.mens !== 'undefined') {
-                            self.menCloths = navigations.data.data.mens;
-                        }
-
-                        if (typeof navigations.data.data.womens !== 'undefined') {
-                            self.womenCloths = navigations.data.data.womens;
-                        }
-
-                        if (typeof navigations.data.data.kids !== 'undefined') {
-                            self.kidCloths = navigations.data.data.kids;
-                        }
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
         },
 
         data() {
             return {
                 popularSearch: {},
-                menCloths: {},
-                womenCloths: {},
-                kidCloths: {},
                 trans: JSON.parse(this.locale,true)
             }
         },

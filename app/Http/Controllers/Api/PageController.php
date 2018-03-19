@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\DesignerRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
+use App\Repositories\SettingRepository;
 use App\Repositories\PageRepository;
 use App\Repositories\LookbookRepository;
 use Exception;
@@ -232,7 +233,12 @@ class PageController extends BaseApiController
 
     public function popularSearch(){
         try {
-            $popularSearch = (new ProductRepository)->getPopularSearch()->toArray();
+            $settings = (new SettingRepository)->getSettingByGroup('Popular Search');
+
+            $popularSearch = collect($settings)->mapWithKeys(function ($item) {
+                return [$item['name'] => $item['content']];
+            })->toArray();
+
             return $this->success($popularSearch, 200, true);
         } catch (Exception $e) {
             return $this->error($e, 400, true);
