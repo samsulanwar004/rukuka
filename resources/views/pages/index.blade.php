@@ -63,7 +63,7 @@
                           <div class="uk-overlay-primary uk-position-cover"></div>
                           <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m">
                             <h3 class="uk-transition-slide-bottom-small blog-subtitle uk-visible@m">{{ $home['homepage_text_1'] }}</h3>
-                            <a href="#" class="uk-button uk-button-small uk-button-default">{{ trans('app.shop_now') }}</a>
+                            <a href="{{ $home['homepage_url_1'] }}" class="uk-button uk-button-small uk-button-default">{{ trans('app.shop_now') }}</a>
                           </div>
                         </div>
                         <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_1'] }}</span>
@@ -77,7 +77,7 @@
                           <div class="uk-overlay-primary uk-position-cover"></div>
                           <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m">
                             <h3 class="uk-transition-slide-bottom-small blog-subtitle uk-visible@m">{{ $home['homepage_text_2'] }}</h3>
-                            <a href="#" class="uk-button uk-button-small uk-button-default">{{ trans('app.shop_now') }}</a>
+                            <a href="{{ $home['homepage_url_2'] }}" class="uk-button uk-button-small uk-button-default">{{ trans('app.shop_now') }}</a>
                           </div>
                         </div>
                         <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_2'] }}</span>
@@ -91,7 +91,7 @@
                           <div class="uk-overlay-primary uk-position-cover"></div>
                           <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m">
                             <h3 class="uk-transition-slide-bottom-small blog-subtitle uk-visible@m">{{ $home['homepage_text_3'] }}</h3>
-                            <a href="#" class="uk-button uk-button-small uk-button-default">{{ trans('app.shop_now') }}</a>
+                            <a href="{{ $home['homepage_url_3'] }}" class="uk-button uk-button-small uk-button-default">{{ trans('app.shop_now') }}</a>
                           </div>
                         </div>
                         <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_3'] }}</span>
@@ -105,7 +105,7 @@
                           <div class="uk-overlay-primary uk-position-cover"></div>
                           <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m">
                             <h3 class="uk-transition-slide-bottom-small blog-subtitle uk-visible@m">{{ $home['homepage_text_4'] }}</h3>
-                            <a href="#" class="uk-button uk-button-small uk-button-default">{{ trans('app.shop_now') }}</a>
+                            <a href="{{ $home['homepage_url_4'] }}" class="uk-button uk-button-small uk-button-default">{{ trans('app.shop_now') }}</a>
                           </div>
                         </div>
                         <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_4'] }}</span>
