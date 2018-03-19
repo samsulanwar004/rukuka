@@ -32,7 +32,6 @@ class PageController extends BaseController
     const SLIDER_MEN_CACHE = 'slider.men.cache';
     const SLIDER_WOMEN_CACHE = 'slider.women.cache';
     const DESIGNER_CACHE = 'designer.cache';
-    const EXCHANGE_CACHE = 'exchange.cache';
 
     protected $redirectAfterInsertContact = '/help/contact-us';
     private $date;
@@ -646,17 +645,9 @@ class PageController extends BaseController
     {
         try {
 
-            if (Cache::has(self::EXCHANGE_CACHE)) {
-                $exchange = Cache::get(self::EXCHANGE_CACHE);
-            } else {
-                $exchange = (new CurrencyService)->getCurrentCurrency();
+            $exchange = (new CurrencyService)->getCurrentCurrency();
 
-                $expiresAt = Carbon::now()->addMinutes(60);
-
-                Cache::put(self::EXCHANGE_CACHE, $exchange, $expiresAt);
-            }
-
-           return response()->json([
+            return response()->json([
                 'status' => 'ok',
                 'message' => 'success',
                 'data' => $exchange
