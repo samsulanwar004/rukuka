@@ -396,7 +396,7 @@ return [
     //email common
     'invoice'                   =>  'Invoice',
     'note'                      =>  'Note',
-    'note_currency'             =>  '* Total charge in',
+    'note_currency'             =>  '* Total charge in IDR',
     'please'                    =>  'Please',
     'contact_label'             =>  'contact us',
     'contact_text'              =>  'with any questions regarding this invoice.',

@@ -116,7 +116,7 @@
                   </div>
             </div>
             <div class="uk-width-1-3@m">
-                <a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}">{{ $product->designer->name }}</a><br>
+                <a href="/shop?menu=designers&category={{$product->designer->slug}}">{{ $product->designer->name }}</a><br>
                 <h3 class="uk-margin-remove">{{ $product->name }}</h3>
                 @if($product->price_before_discount > 0)
                     <b>
@@ -170,9 +170,9 @@
                         <h5 class="uk-margin-remove">{{ $product->product_code }}</h5>
                     </div>
                     <div class="uk-text-center">
-                        <a href="{{ route('shop', ['categories' => strtolower($product->category->parent->parent->name) ,'category' => strtolower($product->category->parent->name), 'slug' => $product->category->slug]) }}">{{ $product->category->name }}</a>
+                        <a href="/shop?menu={{strtolower($product->gender)}}&parent={{strtolower($product->category->parent->name)}}&category={{$product->category->slug}}">{{ $product->category->name }}</a>
                         <br>
-                        <h5 class="uk-margin-remove"><a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}">{{ $product->designer->name }}</a></h5>
+                        <h5 class="uk-margin-remove"><a href="/shop?menu=designers&category={{$product->designer->slug}}">{{ $product->designer->name }}</a></h5>
                     </div>
                 </div>
                 <hr class="uk-margin-small">
@@ -292,7 +292,7 @@
         ></related>
         <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">
             <div class="uk-panel uk-text-center">
-                <a  href="{{route('shop',['categories' => 'designers', 'category' => 'all' ])}}" class="uk-button uk-button-small uk-button-text uk-text-uppercase">{{ trans('app.show_all_product') }}</a>
+                <a  href="/shop?menu=designers&category=all" class="uk-button uk-button-small uk-button-text uk-text-uppercase">{{ trans('app.show_all_product') }}</a>
             </div>
         </div>
     </div>
