@@ -38,9 +38,11 @@ class MetaTag
 
     private function processGetMetaTag($currentURL){
 
-        $defaultDesc  = DB::table('cms_settings')->where([['name','=','meta_description']])
-                                                 ->get()
-                                                 ->first();
+        // $defaultDesc  = DB::table('cms_settings')->where([['name','=','meta_description']])
+        //                                          ->get()
+        //                                          ->first();
+
+        $defaultDesc  = null;
 
         if ($defaultDesc == null) {
 
@@ -80,7 +82,9 @@ class MetaTag
 
             if ($currentUrl[3] == 'product') {
 
-                $product = DB::table('products')->where('slug','=', $currentUrl[4])->get()->last();
+                // $product = DB::table('products')->where('slug','=', $currentUrl[4])->get()->last();
+
+                $product = null;
 
                 if (count($product) > 0 ) {
 
@@ -104,7 +108,9 @@ class MetaTag
 
                 }else{
 
-                    $articles = DB::table('blogs')->where('slug','=', $currentUrl[4])->get()->last();
+                    //$articles = DB::table('blogs')->where('slug','=', $currentUrl[4])->get()->last();
+
+                    $articles = null;
 
                     if (count($articles) > 0 ) {
 
