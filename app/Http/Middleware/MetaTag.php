@@ -58,9 +58,11 @@ class MetaTag
 
         }
 
-        $defaultTitle = DB::table('cms_settings')->where([['name','=','meta_title']])
-                                                 ->get()
-                                                 ->first();
+        // $defaultTitle = DB::table('cms_settings')->where([['name','=','meta_title']])
+        //                                          ->get()
+        //                                          ->first();
+
+        $defaultTitle = null;
 
         if ($defaultTitle == null) {
 
