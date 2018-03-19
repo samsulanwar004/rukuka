@@ -10,9 +10,14 @@ use App\Repositories\SettingRepository;
 use App\Repositories\PageRepository;
 use App\Repositories\LookbookRepository;
 use Exception;
+use Illuminate\Support\Facades\Cache;
+use Carbon\Carbon;
+
 
 class PageController extends BaseApiController
 {
+
+    CONST MENU_CACHE = 'menu.cache';
     
     public function menu($parent = null)
     {
@@ -23,47 +28,57 @@ class PageController extends BaseApiController
 	    		return $this->success($designers,200, true);
 	    	} else {
 	    		if ($parent == null) {
-	    		    //Designer List
-                    $categories = (new CategoryRepository)->getCategories();
-                    $categories = collect($categories)->mapWithKeys(function ($item) {
-                        return [strtolower($item['name']) => $item['child']];
-                    })->toArray();
-                    $categories['designers'] = (new DesignerRepository)->getDesigners();
 
-                    //Designer Navigation
-                    $designersResult = (new DesignerRepository)->getDesignersNav();
-                    $designersResult = collect($designersResult)->mapWithKeys(function ($item) {
-                        return [strtolower($item['name']) => $item['content']];
-                    })->toArray();
-                    $categories['designers_nav'] = $designersResult;
+                    if (Cache::has(self::MENU_CACHE)) {
+                        $categories = Cache::get(self::MENU_CACHE);
+                    } else {
+                        //Designer List
+                        $categories = (new CategoryRepository)->getCategories();
+                        $categories = collect($categories)->mapWithKeys(function ($item) {
+                            return [strtolower($item['name']) => $item['child']];
+                        })->toArray();
+                        $categories['designers'] = (new DesignerRepository)->getDesigners();
 
-                    //Women Navigation
-                    $womensResult = (new DesignerRepository)->getWomensNav();
-                    $womensResult = collect($womensResult)->mapWithKeys(function ($item) {
-                        return [strtolower($item['name']) => $item['content']];
-                    })->toArray();
-                    $categories['womens_nav'] = $womensResult;
+                        //Designer Navigation
+                        $designersResult = (new DesignerRepository)->getDesignersNav();
+                        $designersResult = collect($designersResult)->mapWithKeys(function ($item) {
+                            return [strtolower($item['name']) => $item['content']];
+                        })->toArray();
+                        $categories['designers_nav'] = $designersResult;
 
-                    //Men Navigation
-                    $MensResult = (new DesignerRepository)->getMensNav();
-                    $MensResult = collect($MensResult)->mapWithKeys(function ($item) {
-                        return [strtolower($item['name']) => $item['content']];
-                    })->toArray();
-                    $categories['mens_nav'] = $MensResult;
+                        //Women Navigation
+                        $womensResult = (new DesignerRepository)->getWomensNav();
+                        $womensResult = collect($womensResult)->mapWithKeys(function ($item) {
+                            return [strtolower($item['name']) => $item['content']];
+                        })->toArray();
+                        $categories['womens_nav'] = $womensResult;
 
-                    //Kid Navigation
-                    $KidsResult = (new DesignerRepository)->getKidsNav();
-                    $KidsResult = collect($KidsResult)->mapWithKeys(function ($item) {
-                        return [strtolower($item['name']) => $item['content']];
-                    })->toArray();
-                    $categories['kids_nav'] = $KidsResult;
+                        //Men Navigation
+                        $MensResult = (new DesignerRepository)->getMensNav();
+                        $MensResult = collect($MensResult)->mapWithKeys(function ($item) {
+                            return [strtolower($item['name']) => $item['content']];
+                        })->toArray();
+                        $categories['mens_nav'] = $MensResult;
 
-                    //Sale Navigation
-                    $SaleResult = (new DesignerRepository)->getSalesNav();
-                    $SaleResult = collect($SaleResult)->mapWithKeys(function ($item) {
-                        return [strtolower($item['name']) => $item['content']];
-                    })->toArray();
-                    $categories['sales_nav'] = $SaleResult;
+                        //Kid Navigation
+                        $KidsResult = (new DesignerRepository)->getKidsNav();
+                        $KidsResult = collect($KidsResult)->mapWithKeys(function ($item) {
+                            return [strtolower($item['name']) => $item['content']];
+                        })->toArray();
+                        $categories['kids_nav'] = $KidsResult;
+
+                        //Sale Navigation
+                        $SaleResult = (new DesignerRepository)->getSalesNav();
+                        $SaleResult = collect($SaleResult)->mapWithKeys(function ($item) {
+                            return [strtolower($item['name']) => $item['content']];
+                        })->toArray();
+                        $categories['sales_nav'] = $SaleResult;
+
+                        $expiresAt = Carbon::now()->addMinutes(60);
+
+                        Cache::put(self::MENU_CACHE, $categories, $expiresAt);
+                    }
+	    		    
 
                     return $this->success($categories, 200, true);
                 } else {
@@ -143,7 +158,7 @@ class PageController extends BaseApiController
                     'slug' => $entry->slug,
                     'price' => $entry->sell_price,
                     'price_before_discount' => $entry->price_before_discount,
-                    'photo' => $entry->photo,
+                    'photo' => $entry->photo ? str_replace('original', 'small', $entry->photo) : $entry->photo,
                 ];
             })->toArray();
 
@@ -179,7 +194,7 @@ class PageController extends BaseApiController
                     'slug' => $entry->slug,
                     'price' => $entry->sell_price,
                     'price_before_discount' => $entry->price_before_discount,
-                    'photo' => $entry->photo,
+                    'photo' => $entry->photo ? str_replace('original', 'small', $entry->photo) : $entry->photo,
                 ];
             })->toArray();
 
@@ -194,7 +209,12 @@ class PageController extends BaseApiController
         try {
             $product = (new ProductRepository)->getProductById($id);
 
-            $product->images->toArray();
+            $product->images_medium = $product->images->map(function($entry) {
+                return [
+                    'name' => $entry->name,
+                    'photo' => str_replace('original', 'medium', $entry->photo)
+                ];
+            });
 
             $product->stocks->toArray();
 
@@ -254,7 +274,7 @@ class PageController extends BaseApiController
                     'slug' => $entry->slug,
                     'price' => $entry->sell_price,
                     'price_before_discount' => $entry->price_before_discount,
-                    'photo' => $entry->photo,
+                    'photo' => $entry->photo ? str_replace('original', 'small', $entry->photo) : $entry->photo,
                 ];
             })->toArray();
 
@@ -314,7 +334,7 @@ class PageController extends BaseApiController
                     'price' => $entry->sell_price,
                     'price_before_discount' => $entry->price_before_discount,
                     'currency' => $entry->currency,
-                    'photo' => $entry->photo,
+                    'photo' => $entry->photo ? str_replace('original', 'small', $entry->photo) : $entry->photo,
                 ];
             })->toArray();
 

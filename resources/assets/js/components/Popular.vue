@@ -295,7 +295,7 @@
             self.priceBeforeDiscount = data.price_before_discount;
             self.color = data.color;
             self.palette = data.color_palette;
-            self.images = data.images;
+            self.images = data.images_medium;
             self.stocks = data.stocks;
             self.content = data.content;
             self.sizeAndFit = data.size_and_fit;

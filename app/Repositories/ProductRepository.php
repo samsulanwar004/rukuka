@@ -15,7 +15,7 @@ class ProductRepository
 
 	public $designer;
 
-    const COUNT_OF_PRODUCT = 60;
+    const COUNT_OF_PRODUCT = 30;
 
 	public function model()
 	{
@@ -564,7 +564,7 @@ class ProductRepository
     {
         return ProductImage::whereIn('products_id', $ids)
             ->orderBy('id', 'DESC')
-            ->get();
+            ->get();  
     }
 
     public function getProduct()

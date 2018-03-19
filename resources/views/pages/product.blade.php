@@ -12,7 +12,7 @@
                         <div class="uk-thumbnav" uk-grid uk-tab="connect: #component-tab-left; animation: uk-animation-fade">
                             @if($product->images[0])
                                 @foreach($product->images as $image)
-                                    <div style="margin-bottom: 10px" class="uk-width-1-2"><a href="#"><img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="100" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'"></a></div>
+                                    <div style="margin-bottom: 10px" class="uk-width-1-2"><a href="#"><img src="{{ uploadCDN(str_replace('original', 'small', $image->photo)) }}" alt="{{ $image->name }}" width="100" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'"></a></div>
                                 @endforeach
                             @else
                                 <div style="margin-bottom: 10px" class="uk-width-1-2"><a href="#"><img src="{{ imageCDN(config('common.default.image_2')) }}" alt="{{ $image->name }}" width="100" ></a></div>
@@ -25,7 +25,7 @@
                                 @foreach($product->images as $image)
                                     <li>
                                       <div class="uk-inline uk-dark">
-                                        <img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="510" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'">
+                                        <img src="{{ uploadCDN(str_replace('original', 'medium', $image->photo)) }}" alt="{{ $image->name }}" width="510" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'">
                                         <a class="uk-position-absolute uk-transform-center" style="left: 90%; top: 90%" href="#modal-full-split-{{ $image->id }}" uk-toggle uk-marker uk-tooltip="title: full view; pos: left"></a>
                                       </div>
                                         <div id="modal-full-split-{{ $image->id }}" class="uk-modal-full" uk-modal>
@@ -104,7 +104,7 @@
                       @if($product->images[0])
                           @foreach($product->images as $image)
                           <li>
-                            <img src="{{ uploadCDN($image->photo) }}">
+                            <img src="{{ uploadCDN(str_replace('original', 'small', $image->photo)) }}">
                             <a class="uk-position-absolute uk-transform-center" style="left: 90%; top: 90%" href="#modal-full-split-{{ $image->id }}" uk-toggle uk-marker uk-tooltip="title: full view; pos: left"></a>
                           </li>
                         @endforeach
