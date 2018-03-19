@@ -59,6 +59,7 @@ return [
     'show_all_product'          =>  '全品を見せる',
     'related'                   =>  '関連商品',
     'quick_shop'                =>  'クイックショップ',
+    'close'                     =>  '閉じる',
 
     //contact and social media
     'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',

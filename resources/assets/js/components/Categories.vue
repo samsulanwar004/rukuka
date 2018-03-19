@@ -4,7 +4,9 @@
             <li>
                 <h5 class="uk-link-reset uk-text-uppercase">
                     <a :href="'/shop?menu=designers&category=all'">
-                        {{ trans.all }}
+                        <span :class="{'text-underline': categorySlug == 'all'}">
+                            {{ trans.all }}
+                        </span>
                     </a>
                 </h5>
             </li>
@@ -35,7 +37,9 @@
                         {{ trans.all }}
                     </a>
                     <a v-else :href="'/shop?menu='+parent+'&parent=all'">
-                        {{ trans.all }}
+                        <span :class="{'text-underline': categorySlug == 'all'}">
+                            {{ trans.all }}
+                        </span>
                     </a>
                 </h5>
             </li>
@@ -45,6 +49,13 @@
                 <h5 href="#" class="uk-accordion-title">{{ category.name.toUpperCase() }}</h5>
                 <div class="uk-accordion-content">
                 <ul class="uk-nav uk-filter-nav">
+                    <li>
+                        <a :href="'/shop?menu='+parent+'&parent='+ category.name.toLowerCase() +'&category=all'">
+                            <span :class="{'text-underline': categorySlug == category.name.toLowerCase() && slug == 'all'}">
+                                 {{ trans.all }}
+                            </span>
+                        </a>
+                    </li>
                     <li v-for="cat in category.child" >
                       <a :href="'/shop?menu='+parent+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
                           <span :class="{'text-underline': slug == cat.slug}">
@@ -100,6 +111,7 @@
         data() {
             return {
                 categories: {},
+                categorySlug: this.category_slug,
                 trans: JSON.parse(this.locale,true)
             }
         },
