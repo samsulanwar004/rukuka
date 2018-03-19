@@ -3,7 +3,8 @@
       <div class="uk-navbar-center">
 
           <ul class="uk-navbar-nav">
-              <li :class="{'uk-active': segment_1 == 'designer' || segment_2 == 'designers'}">
+              <!--Start Designer-->
+              <li>
                   <a :href="designerLink">{{ trans.designers_nav }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
@@ -51,7 +52,10 @@
                     </div>
                 </div>
               </li>
-              <li :class="{'uk-active': segment_1 == 'women' || segment_2 == 'womens'}">
+              <!--End Designer-->
+
+              <!--Start Womens-->
+              <li>
                   <a :href="womenLink">{{ trans.women_nav }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
@@ -113,7 +117,10 @@
                       </div>
                   </div>
               </li>
-              <li :class="{'uk-active': segment_1 == 'men' || segment_2 == 'mens'}">
+              <!--End Womens-->
+
+              <!--Start Mens-->
+              <li>
                 <a :href="menLink">{{ trans.men_nav }}</a>
                 <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                     <div class="uk-grid uk-grid-small" uk-grid>
@@ -127,7 +134,7 @@
                                   <a href="/shop?menu=mens&parent=clothing&category=all">{{ trans.all }}</a>
                                 </li>
                                 <li class="uk-parent" v-for="cat in categories.clothing">
-                                    <a :href="'/shop?menu=womens&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
+                                    <a :href="'/shop?menu=mens&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                               </ul>
                             </div>
@@ -140,7 +147,7 @@
                                   <a href="/shop?menu=mens&parent=accessories&category=all">{{ trans.all }}</a>
                                 </li>
                                 <li class="uk-parent" v-for="cat in categories.accessories">
-                                    <a :href="'/shop?menu=womens&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
+                                    <a :href="'/shop?menu=mens&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                               </ul>
                             </div>
@@ -176,9 +183,15 @@
                     </div>
                 </div>
               </li>
+              <!--End Mens-->
+
+              <!--Start Home-->
               <li>
                   <a href="/shop?menu=home&parent=all&category=all">{{ trans.home }}</a>
               </li>
+              <!--End Home-->
+
+              <!--Start Sale-->
               <li>
                   <!--<a class="uk-text-danger"><b>{{ trans.sale_nav }}</b></a>-->
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
@@ -214,9 +227,14 @@
                       </div>
                   </div>
               </li>
-              <li :class="{'uk-active': segment_1 == 'editorial' || segment_1 == 'lookbook'}">
+              <!--End Sale-->
+
+              <!--Start Editorial-->
+              <li>
                   <a href="/editorial">{{ trans.blog_nav }}</a>
               </li>
+              <!--End Editorial-->
+
           </ul>
       </div>
     </nav>
@@ -236,8 +254,6 @@
           'aws_link',
           'default_image',
           'locale',
-          'segment_1',
-          'segment_2',
         ],
 
         components: {
@@ -267,7 +283,7 @@
                 if (typeof navigations.data.data !== 'undefined') {
                   self.categories = navigations.data.data;
                 }
-
+                
                 if (typeof navigations.data.data.designers !== 'undefined') {
                    self.designers = navigations.data.data.designers.sort(sort_by('created_at', true, function(result){
                     return result;
@@ -322,8 +338,6 @@
                 errorImage: {},
                 loadingImage: {},
                 errorImageSale: {},
-                segment_1: this.segment_1,
-                segment_2: this.segment_2,
             }
         },
 

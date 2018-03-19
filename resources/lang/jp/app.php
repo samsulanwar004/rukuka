@@ -59,6 +59,7 @@ return [
     'show_all_product'          =>  '全品を見せる',
     'related'                   =>  '関連商品',
     'quick_shop'                =>  'クイックショップ',
+    'close'                     =>  '閉じる',
 
     //contact and social media
     'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',
@@ -225,6 +226,7 @@ return [
     'filter'                    =>  'フィルタ',
     'color_filter'              =>  'カラー',
     'product_not_available'     =>  'この商品は手に入らない',
+    'result'                    =>  '結果',
 
     //resources/views/pages/product.blade.php
     'product_code'              =>  '商品コード:',

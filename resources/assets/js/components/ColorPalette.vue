@@ -1,6 +1,6 @@
 <template>
       <div>
-          <h5 class="uk-text-uppercase">{{ trans.color }}</h5>
+          <h5 class="uk-text-uppercase uk-accordion-title">{{ trans.color }}</h5>
             <ul class="uk-grid uk-grid-collapse">
               <li v-for="color in palette" :uk-tooltip="color.name">
                 <label>

@@ -26,11 +26,11 @@ class CategoryRepository
 			return strtolower($entry['name']) == strtolower($parent);
 		})->first();
 
-		return $parent['child'];
+		return isset($parent['child']) ? $parent['child'] : $categories;
 	}
 
 	public function getCategories()
 	{
-		return Category::nested()->get();
+		return Category::nested()->orderBy('slug', 'asc')->get();
 	}
 }

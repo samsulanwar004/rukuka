@@ -20,10 +20,19 @@ use DB;
 use Validator;
 use App\Services\CurrencyService;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Illuminate\Support\Facades\Cache;
 
 class PageController extends BaseController
 {
     const INSTANCE_SHOP = 'shopping';
+    const SETTING_HOME_CACHE = 'setting.home.cache';
+    const SETTING_MEN_CACHE = 'setting.men.cache';
+    const SETTING_WOMEN_CACHE = 'setting.women.cache';
+    const SLIDER_HOME_CACHE = 'slider.home.cache';
+    const SLIDER_MEN_CACHE = 'slider.men.cache';
+    const SLIDER_WOMEN_CACHE = 'slider.women.cache';
+    const DESIGNER_CACHE = 'designer.cache';
+    const EXCHANGE_CACHE = 'exchange.cache';
 
     protected $redirectAfterInsertContact = '/help/contact-us';
     private $date;
@@ -35,14 +44,29 @@ class PageController extends BaseController
 
     public function index()
     {
+        if (Cache::has(self::SETTING_HOME_CACHE)) {
+            $settings = Cache::get(self::SETTING_HOME_CACHE);
+        } else {
+            $settings = (new SettingRepository)->getSettingByGroup('Home Page');
 
-        $settings = (new SettingRepository)->getSettingByGroup('Home Page');
+            $expiresAt = Carbon::now()->addMinutes(60);
+
+            Cache::put(self::SETTING_HOME_CACHE, $settings, $expiresAt);
+        }
 
         $home = collect($settings)->mapWithKeys(function ($item) {
             return [$item['name'] => $item['content']];
         })->toArray();
 
-        $slider = (new SettingRepository())->getSliderByGroup('Homepage');
+        if (Cache::has(self::SLIDER_HOME_CACHE)) {
+            $slider = Cache::get(self::SLIDER_HOME_CACHE);
+        } else {
+            $slider = (new SettingRepository())->getSliderByGroup('Homepage');
+
+            $expiresAt = Carbon::now()->addMinutes(60);
+
+            Cache::put(self::SLIDER_HOME_CACHE, $slider, $expiresAt);
+        }
 
     	return view('pages.index', compact('home','slider', 'exchange'));
     }
@@ -57,20 +81,30 @@ class PageController extends BaseController
             } elseif ($request->input('menu') == 'womens') {
                 if (in_array($request->input('parent'), array('clothing', 'accessories'))) {
                     $products = (new ProductRepository)
-                        ->getProductByCategory($request);
+                        ->getProductByMenu($request);
                 } else {
-                    throw new Exception("Error Processing Request", 1);
+                    if ($request->input('parent') == 'all') {
+                        $products = (new ProductRepository)
+                        ->getProductByMenuAll($request);
+                    } else {
+                        throw new Exception("Error Processing Request", 1);
+                    }
                 }
             } elseif ($request->input('menu') == 'mens') {
                 if (in_array($request->input('parent'), array('clothing', 'accessories'))) {
                     $products = (new ProductRepository)
-                        ->getProductByCategory($request);
+                        ->getProductByMenu($request);
                 } else {
-                    throw new Exception("Error Processing Request", 1);
+                    if ($request->input('parent') == 'all') {
+                        $products = (new ProductRepository)
+                        ->getProductByMenuAll($request);
+                    } else {
+                        throw new Exception("Error Processing Request", 1);   
+                    }
                 }
             } elseif ($request->input('menu') == 'home') {
                 $products = (new ProductRepository)
-                        ->getProductByCategory($request);
+                        ->getProductByMenu($request);
             } else {
                 throw new Exception("Error Processing Request", 1);
             }
@@ -103,7 +137,7 @@ class PageController extends BaseController
                     'slug' => $entry->slug,
                     'price' => $entry->sell_price,
                     'price_before_discount' => $entry->price_before_discount,
-                    'photo' => $entry->photo,
+                    'photo' => $entry->photo ? str_replace('original', 'small', $entry->photo) : $entry->photo,
                     'is_new' => $this->date->diffInDays(Carbon::parse($entry->created_at)) <= 7 ? true : false,
                 ];
             });
@@ -111,6 +145,12 @@ class PageController extends BaseController
             $recentlyViewed = session()->get('products.recently_viewed');
 
             $recently = $recentlyViewed ? array_keys(array_flip(array_reverse($recentlyViewed))) : [];
+
+            $categories = $request->input('menu');
+            $category = $categories == 'designers' ? $request->input('category') : $request->input('parent') ;
+            $slug = $request->input('category');
+
+//            dd($categories,$category,$slug);
         } catch (Exception $e) {
             return abort(404);
         }
@@ -199,7 +239,16 @@ class PageController extends BaseController
 
     public function designer()
     {
-        $designers = (new DesignerRepository)->getDesignersAZ();
+        if (Cache::has(self::DESIGNER_CACHE)) {
+            $designers = Cache::get(self::DESIGNER_CACHE);
+        } else {
+            $designers = (new DesignerRepository)->getDesignersAZ();
+
+            $expiresAt = Carbon::now()->addMinutes(60);
+
+            Cache::put(self::DESIGNER_CACHE, $designers, $expiresAt);
+        }
+
         $alpabeths = collect($designers)->map(function ($item) {
             return strtolower(substr($item['slug'], 0, 1));
         })->toArray();
@@ -211,26 +260,60 @@ class PageController extends BaseController
 
     public function women()
     {
-        $settings = (new SettingRepository)->getSettingByGroup('Women Page');
+
+        if (Cache::has(self::SETTING_WOMEN_CACHE)) {
+            $settings = Cache::get(self::SETTING_WOMEN_CACHE);
+        } else {
+            $settings = (new SettingRepository)->getSettingByGroup('Women Page');
+
+            $expiresAt = Carbon::now()->addMinutes(60);
+
+            Cache::put(self::SETTING_WOMEN_CACHE, $settings, $expiresAt);
+        }
 
         $women = collect($settings)->mapWithKeys(function ($item) {
             return [$item['name'] => $item['content']];
         })->toArray();
 
-        $slider = (new SettingRepository())->getSliderByGroup('Women');
+        if (Cache::has(self::SLIDER_WOMEN_CACHE)) {
+            $slider = Cache::get(self::SLIDER_WOMEN_CACHE);
+        } else {
+            $slider = (new SettingRepository())->getSliderByGroup('Women');
+
+            $expiresAt = Carbon::now()->addMinutes(60);
+
+            Cache::put(self::SLIDER_WOMEN_CACHE, $slider, $expiresAt);
+        }
 
         return view('pages.women', compact('women','slider'));
     }
 
     public function men()
     {
-        $settings = (new SettingRepository)->getSettingByGroup('Men Page');
+
+        if (Cache::has(self::SETTING_MEN_CACHE)) {
+            $settings = Cache::get(self::SETTING_MEN_CACHE);
+        } else {
+            $settings = (new SettingRepository)->getSettingByGroup('Men Page');
+
+            $expiresAt = Carbon::now()->addMinutes(60);
+
+            Cache::put(self::SETTING_MEN_CACHE, $settings, $expiresAt);
+        }
 
         $men = collect($settings)->mapWithKeys(function ($item) {
             return [$item['name'] => $item['content']];
         })->toArray();
 
-        $slider = (new SettingRepository())->getSliderByGroup('Men');
+        if (Cache::has(self::SLIDER_MEN_CACHE)) {
+            $slider = Cache::get(self::SLIDER_MEN_CACHE);
+        } else {
+            $slider = (new SettingRepository())->getSliderByGroup('Men');
+
+            $expiresAt = Carbon::now()->addMinutes(60);
+
+            Cache::put(self::SLIDER_MEN_CACHE, $slider, $expiresAt);
+        }
 
         return view('pages.men', compact('men','slider'));
     }
@@ -291,7 +374,7 @@ class PageController extends BaseController
                         'options' => [
                             'size' => $stock->size,
                             'color' => $stock->product->palette->name,
-                            'photo' => $stock->product->images->first()->photo,
+                            'photo' => $stock->product->images->first()->photo ? str_replace('original', 'small', $stock->product->images->first()->photo) : $stock->product->images->first()->photo,
                             'description' => $stock->product->content,
                             'slug' => $stock->product->slug,
                             'product_id' => $stock->product->id,
@@ -487,17 +570,24 @@ class PageController extends BaseController
         $colorId = $request->has('color_id') ? $request->input('color_id') : null;
         $sortByPrice = $request->input('price');
 
-        return view('pages.search', compact(
-            'products',
-            'shops',
-            'keyword',
-            'productcategory',
-            'category',
-            'subcategory',
-            'filter',
-            'colorId',
-            'sortByPrice'
-        ));
+        if(count($products) == 0){
+            return view('pages.search_404', compact('keyword'));
+        }
+        else{
+            return view('pages.search', compact(
+                'products',
+                'shops',
+                'keyword',
+                'productcategory',
+                'category',
+                'subcategory',
+                'filter',
+                'colorId',
+                'sortByPrice'
+            ));
+        }
+
+
     }
 
     public function contact (Request $request){
@@ -547,7 +637,17 @@ class PageController extends BaseController
     public function exchange()
     {
         try {
-           $exchange = (new CurrencyService)->getCurrentCurrency();
+
+            if (Cache::has(self::EXCHANGE_CACHE)) {
+                $exchange = Cache::get(self::EXCHANGE_CACHE);
+            } else {
+                $exchange = (new CurrencyService)->getCurrentCurrency();
+
+                $expiresAt = Carbon::now()->addMinutes(60);
+
+                Cache::put(self::EXCHANGE_CACHE, $exchange, $expiresAt);
+            }
+
            return response()->json([
                 'status' => 'ok',
                 'message' => 'success',
