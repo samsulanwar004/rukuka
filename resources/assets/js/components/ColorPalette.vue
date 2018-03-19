@@ -1,6 +1,6 @@
 <template>
       <div>
-          <h5 class="uk-text-uppercase">{{ trans.color }}</h5>
+          <h5 class="uk-text-uppercase uk-accordion-title">{{ trans.color }}</h5>
             <ul class="uk-grid uk-grid-collapse">
               <li v-for="color in palette" :uk-tooltip="color.name">
                 <label>
@@ -10,7 +10,8 @@
                       :loading-image="loadingImage"
                       :error-image="errorImage"
                       :alt="color.name"
-                      width="27px">
+                      width="27px"
+                      image-class="uk-border-circle uk-box-shadow-small">
                     </lazy-background>
                 </label>
               </li>
@@ -23,7 +24,7 @@
     import axios from 'axios';
     import VueLazyBackgroundImage from '../components/VueLazyBackgroundImage.vue';
     export default {
-        props: ['api', 'default_image', 'aws_link', 'color_id','filter','locale'],
+        props: ['api', 'default_image', 'aws_link', 'color_id','locale','action_link'],
 
         components: {
           'lazy-background': VueLazyBackgroundImage
@@ -66,11 +67,19 @@
 
         methods: {
             pickColor: function (colorId) {
-                if(this.filter){
-                    window.location.href = '?'+this.filter+'&color_id='+colorId;
+                var search = function searchStringInArray (str, strArray) {
+                    for (var j=0; j<strArray.length; j++) {
+                        if (strArray[j].match(str)) return j;
+                    }
+                    return -1;
                 }
-                else{
-                    window.location.href = '?color_id='+colorId;
+                var myarr = this.action_link.split("&");
+                var position = search('color',myarr);
+                if(position == -1) {
+                    window.location.href = this.action_link+'&color_id='+colorId;
+                } else {
+                    delete myarr[position];
+                    window.location.href = myarr.join('&')+'&color_id='+colorId;
                 }
             }
         }

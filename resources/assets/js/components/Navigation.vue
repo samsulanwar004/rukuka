@@ -3,7 +3,8 @@
       <div class="uk-navbar-center">
 
           <ul class="uk-navbar-nav">
-              <li :class="{'uk-active': segment_1 == 'designer' || segment_2 == 'designers'}">
+              <!--Start Designer-->
+              <li :class="{'uk-active': segment1 == 'designer'}">
                   <a :href="designerLink">{{ trans.designers_nav }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
@@ -14,10 +15,10 @@
                             </ul>
                             <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2 uk-width-1-2">
                                 <li class="uk-parent uk-active">
-                                    <a href="/shop/designers/all">{{ trans.all }} </a>
+                                    <a href="/shop?menu=designers&category=all">{{ trans.all }} </a>
                                 </li>
                               <li class="uk-parent" v-for="design in designers">
-                                  <a :href="'/shop/designers/'+ design.slug ">{{ design.name }}</a>
+                                  <a :href="'/shop?menu=designers&category='+ design.slug ">{{ design.name }}</a>
                               </li>
                             </ul>
                           </div>
@@ -51,34 +52,37 @@
                     </div>
                 </div>
               </li>
-              <li :class="{'uk-active': segment_1 == 'women' || segment_2 == 'womens'}">
+              <!--End Designer-->
+
+              <!--Start Womens-->
+              <li :class="{'uk-active': segment1 == 'women'}">
                   <a :href="womenLink">{{ trans.women_nav }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
                             <div class="uk-width-1-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'"><h5 class="uk-margin-small uk-text-uppercase">{{ trans.clothing }}</h5></li>
+                                <li ><h5 class="uk-margin-small uk-text-uppercase">{{ trans.clothing }}</h5></li>
                               </ul>
-                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
+                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1">
                                 <li class="uk-parent uk-active">
-                                  <a href="/shop/womens/all">{{ trans.all }}</a>
+                                  <a href="/shop?menu=womens&parent=clothing&category=all">{{ trans.all }}</a>
                                 </li>
-                                <li class="uk-parent" v-for="cat in cloth.child">
-                                    <a :href="'/shop/womens/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
+                                <li class="uk-parent" v-for="cat in categories.clothing">
+                                    <a :href="'/shop?menu=womens&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                               </ul>
                             </div>
                             <div class="uk-width-1-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'accessories'"><h5 class="uk-margin-small uk-text-uppercase">{{ trans.accessories }}</h5></li>
+                                <li><h5 class="uk-margin-small uk-text-uppercase">{{ trans.accessories }}</h5></li>
                               </ul>
-                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1" v-for="cloth in womenCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
+                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1">
                                 <li class="uk-parent uk-active">
-                                  <a href="/shop/womens/all">{{ trans.all }}</a>
+                                  <a href="/shop?menu=womens&parent=accessories&category=all">{{ trans.all }}</a>
                                 </li>
-                                <li class="uk-parent" v-for="cat in cloth.child">
-                                    <a :href="'/shop/womens/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
+                                <li class="uk-parent" v-for="cat in categories.accessories">
+                                    <a :href="'/shop?menu=womens&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                               </ul>
                             </div>
@@ -113,34 +117,37 @@
                       </div>
                   </div>
               </li>
-              <li :class="{'uk-active': segment_1 == 'men' || segment_2 == 'mens'}">
+              <!--End Womens-->
+
+              <!--Start Mens-->
+              <li :class="{'uk-active': segment1 == 'men'}">
                 <a :href="menLink">{{ trans.men_nav }}</a>
                 <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                     <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
                             <div class="uk-width-1-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'"><h5 class="uk-margin-small uk-text-uppercase">{{ trans.clothing }}</h5></li>
+                                <li><h5 class="uk-margin-small uk-text-uppercase">{{ trans.clothing }}</h5></li>
                               </ul>
-                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1" v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'clothing'">
+                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1">
                                 <li class="uk-parent uk-active">
-                                  <a href="/shop/mens/all">{{ trans.all }}</a>
+                                  <a href="/shop?menu=mens&parent=clothing&category=all">{{ trans.all }}</a>
                                 </li>
-                                <li class="uk-parent" v-for="cat in cloth.child">
-                                    <a :href="'/shop/mens/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
+                                <li class="uk-parent" v-for="cat in categories.clothing">
+                                    <a :href="'/shop?menu=mens&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                               </ul>
                             </div>
                             <div class="uk-width-1-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'accessories'"><h5 class="uk-margin-small uk-text-uppercase">{{ trans.accessories }}</h5></li>
+                                <li><h5 class="uk-margin-small uk-text-uppercase">{{ trans.accessories }}</h5></li>
                               </ul>
-                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1" v-for="cloth in menCloths" v-if="cloth.name.toLowerCase() == 'accessories'">
+                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1">
                                 <li class="uk-parent uk-active">
-                                  <a href="/shop/mens/all">{{ trans.all }}</a>
+                                  <a href="/shop?menu=mens&parent=accessories&category=all">{{ trans.all }}</a>
                                 </li>
-                                <li class="uk-parent" v-for="cat in cloth.child">
-                                    <a :href="'/shop/mens/'+cloth.name.toLowerCase()+'/'+ cat.slug ">{{ cat.name }}</a>
+                                <li class="uk-parent" v-for="cat in categories.accessories">
+                                    <a :href="'/shop?menu=mens&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                               </ul>
                             </div>
@@ -176,10 +183,16 @@
                     </div>
                 </div>
               </li>
-              <li :class="{'uk-active': segment_1 == 'home' || segment_2 == 'home'}">
-                  <a href="/shop/home/all">{{ trans.home }}</a>
+              <!--End Mens-->
+
+              <!--Start Home-->
+              <li :class="{'uk-active': segment1 == 'home'}">
+                  <a href="/shop?menu=home&parent=all">{{ trans.home }}</a>
               </li>
-              <li>
+              <!--End Home-->
+
+              <!--Start Sale-->
+              <li :class="{'uk-active': segment1 == 'sale'}">
                   <!--<a class="uk-text-danger"><b>{{ trans.sale_nav }}</b></a>-->
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div uk-grid>
@@ -214,9 +227,14 @@
                       </div>
                   </div>
               </li>
-              <li :class="{'uk-active': segment_1 == 'editorial' || segment_1 == 'lookbook'}">
+              <!--End Sale-->
+
+              <!--Start Editorial-->
+              <li :class="{'uk-active': segment1 == 'editorial'}">
                   <a href="/editorial">{{ trans.blog_nav }}</a>
               </li>
+              <!--End Editorial-->
+
           </ul>
       </div>
     </nav>
@@ -237,7 +255,7 @@
           'default_image',
           'locale',
           'segment_1',
-          'segment_2',
+          'segment_2'
         ],
 
         components: {
@@ -264,18 +282,10 @@
               if (typeof navigations.data.data !== 'undefined') {
                 Event.fire('navigation', navigations.data.data);
 
-                if (typeof navigations.data.data.mens !== 'undefined') {
-                  self.menCloths = navigations.data.data.mens;
+                if (typeof navigations.data.data !== 'undefined') {
+                  self.categories = navigations.data.data;
                 }
-
-                if (typeof navigations.data.data.womens !== 'undefined') {
-                  self.womenCloths = navigations.data.data.womens;
-                }
-
-                if (typeof navigations.data.data.kids !== 'undefined') {
-                  self.kidCloths = navigations.data.data.kids;
-                }
-
+                
                 if (typeof navigations.data.data.designers !== 'undefined') {
                    self.designers = navigations.data.data.designers.sort(sort_by('created_at', true, function(result){
                     return result;
@@ -314,9 +324,7 @@
 
         data() {
             return {
-                menCloths: {},
-                womenCloths: {},
-                kidCloths: {},
+                categories: {},
                 designers: {},
                 menLink: this.men_link,
                 womenLink: this.women_link,
@@ -332,8 +340,7 @@
                 errorImage: {},
                 loadingImage: {},
                 errorImageSale: {},
-                segment_1: this.segment_1,
-                segment_2: this.segment_2,
+                segment1: this.segment_1,
             }
         },
 

@@ -2,12 +2,17 @@
 @section('title', $keyword.' '.trans('app.title_search') )
 @section('content')
     <div class="uk-container">
-        <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ trans('app.all_you_need') }}</h3>
-        <div class="uk-panel">
+        <h3 class="uk-margin-small-top uk-margin-remove-bottom uk-visible@m">{{ trans('app.search_label') }}</h3>
+        <div class="uk-panel uk-visible@m">
             <ul class="uk-breadcrumb">
                 <li><a href="/">{{ trans('app.home') }}</a></li>
                 <li><a>{{ trans('app.search_label') }}</a></li>
             </ul>
+        </div>
+
+        <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-hidden@m">{{ trans('app.search_label') }} : "{{$keyword}}"</h4>
+        <div class="uk-panel uk-hidden@m">
+            <h5>{{ count($shops) }} {{  trans('app.result') }}</h5>
         </div>
 
         <div class="uk-grid-small uk-margin-small-top" uk-grid>
@@ -34,34 +39,19 @@
                         </h6>
                     </div>
                     <div class="uk-visible@m">
-                        <div class="uk-text-right">
+                        <div class="uk-text-right uk-margin-bottom uk-margin-top">
                             <h6 class="uk-text-uppercase uk-margin-remove-vertical">
                                 @include('pagination.default', ['paginator' => $products])
                             </h6>
                         </div>
                     </div>
-                    <div class="uk-hidden@m uk-text-right">
-                        <a href="#modal" class="uk-button uk-button-default-warm uk-button-small" uk-toggle>Filter</a>
-                        <div id="modal" uk-modal>
-                            <div class="uk-modal-dialog uk-modal-body">
-                                <search-mobile
-                                        keyword="{{$keyword}}"
-                                        category="{{ $category }}"
-                                        subcategory="{{ $subcategory }}"
-                                        productcategory="{{ $productcategory }}"
-                                        locale="{{ json_encode(trans('app')) }}"
-                                ></search-mobile>
-                                <hr class="uk-margin-small-top">
-                                <color-palette-mobile
-                                        default_image="{{ json_encode(config('common.default')) }}"
-                                        aws_link="{{ config('filesystems.s3url') }}"
-                                        color_id="{{ $colorId }}"
-                                        filter="{{ http_build_query($filter) }}"
-                                        locale="{{ json_encode(trans('app')) }}"
-                                ></color-palette-mobile>
-                            </div>
-                        </div>
-                    </div>
+                    {{--<div class="uk-hidden@m uk-text-right">--}}
+                        {{--<a href="#modal" class="uk-button uk-button-default-warm uk-button-small" uk-toggle>{{ trans('app.filter') }}</a>--}}
+                        {{--<div id="modal" uk-modal>--}}
+                            {{--<div class="uk-modal-dialog uk-modal-body">--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                 </div>
             </div>
         </div>
@@ -70,28 +60,10 @@
             <div id="nav1" class="uk-width-1-4@m uk-visible@m">
                 <div class="uk-card uk-background-muted uk-card-small uk-box-shadow-small">
                     <div class="uk-card-body">
-                      <h5 class="uk-text-uppercase">{{ trans('app.search_label') }} :  <b> {{$keyword}} </b> </h5>
-                        <hr class="uk-margin-small-bottom">
-                        <search
-                                api="{{ route('search.api',['keyword' => $keyword])}}"
-                                keyword="{{$keyword}}"
-                                category="{{ $category }}"
-                                subcategory="{{ $subcategory }}"
-                                productcategory="{{ $productcategory }}"
-                                locale="{{ json_encode(trans('app')) }}"
-                        ></search>
-                        <hr class="uk-margin-small-top">
-                        <color-palette
-                                api="{{ route('color') }}"
-                                default_image="{{ json_encode(config('common.default')) }}"
-                                aws_link="{{ config('filesystems.s3url') }}"
-                                color_id="{{ $colorId }}"
-                                filter="{{ http_build_query($filter) }}"
-                                locale="{{ json_encode(trans('app')) }}"
-                        ></color-palette>
+                      <h5>{{ trans('app.search_label') }} :  <b> "{{$keyword}}" </b> </h5>
+                      <h5>{{ count($shops) }} {{  trans('app.result') }}</h5>
                     </div>
                 </div>
-
             </div>
             <div class="uk-width-expand@m">
                 <shop
@@ -108,9 +80,9 @@
             </div>
         </div>
         <div class="uk-text-right uk-margin-bottom uk-margin-top">
-          <span class="uk-text-meta">
-          @include('pagination.default', ['paginator' => $products])
-          </span>
+            <h6 class="uk-text-uppercase uk-margin-remove-vertical">
+                @include('pagination.default', ['paginator' => $products])
+            </h6>
         </div>
     </div>
 @endsection

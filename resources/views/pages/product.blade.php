@@ -12,7 +12,7 @@
                         <div class="uk-thumbnav" uk-grid uk-tab="connect: #component-tab-left; animation: uk-animation-fade">
                             @if($product->images[0])
                                 @foreach($product->images as $image)
-                                    <div style="margin-bottom: 10px" class="uk-width-1-2"><a href="#"><img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="100" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'"></a></div>
+                                    <div style="margin-bottom: 10px" class="uk-width-1-2"><a href="#"><img src="{{ uploadCDN(str_replace('original', 'small', $image->photo)) }}" alt="{{ $image->name }}" width="100" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'"></a></div>
                                 @endforeach
                             @else
                                 <div style="margin-bottom: 10px" class="uk-width-1-2"><a href="#"><img src="{{ imageCDN(config('common.default.image_2')) }}" alt="{{ $image->name }}" width="100" ></a></div>
@@ -25,7 +25,7 @@
                                 @foreach($product->images as $image)
                                     <li>
                                       <div class="uk-inline uk-dark">
-                                        <img src="{{ uploadCDN($image->photo) }}" alt="{{ $image->name }}" width="510" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'">
+                                        <img src="{{ uploadCDN(str_replace('original', 'medium', $image->photo)) }}" alt="{{ $image->name }}" width="510" onerror="this.src = '{{imageCDN(config('common.default.image_2'))}}'">
                                         <a class="uk-position-absolute uk-transform-center" style="left: 90%; top: 90%" href="#modal-full-split-{{ $image->id }}" uk-toggle uk-marker uk-tooltip="title: full view; pos: left"></a>
                                       </div>
                                         <div id="modal-full-split-{{ $image->id }}" class="uk-modal-full" uk-modal>
@@ -79,9 +79,6 @@
 
                                                               <a class="uk-slidenav-large uk-position-center-left uk-hidden-hover uk-height-viewport" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
                                                               <a class="uk-slidenav-large uk-position-center-right uk-hidden-hover uk-height-viewport" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
-
-
-
                                                           </div>
 
                                                       </div>
@@ -104,7 +101,7 @@
                       @if($product->images[0])
                           @foreach($product->images as $image)
                           <li>
-                            <img src="{{ uploadCDN($image->photo) }}">
+                            <img src="{{ uploadCDN(str_replace('original', 'medium', $image->photo)) }}">
                             <a class="uk-position-absolute uk-transform-center" style="left: 90%; top: 90%" href="#modal-full-split-{{ $image->id }}" uk-toggle uk-marker uk-tooltip="title: full view; pos: left"></a>
                           </li>
                         @endforeach
@@ -116,7 +113,7 @@
                   </div>
             </div>
             <div class="uk-width-1-3@m">
-                <a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}">{{ $product->designer->name }}</a><br>
+                <a href="/shop?menu=designers&category={{$product->designer->slug}}">{{ $product->designer->name }}</a><br>
                 <h3 class="uk-margin-remove">{{ $product->name }}</h3>
                 @if($product->price_before_discount > 0)
                     <b>
@@ -170,9 +167,9 @@
                         <h5 class="uk-margin-remove">{{ $product->product_code }}</h5>
                     </div>
                     <div class="uk-text-center">
-                        <a href="{{ route('shop', ['categories' => strtolower($product->category->parent->parent->name) ,'category' => strtolower($product->category->parent->name), 'slug' => $product->category->slug]) }}">{{ $product->category->name }}</a>
+                        <a href="/shop?menu={{strtolower($product->gender)}}&parent={{strtolower($product->category->parent->name)}}&category={{$product->category->slug}}">{{ $product->category->name }}</a>
                         <br>
-                        <h5 class="uk-margin-remove"><a href="{{ route('shop', ['categories' => 'designers', 'category' => $product->designer->slug ]) }}">{{ $product->designer->name }}</a></h5>
+                        <h5 class="uk-margin-remove"><a href="/shop?menu=designers&category={{$product->designer->slug}}">{{ $product->designer->name }}</a></h5>
                     </div>
                 </div>
                 <hr class="uk-margin-small">
@@ -292,7 +289,7 @@
         ></related>
         <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">
             <div class="uk-panel uk-text-center">
-                <a  href="{{route('shop',['categories' => 'designers', 'category' => 'all' ])}}" class="uk-button uk-button-small uk-button-text uk-text-uppercase">{{ trans('app.show_all_product') }}</a>
+                <a  href="/shop?menu=designers&category=all" class="uk-button uk-button-small uk-button-text uk-text-uppercase">{{ trans('app.show_all_product') }}</a>
             </div>
         </div>
     </div>

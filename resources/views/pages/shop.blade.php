@@ -1,4 +1,6 @@
 @extends('app')
+
+{{--Title--}}
 @if($categories == 'designers')
     @if($category == 'all')
         @section('title',  $designer->name.' '.trans('app.title_designers_list') )
@@ -6,11 +8,11 @@
         @section('title',  $designer->name.' '.trans('app.title_designers') )
     @endif
 @else
-    @if($categories == 'womens' && $category == 'all')
+    @if($categories == 'womens' && $category == 'all' || $categories == 'womens' && $slug == 'all')
         @section('title', trans('app.title_shop_womens') )
-    @elseif($categories == 'mens' && $category == 'all')
+    @elseif($categories == 'mens' && $category == 'all' || $categories == 'mens' && $slug =='all')
         @section('title', trans('app.title_shop_mens') )
-    @elseif($categories == 'home' && $category == 'all')
+    @elseif($categories == 'home' && $category == 'all' || $categories == 'home' && $slug == 'all')
         @section('title', trans('app.title_shop_home') )
     @elseif($products->first()->category_name)
         @section('title',$products->first()->category_name.' '.trans('app.title_shop_category') )
@@ -18,21 +20,24 @@
         @section('title',trans('app.product_not_available').' '.trans('app.title_shop_category') )
     @endif
 @endif
-@section('content')
+{{--End Title--}}
 
+@section('content')
+    {{--Title Breadcrumbs--}}
     <div class="uk-container">
       @if($categories == 'designers' && $category != 'all')
           <h3 class="uk-margin-small-top uk-margin-remove-bottom "></h3>
       @else
-          @if($category == 'all')
+          @if($category == 'all' || $slug == 'all')
               <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ trans('app.all_you_need') }}</h3>
           @else
               <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ isset($products->first()->category_name) ? $products->first()->category_name : trans('app.product_not_available') }}</h3>
           @endif
       @endif
       <div class="uk-visible@m">
+      {{--End Title Breadcrumbs--}}
 
-
+      {{--Breadcrumbs--}}
       @if($categories == 'designers')
           @include('partials.breadcrumb', [
               'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => 'categories']
@@ -42,13 +47,21 @@
               @include('partials.breadcrumb', [
                 'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => 'categories']
               ])
+          @elseif($slug == 'all')
+              @include('partials.breadcrumb', [
+                'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false]
+              ])
           @else
               @include('partials.breadcrumb', [
                   'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false, isset($products->first()->category_name) ? $products->first()->category_name : 'Product not available' => 'categories']
               ])
           @endif
       @endif
+      {{--End Breadcrumbs--}}
+
+
       </div>
+        {{-- Start Designer Header  --}}
         @if($categories == 'designers' && $category != 'all')
             <div class="uk-grid-small uk-margin-top" uk-grid>
                 <div class="uk-panel uk-width-1-4 uk-text-center">
@@ -63,6 +76,7 @@
         @else
 
         @endif
+        {{--End Designer Header--}}
 
         <div class="uk-grid-small uk-margin-small-top" uk-grid>
             <div class="uk-width-1-4@m uk-visible@m">
@@ -115,10 +129,11 @@
                                     aws_link="{{ config('filesystems.s3url') }}"
                                     color_id="{{ $colorId }}"
                                     locale="{{ json_encode(trans('app')) }}"
+                                    action_link="{{ actionLink() }}"
                             ></color-palette-mobile>
                           </div>
                           <div class="uk-modal-footer">
-                            <a href="#" class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-modal-close">back to shop</a>
+                            <a href="#" class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-modal-close">{{ trans('app.close') }}</a>
                           </div>
 
                         </div>
@@ -147,6 +162,7 @@
                                 aws_link="{{ config('filesystems.s3url') }}"
                                 color_id="{{ $colorId }}"
                                 locale="{{ json_encode(trans('app')) }}"
+                                action_link="{{ actionLink() }}"
                         ></color-palette>
                     </div>
                 </div>

@@ -3,19 +3,25 @@
         <ul class="uk-accordion">
             <li>
                 <h5 class="uk-link-reset uk-text-uppercase">
-                    <a :href="'/shop/designers/all'">
-                        {{ trans.all }}
+                    <a :href="'/shop?menu=designers&category=all'">
+                       <span :class="{'text-underline': categorySlug == 'all'}">
+                            {{ trans.all }}
+                        </span>
                     </a>
                 </h5>
             </li>
         </ul>
         <ul class="uk-accordion" uk-accordion="multiple: true" >
-            <li >
+            <li :class="{'uk-open': categorySlug != 'all'}">
                 <h5 href="#" class="uk-accordion-title">{{ parent.toUpperCase() }}</h5>
                 <div class="uk-accordion-content">
                     <ul class="uk-nav uk-filter-nav">
-                        <li v-for="category in categories" :class="{'uk-text-bold': slug == category.slug}">
-                            <a :href="'/shop/'+parent+'/'+ category.slug ">{{ category.name }}</a>
+                        <li v-for="category in categories">
+                            <a :href="'/shop?menu='+parent+'&category='+ category.slug ">
+                                <span :class="{'text-underline': slug == category.slug}">
+                                    {{ category.name }}
+                                </span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -27,21 +33,37 @@
         <ul class="uk-accordion">
             <li>
                 <h5 class="uk-link-reset uk-text-uppercase">
-                    <a :href="'/shop/'+parent+'/all'">
+                    <a v-if="sales" :href="'/shop?menu='+parent+'&parent=sale'">
                         {{ trans.all }}
+                    </a>
+                    <a v-else :href="'/shop?menu='+parent+'&parent=all'">
+                        <span :class="{'text-underline': categorySlug == 'all'}">
+                            {{ trans.all }}
+                        </span>
                     </a>
                 </h5>
             </li>
         </ul>
-        <ul class="uk-accordion" uk-accordion="multiple: true" >
-            <li v-for="category in categories">
+        <ul class="uk-accordion" uk-accordion="multiple: false" >
+            <li v-for="category in categories" :class="{'uk-open': categorySlug == category.name.toLowerCase()}">
                 <h5 href="#" class="uk-accordion-title">{{ category.name.toUpperCase() }}</h5>
                 <div class="uk-accordion-content">
-                <ul class="uk-nav uk-filter-nav">
-                    <li v-for="cat in category.child" :class="{'uk-text-bold': slug == cat.slug}">
-                      <a :href="'/shop/'+parent+'/'+ category.name.toLowerCase() +'/'+ cat.slug + sales">{{ cat.name }}</a>
-                    </li>
-                </ul>
+                    <ul class="uk-nav uk-filter-nav">
+                        <li>
+                            <a :href="'/shop?menu='+parent+'&parent='+ category.name.toLowerCase() +'&category=all'">
+                            <span :class="{'text-underline': categorySlug == category.name.toLowerCase() && slug == 'all'}">
+                                 {{ trans.all }}
+                            </span>
+                            </a>
+                        </li>
+                        <li v-for="cat in category.child" >
+                            <a :href="'/shop?menu='+parent+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
+                          <span :class="{'text-underline': slug == cat.slug}">
+                              {{ cat.name }}
+                          </span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </li>
         </ul>
@@ -65,6 +87,7 @@
         data() {
             return {
                 categories: {},
+                categorySlug: this.category_slug,
                 trans: JSON.parse(this.locale,true)
             }
         },

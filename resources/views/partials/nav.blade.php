@@ -64,7 +64,6 @@
       default_image="{{ json_encode(config('common.default')) }}"
       locale="{{ json_encode(trans('app')) }}"
       segment_1="{{ Request::segment(1) }}"
-      segment_2="{{ Request::segment(2) }}"
     ></navigation>
   </div>
   <div class="uk-section uk-section-xsmall uk-padding-remove">
@@ -83,6 +82,7 @@
         $.typeahead({
             input: '.js-typeahead-designers',
             order: "asc",
+            minLength: 1,
             maxItemPerGroup: 5,
             source: {
                 designer:
@@ -94,9 +94,21 @@
             },
             callback: {
                 onClick: function (node, a, item, event) {
-                    window.location.replace("/shop/designers/"+ item.display.replace(/[\s]|:\s/g, "-").replace("'", "-").toLowerCase() + "/");
+                    var designer_slug = slugify(item.display);
+                    window.location.replace("/shop?menu=designers&category="+ designer_slug);
                 }
             }
         });
+
+        function slugify(text)
+        {
+            return text.toString().toLowerCase()
+                .replace(/\s+/g, '-')           // Replace spaces with -
+                .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+                .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+                .replace(/^-+/, '')             // Trim - from start of text
+                .replace(/-+$/, '');            // Trim - from end of text
+        }
+
     </script>
 @endsection

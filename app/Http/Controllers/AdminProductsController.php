@@ -427,7 +427,6 @@
 
 	    	$product = $this->getProductById($id);
 
-
 	    	return Category::attr([
 	    		'name' => 'product_categories_id',
 	    		'class' => 'form-control'

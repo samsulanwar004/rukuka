@@ -59,6 +59,7 @@ return [
     'show_all_product'          =>  'Show All Product',
     'related'                   =>  'Related Product',
     'quick_shop'                =>  'Quick Shop',
+    'close'                     =>  'Close',
 
     //contact and social media
     'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',
@@ -225,6 +226,7 @@ return [
     'filter'                    =>  'Filter',
     'color_filter'              =>  'Color',
     'product_not_available'     =>  'Product not available',
+    'result'                    =>  'Results',
 
     //resources/views/pages/product.blade.php
     'product_code'              =>  'Product Code:',
@@ -394,7 +396,7 @@ return [
     //email common
     'invoice'                   =>  'Invoice',
     'note'                      =>  'Note',
-    'note_currency'             =>  '* Total charge in',
+    'note_currency'             =>  '* Total charge in IDR',
     'please'                    =>  'Please',
     'contact_label'             =>  'contact us',
     'contact_text'              =>  'with any questions regarding this invoice.',
