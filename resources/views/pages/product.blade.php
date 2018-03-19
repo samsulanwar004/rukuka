@@ -79,9 +79,6 @@
 
                                                               <a class="uk-slidenav-large uk-position-center-left uk-hidden-hover uk-height-viewport" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
                                                               <a class="uk-slidenav-large uk-position-center-right uk-hidden-hover uk-height-viewport" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
-
-
-
                                                           </div>
 
                                                       </div>
@@ -104,7 +101,7 @@
                       @if($product->images[0])
                           @foreach($product->images as $image)
                           <li>
-                            <img src="{{ uploadCDN(str_replace('original', 'small', $image->photo)) }}">
+                            <img src="{{ uploadCDN(str_replace('original', 'medium', $image->photo)) }}">
                             <a class="uk-position-absolute uk-transform-center" style="left: 90%; top: 90%" href="#modal-full-split-{{ $image->id }}" uk-toggle uk-marker uk-tooltip="title: full view; pos: left"></a>
                           </li>
                         @endforeach
