@@ -4,7 +4,7 @@
 
           <ul class="uk-navbar-nav">
               <!--Start Designer-->
-              <li>
+              <li :class="{'uk-active': segment1 == 'designer'}">
                   <a :href="designerLink">{{ trans.designers_nav }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
@@ -15,7 +15,7 @@
                             </ul>
                             <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2 uk-width-1-2">
                                 <li class="uk-parent uk-active">
-                                    <a href="/shop?menu=designers&category=all">{{ trans.all }} </a>
+                                    <a href="/shop?menu=designers&category=all">{{ segment1}} </a>
                                 </li>
                               <li class="uk-parent" v-for="design in designers">
                                   <a :href="'/shop?menu=designers&category='+ design.slug ">{{ design.name }}</a>
@@ -55,7 +55,7 @@
               <!--End Designer-->
 
               <!--Start Womens-->
-              <li>
+              <li :class="{'uk-active': segment1 == 'women'}">
                   <a :href="womenLink">{{ trans.women_nav }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
@@ -120,7 +120,7 @@
               <!--End Womens-->
 
               <!--Start Mens-->
-              <li>
+              <li :class="{'uk-active': segment1 == 'men'}">
                 <a :href="menLink">{{ trans.men_nav }}</a>
                 <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                     <div class="uk-grid uk-grid-small" uk-grid>
@@ -186,13 +186,13 @@
               <!--End Mens-->
 
               <!--Start Home-->
-              <li>
+              <li :class="{'uk-active': segment1 == 'home'}">
                   <a href="/shop?menu=home&parent=all&category=all">{{ trans.home }}</a>
               </li>
               <!--End Home-->
 
               <!--Start Sale-->
-              <li>
+              <li :class="{'uk-active': segment1 == 'sale'}">
                   <!--<a class="uk-text-danger"><b>{{ trans.sale_nav }}</b></a>-->
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div uk-grid>
@@ -230,7 +230,7 @@
               <!--End Sale-->
 
               <!--Start Editorial-->
-              <li>
+              <li :class="{'uk-active': segment1 == 'editorial'}">
                   <a href="/editorial">{{ trans.blog_nav }}</a>
               </li>
               <!--End Editorial-->
@@ -254,6 +254,8 @@
           'aws_link',
           'default_image',
           'locale',
+          'segment_1',
+          'segment_2'
         ],
 
         components: {
@@ -338,6 +340,7 @@
                 errorImage: {},
                 loadingImage: {},
                 errorImageSale: {},
+                segment1: this.segment_1,
             }
         },
 
