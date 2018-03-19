@@ -226,6 +226,7 @@ return [
     'filter'                    =>  'Filter',
     'color_filter'              =>  'Color',
     'product_not_available'     =>  'Product not available',
+    'result'                    =>  'Results',
 
     //resources/views/pages/product.blade.php
     'product_code'              =>  'Product Code:',
