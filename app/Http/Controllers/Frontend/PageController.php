@@ -578,17 +578,24 @@ class PageController extends BaseController
         $colorId = $request->has('color_id') ? $request->input('color_id') : null;
         $sortByPrice = $request->input('price');
 
-        return view('pages.search', compact(
-            'products',
-            'shops',
-            'keyword',
-            'productcategory',
-            'category',
-            'subcategory',
-            'filter',
-            'colorId',
-            'sortByPrice'
-        ));
+        if(count($products) == 0){
+            return view('pages.search_404', compact('keyword'));
+        }
+        else{
+            return view('pages.search', compact(
+                'products',
+                'shops',
+                'keyword',
+                'productcategory',
+                'category',
+                'subcategory',
+                'filter',
+                'colorId',
+                'sortByPrice'
+            ));
+        }
+
+
     }
 
     public function contact (Request $request){

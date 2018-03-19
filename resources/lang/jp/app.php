@@ -226,6 +226,7 @@ return [
     'filter'                    =>  'フィルタ',
     'color_filter'              =>  'カラー',
     'product_not_available'     =>  'この商品は手に入らない',
+    'result'                    =>  '結果',
 
     //resources/views/pages/product.blade.php
     'product_code'              =>  '商品コード:',
