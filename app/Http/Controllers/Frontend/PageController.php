@@ -103,8 +103,17 @@ class PageController extends BaseController
                     }
                 }
             } elseif ($request->input('menu') == 'home') {
-                $products = (new ProductRepository)
+                if (in_array($request->input('parent'), array('homeware'))) {
+                    $products = (new ProductRepository)
                         ->getProductByMenu($request);
+                } else {
+                    if ($request->input('parent') == 'all') {
+                        $products = (new ProductRepository)
+                        ->getProductByMenuAll($request);
+                    } else {
+                        throw new Exception("Error Processing Request", 1);   
+                    }
+                }
             } else {
                 throw new Exception("Error Processing Request", 1);
             }
@@ -150,7 +159,6 @@ class PageController extends BaseController
             $category = $categories == 'designers' ? $request->input('category') : $request->input('parent') ;
             $slug = $request->input('category');
 
-//            dd($categories,$category,$slug);
         } catch (Exception $e) {
             return abort(404);
         }

@@ -187,7 +187,7 @@
 
               <!--Start Home-->
               <li :class="{'uk-active': segment1 == 'home'}">
-                  <a href="/shop?menu=home&parent=all&category=all">{{ trans.home }}</a>
+                  <a href="/shop?menu=home&parent=all">{{ trans.home }}</a>
               </li>
               <!--End Home-->
 
