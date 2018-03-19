@@ -59,6 +59,7 @@ return [
     'show_all_product'          =>  'Show All Product',
     'related'                   =>  'Related Product',
     'quick_shop'                =>  'Quick Shop',
+    'close'                     =>  'Close',
 
     //contact and social media
     'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',

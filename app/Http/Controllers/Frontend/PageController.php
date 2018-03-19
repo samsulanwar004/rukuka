@@ -147,7 +147,10 @@ class PageController extends BaseController
             $recently = $recentlyViewed ? array_keys(array_flip(array_reverse($recentlyViewed))) : [];
 
             $categories = $request->input('menu');
-            $category = $request->input('parent');
+            $category = $categories == 'designers' ? $request->input('category') : $request->input('parent') ;
+            $slug = $request->input('category');
+
+//            dd($categories,$category,$slug);
         } catch (Exception $e) {
             return abort(404);
         }
