@@ -15,7 +15,7 @@
                             </ul>
                             <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2 uk-width-1-2">
                                 <li class="uk-parent uk-active">
-                                    <a href="/shop?menu=designers&category=all">{{ segment1}} </a>
+                                    <a href="/shop?menu=designers&category=all">{{ trans.all }} </a>
                                 </li>
                               <li class="uk-parent" v-for="design in designers">
                                   <a :href="'/shop?menu=designers&category='+ design.slug ">{{ design.name }}</a>
