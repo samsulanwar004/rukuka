@@ -536,12 +536,6 @@ class ProductRepository
         ProductCategory::where('id', $id)->increment('count');
     }
 
-    public function getPopularSearch(){
-
-        return ProductCategory::orderBy('count','desc')->take(5)->get();
-
-    }
-
     public function getRecentlyViewedProduct($ids)
     {
         $orders = implode(',', $ids);
