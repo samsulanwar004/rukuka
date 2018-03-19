@@ -15,8 +15,6 @@
 	margin-top: -40px!important;
 }
 
-
-
 /* Preloader */
 #preloader {
 	position: fixed;
@@ -43,11 +41,11 @@
 /* .clock {
 	font-family: 'Nanum Pen Script', cursive;
 } */
-.blog-body {
+/* .blog-body {
 	font-family: 'Lato', sans-serif;
 	font-size: 18px;
 	font-weight: 200;
-}
+} */
 
 .blog-title{
 	font-size: 60px;
@@ -884,4 +882,3 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
 }
 
 /*END CSS TYPEHEAD*/
-
