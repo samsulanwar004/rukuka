@@ -63,12 +63,12 @@ class MetaTag
             if ($currentUrl[3] == 'product') {
 
                 $product = DB::table('products')->where('slug','=', $currentUrl[4])->first();
-
+         
                 if (count($product) > 0 ) {
 
                     $currency = (new CurrencyService)->getCurrentCurrency();
 
-                    $specialDesc = $product->name . ' ' . strip_tags($product->content) . ', price: ' . $currency->symbol . number_format(($product->sell_price / $currency->value), 2) . ', specification: ' .  $product->technical_specification . ', categories: ' . $product->tags;
+                    $specialDesc = $product->name . ' ' . strip_tags($product->content) . ', price: ' . $currency->symbol . number_format(($product->sell_price / $currency->value), 2) . ',  ' . $product->detail_and_care;
 
                     return $this->getStructurMetaTag($specialDesc, $product->name);
 
@@ -87,8 +87,6 @@ class MetaTag
                 }else{
 
                     $articles = DB::table('blogs')->where('slug','=', $currentUrl[4])->get()->first();
-
-                    $articles = null;
 
                     if (count($articles) > 0 ) {
 
