@@ -38,44 +38,22 @@ class MetaTag
 
     private function processGetMetaTag($currentURL){
 
-        // $defaultDesc  = DB::table('cms_settings')->where([['name','=','meta_description']])
-        //                                          ->get()
-        //                                          ->first();
-
-        $defaultDesc  = null;
+        $defaultDesc  = config('common.default_desc');
+        // $defaultDesc  = null;
 
         if ($defaultDesc == null) {
 
             $defaultDesc = 'No description in system';
         
-        }else if ($defaultDesc->content == null) {
-            
-            $defaultDesc = 'Please fill content description';
-
-        }else{
-
-            $defaultDesc = $defaultDesc->content;
-
         }
 
-        // $defaultTitle = DB::table('cms_settings')->where([['name','=','meta_title']])
-        //                                          ->get()
-        //                                          ->first();
-
-        $defaultTitle = null;
+        $defaultTitle = config('common.default_title');
+        // $defaultTitle = null;
 
         if ($defaultTitle == null) {
 
             $defaultTitle = 'No title in system';
         
-        }else if ($defaultTitle->content == null) {
-            
-            $defaultTitle = 'Please fill content title';
-
-        }else{
-
-            $defaultTitle = $defaultTitle->content;
-
         }
 
         $currentUrl = explode('/', $currentURL);
@@ -84,9 +62,7 @@ class MetaTag
 
             if ($currentUrl[3] == 'product') {
 
-                // $product = DB::table('products')->where('slug','=', $currentUrl[4])->get()->last();
-
-                $product = null;
+                $product = DB::table('products')->where('slug','=', $currentUrl[4])->first();
 
                 if (count($product) > 0 ) {
 
@@ -110,7 +86,7 @@ class MetaTag
 
                 }else{
 
-                    //$articles = DB::table('blogs')->where('slug','=', $currentUrl[4])->get()->last();
+                    $articles = DB::table('blogs')->where('slug','=', $currentUrl[4])->get()->first();
 
                     $articles = null;
 
