@@ -3855,9 +3855,9 @@ $('#add-image').on('click', function (e) {
             }
 
             if (console.group !== undefined || console.table !== undefined) {
-                console.groupCollapsed("--- jQuery Typeahead Debug ---");
-                console.table(this.table);
-                console.groupEnd();
+                // console.groupCollapsed("--- jQuery Typeahead Debug ---");
+                // console.table(this.table);
+                // console.groupEnd();
             }
 
             this.table = {};
