@@ -40,7 +40,7 @@
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Lookbooks','name'=>'lookbooks_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'lookbooks,name'];
-			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
+			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|unique:lookbook_collections','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
 			$this->form[] = ['label'=>'Title','name'=>'title','type'=>'text','validation'=>'string','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Subtitle','name'=>'subtitle','type'=>'text','validation'=>'string','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'wysiwyg','width'=>'col-sm-10'];
