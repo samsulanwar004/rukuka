@@ -18,12 +18,15 @@
               <navigation-mobile
                       men_link="{{ route('men') }}"
                       women_link="{{ route('women') }}"
-                      kid_link="{{ route('kids') }}"
                       designer_link="{{ route('designer') }}"
                       auth="{{ Auth::check() ? 1 : 0 }}"
                       login_link="{{ route('login') }}"
                       profile_link="{{ route('user') }}"
                       locale="{{ json_encode(trans('app')) }}"
+                      segment_page="{{ Request::segment(1) }}"
+                      segment_shop="{{ $categories }}"
+                      segment_category="{{ $category }}"
+                      segment_slug="{{ $slug == null ? $category:$slug }}"
               ></navigation-mobile>
             </div>
             <div class="uk-navbar-left uk-flex-1 uk-margin-top test-overlay" hidden>
