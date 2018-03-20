@@ -4,7 +4,7 @@
 
           <ul class="uk-navbar-nav">
               <!--Start Designer-->
-              <li :class="{'uk-active': segment1 == 'designer'}">
+              <li :class="{'uk-active': segmentPage == 'designer' || segmentShop == 'designers'}">
                   <a :href="designerLink">{{ trans.designers_nav }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
@@ -13,7 +13,7 @@
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                               <li><h5 class="uk-margin-small uk-text-uppercase">{{ trans.designers_nav }}</h5></li>
                             </ul>
-                            <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2 uk-width-1-2">
+                            <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-3 uk-width-1-1">
                                 <li class="uk-parent uk-active">
                                     <a href="/shop?menu=designers&category=all">{{ trans.all }} </a>
                                 </li>
@@ -55,7 +55,7 @@
               <!--End Designer-->
 
               <!--Start Womens-->
-              <li :class="{'uk-active': segment1 == 'women'}">
+              <li :class="{'uk-active': segmentPage == 'women' || segmentShop == 'womens'}">
                   <a :href="womenLink">{{ trans.women_nav }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
@@ -120,7 +120,7 @@
               <!--End Womens-->
 
               <!--Start Mens-->
-              <li :class="{'uk-active': segment1 == 'men'}">
+              <li :class="{'uk-active': segmentPage == 'men' || segmentShop == 'mens'}">
                 <a :href="menLink">{{ trans.men_nav }}</a>
                 <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                     <div class="uk-grid uk-grid-small" uk-grid>
@@ -186,13 +186,13 @@
               <!--End Mens-->
 
               <!--Start Home-->
-              <li :class="{'uk-active': segment1 == 'home'}">
+              <li :class="{'uk-active': segmentPage == 'home' || segmentShop == 'home'}">
                   <a href="/shop?menu=home&parent=all">{{ trans.home }}</a>
               </li>
               <!--End Home-->
 
               <!--Start Sale-->
-              <li :class="{'uk-active': segment1 == 'sale'}">
+              <li>
                   <!--<a class="uk-text-danger"><b>{{ trans.sale_nav }}</b></a>-->
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div uk-grid>
@@ -230,7 +230,7 @@
               <!--End Sale-->
 
               <!--Start Editorial-->
-              <li :class="{'uk-active': segment1 == 'editorial'}">
+              <li :class="{'uk-active': segmentPage == 'editorial'}">
                   <a href="/editorial">{{ trans.blog_nav }}</a>
               </li>
               <!--End Editorial-->
@@ -249,13 +249,12 @@
           'api',
           'men_link',
           'women_link',
-          'kid_link',
           'designer_link',
           'aws_link',
           'default_image',
           'locale',
-          'segment_1',
-          'segment_2'
+          'segment_page',
+          'segment_shop'
         ],
 
         components: {
@@ -289,7 +288,7 @@
                 if (typeof navigations.data.data.designers !== 'undefined') {
                    self.designers = navigations.data.data.designers.sort(sort_by('created_at', true, function(result){
                     return result;
-                  })).slice(0,27);
+                  })).slice(0,37);
                 }
 
                 if (typeof navigations.data.data.designers_nav !== 'undefined') {
@@ -328,7 +327,6 @@
                 designers: {},
                 menLink: this.men_link,
                 womenLink: this.women_link,
-                kidLink: this.kid_link,
                 designerLink: this.designer_link,
                 designersNav: {},
                 womensNav: {},
@@ -340,7 +338,8 @@
                 errorImage: {},
                 loadingImage: {},
                 errorImageSale: {},
-                segment1: this.segment_1,
+                segmentPage: this.segment_page,
+                segmentShop: this.segment_shop,
             }
         },
 
