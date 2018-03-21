@@ -57,7 +57,7 @@
         </div>
       </div>
       <div class="uk-width-1-3@m">
-        <div class="uk-card uk-card-default uk-background-muted uk-card-small uk-box-shadow-small uk-sticky uk-sticky-fixed" uk-sticky="animation: uk-animation-slide-top; offset:120">
+        <div class="uk-card uk-card-default uk-background-muted uk-card-small uk-box-shadow-small">
           <div class="uk-card-header">
             <h4 class="uk-text-uppercase">{{ trans.summary }}</h4>
           </div>
