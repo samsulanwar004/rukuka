@@ -40,20 +40,20 @@
       {{--Breadcrumbs--}}
       @if($categories == 'designers')
           @include('partials.breadcrumb', [
-              'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => 'categories']
+              'breadcrumbs' => [$categories => '/shop?menu='.$categories.'&category=all', $category => 'categories']
           ])
       @else
           @if($category == 'all')
               @include('partials.breadcrumb', [
-                'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => 'categories']
+                'breadcrumbs' => [$categories => '/shop?menu='.$categories.'&parent=all', $category => 'categories']
               ])
           @elseif($slug == 'all')
               @include('partials.breadcrumb', [
-                'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false]
+                'breadcrumbs' => [$categories => '/shop?menu='.$categories.'&parent=all', $category => false]
               ])
           @else
               @include('partials.breadcrumb', [
-                  'breadcrumbs' => [$categories => '/shop/'.$categories.'/all', $category => false, isset($products->first()->category_name) ? $products->first()->category_name : 'Product not available' => 'categories']
+                  'breadcrumbs' => [$categories => '/shop?menu='.$categories.'&parent=all', $category => false, isset($products->first()->category_name) ? $products->first()->category_name : 'Product not available' => 'categories']
               ])
           @endif
       @endif
