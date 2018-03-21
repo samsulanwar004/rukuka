@@ -2,7 +2,7 @@
 @section('title', trans('app.title_lookbook') )
 @section('content')
     <div class="uk-container uk-container-small">
-        <div uk-slideshow="animation: push; autoplay:true">
+        {{-- <div uk-slideshow="animation: push; autoplay:true">
             <div class="uk-position-relative uk-visible-toggle uk-light">
                 <ul class="uk-slideshow-items">
                     <li>
@@ -26,8 +26,18 @@
                 <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
             </div>
             <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
+        </div> --}}
+        <div class="js-slideshow-animation" uk-slideshow="ratio: 7:3">
+            <div class="uk-position-relative uk-visible-toggle uk-light">
+                <ul class="uk-slideshow-items">
+                    <li>
+                        <video controls autoplay loop playsinline uk-cover="automute: false" uk-video="automute: false">
+                            <source src="{{ config('common.video_slide2') }}" type="video/mp4">
+                        </video>
+                    </li>
+                </ul>
+            </div>
         </div>
-
         <div class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>
             @foreach($lookbook->lookbookCollections as $post)
             <div class="uk-width-1-2 uk-inline">
