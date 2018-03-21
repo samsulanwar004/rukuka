@@ -5,6 +5,7 @@
 	use DB;
 	use CRUDBooster;
 	use Illuminate\Support\Facades\URL;
+	use App\Services\CacheService;
 
 	class AdminProductDesignersController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -280,6 +281,9 @@
 	    public function hook_after_add($id) {
 	        //Your code here
 
+	        //clear cache
+	        (new CacheService)->clearCacheDesigner();
+
 	    }
 
 	    /*
@@ -306,6 +310,9 @@
 	    public function hook_after_edit($id) {
 	        //Your code here
 
+	        //clear cache
+	        (new CacheService)->clearCacheDesigner();
+
 	    }
 
 	    /*
@@ -329,6 +336,9 @@
 	    */
 	    public function hook_after_delete($id) {
 	        //Your code here
+
+	        //clear cache
+	        (new CacheService)->clearCacheDesigner();
 
 	    }
 

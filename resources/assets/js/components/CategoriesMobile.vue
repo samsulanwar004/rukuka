@@ -96,7 +96,7 @@
                             </span>
                             </a>
                         </li>
-                        <li v-for="cat in category.child" >
+                        <li v-for="cat in category.child" v-if="cat.menu == parent || cat.menu == null">
                             <a :href="'/shop?menu='+parent+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
                           <span :class="{'text-underline': slug == cat.slug}">
                               {{ cat.name }}

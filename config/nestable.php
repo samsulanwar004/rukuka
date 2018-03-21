@@ -9,6 +9,7 @@ return [
         'id',
         'name',
         'slug',
+        'menu',
     ],
     'html' => [
         'label' => 'name',

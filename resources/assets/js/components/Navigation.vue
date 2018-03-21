@@ -68,7 +68,7 @@
                                 <li class="uk-parent uk-active">
                                   <a href="/shop?menu=womens&parent=clothing&category=all">{{ trans.all }}</a>
                                 </li>
-                                <li class="uk-parent" v-for="cat in categories.clothing">
+                                <li class="uk-parent" v-for="cat in categories.clothing" v-if="cat.menu == 'womens' || cat.menu == null">
                                     <a :href="'/shop?menu=womens&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                               </ul>
@@ -81,7 +81,7 @@
                                 <li class="uk-parent uk-active">
                                   <a href="/shop?menu=womens&parent=accessories&category=all">{{ trans.all }}</a>
                                 </li>
-                                <li class="uk-parent" v-for="cat in categories.accessories">
+                                <li class="uk-parent" v-for="cat in categories.accessories" v-if="cat.menu == 'womens' || cat.menu == null">
                                     <a :href="'/shop?menu=womens&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                               </ul>
@@ -133,7 +133,7 @@
                                 <li class="uk-parent uk-active">
                                   <a href="/shop?menu=mens&parent=clothing&category=all">{{ trans.all }}</a>
                                 </li>
-                                <li class="uk-parent" v-for="cat in categories.clothing">
+                                <li class="uk-parent" v-for="cat in categories.clothing" v-if="cat.menu == 'mens' || cat.menu == null">
                                     <a :href="'/shop?menu=mens&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                               </ul>
@@ -146,7 +146,7 @@
                                 <li class="uk-parent uk-active">
                                   <a href="/shop?menu=mens&parent=accessories&category=all">{{ trans.all }}</a>
                                 </li>
-                                <li class="uk-parent" v-for="cat in categories.accessories">
+                                <li class="uk-parent" v-for="cat in categories.accessories" v-if="cat.menu == 'mens' || cat.menu == null">
                                     <a :href="'/shop?menu=mens&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                               </ul>

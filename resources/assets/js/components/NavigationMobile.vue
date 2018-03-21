@@ -44,7 +44,7 @@
                                         </span>
                                     </a>
                                 </li>
-                                <li v-for="cat in categories.clothing">
+                                <li v-for="cat in categories.clothing" v-if="cat.menu == 'womens' || cat.menu == null">
                                     <a :href="'/shop?menu=womens&parent=clothing&category='+ cat.slug ">
                                         <span :class="{'text-underline': segmentShop == 'womens' && segmentCategory == 'clothing' && segmentSlug == cat.slug }">
                                             {{ cat.name }}
@@ -65,7 +65,7 @@
                                       </span>
                                   </a>
                                 </li>
-                                <li v-for="cat in categories.accessories">
+                                <li v-for="cat in categories.accessories" v-if="cat.menu == 'womens' || cat.menu == null">
                                     <a :href="'/shop?menu=womens&parent=accessories&category='+ cat.slug ">
                                         <span :class="{'text-underline': segmentShop == 'womens' && segmentCategory == 'accessories' && segmentSlug == cat.slug }">
                                             {{ cat.name }}
@@ -98,7 +98,7 @@
                                         </span>
                                     </a>
                                 </li>
-                                <li v-for="cat in categories.clothing">
+                                <li v-for="cat in categories.clothing" v-if="cat.menu == 'mens' || cat.menu == null">
                                     <a :href="'/shop?menu=mens&parent=clothing&category='+ cat.slug ">
                                         <span :class="{'text-underline': segmentShop == 'mens' && segmentCategory == 'clothing' && segmentSlug == cat.slug }">
                                             {{ cat.name }}
@@ -119,7 +119,7 @@
                                       </span>
                                   </a>
                                 </li>
-                                <li v-for="cat in categories.accessories">
+                                <li v-for="cat in categories.accessories" v-if="cat.menu == 'mens' || cat.menu == null">
                                     <a :href="'/shop?menu=mens&parent=accessories&category='+ cat.slug ">
                                          <span :class="{'text-underline': segmentShop == 'mens' && segmentCategory == 'accessories' && segmentSlug == cat.slug }">
                                             {{ cat.name }}

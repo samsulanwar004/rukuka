@@ -4,6 +4,7 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+	use App\Services\CacheService;
 
 	class AdminProductCategoriesController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -32,11 +33,13 @@
 			$this->col = [];
 			$this->col[] = ["label"=>"Name","name"=>"name"];
 			$this->col[] = ["label"=>"Slug","name"=>"slug"];
+			$this->col[] = ["label"=>"Menu","name"=>"menu"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Menu','name'=>'menu','type'=>'select','validation'=>'string|min:3|max:70','width'=>'col-sm-10','dataenum'=>'mens|Mens;womens|Womens'];
 			$this->form[] = ['label'=>'Parent Category','name'=>'parent_product_categories_id','type'=>'hidden','validation'=>'integer|min:0','width'=>'col-sm-9','datatable'=>'product_categories,name'];
 			# END FORM DO NOT REMOVE THIS LINE
 
@@ -275,6 +278,9 @@
 	        $postdata['slug'] = str_slug($category->name.' '.$category->id);
 	        $categories->update($postdata);
 
+	        //clear cache menu
+	        (new CacheService)->clearCacheMenu();
+
 	    }
 
 	    /* 
@@ -303,6 +309,9 @@
 	        $category = $categories->where('id', $id)->first();
 	        $postdata['slug'] = str_slug($category->name.' '.$category->id);
 	        $categories->update($postdata);
+
+	        //clear cache menu
+	        (new CacheService)->clearCacheMenu();
 	    }
 
 	    /* 
@@ -326,6 +335,9 @@
 	    */
 	    public function hook_after_delete($id) {
 	        //Your code here
+
+	        //clear cache menu
+	        (new CacheService)->clearCacheMenu();
 
 	    }
 
