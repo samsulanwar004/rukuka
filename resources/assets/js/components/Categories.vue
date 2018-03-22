@@ -3,15 +3,15 @@
       <div class="uk-grid-small uk-width-1-1 uk-child-width-1-2" uk-grid>
         <div class="uk-text-center">
           <label>
-          <input type="radio" class="uk-radio" name="gender" value="">
-          <img src="images/BLACK.png" alt="" width="32" class="uk-border-circle uk-box-shadow-small">
+          <input type="radio" class="uk-radio" name="gender" v-on:click="pickGender('mens')">
+          <img src="/images/BLACK.png" alt="" width="32" class="uk-border-circle uk-box-shadow-small">
           </label>
            <h6 class="uk-margin-remove-top">MEN</h6>
         </div>
         <div class="uk-text-center">
           <label>
-          <input type="radio" class="uk-radio" name="gender" value="">
-          <img src="images/BLACK.png" alt="" width="32" class="uk-border-circle uk-box-shadow-small">
+          <input type="radio" class="uk-radio" name="gender" v-on:click="pickGender('womens')">
+          <img src="/images/BLACK.png" alt="" width="32" class="uk-border-circle uk-box-shadow-small">
           </label>
           <h6 class="uk-margin-remove-top">WOMEN</h6>
         </div>
@@ -129,7 +129,7 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['api', 'parent', 'category_slug', 'slug', 'sale','locale'],
+        props: ['api', 'parent', 'category_slug', 'slug', 'sale','locale', 'action_link'],
         created() {
             var self = this;
             var api = this.api;
@@ -174,6 +174,25 @@
         computed: {
             sales: function () {
                 return this.sale != 'sale' ? '' : '/'+this.sale;
+            }
+        },
+
+        methods: {
+            pickGender: function (gender) {
+                var search = function searchStringInArray (str, strArray) {
+                    for (var j=0; j<strArray.length; j++) {
+                        if (strArray[j].match(str)) return j;
+                    }
+                    return -1;
+                }
+                var myarr = this.action_link.split("&");
+                var position = search('gender',myarr);
+                if(position == -1) {
+                    window.location.href = this.action_link+'&gender='+gender;
+                } else {
+                    delete myarr[position];
+                    window.location.href = myarr.join('&')+'&gender='+gender;
+                }
             }
         }
 
