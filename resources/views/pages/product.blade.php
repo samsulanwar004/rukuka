@@ -113,8 +113,27 @@
                   </div>
             </div>
             <div class="uk-width-1-3@m">
-                <a href="/shop?menu=designers&category={{$product->designer->slug}}">{{ $product->designer->name }}</a><br>
-                <h3 class="uk-margin-remove">{{ $product->name }}</h3>
+                <a class="uk-text-small" href="/shop?menu=designers&category={{$product->designer->slug}}">{{ $product->designer->name }}</a><br>
+                <h3 class="uk-margin-remove uk-visible@m">{{ $product->name }}</h3>
+                <div class="uk-grid uk-grid-small uk-hidden@m">
+                  <div class="uk-width-3-5">
+                    <h5 class="uk-hidden@m uk-margin-remove">{{ $product->name }}</h5>
+                  </div>
+                  <div class="uk-width-2-5 uk-text-right">
+                    @if($product->price_before_discount > 0)
+
+                            <del>{{ $product->currency }} {{ number_format($product->price_before_discount, 2) }}</del>
+                                <span class="uk-text-danger">{{ $product->currency }} {{ number_format($product->sell_price, 2) }}</span>
+
+
+                    @else
+                        {{ $product->currency }} {{ number_format($product->sell_price, 2) }}
+                    @endif
+                  </div>
+                </div>
+                <hr class="uk-margin-small">
+                <div class="uk-visible@m">
+
                 @if($product->price_before_discount > 0)
                     <b>
                         <h4 class="uk-margin-remove"><del>{{ $product->currency }} {{ number_format($product->price_before_discount, 2) }}</del>
@@ -124,8 +143,7 @@
                 @else
                     <h4 class="uk-margin-remove">{{ $product->currency }} {{ number_format($product->sell_price, 2) }} </h4>
                 @endif
-
-                <br>
+              </div>
                 @if($rating)
                   <div class="stars-product uk-margin-remove-left">
                       <input disabled type="radio" name="star-m" class="star-1" value="1" {{$rating == 1? 'checked':'' }}/>

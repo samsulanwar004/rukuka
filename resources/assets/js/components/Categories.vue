@@ -1,5 +1,21 @@
 <template>
     <div v-if="parent == 'designers'">
+      <div class="uk-grid-small uk-width-1-1 uk-child-width-1-2" uk-grid>
+        <div class="uk-text-center">
+          <label>
+          <input type="radio" class="uk-radio" name="gender" value="">
+          <img src="images/BLACK.png" alt="" width="32" class="uk-border-circle uk-box-shadow-small">
+          </label>
+           <h6 class="uk-margin-remove-top">MEN</h6>
+        </div>
+        <div class="uk-text-center">
+          <label>
+          <input type="radio" class="uk-radio" name="gender" value="">
+          <img src="images/BLACK.png" alt="" width="32" class="uk-border-circle uk-box-shadow-small">
+          </label>
+          <h6 class="uk-margin-remove-top">WOMEN</h6>
+        </div>
+      </div>
         <ul class="uk-accordion">
             <li>
                 <h5 class="uk-link-reset uk-text-uppercase">
@@ -28,7 +44,6 @@
             </li>
         </ul>
     </div>
-
     <div v-else-if="parent == 'home'">
         <ul class="uk-accordion">
             <li>

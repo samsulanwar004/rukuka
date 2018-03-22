@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h5 class="uk-margin-small">{{ trans.color_label}} :
+        <h6 class="uk-margin-small">{{ trans.color_label}} :
             <lazy-background
               :image-source="prod.color_palette | awsLink(aws_link)"
               alt="rukuka palette"
@@ -9,10 +9,10 @@
               image-class="uk-border-circle uk-box-shadow-small uk-margin-small-right uk-margin-small-left">
             </lazy-background>
             {{ prod.color }}
-        </h5>
+        </h6>
         <div v-if="stocks.length > 0">
             <p class="uk-margin-small-bottom">
-              <span class="uk-text-small uk-text-danger"><b> {{ trans.european }} </b> | <a href="/help/size-charts" target="_blank" class="uk-text-primary"><u> {{ trans.size_chart}} </u></a></span>
+              <span class="uk-text-small uk-text-danger"><b> {{ trans.european }} </b> | <a href="/help/size-charts" target="_blank" class="uk-text-meta"> {{ trans.size_chart}} </a></span>
             </p>
             <select :class="{'uk-select uk-form-width-small uk-form-small uk-margin-small-right': true, 'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
               <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">{{ stock.size }} {{ stock.unit | unit }}</option>

@@ -69,10 +69,10 @@
                 </div>
                 <div class="uk-panel uk-width-3-4">
                     <span class="uk-text-lead">{{ $designer->name }}</span><br>
-                    {!! $designer->content !!}
+                    <span class="uk-text-small">{!! $designer->content !!}</span>
                 </div>
             </div>
-            <hr class="uk-margin-small">
+            <hr style="border-color: #333; border-width: 3px">
         @else
 
         @endif
@@ -81,10 +81,10 @@
         <div class="uk-grid-small uk-margin-small-top" uk-grid>
             <div class="uk-width-1-4@m uk-visible@m">
 
-                <a href="#" uk-toggle="target: #nav1; animation: uk-animation-fade" class="uk-button uk-button-small uk-button-secondary uk-width-1-1">
+                <button class="uk-button uk-button-small uk-button-secondary uk-width-1-1" Disabled>
                   <span class="uk-icon uk-margin-small-right" uk-icon="icon: menu"></span>
                     <label>{{ trans('app.filter_nav') }}</label>
-                </a>
+                </button>
 
             </div>
             <div class="uk-width-3-4@m">
