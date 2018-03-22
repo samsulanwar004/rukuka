@@ -75,7 +75,7 @@ return [
     //resources/views/partials/nav.blade.php
     'search'                    =>  '検索中',
     'search_label'              =>  '検索',
-    'header_note'                =>  'ruKuKaでようこそ！あなたにインドネシア製を綺麗に着せると見せることができます！ruKuKa チェックアウト 行われているイベント ',
+    'header_note'                => 'ruKuKaでようこそ！私たちはあなたの国に出荷します。誇らしげにインドネシアで作られた！ruKuKa チェックアウト 行われているイベント ',
     'find_label'                =>  '商品を検索',
 
     //resources/assets/js/components/UserPanel.vue
