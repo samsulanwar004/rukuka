@@ -53,7 +53,7 @@
   </div>
   <div class="uk-alert-alert" uk-alert>
       <a href="#" class="uk-alert-close" uk-close></a>
-      <p class="uk-text-center">
+      <p class="uk-text-center uk-text-small">
         {{ trans('app.header_note') }} <a href="https://rukuka.com/lookbook/amazon-fashion-week"> <b> <u>{{ trans('app.afw') }}</u> </b> </a></b>
       </p>
   </div>

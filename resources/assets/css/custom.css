@@ -264,6 +264,7 @@ label > input + img{ /* IMAGE STYLES */
 }
 label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
   border:3px solid #333;
+	opacity: 0.2;
 }
 
 .text-underline{

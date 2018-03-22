@@ -18,7 +18,7 @@
           <div>
             <a :href="'#modal-related'+modal_code" class="uk-button uk-button-small uk-button-secondary uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
           </div>
-          <a :href="'/product/'+ product.slug" class="uk-text-muted">{{ product.name.substring(0,35) }}</a>
+          <a :href="'/product/'+ product.slug" class="uk-text-small uk-link-reset">{{ product.name.substring(0,35) }}
           <br>
           <span v-if="product.price_before_discount > 0 ">
             <del class="uk-text-small">
@@ -31,7 +31,7 @@
           <span v-else class="uk-text-small">
               {{ product.price | round(exchangeRate.symbol, exchangeRate.value) }}
           </span>
-
+          </a>
         </div>
       </div>
     </div>
@@ -71,25 +71,46 @@
             </div>
             <div class="uk-width-1-2@m uk-padding-small uk-flex uk-flex-wrap uk-flex-wrap-between">
               <div class="uk-width-1-1">
-
-
-              <transition name="fade">
-                <h4 class="uk-margin-small" v-if="isLoading">{{ trans.loading }}</h4>
-                <h4 class="uk-margin-small" v-else>{{ name }}</h4>
-              </transition>
-              <h4 class="uk-margin-remove">
-                <span v-if="priceBeforeDiscount > 0 ">
-                  <del>
-                      {{ priceBeforeDiscount | round(exchangeRate.symbol, exchangeRate.value) }}
-                  </del>
-                </span>
-                <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
-                    &nbsp;{{ price | round(exchangeRate.symbol, exchangeRate.value) }}
-                </span>
-                <span v-else>
-                    {{ price | round(exchangeRate.symbol, exchangeRate.value) }}
-                </span>
-              </h4>
+                <div class="uk-visible@m">
+                  <transition name="fade">
+                    <h4 class="uk-margin-small" v-if="isLoading">{{ trans.loading }}</h4>
+                    <h4 class="uk-margin-small" v-else>{{ name }}</h4>
+                  </transition>
+                  <span v-if="priceBeforeDiscount > 0 ">
+                    <del>
+                        {{ priceBeforeDiscount | round(exchangeRate.symbol, exchangeRate.value) }}
+                    </del>
+                  </span>
+                  <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
+                      &nbsp;{{ price | round(exchangeRate.symbol, exchangeRate.value) }}
+                  </span>
+                  <span v-else>
+                      {{ price | round(exchangeRate.symbol, exchangeRate.value) }}
+                  </span>
+                </div>
+                <div class="uk-grid-small uk-width-1-1 uk-hidden@m" uk-grid>
+                  <div class="uk-width-3-5">
+                    <transition name="fade">
+                      <h5 class="uk-margin-small" v-if="isLoading">{{ trans.loading }}</h5>
+                      <h5 class="uk-margin-small" v-else>{{ name }}</h5>
+                    </transition>
+                  </div>
+                  <div class="uk-width-2-5 uk-text-right">
+                      <span v-if="priceBeforeDiscount > 0 ">
+                        <del>
+                            {{ priceBeforeDiscount | round(exchangeRate.symbol, exchangeRate.value) }}
+                        </del>
+                        <br>
+                      </span>
+                      <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
+                          &nbsp;{{ price | round(exchangeRate.symbol, exchangeRate.value) }}
+                      </span>
+                      <span v-else>
+                          {{ price | round(exchangeRate.symbol, exchangeRate.value) }}
+                      </span>
+                  </div>
+                </div>
+                <hr class="uk-hidden@m uk-margin-small">
 
               <h5 class="uk-margin-small"> {{ trans.color }} :
                 <lazy-background v-if="isLoading"
