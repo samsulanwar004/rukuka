@@ -75,7 +75,7 @@ return [
     //resources/views/partials/nav.blade.php
     'search'                    =>  'SEARCH HERE...',
     'search_label'              =>  'Search',
-    'header_note'               =>  'Welcome to ruKuKa, we ship to your country. Proudly Indonesian made. Checkout ruKuKa Happening Event',
+    'header_note'               =>  'Welcome to ruKuKa, we ship to your country. Proudly Indonesian made. Check out ruKuKa Happening Event',
     'find_label'                =>  'Find our product',
 
     //resources/assets/js/components/UserPanel.vue
