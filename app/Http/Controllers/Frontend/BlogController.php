@@ -118,7 +118,6 @@ class BlogController extends Controller
                                                 '.$image.'
                                             <div class="uk-visible@m">
                                                 <div class="uk-position-top-left">
-                                                    <h4 class="uk-margin-remove">'.$post->category->name.'</h4>
                                                     <h1 class="uk-margin-remove blog-title">'.$post->title.'</h1>
                                                 </div>
                                                 <div class="uk-position-bottom-right">

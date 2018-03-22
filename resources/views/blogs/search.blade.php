@@ -26,7 +26,6 @@
                               <img src="{{ uploadCDN($post->photo_1) }}" alt="{{$post->title}}" onerror="this.src = '{{imageCDN(config('common.default.image_7'))}}'">
                                 <div class="uk-visible@m">
                                     <div class="uk-position-top-left">
-                                      <h4 class="uk-margin-remove">{{$post->category->name}}</h4>
                                         <h1 class="uk-margin-remove blog-title">{{$post->title}}</h1>
                                     </div>
                                     <div class="uk-position-bottom-right">
