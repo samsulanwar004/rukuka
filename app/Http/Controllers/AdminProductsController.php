@@ -302,7 +302,7 @@
 	    */
 	    public function hook_row_index($column_index,&$column_value) {
 	    	//Your code here
-            if($column_index==5) {
+            if($column_index==6) {
                 if ($column_value == '0') {
                     $column_value = '<span class="label label-warning">Unactive</span>';
                 } else {
