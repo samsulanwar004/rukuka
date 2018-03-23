@@ -129,7 +129,7 @@
 
 <script>
     export default {
-        props: ['parent', 'category_slug', 'slug', 'sale','locale', 'gender'],
+        props: ['parent', 'category_slug', 'slug', 'sale','locale','action_link', 'gender'],
         created() {
             var self = this;
             self.parent = this.parent;
