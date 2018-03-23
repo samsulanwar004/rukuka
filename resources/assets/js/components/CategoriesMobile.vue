@@ -4,14 +4,14 @@
         <div class="uk-text-center">
           <label>
           <input type="radio" class="uk-radio" name="gender" v-on:click="pickGender('mens')" :checked="gender == 'mens'">
-          <img src="/images/BLACK.png" alt="" width="28" class="uk-border-circle uk-box-shadow-small">
+          <img src="https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/uploads/1/2018-02/black.png" alt="" width="28" class="uk-border-circle uk-box-shadow-small">
           </label>
            <h6 class="uk-margin-remove-top">MEN</h6>
         </div>
         <div class="uk-text-center">
           <label>
           <input type="radio" class="uk-radio" name="gender" v-on:click="pickGender('womens')" :checked="gender == 'womens'">
-          <img src="/images/BLACK.png" alt="" width="28" class="uk-border-circle uk-box-shadow-small">
+          <img src="https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/uploads/1/2018-02/black.png" alt="" width="28" class="uk-border-circle uk-box-shadow-small">
           </label>
           <h6 class="uk-margin-remove-top">WOMEN</h6>
         </div>
