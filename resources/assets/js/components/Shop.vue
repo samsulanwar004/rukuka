@@ -185,7 +185,7 @@
                   <div class="uk-grid-match uk-child-width-auto uk-flex-between uk-grid uk-visible@m" uk-grid>
                   <div class="uk-first-column">
                     <div v-if="bagCount > 0">
-                      <a class="uk-icon uk-icon-link" :href="bag_link" uk-icon="icon: cart"></a>
+                      <a :href="bag_link"><i class="material-icons" style="font-size: 18px">shopping_basket</i></a>
                       <div class="uk-badge">
                         <a :href="bag_link" class="uk-light uk-link-reset">{{ bagCount }}</a>
                       </div>
@@ -206,7 +206,7 @@
               <div class="uk-grid-match uk-child-width-auto uk-flex-between uk-grid" uk-grid>
               <div class="uk-first-column">
                 <div v-if="bagCount > 0">
-                  <a class="uk-icon uk-icon-link" :href="bag_link" uk-icon="icon: cart"></a>
+                  <a :href="bag_link"><i class="material-icons" style="font-size: 20px">shopping_basket</i></a>
                   <div class="uk-badge">
                     <a :href="bag_link" class="uk-light uk-link-reset">{{ bagCount }}</a>
                   </div>
@@ -222,9 +222,6 @@
             </div>
           </div>
         </div>
-    </div>
-    <div class="uk-text-center">
-      <a href="#" class="uk-icon-link uk-icon" uk-icon="icon: plus; ratio: 1.5"></a>
     </div>
 </template>
 <style>

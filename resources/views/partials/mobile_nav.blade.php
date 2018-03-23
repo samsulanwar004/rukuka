@@ -1,7 +1,7 @@
-<div class="uk-section uk-section-xsmall uk-padding-remove uk-margin-reove">
+<div class="uk-section uk-section-xsmall uk-padding-remove-vertical">
   <div uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
-    <div class="uk-section uk-section-default uk-section-xsmall uk-padding-small uk-box-shadow-medium">
-      <div class="uk-container uk-container-small">
+    <div class="uk-section uk-section-default uk-section-xsmall uk-padding-remove uk-box-shadow-medium">
+      <div class="uk-container uk-container-small uk-padding-small-left uk-padding-small-right" style="padding-top:6px; padding-bottom: 6px">
         <div class="uk-grid-small" uk-grid>
           <div class="uk-width-1-4@m">
             <user-panel-mobile
