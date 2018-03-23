@@ -298,7 +298,8 @@ class ProductRepository
         }
 
         if ($request->has('gender')) {
-            $query->where('products.gender', $request->input('gender'));
+            $query->whereIn('products.gender', array($request->input('gender'), 'unisex'));
+
         }
 
         if ($category != 'all') {
