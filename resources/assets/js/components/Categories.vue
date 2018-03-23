@@ -3,15 +3,15 @@
       <div class="uk-grid-small uk-width-1-1 uk-child-width-1-2" uk-grid>
         <div class="uk-text-center">
           <label>
-          <input type="radio" class="uk-radio" name="gender" v-on:click="pickGender('mens')">
-          <img src="/images/BLACK.png" alt="" width="32" class="uk-border-circle uk-box-shadow-small">
+          <input type="radio" class="uk-radio" name="gender" v-on:click="pickGender('mens')" :checked="gender == 'mens'">
+          <img src="/images/BLACK.png" alt="" width="28" class="uk-border-circle uk-box-shadow-small">
           </label>
            <h6 class="uk-margin-remove-top">MEN</h6>
         </div>
         <div class="uk-text-center">
           <label>
-          <input type="radio" class="uk-radio" name="gender" v-on:click="pickGender('womens')">
-          <img src="/images/BLACK.png" alt="" width="32" class="uk-border-circle uk-box-shadow-small">
+          <input type="radio" class="uk-radio" name="gender" v-on:click="pickGender('womens')" :checked="gender == 'womens'">
+          <img src="/images/BLACK.png" alt="" width="28" class="uk-border-circle uk-box-shadow-small">
           </label>
           <h6 class="uk-margin-remove-top">WOMEN</h6>
         </div>
@@ -129,7 +129,7 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['api', 'parent', 'category_slug', 'slug', 'sale','locale', 'action_link'],
+        props: ['api', 'parent', 'category_slug', 'slug', 'sale','locale', 'action_link', 'gender'],
         created() {
             var self = this;
             var api = this.api;

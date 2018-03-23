@@ -123,6 +123,7 @@
                                     sale="{{ $sale == null ? $category:$sale }}"
                                     locale="{{ json_encode(trans('app')) }}"
                                     action_link="{{ actionLink() }}"
+                                    gender="{{ $gender }}"
                             ></categories-mobile>
 
                             <color-palette-mobile
@@ -157,6 +158,7 @@
                                 sale="{{ $sale == null ? $category:$sale }}"
                                 locale="{{ json_encode(trans('app')) }}"
                                 action_link="{{ actionLink() }}"
+                                gender="{{ $gender }}"
                         ></categories>
                         <color-palette
                                 api="{{ route('color') }}"

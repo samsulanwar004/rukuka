@@ -25,7 +25,7 @@
     <meta name="googlebot-news" content="nofollow" />
     <meta name="robots" content="nofollow" />
     <meta name="googlebot" content="nofollow" />
-    @endif   
+    @endif
     <!-- end SEO and Responsive -->
 
     <!-- facebook META -->

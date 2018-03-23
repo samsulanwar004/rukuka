@@ -96,7 +96,7 @@ return [
     'language'                  =>  'Language',
     'track_order'               =>  'Track Your Order',
     'shipping_handling'         =>  'Shipping & Handling',
-    'size_chart'                =>  'Size Charts',
+    'size_chart'                =>  'size charts',
     'contact_us'                =>  'Contact Us',
     'payment'                   =>  'Payment',
     'sale_item'                 =>  'Sale Items',

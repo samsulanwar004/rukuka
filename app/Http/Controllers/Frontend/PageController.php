@@ -98,7 +98,7 @@ class PageController extends BaseController
                         $products = (new ProductRepository)
                         ->getProductByMenuAll($request);
                     } else {
-                        throw new Exception("Error Processing Request", 1);   
+                        throw new Exception("Error Processing Request", 1);
                     }
                 }
             } elseif ($request->input('menu') == 'home') {
@@ -110,7 +110,7 @@ class PageController extends BaseController
                         $products = (new ProductRepository)
                         ->getProductByMenuAll($request);
                     } else {
-                        throw new Exception("Error Processing Request", 1);   
+                        throw new Exception("Error Processing Request", 1);
                     }
                 }
             } else {
@@ -157,6 +157,9 @@ class PageController extends BaseController
             $categories = $request->input('menu');
             $category = $categories == 'designers' ? $request->input('category') : $request->input('parent') ;
             $slug = $request->input('category');
+            $gender = $request->input('gender');
+
+
 
         } catch (Exception $e) {
             return abort(404);
@@ -172,7 +175,8 @@ class PageController extends BaseController
             'sale',
             'recently',
             'colorId',
-            'sortByPrice'
+            'sortByPrice',
+            'gender'
         ));
 
     }
@@ -685,7 +689,7 @@ class PageController extends BaseController
 
         try{
             $lookbook = (new LookbookRepository)->getLookbookCollection($lookbook_slug);
-            
+
             //Validate Deleted
             $this->validDelete($lookbook);
             if($lookbook == null){
