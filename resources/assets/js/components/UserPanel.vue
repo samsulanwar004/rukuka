@@ -22,6 +22,56 @@
             {{ wishlistCount }}
           </div>
       </li>
+      <li class="uk-margin-right">
+        <a class="uk-button uk-button-text uk-button-small" href="#flag-modal" uk-toggle><img src="images/flag1x1/us.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> USD</a>
+        <div id="flag-modal" class="uk-modal-full" uk-modal>
+            <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+                <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+                <div class="uk-width-xxlarge uk-padding-large uk-text-center">
+                    <h3>CHOOSE YOUR CURRENCY</h3>
+                    <button class="uk-button uk-button-small uk-button-default" disabled>CURRENT CURRENCY <img src="images/flag1x1/us.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> USD</button>
+                    <h5>UNITED STATES & CANADA</h5>
+                    <div class="uk-grid uk-child-width-1-2@m uk-gird-small" uk-grid>
+                      <div>
+                        <a href="#"><h6>CAD <img src="images/flag1x1/ca.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> Canada</h6></a>
+                      </div>
+                      <div>
+                        <a href="#"><h6>USD <img src="images/flag1x1/us.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> United States of America</h6></a>
+                      </div>
+                    </div>
+                    <h5>ASIA & SOUTHEAST ASIA</h5>
+                    <div class="uk-grid uk-child-width-1-3@m uk-grid-small" uk-grid>
+                      <div>
+                        <a href="#"><h6>IDR <img src="images/flag1x1/id.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> Indonesia</h6></a>
+                      </div>
+                      <div>
+                        <a href="#"><h6>SGD <img src="images/flag1x1/sg.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> Singapure</h6></a>
+                      </div>
+                      <div>
+                        <a href="#"><h6>MYR <img src="images/flag1x1/my.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> Malaysia</h6></a>
+                      </div>
+                      <div>
+                        <a href="#"><h6>BND <img src="images/flag1x1/bn.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> Brunei Darussalam</h6></a>
+                      </div>
+                      <div>
+                        <a href="#"><h6>JPY <img src="images/flag1x1/jp.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> Japan</h6></a>
+                      </div>
+                      <div>
+                        <a href="#"><h6>KRW <img src="images/flag1x1/kr.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> South Korea</h6></a>
+                      </div>
+                      <div>
+                        <a href="#"><h6>CNY <img src="images/flag1x1/cn.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> China</h6></a>
+                      </div>
+                      <div>
+                        <a href="#"><h6>HKD <img src="images/flag1x1/hk.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> Hongkong</h6></a>
+                      </div>
+                    </div>
+                    <h5>UEROPEAN</h5>
+                      <a href="#"><h6>EUR <img src="images/flag1x1/eu.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> Europe</h6></a>
+                </div>
+            </div>
+        </div>
+      </li>
 
       <li>
         <a class="uk-button uk-button-text uk-button-small" v-on:click.prevent="goBag"> <b>{{trans.bag_label}}</b></a>
