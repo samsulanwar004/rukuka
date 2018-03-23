@@ -3,7 +3,7 @@
 return [
     //Title Page
     'rukuka'                    =>  'ruKuKa',
-    'afw'                       =>  'Amazon Fashion Week',
+    'afw'                       =>  'amazon fashion week',
     'title_homepage'            =>  'ruKuKa | A home for curated Indonesian designers and crafts.',
     'title_designers_list'      =>  'Designers | ruKuKa',
     'title_designers'           =>  '| ruKuKa',
@@ -75,7 +75,7 @@ return [
     //resources/views/partials/nav.blade.php
     'search'                    =>  'SEARCH HERE...',
     'search_label'              =>  'Search',
-    'header_note'               =>  'Welcome to ruKuKa, we ship to your country. Proudly Indonesian made. Check out ruKuKa Happening Event',
+    'header_note'               =>  'Welcome to ruKuKa, we ship to your country. Proudly Indonesian made. Check out ruKuKa Event',
     'find_label'                =>  'Find our product',
 
     //resources/assets/js/components/UserPanel.vue
