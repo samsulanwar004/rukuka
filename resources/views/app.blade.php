@@ -15,7 +15,7 @@
     <meta name="description" content="{{ $metaTag['web_meta_tag']['description'] }}">
     <meta name='language' content='EN'/>
     <meta name="author" content="rukuka">
-    
+
     @if($doFollow == true)
     <meta name="googlebot-news" content="index,follow" />
     <meta name="robots" content="index, follow" />

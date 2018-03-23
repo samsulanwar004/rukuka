@@ -131,8 +131,8 @@
                     @endif
                   </div>
                 </div>
-                <hr class="uk-margin-small">
-                <div class="uk-visible@m">
+                <hr class="uk-margin-small uk-hidden@m">
+                <div class="uk-visible@m uk-margin-small-bottom">
 
                 @if($product->price_before_discount > 0)
                     <b>
