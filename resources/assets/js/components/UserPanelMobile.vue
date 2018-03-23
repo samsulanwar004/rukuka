@@ -1,8 +1,8 @@
 <template>
     <div class="uk-grid-small uk-flex uk-flex-middle uk-hidden@m" uk-grid>
-      <div class="uk-width-auto"><a class="uk-icon-link" uk-icon="icon: more; ratio: 0.9" href="#offcanvas-overlay-slide" uk-toggle></a></div>
+      <div class="uk-width-auto"><a href="#offcanvas-overlay-slide" uk-toggle><i class="material-icons" style="font-size: 18px">menu</i></a></div>
       <div class="uk-width-auto">
-        <a class="uk-icon-link" uk-icon="icon: search;  ratio: 0.9" uk-toggle="target: .test-overlay; animation: uk-animation-fade" href="#"></a>
+        <a uk-toggle="target: .test-overlay; animation: uk-animation-fade" href="#"><i class="material-icons" style="font-size: 18px">search</i></a>
       </div>
       <div class="uk-width-expand uk-text-center">
         <a href="/">
@@ -20,13 +20,14 @@
           </div>
         </a>
       </div>
-      <div class="uk-width-auto"><a class="uk-icon-link" uk-icon="icon: cart; ratio: 0.9" :href="bag_link"></a>
+      <div class="uk-width-auto"><a :href="bag_link"><i class="material-icons" style="font-size: 18px">shopping_basket</i>
         <div class="uk-badge" v-if="bagCount > 0">
           {{ bagCount }}
         </div>
+        </a>
       </div>
-      <div v-if="auth == 0" class="uk-width-auto"><a class="uk-icon-link" uk-icon="icon: user;  ratio: 0.9" :href="login_link"></a></div>
-      <div v-if="auth == 1"  class="uk-width-auto"><a class="uk-icon-link" uk-icon="icon: user;  ratio: 0.9" :href="profile_link"></a>
+      <div v-if="auth == 0" class="uk-width-auto"><a :href="login_link"><i class="material-icons" style="font-size: 18px">person</i></a></div>
+      <div v-if="auth == 1"  class="uk-width-auto"><a :href="profile_link"><i class="material-icons" style="font-size: 18px">person</i></a>
       </div>
     </div>
 </template>

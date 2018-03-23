@@ -112,7 +112,7 @@
                 </div>
                 <hr class="uk-hidden@m uk-margin-small">
 
-              <h5 class="uk-margin-small"> {{ trans.color }} :
+              <h6 class="uk-margin-small"> {{ trans.color }} :
                 <lazy-background v-if="isLoading"
                   :image-source="loadingImage"
                   alt="rukuka palette"
@@ -129,7 +129,7 @@
                   image-class="uk-border-circle uk-box-shadow-small uk-margin-small-right uk-margin-small-left">
                 </lazy-background>
                {{ color }}
-              </h5>
+             </h6>
               <div v-if="stocks.length > 0">
                 <div class="uk-grid uk-child-width-1-2 uk-margin-small-bottom" uk-grid>
                   <div>
@@ -178,7 +178,7 @@
               <div class="uk-grid-match uk-child-width-auto uk-flex-between uk-grid uk-visible@m" uk-grid>
               <div class="uk-first-column">
                 <div v-if="bagCount > 0">
-                  <a class="uk-icon uk-icon-link" :href="bag_link" uk-icon="icon: cart"></a>
+                  <a :href="bag_link"><i class="material-icons" style="font-size: 18px">shopping_basket</i></a>
                   <div class="uk-badge">
                     <a :href="bag_link" class="uk-light uk-link-reset">{{ bagCount }}</a>
                   </div>
@@ -199,7 +199,7 @@
           <div class="uk-grid-match uk-child-width-auto uk-flex-between uk-grid" uk-grid>
           <div class="uk-first-column">
             <div v-if="bagCount > 0">
-              <a class="uk-icon uk-icon-link" :href="bag_link" uk-icon="icon: cart"></a>
+              <a :href="bag_link"><i class="material-icons" style="font-size: 18px">shopping_basket</i></a>
               <div class="uk-badge">
                 <a :href="bag_link" class="uk-light uk-link-reset">{{ bagCount }}</a>
               </div>

@@ -31,39 +31,7 @@
     <link rel="stylesheet" href="{{ elixirCDN('css/app.css') }}">
     <script src="{{ elixirCDN('js/vendor.js') }}"></script>
     <script src="{{ elixirCDN('js/custom.js') }}"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style type="text/css">
-
-            .overlay {
-                position: fixed;
-                display: none;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: rgba(0,0,0,0.5);
-                z-index: 2;
-            }
-
-            .modal-body{
-                position: absolute;
-                top: 60%;
-                left: 50%;
-                font-size: 50px;
-                color: white;
-                transform: translate(-50%,-50%);
-                -ms-transform: translate(-50%,-50%);
-                -webkit-transform: translate(-50%,-50%);
-                background-color: #ffffff;
-                border-radius: 5px;
-                z-index: 1;
-                margin-top: 50%;
-            }
-    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
   </head>
   <body>

@@ -75,6 +75,7 @@
     <link rel="stylesheet" href="{{ elixirCDN('css/app.css') }}">
     <script src="{{ elixirCDN('js/vendor.js') }}"></script>
     <script src="{{ elixirCDN('js/custom.js') }}"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
   </head>
   <body>
