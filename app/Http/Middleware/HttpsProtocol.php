@@ -19,7 +19,7 @@ class HttpsProtocol
 
         if (in_array(env('APP_ENV'), array('production'))) {
             // for Proxies
-            //Request::setTrustedProxies([$request->getClientIp()]);
+            Request::setTrustedProxies([$request->getClientIp()]);
             
             if (!$request->isSecure()) {
                 return redirect()->secure($request->getRequestUri(), 301);
