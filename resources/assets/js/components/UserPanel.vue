@@ -23,51 +23,55 @@
           </div>
       </li>
       <li class="uk-margin-right">
-        <a class="uk-button uk-button-text uk-button-small" href="#flag-modal" uk-toggle><img src="images/flag1x1/us.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> USD</a>
+        <a class="uk-button uk-button-text uk-button-small" href="#flag-modal" uk-toggle><img :src="flagImage+language+'.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
+        {{ currencyCode }}
+        </a>
         <div id="flag-modal" class="uk-modal-full" uk-modal>
             <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
                 <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
                 <div class="uk-width-xxlarge uk-padding-large uk-text-center">
-                    <h3>CHOOSE YOUR CURRENCY</h3>
-                    <button class="uk-button uk-button-small uk-button-default" disabled>CURRENT CURRENCY <img src="images/flag1x1/us.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> USD</button>
-                    <h5>UNITED STATES & CANADA</h5>
+                    <h3 class="uk-text-uppercase">{{ trans.currency_title }}</h3>
+                    <button class="uk-button uk-button-small uk-button-default uk-text-uppercase" disabled>{{ trans.currency_set }} <img :src="flagImage+language+'.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
+                      {{ currencyCode }}
+                    </button>
+                    <h5 class="uk-text-uppercase">{{ trans.usca }}</h5>
                     <div class="uk-grid uk-child-width-1-2@m uk-gird-small" uk-grid>
                       <div>
-                        <a href="#"><h6>CAD <img src="images/flag1x1/ca.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> Canada</h6></a>
+                        <a href="/lang/ca"><h6>{{ trans.cad }} <img :src="flagImage+'ca.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.ca }}</h6></a>
                       </div>
                       <div>
-                        <a href="#"><h6>USD <img src="images/flag1x1/us.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> United States of America</h6></a>
+                        <a href="/lang/en"><h6>{{ trans.usd }} <img :src="flagImage+'en.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.us }}</h6></a>
                       </div>
                     </div>
-                    <h5>ASIA & SOUTHEAST ASIA</h5>
+                    <h5 class="uk-text-uppercase">{{ trans.asea }}</h5>
                     <div class="uk-grid uk-child-width-1-3@m uk-grid-small" uk-grid>
                       <div>
-                        <a href="#"><h6>IDR <img src="images/flag1x1/id.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> Indonesia</h6></a>
+                        <a href="/lang/id"><h6>{{ trans.idr }} <img :src="flagImage+'id.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.id }}</h6></a>
                       </div>
                       <div>
-                        <a href="#"><h6>SGD <img src="images/flag1x1/sg.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> Singapure</h6></a>
+                        <a href="/lang/sg"><h6>{{ trans.sgd }} <img :src="flagImage+'sg.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.sg }}</h6></a>
                       </div>
                       <div>
-                        <a href="#"><h6>MYR <img src="images/flag1x1/my.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> Malaysia</h6></a>
+                        <a href="/lang/my"><h6>{{ trans.myr }} <img :src="flagImage+'my.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.my }}</h6></a>
                       </div>
                       <div>
-                        <a href="#"><h6>BND <img src="images/flag1x1/bn.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> Brunei Darussalam</h6></a>
+                        <a href="/lang/bn"><h6>{{ trans.bnd }} <img :src="flagImage+'bn.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.bn }}</h6></a>
                       </div>
                       <div>
-                        <a href="#"><h6>JPY <img src="images/flag1x1/jp.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> Japan</h6></a>
+                        <a href="/lang/jp"><h6>{{ trans.jpy }} <img :src="flagImage+'jp.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.jp }}</h6></a>
                       </div>
                       <div>
-                        <a href="#"><h6>KRW <img src="images/flag1x1/kr.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> South Korea</h6></a>
+                        <a href="/lang/kr"><h6>{{ trans.krw }} <img :src="flagImage+'kr.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.kr }}</h6></a>
                       </div>
                       <div>
-                        <a href="#"><h6>CNY <img src="images/flag1x1/cn.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> China</h6></a>
+                        <a href="/lang/cn"><h6>{{ trans.cny }} <img :src="flagImage+'cn.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.cn }}</h6></a>
                       </div>
                       <div>
-                        <a href="#"><h6>HKD <img src="images/flag1x1/hk.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> Hongkong</h6></a>
+                        <a href="/lang/hk"><h6>{{ trans.hkd }} <img :src="flagImage+'hk.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.hk }}</h6></a>
                       </div>
                     </div>
-                    <h5>UEROPEAN</h5>
-                      <a href="#"><h6>EUR <img src="images/flag1x1/eu.svg" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> Europe</h6></a>
+                    <h5 class="uk-text-uppercase">{{ trans.euro }}</h5>
+                      <a href="/lang/eu"><h6>{{ trans.eur }} <img :src="flagImage+'eu.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.eu }}</h6></a>
                 </div>
             </div>
         </div>
@@ -151,7 +155,9 @@
       'aws_link',
       'default_image',
       'locale',
-      'exchange_api'
+      'exchange_api',
+      'currency_code',
+      'language'
     ],
 
     components: {
@@ -191,6 +197,7 @@
 
       self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;
       self.loadingImage = this.aws_link+'/images/loading-image.gif';
+      self.flagImage = this.aws_link+'/images/flag1x1/';
     },
 
     data () {
@@ -204,7 +211,10 @@
         errorImage: {},
         loadingImage: {},
         trans: JSON.parse(this.locale,true),
-        exchangeRate: {}
+        currencyCode: this.currency_code,
+        language: this.language,
+        exchangeRate: {},
+        flagImage:{}
       }
     },
 
