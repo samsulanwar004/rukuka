@@ -48,6 +48,8 @@ return [
 	// signature for order to payment
 	'order_key_signature' => env('ORDER_KEY_SIGNATURE'),
 
+	'markup_curency' => env('MARKUP_VALUE')
+
 	'maintance_whitelist' => env('MAINTENANCE_WHITELIST'),
 
 	'video_slide' => env('VIDEO_SLIDE'),
