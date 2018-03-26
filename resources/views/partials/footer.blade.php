@@ -47,20 +47,20 @@
           <li><a href="{{ trans('app.email_to') }}" class="uk-icon-link" uk-icon="icon: mail"></a></li>
         </ul>
         </p>
-        <ul class="uk-nav uk-footer-nav">
-          <li class="uk-text-uppercase">{{ trans('app.language') }}</li>
-        </ul>
-        <div class="uk-nav uk-footer-nav">
-          @foreach (Config::get('languages') as $lang => $language)
-            @if ($lang == App::getLocale())
-              <u> <a class="uk-text-small" href="{{ route('lang.switch', $lang) }}">{{$language}}</a> </u>
-            @endif
-              @if ($lang != App::getLocale())
-                <a class="uk-text-small" href="{{ route('lang.switch', $lang) }}"> {{$language}} </a>
-              @endif
-              {{ $loop->last ? '' : '| ' }}
-          @endforeach
-        </div>
+        {{--<ul class="uk-nav uk-footer-nav">--}}
+          {{--<li class="uk-text-uppercase">{{ trans('app.language') }}</li>--}}
+        {{--</ul>--}}
+        {{--<div class="uk-nav uk-footer-nav">--}}
+          {{--@foreach (Config::get('languages') as $lang => $language)--}}
+            {{--@if ($lang == App::getLocale())--}}
+              {{--<u> <a class="uk-text-small" href="{{ route('lang.switch', $lang) }}">{{$language}}</a> </u>--}}
+            {{--@endif--}}
+              {{--@if ($lang != App::getLocale())--}}
+                {{--<a class="uk-text-small" href="{{ route('lang.switch', $lang) }}"> {{$language}} </a>--}}
+              {{--@endif--}}
+              {{--{{ $loop->last ? '' : '| ' }}--}}
+          {{--@endforeach--}}
+        {{--</div>--}}
       </div>
     </div>
     <p>
@@ -113,15 +113,15 @@
     <ul class="uk-grid uk-grid-small uk-flex uk-flex-top uk-flex-between" uk-grid>
       <li>{{ trans('app.copyright') }}</li>
       <li>
-        @foreach (Config::get('languages') as $lang => $language)
-          @if ($lang == App::getLocale())
-            <u> <a class="uk-text-small" href="{{ route('lang.switch', $lang) }}">{{$language}}</a> </u>
-          @endif
-          @if ($lang != App::getLocale())
-            <a class="uk-text-small" href="{{ route('lang.switch', $lang) }}"> {{$language}} </a>
-          @endif
-          {{ $loop->last ? '' : '| ' }}
-        @endforeach
+        {{--@foreach (Config::get('languages') as $lang => $language)--}}
+          {{--@if ($lang == App::getLocale())--}}
+            {{--<u> <a class="uk-text-small" href="{{ route('lang.switch', $lang) }}">{{$language}}</a> </u>--}}
+          {{--@endif--}}
+          {{--@if ($lang != App::getLocale())--}}
+            {{--<a class="uk-text-small" href="{{ route('lang.switch', $lang) }}"> {{$language}} </a>--}}
+          {{--@endif--}}
+          {{--{{ $loop->last ? '' : '| ' }}--}}
+        {{--@endforeach--}}
       </li>
     </ul>
   </div>
