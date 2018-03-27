@@ -30,6 +30,11 @@ Route::post('/tracking/order/result', [
     'uses' => 'Frontend\OrderController@trackingOrderCode',
 ]);
 
+Route::get('/tracking/order/result', [
+    'as'   => 'tracking-result',
+    'uses' => 'Frontend\OrderController@trackingOrderCode',
+]);
+
 Route::get('/editorial', [
     'as'   => 'editorial-get-index',
     'uses' => 'Frontend\BlogController@index',
