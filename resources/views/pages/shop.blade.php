@@ -83,7 +83,7 @@
               <ul class="uk-grid uk-grid-small">
                 <li><a href="#" uk-toggle="target: #nav1"><i class="material-icons" style="font-size: 18px">menu</i></a></li>
                 <li>@if($categories == 'designers' && $category != 'all')
-                    {{-- {{ $designer->name }} --}} Purana Indonesia
+                     {{ $designer->name }}
                 @else
                     @if($category == 'all' || $slug == 'all')
                         {{ trans('app.all_you_need') }}
