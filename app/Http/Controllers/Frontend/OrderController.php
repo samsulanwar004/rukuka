@@ -81,7 +81,8 @@ class OrderController extends BaseController
 
 	        $payment = new CurrencyService;
 			$kurs  = $payment->getCurrentCurrency();
-	        $totalwithshipping = $total+$shipping;
+            $totalwithshipping = $total+$shipping;
+
 	        $secret = config('common.order_key_signature');
 	        $signature = sha1($totalwithshipping.$secret);
 	        $message = 'Waiting for payment';
@@ -106,8 +107,8 @@ class OrderController extends BaseController
 
             //EMAILSENT
 			//sent invoice unpaid to buyer
-             $emailService = (new EmailService);
-             $emailService->sendInvoiceUnpaid($order);
+              $emailService = (new EmailService);
+              $emailService->sendInvoiceUnpaid($order);
 
              //notification
              //create notification
@@ -163,8 +164,8 @@ class OrderController extends BaseController
 			$kurs  = $payment->getCurrentCurrency();
 	        $totalwithshipping = $total+$shipping;
 	        $secret = config('common.order_key_signature');
-	        $signature = sha1($totalwithshipping.$secret);
-	        
+            $signature = sha1($totalwithshipping.$secret);
+
 	        $order = (object) array('order_code' => $data_order->order_code,'users_id' => $data_order->users_id);
 
             $detail = OrderDetail::where('orders_id',$data_order->id)->get();
@@ -220,7 +221,6 @@ class OrderController extends BaseController
         }
         //delete session as guest
         session()->forget('as.guest');
-
 		return view('pages.tracking_order_index');
 	
 	}
