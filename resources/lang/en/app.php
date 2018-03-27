@@ -245,8 +245,8 @@ return [
 
     //resources/views/pages/shop.blade.php
     'sort_by_price'             =>  'Sort by price',
-    'high'                      =>  'high',
-    'low'                       =>  'low',
+    'high'                      =>  'Price high to low',
+    'low'                       =>  'Price low to high',
     'recently_view'             =>  'Recently View',
     'all_you_need'              =>  'All You Need',
     'filter_nav'                =>  'Filter Navigation',

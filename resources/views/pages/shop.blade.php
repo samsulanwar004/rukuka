@@ -25,7 +25,7 @@
 @section('content')
     {{--Title Breadcrumbs--}}
     <div class="uk-container">
-      @if($categories == 'designers' && $category != 'all')
+      {{-- @if($categories == 'designers' && $category != 'all')
           <h3 class="uk-margin-small-top uk-margin-remove-bottom "></h3>
       @else
           @if($category == 'all' || $slug == 'all')
@@ -33,12 +33,12 @@
           @else
               <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ isset($products->first()->category_name) ? $products->first()->category_name : trans('app.product_not_available') }}</h3>
           @endif
-      @endif
-      <div class="uk-visible@m">
+      @endif --}}
+      {{-- <div class="uk-visible@m"> --}}
       {{--End Title Breadcrumbs--}}
 
       {{--Breadcrumbs--}}
-      @if($categories == 'designers')
+      {{-- @if($categories == 'designers')
           @include('partials.breadcrumb', [
               'breadcrumbs' => [$categories => '/shop?menu='.$categories.'&category=all', $category => 'categories']
           ])
@@ -56,16 +56,16 @@
                   'breadcrumbs' => [$categories => '/shop?menu='.$categories.'&parent=all', $category => false, isset($products->first()->category_name) ? $products->first()->category_name : 'Product not available' => 'categories']
               ])
           @endif
-      @endif
+      @endif --}}
       {{--End Breadcrumbs--}}
 
 
-      </div>
+      {{-- </div> --}}
         {{-- Start Designer Header  --}}
         @if($categories == 'designers' && $category != 'all')
             <div class="uk-grid-small uk-margin-top" uk-grid>
                 <div class="uk-panel uk-width-1-4 uk-text-center">
-                    <img src="{{uploadCDN($designer->photo)}}" width="170" height="170" alt="rukuka designer" class="uk-box-shadow-medium" onerror="this.src = '{{imageCDN(config('common.default.image_6'))}}'">
+                    <img src="{{uploadCDN($designer->photo)}}" width="150" height="150" alt="rukuka designer" class="uk-box-shadow-medium" onerror="this.src = '{{imageCDN(config('common.default.image_6'))}}'">
                 </div>
                 <div class="uk-panel uk-width-3-4">
                     <span class="uk-text-lead">{{ $designer->name }}</span><br>
@@ -78,76 +78,131 @@
         @endif
         {{--End Designer Header--}}
 
-        <div class="uk-grid-small uk-margin-small-top" uk-grid>
-            <div class="uk-width-1-4@m uk-visible@m">
+        <div class="uk-background-mutedt uk-visible@m fixed" uk-grid>
+            <div class="uk-width-1-4@m">
+              <ul class="uk-grid uk-grid-small">
+                <li><a href="#" uk-toggle="target: #nav1"><i class="material-icons" style="font-size: 18px">menu</i></a></li>
+                <li>@if($categories == 'designers' && $category != 'all')
+                    {{-- {{ $designer->name }} --}} Purana Indonesia
+                @else
+                    @if($category == 'all' || $slug == 'all')
+                        {{ trans('app.all_you_need') }}
+                    @else
+                        {{ isset($products->first()->category_name) ? $products->first()->category_name : trans('app.product_not_available') }}
+                    @endif
+                @endif</li>
+              </ul>
 
-                <button class="uk-button uk-button-small uk-button-secondary uk-width-1-1" Disabled>
+
+                {{-- <button class="uk-button uk-button-small uk-button-secondary uk-width-1-1" Disabled>
                   <span class="uk-icon uk-margin-small-right" uk-icon="icon: menu"></span>
                     <label>{{ trans('app.filter_nav') }}</label>
-                </button>
+                </button> --}}
 
             </div>
             <div class="uk-width-3-4@m">
-
                 <div class="uk-grid-small uk-child-width-1-2" uk-grid >
                       <div class="uk-text-left">
-                          <h6 class="uk-text-uppercase">{{ trans('app.sort_by_price') }} :
-                              <a href="{{ actionLink(['price' => 'desc']) }}" class="uk-link-reset">
-                                  <span class="{{ $sortByPrice == 'desc' ? 'text-underline':'' }}">
-                                      {{ trans('app.high') }}
-                                  </span>
-                              </a>|
-                              <a href="{{ actionLink(['price' => 'asc']) }}" class="uk-link-reset">
-                                  <span class="{{ $sortByPrice == 'asc' ? 'text-underline':'' }}">
-                                      {{ trans('app.low') }}
-                                  </span>
-                              </a>
-                          </h6>
+                          <a href="#">{{ trans('app.sort_by_price') }}<i class="material-icons"  style="font-size: 18px; vertical-align:middle">expand_more</i></a>
+                          <div uk-drop="mode: hover; delay-hide: 0" style="width: 200px">
+                              <div class="uk-card uk-background-muted uk-box-shadow-small uk-card-small">
+                                <div class="uk-card-body">
+                                  <ul class="uk-list">
+                                    <li>
+                                      <a href="{{ actionLink(['price' => 'desc']) }}">
+                                        <span class="{{ $sortByPrice == 'desc' ? 'uk-text-bold':'' }}">
+                                            {{ trans('app.high') }}
+                                        </span>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="{{ actionLink(['price' => 'asc']) }}">
+                                        <span class="{{ $sortByPrice == 'asc' ? 'uk-text-bold':'' }}">
+                                            {{ trans('app.low') }}
+                                        </span>
+                                    </a>
+                                  </li>
+                                  </ul>
+                                </div>
+
+                              </div>
+                          </div>
+
+
                       </div>
-                      <div class="uk-visible@m">
+                      <div>
                         <div class="uk-text-right">
-                          <h6 class="uk-text-uppercase uk-margin-remove-vertical">
+
                           @include('pagination.default', ['paginator' => $products])
-                        </h6>
-                        </div>
-                      </div>
-                    <div class="uk-hidden@m uk-text-right">
-                      <a href="#modal" class="uk-button uk-button-default-warm uk-button-small" uk-toggle>{{ trans('app.filter') }}</a>
-                      <div id="modal" uk-modal>
-                        <div class="uk-modal-dialog uk-margin-auto-vertical">
-                          <div class="uk-modal-body" uk-overflow-auto>
-                            <categories-mobile
-                                    parent="{{ $categories }}"
-                                    slug="{{ $slug == null ? $category:$slug }}"
-                                    category_slug="{{ $category }}"
-                                    sale="{{ $sale == null ? $category:$sale }}"
-                                    locale="{{ json_encode(trans('app')) }}"
-                                    action_link="{{ actionLink() }}"
-                                    gender="{{ $gender }}"
-                            ></categories-mobile>
-
-                            <color-palette-mobile
-                                    default_image="{{ json_encode(config('common.default')) }}"
-                                    aws_link="{{ config('filesystems.s3url') }}"
-                                    color_id="{{ $colorId }}"
-                                    locale="{{ json_encode(trans('app')) }}"
-                                    action_link="{{ actionLink() }}"
-                            ></color-palette-mobile>
-                          </div>
-                          <div class="uk-modal-footer">
-                            <a href="#" class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-modal-close">{{ trans('app.close') }}</a>
-                          </div>
 
                         </div>
                       </div>
-                    </div>
                 </div>
 
             </div>
         </div>
+        <div class="uk-hidden@m uk-child-width-1-2" uk-grid>
+          <div>
+            <a href="#">{{ trans('app.sort_by_price') }}<i class="material-icons"  style="font-size: 18px; vertical-align:middle">expand_more</i></a>
+            <div uk-drop="mode: hover; delay-hide: 0" style="width: 200px">
+                <div class="uk-card uk-background-muted uk-box-shadow-small uk-card-small">
+                  <div class="uk-card-body">
+                    <ul class="uk-list">
+                      <li>
+                        <a href="{{ actionLink(['price' => 'desc']) }}">
+                          <span class="{{ $sortByPrice == 'desc' ? 'uk-text-bold':'' }}">
+                              {{ trans('app.high') }}
+                          </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{ actionLink(['price' => 'asc']) }}">
+                          <span class="{{ $sortByPrice == 'asc' ? 'uk-text-bold':'' }}">
+                              {{ trans('app.low') }}
+                          </span>
+                      </a>
+                    </li>
+                    </ul>
+                  </div>
+
+                </div>
+            </div>
+          </div>
+          <div class="uk-text-right">
+            <a href="#modal" class="uk-button uk-button-default-warm uk-button-small" uk-toggle>{{ trans('app.filter') }}</a>
+            <div id="modal" uk-modal>
+              <div class="uk-modal-dialog uk-margin-auto-vertical">
+                <div class="uk-modal-body" uk-overflow-auto>
+                  <categories-mobile
+                          parent="{{ $categories }}"
+                          slug="{{ $slug == null ? $category:$slug }}"
+                          category_slug="{{ $category }}"
+                          sale="{{ $sale == null ? $category:$sale }}"
+                          locale="{{ json_encode(trans('app')) }}"
+                          action_link="{{ actionLink() }}"
+                          gender="{{ $gender }}"
+                  ></categories-mobile>
+
+                  <color-palette-mobile
+                          default_image="{{ json_encode(config('common.default')) }}"
+                          aws_link="{{ config('filesystems.s3url') }}"
+                          color_id="{{ $colorId }}"
+                          locale="{{ json_encode(trans('app')) }}"
+                          action_link="{{ actionLink() }}"
+                  ></color-palette-mobile>
+                </div>
+                <div class="uk-modal-footer">
+                  <a href="#" class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-modal-close">{{ trans('app.close') }}</a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="uk-grid-small uk-margin-small-top" uk-grid>
             <div id="nav1" class="uk-width-1-4@m uk-visible@m">
+              <div>
                 <div class="uk-card uk-background-muted uk-card-small uk-box-shadow-small">
                     <div class="uk-card-body">
                         <categories
@@ -170,6 +225,7 @@
                         ></color-palette>
                     </div>
                 </div>
+              </div>
             </div>
             <div class="uk-width-expand@m">
                 <shop

@@ -145,7 +145,7 @@ class PageController extends BaseController
                     'slug' => $entry->slug,
                     'price' => $entry->sell_price,
                     'price_before_discount' => $entry->price_before_discount,
-                    'photo' => $entry->photo ? str_replace('original', 'small', $entry->photo) : $entry->photo,
+                    'photo' => $entry->photo ? str_replace('original', 'medium', $entry->photo) : $entry->photo,
                     'is_new' => $this->date->diffInDays(Carbon::parse($entry->created_at)) <= 7 ? true : false,
                 ];
             });
