@@ -20,7 +20,7 @@ class Language
             App::setLocale(Session::get('applocale'));
         }
         else { 
-            $availableLangs = ['jp', 'en'];
+            $availableLangs = ['jp', 'en', 'id'];
             $ipService = (new IpAddressService);
             $ip = $ipService->getIpUser();
             $userLangs = strtolower($ipService->ipInfo($ip, "Country Code"));
