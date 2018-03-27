@@ -13,6 +13,7 @@
     aws_link="{{ config('filesystems.s3url') }}"
     default_image="{{ json_encode(config('common.default')) }}"
     locale="{{ json_encode(trans('app')) }}"
+    bag_count="{{ count($bags) }}"
   ></bag>
   <hr class="uk-margin-large uk-padding-large" style="border-color: #333; border-width: 3px">
   @if($recently)

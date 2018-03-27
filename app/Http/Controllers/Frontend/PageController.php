@@ -484,13 +484,13 @@ class PageController extends BaseController
 
     public function showBagPage()
     {
-        $getBags = (new BagService)->get(self::INSTANCE_SHOP);
+        $bags = (new BagService)->get(self::INSTANCE_SHOP);
 
         $recentlyViewed = session()->get('products.recently_viewed');
 
         $recently = $recentlyViewed ? array_keys(array_flip(array_reverse($recentlyViewed))) : [];
 
-        return view('pages.bag', compact('recently'));
+        return view('pages.bag', compact('recently', 'bags'));
     }
 
     public function page($slug){
