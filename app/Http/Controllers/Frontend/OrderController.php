@@ -218,6 +218,10 @@ class OrderController extends BaseController
 
 	public function trackingOrderCode(Request $request){
 
+	    if($request->method() == 'GET'){
+            return redirect()->route('tracking-page');
+        }
+
         $tracking = $this->order
                     ->setOrderCode($request->input('order_code'))
                     ->setUserEmail($request->input('email'))
