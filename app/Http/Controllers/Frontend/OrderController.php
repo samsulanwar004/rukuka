@@ -11,6 +11,7 @@ use App\Services\EmailService;
 use App\Services\CurrencyService;
 use App\Repositories\UserRepository;
 use App\Repositories\CourierRepository;
+use App\Repositories\PaymentRepository;
 use DB;
 use Carbon\Carbon;
 use Exception;
@@ -83,9 +84,11 @@ class OrderController extends BaseController
 	        $totalwithshipping = $total+$shipping;
 	        $secret = config('common.order_key_signature');
 	        $signature = sha1($totalwithshipping.$secret);
+	        $message = 'Waiting for payment';
+	        $orderCode = $this->generateOrderCode();
 
 	        $order = $this->order
-	        	->setOrderCode($this->generateOrderCode())
+	        	->setOrderCode($orderCode)
 	        	->setUser($user)
 	        	->setPaymentMethod('creditcard')
 	        	->setPaymentName($address->first_name)
@@ -95,7 +98,7 @@ class OrderController extends BaseController
 	        	->setShipping($address)
 	        	// ->setPayment($creditCard)
 	        	->setShippingCost($shipping)
-	        	->setPendingReason('Waiting for payment')
+	        	->setPendingReason($message)
 	        	->setOrderDate($orderDate)
 	        	->setExpiredDate($expiredDate)
 	        	->setDetail($detail)
@@ -105,6 +108,12 @@ class OrderController extends BaseController
 			//sent invoice unpaid to buyer
              $emailService = (new EmailService);
              $emailService->sendInvoiceUnpaid($order);
+
+             //notification
+             //create notification
+	        $users = config('common.admin.users_id');
+	        $module = 'orders';
+	        (new PaymentRepository)->notificationforAdmin($users, $orderCode.' '.$message, $module);
 
             DB::commit();
 			return view('pages.checkout.checkout_finish', compact(

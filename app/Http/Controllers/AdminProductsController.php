@@ -359,6 +359,13 @@
                 $postdata['product_code'] = $pc;
             }
 
+            $regid = ['867352708284'];
+			$data['title'] = "This is a message title";
+			$data['content'] = "This is a message body";
+			// You can add more key as you need
+			// $data['your_other_key'] =
+			CRUDBooster::sendFCM($regid,$data);
+
 	    }
 
 	    /*

@@ -69,5 +69,9 @@ return [
             'width' => env('IMAGE_MEDIUM_WIDTH'),
             'height' => env('IMAGE_MEDIUM_HEIGHT'),
         ],
+	],
+
+	'admin' => [
+		'users_id' => env('USERS_ID', '1')
 	]
 ];
