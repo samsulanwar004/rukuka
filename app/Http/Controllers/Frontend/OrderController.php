@@ -80,8 +80,7 @@ class OrderController extends BaseController
 
 	        $payment = new CurrencyService;
 			$kurs  = $payment->getCurrentCurrency();
-			$markup = 100/(100+config('common.markup_curency'));
-	        $totalwithshipping = $total+$shipping/$markup;
+            $totalwithshipping = $total+$shipping;
 
 	        $secret = config('common.order_key_signature');
 	        $signature = sha1($totalwithshipping.$secret);
@@ -105,8 +104,8 @@ class OrderController extends BaseController
 
             //EMAILSENT
 			//sent invoice unpaid to buyer
-             // $emailService = (new EmailService);
-             // $emailService->sendInvoiceUnpaid($order);
+              $emailService = (new EmailService);
+              $emailService->sendInvoiceUnpaid($order);
 
             DB::commit();
 			return view('pages.checkout.checkout_finish', compact(
@@ -154,12 +153,10 @@ class OrderController extends BaseController
 			$shipping = $data_order->shipping_cost;
 	        $payment = new CurrencyService;
 			$kurs  = $payment->getCurrentCurrency();
-			$markup = config('common.markup_curency');
 	        $totalwithshipping = $total+$shipping;
 	        $secret = config('common.order_key_signature');
-	        $markup = 100/(100+config('common.markup_curency'));
-	        $totalwithshipping = $total+$shipping/$markup;
-	        
+            $signature = sha1($totalwithshipping.$secret);
+
 	        $order = (object) array('order_code' => $data_order->order_code,'users_id' => $data_order->users_id);
 
             $detail = OrderDetail::where('orders_id',$data_order->id)->get();
@@ -213,6 +210,8 @@ class OrderController extends BaseController
         if(auth()->check()){
             return redirect('/account/history');
         }
+        //delete session as guest
+        session()->forget('as.guest');
 		return view('pages.tracking_order_index');
 	
 	}
