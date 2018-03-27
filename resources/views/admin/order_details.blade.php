@@ -98,7 +98,6 @@
                   @endforeach
                     <tr>
                       <td colspan="4">Shipping Cost</td><td>Rp. {{ number_format($row->shipping_cost) }}</td></tr>
-                      <td colspan="4">Subtotal</td><td>Rp. {{ number_format($total) }}</td></tr>
                       <td colspan="4"><b>Total</b></td><td><b>Rp. {{ number_format($total + $row->shipping_cost) }}</b></td></tr>
                     </tr>
                 </tbody>
