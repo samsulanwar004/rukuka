@@ -122,6 +122,16 @@
           {{--@endif--}}
           {{--{{ $loop->last ? '' : '| ' }}--}}
         {{--@endforeach--}}
+        @foreach (Config::get('languages') as $lang => $language)
+            @if ($lang == App::getLocale())
+                @php
+                  $currency_code = $language
+                @endphp
+            @endif
+        @endforeach
+        <a class="uk-button uk-button-text uk-button-small" href="#flag-modal" uk-toggle><img src="{{ imageCDN('flag1x1/'.App::getLocale().'.svg') }}" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
+        {{ $currency_code }}
+        </a>
       </li>
     </ul>
   </div>
