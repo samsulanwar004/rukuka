@@ -123,7 +123,7 @@ return [
     'language'                  =>  'Language',
     'track_order'               =>  'Track Your Order',
     'shipping_handling'         =>  'Shipping & Handling',
-    'size_chart'                =>  'size charts',
+    'size_chart'                =>  'Size charts',
     'contact_us'                =>  'Contact Us',
     'payment'                   =>  'Payment',
     'sale_item'                 =>  'Sale Items',
