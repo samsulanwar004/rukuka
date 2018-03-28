@@ -9,11 +9,11 @@
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
-                          <div class="uk-width-1-1">
+                          <div class="uk-width-2-3">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                               <li><h5 class="uk-margin-small uk-text-uppercase">{{ trans.designers_nav }}</h5></li>
                             </ul>
-                            <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2 uk-width-1-2">
+                            <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-3">
                                 <li class="uk-parent uk-active">
                                     <a href="/shop?menu=designers&category=all">{{ trans.all }} </a>
                                 </li>
@@ -184,13 +184,11 @@
                 </div>
               </li>
               <!--End Mens-->
-
               <!--Start Home-->
               <li :class="{'uk-active': segmentPage == 'home' || segmentShop == 'home'}">
                   <a href="/shop?menu=home&parent=all">{{ trans.home }}</a>
               </li>
               <!--End Home-->
-
               <!--Start Sale-->
               <li>
                   <!--<a class="uk-text-danger"><b>{{ trans.sale_nav }}</b></a>-->
@@ -326,7 +324,7 @@
                 categories: {},
                 designers: {},
                 menLink: this.men_link,
-                kidLink: this.kid_link,
+                womenLink: this.women_link,
                 designerLink: this.designer_link,
                 designersNav: {},
                 womensNav: {},
