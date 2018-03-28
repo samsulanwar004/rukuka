@@ -197,16 +197,9 @@ class UserController extends BaseController
 
     		$user = $this->getUserActive();
 
-            $checkAddressFound = $user->address;
-
-            $default = 0;
-            if(!count($checkAddressFound)) {
-                $default = 1;
-            }
-
     		$this->user
     			->setUser($user)
-                ->setDefault($default)
+                ->setDefault(1)
     			->persistAddress($request);
 
     		DB::commit();

@@ -393,6 +393,11 @@ class UserRepository
 
 		if (is_null($id)) {
 			$address->user()->associate($this->getUser());
+
+			//setdefault
+			$add = new Address;
+			$add->where('users_id', $this->getUser()->id)
+			->update(array('is_default' => 0));
 		}
 
 		$address->save();
