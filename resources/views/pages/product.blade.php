@@ -191,12 +191,12 @@
                 </div>
           </div>
         </div>
-        <hr class="uk-margin-large uk-visible@m">
-            <div class="uk-text-center">
+        <hr>
+            <div class="uk-text-center uk-margin-medium">
                 <a href="/{{'review/'.$product->slug}}" class="uk-button uk-button-text uk-text-uppercase">{{ trans ('app.write_review') }}</a>
             </div>
             @if($rating)
-                <div>
+                <div class="uk-visible@m">
                     <span class="uk-margin-remove-right uk-text-uppercase">{{ trans('app.rating_text') }}</span>
                     <div class="stars-product stars-position">
                         <input disabled type="radio" name="star" class="star-1" value="1" {{$rating == 1? 'checked':'' }}/>
@@ -219,7 +219,7 @@
             @endif
 
 
-        <div id="review-ajax" class="uk-grid uk-visible@m" uk-grid>
+        <div id="review-ajax" class="uk-grid" uk-grid>
             @foreach($reviews as $review)
                 <div class="uk-width-1-3@m">
                     <div class="uk-card uk-card-border uk-card-small">
@@ -272,7 +272,7 @@
             @endforeach
         </div>
         @if($rating)
-        <div class="uk-grid uk-visible@m" uk-grid>
+        <div class="uk-grid" uk-grid>
             <div id="loader" class="uk-grid-small uk-align-center">
                 <div id="remove-row">
                     <h2>
@@ -284,7 +284,7 @@
             </div>
         </div>
         @endif
-        <hr class="uk-margin-large uk-visible@m" style="border-color: #333; border-width: 3px">
+        <hr style="border-color: #333; border-width: 3px">
             <h4 class="uk-text-center uk-text-uppercase">{{ trans('app.related') }}</h4>
         <related
                 api="{{ route('related', ['categoryId' => $product->product_categories_id]) }}"

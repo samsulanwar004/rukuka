@@ -288,7 +288,7 @@
 	    	//Your code here
 	    	if($column_index==2) {
                 if ($column_value == '0') {
-                    $column_value = '<span class="label label-primary">Payment Pending</span>';
+                    $column_value = '<span class="label label-primary">Payment Unpaid</span>';
                 } else if ($column_value == '1') {
                     $column_value = '<span class="label label-success">Payment Success</span>';
                 } else {
