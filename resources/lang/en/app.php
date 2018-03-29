@@ -405,7 +405,7 @@ return [
     'card_number'               =>  'Card Number :',
     'card_help'                 =>  'Insert your card number',
     'card_holder'               =>  'Card holder :',
-    'holder_help'               =>  'Insert your card number',
+    'holder_help'               =>  'Name card holder',
     'expired'                   =>  'Expired',
     'year'                      =>  'Year',
     'month'                     =>  'Month',

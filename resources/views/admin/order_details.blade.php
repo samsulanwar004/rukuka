@@ -32,6 +32,7 @@
             <span class="label label-info"> {{ $row->airwaybill }} </span> <br><br>
             <b>Order Date</b> <br>
             {{ $row->order_date }} <br>
+
           </div>
           <div class="col-md-3">
             Payment<hr>
@@ -39,7 +40,7 @@
             <br>
             @php
               if ($row->payment_status == '0') {
-                  echo '<span class="label label-primary">Payment Pending</span>';
+                  echo '<span class="label label-primary">Payment Unpaid</span>';
               } else if ($row->payment_status == '1') {
                   echo '<span class="label label-success">Payment Success</span>';
               } else {
@@ -47,6 +48,11 @@
               }
             @endphp
             <br>
+            @if($row->payment_status = '1')
+            <br>
+            <b>Expired Date</b> <br>
+            {{ $row->expired_date }} <br>
+            @endif
           </div>
           <div class="col-md-6">
             Shipping Detail <hr>

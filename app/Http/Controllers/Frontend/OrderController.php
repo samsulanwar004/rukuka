@@ -77,7 +77,7 @@ class OrderController extends BaseController
 	        $shipping = $courir['data']->total_fee_idr;
 
 	        $orderDate = Carbon::now();
-	        $expiredDate = Carbon::now()->addDay();
+	        $expiredDate = Carbon::now()->addDay(3);
 
 	        $payment = new CurrencyService;
 			$kurs  = $payment->getCurrentCurrency();
