@@ -7,6 +7,7 @@
 	use App\Category;
 	use App\Product;
 	use Validator;
+	use Carbon\Carbon;
 
 	class AdminProductsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -192,7 +193,10 @@
 	        |
 	        */
 	        $this->index_statistic = array();
-
+	        $dateNow = Carbon::now();
+	        $this->index_statistic[] = ['label'=>'Total Product','count' => DB::table('products')->count(),'icon'=>'fa fa-file','color'=>'primary'];
+	        $this->index_statistic[] = ['label'=>'Product Active','count' => DB::table('products')->where('is_active' , 1)->count(),'icon'=>'fa fa-file','color'=>'primary'];
+	        $this->index_statistic[] = ['label'=>'New Product','count' => DB::table('products')->where('created_at','>=',$dateNow->subDays(7))->count(),'icon'=>'fa fa-file','color'=>'primary'];
 
 
 	        /*

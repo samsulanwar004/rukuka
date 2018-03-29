@@ -5,6 +5,7 @@
 	use DB;
 	use CRUDBooster;
 	use App\Repositories\UserRepository;
+	use Carbon\Carbon;
 
 	class AdminUserAccountsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -159,6 +160,10 @@
 	        |
 	        */
 	        $this->index_statistic = array();
+	        $dateNow = Carbon::now();
+	        $this->index_statistic[] = ['label'=>'Total User','count' => DB::table('users')->count(),'icon'=>'fa fa-file','color'=>'primary'];
+	        $this->index_statistic[] = ['label'=>'User Active','count' => DB::table('users')->where('status' , 1)->count(),'icon'=>'fa fa-file','color'=>'primary'];
+	        $this->index_statistic[] = ['label'=>'New User','count' => DB::table('users')->where('created_at','>=',$dateNow->subDays(7))->count(),'icon'=>'fa fa-file','color'=>'primary'];
 
 
 

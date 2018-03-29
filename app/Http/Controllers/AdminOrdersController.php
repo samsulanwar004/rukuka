@@ -171,6 +171,10 @@
 	        |
 	        */
 	        $this->index_statistic = array();
+	        $this->index_statistic[] = ['label'=>'Total Order','count' => DB::table('orders')->count(),'icon'=>'fa fa-shopping-cart','color'=>'primary'];
+	        $this->index_statistic[] = ['label'=>'New Order','count' => DB::table('orders')->where('payment_status' , 0)->count(),'icon'=>'fa fa-shopping-cart','color'=>'primary'];
+	        $this->index_statistic[] = ['label'=>'Payment Success','count' => DB::table('orders')->where('payment_status' , 1)->count(),'icon'=>'fa fa-shopping-cart','color'=>'primary'];
+	        $this->index_statistic[] = ['label'=>'Order Finish','count' => DB::table('orders')->where('order_status' , 2)->count(),'icon'=>'fa fa-shopping-cart','color'=>'primary'];
 
 
 
