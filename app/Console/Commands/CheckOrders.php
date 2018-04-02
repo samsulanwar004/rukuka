@@ -46,6 +46,6 @@ class CheckOrders extends Command
             ->where('payment_status',0)
             ->update(['payment_status' => 2,'order_status' => 3,'cancel_reason' => 'Payment Expired']);
 
-        Log::info('Daily check order');
+        Log::info('Checking order expired');
     }
 }
