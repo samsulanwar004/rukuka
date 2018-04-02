@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
 
         $schedule->command('emails:paymentReminder')->hourly();
-        $schedule->command('check:orders')->daily();
+        $schedule->command('check:orders')->hourly();
     }
 
     /**

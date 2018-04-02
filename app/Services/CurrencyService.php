@@ -11,8 +11,10 @@ class CurrencyService
 {
 
 	public function getCurrentCurrency($lang = null)
-	{   // 1. United States of America
-		if (App::isLocale('en') || $lang == 'en') {
+	{   
+        $lang = is_null($lang) ? $this->getLang() : $lang;
+        // 1. United States of America
+		if ($lang == 'en') {
 		    $currency = ExchangeRate::where('currency_code_to', 'usd')
 		    	->orderBy('id', 'DESC')
 		    	->first();
@@ -22,7 +24,7 @@ class CurrencyService
 		    }
 
         // 2. Japan
-		} elseif (App::isLocale('jp') || $lang == 'jp') {
+		} elseif ($lang == 'jp') {
 			$currency = ExchangeRate::where('currency_code_to', 'jpy')
 		    	->orderBy('id', 'DESC')
 		    	->first();
@@ -32,7 +34,7 @@ class CurrencyService
 		    }
 
         // 3. Indonesia
-		} elseif (App::isLocale('id') || $lang == 'id') {
+		} elseif ($lang == 'id') {
             $currency = ExchangeRate::where('currency_code_to', 'idr')
                 ->orderBy('id', 'DESC')
                 ->first();
@@ -42,7 +44,7 @@ class CurrencyService
             }
 
         // 4. Singapore
-        }elseif (App::isLocale('sg') || $lang == 'sg') {
+        }elseif ($lang == 'sg') {
             $currency = ExchangeRate::where('currency_code_to', 'sgd')
                 ->orderBy('id', 'DESC')
                 ->first();
@@ -52,7 +54,7 @@ class CurrencyService
             }
 
         // 5. South Korea
-        }elseif (App::isLocale('kr') || $lang == 'kr') {
+        }elseif ($lang == 'kr') {
             $currency = ExchangeRate::where('currency_code_to', 'krw')
                 ->orderBy('id', 'DESC')
                 ->first();
@@ -62,7 +64,7 @@ class CurrencyService
             }
 
         // 6. Canada
-        }elseif (App::isLocale('ca') || $lang == 'ca') {
+        }elseif ($lang == 'ca') {
             $currency = ExchangeRate::where('currency_code_to', 'cad')
                 ->orderBy('id', 'DESC')
                 ->first();
@@ -72,7 +74,7 @@ class CurrencyService
             }
 
         // 7. Euro
-        }elseif (App::isLocale('eu') || $lang == 'eu') {
+        }elseif ($lang == 'eu') {
             $currency = ExchangeRate::where('currency_code_to', 'eur')
                 ->orderBy('id', 'DESC')
                 ->first();
@@ -82,7 +84,7 @@ class CurrencyService
             }
 
         // 8. Malaysia
-        }elseif (App::isLocale('my') || $lang == 'my') {
+        }elseif ($lang == 'my') {
             $currency = ExchangeRate::where('currency_code_to', 'myr')
                 ->orderBy('id', 'DESC')
                 ->first();
@@ -92,7 +94,7 @@ class CurrencyService
             }
 
         // 9. Brunei
-        }elseif (App::isLocale('bn') || $lang == 'bn') {
+        }elseif ($lang == 'bn') {
             $currency = ExchangeRate::where('currency_code_to', 'bnd')
                 ->orderBy('id', 'DESC')
                 ->first();
@@ -102,7 +104,7 @@ class CurrencyService
             }
 
         // 10. Hongkong
-        }elseif (App::isLocale('hk') || $lang == 'hk') {
+        }elseif ($lang == 'hk') {
             $currency = ExchangeRate::where('currency_code_to', 'hkd')
                 ->orderBy('id', 'DESC')
                 ->first();
@@ -112,7 +114,7 @@ class CurrencyService
             }
 
         // 11. China
-        }elseif (App::isLocale('cn') || $lang == 'cn') {
+        }elseif ($lang == 'cn') {
             $currency = ExchangeRate::where('currency_code_to', 'cny')
                 ->orderBy('id', 'DESC')
                 ->first();
