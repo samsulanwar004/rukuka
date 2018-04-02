@@ -48,7 +48,7 @@
               }
             @endphp
             <br>
-            @if($row->payment_status = '1')
+            @if($row->payment_status != '1')
             <br>
             <b>Expired Date</b> <br>
             {{ $row->expired_date }} <br>
