@@ -642,14 +642,4 @@ class UserRepository
             ->first();
     }
 
-    public function updateExpiredDate($user)
-    {
-        $now = Carbon::now();
-        DB::table('orders')
-            ->whereDate('expired_date', '<', $now->toDateString())
-            ->where('payment_status',0)
-            ->where('users_id',$user->id)
-            ->update(['payment_status' => 2,'order_status' => 3,'cancel_reason' => 'Payment Expired']);
-    }
-
 }

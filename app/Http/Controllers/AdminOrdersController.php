@@ -273,9 +273,7 @@
 	    |
 	    */
 	    public function hook_query_index(&$query) {
-	        //Your code here
-            $this->updateExpiredDate();
-	            
+	        //Your code here    
 	    }
 
 	    /*
@@ -410,15 +408,6 @@
 		  //Please use cbView method instead view method from laravel
 		  $this->cbView('admin.order_details',$data);
 		}
-
-		public function updateExpiredDate()
-        {
-            $now = Carbon::now();
-            DB::table('orders')
-            ->whereDate('expired_date', '<', $now->toDateString())
-            ->where('payment_status',0)
-            ->update(['payment_status' => 2,'order_status' => 3,'cancel_reason' => 'Payment Expired']);
-        }
 
         public function sumTotal($id){
 

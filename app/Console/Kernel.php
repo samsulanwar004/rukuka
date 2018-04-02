@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\EmailPaymentReminder::class,
+        \App\Console\Commands\CheckOrders::class,
     ];
 
     /**
@@ -28,6 +29,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
 
         $schedule->command('emails:paymentReminder')->hourly();
+        $schedule->command('check:orders')->daily();
     }
 
     /**

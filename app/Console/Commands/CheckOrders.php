@@ -3,22 +3,25 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use DB;
+use Carbon\Carbon;
+use Log;
 
-class EmailPaymentReminder extends Command
+class CheckOrders extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'emails:paymentReminder';
+    protected $signature = 'check:orders';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Sending Email Payment Reminder';
+    protected $description = 'Checking Orders expired';
 
     /**
      * Create a new command instance.
@@ -37,6 +40,12 @@ class EmailPaymentReminder extends Command
      */
     public function handle()
     {
+        $now = Carbon::now();
+        DB::table('orders')
+            ->whereDate('expired_date', '<', $now->toDateString())
+            ->where('payment_status',0)
+            ->update(['payment_status' => 2,'order_status' => 3,'cancel_reason' => 'Payment Expired']);
 
+        Log::info('Daily check order');
     }
 }

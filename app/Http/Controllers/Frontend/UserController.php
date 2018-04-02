@@ -768,8 +768,6 @@ class UserController extends BaseController
 
         $user = $this->getUserActive();
 
-        (new UserRepository)->updateExpiredDate($user);
-
         $onPaid = $user->orders->filter(function ($entry) {
             return $entry->payment_status == 0 && $entry->order_status == 0;
         });
