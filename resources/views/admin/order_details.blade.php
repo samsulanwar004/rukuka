@@ -9,19 +9,7 @@
     <div class="panel-heading">
         <strong><i class="fa fa-circle-o"></i> {{ $page_title }}</strong>
     </div>
-    <form method='post' action='{{CRUDBooster::mainpath('edit-save/'.$row->id)}}'>
-      {{ csrf_field() }}
-      <input type="hidden" name="users_id" value="{{ $row->users_id }}">
-      <input type="hidden" name="order_code" value="{{ $row->order_code }}">
-      <input type="hidden" name="payment_method" value="{{ $row->payment_method }}">
-      <input type="hidden" name="payment_name" value="{{ $row->payment_name }}">
-      <input type="hidden" name="payment_validation_status" value="{{ $row->payment_validation_status }}">
-      <input type="hidden" name="order_subtotal" value="{{ $row->order_subtotal }}">
-      <input type="hidden" name="order_subtotal_after_discount" value="{{ $row->order_subtotal_after_discount }}">
-      <input type="hidden" name="order_subtotal_after_coupon" value="{{ $row->order_subtotal_after_coupon }}">
-      <input type="hidden" name="shipping_cost" value="{{ $row->shipping_cost }}">
-      <input type="hidden" name="order_date" value="{{ $row->order_date }}">
-      <input type="hidden" name="expired_date" value="{{ $row->expired_date }}">
+
       <div class="panel-body" style="padding:20px 0px 0px 0px">
         <div class="box-body" id="parent-form-area">
           <div class="col-md-3">
@@ -116,7 +104,36 @@
       <div class="box-footer" style="background: #F5F5F5">
 
         <div class="form-group">
-          <div class="col-md-12" align="right">
+
+
+            <div class="col-md-4" align="right">
+
+<!-- Refund Untuk Dimas
+              @if($charge)
+              <label class="control-label">Refunds</label><br>
+              {{ $charge->id }}<br>
+              {{ $charge->external_id }}<br>
+              {{ $charge->capture_amount }}<br>
+              <input type='number' name='airwaybill' id="capture_amount" class='form-control' min="10000" max="{{ $charge->capture_amount }}" value="{{ $charge->capture_amount }}" style="width: 200px"/>
+              @endif
+-->
+            </div>
+
+
+          <form method='post' action='{{CRUDBooster::mainpath('edit-save/'.$row->id)}}'>
+            {{ csrf_field() }}
+            <input type="hidden" name="users_id" value="{{ $row->users_id }}">
+            <input type="hidden" name="order_code" value="{{ $row->order_code }}">
+            <input type="hidden" name="payment_method" value="{{ $row->payment_method }}">
+            <input type="hidden" name="payment_name" value="{{ $row->payment_name }}">
+            <input type="hidden" name="payment_validation_status" value="{{ $row->payment_validation_status }}">
+            <input type="hidden" name="order_subtotal" value="{{ $row->order_subtotal }}">
+            <input type="hidden" name="order_subtotal_after_discount" value="{{ $row->order_subtotal_after_discount }}">
+            <input type="hidden" name="order_subtotal_after_coupon" value="{{ $row->order_subtotal_after_coupon }}">
+            <input type="hidden" name="shipping_cost" value="{{ $row->shipping_cost }}">
+            <input type="hidden" name="order_date" value="{{ $row->order_date }}">
+            <input type="hidden" name="expired_date" value="{{ $row->expired_date }}">
+          <div class="col-md-8" align="right">
             <label class="control-label">Payment Status</label>
             <select class="form-control" name="payment_status" style="width: 300px">
               <option value="0" {{ $row->payment_status == 0 ? 'selected' : ''}}>
@@ -154,12 +171,19 @@
             <a href="{{ $return_url }}" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Back</a>
             <input type="submit" name="save" class="btn btn-success">
           </div>
+          </form>
         </div>
       </div>
       </div>
         <!-- /.box-footer-->
-    </form>
+
     </div>
   </div>
 </div>
 @endsection
+<!--
+<script type="text/javascript">
+    var input = document.getElementById('capture_amount');
+    input.value;
+</script>
+-->

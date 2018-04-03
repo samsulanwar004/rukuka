@@ -403,6 +403,7 @@
 		  $data = [];
 		  $data['page_title'] = 'Detail Data';
 		  $data['row'] = (new OrderRepository)->getOrderById($id);
+		  $data['charge'] = json_decode($data['row']->charge_response);
 		  $data['return_url'] = request()->input('return_url');
 		  
 		  //Please use cbView method instead view method from laravel

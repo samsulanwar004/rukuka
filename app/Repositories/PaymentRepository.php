@@ -24,13 +24,16 @@ class PaymentRepository
                 );
     }
 
-    public function updateOrder($data)
+    public function updateOrder($data,$responseObject)
     {
+        $response =  json_encode($responseObject);
         $message = 'already paid';
         $order = (new OrderRepository)->getOrderbyOrderCode($data["order"]["order_code"]);
                     $order->payment_status = 1;
                     $order->payment_name = $data["order"]["card_holder"];
                     $order->pending_reason = $message;
+                    $order->charge_response = $response;
+                    $order->charge_date= date("Y-m-d H:i:s");
                     $order->update();
 
         //create notification
