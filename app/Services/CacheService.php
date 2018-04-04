@@ -14,6 +14,8 @@ class CacheService
     const SLIDER_WOMEN_CACHE = 'slider.women.cache';
     const DESIGNER_CACHE = 'designer.cache';
     CONST MENU_CACHE = 'menu.cache';
+    CONST POPULAR_CACHE = 'popular.cache';
+    CONST COLOR_CACHE = 'color.cache';
 
 	public function clearCacheSetting()
 	{
@@ -37,5 +39,19 @@ class CacheService
 	public function clearCacheMenu()
 	{
 		Cache::forget(self::MENU_CACHE);
+	}
+
+	public function clearCachePopular()
+	{
+		$popular = array('Homepage', 'Women', 'Men');
+
+		foreach ($popular as $group) {
+			Cache::forget(self::POPULAR_CACHE.'.'.$group);
+		}
+	}
+
+	public function clearCacheColor()
+	{
+		Cache::forget(self::COLOR_CACHE);
 	}
 }

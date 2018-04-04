@@ -18,6 +18,8 @@ class PageController extends BaseApiController
 {
 
     CONST MENU_CACHE = 'menu.cache';
+    CONST COLOR_CACHE = 'color.cache';
+    CONST POPULAR_CACHE = 'popular.cache';
     
     public function menu($parent = null)
     {
@@ -135,32 +137,40 @@ class PageController extends BaseApiController
     public function popular($group)
     {
         try {
-            $popular = (new ProductRepository)->getMostProduct($group);
+            if (Cache::has(self::POPULAR_CACHE.'.'.$group)) {
+                $popular = Cache::get(self::POPULAR_CACHE.'.'.$group);
+            } else {
+                $popular = (new ProductRepository)->getMostProduct($group);
 
-            $ids = [];
-            foreach ($popular as $value) {
-                $ids[] = $value->id;
-            }
-
-            $image = (new ProductRepository)->getProductImage($ids);
-
-            $popular = $popular->map(function ($entry) use ($image) {
-
-                foreach ($image as $value) {
-                    if ($entry->id == $value->products_id) {
-                        $entry->photo = $value->photo;
-                    }
+                $ids = [];
+                foreach ($popular as $value) {
+                    $ids[] = $value->id;
                 }
 
-                return [
-                    'id' => $entry->id,
-                    'name' => $entry->name,
-                    'slug' => $entry->slug,
-                    'price' => $entry->sell_price,
-                    'price_before_discount' => $entry->price_before_discount,
-                    'photo' => $entry->photo ? str_replace('original', 'small', $entry->photo) : $entry->photo,
-                ];
-            })->toArray();
+                $image = (new ProductRepository)->getProductImage($ids);
+
+                $popular = $popular->map(function ($entry) use ($image) {
+
+                    foreach ($image as $value) {
+                        if ($entry->id == $value->products_id) {
+                            $entry->photo = $value->photo;
+                        }
+                    }
+
+                    return [
+                        'id' => $entry->id,
+                        'name' => $entry->name,
+                        'slug' => $entry->slug,
+                        'price' => $entry->sell_price,
+                        'price_before_discount' => $entry->price_before_discount,
+                        'photo' => $entry->photo ? str_replace('original', 'small', $entry->photo) : $entry->photo,
+                    ];
+                })->toArray();
+
+                $expiresAt = Carbon::now()->addMinutes(60);
+
+                Cache::put(self::POPULAR_CACHE.'.'.$group, $popular, $expiresAt);
+            }
 
             return $this->success($popular, 200, true);
         } catch (Exception $e) {
@@ -287,15 +297,23 @@ class PageController extends BaseApiController
     public function colorPalette()
     {
         try {
-            $color = (new ProductRepository)->getColorPalette();
+            if (Cache::has(self::COLOR_CACHE)) {
+                $color = Cache::get(self::COLOR_CACHE);
+            } else {
+                $color = (new ProductRepository)->getColorPalette();
 
-            $color = $color->map(function ($entry) {
-                return [
-                    'id' => $entry->id,
-                    'name' => $entry->name,
-                    'palette' => uploadCDN($entry->palette)
-                ];
-            })->toArray();
+                $color = $color->map(function ($entry) {
+                    return [
+                        'id' => $entry->id,
+                        'name' => $entry->name,
+                        'palette' => uploadCDN($entry->palette)
+                    ];
+                })->toArray();
+
+                $expiresAt = Carbon::now()->addMinutes(60);
+
+                Cache::put(self::COLOR_CACHE, $color, $expiresAt);
+            }
 
             return $this->success($color, 200, true);
 

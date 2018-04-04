@@ -9,6 +9,7 @@
     use App\Services\UploadService;
     use Illuminate\Http\Request as NewRequest;
     use App\MainSlider;
+    use App\Services\CacheService;
 
 	class AdminMainSlidersController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -281,6 +282,9 @@
 	    public function hook_after_add($id) {        
 	        //Your code here
 
+	        //clear cache
+	        (new CacheService)->clearCacheSlider();
+
 	    }
 
 	    /* 
@@ -306,6 +310,9 @@
 	    public function hook_after_edit($id) {
 	        //Your code here 
 
+	        //clear cache
+	        (new CacheService)->clearCacheSlider();
+
 	    }
 
 	    /* 
@@ -329,6 +336,9 @@
 	    */
 	    public function hook_after_delete($id) {
 	        //Your code here
+
+	        //clear cache
+	        (new CacheService)->clearCacheSlider();
 
 	    }
 
