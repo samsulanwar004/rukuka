@@ -964,7 +964,7 @@ class UserController extends BaseController
 
                 if($response_cc["status"] == "CAPTURED")
                 {
-                    $order = $payment->updateOrder($data,$responseObject);
+                    $order = $payment->updateOrder($data);
 
                     $message = "Charge is successfully captured and the funds will be settled according to the settlement schedule.";
 
