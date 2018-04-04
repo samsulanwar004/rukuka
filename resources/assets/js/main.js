@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueResource from 'vue-resource-2';
 import VeeValidate from 'vee-validate';
 import ES6Promise from 'es6-promise';
+import VueLazyImage from "vue-lazy-images";
 ES6Promise.polyfill();
 
 import UserPanel from './components/UserPanel.vue';
@@ -36,6 +37,7 @@ Vue.config.silent = true
 
 Vue.use(VueResource);
 Vue.use(VeeValidate);
+Vue.use(VueLazyImage);
 
 window.Event = new class {
 
