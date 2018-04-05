@@ -2,26 +2,8 @@
 <div class="uk-width-1-3@m uk-flex uk-flex-middle">
   <div class="uk-width-1-1 uk-flex uk-flex-middle uk-flex-right uk-visible@m">
     <ul class="uk-grid-small " uk-grid>
-      <li v-if="auth == 1" class="uk-margin-right">
-        <a class="uk-button uk-button-text uk-button-small" :href="profile_link"> {{trans.hallo}} <b>{{ accounts.first_name }}</b></a>
-        <div class="uk-drop uk-drop-bottom-left" uk-drop="delay-hide:0" style="width: 150px">
-          <div class="uk-card uk-card-border uk-background-default uk-card-small">
-            <div class="uk-card-body">
-              <ul class="uk-list uk-text-meta">
-                <li><a :href="profile_link">{{trans.account}}</a> </li>
-                <li><a :href="history_link">{{trans.order_history}}</a> </li>
-                <li><a :href="logout_link">{{trans.sign_out}}</a> </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li v-if="auth == 1"  class="uk-margin-right">
-        <a class="uk-button uk-button-text uk-button-small" :href="wishlist_link"><b>{{trans.love}}</b></a>
-          <div class="uk-badge" v-if="wishlistCount > 0">
-            {{ wishlistCount }}
-          </div>
-      </li>
+
+
       <li class="uk-margin-right">
         <a class="uk-button uk-button-text uk-button-small" href="#flag-modal" uk-toggle><img :src="flagImage+language+'.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
         {{ currencyCode }}
@@ -76,10 +58,20 @@
             </div>
         </div>
       </li>
-
+      <li v-if="auth == 1"  class="uk-margin-right">
+        <a :href="wishlist_link"><i class="material-icons" style="font-size: 18px; vertical-align:middle">favorite_border</i>
+          <div class="uk-badge" v-if="wishlistCount > 0">
+            {{ wishlistCount }}
+          </div>
+        </a>
+      </li>
       <li>
-        <a class="uk-button uk-button-text uk-button-small" v-on:click.prevent="goBag"> <b>{{trans.bag_label}}</b></a>
-        <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" v-if="bagCount > 0">
+        <a v-on:click.prevent="goBag"> <i class="material-icons" style="font-size: 18px; vertical-align:middle; margin-right: 5px;">shopping_basket</i>
+          <div class="uk-badge" v-if="bagCount > 0">
+            {{ bagCount }}
+          </div>
+        </a>
+        <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-center; delay-hide:0" v-if="bagCount > 0">
               <div class="uk-card-body uk-card-small">
                 <div class="uk-grid-small" uk-grid v-for="bag in filteredBags">
                   <div class="uk-width-1-3">
@@ -115,12 +107,24 @@
               </div>
           </div>
           <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" id="bag-hidden" v-else></div>
-          <div class="uk-badge" v-if="bagCount > 0">
-            {{ bagCount }}
-          </div>
+
       </li>
       <li v-if="auth == 0" class="uk-margin-left">
-        <a class="uk-button uk-button-text uk-button-small" :href="login_link"><b>{{ trans.login }}</b></a>
+        <a :href="login_link"><i class="material-icons" style="font-size: 18px; vertical-align:middle">person</i> </a>
+      </li>
+      <li v-if="auth == 1" class="uk-margin-left">
+        <a :href="profile_link"> <i class="material-icons" style="font-size: 18px; vertical-align:middle">person</i> {{ accounts.first_name }}</a>
+
+          <div class="uk-card uk-card-default uk-background-default uk-card-small" uk-drop="pos: bottom-right; delay-hide:0" style="width: 150px">
+            <div class="uk-card-body">
+              <ul class="uk-list uk-text-meta">
+                <li><a :href="profile_link">{{trans.account}}</a> </li>
+                <li><a :href="history_link">{{trans.order_history}}</a> </li>
+                <li><a :href="logout_link">{{trans.sign_out}}</a> </li>
+              </ul>
+            </div>
+          </div>
+
       </li>
     </ul>
   </div>

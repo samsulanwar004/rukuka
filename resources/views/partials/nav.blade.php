@@ -3,7 +3,7 @@
         <div class="uk-container">
           <div class="uk-grid-small" uk-grid>
               <div class="uk-width-1-3@m uk-flex uk-flex-middle">
-                <div class="uk-panel">
+                {{-- <div class="uk-panel">
                     {{ Form::open(array('url' => '/search', 'method' =>'get','files' => true,'class' => 'uk-search uk-form-width-medium uk-first-column')) }}
                     <button type="submit" class="uk-search-icon-flip uk-search-icon uk-icon" uk-search-icon></button>
                     <div>
@@ -17,7 +17,13 @@
                         </div>
                     </div>
                     {{ Form::close() }}
-                </div>
+                </div> --}}
+                <ul class="uk-navbar-nav">
+                  <li class="uk-margin-medium-right"><a href="#"> Women </a></li>
+                  <li><a href="#"> Men </a></li>
+                </ul>
+
+
               </div>
               <div class="uk-width-1-3@m">
                 <div class="uk-panel uk-text-center">
@@ -73,6 +79,24 @@
       locale="{{ json_encode(trans('app')) }}"
       segment_page="{{ Request::segment(1) }}"
       segment_shop="{{ $categories }}"
+      profile_link="{{ route('user') }}"
+      history_link="{{ route('user.history') }}"
+      wishlist_link="{{ route('user.wishlist') }}"
+      bag_link="{{ route('bag') }}"
+      login_link="{{ route('login') }}"
+      auth="{{ Auth::check() ? 1 : 0 }}"
+      account="{{ Auth::user('web') }}"
+      wishlist_api="{{ route('wishlist') }}"
+      bag_api="{{ route('persist.bag') }}"
+      product_link="{{ route('product') }}"
+      checkout_link="{{ route('checkout') }}"
+      api_token="{{ Auth::user('web')->api_token }}"
+      logout_link="{{ route('logout') }}"
+      default_image="{{ json_encode(config('common.default')) }}"
+      locale="{{ json_encode(trans('app')) }}"
+      exchange_api="{{ route('exchange') }}"
+      currency_code="{{ $currency_code }}"
+      language="{{ App::getLocale() }}"
     ></navigation>
   </div>
   <div class="uk-section uk-section-xsmall uk-padding-remove">

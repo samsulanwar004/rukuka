@@ -58,7 +58,6 @@ a,
 }
 a:hover,
 .uk-link:hover {
-  color: #666;
   text-decoration: underline;
 }
 /* Text-level semantics
@@ -3199,15 +3198,15 @@ select.uk-form-width-xsmall {
  */
 .uk-badge {
   box-sizing: border-box;
-  min-width: 22px;
-  height: 22px;
+  min-width: 18px;
+  height: 18px;
   padding: 0 5px;
   border-radius: 500px;
   vertical-align: middle;
   /* 1 */
   background: #000;
   color: #fff;
-  font-size: 12px;
+  font-size: 10px;
   /* 2 */
   display: inline-flex;
   justify-content: center;
@@ -3489,10 +3488,10 @@ select.uk-form-width-xsmall {
 }
 /* Placeholder */
 .uk-search-input:-ms-input-placeholder {
-  color: #666 !important;
+  color: #000 !important;
 }
 .uk-search-input::placeholder {
-  color: #666;
+  color: #000;
 }
 /* Icon (Adopts `uk-icon`)
  ========================================================================== */
@@ -3519,13 +3518,13 @@ select.uk-form-width-xsmall {
   justify-content: center;
   align-items: center;
   /* 3 */
-  color: #666;
+  color: #000;
 }
 /*
  * Required for `a`.
  */
 .uk-search .uk-search-icon:hover {
-  color: #666;
+  color: #000;
 }
 /*
  * Make `input` element clickable through icon, e.g. if it's a `span`
@@ -3574,7 +3573,7 @@ select.uk-form-width-xsmall {
 /* Navbar modifier
  ========================================================================== */
 .uk-search-navbar {
-  width: 400px;
+  width: 250px;
 }
 /*
  * Input
@@ -3582,7 +3581,7 @@ select.uk-form-width-xsmall {
 .uk-search-navbar .uk-search-input {
   height: 40px;
   background: transparent;
-  font-size: 17px;
+  font-size: 14px;
 }
 /*
  * Icon
@@ -3607,7 +3606,7 @@ select.uk-form-width-xsmall {
 .uk-search-large .uk-search-input {
   height: 80px;
   background: transparent;
-  font-size: 45px;
+  font-size: 14px;
 }
 /*
  * Icon
@@ -3624,12 +3623,12 @@ select.uk-form-width-xsmall {
 /* Toggle
  ========================================================================== */
 .uk-search-toggle {
-  color: #666;
+  color: #000;
 }
 /* Hover + Focus */
 .uk-search-toggle:hover,
 .uk-search-toggle:focus {
-  color: #000;
+  color: #666;
 }
 /* ========================================================================
    Component: Nav
@@ -3940,26 +3939,24 @@ ul.uk-nav-sub {
   /* 2 */
   box-sizing: border-box;
   height: 40px;
-  padding: 0 40px;
+  margin-left: 0;
+  margin-right: 0;
   /* 3 */
-  font-size: 12px;
+  font-size: 14px;
   font-family: 'Open Sans', sans-serif;
   /* 4 */
   text-decoration: none;
   font-weight: 400;
-  letter-spacing: 2px;
 }
 /*
  * Nav items
  */
 .uk-navbar-nav > li > a {
-  color: #666;
   border-bottom: 3px solid transparent;
   -moz-transition: all 0.2s ease-in;
   -o-transition: all 0.2s ease-in;
   -webkit-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
-  text-transform: uppercase;
   transition: 0.1s ease-in-out;
   transition-property: color, background-color;
 }
