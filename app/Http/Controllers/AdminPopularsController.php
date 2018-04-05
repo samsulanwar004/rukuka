@@ -4,6 +4,7 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+	use App\Services\CacheService;
 
 	class AdminPopularsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -270,6 +271,9 @@
 	    public function hook_after_add($id) {        
 	        //Your code here
 
+	    	//clear cache
+	        (new CacheService)->clearCachePopular();
+
 	    }
 
 	    /* 
@@ -295,6 +299,9 @@
 	    public function hook_after_edit($id) {
 	        //Your code here 
 
+	        //clear cache
+	        (new CacheService)->clearCachePopular();
+
 	    }
 
 	    /* 
@@ -318,6 +325,9 @@
 	    */
 	    public function hook_after_delete($id) {
 	        //Your code here
+
+	        //clear cache
+	        (new CacheService)->clearCachePopular();
 
 	    }
 

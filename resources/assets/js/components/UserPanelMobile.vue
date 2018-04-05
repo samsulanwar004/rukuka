@@ -14,9 +14,6 @@
                   :error-image="errorImageSale"
                   image-style="width: 60px">
           </lazy-background>
-            <div class="uk-overlay uk-position-top">
-              <p style="margin-top: -25px;margin-left: 20px;font-size: 12px">BETA</p>
-            </div>
           </div>
         </a>
       </div>

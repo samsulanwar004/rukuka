@@ -4,6 +4,7 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+	use App\Services\CacheService;
 
 	class AdminProductColorsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -257,6 +258,9 @@
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
 
+	        //clear cache
+	        (new CacheService)->clearCacheColor();
+
 	    }
 
 	    /* 
@@ -294,6 +298,9 @@
 	    public function hook_after_edit($id) {
 	        //Your code here 
 
+	        //clear cache
+	        (new CacheService)->clearCacheColor();
+
 	    }
 
 	    /* 
@@ -317,6 +324,9 @@
 	    */
 	    public function hook_after_delete($id) {
 	        //Your code here
+
+	        //clear cache
+	        (new CacheService)->clearCacheColor();
 
 	    }
 
