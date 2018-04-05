@@ -31,20 +31,33 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"Created By","name"=>"cms_users_id","join"=>"cms_users,name"];
-			$this->col[] = ["label"=>"Currency Code From","name"=>"currency_code_from"];
-			$this->col[] = ["label"=>"Currency Code To","name"=>"currency_code_to"];
-			$this->col[] = ["label"=>"Conversion Value","name"=>"conversion_value","callback_php"=>'"Rp. ". number_format($row->conversion_value)'];
-			$this->col[] = ["label"=>"Inverse Conversion Value","name"=>"inverse_conversion_value"];
+            $this->col[] = ["label"=>"Currency Code From","name"=>"currency_code_from"];
+            $this->col[] = ["label"=>"Conversion Value","name"=>"conversion_value","callback_php"=>'"Rp. ". number_format($row->conversion_value)'];
+            $this->col[] = ["label"=>"Currency Code To","name"=>"currency_code_to"];
+            $this->col[] = ["label"=>"Inverse Conversion Value","name"=>"inverse_conversion_value"];
 			$this->col[] = ["label"=>"Created At","name"=>"created_at"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Currency Code From','name'=>'currency_code_from','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'IDR'];
-			$this->form[] = ['label'=>'Currency Code To','name'=>'currency_code_to','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'USD;JPY'];
-			$this->form[] = ['label'=>'Conversion Value','name'=>'conversion_value','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Inverse Conversion Value','name'=>'inverse_conversion_value','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			# END FORM DO NOT REMOVE THIS LINE
+			$this->form[] = ['label'=>'Currency Code From','name'=>'currency_code_from','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'idr|IDR (Indonesia)','value' => 'idr'];
+            $this->form[] = ['label'=>'Conversion Value','name'=>'conversion_value','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','help' => 'IDR.'];
+            $this->form[] = ['label'=>'Currency Code To','name'=>'currency_code_to','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10', 'dataenum'=>'
+                usd|USD (United of America);
+                jpy|JPY (Japan);
+                idr|IDR (Indonesia);
+                sgd|SGD (Singapore);
+                krw|KRW (South Korea);
+                cad|CAD (Canada);
+                eur|EUR (Euro);
+                myr|MYR (Malaysia);
+                bnd|BND (Brunei);
+                hkd|HKD (Hongkong);
+                cny|CNY (China)'];
+            $this->form[] = ['label'=>'Inverse Conversion Value','name'=>'inverse_conversion_value','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','value'=>'1','readonly'=>true];
+
+
+            # END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
@@ -250,6 +263,12 @@
 	    */    
 	    public function hook_row_index($column_index,&$column_value) {	        
 	    	//Your code here
+            if($column_index==1) {
+                    $column_value = '<span class="text-uppercase">'.$column_value.'</span>';
+            }
+            if($column_index==3) {
+                $column_value = '<span class="text-uppercase">'.$column_value.'</span>';
+            }
 	    }
 
 	    /*

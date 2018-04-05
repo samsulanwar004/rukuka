@@ -21,7 +21,6 @@
                                 <img src="{{ uploadCDN($post->banner) }}" alt="{{$post->name}}" onerror="this.src = '{{imageCDN(config('common.default.image_4'))}}'">
                                 <div class="uk-visible@m">
                                     <div class="uk-position-top-left">
-                                        <h4 class="uk-margin-remove">{{ trans('app.lookbook_title_category') }}</h4>
                                         <h1 class="uk-margin-remove blog-title">{{$post->name}}</h1>
                                     </div>
                                 </div>

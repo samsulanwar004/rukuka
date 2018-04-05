@@ -24,13 +24,17 @@
                       <a href="/" class="uk-link-reset">
                         <div class="uk-inline">
                           <img src="{{ imageCDN(config('common.logo')) }}" alt="rukuka" width="90">
-                          <div class="uk-overlay uk-position-top">
-                            <p style="margin-top: -20px;margin-left: 45px;font-size: 12px;">BETA</p>
-                          </div>
                         </div>
                       </a>
                 </div>
               </div>
+              @foreach (Config::get('languages') as $lang => $language)
+                  @if ($lang == App::getLocale())
+                      @php
+                        $currency_code = $language
+                      @endphp
+                  @endif
+              @endforeach
               <user-panel
                 profile_link="{{ route('user') }}"
                 history_link="{{ route('user.history') }}"
@@ -49,6 +53,8 @@
                 default_image="{{ json_encode(config('common.default')) }}"
                 locale="{{ json_encode(trans('app')) }}"
                 exchange_api="{{ route('exchange') }}"
+                currency_code="{{ $currency_code }}"
+                language="{{ App::getLocale() }}"
               ></user-panel>
           </div>
 

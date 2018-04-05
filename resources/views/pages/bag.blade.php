@@ -13,6 +13,7 @@
     aws_link="{{ config('filesystems.s3url') }}"
     default_image="{{ json_encode(config('common.default')) }}"
     locale="{{ json_encode(trans('app')) }}"
+    bag_count="{{ count($bags) }}"
   ></bag>
   <hr class="uk-margin-large uk-padding-large" style="border-color: #333; border-width: 3px">
   @if($recently)
@@ -36,7 +37,7 @@
   @endif
   <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">
     <div class="uk-panel uk-text-center">
-      <a  href="{{route('shop',['categories' => 'designers', 'category' => 'all' ])}}" class="uk-button uk-button-small uk-button-text">{{ trans('app.show_all_product') }}</a>
+      <a  href="/shop?menu=designers&category=all" class="uk-button uk-button-small uk-button-text uk-text-uppercase">{{ trans('app.show_all_product') }}</a>
     </div>
   </div>
 </div>

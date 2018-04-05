@@ -15,7 +15,7 @@
     <meta name="description" content="{{ $metaTag['web_meta_tag']['description'] }}">
     <meta name='language' content='EN'/>
     <meta name="author" content="rukuka">
-    
+
     @if($doFollow == true)
     <meta name="googlebot-news" content="index,follow" />
     <meta name="robots" content="index, follow" />
@@ -78,14 +78,17 @@
     <meta name="google-site-verification" content="nFdFuv0V-IaFTa6HdepAZ1hYEsEY02ijn9kUbR2ieMQ" />
     <!-- jQuery is required -->
     <link rel="stylesheet" href="{{ elixirCDN('css/app.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="{{ elixirCDN('js/vendor.js') }}"></script>
     <script src="{{ elixirCDN('js/custom.js') }}"></script>
   </head>
   <body>
 
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NRS5V6D"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NRS5V6D"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
     <!-- End Google Tag Manager (noscript) -->
 
     <div id="app">

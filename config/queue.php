@@ -53,7 +53,7 @@ return [
             'key' => env('SQS_KEY'),
             'secret' => env('SQS_SECRET'),
             'prefix' => env('SQS_PREFIX'),
-            'queue' => 'your-queue-name',
+            'queue' => env('QUEUE_MAIL_NAME'),
             'region' => env('SQS_REGION'),
         ],
 

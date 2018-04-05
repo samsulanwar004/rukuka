@@ -7,6 +7,7 @@
 	use App\Category;
 	use App\Product;
 	use Validator;
+	use Carbon\Carbon;
 
 	class AdminProductsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -37,6 +38,7 @@
 			$this->col = [];
             $this->col[] = ["label"=>"Product Code","name"=>"product_code"];
 			$this->col[] = ["label"=>"Name","name"=>"name"];
+            $this->col[] = ["label"=>"Designer","name"=>"product_designers_id","join"=>"product_designers,name"];
             $this->col[] = ["label"=>"Product Categories","name"=>"product_categories_id","join"=>"product_categories,name"];
             $this->col[] = ["label"=>"Sell Price","name"=>"sell_price","callback_php"=>'"Rp. ". number_format($row->sell_price)'];
             $this->col[] = ["label"=>"Status","name"=>"is_active"];
@@ -191,7 +193,10 @@
 	        |
 	        */
 	        $this->index_statistic = array();
-
+	        $dateNow = Carbon::now();
+	        $this->index_statistic[] = ['label'=>'Total Product','count' => DB::table('products')->count(),'icon'=>'fa fa-file','color'=>'primary'];
+	        $this->index_statistic[] = ['label'=>'Product Active','count' => DB::table('products')->where('is_active' , 1)->count(),'icon'=>'fa fa-file','color'=>'primary'];
+	        $this->index_statistic[] = ['label'=>'New Product','count' => DB::table('products')->where('created_at','>=',$dateNow->subDays(7))->count(),'icon'=>'fa fa-file','color'=>'primary'];
 
 
 	        /*
@@ -301,7 +306,7 @@
 	    */
 	    public function hook_row_index($column_index,&$column_value) {
 	    	//Your code here
-            if($column_index==5) {
+            if($column_index==6) {
                 if ($column_value == '0') {
                     $column_value = '<span class="label label-warning">Unactive</span>';
                 } else {
@@ -357,6 +362,13 @@
                 $pc = $this->generateProductDate();
                 $postdata['product_code'] = $pc;
             }
+
+            $regid = ['867352708284'];
+			$data['title'] = "This is a message title";
+			$data['content'] = "This is a message body";
+			// You can add more key as you need
+			// $data['your_other_key'] =
+			CRUDBooster::sendFCM($regid,$data);
 
 	    }
 

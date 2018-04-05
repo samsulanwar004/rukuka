@@ -98,7 +98,7 @@ class PageController extends BaseController
                         $products = (new ProductRepository)
                         ->getProductByMenuAll($request);
                     } else {
-                        throw new Exception("Error Processing Request", 1);   
+                        throw new Exception("Error Processing Request", 1);
                     }
                 }
             } elseif ($request->input('menu') == 'home') {
@@ -110,7 +110,7 @@ class PageController extends BaseController
                         $products = (new ProductRepository)
                         ->getProductByMenuAll($request);
                     } else {
-                        throw new Exception("Error Processing Request", 1);   
+                        throw new Exception("Error Processing Request", 1);
                     }
                 }
             } else {
@@ -145,7 +145,7 @@ class PageController extends BaseController
                     'slug' => $entry->slug,
                     'price' => $entry->sell_price,
                     'price_before_discount' => $entry->price_before_discount,
-                    'photo' => $entry->photo ? str_replace('original', 'small', $entry->photo) : $entry->photo,
+                    'photo' => $entry->photo ? str_replace('original', 'medium', $entry->photo) : $entry->photo,
                     'is_new' => $this->date->diffInDays(Carbon::parse($entry->created_at)) <= 7 ? true : false,
                 ];
             });
@@ -157,6 +157,9 @@ class PageController extends BaseController
             $categories = $request->input('menu');
             $category = $categories == 'designers' ? $request->input('category') : $request->input('parent') ;
             $slug = $request->input('category');
+            $gender = $request->input('gender');
+
+
 
         } catch (Exception $e) {
             return abort(404);
@@ -172,7 +175,8 @@ class PageController extends BaseController
             'sale',
             'recently',
             'colorId',
-            'sortByPrice'
+            'sortByPrice',
+            'gender'
         ));
 
     }
@@ -480,13 +484,13 @@ class PageController extends BaseController
 
     public function showBagPage()
     {
-        $getBags = (new BagService)->get(self::INSTANCE_SHOP);
+        $bags = (new BagService)->get(self::INSTANCE_SHOP);
 
         $recentlyViewed = session()->get('products.recently_viewed');
 
         $recently = $recentlyViewed ? array_keys(array_flip(array_reverse($recentlyViewed))) : [];
 
-        return view('pages.bag', compact('recently'));
+        return view('pages.bag', compact('recently', 'bags'));
     }
 
     public function page($slug){
@@ -685,7 +689,7 @@ class PageController extends BaseController
 
         try{
             $lookbook = (new LookbookRepository)->getLookbookCollection($lookbook_slug);
-            
+
             //Validate Deleted
             $this->validDelete($lookbook);
             if($lookbook == null){

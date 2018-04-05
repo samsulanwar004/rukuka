@@ -297,6 +297,11 @@ class ProductRepository
         	$query->orderBy('products.id', 'desc');
         }
 
+        if ($request->has('gender')) {
+            $query->whereIn('products.gender', array($request->input('gender'), 'unisex'));
+
+        }
+
         if ($category != 'all') {
             $this->setDesigner($this->getDesignerBySlug($category));
         }

@@ -6,7 +6,19 @@
 	z-index: 2;
 	overflow:visible;
 	background: #fff;
-	padding-top:10px;
+	padding: 15px 0 15px 0;
+
+}
+
+.fixed-filter {
+	/* position: -webkit-sticky; */
+	position: fixed;
+	top: 160px;
+	z-index: 1;
+	bottom: 20px;
+	overflow:visible;
+	background: #fff;
+	/* padding: 15px 0 15px 0; */
 
 }
 
@@ -264,6 +276,7 @@ label > input + img{ /* IMAGE STYLES */
 }
 label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
   border:3px solid #333;
+	opacity: 0.2;
 }
 
 .text-underline{

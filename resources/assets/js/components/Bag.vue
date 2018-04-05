@@ -1,5 +1,5 @@
 <template>
-    <div class="uk-margin-large" v-if="bags == 0" >
+    <div class="uk-margin-large" v-if="bags <= 0" >
         <h3 align="center"><p>{{ trans.no_bag }}</p></h3>
     </div>
     <div class="uk-margin-top" uk-grid v-else>
@@ -50,14 +50,11 @@
                         <td class="uk-text-nowrap"><h4>{{ bag.price | round(exchangeRate.symbol, exchangeRate.value) }}</h4></td>
                     </tr>
                 </tbody>
-                <tbody v-if="bags == 0">
-                    <tr><td colspan="6" align="center"><p>{{ trans.no_bag }}</p></td></tr>
-                </tbody>
             </table>
         </div>
       </div>
       <div class="uk-width-1-3@m">
-        <div class="uk-card uk-card-default uk-background-muted uk-card-small uk-box-shadow-small uk-sticky uk-sticky-fixed" uk-sticky="animation: uk-animation-slide-top; offset:120">
+        <div class="uk-card uk-card-default uk-background-muted uk-card-small uk-box-shadow-small">
           <div class="uk-card-header">
             <h4 class="uk-text-uppercase">{{ trans.summary }}</h4>
           </div>
@@ -87,7 +84,7 @@
     import VueLazyBackgroundImage from '../components/VueLazyBackgroundImage.vue';
 
     export default {
-        props: ['bag_link', 'wishlist_link', 'auth', 'checkout_link', 'aws_link','default_image','locale'],
+        props: ['bag_link', 'wishlist_link', 'auth', 'checkout_link', 'aws_link','default_image','locale', 'bag_count'],
 
         components: {
           'lazy-background': VueLazyBackgroundImage
@@ -95,6 +92,8 @@
 
         created () {
             var self = this;
+
+            self.bags = this.bag_count;
 
             Event.listen('exchange', function (response) {
               self.exchangeRate = response.data.data;

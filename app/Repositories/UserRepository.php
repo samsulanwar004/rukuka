@@ -393,6 +393,11 @@ class UserRepository
 
 		if (is_null($id)) {
 			$address->user()->associate($this->getUser());
+
+			//setdefault
+			$add = new Address;
+			$add->where('users_id', $this->getUser()->id)
+			->update(array('is_default' => 0));
 		}
 
 		$address->save();
@@ -635,16 +640,6 @@ class UserRepository
     {
         return User::where('id', $id)
             ->first();
-    }
-
-    public function updateExpiredDate($user)
-    {
-        $now = Carbon::now();
-        DB::table('orders')
-            ->whereDate('expired_date', '<', $now->toDateString())
-            ->where('payment_status',0)
-            ->where('users_id',$user->id)
-            ->update(['payment_status' => 2,'order_status' => 3,'cancel_reason' => 'Payment Expired']);
     }
 
 }

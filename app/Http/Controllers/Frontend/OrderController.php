@@ -11,6 +11,7 @@ use App\Services\EmailService;
 use App\Services\CurrencyService;
 use App\Repositories\UserRepository;
 use App\Repositories\CourierRepository;
+use App\Repositories\PaymentRepository;
 use DB;
 use Carbon\Carbon;
 use Exception;
@@ -76,16 +77,19 @@ class OrderController extends BaseController
 	        $shipping = $courir['data']->total_fee_idr;
 
 	        $orderDate = Carbon::now();
-	        $expiredDate = Carbon::now()->addDay();
+	        $expiredDate = Carbon::now()->addDay(3);
 
 	        $payment = new CurrencyService;
 			$kurs  = $payment->getCurrentCurrency();
-	        $totalwithshipping = $total+$shipping;
+            $totalwithshipping = $total+$shipping;
+
 	        $secret = config('common.order_key_signature');
 	        $signature = sha1($totalwithshipping.$secret);
+	        $message = 'Waiting for payment';
+	        $orderCode = $this->generateOrderCode();
 
 	        $order = $this->order
-	        	->setOrderCode($this->generateOrderCode())
+	        	->setOrderCode($orderCode)
 	        	->setUser($user)
 	        	->setPaymentMethod('creditcard')
 	        	->setPaymentName($address->first_name)
@@ -95,7 +99,7 @@ class OrderController extends BaseController
 	        	->setShipping($address)
 	        	// ->setPayment($creditCard)
 	        	->setShippingCost($shipping)
-	        	->setPendingReason('Waiting for payment')
+	        	->setPendingReason($message)
 	        	->setOrderDate($orderDate)
 	        	->setExpiredDate($expiredDate)
 	        	->setDetail($detail)
@@ -103,8 +107,14 @@ class OrderController extends BaseController
 
             //EMAILSENT
 			//sent invoice unpaid to buyer
-             $emailService = (new EmailService);
-             $emailService->sendInvoiceUnpaid($order);
+              $emailService = (new EmailService);
+              $emailService->sendInvoiceUnpaid($order);
+
+             //notification
+             //create notification
+	        $users = config('common.admin.users_id');
+	        $module = 'orders';
+	        (new PaymentRepository)->notificationforAdmin($users, $orderCode.' '.$message, $module);
 
             DB::commit();
 			return view('pages.checkout.checkout_finish', compact(
@@ -154,8 +164,8 @@ class OrderController extends BaseController
 			$kurs  = $payment->getCurrentCurrency();
 	        $totalwithshipping = $total+$shipping;
 	        $secret = config('common.order_key_signature');
-	        $signature = sha1($totalwithshipping.$secret);
-	        
+            $signature = sha1($totalwithshipping.$secret);
+
 	        $order = (object) array('order_code' => $data_order->order_code,'users_id' => $data_order->users_id);
 
             $detail = OrderDetail::where('orders_id',$data_order->id)->get();
@@ -211,12 +221,15 @@ class OrderController extends BaseController
         }
         //delete session as guest
         session()->forget('as.guest');
-
 		return view('pages.tracking_order_index');
 	
 	}
 
 	public function trackingOrderCode(Request $request){
+
+	    if($request->method() == 'GET'){
+            return redirect()->route('tracking-page');
+        }
 
         $tracking = $this->order
                     ->setOrderCode($request->input('order_code'))

@@ -22,6 +22,60 @@
             {{ wishlistCount }}
           </div>
       </li>
+      <li class="uk-margin-right">
+        <a class="uk-button uk-button-text uk-button-small" href="#flag-modal" uk-toggle><img :src="flagImage+language+'.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
+        {{ currencyCode }}
+        </a>
+        <div id="flag-modal" class="uk-modal-full" uk-modal>
+            <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+                <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+                <div class="uk-width-xxlarge uk-padding-large uk-text-center">
+                    <h3 class="uk-text-uppercase">{{ trans.currency_title }}</h3>
+                    <button class="uk-button uk-button-small uk-button-default uk-text-uppercase" disabled>{{ trans.currency_set }} <img :src="flagImage+language+'.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
+                      {{ currencyCode }}
+                    </button>
+                    <h5 class="uk-text-uppercase">{{ trans.usca }}</h5>
+                    <div class="uk-grid uk-child-width-1-2@m uk-gird-small" uk-grid>
+                      <div>
+                        <a href="/lang/ca"><h6>{{ trans.cad }} <img :src="flagImage+'ca.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.ca }}</h6></a>
+                      </div>
+                      <div>
+                        <a href="/lang/en"><h6>{{ trans.usd }} <img :src="flagImage+'en.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.us }}</h6></a>
+                      </div>
+                    </div>
+                    <h5 class="uk-text-uppercase">{{ trans.asea }}</h5>
+                    <div class="uk-grid uk-child-width-1-3@m uk-grid-small" uk-grid>
+                      <div>
+                        <a href="/lang/id"><h6>{{ trans.idr }} <img :src="flagImage+'id.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.id }}</h6></a>
+                      </div>
+                      <div>
+                        <a href="/lang/sg"><h6>{{ trans.sgd }} <img :src="flagImage+'sg.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.sg }}</h6></a>
+                      </div>
+                      <div>
+                        <a href="/lang/my"><h6>{{ trans.myr }} <img :src="flagImage+'my.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.my }}</h6></a>
+                      </div>
+                      <div>
+                        <a href="/lang/bn"><h6>{{ trans.bnd }} <img :src="flagImage+'bn.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.bn }}</h6></a>
+                      </div>
+                      <div>
+                        <a href="/lang/jp"><h6>{{ trans.jpy }} <img :src="flagImage+'jp.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.jp }}</h6></a>
+                      </div>
+                      <div>
+                        <a href="/lang/kr"><h6>{{ trans.krw }} <img :src="flagImage+'kr.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.kr }}</h6></a>
+                      </div>
+                      <div>
+                        <a href="/lang/cn"><h6>{{ trans.cny }} <img :src="flagImage+'cn.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.cn }}</h6></a>
+                      </div>
+                      <div>
+                        <a href="/lang/hk"><h6>{{ trans.hkd }} <img :src="flagImage+'hk.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.hk }}</h6></a>
+                      </div>
+                    </div>
+                    <h5 class="uk-text-uppercase">{{ trans.euro }}</h5>
+                      <a href="/lang/eu"><h6>{{ trans.eur }} <img :src="flagImage+'eu.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.eu }}</h6></a>
+                </div>
+            </div>
+        </div>
+      </li>
 
       <li>
         <a class="uk-button uk-button-text uk-button-small" v-on:click.prevent="goBag"> <b>{{trans.bag_label}}</b></a>
@@ -101,7 +155,9 @@
       'aws_link',
       'default_image',
       'locale',
-      'exchange_api'
+      'exchange_api',
+      'currency_code',
+      'language'
     ],
 
     components: {
@@ -141,6 +197,7 @@
 
       self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;
       self.loadingImage = this.aws_link+'/images/loading-image.gif';
+      self.flagImage = this.aws_link+'/images/flag1x1/';
     },
 
     data () {
@@ -154,7 +211,10 @@
         errorImage: {},
         loadingImage: {},
         trans: JSON.parse(this.locale,true),
-        exchangeRate: {}
+        currencyCode: this.currency_code,
+        language: this.language,
+        exchangeRate: {},
+        flagImage:{}
       }
     },
 

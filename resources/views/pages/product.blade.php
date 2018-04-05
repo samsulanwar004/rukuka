@@ -113,8 +113,27 @@
                   </div>
             </div>
             <div class="uk-width-1-3@m">
-                <a href="/shop?menu=designers&category={{$product->designer->slug}}">{{ $product->designer->name }}</a><br>
-                <h3 class="uk-margin-remove">{{ $product->name }}</h3>
+                <a class="uk-text-small" href="/shop?menu=designers&category={{$product->designer->slug}}">{{ $product->designer->name }}</a><br>
+                <h3 class="uk-margin-remove uk-visible@m">{{ $product->name }}</h3>
+                <div class="uk-grid uk-grid-small uk-hidden@m">
+                  <div class="uk-width-3-5">
+                    <h5 class="uk-hidden@m uk-margin-remove">{{ $product->name }}</h5>
+                  </div>
+                  <div class="uk-width-2-5 uk-text-right">
+                    @if($product->price_before_discount > 0)
+
+                            <del>{{ $product->currency }} {{ number_format($product->price_before_discount, 2) }}</del>
+                                <span class="uk-text-danger">{{ $product->currency }} {{ number_format($product->sell_price, 2) }}</span>
+
+
+                    @else
+                        {{ $product->currency }} {{ number_format($product->sell_price, 2) }}
+                    @endif
+                  </div>
+                </div>
+                <hr class="uk-margin-small uk-hidden@m">
+                <div class="uk-visible@m uk-margin-small-bottom">
+
                 @if($product->price_before_discount > 0)
                     <b>
                         <h4 class="uk-margin-remove"><del>{{ $product->currency }} {{ number_format($product->price_before_discount, 2) }}</del>
@@ -124,8 +143,7 @@
                 @else
                     <h4 class="uk-margin-remove">{{ $product->currency }} {{ number_format($product->sell_price, 2) }} </h4>
                 @endif
-
-                <br>
+              </div>
                 @if($rating)
                   <div class="stars-product uk-margin-remove-left">
                       <input disabled type="radio" name="star-m" class="star-1" value="1" {{$rating == 1? 'checked':'' }}/>
@@ -151,8 +169,7 @@
                         locale="{{ json_encode(trans('app')) }}"
                         aws_link="{{ config('filesystems.s3url') }}"
                 ></button-buy>
-                <hr>
-                <p class="uk-margin-remove uk-text-meta">
+                <p class="uk-text-meta">
                 <ul class="uk-grid-small uk-flex-middle uk-flex-center" uk-grid>
                     <li><a class="uk-icon-link" uk-icon="icon: twitter" target="_blank" href="{{ $share['twitter']}}"></a></li>
                     <li><a class="uk-icon-link" uk-icon="icon: facebook" target="_blank" href="{{ $share['facebook']}}"></a></li>
@@ -172,16 +189,14 @@
                         <h5 class="uk-margin-remove"><a href="/shop?menu=designers&category={{$product->designer->slug}}">{{ $product->designer->name }}</a></h5>
                     </div>
                 </div>
-                <hr class="uk-margin-small">
           </div>
         </div>
         <hr>
-        <div class="uk-panel uk-grid" uk-grid>
-            <div class="uk-width-1-4@m">
-                <a href="/{{'review/'.$product->slug}}" class="uk-button uk-button-default uk-text-uppercase">{{ trans ('app.write_review') }}</a>
+            <div class="uk-text-center uk-margin-medium">
+                <a href="/{{'review/'.$product->slug}}" class="uk-button uk-button-text uk-text-uppercase">{{ trans ('app.write_review') }}</a>
             </div>
             @if($rating)
-                <div class="uk-width-3-4@m">
+                <div class="uk-visible@m">
                     <span class="uk-margin-remove-right uk-text-uppercase">{{ trans('app.rating_text') }}</span>
                     <div class="stars-product stars-position">
                         <input disabled type="radio" name="star" class="star-1" value="1" {{$rating == 1? 'checked':'' }}/>
@@ -197,13 +212,14 @@
                     <span><i>{{ trans('app.based_on') }} {{count($product->review)}} {{ trans('app.reviews') }}</i></span>
                 </div>
             @else
-              <div class="uk-panel">
+              {{-- <div class="uk-panel">
                   <label class="uk-text-uppercase">{{ trans('app.shopper_text') }}</label> <br>
                 {{ trans('app.comment_text') }}
-              </div>
+              </div> --}}
             @endif
-        </div>
-        <div id="review-ajax" class="uk-grid uk-visible@m" uk-grid>
+
+
+        <div id="review-ajax" class="uk-grid" uk-grid>
             @foreach($reviews as $review)
                 <div class="uk-width-1-3@m">
                     <div class="uk-card uk-card-border uk-card-small">
@@ -255,9 +271,8 @@
                 </div>
             @endforeach
         </div>
-
         @if($rating)
-        <div class="uk-grid uk-visible@m" uk-grid>
+        <div class="uk-grid" uk-grid>
             <div id="loader" class="uk-grid-small uk-align-center">
                 <div id="remove-row">
                     <h2>
@@ -269,13 +284,8 @@
             </div>
         </div>
         @endif
-
-        <hr>
-        <div class="uk-grid-small uk-margin-small-bottom uk-margin-top">
-            <div class="uk-panel">
-                <h4 class="uk-margin-small uk-text-uppercase">{{ trans('app.related') }}</h4>
-            </div>
-        </div>
+        <hr style="border-color: #333; border-width: 3px">
+            <h4 class="uk-text-center uk-text-uppercase">{{ trans('app.related') }}</h4>
         <related
                 api="{{ route('related', ['categoryId' => $product->product_categories_id]) }}"
                 product_api="{{ route('product.api') }}"

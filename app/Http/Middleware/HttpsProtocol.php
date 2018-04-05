@@ -17,7 +17,7 @@ class HttpsProtocol
     public function handle($request, Closure $next)
     {
 
-        if (in_array(env('APP_ENV'), array('developer', 'production'))) {
+        if (in_array(env('APP_ENV'), array('production'))) {
             // for Proxies
             Request::setTrustedProxies([$request->getClientIp()]);
             

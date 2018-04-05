@@ -1,5 +1,21 @@
 <template>
     <div v-if="parent == 'designers'">
+      <div class="uk-grid-small uk-width-1-1 uk-child-width-1-2" uk-grid>
+        <div class="uk-text-center">
+          <label>
+          <input type="radio" class="uk-radio" name="gender" v-on:click="pickGender('mens')" :checked="gender == 'mens'">
+          <img src="https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/uploads/1/2018-02/black.png" alt="" width="28" class="uk-border-circle uk-box-shadow-small">
+          </label>
+           <h6 class="uk-margin-remove-top uk-text-uppercase"> {{ trans.men }}</h6>
+        </div>
+        <div class="uk-text-center">
+          <label>
+          <input type="radio" class="uk-radio" name="gender" v-on:click="pickGender('womens')" :checked="gender == 'womens'">
+          <img src="https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/uploads/1/2018-02/black.png" alt="" width="28" class="uk-border-circle uk-box-shadow-small">
+          </label>
+          <h6 class="uk-margin-remove-top uk-text-uppercase">{{ trans.women }}</h6>
+        </div>
+      </div>
         <ul class="uk-accordion">
             <li>
                 <h5 class="uk-link-reset uk-text-uppercase">
@@ -28,7 +44,6 @@
             </li>
         </ul>
     </div>
-
     <div v-else-if="parent == 'home'">
         <ul class="uk-accordion">
             <li>
@@ -96,7 +111,7 @@
                             </span>
                         </a>
                     </li>
-                    <li v-for="cat in category.child" >
+                    <li v-for="cat in category.child" v-if="cat.menu == parent || cat.menu == null">
                       <a :href="'/shop?menu='+parent+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
                           <span :class="{'text-underline': slug == cat.slug}">
                               {{ cat.name }}
@@ -114,7 +129,7 @@
 <script>
     import axios from 'axios';
     export default {
-        props: ['api', 'parent', 'category_slug', 'slug', 'sale','locale'],
+        props: ['api', 'parent', 'category_slug', 'slug', 'sale','locale', 'action_link', 'gender'],
         created() {
             var self = this;
             var api = this.api;
@@ -159,6 +174,25 @@
         computed: {
             sales: function () {
                 return this.sale != 'sale' ? '' : '/'+this.sale;
+            }
+        },
+
+        methods: {
+            pickGender: function (gender) {
+                var search = function searchStringInArray (str, strArray) {
+                    for (var j=0; j<strArray.length; j++) {
+                        if (strArray[j].match(str)) return j;
+                    }
+                    return -1;
+                }
+                var myarr = this.action_link.split("&");
+                var position = search('gender',myarr);
+                if(position == -1) {
+                    window.location.href = this.action_link+'&gender='+gender;
+                } else {
+                    delete myarr[position];
+                    window.location.href = myarr.join('&')+'&gender='+gender;
+                }
             }
         }
 

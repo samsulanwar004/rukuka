@@ -197,16 +197,9 @@ class UserController extends BaseController
 
     		$user = $this->getUserActive();
 
-            $checkAddressFound = $user->address;
-
-            $default = 0;
-            if(!count($checkAddressFound)) {
-                $default = 1;
-            }
-
     		$this->user
     			->setUser($user)
-                ->setDefault($default)
+                ->setDefault(1)
     			->persistAddress($request);
 
     		DB::commit();
@@ -774,8 +767,6 @@ class UserController extends BaseController
         $exchange = (new CurrencyService)->getCurrentCurrency();
 
         $user = $this->getUserActive();
-
-        (new UserRepository)->updateExpiredDate($user);
 
         $onPaid = $user->orders->filter(function ($entry) {
             return $entry->payment_status == 0 && $entry->order_status == 0;

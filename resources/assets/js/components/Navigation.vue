@@ -9,11 +9,11 @@
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
-                          <div class="uk-width-1-1">
+                          <div class="uk-width-2-3">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                               <li><h5 class="uk-margin-small uk-text-uppercase">{{ trans.designers_nav }}</h5></li>
                             </ul>
-                            <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-3 uk-width-1-1">
+                            <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-3">
                                 <li class="uk-parent uk-active">
                                     <a href="/shop?menu=designers&category=all">{{ trans.all }} </a>
                                 </li>
@@ -68,7 +68,7 @@
                                 <li class="uk-parent uk-active">
                                   <a href="/shop?menu=womens&parent=clothing&category=all">{{ trans.all }}</a>
                                 </li>
-                                <li class="uk-parent" v-for="cat in categories.clothing">
+                                  <li class="uk-parent" v-for="cat in categories.clothing" v-if="cat.menu == 'womens' || cat.menu == null">
                                     <a :href="'/shop?menu=womens&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                               </ul>
@@ -133,7 +133,7 @@
                                 <li class="uk-parent uk-active">
                                   <a href="/shop?menu=mens&parent=clothing&category=all">{{ trans.all }}</a>
                                 </li>
-                                <li class="uk-parent" v-for="cat in categories.clothing">
+                                <li class="uk-parent" v-for="cat in categories.clothing" v-if="cat.menu == 'mens' || cat.menu == null">
                                     <a :href="'/shop?menu=mens&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                               </ul>
@@ -146,8 +146,8 @@
                                 <li class="uk-parent uk-active">
                                   <a href="/shop?menu=mens&parent=accessories&category=all">{{ trans.all }}</a>
                                 </li>
-                                <li class="uk-parent" v-for="cat in categories.accessories">
-                                    <a :href="'/shop?menu=mens&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
+                                  <li class="uk-parent" v-for="cat in categories.accessories" v-if="cat.menu == 'mens' || cat.menu == null">
+                                      <a :href="'/shop?menu=mens&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                               </ul>
                             </div>
@@ -184,13 +184,11 @@
                 </div>
               </li>
               <!--End Mens-->
-
               <!--Start Home-->
               <li :class="{'uk-active': segmentPage == 'home' || segmentShop == 'home'}">
                   <a href="/shop?menu=home&parent=all">{{ trans.home }}</a>
               </li>
               <!--End Home-->
-
               <!--Start Sale-->
               <li>
                   <!--<a class="uk-text-danger"><b>{{ trans.sale_nav }}</b></a>-->
@@ -284,7 +282,7 @@
                 if (typeof navigations.data.data !== 'undefined') {
                   self.categories = navigations.data.data;
                 }
-                
+
                 if (typeof navigations.data.data.designers !== 'undefined') {
                    self.designers = navigations.data.data.designers.sort(sort_by('created_at', true, function(result){
                     return result;

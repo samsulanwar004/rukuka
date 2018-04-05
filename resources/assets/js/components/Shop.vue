@@ -6,13 +6,12 @@
             <div class="uk-card uk-card-small">
                 <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
                     <a :href="'/product/'+ product.slug">
-                         <lazy-background
-                          :image-source="product.photo | awsLink(aws_link)"
-                          :alt="product.name"
-                          :loading-image="loadingImage"
-                          :error-image="errorImage"
-                          image-class="uk-transition-scale-up uk-transition-opaque">
-                        </lazy-background>
+                        <lazy-image 
+                            :src='product.photo | awsLink(aws_link, errorImage)'
+                            :img-class="['uk-transition-scale-up','uk-transition-opaque']"
+                            :placeholder='loadingImage' 
+                            :img-alt='product.name'
+                        ></lazy-image>
                         <div class="uk-postion-small uk-position-top-right" v-if="product.price_before_discount > 0">
                           <span class="uk-label uk-label-danger">SALE</span>
                         </div>
@@ -25,7 +24,7 @@
                   <div>
                     <a href="#modal-shop" class="uk-button uk-button-small uk-button-secondary uk-width-1-1 uk-text-uppercase" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
                   </div>
-                    <a :href="'/product/'+ product.slug" alt="product.name">{{ product.name.substring(0,30) }}</a>
+                    <a :href="'/product/'+ product.slug" alt="product.name" class="uk-text-meta uk-link-reset">{{ product.name.substring(0,30) }}
                     <br>
                     <span v-if="product.price_before_discount > 0 ">
                         <del>
@@ -38,6 +37,7 @@
                     <span v-else>
                         {{ product.price | round(exchangeRate.symbol, exchangeRate.value) }}
                     </span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -52,18 +52,18 @@
                     <div class="uk-position-relative uk-visible-toggle uk-dark">
                       <ul class="uk-slideshow-items">
                         <li v-for="image in images">
-                            <lazy-background v-if="isLoading"
-                              :image-source="loadingImage"
-                              :alt="image.name"
-                              :loading-image="loadingImage"
-                              :error-image="errorImage">
-                            </lazy-background>
-                            <lazy-background v-else
-                              :image-source="image.photo | awsLink(aws_link)"
-                              :alt="image.name"
-                              :loading-image="loadingImage"
-                              :error-image="errorImage">
-                            </lazy-background>
+                          <lazy-background v-if="isLoading"
+                            :image-source="loadingImage"
+                            :alt="image.name"
+                            :loading-image="loadingImage"
+                            :error-image="errorImage">
+                          </lazy-background>
+                          <lazy-background v-else
+                            :image-source="image.photo | awsLink(aws_link)"
+                            :alt="image.name"
+                            :loading-image="loadingImage"
+                            :error-image="errorImage">
+                          </lazy-background>
                         </li>
                       </ul>
                       <a class="uk-slidenav-large uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
@@ -76,27 +76,50 @@
                 </div>
                 <div class="uk-width-1-2@m uk-padding-small uk-flex uk-flex-wrap uk-flex-wrap-between">
                   <div class="uk-width-1-1">
+                    <div class="uk-visible@m">
+                      <transition name="fade">
+                        <h4 class="uk-margin-small" v-if="isLoading">{{ trans.loading }}</h4>
+                        <h4 class="uk-margin-small" v-else>{{ name }}</h4>
+                      </transition>
+                      <span v-if="priceBeforeDiscount > 0 ">
+                        <del>
+                            {{ priceBeforeDiscount | round(exchangeRate.symbol, exchangeRate.value) }}
+                        </del>
+                      </span>
+                      <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
+                          &nbsp;{{ price | round(exchangeRate.symbol, exchangeRate.value) }}
+                      </span>
+                      <span v-else>
+                          {{ price | round(exchangeRate.symbol, exchangeRate.value) }}
+                      </span>
+                    </div>
+                    <div class="uk-grid-small uk-width-1-1 uk-hidden@m" uk-grid>
+                      <div class="uk-width-3-5">
+                        <transition name="fade">
+                          <h5 class="uk-margin-small" v-if="isLoading">{{ trans.loading }}</h5>
+                          <h5 class="uk-margin-small" v-else>{{ name }}</h5>
+                        </transition>
+                      </div>
+                      <div class="uk-width-2-5 uk-text-right">
+                          <span v-if="priceBeforeDiscount > 0 ">
+                            <del>
+                                {{ priceBeforeDiscount | round(exchangeRate.symbol, exchangeRate.value) }}
+                            </del>
+                            <br>
+                          </span>
+                          <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
+                              &nbsp;{{ price | round(exchangeRate.symbol, exchangeRate.value) }}
+                          </span>
+                          <span v-else>
+                              {{ price | round(exchangeRate.symbol, exchangeRate.value) }}
+                          </span>
+                      </div>
+                    </div>
+                    <hr class="uk-hidden@m uk-margin-small">
 
 
-                  <transition name="fade">
-                    <h4 class="uk-margin-small" v-if="isLoading">{{ trans.loading }}</h4>
-                    <h4 class="uk-margin-small" v-else>{{ name }}</h4>
-                  </transition>
-                  <h4 class="uk-margin-remove">
-                    <span v-if="priceBeforeDiscount > 0 ">
-                      <del>
-                          {{ priceBeforeDiscount | round(exchangeRate.symbol, exchangeRate.value) }}
-                      </del>
-                    </span>
-                    <span class="uk-text-danger" v-if="priceBeforeDiscount > 0 ">
-                        &nbsp;{{ price | round(exchangeRate.symbol, exchangeRate.value) }}
-                    </span>
-                    <span v-else>
-                        {{ price | round(exchangeRate.symbol, exchangeRate.value) }}
-                    </span>
-                  </h4>
 
-                  <h5 class="uk-margin-small"> {{ trans.color }} :
+                  <h6 class="uk-margin-small"> {{ trans.color }} :
                     <lazy-background v-if="isLoading"
                       :image-source="loadingImage"
                       alt="rukuka palette"
@@ -113,17 +136,21 @@
                       image-class="uk-border-circle uk-box-shadow-small uk-margin-small-right uk-margin-small-left">
                     </lazy-background>
                    {{ color }}
-                  </h5>
+                 </h6>
                   <div v-if="stocks.length > 0">
-                      <p class="uk-margin-small-bottom">
-                          <span class="uk-text-small uk-text-danger"><b> {{ trans.european }} </b> | <a href="/help/size-charts" target="_blank" class="uk-text-primary"><u> {{ trans.size_chart}} </u></a></span>
-                      </p>
+                      <div class="uk-grid uk-child-width-1-2 uk-margin-small-bottom" uk-grid>
+                        <div>
+                          <h6> <b> {{ trans.european }} </b></h6>
+                        </div>
+                        <div class="uk-text-right">
+                          <span class="uk-text-meta"><a href="/help/size-charts" target="_blank"> {{ trans.size_chart}}</a></span>
+                        </div>
+                      </div>
                     <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-medium">
                       <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
                         {{ stock.size }} {{ stock.unit | unit }}
                       </option>
                     </select>
-                    <span class="uk-text-meta"><i> {{ trans.choose_size_label }} </i> </span>
                   </div>
                   <div v-else>
                       <span class="uk-text-meta"><i class="uk-text-danger">{{ trans.no_size }} </i> <br>{{ trans.contact_cs }} </span>
@@ -157,7 +184,7 @@
                   <div class="uk-grid-match uk-child-width-auto uk-flex-between uk-grid uk-visible@m" uk-grid>
                   <div class="uk-first-column">
                     <div v-if="bagCount > 0">
-                      <a class="uk-icon uk-icon-link" :href="bag_link" uk-icon="icon: cart"></a>
+                      <a :href="bag_link"><i class="material-icons" style="font-size: 18px">shopping_basket</i></a>
                       <div class="uk-badge">
                         <a :href="bag_link" class="uk-light uk-link-reset">{{ bagCount }}</a>
                       </div>
@@ -178,7 +205,7 @@
               <div class="uk-grid-match uk-child-width-auto uk-flex-between uk-grid" uk-grid>
               <div class="uk-first-column">
                 <div v-if="bagCount > 0">
-                  <a class="uk-icon uk-icon-link" :href="bag_link" uk-icon="icon: cart"></a>
+                  <a :href="bag_link"><i class="material-icons" style="font-size: 20px">shopping_basket</i></a>
                   <div class="uk-badge">
                     <a :href="bag_link" class="uk-light uk-link-reset">{{ bagCount }}</a>
                   </div>
@@ -194,9 +221,6 @@
             </div>
           </div>
         </div>
-    </div>
-    <div class="uk-text-center">
-      <a href="#" class="uk-icon-link uk-icon" uk-icon="icon: plus; ratio: 1.5"></a>
     </div>
 </template>
 <style>
@@ -414,8 +438,8 @@
               }
           },
 
-          awsLink: function (value, aws) {
-            var link = value == null ? '#' : aws+'/'+value;
+          awsLink: function (value, aws, error = '#') {
+            var link = value == null ? error : aws+'/'+value;
             return link;
           },
 
