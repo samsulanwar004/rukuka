@@ -24,9 +24,6 @@
                       <a href="/" class="uk-link-reset">
                         <div class="uk-inline">
                           <img src="{{ imageCDN(config('common.logo')) }}" alt="rukuka" width="90">
-                          <div class="uk-overlay uk-position-top">
-                            <p style="margin-top: -20px;margin-left: 45px;font-size: 12px;">BETA</p>
-                          </div>
                         </div>
                       </a>
                 </div>
