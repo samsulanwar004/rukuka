@@ -5,13 +5,12 @@
       <div class="uk-card uk-card-small uk-padding-remove">
         <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
           <a :href="'/product/'+ product.slug">
-            <lazy-background
-              :image-source="product.photo | awsLink(aws_link)"
-              :alt="product.name"
-              :loading-image="loadingImage"
-              :error-image="errorImage"
-              image-class="uk-transition-scale-up uk-transition-opaque">
-            </lazy-background>
+            <lazy-image 
+                :src='product.photo | awsLink(aws_link, errorImage)'
+                :img-class="['uk-transition-scale-up','uk-transition-opaque']"
+                :placeholder='loadingImage' 
+                :img-alt='product.name'
+            ></lazy-image>
           </a>
         </div>
         <div class="uk-card-body uk-padding-remove">
@@ -46,18 +45,18 @@
                 <div class="uk-position-relative uk-visible-toggle uk-dark">
                   <ul class="uk-slideshow-items">
                     <li v-for="image in images">
-                        <lazy-background v-if="isLoading"
-                          :image-source="loadingImage"
-                          :alt="image.name"
-                          :loading-image="loadingImage"
-                          :error-image="errorImage">
-                        </lazy-background>
-                        <lazy-background v-else
-                          :image-source="image.photo | awsLink(aws_link)"
-                          :alt="image.name"
-                          :loading-image="loadingImage"
-                          :error-image="errorImage">
-                        </lazy-background>
+                      <lazy-background v-if="isLoading"
+                        :image-source="loadingImage"
+                        :alt="image.name"
+                        :loading-image="loadingImage"
+                        :error-image="errorImage">
+                      </lazy-background>
+                      <lazy-background v-else
+                        :image-source="image.photo | awsLink(aws_link)"
+                        :alt="image.name"
+                        :loading-image="loadingImage"
+                        :error-image="errorImage">
+                      </lazy-background>
                     </li>
                   </ul>
                   <a class="uk-slidenav-large uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
@@ -461,8 +460,8 @@
           }
       },
 
-      awsLink: function (value, aws) {
-        var link = value == null ? '#' : aws+'/'+value;
+      awsLink: function (value, aws, error = '#') {
+        var link = value == null ? error : aws+'/'+value;
         return link;
       },
 
