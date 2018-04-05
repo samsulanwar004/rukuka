@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+// use GuzzleHttp\Client;
 use GuzzleHttp\Client;
 use Meng\AsyncSoap\Guzzle\Factory;
 
@@ -9,13 +10,9 @@ class PosIndonesiaCourierService
 {
 	private function getTemplateWSDL($wsdlPath)
 	{
-		// $client = new Client([
-		// 						'defaults' => [
-		// 	    					'verify' => 'E:\Xampp_windows_server\php\cacert.pem'
-		// 						]
-		// 					]);
-		
-		$client = new Client();
+		$client = new Client(
+							    ['verify' => false]
+							);
 
 	    return (new Factory())->create($client, $wsdlPath);
 	}
