@@ -6,7 +6,7 @@
 
       <li class="uk-margin-right">
         <a href="#flag-modal" uk-toggle><img :src="flagImage+language+'.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
-        <span class="uk-text-lowercase">{{ currencyCode }}</span>
+        <span class="uk-text-uppercase">{{ currencyCode }}</span>
         </a>
         <div id="flag-modal" class="uk-modal-full" uk-modal>
             <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>

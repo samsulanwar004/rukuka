@@ -7,7 +7,7 @@
               <a href="#">New Arrival</a>
             </li>
               <!--Start Designer-->
-              <li :class="{'uk-active': segmentPage == 'designer' || segmentShop == 'designers'}" class="uk-margin-medium-right">
+              <li :class="{'uk-active': category == 'designers'}" class="uk-margin-medium-right">
                   <a :href="designerLink">{{ trans.designers_nav }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
@@ -18,10 +18,10 @@
                             </ul>
                             <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-3">
                                 <li class="uk-parent uk-active">
-                                    <a href="/shop?menu=designers&category=all">{{ trans.all }} </a>
+                                    <a :href="'/shop?menu=designers&gender='+navigation+'&category=all'">{{ trans.all }} </a>
                                 </li>
                               <li class="uk-parent" v-for="design in designers">
-                                  <a :href="'/shop?menu=designers&category='+ design.slug ">{{ design.name }}</a>
+                                  <a :href="'/shop?menu=designers&gender='+navigation+'&category='+ design.slug ">{{ design.name }}</a>
                               </li>
                             </ul>
                           </div>
@@ -58,9 +58,9 @@
               <!--End Designer-->
 
               <!--Start Womens-->
-              <li :class="{'uk-active': segmentPage == 'women' || segmentShop == 'womens'}" class="uk-margin-medium-right">
+              <li :class="{'uk-active': category == 'clothing'}" class="uk-margin-medium-right">
                   <!-- <a :href="womenLink">{{ trans.women_nav }}</a> -->
-                  <a href="#">Clothing</a>
+                  <a href="#">{{ trans.clothing }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
@@ -70,23 +70,10 @@
                               </ul>
                               <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1">
                                 <li class="uk-parent uk-active">
-                                  <a href="/shop?menu=womens&parent=clothing&category=all">{{ trans.all }}</a>
+                                  <a :href="'/shop?menu='+navigation+'&parent=clothing&category=all'">{{ trans.all }}</a>
                                 </li>
-                                  <li class="uk-parent" v-for="cat in categories.clothing" v-if="cat.menu == 'womens' || cat.menu == null">
-                                    <a :href="'/shop?menu=womens&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
-                                </li>
-                              </ul>
-                            </div>
-                            <div class="uk-width-1-3">
-                              <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li><h5 class="uk-margin-small uk-text-uppercase">{{ trans.accessories }}</h5></li>
-                              </ul>
-                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1">
-                                <li class="uk-parent uk-active">
-                                  <a href="/shop?menu=womens&parent=accessories&category=all">{{ trans.all }}</a>
-                                </li>
-                                <li class="uk-parent" v-for="cat in categories.accessories">
-                                    <a :href="'/shop?menu=womens&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
+                                  <li class="uk-parent" v-for="cat in categories.clothing" v-if="cat.menu == navigation || cat.menu == null">
+                                    <a :href="'/shop?menu='+navigation+'&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                               </ul>
                             </div>
@@ -124,35 +111,22 @@
               <!--End Womens-->
 
               <!--Start Mens-->
-              <li :class="{'uk-active': segmentPage == 'men' || segmentShop == 'mens'}" class="uk-margin-medium-right">
+              <li :class="{'uk-active': category == 'accessories'}" class="uk-margin-medium-right">
                 <!-- <a :href="menLink">{{ trans.men_nav }}</a> -->
-                <a href="#">Accessories</a>
+                <a href="#">{{ trans.accessories }}</a>
                 <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                     <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
-                            <div class="uk-width-1-3">
-                              <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li><h5 class="uk-margin-small uk-text-uppercase">{{ trans.clothing }}</h5></li>
-                              </ul>
-                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1">
-                                <li class="uk-parent uk-active">
-                                  <a href="/shop?menu=mens&parent=clothing&category=all">{{ trans.all }}</a>
-                                </li>
-                                <li class="uk-parent" v-for="cat in categories.clothing" v-if="cat.menu == 'mens' || cat.menu == null">
-                                    <a :href="'/shop?menu=mens&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
-                                </li>
-                              </ul>
-                            </div>
                             <div class="uk-width-1-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li><h5 class="uk-margin-small uk-text-uppercase">{{ trans.accessories }}</h5></li>
                               </ul>
                               <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1">
                                 <li class="uk-parent uk-active">
-                                  <a href="/shop?menu=mens&parent=accessories&category=all">{{ trans.all }}</a>
+                                  <a :href="'/shop?menu='+navigation+'&parent=accessories&category=all'">{{ trans.all }}</a>
                                 </li>
-                                  <li class="uk-parent" v-for="cat in categories.accessories" v-if="cat.menu == 'mens' || cat.menu == null">
-                                      <a :href="'/shop?menu=mens&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
+                                  <li class="uk-parent" v-for="cat in categories.accessories" v-if="cat.menu == navigation || cat.menu == null">
+                                      <a :href="'/shop?menu='+navigation+'&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
                                 </li>
                               </ul>
                             </div>
@@ -190,7 +164,7 @@
               </li>
               <!--End Mens-->
               <!--Start Home-->
-              <li :class="{'uk-active': segmentPage == 'home' || segmentShop == 'home'}" class="uk-margin-medium-right">
+              <li :class="{'uk-active': category == 'home'}" class="uk-margin-medium-right">
                   <a href="/shop?menu=home&parent=all">{{ trans.home }}</a>
               </li>
               <!--End Home-->
@@ -246,7 +220,7 @@
 
           <li class="uk-margin-left">
             <a href="#flag-modal" uk-toggle><img :src="flagImage+language+'.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
-            <span class="uk-text-lowercase uk-margin-small-left">{{ currencyCode }}</span>
+            <span class="uk-text-uppercase uk-margin-small-left">{{ currencyCode }}</span>
             </a>
             <div id="flag-modal" class="uk-modal-full" uk-modal>
                 <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
@@ -354,8 +328,6 @@
           'aws_link',
           'default_image',
           'locale',
-          'segment_page',
-          'segment_shop',
           'profile_link',
           'history_link',
           'wishlist_link',
@@ -371,7 +343,9 @@
           'logout_link',
           'exchange_api',
           'currency_code',
-          'language'
+          'language',
+          'navigation',
+          'category'
         ],
 
         components: {
@@ -486,8 +460,6 @@
                 errorImagePanel: {},
                 loadingImage: {},
                 errorImageSale: {},
-                segmentPage: this.segment_page,
-                segmentShop: this.segment_shop,
                 wishlistCount: {},
                 bagCount: {},
                 bags: {},
