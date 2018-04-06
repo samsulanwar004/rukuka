@@ -70,8 +70,31 @@
                         </tr>
                     </tbody>
                 </table>
+                <h6 class="uk-margin-small uk-text-uppercase">{{ trans('app.payment_method') }}</h6>
                 <form action="{{ route('order') }}" method="POST">
                   {{ csrf_field() }}
+                  <table class="uk-table uk-table-divider uk-table-hover">
+                    <tbody>
+                        @if($currency == 'idr')
+                        <tr>
+                            <td>
+                                <input type="radio" class="uk-radio" name="payment_method" value="bank_transfer" required="required"> 
+                            </td>
+                            <td>
+                              Bank Transfer
+                            </td>
+                        </tr>
+                        @endif
+                        <tr>
+                            <td>
+                                <input type="radio" class="uk-radio" name="payment_method" value="creditcard" required="required"> 
+                            </td>
+                            <td>
+                              Credit Card
+                            </td>
+                        </tr>
+                    </tbody>
+                  </table>
                   <input type="hidden" name="order" value="ok">
                   <input type="submit" name="submit" id="submit" style="display: none;">
                 </form>
