@@ -10,7 +10,7 @@
     $navigation = null;
   }
 
-  $category = isset($categories) ? $categories : $category;
+  $category = $categories == 'designers' ? $categories : $category;
 
 @endphp
 <div class="uk-section-xsmall uk-background-default uk-margin-remove uk-padding-remove" style="border-color: #333; border-width: 5px">
