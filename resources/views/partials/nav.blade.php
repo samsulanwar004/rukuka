@@ -1,9 +1,9 @@
-<div class="uk-section-xsmall uk-background-default uk-margin-remove uk-padding-remove" style="border-color: #333; border-width: 5px" uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
-    <div class="uk-section uk-section-default uk-section-xsmall uk-padding-remove-vertical">
+<div class="uk-section-xsmall uk-background-default uk-margin-remove uk-padding-remove" style="border-color: #333; border-width: 5px">
+    <div class="uk-section uk-section-default uk-section-xsmall uk-padding-remove-vertical header-let">
         <div class="uk-container">
           <div class="uk-grid-small" uk-grid>
-              <div class="uk-width-1-3@m uk-flex uk-flex-middle">
-                <div class="uk-panel">
+              <div class="uk-width-2-5@m uk-flex uk-flex-middle">
+                {{-- <div class="uk-panel">
                     {{ Form::open(array('url' => '/search', 'method' =>'get','files' => true,'class' => 'uk-search uk-form-width-medium uk-first-column')) }}
                     <button type="submit" class="uk-search-icon-flip uk-search-icon uk-icon" uk-search-icon></button>
                     <div>
@@ -17,9 +17,15 @@
                         </div>
                     </div>
                     {{ Form::close() }}
-                </div>
+                </div> --}}
+                <ul class="uk-navbar-nav">
+                  <li class="uk-margin-medium-right"><a href="/women"> Women </a></li>
+                  <li><a href="/men"> Men </a></li>
+                </ul>
+
+
               </div>
-              <div class="uk-width-1-3@m">
+              <div class="uk-width-1-5@m">
                 <div class="uk-panel uk-text-center">
                       <a href="/" class="uk-link-reset">
                         <div class="uk-inline">
@@ -60,6 +66,11 @@
 
         </div>
     </div>
+    {{-- {{dd( || $product->gender == "women")}}
+    {{dd( || $product->gender == "women") || }} --}}
+    @if (Request::segment(1) == "women" || Request::segment(1) == "men" || $categories == "womens" || $categories == "mens" || $product->gender == "womens" ||  $product->gender == "mens")
+    <div class="cbp-af-header">
+
     <navigation
       api="{{ route('menu')}}"
       men_link="{{ route('men') }}"
@@ -70,9 +81,31 @@
       locale="{{ json_encode(trans('app')) }}"
       segment_page="{{ Request::segment(1) }}"
       segment_shop="{{ $categories }}"
+      profile_link="{{ route('user') }}"
+      history_link="{{ route('user.history') }}"
+      wishlist_link="{{ route('user.wishlist') }}"
+      bag_link="{{ route('bag') }}"
+      login_link="{{ route('login') }}"
+      auth="{{ Auth::check() ? 1 : 0 }}"
+      account="{{ Auth::user('web') }}"
+      wishlist_api="{{ route('wishlist') }}"
+      bag_api="{{ route('persist.bag') }}"
+      product_link="{{ route('product') }}"
+      checkout_link="{{ route('checkout') }}"
+      api_token="{{ Auth::user('web')->api_token }}"
+      logout_link="{{ route('logout') }}"
+      default_image="{{ json_encode(config('common.default')) }}"
+      locale="{{ json_encode(trans('app')) }}"
+      exchange_api="{{ route('exchange') }}"
+      currency_code="{{ $currency_code }}"
+      language="{{ App::getLocale() }}"
     ></navigation>
+
   </div>
-  <div class="uk-section uk-section-xsmall uk-padding-remove">
+    @endif
+  </div>
+  @if (Request::segment(1) == "women" || Request::segment(1) == "men" || $categories == "womens" || $categories == "mens" || $product->gender == "womens" ||  $product->gender == "mens")
+  <div class="uk-section uk-section-xsmall uk-padding-remove uk-margin-medium-top">
     <div class="uk-container">
       <div class="uk-alert-alert" uk-alert>
           <a href="#" class="uk-alert-close" uk-close></a>
@@ -82,6 +115,7 @@
       </div>
     </div>
   </div>
+@endif
 
 @section('footer_scripts')
     <script>

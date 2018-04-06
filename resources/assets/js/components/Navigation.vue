@@ -1,10 +1,13 @@
 <template>
     <nav class="uk-container uk-section-default uk-background-default" uk-navbar="dropbar: true; align: center; boundary-align: true; duration:100">
-      <div class="uk-navbar-center">
-
+      <div class="uk-navbar-left">
           <ul class="uk-navbar-nav">
+            <!-- New Arrival -->
+            <li class="uk-margin-medium-right">
+              <a href="#">New Arrival</a>
+            </li>
               <!--Start Designer-->
-              <li :class="{'uk-active': segmentPage == 'designer' || segmentShop == 'designers'}">
+              <li :class="{'uk-active': segmentPage == 'designer' || segmentShop == 'designers'}" class="uk-margin-medium-right">
                   <a :href="designerLink">{{ trans.designers_nav }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
@@ -55,8 +58,9 @@
               <!--End Designer-->
 
               <!--Start Womens-->
-              <li :class="{'uk-active': segmentPage == 'women' || segmentShop == 'womens'}">
-                  <a :href="womenLink">{{ trans.women_nav }}</a>
+              <li :class="{'uk-active': segmentPage == 'women' || segmentShop == 'womens'}" class="uk-margin-medium-right">
+                  <!-- <a :href="womenLink">{{ trans.women_nav }}</a> -->
+                  <a href="#">Clothing</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
@@ -120,8 +124,9 @@
               <!--End Womens-->
 
               <!--Start Mens-->
-              <li :class="{'uk-active': segmentPage == 'men' || segmentShop == 'mens'}">
-                <a :href="menLink">{{ trans.men_nav }}</a>
+              <li :class="{'uk-active': segmentPage == 'men' || segmentShop == 'mens'}" class="uk-margin-medium-right">
+                <!-- <a :href="menLink">{{ trans.men_nav }}</a> -->
+                <a href="#">Accessories</a>
                 <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                     <div class="uk-grid uk-grid-small" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
@@ -185,7 +190,7 @@
               </li>
               <!--End Mens-->
               <!--Start Home-->
-              <li :class="{'uk-active': segmentPage == 'home' || segmentShop == 'home'}">
+              <li :class="{'uk-active': segmentPage == 'home' || segmentShop == 'home'}" class="uk-margin-medium-right">
                   <a href="/shop?menu=home&parent=all">{{ trans.home }}</a>
               </li>
               <!--End Home-->
@@ -228,15 +233,113 @@
               <!--End Sale-->
 
               <!--Start Editorial-->
-              <li :class="{'uk-active': segmentPage == 'editorial'}">
+              <li :class="{'uk-active': segmentPage == 'editorial'}" class="uk-margin-medium-right">
                   <a href="/editorial">{{ trans.blog_nav }}</a>
               </li>
               <!--End Editorial-->
 
           </ul>
       </div>
+      <div class="uk-navbar-right user_panel_vis">
+        <ul class="uk-navbar-nav">
+
+
+          <li class="uk-margin-left">
+            <a href="#flag-modal" uk-toggle><img :src="flagImage+language+'.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
+            <span class="uk-text-lowercase uk-margin-small-left">{{ currencyCode }}</span>
+            </a>
+            <div id="flag-modal" class="uk-modal-full" uk-modal>
+                <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+                    <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+                    <div class="uk-width-xxlarge uk-padding-large uk-text-center">
+                        <h3 class="uk-text-uppercase">{{ trans.currency_title }}</h3>
+                        <button class="uk-button uk-button-small uk-button-default uk-text-uppercase" disabled>{{ trans.currency_set }} <img :src="flagImage+language+'.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
+                          {{ currencyCode }}
+                        </button>
+                        <h5 class="uk-text-uppercase">{{ trans.usca }}</h5>
+                        <div class="uk-grid uk-child-width-1-2@m uk-gird-small" uk-grid>
+                          <div>
+                            <a href="/lang/ca"><h6>{{ trans.cad }} <img :src="flagImage+'ca.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.ca }}</h6></a>
+                          </div>
+                          <div>
+                            <a href="/lang/en"><h6>{{ trans.usd }} <img :src="flagImage+'en.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.us }}</h6></a>
+                          </div>
+                        </div>
+                        <h5 class="uk-text-uppercase">{{ trans.asea }}</h5>
+                        <div class="uk-grid uk-child-width-1-3@m uk-grid-small" uk-grid>
+                          <div>
+                            <a href="/lang/id"><h6>{{ trans.idr }} <img :src="flagImage+'id.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.id }}</h6></a>
+                          </div>
+                          <div>
+                            <a href="/lang/sg"><h6>{{ trans.sgd }} <img :src="flagImage+'sg.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.sg }}</h6></a>
+                          </div>
+                          <div>
+                            <a href="/lang/my"><h6>{{ trans.myr }} <img :src="flagImage+'my.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.my }}</h6></a>
+                          </div>
+                          <div>
+                            <a href="/lang/bn"><h6>{{ trans.bnd }} <img :src="flagImage+'bn.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.bn }}</h6></a>
+                          </div>
+                          <div>
+                            <a href="/lang/jp"><h6>{{ trans.jpy }} <img :src="flagImage+'jp.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.jp }}</h6></a>
+                          </div>
+                          <div>
+                            <a href="/lang/kr"><h6>{{ trans.krw }} <img :src="flagImage+'kr.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.kr }}</h6></a>
+                          </div>
+                          <div>
+                            <a href="/lang/cn"><h6>{{ trans.cny }} <img :src="flagImage+'cn.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.cn }}</h6></a>
+                          </div>
+                          <div>
+                            <a href="/lang/hk"><h6>{{ trans.hkd }} <img :src="flagImage+'hk.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.hk }}</h6></a>
+                          </div>
+                        </div>
+                        <h5 class="uk-text-uppercase">{{ trans.euro }}</h5>
+                          <a href="/lang/eu"><h6>{{ trans.eur }} <img :src="flagImage+'eu.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans.eu }}</h6></a>
+                    </div>
+                </div>
+            </div>
+          </li>
+          <li v-if="auth == 1"  class="uk-margin-left">
+            <a :href="wishlist_link"><i class="material-icons" style="font-size: 18px">favorite</i>
+              <div class="uk-badge" v-if="wishlistCount > 0">
+                {{ wishlistCount }}
+              </div>
+            </a>
+          </li>
+          <li  class="uk-margin-left">
+            <a href="#" v-on:click.prevent="goBag"><i class="material-icons" style="font-size: 18px">shopping_basket</i>
+              <div class="uk-badge" v-if="bagCount > 0">
+                {{ bagCount }}
+              </div>
+            </a>
+          </li>
+          <li v-if="auth == 0"  class="uk-margin-left">
+            <a :href="login_link"><i class="material-icons" style="font-size: 18px">person</i></a>
+          </li>
+          <li v-if="auth == 1"  class="uk-margin-left">
+            <a :href="profile_link"> <i class="material-icons" style="font-size: 18px; vertical-align:middle">person</i> {{ accounts.first_name }}</a>
+          </li>
+
+        </ul>
+
+      </div>
+      <div class="uk-navbar-right search_vis">
+          <div class="uk-navbar-item">
+
+              <form class="uk-search">
+                  <button class="uk-search-icon-flip" uk-search-icon uk-icon="ratio: 0.3"></button>
+                  <input class="uk-search-input" type="search" placeholder="Search ">
+              </form>
+
+          </div>
+      </div>
     </nav>
 </template>
+
+<style>
+  #bag-hidden {
+    display: none;
+  }
+</style>
 
 <script>
     import axios from 'axios';
@@ -252,7 +355,23 @@
           'default_image',
           'locale',
           'segment_page',
-          'segment_shop'
+          'segment_shop',
+          'profile_link',
+          'history_link',
+          'wishlist_link',
+          'bag_link',
+          'login_link',
+          'auth',
+          'wishlist_api',
+          'bag_api',
+          'account',
+          'product_link',
+          'checkout_link',
+          'api_token',
+          'logout_link',
+          'exchange_api',
+          'currency_code',
+          'language'
         ],
 
         components: {
@@ -314,6 +433,38 @@
               console.log(error);
             });
 
+            // userpanel
+            if (this.auth == 1) {
+              self.getWishlist();
+            }
+
+            self.getExchange();
+
+            self.accounts = this.account ? JSON.parse(this.account) : {};
+
+            self.getBag();
+
+            Event.listen('addBag', function (response) {
+              self.bagCount = response.data.bagCount;
+              self.bags = response.data.bags;
+              self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
+            });
+
+            Event.listen('removePopUp', function (response) {
+              self.bagCount = response.data.bagCount;
+              self.bags = response.data.bags;
+              self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
+            });
+
+            Event.listen('addWishlist', function (response) {
+              self.wishlistCount = response.data.wishlistCount;
+            });
+
+            Event.fire('user', this.accounts);
+
+            self.errorImagePanel = this.aws_link+'/images/'+this.defaultImage.image_2;
+            self.flagImage = this.aws_link+'/images/flag1x1/';
+
             self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_7;
             self.errorImageSale = this.aws_link+'/images/'+this.defaultImage.image_5;
             self.loadingImage = this.aws_link+'/images/loading-image.gif';
@@ -331,20 +482,115 @@
                 mensNav: {},
                 kidsNav: {},
                 salesNav: {},
-                defaultImage: JSON.parse(this.default_image,true),
-                trans: JSON.parse(this.locale,true),
                 errorImage: {},
+                errorImagePanel: {},
                 loadingImage: {},
                 errorImageSale: {},
                 segmentPage: this.segment_page,
                 segmentShop: this.segment_shop,
+                wishlistCount: {},
+                bagCount: {},
+                bags: {},
+                accounts: {},
+                subtotal: {},
+                defaultImage: JSON.parse(this.default_image,true),
+                trans: JSON.parse(this.locale,true),
+                currencyCode: this.currency_code,
+                language: this.language,
+                exchangeRate: {},
+                flagImage:{}
             }
+        },
+        methods: {
+          removeBag: function (sku) {
+            var self = this;
+            axios.get(this.bag_api, {
+              params: {
+                remove: sku
+              }
+            })
+            .then(function (response) {
+              self.bagCount = response.data.bagCount;
+              self.bags = response.data.bags;
+              self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
+
+              Event.fire('removeBag', response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          },
+
+          getBag: function () {
+            var self = this;
+            axios.get(this.bag_api, {
+            })
+            .then(function (response) {
+              self.bagCount = response.data.bagCount;
+              self.bags = response.data.bags;
+              self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
+
+              Event.fire('bags', response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          },
+
+          getWishlist: function () {
+            var self = this;
+            var api_token = this.api_token;
+            axios.post(this.wishlist_api, {
+              api_token: api_token
+            })
+            .then(function (response) {
+              if (typeof response.data.data !== 'undefined') {
+                self.wishlistCount = response.data.data.length;
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          },
+
+          getExchange: function () {
+            var self = this;
+            axios.get(this.exchange_api, {
+            })
+            .then(function (response) {
+              self.exchangeRate = response.data.data;
+
+              Event.fire('exchange', response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          },
+
+          goBag: function () {
+            window.location.href = this.bag_link;
+          }
+        },
+
+        computed: {
+          filteredBags: function () {
+            return typeof this.bags[0] !== 'undefined' ? this.bags.slice(0,2) : {};
+          }
         },
 
         filters: {
           awsLink: function (value, aws) {
             var link = value == null ? '#' : aws+'/'+value;
             return link;
+          },
+
+          round: function(value, currency, rate) {
+            var value = value / rate;
+            var money = function(n, currency) {
+              return currency + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+            };
+
+            return money(Number(Math.round(value+'e'+2)+'e-'+2), currency);
           }
         }
     }
