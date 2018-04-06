@@ -1,12 +1,12 @@
 <template>
-<div class="uk-width-1-3@m uk-flex uk-flex-middle">
+<div class="uk-width-2-5@m uk-flex uk-flex-middle">
   <div class="uk-width-1-1 uk-flex uk-flex-middle uk-flex-right uk-visible@m">
     <ul class="uk-grid-small " uk-grid>
 
 
       <li class="uk-margin-right">
-        <a class="uk-button uk-button-text uk-button-small" href="#flag-modal" uk-toggle><img :src="flagImage+language+'.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
-        {{ currencyCode }}
+        <a href="#flag-modal" uk-toggle><img :src="flagImage+language+'.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
+        <span class="uk-text-lowercase">{{ currencyCode }}</span>
         </a>
         <div id="flag-modal" class="uk-modal-full" uk-modal>
             <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
@@ -59,14 +59,14 @@
         </div>
       </li>
       <li v-if="auth == 1"  class="uk-margin-right">
-        <a :href="wishlist_link"><i class="material-icons" style="font-size: 18px; vertical-align:middle">favorite_border</i>
+        <a :href="wishlist_link"><i class="material-icons" style="font-size: 18px; vertical-align:middle">favorite</i> Wishlist
           <div class="uk-badge" v-if="wishlistCount > 0">
             {{ wishlistCount }}
           </div>
         </a>
       </li>
       <li>
-        <a v-on:click.prevent="goBag"> <i class="material-icons" style="font-size: 18px; vertical-align:middle; margin-right: 5px;">shopping_basket</i>
+        <a v-on:click.prevent="goBag"> <i class="material-icons" style="font-size: 18px; vertical-align:middle;">shopping_basket</i> Bag
           <div class="uk-badge" v-if="bagCount > 0">
             {{ bagCount }}
           </div>
@@ -110,7 +110,7 @@
 
       </li>
       <li v-if="auth == 0" class="uk-margin-left">
-        <a :href="login_link"><i class="material-icons" style="font-size: 18px; vertical-align:middle">person</i> </a>
+        <a :href="login_link"><i class="material-icons" style="font-size: 18px; vertical-align:middle">person</i> Login</a>
       </li>
       <li v-if="auth == 1" class="uk-margin-left">
         <a :href="profile_link"> <i class="material-icons" style="font-size: 18px; vertical-align:middle">person</i> {{ accounts.first_name }}</a>

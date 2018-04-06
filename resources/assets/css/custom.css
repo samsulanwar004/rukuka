@@ -2,7 +2,7 @@
 .fixed {
 	position: -webkit-sticky;
 	position: sticky;
-	top: 105px;
+	top: 40px;
 	z-index: 2;
 	overflow:visible;
 	background: #fff;
@@ -10,13 +10,16 @@
 
 }
 
+.margin-5px-bot {
+	margin-bottom: 5px;
+}
 
 .fixed-userpanel {
 	position: -webkit-sticky;
 	position: sticky;
 	top: 0px;
-	z-index: 2;
-	overflow:visible;
+	z-index: 1000;
+	/* overflow:visible; */
 	background: #fff;
 
 }
@@ -907,3 +910,63 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
 }
 
 /*END CSS TYPEHEAD*/
+
+.cbp-af-header {
+	position: fixed;
+	top: 65px;
+	left: 0;
+	width: 100%;
+	background: #fff;
+	z-index: 900;
+	height: 40px;
+	overflow: visible;
+	-webkit-transition: height 0.3s;
+	-moz-transition: height 0.3s;
+	transition: height 0.3s;
+}
+
+.cbp-af-header .cbp-af-inner {
+	width: 90%;
+	max-width: 69em;
+	margin: 0 auto;
+	padding: 0 1.875em;
+}
+
+.cbp-af-header .search_vis{
+	display: inline-block;
+	position: relative;
+	-moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+.cbp-af-header .header_let{
+	display: inline-block;
+	position: relative;
+}
+.cbp-af-header .user_panel_vis{
+	display: none;
+	-moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+
+/* Transitions and class for reduced height */
+.cbp-af-header.cbp-af-header-shrink {
+	top:0;
+	height: 40px;
+}
+
+.cbp-af-header.cbp-af-header-shrink .search_vis{
+	/* line-height: 90px; */
+	display: none;
+}
+.cbp-af-header.cbp-af-header-shrink .header_let{
+	/* line-height: 90px; */
+	display: none;
+}
+
+.cbp-af-header.cbp-af-header-shrink .user_panel_vis{
+	display: block;
+}

@@ -240,28 +240,10 @@
 
           </ul>
       </div>
-      <!-- <div class="uk-navbar-right test-overlay">
+      <div class="uk-navbar-right user_panel_vis">
         <ul class="uk-navbar-nav">
-          <li v-if="auth == 1"  class="uk-margin-left">
-            <a :href="profile_link"> {{trans.hallo}} <b>{{ accounts.first_name }}</b></a>
-            <div class="uk-drop uk-drop-bottom-left" uk-drop="delay-hide:0" style="width: 150px">
-              <div class="uk-card uk-card-border uk-background-default uk-card-small">
-                <div class="uk-card-body">
-                  <ul class="uk-list uk-text-meta">
-                    <li><a :href="profile_link">{{trans.account}}</a> </li>
-                    <li><a :href="history_link">{{trans.order_history}}</a> </li>
-                    <li><a :href="logout_link">{{trans.sign_out}}</a> </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li v-if="auth == 1"  class="uk-margin-left">
-            <a :href="wishlist_link"><i class="material-icons" style="font-size: 18px">favorite</i></a>
-              <div class="uk-badge" v-if="wishlistCount > 0">
-                {{ wishlistCount }}
-              </div>
-          </li>
+
+
           <li class="uk-margin-left">
             <a href="#flag-modal" uk-toggle><img :src="flagImage+language+'.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
             <span class="uk-text-lowercase uk-margin-small-left">{{ currencyCode }}</span>
@@ -316,59 +298,34 @@
                 </div>
             </div>
           </li>
-          <li  class="uk-margin-left">
-            <a href="#" v-on:click.prevent="goBag"><i class="material-icons" style="font-size: 18px">shopping_basket</i></a>
-            <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" v-if="bagCount > 0">
-                  <div class="uk-card-body uk-card-small">
-                    <div class="uk-grid-small" uk-grid v-for="bag in filteredBags">
-                      <div class="uk-width-1-3">
-                        <lazy-background
-                          :image-source="bag.options.photo | awsLink(aws_link)"
-                          :alt="bag.name"
-                          :loading-image="loadingImage"
-                          :error-image="errorImage">
-                        </lazy-background>
-                      </div>
-                      <div class="uk-width-2-3">
-                        <div class="uk-panel">
-                          <span class="uk-text-small"><b>{{ bag.name }}</b></span><br>
-                          <span class="uk-text-small">{{ bag.price | round(exchangeRate.symbol, exchangeRate.value) }} </span><br>
-                          <span class="uk-text-meta">{{ trans.color }} : {{ bag.options.color }}</span><br>
-                          <span class="uk-text-meta">{{ trans.size }}  : {{ bag.options.size }}</span><br>
-                          <a :href="product_link+'/'+bag.options.slug+'/bag/'+bag.id" class="uk-button uk-button-text uk-button-small" name="button"><span class="uk-icon" uk-icon="icon: pencil; ratio: 0.8"></span>{{ trans.edit }}</a>
-                          <button type="button" class="uk-button uk-button-text uk-button-small" name="button" v-on:click="removeBag(bag.id)"><span class="uk-icon" uk-icon="icon: trash; ratio: 0.8"></span>{{trans.remove}}</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="uk-card-footer uk-background-muted">
-                    <div class="uk-text-center">
-                      <a :href="bag_link" class="uk-button uk-button-text">{{ trans.your_shop}}</a>
-                    </div>
-                  </div>
-                  <div class="uk-card-footer uk-padding-small">
-                    <div class="uk-text-center">
-                      <h4 class="uk-text-uppercase">{{ trans.subtotal}}: {{ subtotal | round(exchangeRate.symbol, exchangeRate.value) }}</h4>
-                      <a :href="checkout_link" class="uk-button-secondary uk-button uk-button-small uk-width-1-1 uk-text-uppercase">{{ trans.checkout_now}}</a>
-                    </div>
-                  </div>
+          <li v-if="auth == 1"  class="uk-margin-left">
+            <a :href="wishlist_link"><i class="material-icons" style="font-size: 18px">favorite</i>
+              <div class="uk-badge" v-if="wishlistCount > 0">
+                {{ wishlistCount }}
               </div>
-              <div class="uk-card-border uk-background-default uk-card" uk-drop="pos: bottom-right; delay-hide:0" id="bag-hidden" v-else></div>
+            </a>
+          </li>
+          <li  class="uk-margin-left">
+            <a href="#" v-on:click.prevent="goBag"><i class="material-icons" style="font-size: 18px">shopping_basket</i>
               <div class="uk-badge" v-if="bagCount > 0">
                 {{ bagCount }}
               </div>
+            </a>
           </li>
           <li v-if="auth == 0"  class="uk-margin-left">
             <a :href="login_link"><i class="material-icons" style="font-size: 18px">person</i></a>
           </li>
+          <li v-if="auth == 1"  class="uk-margin-left">
+            <a :href="profile_link"> <i class="material-icons" style="font-size: 18px; vertical-align:middle">person</i> {{ accounts.first_name }}</a>
+          </li>
 
         </ul>
 
-      </div> -->
-      <div class="uk-navbar-right">
+      </div>
+      <div class="uk-navbar-right search_vis">
           <div class="uk-navbar-item">
 
-              <form class="uk-search uk-search-navbar">
+              <form class="uk-search">
                   <button class="uk-search-icon-flip" uk-search-icon uk-icon="ratio: 0.3"></button>
                   <input class="uk-search-input" type="search" placeholder="Search ">
               </form>
