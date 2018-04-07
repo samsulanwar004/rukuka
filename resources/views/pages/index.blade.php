@@ -9,7 +9,7 @@
       $kidTitle = explode('|', $home['kid_title']);
     @endphp
     <div class="uk-container">
-      <div class="uk-text-center">
+      {{-- <div class="uk-text-center">
         <div class="uk-grid-small uk-text-left">
             @include('partials.alert')
         </div>
@@ -50,9 +50,9 @@
             </div>
 
         </div>
-    </div>
+    </div> --}}
 
-    <div class="uk-margin-top"  uk-slider="clsActivated: uk-transition-active; autoplay: true">
+    {{-- <div class="uk-margin-top"  uk-slider="clsActivated: uk-transition-active; autoplay: true">
             <div class="uk-position-relative uk-visible-toggle">
 
                 <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-4@m">
@@ -117,7 +117,7 @@
                 <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
 
             </div>
-        </div>
+        </div> --}}
         <div uk-slider="clsActivated: uk-transition-active;" class="uk-margin-top">
                 <div class="uk-position-relative uk-visible-toggle">
                     <ul class="uk-slider-items uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
@@ -152,7 +152,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="uk-margin-small-top">
+            {{-- <div class="uk-margin-small-top">
               <div class="uk-inline uk-light">
                 <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
                   <img src="{{ uploadCDN($home['homepage_banner_9']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'">
@@ -164,9 +164,9 @@
                 </a>
               </div>
               <hr class="uk-margin-remove-top uk-margin-bottom" style="border-color: #333; border-width: 5px">
-            </div>
+            </div> --}}
 
-            <div uk-slider="clsActivated: uk-transition-active;" class="uk-margin-top">
+            {{-- <div uk-slider="clsActivated: uk-transition-active;" class="uk-margin-top">
                     <div class="uk-position-relative uk-visible-toggle">
                         <ul class="uk-slider-items uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
                             <li>
@@ -201,9 +201,9 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> --}}
 </div>
-  <div class="uk-container uk-margin-top">
+  {{-- <div class="uk-container uk-margin-top">
     <h4 class="uk-text-uppercase uk-text-center"><b>{{ trans('app.title_index_3') }}</b></h4>
   	<popular
       api="{{ route('populer', 'Homepage')}}"
@@ -217,7 +217,7 @@
       locale="{{ json_encode(trans('app')) }}"
       exchange="{{ json_encode($exchange) }}"
     ></popular>
-    </div>
+    </div> --}}
 
 
 @endsection

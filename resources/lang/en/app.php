@@ -376,6 +376,7 @@ return [
     'shipping_method'           =>  'Choose a Shipping Method',
     'today'                     =>  'Today',
     'shipping_detail'           =>  'Shipping Detail',
+    'payment_method'            =>  'Payment Method',
 
     //resources/views/pages/checkout/shipping_preview.blade.php
     'confirm_order'             =>  'Please Confirm Your Order',

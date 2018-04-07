@@ -744,6 +744,7 @@ class UserController extends BaseController
         }
 
         $exchange = (new CurrencyService)->getCurrentCurrency();
+        $currency = $exchange->currency;
 
         //inject currency
         $cost = $shippingCost['data']->total_fee_idr / $exchange->value;
@@ -760,7 +761,8 @@ class UserController extends BaseController
             // 'defaultCreditcard',
             'defaultAddress',
             'shippingCost',
-            'total'
+            'total',
+            'currency'
         ));
     }
 

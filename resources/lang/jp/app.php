@@ -375,6 +375,7 @@ return [
     'shipping_method'           =>  '発送方法を選択',
     'today'                     =>  '本日',
     'shipping_detail'           =>  '発送詳細',
+    'payment_method'            =>  '支払方法',
 
     //resources/views/pages/checkout/shipping_preview.blade.php
     'confirm_order'             =>  'ご注文を確認してください',
