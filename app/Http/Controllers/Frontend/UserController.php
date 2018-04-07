@@ -16,6 +16,8 @@ use App\Repositories\CourierRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\PaymentRepository;
 use App\Review;
+use App\ConfirmPayment;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends BaseController
 {
@@ -1056,6 +1058,80 @@ class UserController extends BaseController
     public function afterPaymentPage(Request $request)
     {
         return view('pages.landing');
+    }
+
+    public function confirmPaymentPage()
+    {
+        return view('pages.payment_confirm_index');
+    }
+
+    public function confirmPayment(Request $request)
+    {
+        if($request->method() == 'GET'){
+            return redirect()->route('payment.confirm.page');
+        }
+
+//      validate order code start
+        Validator::extend('check_order_number', function( $attribute, $value, $parameters ) {
+            $order=(new OrderRepository())->getOrderbyOrderCode($value);
+            //kondisikan order adalah bank transfer dan tidak expired / cancel
+            if($order == null){
+                return FALSE;
+            }
+            else{
+                return TRUE;
+            }
+        });
+
+        $messages = [
+            'check_order_number' => "Order Number not found",
+        ];
+
+        $rules = [
+            'order_code'     => 'required|check_order_number|max:15'
+        ];
+
+        $validation = Validator::make($request->all(), $rules, $messages);
+
+        if ($validation->fails())
+        {
+            return redirect()->back()->withInput()->withErrors($validation);
+        }
+//      validate order code end
+
+        try {
+            DB::beginTransaction();
+            $order=(new OrderRepository())->getOrderbyOrderCode($request->input('order_code'));
+            $confirmUpdate = (new UserRepository())->getConfirmPaymentByOrderId($order->id);
+            if($confirmUpdate == null){
+                $InsertConfirm = new ConfirmPayment();
+                $InsertConfirm->orders_id = $order->id;
+                $InsertConfirm->customer_bank = $request->input('customer_bank');
+                $InsertConfirm->account_owner = $request->input('account_owner');
+                $InsertConfirm->store_bank = $request->input('store_bank');
+                $InsertConfirm->transfer_amount = $request->input('transfer_amount');
+                $InsertConfirm->save();
+            }else{
+//              check if confirm payment has been validate
+                if($confirmUpdate->is_valid == 0 ){
+                    $confirmUpdate->customer_bank = $request->input('customer_bank');
+                    $confirmUpdate->account_owner = $request->input('account_owner');
+                    $confirmUpdate->store_bank = $request->input('store_bank');
+                    $confirmUpdate->transfer_amount = $request->input('transfer_amount');
+                    $confirmUpdate->updated_at = date("Y-m-d H:i:s");
+                    $confirmUpdate->update();
+                }else{
+                    return redirect()->back()->with(['success' => trans('app.confirm_success')]);;
+                }
+            }
+            DB::commit();
+            $amount = $request->input('transfer_amount');
+            return view('pages.payment_confirm_result', compact('amount'));
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return back()->withErrors($e->getMessage());
+        }
     }
 
 }
