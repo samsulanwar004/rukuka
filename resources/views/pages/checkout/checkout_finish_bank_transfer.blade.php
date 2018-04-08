@@ -37,9 +37,55 @@
                 </table>
 
           {{ trans('app.note') }} : <br>
-          Silahkan lakukan pembayaran melalui transfer ke bank kami sebesar : <h5> {{$kurs->symbol}} {{number_format($totalwithshipping,2)}} </h5>
+          {{ trans('app.transfer_money') }} <label> IDR.  {{number_format($totalwithshipping,2)}} </label>
+            {{trans('app.transfer_account')}}
+                <a href="/help/contact-us">{{ trans('app.contact_us') }} </a> {{ trans('app.confirm_contact_us') }}
+                <div class="uk-flex uk-grid" uk-grid>
+                    <div class="uk-panel uk-width-1-3@m">
+                        <div class="uk-card uk-card-default">
+                            <div class="uk-card-body">
+                                <ul class="uk-list uk-text-center">
+                                    <img src="{{ imageCDN('bca.png') }}" alt="bca" height="50">
+                                    <li><b>{{trans('app.no-bca')}}</b></li>
+                                    <li class="uk-text-small">{{trans('app.name-bca')}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-panel uk-width-1-3@m">
+                        <div class="uk-card uk-card-default">
+                            <div class="uk-card-body">
+                                <ul class="uk-list uk-text-center">
+                                    <img src="{{ imageCDN('bni.png') }}" alt="bni" height="50">
+                                    <li><b>{{trans('app.no-bni')}}</b></li>
+                                    <li class="uk-text-small">{{trans('app.name-bni')}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-panel uk-width-1-3@m">
+                        <div class="uk-card uk-card-default">
+                            <div class="uk-card-body">
+                                <ul class="uk-list uk-text-center">
+                                    <img src="{{ imageCDN('mandiri.png') }}" alt="mandiri" height="50">
+                                    <li><b>{{trans('app.no-mandiri')}}</b></li>
+                                    <li class="uk-text-small">{{trans('app.name-mandiri')}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" uk-margin-large uk-text-center">
+                    <a href="{{ route('payment.confirm') }}"><button class="uk-button uk-button-secondary uk-button-small">{{ trans('app.confirm_payment') }}</button></a>
+                </div>
+                <div class=" uk-margin uk-text-center">
+                    <a href="{{ route('index') }}"><button class="uk-button uk-button-default uk-button-small"><span class="uk-icon" uk-icon="icon: chevron-left"></span>{{ trans('app.back_to_home') }}</button></a>
+                </div>
+            </div>
+
         </div>
-      </div>
+
     </div>
   </div>
 </div>

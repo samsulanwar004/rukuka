@@ -301,7 +301,17 @@ class CmsModulsSeeder extends Seeder {
             'controller'=>'AdminLookbookProductsController',
             'is_protected'=>0,
             'is_active'=>0
-        ]
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Confirm Payment',
+            'icon'=>'fa fa-check',
+            'path'=>'confirm-payments',
+            'table_name'=>'confirm_payments',
+            'controller'=>'AdminConfirmPaymentsController',
+            'is_protected'=>0,
+            'is_active'=>0
+            ]
         ];
 
 
@@ -616,7 +626,7 @@ class CmsMenusSeeder extends Seeder {
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 7
+            'sorting' => 8
         ]
         ,[
 
@@ -630,7 +640,7 @@ class CmsMenusSeeder extends Seeder {
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 5
+            'sorting' => 6
         ]
         ,[
 
@@ -644,7 +654,7 @@ class CmsMenusSeeder extends Seeder {
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 6
+            'sorting' => 7
         ],[
 
             'created_at'=>date('Y-m-d H:i:s'),
@@ -683,7 +693,7 @@ class CmsMenusSeeder extends Seeder {
             'is_active'=>1,
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
-            'sorting' => 8
+            'sorting' => 9
         ],[
 
             'created_at'=>date('Y-m-d H:i:s'),
@@ -736,6 +746,19 @@ class CmsMenusSeeder extends Seeder {
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 3
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Confirm Payment',
+            'type'=>'Route',
+            'path'=>'AdminConfirmPaymentsControllerGetIndex',
+            'color' => 'normal',
+            'icon'=>'fa fa-check',
+            'parent_id'=>0,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 5
         ]
     ];
 
