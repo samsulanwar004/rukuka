@@ -13,7 +13,7 @@
 				<label class="uk-text-muted">{{ trans('app.confirm_result_text_1') }}</label>
 				<h5 class="uk-text-muted uk-margin-remove-bottom">{{ trans('app.confirm_result_amount') }}</h5>
 				<h3 class="uk-margin-remove-top">
-					IDR {{ $amount }}
+					IDR. {{ number_format($amount,2) }}
 				</h3>
 				<hr>
 				<label class="uk-text-muted">{{ trans('app.confirm_result_text_2') }}</label><br>

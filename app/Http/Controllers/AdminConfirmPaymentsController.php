@@ -263,7 +263,7 @@
                 } elseif($column_value == '1') {
                     $column_value = '<span class="label label-success">Valid</span>';
                 } else {
-                    $column_value = '<span class="label label-danger">Unvalid</span>';
+                    $column_value = '<span class="label label-danger">Invalid</span>';
                 }
             }
             if($column_index==5){
