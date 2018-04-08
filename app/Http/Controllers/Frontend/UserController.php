@@ -1076,12 +1076,18 @@ class UserController extends BaseController
 //      validate order code start
         Validator::extend('check_order_number', function( $attribute, $value, $parameters ) {
             $order=(new OrderRepository())->getOrderbyOrderCode($value);
-            //kondisikan order adalah bank transfer dan tidak expired / cancel
+
             if($order == null){
                 return FALSE;
             }
             else{
-                return TRUE;
+                //kondisikan order adalah bank transfer dan tidak expired / cancel
+                if($order->payment_method == 'bank_transfer' && $order->order_status != 3){
+                    return TRUE;
+                }else{
+                    return FALSE;
+                }
+
             }
         });
 
