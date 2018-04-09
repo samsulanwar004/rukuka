@@ -186,10 +186,56 @@
                       <td style="word-wrap:break-word;padding:10px 25px;" align="left">
                         <div style="cursor:auto;color:#666;font-size:12px;line-height:22px;text-align:left;">
                           <p style="margin:0px">
-                          {{trans('app.note',[], $locale)}} :
-                          <br> Silahkan lakukan pembayaran melalui transfer ke bank kami sebesar : {{ number_format($order->order_total_idr) }}
+                            {{trans('app.note',[], $locale)}} :<br>
+                            {{ trans('app.transfer_money') }}
+                            <label> IDR.   {{ number_format($order->order_total_idr) }} </label>
+                            {{trans('app.transfer_account',[], $locale)}} :<br>
                         </P>
                         </div>
+                      </td>
+                    </tr>
+                    <tr>
+                    <tr>
+                      <td style="word-wrap:break-word;padding:10px 25px;" align="left">
+                        <table cellpadding="0" cellspacing="0" style="cellspacing:0px;color:#333;font-size:13px;line-height:30px;table-layout:auto;" width="100%" border="0">
+                          <tr style="text-align:left;padding:15px 0;">
+                            <th style="padding: 0 15px 0 0;">
+                              <img alt="" height="auto" src="https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/images/bca.png" width="70">
+                            </th>
+                            <th style="padding: 0 0 0 15px;">
+                              <img alt="" height="auto" src="https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/images/bni.png" width="70">
+                            </th>
+                            <th style="padding: 0 0 0 15px;">
+                              <img alt="" height="auto" src="https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/images/mandiri.png" width="70">
+                            </th>
+                          </tr>
+
+                          <tr style="text-align:left;padding:15px 0;">
+                            <td style="padding: 0 15px 0 0;">{{ trans('app.no-bca',[], $locale) }}</td>
+                            <td style="padding: 0 0 0 15px;">{{ trans('app.no-bni',[], $locale) }}</td>
+                            <td style="padding: 0 0 0 15px;">{{ trans('app.no-mandiri',[], $locale) }}</td>
+                          </tr>
+
+                          <tr style="text-align:left;padding:15px 0;">
+                            <td style="padding: 0 15px 0 0;">{{ trans('app.name-bca',[], $locale) }}</td>
+                            <td style="padding: 0 0 0 15px;">{{ trans('app.name-bni',[], $locale) }}</td>
+                            <td style="padding: 0 0 0 15px;">{{ trans('app.name-mandiri',[], $locale) }}</td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                      <td style="word-wrap:break-word;" align="center">
+                        <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;" align="center" border="0">
+                          <tbody>
+                          <tr>
+                            <td>
+                              @component('mail::button', ['url' => route('payment.confirm')])
+                                {{ trans('app.confirm_payment',[], $locale) }}
+                              @endcomponent
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
                       </td>
                     </tr>
                     <tr>
