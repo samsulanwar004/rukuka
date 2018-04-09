@@ -37,7 +37,7 @@
                   <div class="typeahead__container">
                     <div class="typeahead__field">
                         <span class="typeahead__query">
-                          <input class="uk-search-input js-typeahead-designers" name="keyword" type="search" required placeholder="{{ trans('app.find_label') }}" autofocus autocomplete="off">
+                          <input class="uk-search-input js-typeahead-designers" name="keyword" type="search" required placeholder="{{ trans('app.search') }}" autofocus autocomplete="off">
                         </span>
                     </div>
                   </div>
