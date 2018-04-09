@@ -78,7 +78,7 @@ class PageController extends BaseController
                 $products = $product->getProductByDesigner($request);
                 $designer = $product->getDesigner();
             } elseif ($request->input('menu') == 'womens') {
-                if (in_array($request->input('parent'), array('clothing', 'accessories'))) {
+                if (in_array($request->input('parent'), array('clothing', 'accessories', 'homeware'))) {
                     $products = (new ProductRepository)
                         ->getProductByMenu($request);
                 } else {
@@ -90,19 +90,7 @@ class PageController extends BaseController
                     }
                 }
             } elseif ($request->input('menu') == 'mens') {
-                if (in_array($request->input('parent'), array('clothing', 'accessories'))) {
-                    $products = (new ProductRepository)
-                        ->getProductByMenu($request);
-                } else {
-                    if ($request->input('parent') == 'all') {
-                        $products = (new ProductRepository)
-                        ->getProductByMenuAll($request);
-                    } else {
-                        throw new Exception("Error Processing Request", 1);
-                    }
-                }
-            } elseif ($request->input('menu') == 'home') {
-                if (in_array($request->input('parent'), array('homeware'))) {
+                if (in_array($request->input('parent'), array('clothing', 'accessories', 'homeware'))) {
                     $products = (new ProductRepository)
                         ->getProductByMenu($request);
                 } else {
@@ -234,6 +222,8 @@ class PageController extends BaseController
         $buttonBuy->content = $product->content;
         $buttonBuy->size_and_fit = $product->size_and_fit;
         $buttonBuy->detail_and_care = $product->detail_and_care;
+        $buttonBuy->is_preorder = $product->is_preorder;
+        $buttonBuy->preorder_day = $product->preorder_day;
 
     	return view('pages.product', compact(
             'product',
@@ -396,7 +386,8 @@ class PageController extends BaseController
                             'length' =>  $stock->product->length,
                             'width' =>  $stock->product->width,
                             'height' =>  $stock->product->height,
-                            'diameter' => $stock->product->diameter
+                            'diameter' => $stock->product->diameter,
+                            'preorder' => $stock->product->is_preorder == 1 ? $stock->product->preorder_day : null
                         ]
                     ];
                     $bag->save($product, self::INSTANCE_SHOP);

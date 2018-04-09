@@ -1,3 +1,18 @@
+@php
+  $women = Request::segment(1) == "women" || Request::input('gender') == "womens" || $categories == "womens" || $product->gender == "womens" ? "womens" : null;
+  $men = Request::segment(1) == "men" || Request::input('gender') == "mens" || $categories == "mens" || $product->gender == "mens" ? "mens" : null;
+
+  if($women) {
+    $navigation = $women;
+  } elseif ($men) {
+    $navigation = $men;
+  } else {
+    $navigation = null;
+  }
+
+  $category = $categories == 'designers' ? $categories : $category;
+
+@endphp
 <div class="uk-section uk-section-xsmall uk-padding-remove-vertical">
   <div uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
     <div class="uk-section uk-section-default uk-section-xsmall uk-padding-remove uk-box-shadow-medium">
@@ -23,10 +38,10 @@
                       login_link="{{ route('login') }}"
                       profile_link="{{ route('user') }}"
                       locale="{{ json_encode(trans('app')) }}"
-                      segment_page="{{ Request::segment(1) }}"
-                      segment_shop="{{ $categories }}"
                       segment_category="{{ $category }}"
                       segment_slug="{{ $slug == null ? $category:$slug }}"
+                      navigation="{{ $navigation }}"
+                      category="{{ isset($category) ? $category : null }}"
               ></navigation-mobile>
             </div>
             <div class="uk-navbar-left uk-flex-1 uk-margin-top test-overlay" hidden>
@@ -37,7 +52,7 @@
                   <div class="typeahead__container">
                     <div class="typeahead__field">
                         <span class="typeahead__query">
-                          <input class="uk-search-input js-typeahead-designers" name="keyword" type="search" required placeholder="{{ trans('app.find_label') }}" autofocus autocomplete="off">
+                          <input class="uk-search-input js-typeahead-designers" name="keyword" type="search" required placeholder="{{ trans('app.search') }}" autofocus autocomplete="off">
                         </span>
                     </div>
                   </div>

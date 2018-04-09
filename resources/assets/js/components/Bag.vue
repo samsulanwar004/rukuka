@@ -31,6 +31,7 @@
                             <li><h4>{{ bag.name }}</h4></li>
                             <li class="uk-margin-remove"><span class="uk-text-small">{{ trans.color }}: {{ bag.options.color }}</span></li>
                             <li class="uk-margin-remove"><span class="uk-text-small">{{ trans.size }} : {{ bag.options.size }}</span></li>
+                            <li class="uk-margin-remove" v-if="bag.options.preorder"><span class="uk-text-small uk-text-danger">Pre Order {{ bag.options.preorder }} days</span></li>
                           </ul>
                           <form v-on:submit.prevent="moveWishlist">
                               <input type="hidden" name="size" :value="bag.id">
