@@ -333,6 +333,7 @@ return [
     //resources/assets/js/components/ButtonBuy.vue
     'choose_size_label'         =>  'Choose your size',
     'no_size'                   =>  'No size available',
+    'product_available'         =>  'Product available',
     'contact_cs'                =>  'Please, contact our customer service.',
     'editors_notes'             =>  'Editors Notes',
     'size_fit'                  =>  'Size & Fit',

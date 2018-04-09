@@ -11,17 +11,22 @@
             {{ prod.color }}
         </h6>
         <div v-if="stocks.length > 0">
-          <div class="uk-grid uk-child-width-1-2 uk-margin-small-bottom" uk-grid>
-            <div>
-              <h6> <b> {{ trans.european }} </b></h6>
+            <div v-if="stocks[0].size == 'none'">
+                <span class="uk-text-meta"><i class="uk-text-success">{{ trans.product_available }} ({{ stocks[0].unit }})</i>
             </div>
-            <div class="uk-text-right">
-              <span class="uk-text-meta"><a href="/help/size-charts" target="_blank"> {{ trans.size_chart}}</a></span>
+            <div v-else>
+              <div class="uk-grid uk-child-width-1-2 uk-margin-small-bottom" uk-grid>
+                <div>
+                  <h6> <b> {{ trans.european }} </b></h6>
+                </div>
+                <div class="uk-text-right">
+                  <span class="uk-text-meta"><a href="/help/size-charts" target="_blank"> {{ trans.size_chart}}</a></span>
+                </div>
+              </div>
+                <select :class="{'uk-select uk-form-width-small uk-form-small uk-margin-small-right': true, 'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
+                    <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">{{ stock.size }} {{ stock.unit | unit }}</option>
+                </select>
             </div>
-          </div>
-            <select :class="{'uk-select uk-form-width-small uk-form-small uk-margin-small-right': true, 'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">
-              <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">{{ stock.size }} {{ stock.unit | unit }}</option>
-            </select>
         </div>
         <div v-else>
             <span class="uk-text-meta"><i class="uk-text-danger">{{ trans.no_size }} </i> <br>{{ trans.contact_cs }} </span>
