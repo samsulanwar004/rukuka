@@ -2,16 +2,16 @@
 @section('title', trans('app.title_confirm') )
 @section('content')
 
-<div class="uk-container uk-container-large">
+<div class="uk-container">
   	<div class="uk-grid-small uk-margin-top uk-margin-bottom uk-flex uk-flex-center">
       	<div class="uk-width-1-1@m ">
-			<div class="uk-card uk-background-muted uk-box-shadow-small">
+			<div class="uk-card">
         		<div class="uk-card-body">
 				<h3 class="uk-card-title uk-text-center uk-text-uppercase">
 				{{ trans('app.confirm_title') }}
 				</h3>
-				<label class="uk-text-muted">{{ trans('app.confirm_subtitle') }} </label>
-				<label class="uk-text-muted">{{ trans('app.please') }}</label> <a href="/help/contact-us">{{ trans('app.contact_us') }} </a> {{ trans('app.confirm_contact_us') }}
+			{{ trans('app.confirm_subtitle') }}
+				{{ trans('app.please') }} <a href="/help/contact-us" class="uk-text-primary">{{ trans('app.contact_us') }} </a> {{ trans('app.confirm_contact_us') }}
 				<hr>
 					<div class="uk-grid-small uk-margin-top">
 						@include('partials.alert')
@@ -67,7 +67,7 @@
         </div>
 				<div class="uk-card-footer">
 					<div class="uk-panel uk-text-center">
-						<a href="{{ route('index') }}"><button class="uk-button uk-button-default uk-button-small"><span class="uk-icon" uk-icon="icon: chevron-left"></span>{{ trans('app.back_to_home') }}</button></a>
+						<a href="{{ route('index') }}" class="uk-button-text uk-button"><span class="uk-icon" uk-icon="icon: chevron-left"></span>{{ trans('app.back_to_home') }}</a>
 					</div>
 				</div>
 			</div>

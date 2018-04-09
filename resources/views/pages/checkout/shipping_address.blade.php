@@ -7,7 +7,7 @@
    </div>
    <div class="uk-margin-top" uk-grid>
       <div class="uk-width-2-3@m">
-        <div class="uk-card uk-card-default uk-card-small uk-background-muted uk-box-shadow-small" uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
+        <div class="uk-card uk-card-default uk-card-small uk-background-muted uk-box-shadow-small">
           <div class="uk-card-body">
            <div class="uk-grid uk-grid-divider uk-child-width-1-3 uk-margin-small" uk-grid>
 
@@ -316,7 +316,7 @@
           'Accept': "application/json"
        }
     });
-    
+
     var jqxhr = $.get( "/api/v1/countries", function(response) {
 
       if (response.error == '000') {
