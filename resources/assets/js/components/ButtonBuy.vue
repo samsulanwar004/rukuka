@@ -28,19 +28,19 @@
         </div>
         <ul uk-accordion="animation: true; multiple: false">
             <li class="uk-open">
-                <h5 class="uk-accordion-title">{{ trans.editors_notes }}</h5>
+                <span class="uk-accordion-title">{{ trans.editors_notes }}</span>
                 <div class="uk-accordion-content">
                     <span v-html="prod.content"></span>
                 </div>
             </li>
             <li>
-                <h5 class="uk-accordion-title">{{ trans.size_fit }}</h5>
+                <span class="uk-accordion-title">{{ trans.size_fit }}</span>
                 <div class="uk-accordion-content">
                     <span v-html="prod.size_and_fit"></span>
                 </div>
             </li>
             <li>
-                <h5 class="uk-accordion-title">{{ trans.detail_care }}</h5>
+                <span class="uk-accordion-title">{{ trans.detail_care }}</span>
                 <div class="uk-accordion-content">
                     <span v-html="prod.detail_and_care"></span>
                 </div>

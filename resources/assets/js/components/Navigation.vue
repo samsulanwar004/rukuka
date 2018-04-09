@@ -1,5 +1,5 @@
 <template>
-    <nav class="uk-container uk-section-default uk-background-default" uk-navbar="dropbar: true; align: center; boundary-align: true; duration:100">
+    <nav class="uk-container" uk-navbar="dropbar: true; align: center; boundary-align: true; duration:100">
       <div class="uk-navbar-left">
           <ul class="uk-navbar-nav">
             <!-- New Arrival -->
@@ -10,7 +10,7 @@
               <li :class="{'uk-active': category == 'designers'}" class="uk-margin-medium-right">
                   <a :href="designerLink">{{ trans.designers_nav }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
-                      <div class="uk-grid uk-grid-small" uk-grid>
+                      <div class="uk-grid uk-grid-small uk-grid-collapse" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
                           <div class="uk-width-2-3">
                             <ul class="uk-nav uk-navbar-dropdown-nav">

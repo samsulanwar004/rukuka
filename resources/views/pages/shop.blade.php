@@ -200,11 +200,9 @@
           </div>
         </div>
 
-        <div class="uk-grid-small uk-margin-small-top" uk-grid>
+        <div class="uk-grid uk-margin-small-top" uk-grid>
             <div id="nav1" class="uk-width-1-4@m uk-visible@m">
-              <div>
-                <div class="uk-card uk-background-muted uk-card-small uk-box-shadow-small">
-                    <div class="uk-card-body">
+
                         <categories
                                 api="{{ route('menu', ['parent' => $categories]) }}"
                                 parent="{{ $categories }}"
@@ -223,9 +221,7 @@
                                 locale="{{ json_encode(trans('app')) }}"
                                 action_link="{{ actionLink() }}"
                         ></color-palette>
-                    </div>
-                </div>
-              </div>
+
             </div>
             <div class="uk-width-expand@m">
                 <shop
@@ -244,7 +240,7 @@
           <div class="uk-text-right uk-margin-bottom uk-margin-top">
 
             @include('pagination.default', ['paginator' => $products])
-      
+
           </div>
         <hr>
         @if($recently)

@@ -1,6 +1,6 @@
 <template>
     <div v-if="parent == 'designers'">
-      <div class="uk-grid-small uk-width-1-1 uk-child-width-1-2" uk-grid>
+      <!-- <div class="uk-grid-small uk-width-1-1 uk-child-width-1-2" uk-grid>
         <div class="uk-text-center">
           <label>
           <input type="radio" class="uk-radio" name="gender" v-on:click="pickGender('mens')" :checked="gender == 'mens'">
@@ -15,26 +15,26 @@
           </label>
           <h6 class="uk-margin-remove-top uk-text-uppercase">{{ trans.women }}</h6>
         </div>
-      </div>
+      </div> -->
         <ul class="uk-accordion">
             <li>
-                <h5 class="uk-link-reset uk-text-uppercase">
+                <span class="uk-link-reset">
                     <a :href="'/shop?menu=designers&category=all'">
-                        <span :class="{'text-underline': categorySlug == 'all'}">
+                        <span :class="{'uk-text-bold': categorySlug == 'all'}">
                             {{ trans.all }}
                         </span>
                     </a>
-                </h5>
+                </span>
             </li>
         </ul>
         <ul class="uk-accordion" uk-accordion="multiple: true" >
             <li class="uk-open">
-                <h5 href="#" class="uk-accordion-title">{{ parent.toUpperCase() }}</h5>
+                <span href="#" class="uk-accordion-title">{{ parent }}</span>
                 <div class="uk-accordion-content">
                     <ul class="uk-nav uk-filter-nav">
                         <li v-for="category in categories">
                             <a :href="'/shop?menu='+parent+'&category='+ category.slug ">
-                                <span :class="{'text-underline': slug == category.slug}">
+                                <span :class="{'uk-text-bold': slug == category.slug}">
                                     {{ category.name }}
                                 </span>
                             </a>
@@ -47,33 +47,33 @@
     <div v-else-if="parent == 'home'">
         <ul class="uk-accordion">
             <li>
-                <h5 class="uk-link-reset uk-text-uppercase">
+                <span class="uk-link-reset">
                     <a v-if="sales" :href="'/shop?menu='+parent+'&parent=sale'">
                         {{ trans.all }}
                     </a>
                     <a v-else :href="'/shop?menu='+parent+'&parent=all'">
-                        <span :class="{'text-underline': categorySlug == 'all'}">
+                        <span :class="{'uk-text-bold': categorySlug == 'all'}">
                             {{ trans.all }}
                         </span>
                     </a>
-                </h5>
+                </span>
             </li>
         </ul>
         <ul class="uk-accordion" uk-accordion="multiple: true" >
             <li class="uk-open" v-for="category in categories" v-if="category.name.toLowerCase() == 'homeware'">
-                <h5 href="#" class="uk-accordion-title">{{ category.name.toUpperCase() }}</h5>
+                <span href="#" class="uk-accordion-title">{{ category.name }}</span>
                 <div class="uk-accordion-content">
                 <ul class="uk-nav uk-filter-nav">
                     <li>
                         <a :href="'/shop?menu='+parent+'&parent='+ category.name.toLowerCase() +'&category=all'">
-                            <span :class="{'text-underline': categorySlug == category.name.toLowerCase() && slug == 'all'}">
+                            <span :class="{'uk-text-bold': categorySlug == category.name.toLowerCase() && slug == 'all'}">
                                  {{ trans.all }}
                             </span>
                         </a>
                     </li>
                     <li v-for="cat in category.child" >
                       <a :href="'/shop?menu='+parent+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
-                          <span :class="{'text-underline': slug == cat.slug}">
+                          <span :class="{'uk-text-bold': slug == cat.slug}">
                               {{ cat.name }}
                           </span>
                       </a>
@@ -87,33 +87,33 @@
     <div v-else>
         <ul class="uk-accordion">
             <li>
-                <h5 class="uk-link-reset uk-text-uppercase">
+                <span class="uk-link-reset">
                     <a v-if="sales" :href="'/shop?menu='+parent+'&parent=sale'">
                         {{ trans.all }}
                     </a>
                     <a v-else :href="'/shop?menu='+parent+'&parent=all'">
-                        <span :class="{'text-underline': categorySlug == 'all'}">
+                        <span :class="{'uk-text-bold': categorySlug == 'all'}">
                             {{ trans.all }}
                         </span>
                     </a>
-                </h5>
+                </span>
             </li>
         </ul>
         <ul class="uk-accordion" uk-accordion="multiple: true" >
             <li class="uk-open" v-for="category in categories" v-if="category.name.toLowerCase() != 'homeware'">
-                <h5 href="#" class="uk-accordion-title">{{ category.name.toUpperCase() }}</h5>
+                <span href="#" class="uk-accordion-title">{{ category.name }}</span>
                 <div class="uk-accordion-content">
                 <ul class="uk-nav uk-filter-nav">
                     <li>
                         <a :href="'/shop?menu='+parent+'&parent='+ category.name.toLowerCase() +'&category=all'">
-                            <span :class="{'text-underline': categorySlug == category.name.toLowerCase() && slug == 'all'}">
+                            <span :class="{'uk-text-bold': categorySlug == category.name.toLowerCase() && slug == 'all'}">
                                  {{ trans.all }}
                             </span>
                         </a>
                     </li>
                     <li v-for="cat in category.child" v-if="cat.menu == parent || cat.menu == null">
                       <a :href="'/shop?menu='+parent+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
-                          <span :class="{'text-underline': slug == cat.slug}">
+                          <span :class="{'uk-text-bold': slug == cat.slug}">
                               {{ cat.name }}
                           </span>
                       </a>
