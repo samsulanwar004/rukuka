@@ -4,7 +4,7 @@
           <ul class="uk-navbar-nav">
             <!-- New Arrival -->
             <li class="uk-margin-medium-right">
-              <a href="#">New Arrival</a>
+              <a :href="'/shop?menu='+navigation+'&parent=all'">{{ trans.new_arrival }}</a>
             </li>
               <!--Start Designer-->
               <li :class="{'uk-active': category == 'designers'}" class="uk-margin-medium-right">
