@@ -1,5 +1,5 @@
 /*! UIkit 3.0.0-beta.39 | http://www.getuikit.com | (c) 2014 - 2017 YOOtheme | MIT License */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,600i,700,700i,800,800i');
 /* ========================================================================
    Component: Base
  ========================================================================== */
@@ -13,7 +13,7 @@ html {
   /* 1 */
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.5;
   /* 2 */
   -webkit-text-size-adjust: 100%;
@@ -58,7 +58,6 @@ a,
 }
 a:hover,
 .uk-link:hover {
-  color: #666;
   text-decoration: underline;
 }
 /* Text-level semantics
@@ -3104,8 +3103,9 @@ select.uk-form-width-xsmall {
   position: relative;
   margin-bottom: 20px;
   padding: 15px 29px 15px 15px;
-  background: #f8f8f8;
+  background: #fff;
   color: #000;
+  border-bottom: solid 1px #e5e5e5;
 }
 /* Add margin if adjacent element */
 * + .uk-alert {
@@ -3199,26 +3199,28 @@ select.uk-form-width-xsmall {
  */
 .uk-badge {
   box-sizing: border-box;
-  min-width: 22px;
-  height: 22px;
+  min-width: 18px;
+  height: 18px;
   padding: 0 5px;
   border-radius: 500px;
   vertical-align: middle;
   /* 1 */
-  background: #000;
-  color: #fff;
-  font-size: 12px;
+  background: #fff;
+  color: #000;
+  font-size: 10px;
   /* 2 */
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  border: solid 1px #000;
+  margin-left: 5px;
 }
 /*
  * Required for `a`
  */
 .uk-badge:hover,
 .uk-badge:focus {
-  color: #fff;
+  color: #666;
   text-decoration: none;
   outline: none;
 }
@@ -3489,10 +3491,10 @@ select.uk-form-width-xsmall {
 }
 /* Placeholder */
 .uk-search-input:-ms-input-placeholder {
-  color: #666 !important;
+  color: #000 !important;
 }
 .uk-search-input::placeholder {
-  color: #666;
+  color: #000;
 }
 /* Icon (Adopts `uk-icon`)
  ========================================================================== */
@@ -3519,13 +3521,13 @@ select.uk-form-width-xsmall {
   justify-content: center;
   align-items: center;
   /* 3 */
-  color: #666;
+  color: #000;
 }
 /*
  * Required for `a`.
  */
 .uk-search .uk-search-icon:hover {
-  color: #666;
+  color: #000;
 }
 /*
  * Make `input` element clickable through icon, e.g. if it's a `span`
@@ -3574,7 +3576,7 @@ select.uk-form-width-xsmall {
 /* Navbar modifier
  ========================================================================== */
 .uk-search-navbar {
-  width: 400px;
+  width: 250px;
 }
 /*
  * Input
@@ -3582,7 +3584,7 @@ select.uk-form-width-xsmall {
 .uk-search-navbar .uk-search-input {
   height: 40px;
   background: transparent;
-  font-size: 17px;
+  font-size: 14px;
 }
 /*
  * Icon
@@ -3607,7 +3609,7 @@ select.uk-form-width-xsmall {
 .uk-search-large .uk-search-input {
   height: 80px;
   background: transparent;
-  font-size: 45px;
+  font-size: 14px;
 }
 /*
  * Icon
@@ -3624,12 +3626,12 @@ select.uk-form-width-xsmall {
 /* Toggle
  ========================================================================== */
 .uk-search-toggle {
-  color: #666;
+  color: #000;
 }
 /* Hover + Focus */
 .uk-search-toggle:hover,
 .uk-search-toggle:focus {
-  color: #000;
+  color: #666;
 }
 /* ========================================================================
    Component: Nav
@@ -3661,7 +3663,7 @@ select.uk-form-width-xsmall {
  * Must target `a` elements to exclude other elements (e.g. lists)
  */
 .uk-nav > li > a {
-  padding: 5px 0;
+  padding: 3px 0;
 }
 /* Sublists
  ========================================================================== */
@@ -3703,7 +3705,7 @@ ul.uk-nav-sub {
 /* Header
  ========================================================================== */
 .uk-nav-header {
-  padding: 5px 0;
+  padding: 3px 0;
   text-transform: uppercase;
   font-size: 12px;
 }
@@ -3823,8 +3825,6 @@ ul.uk-nav-sub {
 .uk-navbar {
   display: flex;
   /* 1 */
-  border-top: 1px solid #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
   position: relative;
 }
 /* Container
@@ -3940,26 +3940,56 @@ ul.uk-nav-sub {
   /* 2 */
   box-sizing: border-box;
   height: 40px;
-  padding: 0 40px;
+  margin-left: 0;
+  margin-right: 0;
   /* 3 */
-  font-size: 12px;
+  font-size: 14px;
   font-family: 'Open Sans', sans-serif;
   /* 4 */
   text-decoration: none;
   font-weight: 400;
-  letter-spacing: 2px;
 }
 /*
- * Nav items
+ * Nav items top
  */
-.uk-navbar-nav > li > a {
-  color: #666;
+.uk-navbar-top > li > a {
   border-bottom: 3px solid transparent;
   -moz-transition: all 0.2s ease-in;
   -o-transition: all 0.2s ease-in;
   -webkit-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
-  text-transform: uppercase;
+  line-height: 65px;
+}
+/*
+ * Hover
+ * Apply hover style also to focus state and if dropdown is opened
+ */
+.uk-navbar-top > li:hover > a,
+.uk-navbar-top > li > a:focus,
+.uk-navbar-top > li > a.uk-open {
+  color: #000;
+  border-bottom: 3px solid;
+  outline: none;
+}
+/* OnClick */
+.uk-navbar-top > li > a:active {
+  color: #333;
+  border-bottom: 3px solid;
+}
+/* Active */
+.uk-navbar-top > li.uk-active > a {
+  color: #333;
+  border-bottom: 3px solid;
+}
+/*
+ * Nav items
+ */
+.uk-navbar-nav > li > a {
+  border-bottom: 3px solid transparent;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
   transition: 0.1s ease-in-out;
   transition-property: color, background-color;
 }
@@ -4103,7 +4133,7 @@ ul.uk-nav-sub {
  * Adopts `uk-nav`
  ========================================================================== */
 .uk-navbar-dropdown-nav {
-  font-size: 13px;
+  font-size: 14px;
 }
 /*
  * Items
@@ -4114,11 +4144,11 @@ ul.uk-nav-sub {
 /* Hover + Focus */
 .uk-navbar-dropdown-nav > li > a:hover,
 .uk-navbar-dropdown-nav > li > a:focus {
-  color: #666;
+  text-decoration: underline;
 }
 /* Active */
 .uk-navbar-dropdown-nav > li.uk-active > a {
-  color: #333;
+  font-weight: 600;
 }
 /*
  * Header
@@ -4127,43 +4157,48 @@ ul.uk-nav-sub {
   color: #333;
 }
 .uk-filter-nav > li {
-  font-size: 12px;
-  line-height: 1;
-  color: #666;
+  padding-left: 5px;
+  font-size: 14px;
+  line-height: 1.3;
+  color: #000;
 }
 .uk-filter-nav > li > a {
-  font-size: 12px;
-  line-height: 1;
-  color: #666;
+  font-size: 14px;
+  padding-left: 5px;
+  line-height: 1.3;
+  color: #000;
 }
 /* Hover + Focus */
 .uk-filter-nav > li > a:hover,
 .uk-filter-nav > li > a:focus {
   color: #000;
+  text-decoration: underline;
 }
 /* Active */
 .uk-filter-nav > li.uk-active > a {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   color: #000;
 }
 .uk-footer-nav > li {
-  font-size: 12px;
-  color: #666;
+  font-size: 13px;
+  color: #000;
 }
 .uk-footer-nav > li > a {
-  font-size: 12px;
-  color: #666;
+  font-size: 13px;
+  color: #000;
 }
 /* Hover + Focus */
 .uk-footer-nav > li > a:hover,
 .uk-footer-nav > li > a:focus {
   color: #000;
+  text-decoration: underline;
 }
 /* Active */
 .uk-footer-nav > li.uk-active > a {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
+  text-decoration: underline;
   color: #000;
 }
 /*
@@ -4799,17 +4834,17 @@ ul.uk-nav-sub {
 .uk-accordion-title {
   margin: 0;
   font-size: 14px;
-  line-height: 1;
+  line-height: 2;
   font-weight: 400;
   padding-bottom: 10px;
-  letter-spacing: 1.5px;
   cursor: pointer;
+  text-transform: capitalize;
   overflow: hidden;
 }
 .uk-accordion-title::after {
   content: "";
-  width: 1em;
-  height: 1em;
+  width: 2em;
+  height: 2em;
   float: right;
   background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2213%22%20height%3D%2213%22%20viewBox%3D%220%200%2013%2013%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Crect%20fill%3D%22%23000%22%20width%3D%2213%22%20height%3D%221%22%20x%3D%220%22%20y%3D%226%22%20%2F%3E%0A%20%20%20%20%3Crect%20fill%3D%22%23000%22%20width%3D%221%22%20height%3D%2213%22%20x%3D%226%22%20y%3D%220%22%20%2F%3E%0A%3C%2Fsvg%3E");
   background-repeat: no-repeat;
@@ -4829,8 +4864,8 @@ ul.uk-nav-sub {
  ========================================================================== */
 .uk-accordion-content {
   margin-top: 0px;
-  font-size: 13px;
-  color: #333;
+  font-size: 14px;
+  color: #000;
 }
 /*
  * Micro clearfix

@@ -1,9 +1,9 @@
-<div class="uk-section uk-section-muted uk-section-xsmall uk-visible@m">
+<div class="uk-section uk-section-muted uk-section-small uk-visible@m">
   <div class="uk-container">
     <div class="uk-panel uk-grid" uk-grid>
       <div class="uk-width-1-6@m">
         <ul class="uk-nav uk-footer-nav">
-          <li class="uk-text-uppercase"><b>{{ trans('app.help_care') }}</b></li>
+          <li><span class="footer_title">{{ trans('app.help_care') }}</span></li>
           <li><a href="{{ URL::to('help/contact-us')}}">{{ trans('app.contact_us') }}</a></li>
           <li><a href="{{ URL::to('help/returns-exchanges') }}">{{ trans('app.returns_exchanges') }}</a></li>
           <li><a href="{{ URL::to('help/size-charts') }}">{{ trans('app.size_chart') }}</a></li>
@@ -12,14 +12,15 @@
       </div>
       <div class="uk-width-1-6@m">
         <ul class="uk-nav uk-footer-nav">
-          <li class="uk-text-uppercase"><b>{{ trans('app.order_shipping') }}</b></li>
+          <li><span class="footer_title">{{ trans('app.order_shipping') }}</span></li>
           <li><a href="{{ route('tracking-page')}}"> {{trans('app.track_order') }}</a> </li>
+          <li><a href="{{ route('payment.confirm')}}"> {{trans('app.confirm_payment') }}</a> </li>
           <li><a href="{{ URL::to('help/shipping-handling')}}">{{ trans('app.shipping_handling') }}</a></li>
         </ul>
       </div>
       <div class="uk-width-1-6@m">
         <ul class="uk-nav uk-footer-nav">
-          <li class="uk-text-uppercase"><b>{{ trans('app.about_rukuka') }}</b></li>
+          <li><span class="footer_title">{{ trans('app.about_rukuka') }}</span></li>
           <li><a href="{{ URL::to('page/about-us')}}">{{ trans('app.about_us') }}</a></li>
           <li><a href="{{ URL::to('page/partners')}}">{{ trans('app.partners') }}</a></li>
           <li><a href="{{ URL::to('page/careers')}}">{{ trans('app.careers') }}</a></li>
@@ -39,7 +40,7 @@
         ></subcriber>
         <p class="uk-margin-small">
           <ul class="uk-nav uk-footer-nav">
-            <li class="uk-text-uppercase">{{ trans('app.connect_us') }}</li>
+            <li><span class="footer_title">{{ trans('app.connect_us') }}</span></li>
           </ul>
         <ul class="uk-grid-small" uk-grid>
           <li><a href="{{ trans('app.facebook') }}" target="_blank"   class="uk-icon-link" uk-icon="icon: facebook"></a></li>
@@ -47,24 +48,10 @@
           <li><a href="{{ trans('app.email_to') }}" class="uk-icon-link" uk-icon="icon: mail"></a></li>
         </ul>
         </p>
-        {{--<ul class="uk-nav uk-footer-nav">--}}
-          {{--<li class="uk-text-uppercase">{{ trans('app.language') }}</li>--}}
-        {{--</ul>--}}
-        {{--<div class="uk-nav uk-footer-nav">--}}
-          {{--@foreach (Config::get('languages') as $lang => $language)--}}
-            {{--@if ($lang == App::getLocale())--}}
-              {{--<u> <a class="uk-text-small" href="{{ route('lang.switch', $lang) }}">{{$language}}</a> </u>--}}
-            {{--@endif--}}
-              {{--@if ($lang != App::getLocale())--}}
-                {{--<a class="uk-text-small" href="{{ route('lang.switch', $lang) }}"> {{$language}} </a>--}}
-              {{--@endif--}}
-              {{--{{ $loop->last ? '' : '| ' }}--}}
-          {{--@endforeach--}}
-        {{--</div>--}}
       </div>
     </div>
     <p>
-    <span class="uk-text-meta uk-margin-top">{{ trans('app.copyright') }}</span>
+    <span class="footer_title">{{ trans('app.copyright') }}</span>
     </p>
   </div>
 </div>
@@ -89,6 +76,7 @@
           <a href="#" class="uk-text-uppercase"><b>{{ trans('app.order_shipping') }}</b></a>
           <ul class="uk-nav-sub">
             <li><a href="{{ route('tracking-page')}}"> {{trans('app.track_order') }}</a> </li>
+            <li><a href="{{ route('payment.confirm')}}"> {{trans('app.confirm_payment') }}</a> </li>
             <li><a href="{{ URL::to('help/shipping-handling')}}">{{ trans('app.shipping_handling') }}</a></li>
           </ul>
       </li>

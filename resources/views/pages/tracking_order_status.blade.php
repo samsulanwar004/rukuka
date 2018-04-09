@@ -122,6 +122,7 @@
 								<td>
 									<form action="/repayment" method="POST">
 										<input type="hidden" name="order_code" value="{{ $tracking['data']->order_code }}">
+										<input type="hidden" name="payment_method" value="{{ $tracking['data']->payment_method }}">
 										<input type="hidden" name="signature" value="{{ sha1($tracking['data']->order_code) }}">
 										{{ csrf_field() }}
 										<input  class="uk-button uk-button-secondary uk-button-small" type="submit" value="{{ trans('app.pay') }}">
@@ -176,6 +177,7 @@
 									<td colspan="4" class=" uk-text-right">
 										<form action="/repayment" method="POST">
 											<input type="hidden" name="order_code" value="{{ $tracking['data']->order_code }}">
+											<input type="hidden" name="payment_method" value="{{ $tracking['data']->payment_method }}">
 											<input type="hidden" name="signature" value="{{ sha1($tracking['data']->order_code) }}">
 											{{ csrf_field() }}
 											<input  class="uk-button uk-button-secondary uk-button-small" type="submit" value="{{ trans('app.pay') }}">

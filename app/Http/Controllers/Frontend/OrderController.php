@@ -32,7 +32,8 @@ class OrderController extends BaseController
 	public function store(Request $request)
 	{   
 		$this->validate($request, [
-			'order' => 'required'
+			'order' => 'required',
+			'payment_method' => 'required'
 		]);
 
 		try {
@@ -41,9 +42,10 @@ class OrderController extends BaseController
 			$bag = new BagService;
 
             $address = $this->user
-            ->setUser($user)
-            ->getAddressDefault();
+	            ->setUser($user)
+	            ->getAddressDefault();
 
+	        $paymentMethod = $request->input('payment_method');
 
 	        $bags = $bag->get(self::INSTANCE_SHOP);
 
@@ -91,7 +93,7 @@ class OrderController extends BaseController
 	        $order = $this->order
 	        	->setOrderCode($orderCode)
 	        	->setUser($user)
-	        	->setPaymentMethod('creditcard')
+	        	->setPaymentMethod($paymentMethod)
 	        	->setPaymentName($address->first_name)
 	        	->setOrderSubtotal($total)
 	        	->setOrderSubtotalAfterDiscount($total)
@@ -105,11 +107,6 @@ class OrderController extends BaseController
 	        	->setDetail($detail)
 	        	->save();
 
-            //EMAILSENT
-			//sent invoice unpaid to buyer
-              $emailService = (new EmailService);
-              $emailService->sendInvoiceUnpaid($order);
-
              //notification
              //create notification
 	        $users = config('common.admin.users_id');
@@ -117,16 +114,39 @@ class OrderController extends BaseController
 	        (new PaymentRepository)->notificationforAdmin($users, $orderCode.' '.$message, $module);
 
             DB::commit();
-			return view('pages.checkout.checkout_finish', compact(
-				'order', 
-				'detail', 
-				'total', 
-				'shipping',
-				'signature',
-				'kurs',
-				'repayment',
-				'totalwithshipping'
-			));
+
+            if ($paymentMethod === 'creditcard') {
+            	//EMAILSENT
+				//sent invoice unpaid to buyer
+	            $emailService = (new EmailService);
+	            $emailService->sendInvoiceUnpaid($order);
+
+            	return view('pages.checkout.checkout_finish', compact(
+					'order', 
+					'detail', 
+					'total', 
+					'shipping',
+					'signature',
+					'kurs',
+					'repayment',
+					'totalwithshipping'
+				));
+
+            } elseif ($paymentMethod === 'bank_transfer') {
+            	//EMAILSENT
+				//sent invoice unpaid to buyer
+	            $emailService = (new EmailService);
+	            $emailService->sendInvoiceUnpaidBankTransfer($order);
+
+            	return view('pages.checkout.checkout_finish_bank_transfer', compact(
+					'order', 
+					'detail', 
+					'total', 
+					'shipping',
+					'kurs',
+					'totalwithshipping'
+				));
+            } 
 
 		} catch (Exception $e) {
 			DB::rollBack();
@@ -137,12 +157,19 @@ class OrderController extends BaseController
 
 	public function restore(Request $request)
 	{   
+		$this->validate($request, [
+			'order_code' => 'required',
+			'payment_method' => 'required',
+			'signature' => 'required'
+		]);
+
 		try
 		{
 			$data = $request->all();
 			$order_id = $data['order_code'];
 			$signature1 = $data['signature'];
 			$signature2 = sha1($order_id);
+			$paymentMethod = $data['payment_method'];
 			if ($signature1 != $signature2) 
 			{
 	         	throw new Exception("access denied.", 1);	
@@ -185,19 +212,32 @@ class OrderController extends BaseController
 
 	        $year = intval(date('Y'));
 	        $repayment = 1;
-			
-			return view('pages.checkout.checkout_finish', compact( 
-				'year',
-				'order',
-				'detail', 
-				'total', 
-				'shipping',
-				'signature',
-				'repayment',
-				'kurs',
-				'totalwithshipping'
-			));
 
+	        if ($paymentMethod === 'creditcard') {
+
+            	return view('pages.checkout.checkout_finish', compact( 
+					'year',
+					'order',
+					'detail', 
+					'total', 
+					'shipping',
+					'signature',
+					'repayment',
+					'kurs',
+					'totalwithshipping'
+				));
+
+            } elseif ($paymentMethod === 'bank_transfer') {
+
+            	return view('pages.checkout.checkout_finish_bank_transfer', compact(
+					'order', 
+					'detail', 
+					'total', 
+					'shipping',
+					'kurs',
+					'totalwithshipping'
+				));
+            }
 		
 		} catch (Exception $e) {
 

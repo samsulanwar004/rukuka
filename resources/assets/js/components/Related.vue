@@ -5,19 +5,19 @@
       <div class="uk-card uk-card-small uk-padding-remove">
         <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
           <a :href="'/product/'+ product.slug">
-            <lazy-image 
+            <lazy-image
                 :src='product.photo | awsLink(aws_link, errorImage)'
                 :img-class="['uk-transition-scale-up','uk-transition-opaque']"
-                :placeholder='loadingImage' 
+                :placeholder='loadingImage'
                 :img-alt='product.name'
             ></lazy-image>
           </a>
         </div>
         <div class="uk-card-body uk-padding-remove">
-          <div>
+          <div class="margin-5px-bot">
             <a :href="'#modal-related'+modal_code" class="uk-button uk-button-small uk-button-secondary uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
           </div>
-          <a :href="'/product/'+ product.slug" class="uk-text-small uk-link-reset">{{ product.name.substring(0,35) }}
+          <a :href="'/product/'+ product.slug" class="shop_item_title uk-link-reset">{{ product.name.substring(0,35) }}
           <br>
           <span v-if="product.price_before_discount > 0 ">
             <del class="uk-text-small">

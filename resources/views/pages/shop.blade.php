@@ -78,7 +78,7 @@
         @endif
         {{--End Designer Header--}}
 
-        <div class="uk-background-mutedt uk-visible@m fixed" uk-grid>
+        <div class="uk-background-muted uk-visible@m fixed" uk-grid>
             <div class="uk-width-1-4@m">
               <ul class="uk-grid uk-grid-small">
                 <li><a href="#" uk-toggle="target: #nav1"><i class="material-icons" style="font-size: 18px">menu</i></a></li>
@@ -105,7 +105,7 @@
                       <div class="uk-text-left">
                           <a href="#">{{ trans('app.sort_by_price') }}<i class="material-icons"  style="font-size: 18px; vertical-align:middle">expand_more</i></a>
                           <div uk-drop="mode: hover; delay-hide: 0" style="width: 200px">
-                              <div class="uk-card uk-background-muted uk-box-shadow-small uk-card-small">
+                              <div class="uk-card uk-background-default uk-box-shadow-small uk-card-small">
                                 <div class="uk-card-body">
                                   <ul class="uk-list">
                                     <li>
@@ -145,7 +145,7 @@
           <div>
             <a href="#">{{ trans('app.sort_by_price') }}<i class="material-icons"  style="font-size: 18px; vertical-align:middle">expand_more</i></a>
             <div uk-drop="mode: hover; delay-hide: 0" style="width: 200px">
-                <div class="uk-card uk-background-muted uk-box-shadow-small uk-card-small">
+                <div class="uk-card uk-background-default uk-box-shadow-small uk-card-small">
                   <div class="uk-card-body">
                     <ul class="uk-list">
                       <li>
@@ -200,11 +200,9 @@
           </div>
         </div>
 
-        <div class="uk-grid-small uk-margin-small-top" uk-grid>
+        <div class="uk-grid uk-margin-small-top" uk-grid>
             <div id="nav1" class="uk-width-1-4@m uk-visible@m">
-              <div>
-                <div class="uk-card uk-background-muted uk-card-small uk-box-shadow-small">
-                    <div class="uk-card-body">
+
                         <categories
                                 api="{{ route('menu', ['parent' => $categories]) }}"
                                 parent="{{ $categories }}"
@@ -223,9 +221,7 @@
                                 locale="{{ json_encode(trans('app')) }}"
                                 action_link="{{ actionLink() }}"
                         ></color-palette>
-                    </div>
-                </div>
-              </div>
+
             </div>
             <div class="uk-width-expand@m">
                 <shop
@@ -242,9 +238,9 @@
             </div>
         </div>
           <div class="uk-text-right uk-margin-bottom uk-margin-top">
-            <h6 class="uk-text-uppercase uk-margin-remove-vertical">
+
             @include('pagination.default', ['paginator' => $products])
-          </h6>
+
           </div>
         <hr>
         @if($recently)

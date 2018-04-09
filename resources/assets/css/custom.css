@@ -2,7 +2,7 @@
 .fixed {
 	position: -webkit-sticky;
 	position: sticky;
-	top: 105px;
+	top: 60px;
 	z-index: 2;
 	overflow:visible;
 	background: #fff;
@@ -10,12 +10,39 @@
 
 }
 
+.margin-5px-bot {
+	margin-bottom: 5px;
+}
+
+.footer_title {
+	font-weight: 600;
+	font-size: 15px;
+	line-height: 40px;
+}
+
+/* shop title */
+
+.shop_item_title {
+	font-weight: 600;
+	font-size:13px;
+}
+
+.fixed-userpanel {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0px;
+	z-index: 1000;
+	/* overflow:visible; */
+	background: #fff;
+
+}
+
+
 .fixed-filter {
-	/* position: -webkit-sticky; */
-	position: fixed;
-	top: 160px;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 105px;
 	z-index: 1;
-	bottom: 20px;
 	overflow:visible;
 	background: #fff;
 	/* padding: 15px 0 15px 0; */
@@ -895,3 +922,72 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
 }
 
 /*END CSS TYPEHEAD*/
+
+.cbp-af-header {
+	position: fixed;
+	top: 65px;
+	left: 0;
+	width: 100%;
+	background: #fff;
+	z-index: 900;
+	height: 42px;
+	overflow: visible;
+	border: 1px 0 1px 0 solid #e5e5e5;
+	-webkit-transition: height 0.3s;
+	-moz-transition: height 0.3s;
+	transition: height 0.3s;
+}
+
+.cbp-af-header .cbp-af-inner {
+	width: 90%;
+	max-width: 69em;
+	margin: 0 auto;
+	padding: 0 1.875em;
+}
+
+.cbp-af-header .search_vis{
+	display: inline-block;
+	position: relative;
+	-moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+.cbp-af-header .header_let{
+	display: inline-block;
+	position: relative;
+}
+.cbp-af-header .user_panel_vis{
+	display: none;
+	-moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+
+/* Transitions and class for reduced height */
+.cbp-af-header.cbp-af-header-shrink {
+	top:0;
+	height: 60px;
+	border-top: 1px transparent;
+	border-bottom: 1px transparent;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.cbp-af-header.cbp-af-header-shrink .search_vis{
+	/* line-height: 90px; */
+	display: none;
+}
+.cbp-af-header.cbp-af-header-shrink .header_let{
+	/* line-height: 90px; */
+	display: none;
+}
+
+.cbp-af-header.cbp-af-header-shrink .user_panel_vis{
+	margin-top: 10px;
+	display: block;
+}
+
+.cbp-af-header.cbp-af-header-shrink nav{
+	height: 60px;
+}

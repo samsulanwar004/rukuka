@@ -1,6 +1,6 @@
 <template>
     <ul class="uk-nav uk-footer-nav">
-        <li class="uk-text-uppercase"><b>{{ trans.popular_searches}}</b></li>
+        <li><span class="footer_title">{{ trans.popular_searches}}</span></li>
         <ul class="uk-nav uk-footer-nav">
             <li class="uk-parent">
                 <a :href="popularSearch.popular_url_1">{{ popularSearch.popular_name_1 }}</a>

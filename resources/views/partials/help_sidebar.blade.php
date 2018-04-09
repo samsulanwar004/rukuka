@@ -7,6 +7,7 @@
             <li><a href="{{ URL::to('help/size-charts') }}">{{ trans('app.size_chart') }}</a></li>
             <li><a href="{{ URL::to('help/payment')}}">{{ trans('app.payment') }}</a></li>
             <li><a href="{{ route('tracking-page')}}"> {{trans('app.track_order') }}</a> </li>
+            <li><a href="{{ route('payment.confirm')}}"> {{trans('app.confirm_payment') }}</a> </li>
             <li><a href="{{ URL::to('help/shipping-handling')}}">{{ trans('app.shipping_handling') }}</a></li>
             <br>
             <li><a href="{{ URL::to('page/about-us')}}">{{ trans('app.about_us') }}</a></li>
@@ -31,6 +32,7 @@
                                 <li><a href="{{ URL::to('help/size-charts') }}">{{ trans('app.size_chart') }}</a></li>
                                 <li><a href="{{ URL::to('help/payment')}}">{{ trans('app.payment') }}</a></li>
                                 <li><a href="{{ route('tracking-page')}}"> {{trans('app.track_order') }}</a> </li>
+                                <li><a href="{{ route('payment.confirm')}}"> {{trans('app.confirm_payment') }}</a> </li>
                                 <li><a href="{{ URL::to('help/shipping-handling')}}">{{ trans('app.shipping_handling') }}</a></li>
                                 <br>
                                 <li><a href="{{ URL::to('page/about-us')}}">{{ trans('app.about_us') }}</a></li>

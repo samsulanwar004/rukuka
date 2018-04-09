@@ -1,7 +1,7 @@
 <template>
     <ul class="uk-list uk-footer-nav">
         <li>
-            <b class="uk-text-uppercase">{{ trans.stay_update }}</b>
+            <span class="footer_title">{{ trans.stay_update }}</span>
         </li>
         <li class="uk-text-meta" v-if="messages">
             <i v-if="messages">{{ messages }}</i>

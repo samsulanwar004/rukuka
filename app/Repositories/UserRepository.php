@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\ConfirmPayment;
 use App\User;
 use App\CreditCard;
 use App\Address;
@@ -639,6 +640,12 @@ class UserRepository
     public function getUserById($id)
     {
         return User::where('id', $id)
+            ->first();
+    }
+
+    public function getConfirmPaymentByOrderId($id)
+    {
+        return ConfirmPayment::where('orders_id', $id)
             ->first();
     }
 
