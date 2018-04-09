@@ -2,7 +2,7 @@
 .fixed {
 	position: -webkit-sticky;
 	position: sticky;
-	top: 40px;
+	top: 60px;
 	z-index: 2;
 	overflow:visible;
 	background: #fff;
@@ -12,6 +12,19 @@
 
 .margin-5px-bot {
 	margin-bottom: 5px;
+}
+
+.footer_title {
+	font-weight: 600;
+	font-size: 15px;
+	line-height: 40px;
+}
+
+/* shop title */
+
+.shop_item_title {
+	font-weight: 600;
+	font-size:13px;
 }
 
 .fixed-userpanel {
@@ -26,11 +39,10 @@
 
 
 .fixed-filter {
-	/* position: -webkit-sticky; */
-	position: fixed;
-	top: 160px;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 105px;
 	z-index: 1;
-	bottom: 20px;
 	overflow:visible;
 	background: #fff;
 	/* padding: 15px 0 15px 0; */
@@ -918,8 +930,9 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
 	width: 100%;
 	background: #fff;
 	z-index: 900;
-	height: 40px;
+	height: 42px;
 	overflow: visible;
+	border: 1px 0 1px 0 solid #e5e5e5;
 	-webkit-transition: height 0.3s;
 	-moz-transition: height 0.3s;
 	transition: height 0.3s;
@@ -955,7 +968,10 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
 /* Transitions and class for reduced height */
 .cbp-af-header.cbp-af-header-shrink {
 	top:0;
-	height: 40px;
+	height: 60px;
+	border-top: 1px transparent;
+	border-bottom: 1px transparent;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .cbp-af-header.cbp-af-header-shrink .search_vis{
@@ -968,5 +984,10 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
 }
 
 .cbp-af-header.cbp-af-header-shrink .user_panel_vis{
+	margin-top: 10px;
 	display: block;
+}
+
+.cbp-af-header.cbp-af-header-shrink nav{
+	height: 60px;
 }
