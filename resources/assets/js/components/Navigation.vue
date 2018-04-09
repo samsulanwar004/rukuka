@@ -165,7 +165,7 @@
               <!--End Mens-->
               <!--Start Home-->
               <li :class="{'uk-active': category == 'home'}" class="uk-margin-medium-right">
-                  <a href="/shop?menu=home&parent=all">{{ trans.home }}</a>
+                  <a :href="'/shop?menu='+navigation+'&parent=homeware&category=all'">{{ trans.home }}</a>
               </li>
               <!--End Home-->
               <!--Start Sale-->

@@ -49,7 +49,7 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'Product Designers','name'=>'product_designers_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_designers,name'];
             $this->form[] = ['label'=>'Product Categories','name'=>'product_categories_id','type'=>'custom','validation'=>'required','width'=>'col-sm-10', 'html' => $this->categories()];
-            $this->form[] = ['label'=>'Gender','name'=>'gender','type'=>'select','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','dataenum'=>'mens|Mens;womens|Womens;unisex|Unisex;home|Home'];
+            $this->form[] = ['label'=>'Gender','name'=>'gender','type'=>'select','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','dataenum'=>'mens|Mens;womens|Womens;unisex|Unisex'];
             $this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Color','name'=>'product_colors_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'product_colors,name'];
 			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'wysiwyg','validation'=>'string','width'=>'col-sm-10'];

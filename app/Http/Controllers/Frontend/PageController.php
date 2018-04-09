@@ -78,7 +78,7 @@ class PageController extends BaseController
                 $products = $product->getProductByDesigner($request);
                 $designer = $product->getDesigner();
             } elseif ($request->input('menu') == 'womens') {
-                if (in_array($request->input('parent'), array('clothing', 'accessories'))) {
+                if (in_array($request->input('parent'), array('clothing', 'accessories', 'homeware'))) {
                     $products = (new ProductRepository)
                         ->getProductByMenu($request);
                 } else {
@@ -90,19 +90,7 @@ class PageController extends BaseController
                     }
                 }
             } elseif ($request->input('menu') == 'mens') {
-                if (in_array($request->input('parent'), array('clothing', 'accessories'))) {
-                    $products = (new ProductRepository)
-                        ->getProductByMenu($request);
-                } else {
-                    if ($request->input('parent') == 'all') {
-                        $products = (new ProductRepository)
-                        ->getProductByMenuAll($request);
-                    } else {
-                        throw new Exception("Error Processing Request", 1);
-                    }
-                }
-            } elseif ($request->input('menu') == 'home') {
-                if (in_array($request->input('parent'), array('homeware'))) {
+                if (in_array($request->input('parent'), array('clothing', 'accessories', 'homeware'))) {
                     $products = (new ProductRepository)
                         ->getProductByMenu($request);
                 } else {
