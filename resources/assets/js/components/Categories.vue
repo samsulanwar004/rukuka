@@ -44,45 +44,6 @@
             </li>
         </ul>
     </div>
-    <div v-else-if="parent == 'home'">
-        <ul class="uk-accordion">
-            <li>
-                <span class="uk-link-reset">
-                    <a v-if="sales" :href="'/shop?menu='+parent+'&parent=sale'">
-                        {{ trans.all }}
-                    </a>
-                    <a v-else :href="'/shop?menu='+parent+'&parent=all'">
-                        <span :class="{'uk-text-bold': categorySlug == 'all'}">
-                            {{ trans.all }}
-                        </span>
-                    </a>
-                </span>
-            </li>
-        </ul>
-        <ul class="uk-accordion" uk-accordion="multiple: true" >
-            <li class="uk-open" v-for="category in categories" v-if="category.name.toLowerCase() == 'homeware'">
-                <span href="#" class="uk-accordion-title">{{ category.name }}</span>
-                <div class="uk-accordion-content">
-                <ul class="uk-nav uk-filter-nav">
-                    <li>
-                        <a :href="'/shop?menu='+parent+'&parent='+ category.name.toLowerCase() +'&category=all'">
-                            <span :class="{'uk-text-bold': categorySlug == category.name.toLowerCase() && slug == 'all'}">
-                                 {{ trans.all }}
-                            </span>
-                        </a>
-                    </li>
-                    <li v-for="cat in category.child" >
-                      <a :href="'/shop?menu='+parent+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
-                          <span :class="{'uk-text-bold': slug == cat.slug}">
-                              {{ cat.name }}
-                          </span>
-                      </a>
-                    </li>
-                </ul>
-                </div>
-            </li>
-        </ul>
-    </div>
 
     <div v-else>
         <ul class="uk-accordion">
@@ -100,7 +61,7 @@
             </li>
         </ul>
         <ul class="uk-accordion" uk-accordion="multiple: true" >
-            <li class="uk-open" v-for="category in categories" v-if="category.name.toLowerCase() != 'homeware'">
+            <li class="uk-open" v-for="category in categories">
                 <span href="#" class="uk-accordion-title">{{ category.name }}</span>
                 <div class="uk-accordion-content">
                 <ul class="uk-nav uk-filter-nav">
