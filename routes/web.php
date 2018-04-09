@@ -20,6 +20,21 @@ Route::get('eco-tourism', function () {
     return view('errors.503');
 });
 
+Route::get('/payment/confirm', [
+    'as'   => 'payment.confirm.page',
+    'uses' => 'Frontend\UserController@confirmPaymentPage',
+]);
+
+Route::get('/payment/confirm/result', [
+    'as'   => 'payment.confirm',
+    'uses' => 'Frontend\UserController@confirmPayment',
+]);
+
+Route::post('/payment/confirm/result', [
+    'as'   => 'payment.confirm',
+    'uses' => 'Frontend\UserController@confirmPayment',
+]);
+
 Route::get('/tracking/order/', [
     'as'   => 'tracking-page',
     'uses' => 'Frontend\OrderController@trackingOrder',

@@ -14,6 +14,7 @@
         <ul class="uk-nav uk-footer-nav">
           <li><span class="footer_title">{{ trans('app.order_shipping') }}</span></li>
           <li><a href="{{ route('tracking-page')}}"> {{trans('app.track_order') }}</a> </li>
+          <li><a href="{{ route('payment.confirm')}}"> {{trans('app.confirm_payment') }}</a> </li>
           <li><a href="{{ URL::to('help/shipping-handling')}}">{{ trans('app.shipping_handling') }}</a></li>
         </ul>
       </div>
@@ -75,6 +76,7 @@
           <a href="#" class="uk-text-uppercase"><b>{{ trans('app.order_shipping') }}</b></a>
           <ul class="uk-nav-sub">
             <li><a href="{{ route('tracking-page')}}"> {{trans('app.track_order') }}</a> </li>
+            <li><a href="{{ route('payment.confirm')}}"> {{trans('app.confirm_payment') }}</a> </li>
             <li><a href="{{ URL::to('help/shipping-handling')}}">{{ trans('app.shipping_handling') }}</a></li>
           </ul>
       </li>
