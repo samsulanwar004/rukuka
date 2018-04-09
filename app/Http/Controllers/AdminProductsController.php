@@ -64,6 +64,8 @@
 			$this->form[] = ['label'=>'Width','name'=>'width','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Cm','placeholder'=>'cm'];
 			$this->form[] = ['label'=>'Height','name'=>'height','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Cm','placeholder'=>'cm'];
 			$this->form[] = ['label'=>'Diameter','name'=>'diameter','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Cm','placeholder'=>'cm'];
+			$this->form[] = ['label'=>'Pre Order','name'=>'is_preorder','type'=>'radio','width'=>'col-sm-10','dataenum'=>'0|Unactive;1|Active','value'=>0];
+			$this->form[] = ['label'=>'Pre Order Day','name'=>'preorder_day','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-2','help'=>'on Day','placeholder'=>'day'];
 			$this->form[] = ['label'=>'Status','name'=>'is_active','type'=>'radio','width'=>'col-sm-10','dataenum'=>'0|Unactive;1|Active','value'=>0];
 			# END FORM DO NOT REMOVE THIS LINE
 

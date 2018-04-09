@@ -31,6 +31,9 @@
         <div v-else>
             <span class="uk-text-meta"><i class="uk-text-danger">{{ trans.no_size }} </i> <br>{{ trans.contact_cs }} </span>
         </div>
+        <div v-if="prod.is_preorder == 1">
+            <span class="uk-text-meta"><i class="uk-text-danger">Pre Order {{ prod.preorder_day }} days</i>
+        </div>
         <ul uk-accordion="animation: true; multiple: false">
             <li class="uk-open">
                 <span class="uk-accordion-title">{{ trans.editors_notes }}</span>
@@ -55,7 +58,8 @@
           <button class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right uk-text-uppercase" v-on:click="updateBag(sku)"> {{ trans.update_bag }} </button>
         </div>
         <div class="uk-margin-small-top" v-else>
-          <button class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right uk-text-uppercase" v-on:click="bag"> {{ trans.add_to_bag }} </button>
+          <button v-if="prod.is_preorder == 0" class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right uk-text-uppercase" v-on:click="bag"> {{ trans.add_to_bag }} </button>
+          <button v-else class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right uk-text-uppercase" v-on:click="bag"> Pre Order </button>
         </div>
         <div class="uk-margin-small-top" v-if="method == 'wishlist'">
             <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right uk-text-uppercase" v-on:click="updateWishlist(id)">{{ trans.update_wishlist }}</button>

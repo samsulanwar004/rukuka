@@ -130,23 +130,31 @@
                {{ color }}
              </h6>
               <div v-if="stocks.length > 0">
-                <div class="uk-grid uk-child-width-1-2 uk-margin-small-bottom" uk-grid>
-                  <div>
-                    <h6> <b> {{ trans.european }} </b></h6>
-                  </div>
-                  <div class="uk-text-right">
-                    <span class="uk-text-meta"><a href="/help/size-charts" target="_blank"> {{ trans.size_chart}}</a></span>
-                  </div>
+                <div v-if="stocks[0].size == 'none'">
+                    <span class="uk-text-meta"><i class="uk-text-success">{{ trans.product_available }} ({{ stocks[0].unit }})</i>
                 </div>
-                <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-medium">
-                  <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
-                    {{ stock.size }} {{ stock.unit | unit }}
-                  </option>
+                <div v-else>
+                  <div class="uk-grid uk-child-width-1-2 uk-margin-small-bottom" uk-grid>
+                    <div>
+                      <h6> <b> {{ trans.european }} </b></h6>
+                    </div>
+                    <div class="uk-text-right">
+                      <span class="uk-text-meta"><a href="/help/size-charts" target="_blank"> {{ trans.size_chart}}</a></span>
+                    </div>
+                  </div>
+                  <select name="size" v-model="size" v-validate="'required'" class="uk-select uk-form-small uk-form-width-medium">
+                    <option v-for="stock in stocks" :value="stock.sku" :disabled="stock.unit <= 0">
+                      {{ stock.size }} {{ stock.unit | unit }}
+                    </option>
 
-                </select>
+                  </select>
+                </div>
               </div>
               <div v-else>
                   <span class="uk-text-meta"><i class="uk-text-danger">{{ trans.no_size }} </i> <br>{{ trans.contact_cs }} </span>
+              </div>
+              <div v-if="isPreOrder == 1">
+                  <span class="uk-text-meta"><i class="uk-text-danger">Pre Order {{ preOrderDay }} days</i>
               </div>
               <ul uk-accordion="animation: true; multiple: false">
                   <li class="uk-open">
@@ -314,6 +322,8 @@
             detailAndCare: {},
             slug: {},
             size: {},
+            isPreOrder: {},
+            preOrderDay: {},
             defaultImage: JSON.parse(this.default_image,true),
             bagCount: {},
             isLoading: false,
@@ -345,6 +355,9 @@
             self.detailAndCare = data.detail_and_care;
             self.slug =  data.slug;
             self.size = self.stocks.length > 0 ? self.stocks[0].sku : null;
+            self.isPreOrder =  data.is_preorder;
+            self.preOrderDay =  data.preorder_day;
+
             self.isLoading = false;
 
           }
