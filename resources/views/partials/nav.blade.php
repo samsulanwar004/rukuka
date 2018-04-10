@@ -1,6 +1,6 @@
 @php
-  $women = Request::segment(1) == "women" || Request::input('gender') == "womens" || $categories == "womens" || $product->gender == "womens" ? "womens" : null;
-  $men = Request::segment(1) == "men" || Request::input('gender') == "mens" || $categories == "mens" || $product->gender == "mens" ? "mens" : null;
+  $women = Request::segment(1) == "women" || Request::segment(1) == "designer" || Request::input('gender') == "womens" || $categories == "womens" || $product->gender == "womens" || $product->gender == "unisex" ? "womens" : null;
+  $men = Request::segment(1) == "men" || Request::segment(1) == "designer" ||  Request::input('gender') == "mens" || $categories == "mens" || $product->gender == "mens" || $product->gender == "unisex" ? "mens" : null;
 
   if($women) {
     $navigation = $women;
@@ -10,29 +10,12 @@
     $navigation = null;
   }
 
-  $category = $categories == 'designers' ? $categories : $category;
-
 @endphp
 <div class="uk-section-xsmall uk-background-default uk-margin-remove uk-padding-remove" style="border-color: #333; border-width: 5px">
     <div class="uk-section uk-section-default uk-section-xsmall uk-padding-remove-vertical header-let">
         <div class="uk-container">
           <div class="uk-grid-small" uk-grid>
               <div class="uk-width-2-5@m uk-flex uk-flex-middle">
-                {{-- <div class="uk-panel">
-                    {{ Form::open(array('url' => '/search', 'method' =>'get','files' => true,'class' => 'uk-search uk-form-width-medium uk-first-column')) }}
-                    <button type="submit" class="uk-search-icon-flip uk-search-icon uk-icon" uk-search-icon></button>
-                    <div>
-                        <div class="typeahead__container">
-                            <div class="typeahead__field">
-                                <span class="typeahead__query">
-                                    <input class="js-typeahead-designers" type="search" class=" uk-search-input" name="keyword" autocomplete="off" required placeholder="{{ trans('app.search') }}">
-                                    <button type="submit" class="uk-search-icon-flip uk-search-icon uk-icon" uk-search-icon></button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    {{ Form::close() }}
-                </div> --}}
                 <ul class="uk-navbar-nav">
                   <li class="uk-margin-medium-right {{ $navigation == 'womens' ? 'uk-active' : ''}}"><a href="{{ route('women') }}"> Women </a></li>
                   <li class="{{ $navigation == 'mens' ? 'uk-active' : ''}}"><a href="{{ route('men') }}"> Men </a></li>
@@ -42,7 +25,7 @@
               </div>
               <div class="uk-width-1-5@m">
                 <div class="uk-panel uk-text-center">
-                      <a href="/" class="uk-link-reset">
+                      <a href="/{{ str_replace('s', '', $navigation) }}" class="uk-link-reset">
                         <div class="uk-inline">
                           <img src="{{ imageCDN(config('common.logo')) }}" alt="rukuka" width="90">
                         </div>
@@ -112,6 +95,7 @@
           language="{{ App::getLocale() }}"
           navigation="{{ $navigation }}"
           category="{{ isset($category) ? $category : null }}"
+          designer="{{ isset($designer) || Request::segment(1) == "designer" ? true : false }}"
         ></navigation>
 
       </div>
@@ -158,8 +142,9 @@
             },
             callback: {
                 onClick: function (node, a, item, event) {
+                  var navigation = "{{$navigation}}";
                     var designer_slug = slugify(item.display);
-                    window.location.replace("/shop?menu=designers&category="+ designer_slug);
+                    window.location.replace("/shop?menu="+navigation+"&designer="+ designer_slug);
                 }
             }
         });

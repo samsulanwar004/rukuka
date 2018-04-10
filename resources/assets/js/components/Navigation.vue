@@ -7,8 +7,8 @@
               <a :href="'/shop?menu='+navigation+'&parent=all'">{{ trans.new_arrival }}</a>
             </li>
               <!--Start Designer-->
-              <li :class="{'uk-active': category == 'designers'}" class="uk-margin-medium-right">
-                  <a :href="designerLink">{{ trans.designers_nav }}</a>
+              <li :class="{'uk-active': designer }" class="uk-margin-medium-right">
+                  <a :href="designerLink+'?menu='+navigation">{{ trans.designers_nav }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
                       <div class="uk-grid uk-grid-small uk-grid-collapse" uk-grid>
                         <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
@@ -17,11 +17,8 @@
                               <li><h5 class="uk-margin-small uk-text-uppercase">{{ trans.designers_nav }}</h5></li>
                             </ul>
                             <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-3">
-                                <li class="uk-parent uk-active">
-                                    <a :href="'/shop?menu=designers&gender='+navigation+'&category=all'">{{ trans.all }} </a>
-                                </li>
                               <li class="uk-parent" v-for="design in designers">
-                                  <a :href="'/shop?menu=designers&gender='+navigation+'&category='+ design.slug ">{{ design.name }}</a>
+                                  <a :href="'/shop?menu='+navigation+'&designer='+ design.slug ">{{ design.name }}</a>
                               </li>
                             </ul>
                           </div>
@@ -70,7 +67,7 @@
                               </ul>
                               <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1">
                                 <li class="uk-parent uk-active">
-                                  <a :href="'/shop?menu='+navigation+'&parent=clothing&category=all'">{{ trans.all }}</a>
+                                  <a :href="'/shop?menu='+navigation+'&parent=clothing&category=all'">{{ trans.all }} Clothing</a>
                                 </li>
                                   <li class="uk-parent" v-for="cat in categories.clothing" v-if="cat.menu == navigation || cat.menu == null">
                                     <a :href="'/shop?menu='+navigation+'&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
@@ -123,7 +120,7 @@
                               </ul>
                               <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1">
                                 <li class="uk-parent uk-active">
-                                  <a :href="'/shop?menu='+navigation+'&parent=accessories&category=all'">{{ trans.all }}</a>
+                                  <a :href="'/shop?menu='+navigation+'&parent=accessories&category=all'">{{ trans.all }} Accessories</a>
                                 </li>
                                   <li class="uk-parent" v-for="cat in categories.accessories" v-if="cat.menu == navigation || cat.menu == null">
                                       <a :href="'/shop?menu='+navigation+'&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
@@ -164,7 +161,7 @@
               </li>
               <!--End Mens-->
               <!--Start Home-->
-              <li :class="{'uk-active': category == 'home'}" class="uk-margin-medium-right">
+              <li :class="{'uk-active': category == 'homeware'}" class="uk-margin-medium-right">
                   <a :href="'/shop?menu='+navigation+'&parent=homeware&category=all'">{{ trans.home }}</a>
               </li>
               <!--End Home-->
@@ -352,7 +349,8 @@
           'currency_code',
           'language',
           'navigation',
-          'category'
+          'category',
+          'designer'
         ],
 
         components: {

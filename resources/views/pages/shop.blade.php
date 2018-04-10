@@ -1,7 +1,7 @@
 @extends('app')
 
 {{--Title--}}
-@if($categories == 'designers')
+@if($designer)
     @if($category == 'all')
         @section('title',  $designer->name.' '.trans('app.title_designers_list') )
     @else
@@ -12,8 +12,6 @@
         @section('title', trans('app.title_shop_womens') )
     @elseif($categories == 'mens' && $category == 'all' || $categories == 'mens' && $slug =='all')
         @section('title', trans('app.title_shop_mens') )
-    @elseif($categories == 'home' && $category == 'all' || $categories == 'home' && $slug == 'all')
-        @section('title', trans('app.title_shop_home') )
     @elseif($products->first()->category_name)
         @section('title',$products->first()->category_name.' '.trans('app.title_shop_category') )
     @else
@@ -62,7 +60,7 @@
 
       {{-- </div> --}}
         {{-- Start Designer Header  --}}
-        @if($categories == 'designers' && $category != 'all')
+        @if($designer)
             <div class="uk-grid-small uk-margin-top" uk-grid>
                 <div class="uk-panel uk-width-1-4 uk-text-center">
                     <img src="{{uploadCDN($designer->photo)}}" width="150" height="150" alt="rukuka designer" class="uk-box-shadow-medium" onerror="this.src = '{{imageCDN(config('common.default.image_6'))}}'">
@@ -82,15 +80,17 @@
             <div class="uk-width-1-4@m">
               <ul class="uk-grid uk-grid-small">
                 <li><a href="#" uk-toggle="target: #nav1"><i class="material-icons" style="font-size: 18px">menu</i></a></li>
-                <li>@if($categories == 'designers' && $category != 'all')
-                     {{ $designer->name }}
-                @else
-                    @if($category == 'all' || $slug == 'all')
-                        {{ trans('app.all_you_need') }}
-                    @else
-                        {{ isset($products->first()->category_name) ? $products->first()->category_name : trans('app.product_not_available') }}
-                    @endif
-                @endif</li>
+                <li>
+                  @if($designer)
+                       {{ $designer->name }}
+                  @else
+                      @if($category == 'all' || $slug == 'all')
+                          {{ trans('app.all_you_need') }}
+                      @else
+                          {{ isset($products->first()->category_name) ? $products->first()->category_name : trans('app.product_not_available') }}
+                      @endif
+                  @endif
+              </li>
               </ul>
 
 
@@ -143,7 +143,8 @@
         </div>
         <div class="uk-hidden@m uk-child-width-1-2" uk-grid>
           <div>
-            <a href="#">{{ trans('app.sort_by_price') }}<i class="material-icons"  style="font-size: 18px; vertical-align:middle">expand_more</i></a>
+            <a href="#">{{ trans('app.sort_by_price') }}
+              <i class="material-icons"  style="font-size: 18px; vertical-align:middle">expand_more</i></a>
             <div uk-drop="mode: hover; delay-hide: 0" style="width: 200px">
                 <div class="uk-card uk-background-default uk-box-shadow-small uk-card-small">
                   <div class="uk-card-body">
@@ -174,21 +175,20 @@
               <div class="uk-modal-dialog uk-margin-auto-vertical">
                 <div class="uk-modal-body" uk-overflow-auto>
                   <categories-mobile
-                          parent="{{ $categories }}"
-                          slug="{{ $slug == null ? $category:$slug }}"
-                          category_slug="{{ $category }}"
-                          sale="{{ $sale == null ? $category:$sale }}"
-                          locale="{{ json_encode(trans('app')) }}"
-                          action_link="{{ actionLink() }}"
-                          gender="{{ $gender }}"
+                    parent="{{ $categories }}"
+                    slug="{{ $slug == null ? $category:$slug }}"
+                    category_slug="{{ $category }}"
+                    sale="{{ $sale == null ? $category:$sale }}"
+                    locale="{{ json_encode(trans('app')) }}"
+                    designer_slug={{ $designer ? $designer->slug : ''}}
                   ></categories-mobile>
 
                   <color-palette-mobile
-                          default_image="{{ json_encode(config('common.default')) }}"
-                          aws_link="{{ config('filesystems.s3url') }}"
-                          color_id="{{ $colorId }}"
-                          locale="{{ json_encode(trans('app')) }}"
-                          action_link="{{ actionLink() }}"
+                    default_image="{{ json_encode(config('common.default')) }}"
+                    aws_link="{{ config('filesystems.s3url') }}"
+                    color_id="{{ $colorId }}"
+                    locale="{{ json_encode(trans('app')) }}"
+                    action_link="{{ actionLink() }}"
                   ></color-palette-mobile>
                 </div>
                 <div class="uk-modal-footer">
@@ -201,41 +201,40 @@
         </div>
 
         <div class="uk-grid uk-margin-small-top" uk-grid>
-            <div id="nav1" class="uk-width-1-4@m uk-visible@m">
+          <div id="nav1" class="uk-width-1-4@m uk-visible@m">
 
-                        <categories
-                                api="{{ route('menu', ['parent' => $categories]) }}"
-                                parent="{{ $categories }}"
-                                slug="{{ $slug == null ? $category:$slug }}"
-                                category_slug="{{ $category }}"
-                                sale="{{ $sale == null ? $category:$sale }}"
-                                locale="{{ json_encode(trans('app')) }}"
-                                action_link="{{ actionLink() }}"
-                                gender="{{ $gender }}"
-                        ></categories>
-                        <color-palette
-                                api="{{ route('color') }}"
-                                default_image="{{ json_encode(config('common.default')) }}"
-                                aws_link="{{ config('filesystems.s3url') }}"
-                                color_id="{{ $colorId }}"
-                                locale="{{ json_encode(trans('app')) }}"
-                                action_link="{{ actionLink() }}"
-                        ></color-palette>
+            <categories
+              api="{{ route('menu', ['parent' => $categories]) }}"
+              parent="{{ $categories }}"
+              slug="{{ $slug == null ? $category:$slug }}"
+              category_slug="{{ $category }}"
+              sale="{{ $sale == null ? $category:$sale }}"
+              locale="{{ json_encode(trans('app')) }}"
+              designer_slug={{ $designer ? $designer->slug : ''}}
+            ></categories>
+            <color-palette
+              api="{{ route('color') }}"
+              default_image="{{ json_encode(config('common.default')) }}"
+              aws_link="{{ config('filesystems.s3url') }}"
+              color_id="{{ $colorId }}"
+              locale="{{ json_encode(trans('app')) }}"
+              action_link="{{ actionLink() }}"
+            ></color-palette>
 
-            </div>
-            <div class="uk-width-expand@m">
-                <shop
-                  shops ="{{ $shops }}"
-                  product_api="{{ route('product.api') }}"
-                  bag_api="{{ route('persist.bag') }}"
-                  wishlist_api="{{ route('persist.wishlist') }}"
-                  auth="{{ Auth::check() ? 1 : 0 }}"
-                  aws_link="{{ config('filesystems.s3url') }}"
-                  default_image="{{ json_encode(config('common.default')) }}"
-                  bag_link="{{ route('bag') }}"
-                  locale="{{ json_encode(trans('app')) }}"
-                ></shop>
-            </div>
+          </div>
+          <div class="uk-width-expand@m">
+            <shop
+              shops ="{{ $shops }}"
+              product_api="{{ route('product.api') }}"
+              bag_api="{{ route('persist.bag') }}"
+              wishlist_api="{{ route('persist.wishlist') }}"
+              auth="{{ Auth::check() ? 1 : 0 }}"
+              aws_link="{{ config('filesystems.s3url') }}"
+              default_image="{{ json_encode(config('common.default')) }}"
+              bag_link="{{ route('bag') }}"
+              locale="{{ json_encode(trans('app')) }}"
+            ></shop>
+          </div>
         </div>
           <div class="uk-text-right uk-margin-bottom uk-margin-top">
 
