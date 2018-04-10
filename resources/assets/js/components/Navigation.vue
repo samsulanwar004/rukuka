@@ -10,9 +10,9 @@
               <li :class="{'uk-active': designer }" class="uk-margin-medium-right">
                   <a :href="designerLink+'?menu='+navigation">{{ trans.designers_nav }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
-                      <div class="uk-grid uk-grid-small uk-grid-collapse" uk-grid>
-                        <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
-                          <div class="uk-width-2-3">
+                      <div uk-grid>
+                        <div class="uk-width-3-5@m">
+                          <div class="uk-width-3-4">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                               <li><h5 class="uk-margin-small uk-text-uppercase">{{ trans.designers_nav }}</h5></li>
                             </ul>
@@ -36,7 +36,7 @@
                                                   :alt="designersNav.designer_designer_shop__text"
                                                   :loading-image="loadingImage"
                                                   :error-image="errorImage"
-                                                  image-style="height: 400px; width:400px">
+                                                  image-style="height: 250px; width:250px">
                                           </lazy-background>
                                       </a>
                                       <div class="uk-overlay-primary uk-position-cover"></div>
@@ -59,13 +59,13 @@
                   <!-- <a :href="womenLink">{{ trans.women_nav }}</a> -->
                   <a href="#">{{ trans.clothing }}</a>
                   <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
-                      <div class="uk-grid uk-grid-small" uk-grid>
-                        <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
-                            <div class="uk-width-1-3">
+                      <div uk-grid>
+                        <div class="uk-width-3-5@m" uk-grid>
+                            <div class="uk-width-3-4">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li ><h5 class="uk-margin-small uk-text-uppercase">{{ trans.clothing }}</h5></li>
                               </ul>
-                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-1">
+                              <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2">
                                 <li class="uk-parent uk-active">
                                   <a :href="'/shop?menu='+navigation+'&parent=clothing&category=all'">{{ trans.all }} Clothing</a>
                                 </li>
@@ -88,7 +88,7 @@
                                                   :alt="womensNav.women_shop_text"
                                                   :loading-image="loadingImage"
                                                   :error-image="errorImage"
-                                                  image-style="height: 400px; width:400px">
+                                                  image-style="height: 250px; width:250px">
                                           </lazy-background>
                                       </a>
                                       <div class="uk-overlay-primary uk-position-cover"></div>
@@ -112,8 +112,8 @@
                 <!-- <a :href="menLink">{{ trans.men_nav }}</a> -->
                 <a href="#">{{ trans.accessories }}</a>
                 <div class="uk-navbar-dropdown" uk-drop="boundary: !nav; delay-show:200; delay-hide:200; boundary-align: true; pos: bottom-justify;">
-                    <div class="uk-grid uk-grid-small" uk-grid>
-                        <div class="uk-width-3-5@m uk-margin-remove uk-padding-remove-vertical uk-padding-small" uk-grid>
+                    <div uk-grid>
+                        <div class="uk-width-3-5@m" uk-grid>
                             <div class="uk-width-1-3">
                               <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li><h5 class="uk-margin-small uk-text-uppercase">{{ trans.accessories }}</h5></li>
@@ -141,7 +141,7 @@
                                                 :alt="mensNav.men_shop_text"
                                                 :loading-image="loadingImage"
                                                 :error-image="errorImage"
-                                                image-style="height: 400px; width:400px">
+                                                image-style="height: 250px; width:250px">
                                         </lazy-background>
                                     </a>
                                     <div class="uk-overlay-primary uk-position-cover"></div>

@@ -8,7 +8,7 @@
       $menTitle = explode('|', $home['men_title']);
       $kidTitle = explode('|', $home['kid_title']);
     @endphp
-    <div class="uk-container">
+    {{-- <div class="uk-container"> --}}
       {{-- <div class="uk-text-center">
         <div class="uk-grid-small uk-text-left">
             @include('partials.alert')
@@ -118,40 +118,38 @@
 
             </div>
         </div> --}}
-        <div uk-slider="clsActivated: uk-transition-active;" class="uk-margin-top">
-                <div class="uk-position-relative uk-visible-toggle">
-                    <ul class="uk-slider-items uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
-                        <li>
-                          <div class="uk-panel uk-transition-toggle">
-                            <a href="{{ $home['homepage_url_5'] }}" class="uk-link-reset">
-                              <div class="uk-inline">
-                                  <img src="{{ uploadCDN($home['homepage_banner_5']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_7'))}}'">
-                                  <div class="uk-position-center uk-panel uk-light uk-visible@m">
-                                    <span class="banner-highlight">{{ $home['homepage_text_5'] }}</span>
-                                  </div>
-                                </div>
-                                <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_5'] }}</span>
-                              </a>
+
+                <ul class="uk-slider-items uk-grid uk-grid-collapse uk-child-width-1-2" uk-grid>
+                    <li>
+                      <div class="uk-inline-clip uk-transition-toggle">
+                        <a href="{{ $home['homepage_url_5'] }}" class="uk-link-reset">
+                          <div class="uk-inline">
+                              <img src="{{ uploadCDN($home['homepage_banner_5']) }}" alt="rukuka homepage" class="uk-transition-scale-up uk-transition-opaque" onerror="this.src = '{{imageCDN(config('common.default.image_7'))}}'">
+                              <div class="uk-position-center uk-panel uk-light uk-visible@m">
+                                <span class="banner-highlight">{{ $home['homepage_text_5'] }}</span>
+                              </div>
                             </div>
-                            <hr class="uk-margin-remove-top uk-margin-bottom uk-visible@m" style="border-color: #333; border-width: 5px">
-                        </li>
-                        <li>
-                          <div class="uk-panel uk-transition-toggle">
-                            <a href="{{ $home['homepage_url_6'] }}" class="uk-link-reset">
-                              <div class="uk-inline">
-                                  <img src="{{ uploadCDN($home['homepage_banner_6']) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_7'))}}'">
-                                  <div class="uk-position-center uk-panel uk-light uk-visible@m">
-                                    <span class="banner-highlight">{{ $home['homepage_text_6'] }}</span>
-                                  </div>
-                                </div>
-                                <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_6'] }}</span>
-                              </a>
+                            <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_5'] }}</span>
+                          </a>
+                        </div>
+                        <hr class="uk-margin-remove-top uk-margin-bottom uk-visible@m" style="border-color: #333; border-width: 5px">
+                    </li>
+                    <li>
+                      <div class="uk-inline-clip uk-transition-toggle">
+                        <a href="{{ $home['homepage_url_6'] }}" class="uk-link-reset">
+                          <div class="uk-inline">
+                              <img src="{{ uploadCDN($home['homepage_banner_6']) }}" alt="rukuka homepage" class="uk-transition-scale-up uk-transition-opaque" onerror="this.src = '{{imageCDN(config('common.default.image_7'))}}'">
+                              <div class="uk-position-center uk-panel uk-light uk-visible@m">
+                                <span class="banner-highlight">{{ $home['homepage_text_6'] }}</span>
+                              </div>
                             </div>
-                            <hr class="uk-margin-remove-top uk-visible@m" style="border-color: #333; border-width: 5px">
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                            <span class="uk-margin-small uk-dark uk-hidden@m">{{ $home['homepage_text_6'] }}</span>
+                          </a>
+                        </div>
+                        <hr class="uk-margin-remove-top uk-visible@m" style="border-color: #333; border-width: 5px">
+                    </li>
+                </ul>
+              
             {{-- <div class="uk-margin-small-top">
               <div class="uk-inline uk-light">
                 <a href="{{ $home['homepage_url_9'] }}" class="uk-link-reset">
@@ -202,7 +200,7 @@
                         </ul>
                     </div>
                 </div> --}}
-</div>
+{{-- </div> --}}
   {{-- <div class="uk-container uk-margin-top">
     <h4 class="uk-text-uppercase uk-text-center"><b>{{ trans('app.title_index_3') }}</b></h4>
   	<popular

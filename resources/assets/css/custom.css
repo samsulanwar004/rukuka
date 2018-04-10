@@ -486,7 +486,6 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
 
 .typeahead__container {
 	position: relative;
-	font: 1rem Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
 .typeahead__container * {

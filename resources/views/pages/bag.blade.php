@@ -1,7 +1,7 @@
 @extends('app')
 @section('title', trans('app.title_bag') )
 @section('content')
-<div class="uk-container uk-container-small">
+<div class="uk-container">
   <div class="uk-grid-small uk-margin-top">
       @include('partials.alert')
   </div>
