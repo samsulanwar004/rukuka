@@ -5,7 +5,7 @@
 <div class="uk-container">
   	<div class="uk-grid-small uk-margin-top uk-margin-bottom uk-flex uk-flex-center">
       	<div class="uk-width-1-1@m ">
-			<div class="uk-card">
+			<div class="uk-card uk-background-muted uk-box-shadow-small">
         		<div class="uk-card-body">
 				<h3 class="uk-card-title uk-text-center uk-text-uppercase">
 				{{ trans('app.confirm_title') }}
