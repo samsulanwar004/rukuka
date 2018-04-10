@@ -301,17 +301,8 @@
 	    public function hook_before_edit(&$postdata,$id) {
 	        //Your code here
             $productStock = ProductStock::where('id', $id)->first();
-            $sku = strtoupper(substr($productStock->sku,0,4));
-
-            if($sku == 'KUKA'){
-                $product = Product::where('id', $productStock->products_id)->first();
-                $desaignerName = $this->generateDesignerName($product->designer->slug);
-                $productName = $this->generateProductName($product->name);
-                $productSize = $this->generateSize($productStock->size);
-                $sku = $this->generateSku($desaignerName,$productName,$productSize);
-                $postdata['sku'] = $sku;
-            }
             $postdata['products_id'] = $productStock->products_id;
+            $postdata['sku'] = strtoupper(str_slug($productStock->sku));
             $postdata['size'] = $productStock->size;
 	    }
 
@@ -385,6 +376,6 @@
         }
 
         public function generateSize($size){
-	        return strtoupper($size);
+	        return strtoupper(str_slug($size));
         }
 	}
