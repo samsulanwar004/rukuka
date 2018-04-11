@@ -7,7 +7,7 @@
     </div>
     <div class="uk-grid uk-margin-top" uk-grid>
         <div class="uk-width-2-3@m">
-            <div class="uk-card uk-card-default uk-card-small uk-background-muted uk-box-shadow-small" uk-sticky="bottom: #hash; animation: uk-animation-slide-top;">
+            <div class="uk-card uk-card-default uk-card-small uk-background-muted uk-box-shadow-small">
               <div class="uk-card-body">
                <div class="uk-grid uk-grid-divider uk-child-width-1-3 uk-margin-small" uk-grid>
                  <div class="uk-text-center">
@@ -70,7 +70,8 @@
                         </tr>
                     </tbody>
                 </table>
-                <h6 class="uk-margin-small uk-text-uppercase">{{ trans('app.payment_method') }}</h6>
+                <hr class="uk-margin" style="border-color: #333; border-width: 3px">
+                <h4 class="uk-margin-small uk-text-uppercase">{{ trans('app.payment_method') }}</h4>
                 <form action="{{ route('order') }}" method="POST">
                   {{ csrf_field() }}
                   <table class="uk-table uk-table-divider uk-table-hover">
@@ -78,16 +79,16 @@
                         @if($currency == 'idr')
                         <tr>
                             <td>
-                                <input type="radio" class="uk-radio" name="payment_method" value="bank_transfer" required="required"> 
+                                <input type="radio" class="uk-radio" name="payment_method" value="bank_transfer" required="required">
                             </td>
                             <td>
-                              Bank Transfer
+                              <span></span>Bank Transfer
                             </td>
                         </tr>
                         @endif
                         <tr>
                             <td>
-                                <input type="radio" class="uk-radio" name="payment_method" value="creditcard" required="required"> 
+                                <input type="radio" class="uk-radio" name="payment_method" value="creditcard" required="required">
                             </td>
                             <td>
                               Credit Card

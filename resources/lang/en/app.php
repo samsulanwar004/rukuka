@@ -74,7 +74,7 @@ return [
     'subtitle_index_1'          => 'Get Discover',
 
     //resources/views/partials/nav.blade.php
-    'search'                    =>  'SEARCH HERE...',
+    'search'                    =>  'Search....',
     'search_label'              =>  'Search',
     'header_note'               =>  'Welcome to ruKuKa, we ship to your country. Proudly Indonesian made. Check out ruKuKa Event',
     'find_label'                =>  'Find our product',
@@ -333,6 +333,7 @@ return [
     //resources/assets/js/components/ButtonBuy.vue
     'choose_size_label'         =>  'Choose your size',
     'no_size'                   =>  'No size available',
+    'product_available'         =>  'Product available',
     'contact_cs'                =>  'Please, contact our customer service.',
     'editors_notes'             =>  'Editors Notes',
     'size_fit'                  =>  'Size & Fit',

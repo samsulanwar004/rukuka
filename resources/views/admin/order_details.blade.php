@@ -93,7 +93,7 @@
                   @foreach($row->details as $detail)
                     <tr>
                         <td>{{ $detail->product_name }}</td>
-                        <td>{{ $detail->sku }}</td>
+                        <td><a href="/admin/product-stocks?q={{ $detail->sku }}">{{ $detail->sku }}</a></td>
                         <td>Rp. {{ number_format($detail->price) }}</td>
                         <td>{{ $detail->qty }}</td>
                         <td>Rp. {{ number_format($detail->subtotal) }}</td>

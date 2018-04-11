@@ -47,7 +47,7 @@
             else{
                 $this->form = [];
                 $this->form[] = ['label'=>'Product Code','name'=>'products_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'products,product_code','datatable_format'=>'product_code,\' - \',name'];
-                $this->form[] = ['label'=>'Size','name'=>'size','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'oval;round;35;36;37;38;39;40;40F;40M;41;41F;41M;42;43;44;45;46;47;XS;S;M;L;XL;XXL;ALL SIZE'];
+                $this->form[] = ['label'=>'Size','name'=>'size','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'none;oval;round;35;36;37;38;39;40;40F;40M;41;41F;41M;42;43;44;45;46;47;XS;S;M;L;XL;XXL;ALL SIZE'];
                 $this->form[] = ['label'=>'Unit','name'=>'unit','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
             }
 
@@ -75,7 +75,6 @@
 	        |
 	        */
 	        $this->sub_module = array();
-
 
 	        /*
 	        | ----------------------------------------------------------------------
@@ -302,17 +301,8 @@
 	    public function hook_before_edit(&$postdata,$id) {
 	        //Your code here
             $productStock = ProductStock::where('id', $id)->first();
-            $sku = strtoupper(substr($productStock->sku,0,4));
-
-            if($sku == 'KUKA'){
-                $product = Product::where('id', $productStock->products_id)->first();
-                $desaignerName = $this->generateDesignerName($product->designer->slug);
-                $productName = $this->generateProductName($product->name);
-                $productSize = $this->generateSize($productStock->size);
-                $sku = $this->generateSku($desaignerName,$productName,$productSize);
-                $postdata['sku'] = $sku;
-            }
             $postdata['products_id'] = $productStock->products_id;
+            $postdata['sku'] = strtoupper(str_slug($productStock->sku));
             $postdata['size'] = $productStock->size;
 	    }
 
@@ -386,6 +376,6 @@
         }
 
         public function generateSize($size){
-	        return strtoupper($size);
+	        return strtoupper(str_slug($size));
         }
 	}

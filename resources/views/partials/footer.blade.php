@@ -28,10 +28,10 @@
         </ul>
       </div>
       <div class="uk-width-1-6@m">
-          <popular-search
+{{--           <popular-search
           popular_search="{{ route('popular-search') }}"
           locale="{{ json_encode(trans('app')) }}"
-          ></popular-search>
+          ></popular-search> --}}
       </div>
       <div class="uk-width-expand@m">
         <subcriber
@@ -101,15 +101,6 @@
     <ul class="uk-grid uk-grid-small uk-flex uk-flex-top uk-flex-between" uk-grid>
       <li>{{ trans('app.copyright') }}</li>
       <li>
-        {{--@foreach (Config::get('languages') as $lang => $language)--}}
-          {{--@if ($lang == App::getLocale())--}}
-            {{--<u> <a class="uk-text-small" href="{{ route('lang.switch', $lang) }}">{{$language}}</a> </u>--}}
-          {{--@endif--}}
-          {{--@if ($lang != App::getLocale())--}}
-            {{--<a class="uk-text-small" href="{{ route('lang.switch', $lang) }}"> {{$language}} </a>--}}
-          {{--@endif--}}
-          {{--{{ $loop->last ? '' : '| ' }}--}}
-        {{--@endforeach--}}
         @foreach (Config::get('languages') as $lang => $language)
             @if ($lang == App::getLocale())
                 @php

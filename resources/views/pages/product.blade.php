@@ -156,18 +156,18 @@
                 @endif
 
                 <button-buy
-                        api_bag="{{ route('persist.bag') }}"
-                        api_wishlist="{{ route('persist.wishlist') }}"
-                        product="{{ json_encode($buttonBuy) }}"
-                        sizes="{{ $product->stocks }}"
-                        auth="{{ Auth::check() ? 1 : 0 }}"
-                        method="{{ $method }}"
-                        sku="{{ $sku }}"
-                        id="{{ $id }}"
-                        bag_link="{{ route('bag') }}"
-                        wishlist_link="{{ route('user.wishlist') }}"
-                        locale="{{ json_encode(trans('app')) }}"
-                        aws_link="{{ config('filesystems.s3url') }}"
+                    api_bag="{{ route('persist.bag') }}"
+                    api_wishlist="{{ route('persist.wishlist') }}"
+                    product="{{ json_encode($buttonBuy) }}"
+                    sizes="{{ $product->stocks }}"
+                    auth="{{ Auth::check() ? 1 : 0 }}"
+                    method="{{ $method }}"
+                    sku="{{ $sku }}"
+                    id="{{ $id }}"
+                    bag_link="{{ route('bag') }}"
+                    wishlist_link="{{ route('user.wishlist') }}"
+                    locale="{{ json_encode(trans('app')) }}"
+                    aws_link="{{ config('filesystems.s3url') }}"
                 ></button-buy>
                 <p class="uk-text-meta">
                 <ul class="uk-grid-small uk-flex-middle uk-flex-center" uk-grid>

@@ -4,26 +4,26 @@
             <a href="/" class="uk-link-reset"><h4 class="uk-margin-remove">{{ trans.rukuka }}</h4></a>
             <hr class="uk-margin-small">
             <ul class="uk-nav uk-nav-primary uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
-                <li :class="{'uk-parent': true , 'uk-open uk-active': segmentPage == 'designer' || segmentShop == 'designers' }">
+                <li :class="{'uk-parent': true , 'uk-open uk-active': category == 'designers' }">
                     <a :href="designerLink" class="uk-text-uppercase">{{ trans.designers_nav }}</a>
                     <ul class="uk-nav-sub">
                         <li class="uk-parent">
-                            <a href="/shop?menu=designers&category=all">
-                              <span :class="{'text-underline': segmentShop == 'designers' && segmentCategory == 'all' }">
+                            <a :href="'/shop?menu=designers&gender='+navigation+'&category=all'">
+                              <span :class="{'text-underline': category == 'designers' }">
                                 {{ trans.all }}
                                </span>
                             </a>
                         </li>
                         <li class="uk-parent" v-for="design in designers">
-                            <a :href="'/shop?menu=designers&category='+ design.slug ">
-                            <span :class="{'text-underline': segmentShop == 'designers' && segmentCategory == design.slug }">
+                            <a :href="'/shop?menu=designers&gender='+navigation+'&category='+ design.slug ">
+                            <span>
                                 {{ design.name }}
                             </span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li :class="{'uk-parent': true , 'uk-open uk-active': segmentPage == 'women' || segmentShop == 'womens' }">
+                <li :class="{'uk-parent': true , 'uk-open uk-active': navigation == 'womens' }">
                     <a :href="womenLink" class="uk-text-uppercase">{{ trans.women_nav }}</a>
                     <ul class="uk-nav uk-nav-sub uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
                         <li>
@@ -160,7 +160,22 @@
 
 <script>
     export default {
-        props: ['men_link', 'women_link','designer_link','auth','login_link','profile_link','locale','segment_page','segment_shop','segment_category','segment_slug'],
+        props: [
+            'men_link', 
+            'women_link',
+            'designer_link',
+            'auth',
+            'login_link',
+            'profile_link',
+            'locale',
+            'segment_page',
+            'segment_shop',
+            'segment_category',
+            'segment_slug',
+            'navigation',
+            'category'
+        ],
+
         created() {
             var self = this;
             var sort_by = function(field, reverse, primer){
@@ -201,8 +216,6 @@
                 womenLink: this.women_link,
                 designerLink: this.designer_link,
                 trans: JSON.parse(this.locale,true),
-                segmentPage: this.segment_page,
-                segmentShop: this.segment_shop,
                 segmentCategory: this.segment_category,
                 segmentSlug: this.segment_slug,
             }

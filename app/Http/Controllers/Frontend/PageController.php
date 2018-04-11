@@ -70,52 +70,11 @@ class PageController extends BaseController
     	return view('pages.index', compact('home','slider', 'exchange'));
     }
 
-    public function shop(Request $request)
+    public function shop(Request $request, ProductRepository $product)
     {
         try {
-            if ($request->input('menu') == 'designers') {
-                $product = (new ProductRepository);
-                $products = $product->getProductByDesigner($request);
-                $designer = $product->getDesigner();
-            } elseif ($request->input('menu') == 'womens') {
-                if (in_array($request->input('parent'), array('clothing', 'accessories'))) {
-                    $products = (new ProductRepository)
-                        ->getProductByMenu($request);
-                } else {
-                    if ($request->input('parent') == 'all') {
-                        $products = (new ProductRepository)
-                        ->getProductByMenuAll($request);
-                    } else {
-                        throw new Exception("Error Processing Request", 1);
-                    }
-                }
-            } elseif ($request->input('menu') == 'mens') {
-                if (in_array($request->input('parent'), array('clothing', 'accessories'))) {
-                    $products = (new ProductRepository)
-                        ->getProductByMenu($request);
-                } else {
-                    if ($request->input('parent') == 'all') {
-                        $products = (new ProductRepository)
-                        ->getProductByMenuAll($request);
-                    } else {
-                        throw new Exception("Error Processing Request", 1);
-                    }
-                }
-            } elseif ($request->input('menu') == 'home') {
-                if (in_array($request->input('parent'), array('homeware'))) {
-                    $products = (new ProductRepository)
-                        ->getProductByMenu($request);
-                } else {
-                    if ($request->input('parent') == 'all') {
-                        $products = (new ProductRepository)
-                        ->getProductByMenuAll($request);
-                    } else {
-                        throw new Exception("Error Processing Request", 1);
-                    }
-                }
-            } else {
-                throw new Exception("Error Processing Request", 1);
-            }
+            
+            $products = $product->getProductByMenu($request);
 
             foreach ($request->all() as $key => $value) {
                 $products->appends($key, $value);
@@ -129,7 +88,7 @@ class PageController extends BaseController
                 $ids[] = $value->id;
             }
 
-            $image = (new ProductRepository)->getProductImage($ids);
+            $image = $product->getProductImage($ids);
 
             $shops = $products->map(function ($entry) use ($image){
 
@@ -155,11 +114,13 @@ class PageController extends BaseController
             $recently = $recentlyViewed ? array_keys(array_flip(array_reverse($recentlyViewed))) : [];
 
             $categories = $request->input('menu');
-            $category = $categories == 'designers' ? $request->input('category') : $request->input('parent') ;
+            $category = $request->input('parent') ;
             $slug = $request->input('category');
-            $gender = $request->input('gender');
 
-
+            // when parent designer
+            if ($request->has('designer')) {
+                $designer = $product->getDesigner();
+            }
 
         } catch (Exception $e) {
             return abort(404);
@@ -175,8 +136,7 @@ class PageController extends BaseController
             'sale',
             'recently',
             'colorId',
-            'sortByPrice',
-            'gender'
+            'sortByPrice'
         ));
 
     }
@@ -234,6 +194,8 @@ class PageController extends BaseController
         $buttonBuy->content = $product->content;
         $buttonBuy->size_and_fit = $product->size_and_fit;
         $buttonBuy->detail_and_care = $product->detail_and_care;
+        $buttonBuy->is_preorder = $product->is_preorder;
+        $buttonBuy->preorder_day = $product->preorder_day;
 
     	return view('pages.product', compact(
             'product',
@@ -266,7 +228,9 @@ class PageController extends BaseController
 
         $alpabeths = array_unique($alpabeths);
 
-        return view('pages.designer', compact('designers', 'alpabeths'));
+        $menu = request()->has('menu') ? request()->input('menu') : '';
+
+        return view('pages.designer', compact('designers', 'alpabeths', 'menu'));
     }
 
     public function women()
@@ -396,7 +360,8 @@ class PageController extends BaseController
                             'length' =>  $stock->product->length,
                             'width' =>  $stock->product->width,
                             'height' =>  $stock->product->height,
-                            'diameter' => $stock->product->diameter
+                            'diameter' => $stock->product->diameter,
+                            'preorder' => $stock->product->is_preorder == 1 ? $stock->product->preorder_day : null
                         ]
                     ];
                     $bag->save($product, self::INSTANCE_SHOP);
