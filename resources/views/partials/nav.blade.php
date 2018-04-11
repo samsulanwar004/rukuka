@@ -1,6 +1,6 @@
 @php
-  $women = Request::segment(1) == "women" || Request::segment(1) == "designer" || Request::input('gender') == "womens" || $categories == "womens" || $product->gender == "womens" || $product->gender == "unisex" ? "womens" : null;
-  $men = Request::segment(1) == "men" || Request::segment(1) == "designer" ||  Request::input('gender') == "mens" || $categories == "mens" || $product->gender == "mens" || $product->gender == "unisex" ? "mens" : null;
+  $women = Request::segment(1) == "women" || Request::segment(1) == "designer" || Request::segment(1) == "editorial" || Request::input('gender') == "womens" || $categories == "womens" || $product->gender == "womens" || $product->gender == "unisex" ? "womens" : null;
+  $men = Request::segment(1) == "men" || Request::segment(1) == "designer" || Request::segment(1) == "editorial" ||  Request::input('gender') == "mens" || $categories == "mens" || $product->gender == "mens" || $product->gender == "unisex" ? "mens" : null;
 
   if($women) {
     $navigation = $women;
@@ -95,7 +95,8 @@
           language="{{ App::getLocale() }}"
           navigation="{{ $navigation }}"
           category="{{ isset($category) ? $category : null }}"
-          designer="{{ isset($designer) || Request::segment(1) == "designer" ? true : false }}"
+          designer="{{ Request::segment(1) == "designer" ? true : false }}"
+          editorial="{{ Request::segment(1) == "editorial" ? true : false }}"
         ></navigation>
 
       </div>

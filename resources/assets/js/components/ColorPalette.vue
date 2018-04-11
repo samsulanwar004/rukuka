@@ -1,29 +1,27 @@
 <template>
-      <div>
-        <ul class="uk-accordion" uk-accordion>
-          <li><span href="#" class="uk-accordion-title">{{ trans.color }}</span>
-            <div class="uk-accordion-content">
-              <ul class="uk-grid uk-grid-collapse">
-                <li v-for="color in palette" :uk-tooltip="color.name">
-                  <label>
-                    <input type="radio" name="palette" v-on:click="pickColor(color.id)" :checked="color.id == color_id"/>
-                      <lazy-background
-                        :image-source="color.palette"
-                        :loading-image="loadingImage"
-                        :error-image="errorImage"
-                        :alt="color.name"
-                        width="32px"
-                        image-class="uk-border-circle uk-box-shadow-small">
-                      </lazy-background>
-                  </label>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-
-
-      </div>
+  <div>
+    <ul class="uk-accordion" uk-accordion>
+      <li><span href="#" class="uk-accordion-title">{{ trans.color }}</span>
+        <div class="uk-accordion-content">
+          <ul class="uk-grid uk-grid-collapse">
+            <li v-for="color in palette" :uk-tooltip="color.name">
+              <label>
+                <input type="radio" name="palette" v-on:click="pickColor(color.id)" :checked="color.id == color_id"/>
+                  <lazy-background
+                    :image-source="color.palette"
+                    :loading-image="loadingImage"
+                    :error-image="errorImage"
+                    :alt="color.name"
+                    width="32px"
+                    image-class="uk-border-circle uk-box-shadow-small">
+                  </lazy-background>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
 
 </template>
 
