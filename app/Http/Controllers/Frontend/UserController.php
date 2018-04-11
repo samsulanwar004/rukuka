@@ -1132,6 +1132,13 @@ class UserController extends BaseController
                     return redirect()->back()->with(['success' => trans('app.confirm_success')]);;
                 }
             }
+
+            //create notification
+            $users = config('common.admin.users_id');
+            $module = 'confirm-payments';
+            $message = 'New payment confirmation';
+            (new PaymentRepository)->notificationforAdmin($users, $order->order_code.' '.$message, $module);
+
             DB::commit();
             $amount = $request->input('transfer_amount');
             return view('pages.payment_confirm_result', compact('amount'));
