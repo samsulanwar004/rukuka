@@ -64,9 +64,7 @@
 
         </div>
     </div>
-    @if ($navigation || $category == 'designers')
-      <div class="cbp-af-header">
-
+      <div class="cbp-af-header {{ $navigation || $category == 'designers' ? '':'uk-hidden' }}">
         <navigation
           api="{{ route('menu')}}"
           men_link="{{ route('men') }}"
@@ -98,9 +96,8 @@
           designer="{{ Request::segment(1) == "designer" ? true : false }}"
           editorial="{{ Request::segment(1) == "editorial" ? true : false }}"
         ></navigation>
-
       </div>
-    @endif
+
   </div>
   @if ($navigation || $category == 'designers')
     <div class="uk-section uk-section-xsmall uk-padding-remove uk-margin-medium-top">
