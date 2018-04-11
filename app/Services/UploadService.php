@@ -4,15 +4,10 @@ namespace App\Services;
 
 use Storage;
 use Exception;
-use App\Libraries\ImageFile;
 
 class UploadService
 {
-    public function imageFromUrl($url)
-    {
-      
-    }
-
+  
     public function uploadProductImage($file)
     {
 
