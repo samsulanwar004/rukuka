@@ -757,12 +757,15 @@ class UserController extends BaseController
 
         $total = $bag->subtotal();
 
+        $language = \App::getLocale();
+
         return view('pages.checkout.shipping_preview', compact(
             // 'defaultCreditcard',
             'defaultAddress',
             'shippingCost',
             'total',
-            'currency'
+            'currency',
+            'language'
         ));
     }
 
