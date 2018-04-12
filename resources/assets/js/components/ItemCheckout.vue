@@ -1,6 +1,6 @@
 <template>
     <div class="uk-overflow-auto uk-margin-bottom">
-    <h4 class="uk-margin-remove">{{ trans.items }} ({{ bags.length }})</h4>
+    <h5 class="uk-margin-remove">{{ trans.items }} ({{ bags.length }})</h5>
     <table class="uk-table uk-table-small uk-margin-remove-bottom">
       <tr>
           <td colspan="2" class="uk-table-expand uk-text-uppercase">{{ trans.item }}</td>
@@ -23,7 +23,7 @@
                 </td>
                 <td class="uk-table-link">
                   <ul class="uk-list uk-margin-small-top">
-                    <li><h4>{{ bag.name }}</h4></li>
+                    <li><h5>{{ bag.name }}</h5></li>
                     <li class="uk-margin-remove"><span class="uk-text-small">{{ trans.color }} : {{ bag.options.color }}</span></li>
                     <li class="uk-margin-remove"><span class="uk-text-small">{{ trans.size }} : {{ bag.options.size }}</span></li>
                     <li class="uk-margin-remove" v-if="bag.options.preorder"><span class="uk-text-small uk-text-danger">Pre Order {{ bag.options.preorder }} days</span></li>
@@ -34,7 +34,7 @@
                   <li>{{ bag.qty }}</li>
                 </ul>
                 </td>
-                <td class="uk-text-nowrap"><h4>{{ bag.price | round(exchangeRate.symbol, exchangeRate.value) }}</h4></td>
+                <td class="uk-text-nowrap"><h5>{{ bag.price | round(exchangeRate.symbol, exchangeRate.value) }}</h5></td>
             </tr>
         </tbody>
     </table>

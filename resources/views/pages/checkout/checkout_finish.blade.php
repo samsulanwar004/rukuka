@@ -1,11 +1,12 @@
 @extends('app_checkout')
 @section('title', trans('app.title_payment') )
 @section('content')
+<div class="uk-section uk-section-muted uk-section-xsmall">
   <div class="uk-container uk-container-small">
     <div class="uk-grid-small uk-margin-top uk-flex uk-flex-center" uk-grid>
       <div class="uk-width-3-4@m">
         <h3>{{ trans('app.checkout_almost') }} </h3>
-        <div class="uk-card uk-card-default uk-card-border uk-margin-bottom">
+        <div class="uk-card uk-card-default uk-margin-bottom">
             <div class="uk-card-body">
                 <form role="form" id="payment-form" method="POST" action="javascript:void(0);" class="form_class">
                  {{ trans('app.order_number') }} :
@@ -103,6 +104,7 @@
 
   <div class="overlay" style="display: none;"></div>
   <!-- <div id="loading" style="display: none;"><img src="https://m.popkey.co/fe4ba7/DYALX.gif" width="200px" height="200px"></div> -->
+</div>
 </div>
 
         <?php $orderCode = $order->order_code;
