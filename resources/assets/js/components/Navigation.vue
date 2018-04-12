@@ -261,7 +261,7 @@
 
 
           <li class="uk-margin-left">
-            <a href="#flag-modal" uk-toggle><img :src="flagImage+language+'.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
+            <a href="#flag-modal" uk-tooltip="title: Your Currency; pos: bottom" uk-toggle><img :src="flagImage+language+'.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
             <span class="uk-text-uppercase uk-margin-small-left">{{ currencyCode }}</span>
             </a>
             <div id="flag-modal" class="uk-modal-full" uk-modal>
@@ -315,24 +315,24 @@
             </div>
           </li>
           <li v-if="auth == 1"  class="uk-margin-left">
-            <a :href="wishlist_link"><i class="material-icons" style="font-size: 18px">favorite</i>
+            <a :href="wishlist_link" uk-tooltip="title: Wishlist; pos: bottom"><i class="material-icons" style="font-size: 18px">favorite</i>
               <div class="uk-badge" v-if="wishlistCount > 0">
                 {{ wishlistCount }}
               </div>
             </a>
           </li>
           <li  class="uk-margin-left">
-            <a href="#" v-on:click.prevent="goBag"><i class="material-icons" style="font-size: 18px">shopping_basket</i>
+            <a href="#" uk-tooltip="title: Bag; pos: bottom" v-on:click.prevent="goBag"><i class="material-icons" style="font-size: 18px">shopping_basket</i>
               <div class="uk-badge" v-if="bagCount > 0">
                 {{ bagCount }}
               </div>
             </a>
           </li>
           <li v-if="auth == 0"  class="uk-margin-left">
-            <a :href="login_link"><i class="material-icons" style="font-size: 18px">person</i></a>
+            <a :href="login_link" uk-tooltip="title: Register or Sign Up; pos: bottom"><i class="material-icons" style="font-size: 18px">person</i></a>
           </li>
           <li v-if="auth == 1"  class="uk-margin-left">
-            <a :href="profile_link"> <i class="material-icons" style="font-size: 18px; vertical-align:middle">person</i> {{ accounts.first_name }}</a>
+            <a :href="profile_link" uk-tooltip="title: Go to Your Account; pos: bottom"> <i class="material-icons" style="font-size: 18px; vertical-align:middle">person</i> {{ accounts.first_name }}</a>
           </li>
 
         </ul>

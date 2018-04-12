@@ -2900,15 +2900,14 @@ select.uk-form-width-xsmall {
  ========================================================================== */
 .uk-alert {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 17px;
   padding: 15px 29px 15px 15px;
-  background: #fff;
+  background: #f8f8f8;
   color: #000;
-  border-bottom: solid 1px #e5e5e5;
 }
 /* Add margin if adjacent element */
 * + .uk-alert {
-  margin-top: 20px;
+  margin-top: 17px;
 }
 /*
  * Remove margin from the last-child
@@ -5575,10 +5574,10 @@ ul.uk-nav-sub {
   /* 3 */
   box-sizing: border-box;
   max-width: 200px;
-  padding: 3px 6px;
+  padding: 5px 10px;
   /* 4 */
-  background: #666;
-  border-radius: 2px;
+  background: #000;
+  border-radius: 5px;
   color: #fff;
   font-size: 12px;
 }

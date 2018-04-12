@@ -77,7 +77,7 @@
         {{--End Designer Header--}}
 
         <div class="uk-background-muted uk-visible@m fixed" uk-grid>
-            <div class="uk-width-1-4@m">
+            <div class="uk-width-1-5@m">
               <ul class="uk-grid uk-grid-small">
                 <li><a href="#" uk-toggle="target: #nav1"><i class="material-icons" style="font-size: 18px">menu</i></a></li>
                 <li>
@@ -100,7 +100,7 @@
                 </button> --}}
 
             </div>
-            <div class="uk-width-3-4@m">
+            <div class="uk-width-4-5@m">
                 <div class="uk-grid-small uk-child-width-1-2" uk-grid >
                       <div class="uk-text-left">
                           <a href="#">{{ trans('app.sort_by_price') }}<i class="material-icons"  style="font-size: 18px; vertical-align:middle">expand_more</i></a>
@@ -201,7 +201,7 @@
         </div>
 
         <div class="uk-grid uk-margin-small-top" uk-grid>
-          <div id="nav1" class="uk-width-1-4@m uk-visible@m">
+          <div id="nav1" class="uk-width-1-5@m uk-visible@m">
 
             <categories
               api="{{ route('menu', ['parent' => $categories]) }}"
