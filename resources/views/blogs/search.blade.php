@@ -1,8 +1,8 @@
-@extends('app_blog')
+@extends('app')
 @section('title', $keyword.' '.trans('app.title_blog_search') )
 @section('content')
 
-    <div class="uk-container uk-container-small">
+    <div class="uk-container">
         @include('partials.category_blog')
         <div class="uk-text-lead uk-text-uppercase uk-text-center">
             <h3 class="uk-margin-small">  {{ trans('app.search_result') }}:</h3>
