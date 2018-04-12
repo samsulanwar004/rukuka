@@ -24,7 +24,107 @@
              </div>
              </div>
             <h6>{{ trans('app.confirm_order') }}</h6>
-            <div class="uk-card uk-card-small uk-card-default">
+            <div class="uk-card uk-card-small uk-card-default uk-margin-top">
+              <div class="uk-card-header">
+                <h4>{{ trans('app.payment_method') }}</h4>
+              </div>
+              <div class="uk-card-badge">
+                <a href="#flag-modal" uk-toggle><img src="{{ imageCDN('flag1x1/'.$language.'.svg') }}" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
+                    <span class="uk-text-uppercase">{{ $currency }}</span>
+                  </a>
+                  <div id="flag-modal" class="uk-modal-full" uk-modal>
+                      <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+                          <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+                          <div class="uk-width-xxlarge uk-padding-large uk-text-center">
+                              <h3 class="uk-text-uppercase">{{ trans('app.currency_title') }}</h3>
+                              <button class="uk-button uk-button-small uk-button-default uk-text-uppercase" disabled>{{ trans('app.currency_set') }} <img src="{{ imageCDN('flag1x1/'.$language.'.svg') }}" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
+                                {{ $currency }}
+                              </button>
+                              <h5 class="uk-text-uppercase">{{ trans('app.usca') }}</h5>
+                              <div class="uk-grid uk-child-width-1-2@m uk-gird-small" uk-grid>
+                                <div>
+                                  <a href="/lang/ca"><h6>{{ trans('app.cad') }} <img src="{{ imageCDN('flag1x1/ca.svg') }}" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans('app.ca') }}</h6></a>
+                                </div>
+                                <div>
+                                  <a href="/lang/en"><h6>{{ trans('app.usd') }} <img src="{{ imageCDN('flag1x1/en.svg') }}" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans('app.us') }}</h6></a>
+                                </div>
+                              </div>
+                              <h5 class="uk-text-uppercase">{{ trans('app.asea') }}</h5>
+                              <div class="uk-grid uk-child-width-1-3@m uk-grid-small" uk-grid>
+                                <div>
+                                  <a href="/lang/id"><h6>{{ trans('app.idr') }} <img src="{{ imageCDN('flag1x1/id.svg') }}" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans('app.id') }}</h6></a>
+                                </div>
+                                <div>
+                                  <a href="/lang/sg"><h6>{{ trans('app.sgd') }} <img src="{{ imageCDN('flag1x1/sg.svg') }}" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans('app.sg') }}</h6></a>
+                                </div>
+                                <div>
+                                  <a href="/lang/my"><h6>{{ trans('app.myr') }} <img src="{{ imageCDN('flag1x1/my.svg') }}" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans('app.my') }}</h6></a>
+                                </div>
+                                <div>
+                                  <a href="/lang/bn"><h6>{{ trans('app.bnd') }} <img src="{{ imageCDN('flag1x1/bn.svg') }}" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans('app.bn') }}</h6></a>
+                                </div>
+                                <div>
+                                  <a href="/lang/jp"><h6>{{ trans('app.jpy') }} <img src="{{ imageCDN('flag1x1/jp.svg') }}" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans('app.jp') }}</h6></a>
+                                </div>
+                                <div>
+                                  <a href="/lang/kr"><h6>{{ trans('app.krw') }} <img src="{{ imageCDN('flag1x1/kr.svg') }}" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans('app.kr') }}</h6></a>
+                                </div>
+                                <div>
+                                  <a href="/lang/cn"><h6>{{ trans('app.cny') }} <img src="{{ imageCDN('flag1x1/cn.svg') }}" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans('app.cn') }}</h6></a>
+                                </div>
+                                <div>
+                                  <a href="/lang/hk"><h6>{{ trans('app.hkd') }} <img src="{{ imageCDN('flag1x1/hk.svg') }}" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans('app.hk') }}</h6></a>
+                                </div>
+                              </div>
+                              <h5 class="uk-text-uppercase">{{ trans('app.euro') }}</h5>
+                                <a href="/lang/eu"><h6>{{ trans('app.eur') }} <img src="{{ imageCDN('flag1x1/eu.svg') }}" width="16" class="uk-border-circle uk-box-shadow-small" alt=""> {{ trans('app.eu') }}</h6></a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="uk-card-body">
+
+                <form action="{{ route('order') }}" method="POST">
+                  {{ csrf_field() }}
+                      <div class="uk-grid-small uk-child-width-1-2" uk-grid>
+                        <div>
+                          <div class="uk-card uk-card-default uk-background-muted uk-card-small uk-card-hover">
+                            <div class="uk-card-header">
+                              <h4><input type="radio" class="uk-radio" name="payment_method" value="bank_transfer" required="required" style="margin-top:0" {{ $currency != 'idr' ? 'disabled' : '' }}> Bank Transfer</h4>
+                            </div>
+                            <div class="uk-card-body">
+                              <h6>Bank Transfer Supported (IDR): </h6>
+                              <ul class="uk-grid uk-child-width-1-3">
+                                <li><img src="{{ imageCDN('bca.png') }}" alt="bca" height="50"></li>
+                                <li><img src="{{ imageCDN('bni.png') }}" alt="bni" height="50"></li>
+                                <li><img src="{{ imageCDN('mandiri.png') }}" alt="mandiri" height="50"></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <div class="uk-card uk-card-default uk-background-muted uk-card-small uk-card-hover">
+                            <div class="uk-card-header">
+                              <h4><input type="radio" class="uk-radio" name="payment_method" value="creditcard" required="required" style="margin-top:0" {{ $currency != 'idr' ? 'checked' : '' }}> Credit Card</h4>
+                            </div>
+                            <div class="uk-card-body">
+                              <h6>Credit Card Supported: </h6>
+                              <ul class="uk-grid uk-child-width-1-2">
+                                <li><img src="{{ imageCDN('visa.png') }}" alt="Visa" width="65"></li>
+                                <li><img src="{{ imageCDN('mastercard.png') }}" alt="Master Card" width="65"></li>
+
+                              </ul>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  <input type="hidden" name="order" value="ok">
+                  <input type="submit" name="submit" id="submit" style="display: none;">
+                </form>
+              </div>
+            </div>
+            <div class="uk-card uk-card-small uk-card-default uk-margin-top">
               <div class="uk-card-header">
                 <h4>{{ trans('app.shipping_detail') }}</h4>
               </div>
@@ -74,83 +174,7 @@
                   </table>
               </div>
             </div>
-            <div class="uk-card uk-card-small uk-card-default uk-margin-top">
-              <div class="uk-card-header">
-                <h4>{{ trans('app.payment_method') }}</h4>
-              </div>
-              <div class="uk-card-body">
 
-
-
-
-
-                {{-- <hr class="uk-margin" style="border-color: #333; border-width: 3px"> --}}
-
-                <form action="{{ route('order') }}" method="POST">
-                  {{ csrf_field() }}
-                  {{-- <table class="uk-table uk-table-divider uk-table-hover">
-                    <tbody> --}}
-                      <div class="uk-grid-small uk-child-width-1-2" uk-grid>
-                        <div>
-                        <div class="uk-card uk-card-default uk-background-muted uk-card-small uk-card-hover">
-                          <div class="uk-card-header">
-                            <h4><input type="radio" class="uk-radio" name="payment_method" value="bank_transfer" required="required" style="margin-top:0"> Bank Transfer</h4>
-                          </div>
-                          <div class="uk-card-body">
-                            <h6>Bank Transfer Supported: </h6>
-                            <ul class="uk-grid uk-child-width-1-3">
-                              <li><img src="{{ imageCDN('bca.png') }}" alt="bca" height="50"></li>
-                              <li><img src="{{ imageCDN('bni.png') }}" alt="bni" height="50"></li>
-                              <li><img src="{{ imageCDN('mandiri.png') }}" alt="mandiri" height="50"></li>
-                            </ul>
-
-                          </div>
-                        </div>
-                        </div>
-                        <div>
-                          <div class="uk-card uk-card-default uk-background-muted uk-card-small uk-card-hover">
-                            <div class="uk-card-header">
-                              <h4><input type="radio" class="uk-radio" name="payment_method" value="creditcard" required="required" style="margin-top:0"> Credit Card</h4>
-                            </div>
-                            <div class="uk-card-body">
-                              <h6>Credit Card Supported: </h6>
-                              <ul class="uk-grid uk-child-width-1-2">
-                                <li><img src="{{ imageCDN('visa.png') }}" alt="Visa" width="65"></li>
-                                <li><img src="{{ imageCDN('mastercard.png') }}" alt="Master Card" width="65"></li>
-
-                              </ul>
-
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                        {{-- @if($currency == 'idr')
-                        <tr>
-                            <td>
-                                <input type="radio" class="uk-radio" name="payment_method" value="bank_transfer" required="required">
-                            </td>
-                            <td>
-                              <span></span>Bank Transfer
-                            </td>
-                        </tr>
-                        @endif
-                        <tr>
-                            <td>
-                                <input type="radio" class="uk-radio" name="payment_method" value="creditcard" required="required">
-                            </td>
-                            <td>
-                              Credit Card
-                            </td>
-                        </tr> --}}
-                    {{-- </tbody>
-                  </table> --}}
-                  <input type="hidden" name="order" value="ok">
-                  <input type="submit" name="submit" id="submit" style="display: none;">
-                </form>
-              </div>
-            </div>
-
-              {{-- <hr class="uk-margin" style="border-color: #333; border-width: 3px"> --}}
               <div class="uk-card uk-card-small uk-card-default uk-margin-top uk-margin-bottom">
                 <div class="uk-card-header">
                   <h4>Your Shopping Bag</h4>
