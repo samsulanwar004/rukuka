@@ -186,7 +186,7 @@
                     <div class="uk-text-center">
                         <a href="/shop?menu={{strtolower($product->gender)}}&parent={{strtolower($product->category->parent->name)}}&category={{$product->category->slug}}">{{ $product->category->name }}</a>
                         <br>
-                        <h5 class="uk-margin-remove"><a href="/shop?menu=designers&category={{$product->designer->slug}}">{{ $product->designer->name }}</a></h5>
+                        <h5 class="uk-margin-remove"><a href="/shop?menu={{strtolower($product->gender)}}&designer={{$product->designer->slug}}">{{ $product->designer->name }}</a></h5>
                     </div>
                 </div>
           </div>
@@ -299,7 +299,7 @@
         ></related>
         <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">
             <div class="uk-panel uk-text-center">
-                <a  href="/shop?menu=designers&category=all" class="uk-button uk-button-small uk-button-text uk-text-uppercase">{{ trans('app.show_all_product') }}</a>
+                <a  href="/shop?menu={{strtolower($product->gender)}}&parent=all" class="uk-button uk-button-small uk-button-text uk-text-uppercase">{{ trans('app.show_all_product') }}</a>
             </div>
         </div>
     </div>

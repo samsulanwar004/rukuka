@@ -35,10 +35,5 @@
           locale="{{ json_encode(trans('app')) }}"
   ></related>
   @endif
-  <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">
-    <div class="uk-panel uk-text-center">
-      <a  href="/shop?menu=designers&category=all" class="uk-button uk-button-small uk-button-text uk-text-uppercase">{{ trans('app.show_all_product') }}</a>
-    </div>
-  </div>
 </div>
 @endsection
