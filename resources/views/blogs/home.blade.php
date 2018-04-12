@@ -1,8 +1,8 @@
-@extends('app_blog')
+@extends('app')
 @section('title', trans('app.title_blog') )
 @section('content')
 
-    <div class="uk-container uk-container-small">
+    <div class="uk-container">
         @include('partials.category_blog')
 
         <div id="blog" class="uk-grid-small uk-margin-top uk-margin-bottom" uk-grid>

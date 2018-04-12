@@ -1,8 +1,8 @@
-@extends('app_blog')
+@extends('app')
 @section('title', $posts['title'].' '.trans('app.title_blog_read') )
 @section('content')
 
-    <div class="uk-container uk-container-small">
+    <div class="uk-container">
         <div class="uk-text-center uk-margin-small-top">
             <div class="uk-inline">
                 <a href="{{ $home['homepage_main_url'] }}" class="uk-link-reset">
@@ -68,11 +68,6 @@
             </div>
         </div>
       </div>
-        <div class="uk-grid-small uk-margin-small-bottom">
-            <div class="uk-panel uk-text-center">
-                <a href="{{ URL::previous() }}"><button class="uk-button uk-button-default-warm uk-button-small"><span class="uk-icon" uk-icon="icon: chevron-left"></span>{{ trans('app.back_to_home') }}</button></a>
-            </div>
-        </div>
     </div>
 
 @endsection
