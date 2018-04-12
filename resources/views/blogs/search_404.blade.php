@@ -1,8 +1,8 @@
-@extends('app_blog')
+@extends('app')
 @section('title', trans('app.title_blog') )
 @section('content')
 
-    <div class="uk-container uk-container-small">
+    <div class="uk-container">
         <div class="uk-text-small uk-text-uppercase uk-text-center uk-margin-medium-top">
             <span>{{ trans('app.nothing_found') }}</span>
         </div>
