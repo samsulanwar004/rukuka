@@ -113,7 +113,7 @@
                   </div>
             </div>
             <div class="uk-width-1-3@m">
-                <a class="uk-text-small" href="/shop?menu=designers&category={{$product->designer->slug}}">{{ $product->designer->name }}</a><br>
+                <a class="uk-text-small" href="/shop?menu={{strtolower($product->gender)}}&designer={{$product->designer->slug}}">{{ $product->designer->name }}</a><br>
                 <h3 class="uk-margin-remove uk-visible@m">{{ $product->name }}</h3>
                 <div class="uk-grid uk-grid-small uk-hidden@m">
                   <div class="uk-width-3-5">
