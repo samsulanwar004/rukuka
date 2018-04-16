@@ -223,483 +223,483 @@
    </div>
 </div>
 </div>
-@endsection
-@section('footer_scripts')
+
 <script type="text/javascript">
-   $(function () {
-     var url = '{{ route('checkout.shipping') }}';
-     $("#continue").on('click', function (e) {
-       e.preventDefault();
-       var submit = $('#submit').val();
-       var url = '{{ route('checkout.shipping') }}';
-       if (submit == 'SUBMIT') {
-         $('#submit').click();
-       } else {
-         window.location.href = url;
-       }
-
-     });
-
-     $('#modal-submit').on('click', function () {
-     $('#new-address').click();
-    });
-   })
-
-   $(document).ready(function(){
-      startLocalAddressing();
-  });
-
-  function startLocalAddressing() {
-
-    // default hidden
-    $('#div-sub-district').hide();
-    $('#div-village').hide();
-
-    // show all country
-    showListCountries();
-
-    // fixing template if submit error
-    handleFormWhenError();
-
-  }
-
-  function handleFormWhenError(){ // this methode will replace input that suitable by country
-
-    if ( {{ ($errors->any() == true) ? 1 : 0 }} ) {
-
-      if ('{{old("country")}}' == 'ID') {
-
-        $('#form-province-empty').replaceWith('<select id="form-province-empty" onchange="showListCities()" name="province" class="uk-input uk-form-small {{ $errors->has("province") ? " uk-form-danger" : "" }}" required></select>');
-        showListProvices();
-
-        $('#form-city-empty').replaceWith('<select id="form-city-empty" onchange="showListSubDistricts()" name="city" class="uk-input uk-form-small {{ $errors->has("city") ? " uk-form-danger" : "" }}" required></select>');
-        showListCities();
-
-        $('#div-sub-district').show();
-        $('#div-village').show();
-
-        $('#form-subdistrict-empty').replaceWith('<select id="form-subdistrict-empty" onchange="showListVillages()" name="sub_district" class="uk-input uk-form-small {{ $errors->has("sub_district") ? " uk-form-danger" : "" }}" required></select>');
-        showListSubDistricts();
-
-        $('#form-village-empty').replaceWith('<select id="form-village-empty" onchange="setPostalCode()" name="village" class="uk-input uk-form-small {{ $errors->has("village") ? " uk-form-danger" : "" }}" required></select>');
-        showListVillages();
-
-      }
-
-    }
-
-  }
-
-  function handleLocalAddress() { //onchange , triger in <option> country
-
-    if ($('#form-country-empty').val() == 'ID') {
-
-      $('#form-province-empty').replaceWith('<select id="form-province-empty" onchange="showListCities()" name="province" class="uk-input uk-form-small {{ $errors->has("province") ? " uk-form-danger" : "" }}" required><option>Select country first</option></select>');
-      $('#form-city-empty').replaceWith('<select id="form-city-empty" onchange="showListSubDistricts()" name="city" class="uk-input uk-form-small {{ $errors->has("city") ? " uk-form-danger" : "" }}" required><option>Select province first</option></select>');
-      $('#form-subdistrict-empty').replaceWith('<select id="form-subdistrict-empty" onchange="showListVillages()" name="sub_district" class="uk-input uk-form-small {{ $errors->has("city") ? " uk-form-danger" : "" }}" required><option>Select city first</option></select>');
-      $('#form-village-empty').replaceWith('<select id="form-village-empty" onchange="setPostalCode()" name="village" class="uk-input uk-form-small {{ $errors->has("village") ? " uk-form-danger" : "" }}" required><option>Select sub district first</option></select>');
-
-      $('#div-sub-district').show();
-      $('#div-village').show();
-
-      $('#form-postal-empty').attr('readonly', true);
-
-    }else{
-
-      $('#form-province-empty').replaceWith('<input class="uk-input uk-form-small" name="province" id="form-province-empty" type="text" value="{{ old("province") }}" required>');
-      $('#form-city-empty').replaceWith('<input class="uk-input uk-form-small" name="city" id="form-city-empty" type="text" value="{{ old("city") }}" required>');
-      $('#form-subdistrict-empty').replaceWith('<span class="uk-input uk-form-small " name="sub_district" id="form-subdistrict-empty" type="text" value=""></span>');
-      $('#form-village-empty').replaceWith('<span class="uk-input uk-form-small " name="village" id="form-village-empty" type="text" value=""></span>');
-
-      $('#div-sub-district').hide();
-      $('#div-village').hide();
-
-      $('#form-province-empty').val('');
-      $('#form-city-empty').val('');
-
-      $('#form-postal-empty').attr('readonly', false);
-    }
-
-  }
-
-  function showListCountries(){
-
-    var allOptionsCountry = '';
-
-    $.ajaxSetup({
-       headers:{
-          'Accept': "application/json"
-       }
-    });
-
-    var jqxhr = $.get( "/api/v1/countries", function(response) {
-
-      if (response.error == '000') {
-
-        $.each(response.data, function( index, value ) {
-
-          if ("{{old('country')}}" == value.countries_code) {
-
-            selectedAlreadyExist = true;
-            allOptionsCountry += '<option selected value="' + value.countries_code + '">'+ value.countries_name.toUpperCase() +'</option>'
-
-          }else{
-
-            allOptionsCountry += '<option value="' + value.countries_code + '">'+ value.countries_name.toUpperCase() +'</option>'
-
-          }
+    $(function () {
+        var url = '{{ route('checkout.shipping') }}';
+        $("#continue").on('click', function (e) {
+            e.preventDefault();
+            var submit = $('#submit').val();
+            var url = '{{ route('checkout.shipping') }}';
+            if (submit == 'SUBMIT') {
+                $('#submit').click();
+            } else {
+                window.location.href = url;
+            }
 
         });
 
-      }else{
+        $('#modal-submit').on('click', function () {
+            $('#new-address').click();
+        });
+    })
 
-        console.log(response.message);
-        allOptionsCountry += '<option></option>';
-
-      }
-
-      $('#form-country-empty').append(allOptionsCountry);
-
-    }).fail(function(xhr, status, error) {
-
-      alert(error + ' when load countries');
-
+    $(document).ready(function(){
+        startLocalAddressing();
     });
-  }
 
-  function showListProvices(){
+    function startLocalAddressing() {
 
-    var allOptionsProvince = null;
+        // default hidden
+        $('#div-sub-district').hide();
+        $('#div-village').hide();
 
-    var jqxhr = $.get( "/api/v1/provinces", function(response) {
+        // show all country
+        showListCountries();
 
-      if (response.error == '000') {
-
-          $.each(response.data, function( index, value ) {
-
-            if ("{{old('province')}}" == value.province) {
-
-              selectedAlreadyExist = true;
-              allOptionsProvince += '<option selected value="' + value.province + '">'+ value.province +'</option>';
-
-            }else{
-
-              allOptionsProvince += '<option value="' + value.province + '">'+ value.province +'</option>';
-
-            }
-
-          });
-
-      }else{
-
-        console.log(response.message);
-        allOptionsProvince += '<option></option>';
-
-      }
-
-      $('#form-province-empty').empty();
-      $('#form-province-empty').append( '<option></option>'+ allOptionsProvince);
-
-    }).fail(function(xhr, status, error) {
-
-      alert(error + ' when load province');
-
-    });
-  }
-
-  function showListCities() {
-
-    var allOptionsCity = '';
-    var byProvince = $('#form-province-empty').val();
-
-    if (byProvince == null) {
-
-      byProvince = '{{ old("province") }}';
+        // fixing template if submit error
+        handleFormWhenError();
 
     }
 
-    var jqxhr = $.get( "/api/v1/cities/" + byProvince , function(response) {
+    function handleFormWhenError(){ // this methode will replace input that suitable by country
 
-      if (response.error == '000') {
+        if ( {{ ($errors->any() == true) ? 1 : 0 }} ) {
 
-          $.each(response.data, function( index, value ) {
+            if ('{{old("country")}}' == 'ID') {
 
-            if ("{{old('city')}}" == value.city) {
+                $('#form-province-empty').replaceWith('<select id="form-province-empty" onchange="showListCities()" name="province" class="uk-input uk-form-small {{ $errors->has("province") ? " uk-form-danger" : "" }}" required></select>');
+                showListProvices();
 
-              selectedAlreadyExist = true;
-              allOptionsCity += '<option selected value="' + value.city + '">'+ value.city +'</option>';
+                $('#form-city-empty').replaceWith('<select id="form-city-empty" onchange="showListSubDistricts()" name="city" class="uk-input uk-form-small {{ $errors->has("city") ? " uk-form-danger" : "" }}" required></select>');
+                showListCities();
 
-            }else{
+                $('#div-sub-district').show();
+                $('#div-village').show();
 
-              allOptionsCity += '<option value="' + value.city + '">'+ value.city +'</option>';
+                $('#form-subdistrict-empty').replaceWith('<select id="form-subdistrict-empty" onchange="showListVillages()" name="sub_district" class="uk-input uk-form-small {{ $errors->has("sub_district") ? " uk-form-danger" : "" }}" required></select>');
+                showListSubDistricts();
+
+                $('#form-village-empty').replaceWith('<select id="form-village-empty" onchange="setPostalCode()" name="village" class="uk-input uk-form-small {{ $errors->has("village") ? " uk-form-danger" : "" }}" required></select>');
+                showListVillages();
 
             }
 
-          });
-
-      }else{
-
-        console.log(response.message);
-        allOptionsCity += '<option></option>';
-
-      }
-
-      $('#form-city-empty').empty();
-      $('#form-city-empty').append('<option></option>'+allOptionsCity);
-
-    }).fail(function(xhr, status, error) {
-
-      alert(error + ' when load city');
-
-    });
-
-  }
-
-  function showListSubDistricts() {
-
-    var allOptionsSubDistrict = '';
-    var byCity = $('#form-city-empty').val();
-
-    if (byCity == null) {
-
-      byCity = '{{old("city")}}';
+        }
 
     }
 
-    var jqxhr = $.get( "/api/v1/sub-district/" + byCity , function(response) {
+    function handleLocalAddress() { //onchange , triger in <option> country
 
-      if (response.error == '000') {
+        if ($('#form-country-empty').val() == 'ID') {
 
-          $.each(response.data, function( index, value ) {
+            $('#form-province-empty').replaceWith('<select id="form-province-empty" onchange="showListCities()" name="province" class="uk-input uk-form-small {{ $errors->has("province") ? " uk-form-danger" : "" }}" required><option>Select country first</option></select>');
+            $('#form-city-empty').replaceWith('<select id="form-city-empty" onchange="showListSubDistricts()" name="city" class="uk-input uk-form-small {{ $errors->has("city") ? " uk-form-danger" : "" }}" required><option>Select province first</option></select>');
+            $('#form-subdistrict-empty').replaceWith('<select id="form-subdistrict-empty" onchange="showListVillages()" name="sub_district" class="uk-input uk-form-small {{ $errors->has("city") ? " uk-form-danger" : "" }}" required><option>Select city first</option></select>');
+            $('#form-village-empty').replaceWith('<select id="form-village-empty" onchange="setPostalCode()" name="village" class="uk-input uk-form-small {{ $errors->has("village") ? " uk-form-danger" : "" }}" required><option>Select sub district first</option></select>');
 
-            if ("{{old('sub_district')}}" == value.sub_district) {
+            $('#div-sub-district').show();
+            $('#div-village').show();
 
-              allOptionsSubDistrict += '<option selected value="' + value.sub_district + '">'+ value.sub_district +'</option>';
+            $('#form-postal-empty').attr('readonly', true);
 
-            }else{
+        }else{
 
-              allOptionsSubDistrict += '<option value="' + value.sub_district + '">'+ value.sub_district +'</option>';
+            $('#form-province-empty').replaceWith('<input class="uk-input uk-form-small" name="province" id="form-province-empty" type="text" value="{{ old("province") }}" required>');
+            $('#form-city-empty').replaceWith('<input class="uk-input uk-form-small" name="city" id="form-city-empty" type="text" value="{{ old("city") }}" required>');
+            $('#form-subdistrict-empty').replaceWith('<span class="uk-input uk-form-small " name="sub_district" id="form-subdistrict-empty" type="text" value=""></span>');
+            $('#form-village-empty').replaceWith('<span class="uk-input uk-form-small " name="village" id="form-village-empty" type="text" value=""></span>');
 
-            }
+            $('#div-sub-district').hide();
+            $('#div-village').hide();
 
-          });
+            $('#form-province-empty').val('');
+            $('#form-city-empty').val('');
 
-      }else{
-
-        console.log(response.message);
-        allOptionsSubDistrict += '';
-
-      }
-
-      $('#form-subdistrict-empty').empty();
-      $('#form-subdistrict-empty').append('<option></option>' + allOptionsSubDistrict);
-
-    }).fail(function(xhr, status, error) {
-
-      alert(error + ' when load subdistrict');
-
-    });
-
-  }
-
-  function showListVillages() {
-
-    var allOptionsVillage = '';
-    var bySubDistrict = $('#form-subdistrict-empty').val();
-
-    if (bySubDistrict == null) {
-
-      bySubDistrict = '{{ old("sub_district") }}';
+            $('#form-postal-empty').attr('readonly', false);
+        }
 
     }
 
-    var jqxhr = $.get( "/api/v1/villages/" + bySubDistrict , function(response) {
+    function showListCountries(){
 
-      if (response.error == '000') {
+        var allOptionsCountry = '';
 
-          $.each(response.data, function( index, value ) {
+        $.ajaxSetup({
+            headers:{
+                'Accept': "application/json"
+            }
+        });
 
-            if ("{{old('village')}}" == value.village) {
+        var jqxhr = $.get( "/api/v1/countries", function(response) {
 
-              allOptionsVillage += '<option selected value="' + value.village + '">'+ value.village + ' - ' + value.postal_code +'</option>';
+            if (response.error == '000') {
+
+                $.each(response.data, function( index, value ) {
+
+                    if ("{{old('country')}}" == value.countries_code) {
+
+                        selectedAlreadyExist = true;
+                        allOptionsCountry += '<option selected value="' + value.countries_code + '">'+ value.countries_name.toUpperCase() +'</option>'
+
+                    }else{
+
+                        allOptionsCountry += '<option value="' + value.countries_code + '">'+ value.countries_name.toUpperCase() +'</option>'
+
+                    }
+
+                });
 
             }else{
 
-              allOptionsVillage += '<option value="' + value.village + '">'+ value.village + ' - ' + value.postal_code +'</option>';
+                console.log(response.message);
+                allOptionsCountry += '<option></option>';
 
             }
 
-          });
+            $('#form-country-empty').append(allOptionsCountry);
 
-      }else{
+        }).fail(function(xhr, status, error) {
 
-        console.log(response.message);
-        allOptionsVillage += '';
+            alert(error + ' when load countries');
 
-      }
-      console.log(this.vilageWithPosCode);
-      $('#form-village-empty').empty();
-      $('#form-village-empty').append('<option></option>' + allOptionsVillage);
+        });
+    }
 
-    }).fail(function(xhr, status, error) {
+    function showListProvices(){
 
-      alert(error + ' when load village');
+        var allOptionsProvince = null;
 
-    });
+        var jqxhr = $.get( "/api/v1/provinces", function(response) {
 
-  }
+            if (response.error == '000') {
 
-  function setPostalCode() {
+                $.each(response.data, function( index, value ) {
 
-    var villageLabel = $('#form-village-empty option:selected').text();
-    var posCode;
+                    if ("{{old('province')}}" == value.province) {
 
-    posCode = villageLabel.replace(' ','');
-    posCode = posCode.split('-');
-    posCode = posCode[1];
+                        selectedAlreadyExist = true;
+                        allOptionsProvince += '<option selected value="' + value.province + '">'+ value.province +'</option>';
 
-    $('#form-postal-empty').val(posCode);
+                    }else{
 
-  }
+                        allOptionsProvince += '<option value="' + value.province + '">'+ value.province +'</option>';
 
-   // punya vue -----------
+                    }
 
-   function showVueListCities() {
-
-    var allOptionsCity = '';
-    var byProvince = $('#form-province-vue').val();
-
-    var jqxhr = $.get("/api/v1/cities/" + byProvince , function(response) {
-
-      if (response.error == '000') {
-
-          $.each(response.data, function( index, value ) {
-
-            if ("{{old('city')}}" == value.city) {
-
-              allOptionsCity += '<option selected value="' + value.city + '">'+ value.city +'</option>';
+                });
 
             }else{
 
-              allOptionsCity += '<option value="' + value.city + '">'+ value.city +'</option>';
+                console.log(response.message);
+                allOptionsProvince += '<option></option>';
 
             }
 
-          });
+            $('#form-province-empty').empty();
+            $('#form-province-empty').append( '<option></option>'+ allOptionsProvince);
 
-      }else{
+        }).fail(function(xhr, status, error) {
 
-        console.log(response.message);
-        allOptionsCity += '<option></option>';
+            alert(error + ' when load province');
 
-      }
+        });
+    }
 
-      $('#form-city-vue').empty();
-      $('#form-city-vue').append('<option></option>'+allOptionsCity);
+    function showListCities() {
 
-    }).fail(function(xhr, status, error) {
+        var allOptionsCity = '';
+        var byProvince = $('#form-province-empty').val();
 
-      alert(error + ' when load city');
+        if (byProvince == null) {
 
-    });
+            byProvince = '{{ old("province") }}';
 
-  }
+        }
 
-  function showVueListSubDistricts() {
+        var jqxhr = $.get( "/api/v1/cities/" + byProvince , function(response) {
 
-    var allOptionsSubDistrict = '';
-    var byCity = $('#form-city-vue').val();
+            if (response.error == '000') {
 
-    var jqxhr = $.get( "/api/v1/sub-district/" + byCity , function(response) {
+                $.each(response.data, function( index, value ) {
 
-      if (response.error == '000') {
+                    if ("{{old('city')}}" == value.city) {
 
-          $.each(response.data, function( index, value ) {
+                        selectedAlreadyExist = true;
+                        allOptionsCity += '<option selected value="' + value.city + '">'+ value.city +'</option>';
 
-            if ("{{old('sub_district')}}" == value.sub_district) {
+                    }else{
 
-              allOptionsSubDistrict += '<option selected value="' + value.sub_district + '">'+ value.sub_district +'</option>';
+                        allOptionsCity += '<option value="' + value.city + '">'+ value.city +'</option>';
+
+                    }
+
+                });
 
             }else{
 
-              allOptionsSubDistrict += '<option value="' + value.sub_district + '">'+ value.sub_district +'</option>';
+                console.log(response.message);
+                allOptionsCity += '<option></option>';
 
             }
 
-          });
+            $('#form-city-empty').empty();
+            $('#form-city-empty').append('<option></option>'+allOptionsCity);
 
-      }else{
+        }).fail(function(xhr, status, error) {
 
-        console.log(response.message);
-        allOptionsSubDistrict += '';
+            alert(error + ' when load city');
 
-      }
+        });
 
-      $('#form-subdistrict-vue').empty();
-      $('#form-subdistrict-vue').append('<option></option>' + allOptionsSubDistrict);
+    }
 
-    }).fail(function(xhr, status, error) {
+    function showListSubDistricts() {
 
-      alert(error + ' when load subdistrict');
+        var allOptionsSubDistrict = '';
+        var byCity = $('#form-city-empty').val();
 
-    });
+        if (byCity == null) {
 
-  }
+            byCity = '{{old("city")}}';
 
-  function showVueListVillages() {
+        }
 
-    var allOptionsVillage = '';
-    var bySubDistrict = $('#form-subdistrict-vue').val();
+        var jqxhr = $.get( "/api/v1/sub-district/" + byCity , function(response) {
 
-    var jqxhr = $.get( "/api/v1/villages/" + bySubDistrict , function(response) {
+            if (response.error == '000') {
 
-      if (response.error == '000') {
+                $.each(response.data, function( index, value ) {
 
-          $.each(response.data, function( index, value ) {
+                    if ("{{old('sub_district')}}" == value.sub_district) {
 
-            if ("{{old('village')}}" == value.village) {
+                        allOptionsSubDistrict += '<option selected value="' + value.sub_district + '">'+ value.sub_district +'</option>';
 
-              allOptionsVillage += '<option selected value="' + value.village + '">'+ value.village + ' - ' + value.postal_code +'</option>';
+                    }else{
+
+                        allOptionsSubDistrict += '<option value="' + value.sub_district + '">'+ value.sub_district +'</option>';
+
+                    }
+
+                });
 
             }else{
 
-              allOptionsVillage += '<option value="' + value.village + '">'+ value.village + ' - ' + value.postal_code +'</option>';
+                console.log(response.message);
+                allOptionsSubDistrict += '';
 
             }
 
-          });
+            $('#form-subdistrict-empty').empty();
+            $('#form-subdistrict-empty').append('<option></option>' + allOptionsSubDistrict);
 
-      }else{
+        }).fail(function(xhr, status, error) {
 
-        console.log(response.message);
-        allOptionsVillage += '';
+            alert(error + ' when load subdistrict');
 
-      }
+        });
 
-      $('#form-village-vue').empty();
-      $('#form-village-vue').append('<option></option>' + allOptionsVillage);
+    }
 
-    }).fail(function(xhr, status, error) {
+    function showListVillages() {
 
-      alert(error + ' when load subdistrict');
+        var allOptionsVillage = '';
+        var bySubDistrict = $('#form-subdistrict-empty').val();
 
-    });
+        if (bySubDistrict == null) {
 
-  }
+            bySubDistrict = '{{ old("sub_district") }}';
 
-  function setVuePostalCode() {
+        }
 
-    var villageLabel = $('#form-village-vue option:selected').text();
-    var posCode;
+        var jqxhr = $.get( "/api/v1/villages/" + bySubDistrict , function(response) {
 
-    posCode = villageLabel.replace(' ','');
-    posCode = posCode.split('-');
-    posCode = posCode[1];
+            if (response.error == '000') {
 
-    $('#form-postal-vue').val(posCode);
+                $.each(response.data, function( index, value ) {
 
-  }
+                    if ("{{old('village')}}" == value.village) {
 
-   // end punya vue -------
+                        allOptionsVillage += '<option selected value="' + value.village + '">'+ value.village + ' - ' + value.postal_code +'</option>';
+
+                    }else{
+
+                        allOptionsVillage += '<option value="' + value.village + '">'+ value.village + ' - ' + value.postal_code +'</option>';
+
+                    }
+
+                });
+
+            }else{
+
+                console.log(response.message);
+                allOptionsVillage += '';
+
+            }
+            console.log(this.vilageWithPosCode);
+            $('#form-village-empty').empty();
+            $('#form-village-empty').append('<option></option>' + allOptionsVillage);
+
+        }).fail(function(xhr, status, error) {
+
+            alert(error + ' when load village');
+
+        });
+
+    }
+
+    function setPostalCode() {
+
+        var villageLabel = $('#form-village-empty option:selected').text();
+        var posCode;
+
+        posCode = villageLabel.replace(' ','');
+        posCode = posCode.split('-');
+        posCode = posCode[1];
+
+        $('#form-postal-empty').val(posCode);
+
+    }
+
+    // punya vue -----------
+
+    function showVueListCities() {
+
+        var allOptionsCity = '';
+        var byProvince = $('#form-province-vue').val();
+
+        var jqxhr = $.get("/api/v1/cities/" + byProvince , function(response) {
+
+            if (response.error == '000') {
+
+                $.each(response.data, function( index, value ) {
+
+                    if ("{{old('city')}}" == value.city) {
+
+                        allOptionsCity += '<option selected value="' + value.city + '">'+ value.city +'</option>';
+
+                    }else{
+
+                        allOptionsCity += '<option value="' + value.city + '">'+ value.city +'</option>';
+
+                    }
+
+                });
+
+            }else{
+
+                console.log(response.message);
+                allOptionsCity += '<option></option>';
+
+            }
+
+            $('#form-city-vue').empty();
+            $('#form-city-vue').append('<option></option>'+allOptionsCity);
+
+        }).fail(function(xhr, status, error) {
+
+            alert(error + ' when load city');
+
+        });
+
+    }
+
+    function showVueListSubDistricts() {
+
+        var allOptionsSubDistrict = '';
+        var byCity = $('#form-city-vue').val();
+
+        var jqxhr = $.get( "/api/v1/sub-district/" + byCity , function(response) {
+
+            if (response.error == '000') {
+
+                $.each(response.data, function( index, value ) {
+
+                    if ("{{old('sub_district')}}" == value.sub_district) {
+
+                        allOptionsSubDistrict += '<option selected value="' + value.sub_district + '">'+ value.sub_district +'</option>';
+
+                    }else{
+
+                        allOptionsSubDistrict += '<option value="' + value.sub_district + '">'+ value.sub_district +'</option>';
+
+                    }
+
+                });
+
+            }else{
+
+                console.log(response.message);
+                allOptionsSubDistrict += '';
+
+            }
+
+            $('#form-subdistrict-vue').empty();
+            $('#form-subdistrict-vue').append('<option></option>' + allOptionsSubDistrict);
+
+        }).fail(function(xhr, status, error) {
+
+            alert(error + ' when load subdistrict');
+
+        });
+
+    }
+
+    function showVueListVillages() {
+
+        var allOptionsVillage = '';
+        var bySubDistrict = $('#form-subdistrict-vue').val();
+
+        var jqxhr = $.get( "/api/v1/villages/" + bySubDistrict , function(response) {
+
+            if (response.error == '000') {
+
+                $.each(response.data, function( index, value ) {
+
+                    if ("{{old('village')}}" == value.village) {
+
+                        allOptionsVillage += '<option selected value="' + value.village + '">'+ value.village + ' - ' + value.postal_code +'</option>';
+
+                    }else{
+
+                        allOptionsVillage += '<option value="' + value.village + '">'+ value.village + ' - ' + value.postal_code +'</option>';
+
+                    }
+
+                });
+
+            }else{
+
+                console.log(response.message);
+                allOptionsVillage += '';
+
+            }
+
+            $('#form-village-vue').empty();
+            $('#form-village-vue').append('<option></option>' + allOptionsVillage);
+
+        }).fail(function(xhr, status, error) {
+
+            alert(error + ' when load subdistrict');
+
+        });
+
+    }
+
+    function setVuePostalCode() {
+
+        var villageLabel = $('#form-village-vue option:selected').text();
+        var posCode;
+
+        posCode = villageLabel.replace(' ','');
+        posCode = posCode.split('-');
+        posCode = posCode[1];
+
+        $('#form-postal-vue').val(posCode);
+
+    }
+
+    // end punya vue -------
 </script>
 @endsection
+
