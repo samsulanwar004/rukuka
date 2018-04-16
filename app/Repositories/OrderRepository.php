@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Order;
 use App\OrderDetail;
+use App\ProductStock;
 use App\Repositories\CourierRepository;
 use App\Repositories\UserRepository;
 
@@ -390,5 +391,11 @@ class OrderRepository
 	public function getOrderbyOrderCode($code){
         return Order::where('order_code', $code)
             ->first();
+    }
+
+    public function getStockById($id)
+    {
+    	return ProductStock::where('id', $id)
+    		->first();
     }
 }

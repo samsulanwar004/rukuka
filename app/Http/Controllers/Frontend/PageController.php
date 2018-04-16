@@ -361,12 +361,25 @@ class PageController extends BaseController
                             'width' =>  $stock->product->width,
                             'height' =>  $stock->product->height,
                             'diameter' => $stock->product->diameter,
-                            'preorder' => $stock->product->is_preorder == 1 ? $stock->product->preorder_day : null
+                            'preorder' => $stock->product->is_preorder == 1 ? $stock->product->preorder_day : null,
+                            'unit' => $stock->unit
                         ]
                     ];
+
+                    $rowId = $bag->search($request->input('size'), self::INSTANCE_SHOP);
+                    
+                    if ($rowId) {
+                        $item = $bag->getItemByRowId($rowId);
+
+                        if ($item->qty == $item->options->unit) {
+                            throw new Exception("Size ".$item->options->size." out of stock", 1); 
+                        }
+                    }
+                    
                     $bag->save($product, self::INSTANCE_SHOP);
+
                 } else {
-                    throw new Exception("No stock available!", 1);
+                    throw new Exception("Out of stock!", 1);
                 }
 
 
@@ -379,6 +392,10 @@ class PageController extends BaseController
 
                 if ($rowId) {
                     $item = $bag->getItemByRowId($rowId);
+
+                    if ($item->qty == $item->options->unit) {
+                        throw new Exception("Size ".$item->options->size." out of stock", 1); 
+                    }
 
                     $bag->update($rowId, $item->qty + 1);
                 }
@@ -401,6 +418,10 @@ class PageController extends BaseController
 
                 if ($rowId) {
                     $item = $bag->getItemByRowId($rowId);
+
+                    if ($request->input('qty') > $item->options->unit) {
+                        throw new Exception("Size ".$item->options->size." out of stock", 1); 
+                    }
 
                     $bag->update($rowId, $request->input('qty'));
                 }
@@ -443,7 +464,7 @@ class PageController extends BaseController
             ]);
 
         } catch (Exception $e) {
-            return $this->error($e->getMessage(), 400);
+            return $this->error($e->getMessage(), 400, true);
         }
     }
 
