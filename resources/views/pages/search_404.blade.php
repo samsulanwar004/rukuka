@@ -1,4 +1,4 @@
-@extends('app_blog')
+@extends('app')
 @section('title', $keyword.' '.trans('app.title_search') )
 @section('content')
 
@@ -13,6 +13,7 @@
             <div><span>{{ trans('app.another_keyword') }}</span></div>
             <div>
                 {{ Form::open(array('url' => '/search', 'method' =>'get','files' => true,'class' => 'uk-search uk-form-width-medium uk-first-column')) }}
+                <input type="hidden" name="menu" value="{{$navigation}}">
                 <button type="submit" class="uk-search-icon-flip uk-search-icon uk-icon" uk-search-icon></button>
                 <div>
                     <div class="typeahead__container">

@@ -1,6 +1,18 @@
 @php
-  $women = Request::segment(1) == "women" || Request::segment(1) == "designer" || Request::segment(1) == "editorial" || Request::input('gender') == "womens" || $categories == "womens" || $product->gender == "womens" || $product->gender == "unisex" ? "womens" : null;
-  $men = Request::segment(1) == "men" || Request::segment(1) == "designer" || Request::segment(1) == "editorial" || Request::input('gender') == "mens" || $categories == "mens" || $product->gender == "mens" || $product->gender == "unisex" ? "mens" : null;
+
+  $women = Request::segment(1) == "women"
+  || Request::input('gender') == "womens"
+  || Request::input('menu') == "womens"
+  || $categories == "womens"
+  || $product->gender == "womens"
+  || $product->gender == "unisex" ? "womens" : null;
+
+  $men = Request::segment(1) == "men"
+  || Request::input('gender') == "mens"
+  || Request::input('menu') == "mens"
+  || $categories == "mens"
+  || $product->gender == "mens"
+  || $product->gender == "unisex" ? "mens" : null;
 
   if($women) {
     $navigation = $women;
@@ -26,6 +38,7 @@
               default_image="{{ json_encode(config('common.default')) }}"
               logo="{{ json_encode(config('common.logo')) }}"
               locale="{{ json_encode(trans('app')) }}"
+              navigation="{{ $navigation }}"
             ></user-panel-mobile>
             <div id="offcanvas-overlay-slide" uk-offcanvas="overlay: true">
               <navigation-mobile
@@ -46,6 +59,7 @@
               <div class="uk-width-expand">
 
                 {{ Form::open(array('url' => '/search', 'method' =>'get','files' => true,'class' => 'uk-search uk-search-navbar uk-width-1-1')) }}
+                <input type="hidden" name="menu" value="{{ $navigation }}">
                 <div>
                   <div class="typeahead__container">
                     <div class="typeahead__field">

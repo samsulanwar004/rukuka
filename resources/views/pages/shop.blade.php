@@ -21,44 +21,8 @@
 {{--End Title--}}
 
 @section('content')
-    {{--Title Breadcrumbs--}}
     <div class="uk-container">
-      {{-- @if($categories == 'designers' && $category != 'all')
-          <h3 class="uk-margin-small-top uk-margin-remove-bottom "></h3>
-      @else
-          @if($category == 'all' || $slug == 'all')
-              <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ trans('app.all_you_need') }}</h3>
-          @else
-              <h3 class="uk-margin-small-top uk-margin-remove-bottom ">{{ isset($products->first()->category_name) ? $products->first()->category_name : trans('app.product_not_available') }}</h3>
-          @endif
-      @endif --}}
-      {{-- <div class="uk-visible@m"> --}}
-      {{--End Title Breadcrumbs--}}
 
-      {{--Breadcrumbs--}}
-      {{-- @if($categories == 'designers')
-          @include('partials.breadcrumb', [
-              'breadcrumbs' => [$categories => '/shop?menu='.$categories.'&category=all', $category => 'categories']
-          ])
-      @else
-          @if($category == 'all')
-              @include('partials.breadcrumb', [
-                'breadcrumbs' => [$categories => '/shop?menu='.$categories.'&parent=all', $category => 'categories']
-              ])
-          @elseif($slug == 'all')
-              @include('partials.breadcrumb', [
-                'breadcrumbs' => [$categories => '/shop?menu='.$categories.'&parent=all', $category => false]
-              ])
-          @else
-              @include('partials.breadcrumb', [
-                  'breadcrumbs' => [$categories => '/shop?menu='.$categories.'&parent=all', $category => false, isset($products->first()->category_name) ? $products->first()->category_name : 'Product not available' => 'categories']
-              ])
-          @endif
-      @endif --}}
-      {{--End Breadcrumbs--}}
-
-
-      {{-- </div> --}}
         {{-- Start Designer Header  --}}
         @if($designer)
             <div class="uk-grid-small uk-margin-top" uk-grid>
@@ -93,12 +57,6 @@
               </li>
               </ul>
 
-
-                {{-- <button class="uk-button uk-button-small uk-button-secondary uk-width-1-1" Disabled>
-                  <span class="uk-icon uk-margin-small-right" uk-icon="icon: menu"></span>
-                    <label>{{ trans('app.filter_nav') }}</label>
-                </button> --}}
-
             </div>
             <div class="uk-width-4-5@m">
                 <div class="uk-grid-small uk-child-width-1-2" uk-grid >
@@ -127,8 +85,6 @@
 
                               </div>
                           </div>
-
-
                       </div>
                       <div>
                         <div class="uk-text-right">
@@ -165,10 +121,10 @@
                     </li>
                     </ul>
                   </div>
-
                 </div>
             </div>
           </div>
+
           <div class="uk-text-right">
             <a href="#modal" class="uk-button uk-button-default-warm uk-button-small" uk-toggle>{{ trans('app.filter') }}</a>
             <div id="modal" uk-modal>
@@ -236,6 +192,7 @@
             ></shop>
           </div>
         </div>
+
           <div class="uk-text-right uk-margin-bottom uk-margin-top">
 
             @include('pagination.default', ['paginator' => $products])
@@ -269,3 +226,4 @@
         @endif
     </div>
 @endsection
+
