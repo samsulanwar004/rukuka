@@ -341,6 +341,7 @@
       <div class="uk-navbar-right search_vis">
           <div class="uk-navbar-item">
               <form class="uk-search uk-search-default" action="/search" method="get">
+                  <input type="hidden" name="menu" :value="navigation">
               <div>
                   <div class="typeahead__container">
                       <div class="typeahead__field">

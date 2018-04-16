@@ -319,8 +319,12 @@ class ProductRepository
             'products.created_at as created_at',
             'products.product_categories_id as product_categories_id'
         )
-        ->where('products.name','like','%'.$request->input('keyword').'%')
+
         ->where('products.is_active',1)
+        ->where('products.gender',$request->input('menu'))
+        ->where('products.name','like','%'.$request->input('keyword').'%')
+        ->orWhere('products.gender', 'unisex')
+        ->where('products.name','like','%'.$request->input('keyword').'%')
         ->whereNull('products.deleted_at');
 
         if ($request->has('price')) {

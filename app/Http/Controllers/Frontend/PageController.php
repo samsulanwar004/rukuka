@@ -538,13 +538,15 @@ class PageController extends BaseController
 
         $keyword = $request->input('keyword');
         $sortByPrice = $request->input('price');
+        $navigation = $request->input('menu');
 
         if(count($products) == 0){
-            return view('pages.search_404', compact('keyword'));
+            return view('pages.search_404', compact('keyword','navigation'));
         }
         else{
             return view('pages.search', compact(
                 'products',
+                'navigation',
                 'shops',
                 'keyword',
                 'sortByPrice'
