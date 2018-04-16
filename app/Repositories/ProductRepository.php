@@ -304,142 +304,24 @@ class ProductRepository
         ->get();
     }
 
-    public function getSearchCategory($request )
-    {
-        if($request->has('category'))
-        {
-            {
-                $categories = (new CategoryRepository)->getCategoryByParent($request->input('category'));
-                $categoryArr=[];
-                foreach($categories as $category){
-                    foreach($category['child'] as $cat){
-                        $categoryArr[] =  $cat['id'];
-                    }
-                }
-            }
-
-            $query = \DB::table('products')->join('product_designers', function ($join) {
-                $join->on('products.product_designers_id', '=', 'product_designers.id')
-                ->whereNull('product_designers.deleted_at');
-            })
-            ->select(
-                'products.id as id', 
-                'products.name as name', 
-                'products.slug as slug', 
-                'products.sell_price as sell_price', 
-                'products.price_before_discount as price_before_discount', 
-                'products.created_at as created_at',
-                'products.product_categories_id as product_categories_id'
-            )
-            ->where('products.name','like','%'.$request->input('keyword').'%')
-            ->whereIn('products.product_categories_id',$categoryArr)
-            ->where('products.is_active',1)
-            ->whereNull('products.deleted_at');
-        }
-        else
-        {
-            $query = \DB::table('products')->join('product_designers', function ($join) {
-                $join->on('products.product_designers_id', '=', 'product_designers.id')
-                ->whereNull('product_designers.deleted_at');
-            })
-            ->select(
-                'products.id as id', 
-                'products.name as name', 
-                'products.slug as slug', 
-                'products.sell_price as sell_price', 
-                'products.price_before_discount as price_before_discount', 
-                'products.created_at as created_at',
-                'products.product_categories_id as product_categories_id'
-            )
-            ->where('products.name','like','%'.$request->input('keyword').'%')
-            ->where('products.is_active',1)
-            ->whereNull('products.deleted_at');
-        }
-
-        if ($request->has('color_id')) {
-            $colorId = $request->input('color_id');
-
-            $query->join('product_colors', function ($join) use ($colorId) {
-                $join->on('products.product_colors_id', '=', 'product_colors.id')
-                ->where('product_colors.id', $colorId);
-            });
-        }
-
-        if ($request->has('price')) {
-            $query->orderBy('products.sell_price', $request->input('price'));
-        } else {
-            $query->orderBy('products.id', 'desc');
-        }
-
-        return $query->get()->unique('product_categories_id');
-    }
-
     public function getSearch($request )
     {
-        if($request->has('category'))
-        {
-
-            if( $request->has('subcategory'))
-            {
-                $categories = (new CategoryRepository)->getCategoryBySlug($request->input('subcategory'));
-                $categoryArr=[];
-                $categoryArr[]=[$categories->id];
-            }
-            else{
-                $categories = (new CategoryRepository)->getCategoryByParent($request->input('category'));
-                $categoryArr=[];
-                foreach($categories as $category){
-                    foreach($category['child'] as $cat){
-                        $categoryArr[] =  $cat['id'];
-                    }
-                }
-            }
-            $query = \DB::table('products')->join('product_designers', function ($join) {
-                $join->on('products.product_designers_id', '=', 'product_designers.id')
-                ->whereNull('product_designers.deleted_at');
-            })
-            ->select(
-                'products.id as id', 
-                'products.name as name', 
-                'products.slug as slug', 
-                'products.sell_price as sell_price', 
-                'products.price_before_discount as price_before_discount', 
-                'products.created_at as created_at',
-                'products.product_categories_id as product_categories_id'
-            )
-            ->where('products.name','like','%'.$request->input('keyword').'%')
-            ->whereIn('products.product_categories_id',$categoryArr)
-            ->where('products.is_active',1)
-            ->whereNull('products.deleted_at');
-        }
-        else
-        {
-            $query = \DB::table('products')->join('product_designers', function ($join) {
-                $join->on('products.product_designers_id', '=', 'product_designers.id')
-                ->whereNull('product_designers.deleted_at');
-            })
-            ->select(
-                'products.id as id', 
-                'products.name as name', 
-                'products.slug as slug', 
-                'products.sell_price as sell_price', 
-                'products.price_before_discount as price_before_discount', 
-                'products.created_at as created_at',
-                'products.product_categories_id as product_categories_id'
-            )
-            ->where('products.name','like','%'.$request->input('keyword').'%')
-            ->where('products.is_active',1)
-            ->whereNull('products.deleted_at');
-        }
-
-        if ($request->has('color_id')) {
-            $colorId = $request->input('color_id');
-
-            $query->join('product_colors', function ($join) use ($colorId) {
-                $join->on('products.product_colors_id', '=', 'product_colors.id')
-                ->where('product_colors.id', $colorId);
-            });
-        }
+        $query = \DB::table('products')->join('product_designers', function ($join) {
+            $join->on('products.product_designers_id', '=', 'product_designers.id')
+            ->whereNull('product_designers.deleted_at');
+        })
+        ->select(
+            'products.id as id',
+            'products.name as name',
+            'products.slug as slug',
+            'products.sell_price as sell_price',
+            'products.price_before_discount as price_before_discount',
+            'products.created_at as created_at',
+            'products.product_categories_id as product_categories_id'
+        )
+        ->where('products.name','like','%'.$request->input('keyword').'%')
+        ->where('products.is_active',1)
+        ->whereNull('products.deleted_at');
 
         if ($request->has('price')) {
             $query->orderBy('products.sell_price', $request->input('price'));

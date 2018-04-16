@@ -537,13 +537,6 @@ class PageController extends BaseController
         });
 
         $keyword = $request->input('keyword');
-
-        $productcategory = $product->getSearchCategory($request);
-        $category = $request->input('category');
-        $subcategory = $request->input('subcategory');
-        $filter = request()->query();
-        unset($filter['color_id']);
-        $colorId = $request->has('color_id') ? $request->input('color_id') : null;
         $sortByPrice = $request->input('price');
 
         if(count($products) == 0){
@@ -554,16 +547,9 @@ class PageController extends BaseController
                 'products',
                 'shops',
                 'keyword',
-                'productcategory',
-                'category',
-                'subcategory',
-                'filter',
-                'colorId',
                 'sortByPrice'
             ));
         }
-
-
     }
 
     public function contact (Request $request){
