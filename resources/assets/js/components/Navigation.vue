@@ -258,6 +258,20 @@
       </div>
       <div class="uk-navbar-right user_panel_vis">
         <ul class="uk-navbar-nav">
+          <li class="uk-margin-left">
+            <form class="uk-search uk-search-default" action="/search" method="get">
+            <div style="margin-top: 3px">
+                <div class="typeahead__container">
+                    <div class="typeahead__field">
+                              <span class="typeahead__query">
+                                  <button type="submit" style="left: -35px" class="uk-search-icon uk-icon" uk-search-icon></button>
+                                  <input class="js-typeahead-designers" type="search" class="uk-search-input" name="keyword" autocomplete="off" required :placeholder="trans.search">
+                              </span>
+                    </div>
+                </div>
+            </div>
+            </form>
+          </li>
 
 
           <li class="uk-margin-left">

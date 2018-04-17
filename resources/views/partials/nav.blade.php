@@ -17,8 +17,8 @@
           <div class="uk-grid-small" uk-grid>
               <div class="uk-width-2-5@m uk-flex uk-flex-middle">
                 <ul class="uk-navbar-nav">
-                  <li class="uk-margin-medium-right {{ $navigation == 'womens' ? 'uk-active' : ''}}"><a href="{{ route('women') }}"> Women </a></li>
-                  <li class="{{ $navigation == 'mens' ? 'uk-active' : ''}}"><a href="{{ route('men') }}"> Men </a></li>
+                  <li class="uk-margin-medium-right {{ $navigation == 'mens' ? 'uk-active' : ''}}"><a href="{{ route('men') }}"> Men </a></li>
+                  <li class="{{ $navigation == 'womens' ? 'uk-active' : ''}}"><a href="{{ route('women') }}"> Women </a></li>
                 </ul>
 
 
