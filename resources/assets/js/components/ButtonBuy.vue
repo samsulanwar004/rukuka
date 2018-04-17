@@ -20,7 +20,8 @@
                   <h6> <b> {{ trans.european }} </b></h6>
                 </div>
                 <div class="uk-text-right">
-                  <span class="uk-text-meta"><a href="/help/size-charts" target="_blank"> {{ trans.size_chart}}</a></span>
+                  <a href="#size-charts" class="uk-link-reset" uk-toggle> <span class="uk-badge">{{ trans.size_chart}}</span></a>
+
                 </div>
               </div>
                 <select :class="{'uk-select uk-form-width-small uk-form-small uk-margin-small-right': true, 'uk-form-danger': errors.has('size') }" name="size" v-model="size" v-validate="'required'">

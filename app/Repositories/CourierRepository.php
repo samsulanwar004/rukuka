@@ -501,6 +501,7 @@ class CourierRepository{
 		return (object) [
 					'serviceCode' 	=> $serviceCode,
 					'serviceName' 	=> $serviceName,
+					'serviceNameOriginal' 	=> $serviceName,
 					'fee' 			=> $fee,
 					'feeTax' 		=> $feeTax,
 					'insurance' 	=> $insurance,
@@ -687,7 +688,8 @@ class CourierRepository{
 			}
 
 			$rebuildData = $this->defaultTemplateForSummary(
-								'POS INDONESIA', 
+								'POS INDONESIA',
+								$costChoosed['data']->serviceNameOriginal, 
 								$costChoosed['data']->totalFeeIdr, 
 								$costChoosed['data']->totalFeeDollar, 
 								$valueChoosed, 
@@ -704,10 +706,11 @@ class CourierRepository{
 
 	}
 
-	private function defaultTemplateForSummary($courierName, $totalFeeIdr, $totalFeeUsd, $valueCourierSelected, $origin){
+	private function defaultTemplateForSummary($courierName, $serviceNameOriginal, $totalFeeIdr, $totalFeeUsd, $valueCourierSelected, $origin){
 
 		return (object) [
 							'courier_name' 			 => $courierName,
+							'service_name_original'  => $serviceNameOriginal,
 							'total_fee_idr' 		 => $totalFeeIdr,
 							'total_fee_usd' 		 => $totalFeeUsd,
 							'value courier_selected' => $valueCourierSelected,

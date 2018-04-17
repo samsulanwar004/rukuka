@@ -9,7 +9,7 @@
                   @foreach ($slider as $item)
                     <li>
                       <a href="{{ $item->url }}" class="uk-link-reset">
-                        <div class="uk-position-cover" uk-slideshow-parallax="scale: 1.2,1.2,1">
+                        <div class="uk-position-cover">
                             <img src="{{ uploadCDN($item->banner) }}" alt="rukuka homepage" onerror="this.src = '{{imageCDN(config('common.default.image_1'))}}'" uk-cover>
                         </div>
                         <div class="uk-position-cover" uk-slideshow-parallax="opacity: 0,0,0.2; background-color: #000,#000"></div>
