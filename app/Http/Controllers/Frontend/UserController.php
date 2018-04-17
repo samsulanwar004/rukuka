@@ -18,6 +18,7 @@ use App\Repositories\PaymentRepository;
 use App\Review;
 use App\ConfirmPayment;
 use Illuminate\Support\Facades\Validator;
+use App\Jobs\ProcessDecreaseStock;
 
 class UserController extends BaseController
 {
@@ -979,6 +980,11 @@ class UserController extends BaseController
                     //sent invoice paid to buyer
                     $emailService = (new EmailService);
                     $emailService->sendInvoicePaid($order);
+
+                    //decrease stock
+                    ProcessDecreaseStock::dispatch($order)
+                        ->onConnection(config('common.queue_active'))
+                        ->onQueue(config('common.queue_list.processing'));
                 }
 
                 if($response_cc["status"] == "AUTHORIZED")

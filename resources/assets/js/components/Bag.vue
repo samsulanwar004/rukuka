@@ -1,5 +1,5 @@
 <template>
-    <div class="uk-margin-large" v-if="bags <= 0" >
+    <div class="uk-margin-large" v-if="bag_count <= 0 || bags.length <= 0" >
         <h3 align="center"><p>{{ trans.no_bag }}</p></h3>
     </div>
     <div class="uk-margin-top" uk-grid v-else>
@@ -29,7 +29,7 @@
                         <td class="uk-table-link">
                           <ul class="uk-list uk-margin-small-top">
                             <li><h4>{{ bag.name }}</h4></li>
-                            <li class="uk-margin-remove"><span class="uk-text-small">{{ trans.color }}: {{ bag.options.color }}</span></li>
+                            <li class="uk-margin-remove"><span class="uk-text-small">{{ trans.color }} : {{ bag.options.color }}</span></li>
                             <li class="uk-margin-remove"><span class="uk-text-small">{{ trans.size }} : {{ bag.options.size }}</span></li>
                             <li class="uk-margin-remove" v-if="bag.options.preorder"><span class="uk-text-small uk-text-danger">Pre Order {{ bag.options.preorder }} days</span></li>
                           </ul>
@@ -93,8 +93,6 @@
 
         created () {
             var self = this;
-
-            self.bags = this.bag_count;
 
             Event.listen('exchange', function (response) {
               self.exchangeRate = response.data.data;
@@ -200,7 +198,12 @@
                   Event.fire('removePopUp', response);
                 })
                 .catch(function (error) {
-                  console.log(error);
+                  var error = JSON.parse(JSON.stringify(error));
+                  if (typeof error.response.data.message !== 'undefined') {
+                      UIkit.notification(error.response.data.message, {
+                          status:'danger'
+                      });
+                  }
                 });
             },
 
@@ -218,7 +221,12 @@
                       Event.fire('removePopUp', response);
                     })
                     .catch(function (error) {
-                      console.log(error);
+                      var error = JSON.parse(JSON.stringify(error));
+                      if (typeof error.response.data.message !== 'undefined') {
+                          UIkit.notification(error.response.data.message, {
+                              status:'danger'
+                          });
+                      }
                     });
                 }
             },

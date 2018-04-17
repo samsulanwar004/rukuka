@@ -417,7 +417,7 @@ return [
     //resources/views/blogs/home.blade.php
     'load_more'                 =>  'Load More',
     'no_content'                =>  'No Content',
-    'search_result'             =>  'Search results for',
+    'search_result'             =>  'Search for',
     'nothing_found'             =>  'Sorry, Nothing Found.',
     'another_keyword'           =>  'try searching with other keywords',
     'other_people'              =>  'Other people also read',
