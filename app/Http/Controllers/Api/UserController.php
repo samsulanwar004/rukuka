@@ -38,7 +38,7 @@ class UserController extends BaseApiController
 
         $validation = $this->validRequest($request, $rules);
         if ($validation->fails()) {
-            return $this->error($validation->errors(), 400, false);
+            return $this->error($validation->errors(), 400, true);
         }
 
         try {
