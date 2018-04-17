@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Cart;
+use App\Repositories\OrderRepository;
 
 class BagService
 {
@@ -51,5 +52,15 @@ class BagService
 	public function remove($rowId)
 	{
 		return Cart::remove($rowId);
+	}
+
+	public function restock($stockId, $decrease)
+	{
+		$stock = (new OrderRepository)->getStockById($stockId);
+        $newUnitStock = $stock->unit - $decrease;
+        $stock->unit = $newUnitStock <= 0 ? 0 : $newUnitStock;
+        $stock->timestamps = false;
+
+        $stock->update();
 	}
 }
