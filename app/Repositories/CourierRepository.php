@@ -501,7 +501,7 @@ class CourierRepository{
 		return (object) [
 					'serviceCode' 	=> $serviceCode,
 					'serviceName' 	=> $serviceName,
-					'serviceNameOriginal' 	=> $serviceName,
+					'serviceNameOriginal' 	=> ucwords(strtolower($serviceName)),
 					'fee' 			=> $fee,
 					'feeTax' 		=> $feeTax,
 					'insurance' 	=> $insurance,
@@ -688,7 +688,7 @@ class CourierRepository{
 			}
 
 			$rebuildData = $this->defaultTemplateForSummary(
-								'POS INDONESIA',
+								'Pos Indonesia',
 								$costChoosed['data']->serviceNameOriginal, 
 								$costChoosed['data']->totalFeeIdr, 
 								$costChoosed['data']->totalFeeDollar, 

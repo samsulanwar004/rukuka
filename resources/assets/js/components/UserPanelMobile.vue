@@ -5,7 +5,7 @@
         <a uk-toggle="target: .test-overlay; animation: uk-animation-fade" href="#"><i class="material-icons" style="font-size: 18px; vertical-align:middle">search</i></a>
       </div>
       <div class="uk-width-expand uk-text-center">
-        <a href="/">
+        <a :href="'/'+ home_link">
           <div class="uk-inline">
           <lazy-background
                   :image-source="logoImage | awsLink(aws_link)"
@@ -75,7 +75,8 @@
         errorImage: {},
         loadingImage: {},
         logoImage: this.aws_link+'/images/'+JSON.parse(this.logo,true),
-        trans: JSON.parse(this.locale,true)
+        trans: JSON.parse(this.locale,true),
+        home_link: this.navigation.replace('s', ''),
       }
     }
   }
