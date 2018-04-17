@@ -357,11 +357,6 @@ Route::middleware(['auth'])->group(function () {
     //     'uses' => 'Frontend\UserController@ccUpdate',
     // ]);
 
-    Route::get('/order', [
-        'as'   => 'order',
-        'uses' => 'Frontend\OrderController@store',
-    ]);
-
 });
 
 Route::middleware(['as.guest'])->group(function () {
@@ -433,15 +428,18 @@ Route::middleware(['as.guest'])->group(function () {
         'uses' => 'Frontend\OrderController@store',
     ]);
 
+    Route::get('/order', function () {
+        abort('404');
+    });
+
     Route::post('/repayment', [
         'as'   => 'repayment',
         'uses' => 'Frontend\OrderController@restore',
     ]);
 
-    Route::get('/order', [
-        'as'   => 'order',
-        'uses' => 'Frontend\OrderController@store',
-    ]);
+    Route::get('/repayment', function () {
+        abort('404');
+    });
 
     Route::get('tracking/trace/{ordeCode}', [
         'as'   => 'tracking-trace',

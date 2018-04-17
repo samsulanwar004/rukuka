@@ -14,7 +14,7 @@ class AddFieldPreorderInProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('is_preorder', 7)->nullable()->after('diameter');
+            $table->string('is_preorder', 1)->default(0)->after('diameter');
             $table->float('preorder_day', 2,0)->default(7)->after('is_preorder');
         });
     }

@@ -1,13 +1,14 @@
 @extends('app_checkout')
 @section('title', trans('app.title_shipping_address') )
 @section('content')
+<div class="uk-section uk-section-muted uk-section-xsmall">
 <div class="uk-container uk-container-small">
    <div class="uk-grid-small uk-margin-top">
       @include('partials.alert')
    </div>
    <div class="uk-margin-top" uk-grid>
       <div class="uk-width-2-3@m">
-        <div class="uk-card uk-card-default uk-card-small uk-background-muted uk-box-shadow-small">
+        <div class="uk-card uk-card-default uk-card-small uk-box-shadow-small">
           <div class="uk-card-body">
            <div class="uk-grid uk-grid-divider uk-child-width-1-3 uk-margin-small" uk-grid>
 
@@ -24,9 +25,14 @@
            </div>
          </div>
          </div>
-         <h4 class="uk-margin-small uk-text-uppercase">{{ trans('app.checkout') }}</h4>
+         <div class="uk-card uk-card-small uk-card-default uk-margin-top">
+           <div class="uk-card-header">
+             <h4>{{ trans('app.checkout') }}</h4>
+           </div>
+           <div class="uk-card-badge">{{ trans('app.select_shipping') }}:</div>
+           <div class="uk-card-body">
          @if (count($address))
-         <h6 class="uk-margin-small uk-text-uppercase">{{ trans('app.select_shipping') }}:</h6>
+         {{-- <h6 class="uk-margin-small uk-text-uppercase"></h6> --}}
           <address-list
                 address="{{ $address }}"
                 address_default="{{ route('user.address.default') }}"
@@ -35,6 +41,8 @@
                 address_update="{{ route('user.address.update') }}"
                 locale="{{ json_encode(trans('app')) }}"
           ></address-list>
+        </div>
+      </div>
          <div id="modal-sections" uk-modal>
             <div class="uk-modal-dialog">
               <button class="uk-modal-close-default" type="button" uk-close></button>
@@ -193,7 +201,11 @@
          </div>
 
          @endif
-         <hr class="uk-margin" style="border-color: #333; border-width: 3px">
+         <div class="uk-card uk-card-small uk-card-default uk-margin-top uk-margin-bottom">
+           <div class="uk-card-header">
+             <h4>Your Shopping Bag</h4>
+           </div>
+           <div class="uk-card-body">
             <item-checkout
                bag_api="{{ route('persist.bag') }}"
                aws_link="{{ config('filesystems.s3url') }}"
@@ -201,12 +213,15 @@
                locale="{{ json_encode(trans('app')) }}"
                exchange_api="{{ route('exchange') }}"
             ></item-checkout>
+          </div>
+        </div>
       </div>
       <summary-checkout
         shipping_cost="0"
         locale="{{ json_encode(trans('app')) }}"
       ></summary-checkout>
    </div>
+</div>
 </div>
 @endsection
 @section('footer_scripts')

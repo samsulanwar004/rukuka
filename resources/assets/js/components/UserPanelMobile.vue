@@ -1,7 +1,7 @@
 <template>
     <div class="uk-grid-small uk-flex uk-flex-middle uk-hidden@m" uk-grid>
       <div class="uk-width-auto"><a href="#offcanvas-overlay-slide" uk-toggle><i class="material-icons" style="font-size: 18px; vertical-align:middle">menu</i></a></div>
-      <div class="uk-width-auto">
+      <div class="uk-width-auto" v-if="navigation">
         <a uk-toggle="target: .test-overlay; animation: uk-animation-fade" href="#"><i class="material-icons" style="font-size: 18px; vertical-align:middle">search</i></a>
       </div>
       <div class="uk-width-expand uk-text-center">
@@ -41,7 +41,8 @@
       'aws_link',
       'default_image',
       'logo',
-      'locale'
+      'locale',
+      'navigation'
     ],
 
     components: {

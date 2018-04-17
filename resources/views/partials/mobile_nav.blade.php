@@ -1,6 +1,18 @@
 @php
-  $women = Request::segment(1) == "women" || Request::input('gender') == "womens" || $categories == "womens" || $product->gender == "womens" ? "womens" : null;
-  $men = Request::segment(1) == "men" || Request::input('gender') == "mens" || $categories == "mens" || $product->gender == "mens" ? "mens" : null;
+
+  $women = Request::segment(1) == "women"
+  || Request::input('gender') == "womens"
+  || Request::input('menu') == "womens"
+  || $categories == "womens"
+  || $product->gender == "womens"
+  || $product->gender == "unisex" ? "womens" : null;
+
+  $men = Request::segment(1) == "men"
+  || Request::input('gender') == "mens"
+  || Request::input('menu') == "mens"
+  || $categories == "mens"
+  || $product->gender == "mens"
+  || $product->gender == "unisex" ? "mens" : null;
 
   if($women) {
     $navigation = $women;
@@ -9,8 +21,6 @@
   } else {
     $navigation = null;
   }
-
-  $category = $categories == 'designers' ? $categories : $category;
 
 @endphp
 <div class="uk-section uk-section-xsmall uk-padding-remove-vertical">
@@ -28,26 +38,28 @@
               default_image="{{ json_encode(config('common.default')) }}"
               logo="{{ json_encode(config('common.logo')) }}"
               locale="{{ json_encode(trans('app')) }}"
+              navigation="{{ $navigation }}"
             ></user-panel-mobile>
             <div id="offcanvas-overlay-slide" uk-offcanvas="overlay: true">
               <navigation-mobile
-                      men_link="{{ route('men') }}"
-                      women_link="{{ route('women') }}"
-                      designer_link="{{ route('designer') }}"
-                      auth="{{ Auth::check() ? 1 : 0 }}"
-                      login_link="{{ route('login') }}"
-                      profile_link="{{ route('user') }}"
-                      locale="{{ json_encode(trans('app')) }}"
-                      segment_category="{{ $category }}"
-                      segment_slug="{{ $slug == null ? $category:$slug }}"
-                      navigation="{{ $navigation }}"
-                      category="{{ isset($category) ? $category : null }}"
+                  men_link="{{ route('men') }}"
+                  women_link="{{ route('women') }}"
+                  designer_link="{{ route('designer') }}"
+                  auth="{{ Auth::check() ? 1 : 0 }}"
+                  login_link="{{ route('login') }}"
+                  profile_link="{{ route('user') }}"
+                  locale="{{ json_encode(trans('app')) }}"
+                  navigation="{{ $navigation }}"
+                  category="{{ isset($category) ? $category : null }}"
+                  designer="{{ Request::segment(1) == "designer" ? true : false }}"
+                  editorial="{{ Request::segment(1) == "editorial" ? true : false }}"
               ></navigation-mobile>
             </div>
             <div class="uk-navbar-left uk-flex-1 uk-margin-top test-overlay" hidden>
               <div class="uk-width-expand">
 
                 {{ Form::open(array('url' => '/search', 'method' =>'get','files' => true,'class' => 'uk-search uk-search-navbar uk-width-1-1')) }}
+                <input type="hidden" name="menu" value="{{ $navigation }}">
                 <div>
                   <div class="typeahead__container">
                     <div class="typeahead__field">

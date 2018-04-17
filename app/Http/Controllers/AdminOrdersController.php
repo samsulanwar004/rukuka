@@ -7,6 +7,7 @@
 	use App\Repositories\OrderRepository;
     use App\Services\EmailService;
     use Carbon\Carbon;
+    use App\Jobs\ProcessDecreaseStock;
 
 	class AdminOrdersController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -348,9 +349,17 @@
             //EMAILSENT
             //Send shipping Notification to buyer
             $order = (new OrderRepository)->getOrderById($id);
-            if($order->order_status == 0 && $postdata['order_status'] == 1){
-                $emailService = (new EmailService);
-                $emailService->sendShipping($order);
+            if ($order->order_status == 0 && $postdata['order_status'] == 1) {
+                (new EmailService)->sendShipping($order);
+            }
+
+            if ($order->payment_status == 0 && $postdata['payment_status'] == 1) {
+            	//decrease stock
+                ProcessDecreaseStock::dispatch($order)
+                    ->onConnection(config('common.queue_active'))
+                    ->onQueue(config('common.queue_list.processing'));
+
+            	(new EmailService)->sendInvoicePaid($order);
             }
 	    }
 

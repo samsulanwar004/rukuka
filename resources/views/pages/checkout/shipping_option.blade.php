@@ -1,6 +1,7 @@
 @extends('app_checkout')
 @section('title', trans('app.title_shipping_option') )
 @section('content')
+<div class="uk-section uk-section-muted uk-section-xsmall">
 <div class="uk-container uk-container-small">
     <div class="uk-grid-small uk-margin-top">
         @include('partials.alert')
@@ -8,7 +9,7 @@
 
     <div class="uk-margin-top" uk-grid>
         <div class="uk-width-2-3@m">
-          <div class="uk-card uk-card-default uk-card-small uk-background-muted uk-box-shadow-small">
+          <div class="uk-card uk-card-default uk-card-small uk-box-shadow-small">
             <div class="uk-card-body">
              <div class="uk-grid uk-grid-divider uk-child-width-1-3 uk-margin-small" uk-grid>
                <div class="uk-text-center">
@@ -23,7 +24,12 @@
              </div>
            </div>
            </div>
-            <h4 class="uk-text-uppercase">{{ trans('app.checkout') }}</h4>
+           <div class="uk-card uk-card-small uk-card-default uk-margin-top">
+             <div class="uk-card-header">
+               <h4>{{ trans('app.checkout') }}</h4>
+             </div>
+             <div class="uk-card-body">
+
             <h6 class="uk-margin-small uk-text-uppercase">{{ trans('app.shipping_method') }}</h6>
             <h6 class="uk-margin-small uk-text-uppercase"> <b>{{ trans('app.today') }} : </b>{{ \Carbon\Carbon::now()->toDayDateTimeString() }}</h6>
 
@@ -75,10 +81,15 @@
             <div style="display: none;">
               <input type="submit" name="submit" id="submit">
             </div>
+          </div>
+        </div>
+        <div class="uk-card uk-card-small uk-card-default uk-margin-top">
+          <div class="uk-card-header">
+            <h4>{{ trans('app.shipping_detail') }}</h4>
+          </div>
+          <div class="uk-card-body">
             <form>
 
-            <h6 class="uk-margin-small uk-text-uppercase">{{ trans('app.shipping_detail') }}</h6>
-            <div>
               <table class="uk-table uk-table-divider uk-table-small uk-background-muted uk-text-meta uk-table-hover">
                   <tbody>
                     <tr>
@@ -111,8 +122,13 @@
                     </tr>
                   </tbody>
                 </table>
-            </div>
-            <hr class="uk-margin" style="border-color: #333; border-width: 3px">
+        </div>
+      </div>
+      <div class="uk-card uk-card-small uk-card-default uk-margin-top uk-margin-bottom">
+        <div class="uk-card-header">
+          <h4>Your Shopping Bag</h4>
+        </div>
+        <div class="uk-card-body">
               <item-checkout
                  bag_api="{{ route('persist.bag') }}"
                  aws_link="{{ config('filesystems.s3url') }}"
@@ -120,12 +136,15 @@
                  locale="{{ json_encode(trans('app')) }}"
                  exchange_api="{{ route('exchange') }}"
               ></item-checkout>
+            </div>
+          </div>
         </div>
         <summary-checkout
           shipping_cost="0"
           locale="{{ json_encode(trans('app')) }}"
         ></summary-checkout>
     </div>
+</div>
 </div>
 @endsection
 

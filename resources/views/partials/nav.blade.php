@@ -1,6 +1,17 @@
 @php
-  $women = Request::segment(1) == "women" || Request::segment(1) == "designer" || Request::input('gender') == "womens" || $categories == "womens" || $product->gender == "womens" || $product->gender == "unisex" ? "womens" : null;
-  $men = Request::segment(1) == "men" || Request::segment(1) == "designer" ||  Request::input('gender') == "mens" || $categories == "mens" || $product->gender == "mens" || $product->gender == "unisex" ? "mens" : null;
+  $women = Request::segment(1) == "women"
+  || Request::input('gender') == "womens"
+  || Request::input('menu') == "womens"
+  || $categories == "womens"
+  || $product->gender == "womens"
+  || $product->gender == "unisex" ? "womens" : null;
+
+  $men = Request::segment(1) == "men"
+  || Request::input('gender') == "mens"
+  || Request::input('menu') == "mens"
+  || $categories == "mens"
+  || $product->gender == "mens"
+  || $product->gender == "unisex" ? "mens" : null;
 
   if($women) {
     $navigation = $women;
@@ -17,8 +28,8 @@
           <div class="uk-grid-small" uk-grid>
               <div class="uk-width-2-5@m uk-flex uk-flex-middle">
                 <ul class="uk-navbar-nav">
-                  <li class="uk-margin-medium-right {{ $navigation == 'womens' ? 'uk-active' : ''}}"><a href="{{ route('women') }}"> Women </a></li>
-                  <li class="{{ $navigation == 'mens' ? 'uk-active' : ''}}"><a href="{{ route('men') }}"> Men </a></li>
+                  <li class="uk-margin-medium-right {{ $navigation == 'mens' ? 'uk-active' : ''}}"><a href="{{ route('men') }}"> {{ trans('app.men') }} </a></li>
+                  <li class="{{ $navigation == 'womens' ? 'uk-active' : ''}}"><a href="{{ route('women') }}"> {{ trans('app.women') }} </a></li>
                 </ul>
 
 
@@ -64,9 +75,7 @@
 
         </div>
     </div>
-    @if ($navigation || $category == 'designers')
-      <div class="cbp-af-header">
-
+      <div class="cbp-af-header {{ $navigation || $category == 'designers' ? '':'uk-hidden' }}">
         <navigation
           api="{{ route('menu')}}"
           men_link="{{ route('men') }}"
@@ -95,11 +104,11 @@
           language="{{ App::getLocale() }}"
           navigation="{{ $navigation }}"
           category="{{ isset($category) ? $category : null }}"
-          designer="{{ isset($designer) || Request::segment(1) == "designer" ? true : false }}"
+          designer="{{ Request::segment(1) == "designer" || Request::input('designer') != "" ? true : false }}"
+          editorial="{{ Request::segment(1) == "editorial" ? true : false }}"
         ></navigation>
-
       </div>
-    @endif
+
   </div>
   @if ($navigation || $category == 'designers')
     <div class="uk-section uk-section-xsmall uk-padding-remove uk-margin-medium-top">

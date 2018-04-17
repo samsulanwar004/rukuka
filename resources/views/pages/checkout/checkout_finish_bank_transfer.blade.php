@@ -1,11 +1,12 @@
 @extends('app_checkout')
 @section('title', trans('app.title_payment') )
 @section('content')
+<div class="uk-section uk-section-muted uk-section-xsmall">
   <div class="uk-container uk-container-small">
     <div class="uk-grid-small uk-margin-top uk-flex uk-flex-center" uk-grid>
       <div class="uk-width-3-4@m">
         <h3>{{ trans('app.checkout_almost') }} </h3>
-        <div class="uk-card uk-card-default uk-card-border uk-margin-bottom">
+        <div class="uk-card uk-card-default uk-margin-bottom">
             <div class="uk-card-body">
                {{ trans('app.order_number') }} : <br>
               <span class="uk-label uk-text-lead uk-light uk-visible@m">{{ $order->order_code }}</span>
@@ -35,14 +36,16 @@
                         </tr>
                   </tbody>
                 </table>
+              <p>
+                {{ trans('app.note') }} : <br>
+                {{ trans('app.transfer_money') }} <label> IDR.  {{number_format($totalwithshipping,2)}} </label>
+                {{trans('app.transfer_account')}}
 
-          {{ trans('app.note') }} : <br>
-          {{ trans('app.transfer_money') }} <label> IDR.  {{number_format($totalwithshipping,2)}} </label>
-            {{trans('app.transfer_account')}}
                 <a href="/help/contact-us">{{ trans('app.contact_us') }} </a> {{ trans('app.confirm_contact_us') }}
+              </p>
                 <div class="uk-flex uk-grid" uk-grid>
                     <div class="uk-panel uk-width-1-3@m">
-                        <div class="uk-card uk-card-default">
+                        <div class="uk-card uk-card-small uk-card-default">
                             <div class="uk-card-body">
                                 <ul class="uk-list uk-text-center">
                                     <img src="{{ imageCDN('bca.png') }}" alt="bca" height="50">
@@ -53,7 +56,7 @@
                         </div>
                     </div>
                     <div class="uk-panel uk-width-1-3@m">
-                        <div class="uk-card uk-card-default">
+                        <div class="uk-card uk-card-small uk-card-default">
                             <div class="uk-card-body">
                                 <ul class="uk-list uk-text-center">
                                     <img src="{{ imageCDN('bni.png') }}" alt="bni" height="50">
@@ -64,7 +67,7 @@
                         </div>
                     </div>
                     <div class="uk-panel uk-width-1-3@m">
-                        <div class="uk-card uk-card-default">
+                        <div class="uk-card uk-card-small uk-card-default">
                             <div class="uk-card-body">
                                 <ul class="uk-list uk-text-center">
                                     <img src="{{ imageCDN('mandiri.png') }}" alt="mandiri" height="50">
@@ -77,10 +80,7 @@
                 </div>
 
                 <div class=" uk-margin-large uk-text-center">
-                    <a href="{{ route('payment.confirm') }}"><button class="uk-button uk-button-secondary uk-button-small">{{ trans('app.confirm_payment') }}</button></a>
-                </div>
-                <div class=" uk-margin uk-text-center">
-                    <a href="{{ route('index') }}"><button class="uk-button uk-button-default uk-button-small"><span class="uk-icon" uk-icon="icon: chevron-left"></span>{{ trans('app.back_to_home') }}</button></a>
+                    <a href="{{ route('payment.confirm') }}"><button class="uk-button uk-width-1-2 uk-button-danger">{{ trans('app.confirm_payment') }}</button></a>
                 </div>
             </div>
 
@@ -89,5 +89,5 @@
     </div>
   </div>
 </div>
+</div>
 @endsection
-

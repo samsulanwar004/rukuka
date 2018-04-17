@@ -30,7 +30,7 @@
                               <ul class="uk-nav uk-navbar-dropdown-nav">
                                   <li class="uk-parent">
                                     <div class="uk-inline">
-                                      <a :href="designersNav.designer_shop_url">
+                                      <a :href="designersNav.designer_shop_url+'&menu='+navigation">
                                           <lazy-background
                                                   :image-source="designersNav.designer_shop_image | awsLink(aws_link)"
                                                   :alt="designersNav.designer_designer_shop__text"
@@ -41,9 +41,9 @@
                                       </a>
                                       <div class="uk-overlay-primary uk-position-cover"></div>
                                       <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m">
-                                      <a :href="designersNav.designer_shop_url">
+                                      <a :href="designersNav.designer_shop_url+'&menu='+navigation">
                                          <h2 class="uk-margin-small uk-text-uppercase"> {{designersNav.designer_shop_text}} </h2>
-                                         <a :href="designersNav.designer_shop_url" class="uk-button uk-button-small uk-button-default">{{ trans.shop_now}}</a>
+                                         <a :href="designersNav.designer_shop_url+'&menu='+navigation" class="uk-button uk-button-small uk-button-default">{{ trans.shop_now}}</a>
                                       </a>
                                     </div>
                                     </div>
@@ -79,10 +79,33 @@
                               <ul class="uk-nav uk-navbar-dropdown-nav">
                                   <h5 class="uk-margin-small uk-text-uppercase"> {{ trans.spotlight }}</h5>
                               </ul>
-                              <ul class="uk-nav uk-navbar-dropdown-nav">
+                              <ul class="uk-nav uk-navbar-dropdown-nav" v-if="navigation == 'mens'">
                                   <li class="uk-parent">
                                     <div class="uk-inline">
-                                      <a :href="womensNav.women_shop_url">
+                                      <a :href="mensNav.men_shop_url+'&parent=clothing&category=all'">
+                                          <lazy-background
+                                                  :image-source="mensNav.men_shop_image | awsLink(aws_link)"
+                                                  :alt="mensNav.men_shop_text"
+                                                  :loading-image="loadingImage"
+                                                  :error-image="errorImage"
+                                                  image-style="height: 250px; width:250px">
+                                          </lazy-background>
+                                      </a>
+                                      <div class="uk-overlay-primary uk-position-cover"></div>
+                                      <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m">
+                                      <a :href="mensNav.men_shop_url+'&parent=clothing&category=all'">
+                                         <h2 class="uk-margin-small uk-text-uppercase"> {{mensNav.men_shop_text}} </h2>
+                                         <a :href="mensNav.men_shop_url+'&parent=clothing&category=all'" class="uk-button uk-button-small uk-button-default">{{ trans.shop_now}}</a>
+                                      </a>
+                                    </div>
+                                    </div>
+
+                                  </li>
+                              </ul>
+                              <ul class="uk-nav uk-navbar-dropdown-nav" v-else>
+                                  <li class="uk-parent">
+                                    <div class="uk-inline">
+                                      <a :href="womensNav.women_shop_url+'&parent=clothing&category=all'">
                                           <lazy-background
                                                   :image-source="womensNav.women_shop_image | awsLink(aws_link)"
                                                   :alt="womensNav.women_shop_text"
@@ -93,9 +116,9 @@
                                       </a>
                                       <div class="uk-overlay-primary uk-position-cover"></div>
                                       <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m">
-                                      <a :href="womensNav.women_shop_url">
+                                      <a :href="womensNav.women_shop_url+'&parent=clothing&category=all'">
                                          <h2 class="uk-margin-small uk-text-uppercase"> {{womensNav.women_shop_text}} </h2>
-                                         <a :href="womensNav.women_shop_url" class="uk-button uk-button-small uk-button-default">{{ trans.shop_now}}</a>
+                                         <a :href="womensNav.women_shop_url+'&parent=clothing&category=all'" class="uk-button uk-button-small uk-button-default">{{ trans.shop_now}}</a>
                                       </a>
                                     </div>
                                     </div>
@@ -132,10 +155,10 @@
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <h5 class="uk-margin-small uk-text-uppercase"> {{ trans.spotlight }}</h5>
                             </ul>
-                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <ul class="uk-nav uk-navbar-dropdown-nav" v-if="navigation == 'mens'">
                                 <li class="uk-parent">
                                   <div class="uk-inline">
-                                    <a :href="mensNav.men_shop_url">
+                                    <a :href="mensNav.men_shop_url+'&parent=accessories&category=all'">
                                         <lazy-background
                                                 :image-source="mensNav.men_shop_image | awsLink(aws_link)"
                                                 :alt="mensNav.men_shop_text"
@@ -146,13 +169,35 @@
                                     </a>
                                     <div class="uk-overlay-primary uk-position-cover"></div>
                                     <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m">
-                                    <a :href="mensNav.men_shop_url">
+                                    <a :href="mensNav.men_shop_url+'&parent=accessories&category=all'">
                                        <h2 class="uk-margin-small uk-text-uppercase"> {{mensNav.men_shop_text}} </h2>
-                                       <a :href="mensNav.men_shop_url" class="uk-button uk-button-small uk-button-default">{{ trans.shop_now}}</a>
+                                       <a :href="mensNav.men_shop_url+'&parent=accessories&category=all'" class="uk-button uk-button-small uk-button-default">{{ trans.shop_now}}</a>
                                     </a>
                                   </div>
                                   </div>
 
+                                </li>
+                            </ul>
+                            <ul class="uk-nav uk-navbar-dropdown-nav" v-else>
+                                <li class="uk-parent">
+                                  <div class="uk-inline">
+                                    <a :href="womensNav.women_shop_url+'&parent=accessories&category=all'">
+                                        <lazy-background
+                                                :image-source="womensNav.women_shop_image | awsLink(aws_link)"
+                                                :alt="womensNav.women_shop_text"
+                                                :loading-image="loadingImage"
+                                                :error-image="errorImage"
+                                                image-style="height: 250px; width:250px">
+                                        </lazy-background>
+                                    </a>
+                                    <div class="uk-overlay-primary uk-position-cover"></div>
+                                    <div class="uk-position-small uk-position-bottom uk-text-center uk-panel uk-light uk-visible@m">
+                                    <a :href="womensNav.women_shop_url+'&parent=accessories&category=all'">
+                                       <h2 class="uk-margin-small uk-text-uppercase"> {{womensNav.women_shop_text}} </h2>
+                                       <a :href="womensNav.women_shop_url+'&parent=accessories&category=all'" class="uk-button uk-button-small uk-button-default">{{ trans.shop_now}}</a>
+                                    </a>
+                                  </div>
+                                  </div>
                                 </li>
                             </ul>
                         </div>
@@ -204,7 +249,7 @@
               <!--End Sale-->
 
               <!--Start Editorial-->
-              <li :class="{'uk-active': segmentPage == 'editorial'}" class="uk-margin-medium-right">
+              <li :class="{'uk-active': editorial }" class="uk-margin-medium-right">
                   <a href="/editorial">{{ trans.blog_nav }}</a>
               </li>
               <!--End Editorial-->
@@ -213,10 +258,24 @@
       </div>
       <div class="uk-navbar-right user_panel_vis">
         <ul class="uk-navbar-nav">
+          <li class="uk-margin-left">
+            <form class="uk-search uk-search-default" action="/search" method="get">
+            <div style="margin-top: 3px">
+                <div class="typeahead__container">
+                    <div class="typeahead__field">
+                              <span class="typeahead__query">
+                                  <button type="submit" style="left: -35px" class="uk-search-icon uk-icon" uk-search-icon></button>
+                                  <input class="js-typeahead-designers" type="search" class="uk-search-input" name="keyword" autocomplete="off" required :placeholder="trans.search">
+                              </span>
+                    </div>
+                </div>
+            </div>
+            </form>
+          </li>
 
 
           <li class="uk-margin-left">
-            <a href="#flag-modal" uk-toggle><img :src="flagImage+language+'.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
+            <a href="#flag-modal" uk-tooltip="title: Your Currency; pos: bottom" uk-toggle><img :src="flagImage+language+'.svg'" width="16" class="uk-border-circle uk-box-shadow-small" alt="">
             <span class="uk-text-uppercase uk-margin-small-left">{{ currencyCode }}</span>
             </a>
             <div id="flag-modal" class="uk-modal-full" uk-modal>
@@ -270,24 +329,24 @@
             </div>
           </li>
           <li v-if="auth == 1"  class="uk-margin-left">
-            <a :href="wishlist_link"><i class="material-icons" style="font-size: 18px">favorite</i>
+            <a :href="wishlist_link" uk-tooltip="title: Wishlist; pos: bottom"><i class="material-icons" style="font-size: 18px">favorite</i>
               <div class="uk-badge" v-if="wishlistCount > 0">
                 {{ wishlistCount }}
               </div>
             </a>
           </li>
           <li  class="uk-margin-left">
-            <a href="#" v-on:click.prevent="goBag"><i class="material-icons" style="font-size: 18px">shopping_basket</i>
+            <a href="#" uk-tooltip="title: Bag; pos: bottom" v-on:click.prevent="goBag"><i class="material-icons" style="font-size: 18px">shopping_basket</i>
               <div class="uk-badge" v-if="bagCount > 0">
                 {{ bagCount }}
               </div>
             </a>
           </li>
           <li v-if="auth == 0"  class="uk-margin-left">
-            <a :href="login_link"><i class="material-icons" style="font-size: 18px">person</i></a>
+            <a :href="login_link" uk-tooltip="title: Register or Sign Up; pos: bottom"><i class="material-icons" style="font-size: 18px">person</i></a>
           </li>
           <li v-if="auth == 1"  class="uk-margin-left">
-            <a :href="profile_link"> <i class="material-icons" style="font-size: 18px; vertical-align:middle">person</i> {{ accounts.first_name }}</a>
+            <a :href="profile_link" uk-tooltip="title: Go to Your Account; pos: bottom"> <i class="material-icons" style="font-size: 18px; vertical-align:middle">person</i> {{ accounts.first_name }}</a>
           </li>
 
         </ul>
@@ -296,6 +355,7 @@
       <div class="uk-navbar-right search_vis">
           <div class="uk-navbar-item">
               <form class="uk-search uk-search-default" action="/search" method="get">
+                  <input type="hidden" name="menu" :value="navigation">
               <div>
                   <div class="typeahead__container">
                       <div class="typeahead__field">
@@ -350,7 +410,8 @@
           'language',
           'navigation',
           'category',
-          'designer'
+          'designer',
+          'editorial'
         ],
 
         components: {

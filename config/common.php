@@ -57,7 +57,8 @@ return [
 	'queue_active' => env('QUEUE_ACTIVE'),
 
 	'queue_list' => [
-		'user_mail' => env('QUEUE_MAIL_NAME')
+		'user_mail' => env('QUEUE_MAIL_NAME'),
+		'processing' => env('QUEUE_PROCESSING', 'processing'),
 	],
 
 	'image' => [

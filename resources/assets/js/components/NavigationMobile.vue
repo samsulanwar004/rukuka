@@ -1,21 +1,22 @@
 <template>
     <div class="uk-offcanvas-bar uk-text-left uk-flex uk-flex-wrap uk-flex-wrap-between">
         <div class="uk-width-1-1">
-            <a href="/" class="uk-link-reset"><h4 class="uk-margin-remove">{{ trans.rukuka }}</h4></a>
+            <a :href="'/'+navigation.replace('s', '')" class="uk-link-reset"><h4 class="uk-margin-remove">{{ trans.rukuka }}</h4></a>
             <hr class="uk-margin-small">
-            <ul class="uk-nav uk-nav-primary uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
-                <li :class="{'uk-parent': true , 'uk-open uk-active': category == 'designers' }">
-                    <a :href="designerLink" class="uk-text-uppercase">{{ trans.designers_nav }}</a>
+            <ul class="uk-nav uk-nav-primary uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav v-if="navigation">
+                <li>
+                    <a class="uk-text-bold" :href="'/shop?menu='+navigation+'&parent=all'">
+                        <span>
+                            {{ trans.new_arrival}}
+                        </span>
+                    </a>
+                </li>
+
+                <li :class="{'uk-parent': true , 'uk-open uk-active': designer }">
+                    <a :href="designerLink+'?menu='+navigation" class="uk-text-uppercase">{{ trans.designers_nav }}</a>
                     <ul class="uk-nav-sub">
-                        <li class="uk-parent">
-                            <a :href="'/shop?menu=designers&gender='+navigation+'&category=all'">
-                              <span :class="{'text-underline': category == 'designers' }">
-                                {{ trans.all }}
-                               </span>
-                            </a>
-                        </li>
                         <li class="uk-parent" v-for="design in designers">
-                            <a :href="'/shop?menu=designers&gender='+navigation+'&category='+ design.slug ">
+                            <a :href="'/shop?menu='+navigation+'&designer='+ design.slug ">
                             <span>
                                 {{ design.name }}
                             </span>
@@ -23,117 +24,53 @@
                         </li>
                     </ul>
                 </li>
-                <li :class="{'uk-parent': true , 'uk-open uk-active': navigation == 'womens' }">
-                    <a :href="womenLink" class="uk-text-uppercase">{{ trans.women_nav }}</a>
-                    <ul class="uk-nav uk-nav-sub uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
+
+                <li :class="{'uk-parent': true , 'uk-open uk-active': category == 'clothing' }">
+                    <a class="uk-text-uppercase">{{ trans.clothing }}</a>
+                    <ul class="uk-nav-sub">
+                    <span>
                         <li>
-                            <a :href="womenLink">
-                            <span :class="{'text-underline': segmentPage == 'women' }">
-                                {{ trans.new_arrival}}
-                            </span>
-                            </a>
-                        </li>
-                        <li :class="{'uk-parent': true , 'uk-open': segmentShop == 'womens' && segmentCategory == 'clothing' }">
-                            <a >{{ trans.clothing }}</a>
-                            <ul class="uk-nav-sub">
-                            <span>
-                                <li>
-                                    <a href="/shop?menu=womens&parent=clothing&category=all">
-                                        <span :class="{'text-underline': segmentShop == 'womens' && segmentCategory == 'clothing' && segmentSlug == 'all' }">
-                                            {{ trans.all }}
-                                        </span>
-                                    </a>
-                                </li>
-                                <li v-for="cat in categories.clothing" v-if="cat.menu == 'womens' || cat.menu == null">
-                                    <a :href="'/shop?menu=womens&parent=clothing&category='+ cat.slug ">
-                                        <span :class="{'text-underline': segmentShop == 'womens' && segmentCategory == 'clothing' && segmentSlug == cat.slug }">
-                                            {{ cat.name }}
-                                        </span>
-                                    </a>
-                                </li>
-                            </span>
-                            </ul>
-                        </li>
-                        <li :class="{'uk-parent': true , 'uk-open': segmentShop == 'womens' && segmentCategory == 'accessories' }">
-                            <a>{{ trans.accessories }}</a>
-                            <ul class="uk-nav-sub">
-                            <span>
-                                <li>
-                                  <a href="/shop?menu=womens&parent=accessories&category=all">
-                                      <span :class="{'text-underline': segmentShop == 'womens' && segmentCategory == 'accessories' && segmentSlug == 'all' }">
-                                          {{ trans.all }}
-                                      </span>
-                                  </a>
-                                </li>
-                                <li v-for="cat in categories.accessories" v-if="cat.menu == 'womens' || cat.menu == null">
-                                    <a :href="'/shop?menu=womens&parent=accessories&category='+ cat.slug ">
-                                        <span :class="{'text-underline': segmentShop == 'womens' && segmentCategory == 'accessories' && segmentSlug == cat.slug }">
-                                            {{ cat.name }}
-                                        </span>
-                                    </a>
-                                </li>
-                            </span>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li :class="{'uk-parent': true , 'uk-open uk-active': segmentPage == 'men' || segmentShop == 'mens' }">
-                    <a :href="menLink" class="uk-text-uppercase">{{ trans.men_nav }}</a>
-                    <ul class="uk-nav uk-nav-sub uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
-                        <li>
-                            <a class="uk-text-bold" :href="menLink">
-                                <span :class="{'text-underline': segmentPage == 'men' }">
-                                    {{ trans.new_arrival}}
+                            <a :href="'/shop?menu='+navigation+'&parent=clothing&category=all'">
+                                <span>
+                                    {{ trans.all }}
                                 </span>
                             </a>
                         </li>
-                        <li :class="{'uk-parent': true , 'uk-open': segmentShop == 'mens' && segmentCategory == 'clothing' }">
-                        <a>{{ trans.clothing }}</a>
-                            <ul class="uk-nav-sub">
-                            <span>
-                                <li>
-                                    <a href="/shop?menu=mens&parent=clothing&category=all">
-                                        <span :class="{'text-underline': segmentShop == 'mens' && segmentCategory == 'clothing' && segmentSlug == 'all' }">
-                                            {{ trans.all }}
-                                        </span>
-                                    </a>
-                                </li>
-                                <li v-for="cat in categories.clothing" v-if="cat.menu == 'mens' || cat.menu == null">
-                                    <a :href="'/shop?menu=mens&parent=clothing&category='+ cat.slug ">
-                                        <span :class="{'text-underline': segmentShop == 'mens' && segmentCategory == 'clothing' && segmentSlug == cat.slug }">
-                                            {{ cat.name }}
-                                        </span>
-                                    </a>
-                                </li>
-                            </span>
-                            </ul>
+                        <li v-for="cat in categories.clothing" v-if="cat.menu == navigation || cat.menu == null">
+                            <a :href="'/shop?menu='+navigation+'&parent=clothing&category='+ cat.slug ">
+                                <span>
+                                    {{ cat.name }}
+                                </span>
+                            </a>
                         </li>
-                        <li :class="{'uk-parent': true , 'uk-open': segmentShop == 'mens' && segmentCategory == 'accessories' }">
-                            <a>{{ trans.accessories }}</a>
-                            <ul class="uk-nav-sub">
-                            <span>
-                                <li>
-                                  <a href="/shop?menu=mens&parent=accessories&category=all">
-                                      <span :class="{'text-underline': segmentShop == 'mens' && segmentCategory == 'accessories' && segmentSlug == 'all' }">
-                                          {{ trans.all }}
-                                      </span>
-                                  </a>
-                                </li>
-                                <li v-for="cat in categories.accessories" v-if="cat.menu == 'mens' || cat.menu == null">
-                                    <a :href="'/shop?menu=mens&parent=accessories&category='+ cat.slug ">
-                                         <span :class="{'text-underline': segmentShop == 'mens' && segmentCategory == 'accessories' && segmentSlug == cat.slug }">
-                                            {{ cat.name }}
-                                         </span>
-                                    </a>
-                                </li>
-                            </span>
-                            </ul>
-                        </li>
+                    </span>
                     </ul>
                 </li>
 
-                <li :class="{'uk-open uk-active': segmentShop == 'home' }">
-                    <a href="/shop?menu=home&parent=all&category=all" class="uk-text-uppercase">{{ trans.home_nav }}</a>
+                <li :class="{'uk-parent': true , 'uk-open uk-active': category == 'accessories' }">
+                    <a class="uk-text-uppercase">{{ trans.accessories }}</a>
+                    <ul class="uk-nav-sub">
+                    <span>
+                        <li>
+                          <a :href="'/shop?menu='+navigation+'&parent=accessories&category=all'">
+                              <span>
+                                  {{ trans.all }}
+                              </span>
+                          </a>
+                        </li>
+                        <li v-for="cat in categories.accessories" v-if="cat.menu == navigation || cat.menu == null">
+                            <a :href="'/shop?menu='+navigation+'&parent=accessories&category='+ cat.slug ">
+                                 <span>
+                                    {{ cat.name }}
+                                 </span>
+                            </a>
+                        </li>
+                    </span>
+                    </ul>
+                </li>
+
+                <li :class="{'uk-open uk-active': category == 'homeware' }">
+                    <a :href="'/shop?menu='+navigation+'&parent=homeware&category=all'" class="uk-text-uppercase">{{ trans.home_nav }}</a>
                 </li>
 
                 <li class="uk-parent">
@@ -145,8 +82,16 @@
                     </ul>
                 </li>
                 <hr class="uk-margin-small">
-                <li :class="{'uk-open uk-active': segmentPage == 'editorial' }">
+                <li :class="{'uk-open uk-active': editorial }">
                     <a href="/editorial" class="uk-text-uppercase">{{ trans.blog_nav }}</a>
+                </li>
+            </ul>
+            <ul class="uk-nav uk-nav-primary uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav v-else>
+                <li>
+                    <a href="/women" class="uk-text-uppercase">{{ trans.women_nav}}</a>
+                </li>
+                <li>
+                    <a href="/men" class="uk-text-uppercase">{{ trans.men_nav}}</a>
                 </li>
             </ul>
         </div>
@@ -168,12 +113,10 @@
             'login_link',
             'profile_link',
             'locale',
-            'segment_page',
-            'segment_shop',
-            'segment_category',
-            'segment_slug',
             'navigation',
-            'category'
+            'category',
+            'designer',
+            'editorial'
         ],
 
         created() {
@@ -215,9 +158,7 @@
                 menLink: this.men_link,
                 womenLink: this.women_link,
                 designerLink: this.designer_link,
-                trans: JSON.parse(this.locale,true),
-                segmentCategory: this.segment_category,
-                segmentSlug: this.segment_slug,
+                trans: JSON.parse(this.locale,true)
             }
         }
     }

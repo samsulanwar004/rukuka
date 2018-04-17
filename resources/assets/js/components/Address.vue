@@ -1,6 +1,6 @@
 <template>
     <div class="uk-grid uk-grid-small" uk-grid>
-       <div class="uk-width-1-3@m" v-for="add in data">
+       <div class="uk-width-1-2@m" v-for="add in data">
           <div :class="{'uk-card uk-card-default uk-card-small uk-box-shadow-small uk-box-shadow-hover-medium': true, 'uk-background-muted': add.is_default }">
              <div class="uk-card-body">
                 <table>
@@ -302,7 +302,7 @@
                           });
 
                           self.data = response.data.address;
-                        
+
                           setTimeout(function () {
                             $('.uk-close').click();
                           }, 2000);
@@ -350,7 +350,7 @@
 
                 $('#div-sub-district-vue').hide();
                 $('#div-village-vue').hide();
-                
+
                 $('#form-postal-vue').attr('readonly', false);
               }
             },

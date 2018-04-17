@@ -113,7 +113,7 @@
                   </div>
             </div>
             <div class="uk-width-1-3@m">
-                <a class="uk-text-small" href="/shop?menu=designers&category={{$product->designer->slug}}">{{ $product->designer->name }}</a><br>
+                <a class="uk-text-small" href="/shop?menu={{strtolower($product->gender)}}&designer={{$product->designer->slug}}">{{ $product->designer->name }}</a><br>
                 <h3 class="uk-margin-remove uk-visible@m">{{ $product->name }}</h3>
                 <div class="uk-grid uk-grid-small uk-hidden@m">
                   <div class="uk-width-3-5">
@@ -186,7 +186,7 @@
                     <div class="uk-text-center">
                         <a href="/shop?menu={{strtolower($product->gender)}}&parent={{strtolower($product->category->parent->name)}}&category={{$product->category->slug}}">{{ $product->category->name }}</a>
                         <br>
-                        <h5 class="uk-margin-remove"><a href="/shop?menu=designers&category={{$product->designer->slug}}">{{ $product->designer->name }}</a></h5>
+                        <h5 class="uk-margin-remove"><a href="/shop?menu={{strtolower($product->gender)}}&designer={{$product->designer->slug}}">{{ $product->designer->name }}</a></h5>
                     </div>
                 </div>
           </div>
@@ -299,7 +299,7 @@
         ></related>
         <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">
             <div class="uk-panel uk-text-center">
-                <a  href="/shop?menu=designers&category=all" class="uk-button uk-button-small uk-button-text uk-text-uppercase">{{ trans('app.show_all_product') }}</a>
+                <a  href="/shop?menu={{strtolower($product->gender)}}&parent=all" class="uk-button uk-button-small uk-button-text uk-text-uppercase">{{ trans('app.show_all_product') }}</a>
             </div>
         </div>
     </div>
@@ -351,3 +351,330 @@
         });
     }
 </script>
+
+{{-- table size chart start --}}
+
+<div id="size-charts" class="uk-modal-full" uk-modal>
+  <div class="uk-modal-dialog">
+      <button class="uk-modal-close-full" type="button" uk-close></button>
+      <div class="uk-flex-middle">
+    <div class="uk-padding-small uk-text-center"  uk-height-viewport>
+      <p uk-switcher="animation: uk-animation-fade">
+          <a class="uk-button uk-button-danger uk-button-small" href="#">WOMEN</a>
+          <a class="uk-button uk-button-danger uk-button-small" href="#">MEN</a>
+          <a class="uk-button uk-button-danger uk-button-small" href="#">CONVERSION</a>
+      </p>
+      <ul class="uk-switcher">
+        <li>
+          <h5 class="uk-margin-remove">WOMEN BODY MEASUREMENT</h5>
+          <h6 class="uk-margin-remove">in centimeter </h6>
+
+          <h6 class="uk-margin-small">BLOUSE   /   TEE   /   OUTER   &   DRESS</h6>
+
+          <table class="uk-table uk-table-striped uk-table-small uk-text-small">
+            <thead>
+              <tr>
+                <th>Body Measurement Method</th>
+                <th>S</th>
+                <th>M</th>
+                <th>L</th>
+                <th>XL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Bust circumference measure at armpit</td>
+                <td>76 - 78</td>
+                <td>80 - 82</td>
+                <td>84 - 86</td>
+                <td>88 - 92</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td>Waist circumference measure at belly button</td>
+                <td>64 - 66</td>
+                <td>68 - 70</td>
+                <td>72 - 74</td>
+                <td>88 - 92</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td>Hip circumference measure  at 21 cm down from belly button</td>
+                <td>90 - 92</td>
+                <td>94 - 96</td>
+                <td>98 - 100</td>
+                <td>102 - 106</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h6 class="uk-margin-small">SKIRT / PANTS</h6>
+
+          <table class="uk-table uk-table-striped uk-table-small uk-text-small">
+            <thead>
+              <tr>
+                <th>Body Measurement Method</th>
+                <th>S</th>
+                <th>M</th>
+                <th>L</th>
+                <th>XL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Waist circumference measure at belly button</td>
+                <td>64 - 66</td>
+                <td>68 - 70</td>
+                <td>72 - 74</td>
+                <td>88 - 92</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td>Hip circumference measure  at 21 cm down from belly button</td>
+                <td>90 - 92</td>
+                <td>94 - 96</td>
+                <td>98 - 100</td>
+                <td>102 - 106</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h6 class="uk-margin-small">JUMPSUIT</h6>
+
+          <table class="uk-table uk-table-striped uk-table-small uk-text-small">
+            <thead>
+              <tr>
+                <th>Body Measurement Method</th>
+                <th>S</th>
+                <th>M</th>
+                <th>L</th>
+                <th>XL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Bust circumference measure at armpit</td>
+                <td>76 - 78</td>
+                <td>80 - 82</td>
+                <td>84 - 86</td>
+                <td>88 - 92</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td>Waist circumference measure at belly button</td>
+                <td>64 - 66</td>
+                <td>68 - 70</td>
+                <td>72 - 74</td>
+                <td>88 - 92</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td>Hip circumference measure  at 21 cm down from belly button</td>
+                <td>90 - 92</td>
+                <td>94 - 96</td>
+                <td>98 - 100</td>
+                <td>102 - 106</td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+        <li>
+          <h5 class="uk-margin-remove">MEN BODY MEASUREMENT</h5>
+          <h6 class="uk-margin-remove">in centimeter </h6>
+
+          <h6 class="uk-margin-small">REGULAR FIT SHIRT / TEE / OUTER</h6>
+
+          <table class="uk-table uk-table-striped uk-table-small uk-text-small">
+            <thead>
+              <tr>
+                <th>Body Measurement Method</th>
+                <th>S</th>
+                <th>M</th>
+                <th>L</th>
+                <th>XL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Bust circumference measure at armpit</td>
+                <td>92 - 94</td>
+                <td>96 - 98</td>
+                <td>100 - 102</td>
+                <td>104 - 108</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td>Hip circumference measure  at 21 cm down from belly button</td>
+                <td>92 - 94</td>
+                <td>96 - 98</td>
+                <td>100 - 102</td>
+                <td>104 - 108</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h6 class="uk-margin-small">SKIRT / PANTS</h6>
+
+          <table class="uk-table uk-table-striped uk-table-small uk-text-small">
+            <thead>
+              <tr>
+                <th>Body Measurement Method</th>
+                <th>S</th>
+                <th>M</th>
+                <th>L</th>
+                <th>XL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Waist circumference measure at belly button</td>
+                <td>78 - 80</td>
+                <td>82 - 84</td>
+                <td>86 - 88</td>
+                <td>90 - 92</td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+        <li>
+          <h5>CLOTHING - SINGLE SIZE CONVERSION</h5>
+          <table class="uk-table uk-table-striped uk-table-small uk-text-small">
+            <tr>
+              <td>UK</td>
+              <td>4</td>
+              <td>6</td>
+              <td>8</td>
+              <td>10</td>
+              <td>12</td>
+              <td>14</td>
+              <td>16</td>
+              <td>18</td>
+              <td>20</td>
+              <td>22</td>
+              <td>24</td>
+              <td>26</td>
+            </tr>
+            <tr>
+              <td>European</td>
+              <td>32</td>
+              <td>34</td>
+              <td>36</td>
+              <td>38</td>
+              <td>40</td>
+              <td>42</td>
+              <td>44</td>
+              <td>46</td>
+              <td>48</td>
+              <td>50</td>
+              <td>52</td>
+              <td>54</td>
+            </tr>
+          <tr>
+              <td>US</td>
+              <td>1</td>
+              <td>2</td>
+              <td>4</td>
+              <td>6</td>
+              <td>8</td>
+              <td>10</td>
+              <td>12</td>
+              <td>14</td>
+              <td>16</td>
+              <td>18</td>
+              <td>20</td>
+              <td>22</td>
+            </tr>
+            <tr>
+              <td>Australia</td>
+              <td>4</td>
+              <td>6</td>
+              <td>8</td>
+              <td>10</td>
+              <td>12</td>
+              <td>14</td>
+              <td>16</td>
+              <td>18</td>
+              <td>20</td>
+              <td>22</td>
+              <td>24</td>
+              <td>26</td>
+            </tr>
+          </table>
+        </li>
+      </ul>
+
+
+      {{-- <h4>CLOTHING - SINGLE SIZE CONVERSION</h4>
+      <table class="uk-table uk-table-divider uk-table-hover">
+        <tr>
+          <td>UK</td>
+          <td>4</td>
+          <td>6</td>
+          <td>8</td>
+          <td>10</td>
+          <td>12</td>
+          <td>14</td>
+          <td>16</td>
+          <td>18</td>
+          <td>20</td>
+          <td>22</td>
+          <td>24</td>
+          <td>26</td>
+        </tr>
+        <tr>
+          <td>European</td>
+          <td>32</td>
+          <td>34</td>
+          <td>36</td>
+          <td>38</td>
+          <td>40</td>
+          <td>42</td>
+          <td>44</td>
+          <td>46</td>
+          <td>48</td>
+          <td>50</td>
+          <td>52</td>
+          <td>54</td>
+        </tr>
+      <tr>
+          <td>US</td>
+          <td>1</td>
+          <td>2</td>
+          <td>4</td>
+          <td>6</td>
+          <td>8</td>
+          <td>10</td>
+          <td>12</td>
+          <td>14</td>
+          <td>16</td>
+          <td>18</td>
+          <td>20</td>
+          <td>22</td>
+        </tr>
+        <tr>
+          <td>Australia</td>
+          <td>4</td>
+          <td>6</td>
+          <td>8</td>
+          <td>10</td>
+          <td>12</td>
+          <td>14</td>
+          <td>16</td>
+          <td>18</td>
+          <td>20</td>
+          <td>22</td>
+          <td>24</td>
+          <td>26</td>
+        </tr>
+      </table> --}}
+    </div>
+  </div>
+</div>
+</div>
+{{-- table size chart ends --}}

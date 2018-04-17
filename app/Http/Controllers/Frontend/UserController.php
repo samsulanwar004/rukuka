@@ -18,6 +18,7 @@ use App\Repositories\PaymentRepository;
 use App\Review;
 use App\ConfirmPayment;
 use Illuminate\Support\Facades\Validator;
+use App\Jobs\ProcessDecreaseStock;
 
 class UserController extends BaseController
 {
@@ -757,12 +758,15 @@ class UserController extends BaseController
 
         $total = $bag->subtotal();
 
+        $language = \App::getLocale();
+
         return view('pages.checkout.shipping_preview', compact(
             // 'defaultCreditcard',
             'defaultAddress',
             'shippingCost',
             'total',
-            'currency'
+            'currency',
+            'language'
         ));
     }
 
@@ -976,6 +980,11 @@ class UserController extends BaseController
                     //sent invoice paid to buyer
                     $emailService = (new EmailService);
                     $emailService->sendInvoicePaid($order);
+
+                    //decrease stock
+                    ProcessDecreaseStock::dispatch($order)
+                        ->onConnection(config('common.queue_active'))
+                        ->onQueue(config('common.queue_list.processing'));
                 }
 
                 if($response_cc["status"] == "AUTHORIZED")
@@ -1132,6 +1141,13 @@ class UserController extends BaseController
                     return redirect()->back()->with(['success' => trans('app.confirm_success')]);;
                 }
             }
+
+            //create notification
+            $users = config('common.admin.users_id');
+            $module = 'confirm-payments';
+            $message = 'New payment confirmation';
+            (new PaymentRepository)->notificationforAdmin($users, $order->order_code.' '.$message, $module);
+
             DB::commit();
             $amount = $request->input('transfer_amount');
             return view('pages.payment_confirm_result', compact('amount'));
