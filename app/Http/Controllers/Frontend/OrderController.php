@@ -77,6 +77,8 @@ class OrderController extends BaseController
 	        });
 
 	        $shipping = $courir['data']->total_fee_idr;
+	        $shippingName = $courir['data']->courier_name;
+	        $shippingService = $courir['data']->service_name_original;
 
 	        $orderDate = Carbon::now();
 	        $expiredDate = Carbon::now()->addDay(3);
@@ -100,6 +102,8 @@ class OrderController extends BaseController
 	        	->setOrderSubtotalAfterCoupon($total)
 	        	->setShipping($address)
 	        	// ->setPayment($creditCard)
+	        	->setShippingName($shippingName)
+	        	->setShippingService($shippingService)
 	        	->setShippingCost($shipping)
 	        	->setPendingReason($message)
 	        	->setOrderDate($orderDate)

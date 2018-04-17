@@ -20,6 +20,8 @@ class OrderRepository
 	private $orderSubtotalAfterDiscount;
 	private $orderSubtotalAfterCoupon;
 	private $shipping;
+	private $shippingName;
+	private $shippingService;
 	private $shippingCost;
 	private $orderStatus;
 	private $cancelReason;
@@ -173,6 +175,30 @@ class OrderRepository
 		return $this->shippingCost;
 	}
 
+    public function setShippingName($value)
+    {
+        $this->shippingName = $value;
+
+        return $this;
+    }
+
+    public function getShippingName()
+    {
+        return $this->shippingName;
+    }
+
+    public function setShippingService($value)
+    {
+        $this->shippingService = $value;
+
+        return $this;
+    }
+
+    public function getShippingService()
+    {
+        return $this->shippingService;
+    }
+
 	public function setOrderStatus($value)
 	{
 		$this->orderStatus = $value;
@@ -266,7 +292,9 @@ class OrderRepository
     	$order->order_subtotal = $this->getOrderSubtotal();
     	$order->order_subtotal_after_discount = $this->getOrderSubtotalAfterDiscount();
     	$order->order_subtotal_after_coupon = $this->getOrderSubtotalAfterCoupon();
-    	
+
+    	$order->shipping_name = $this->getShippingName();
+    	$order->shipping_service = $this->getShippingService();
     	$order->shipping_cost = $this->getShippingCost();
     	$order->pending_reason = $this->getPendingReason();
     	$order->order_date = $this->getOrderDate();
