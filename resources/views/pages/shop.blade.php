@@ -147,6 +147,7 @@
                     color_id="{{ $colorId }}"
                     locale="{{ json_encode(trans('app')) }}"
                     action_link="{{ actionLink() }}"
+                    color_array="{{json_encode($colorArray)}}"
                   ></color-palette-mobile>
                 </div>
                 <div class="uk-modal-footer">
