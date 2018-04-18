@@ -393,9 +393,9 @@ class PageController extends BaseApiController
                 $expiresAt = Carbon::now()->addMinutes(60);
 
                 Cache::put(self::CATEGORIES_CACHE, $categories, $expiresAt);
-
-                return $this->success($categories,200, true);
             }
+
+            return $this->success($categories,200, true);
         } catch (Exception $e) {
             return $this->error($e, 400, true);
         }
