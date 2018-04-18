@@ -18,77 +18,73 @@ class PageController extends BaseApiController
 {
 
     CONST MENU_CACHE = 'menu.cache';
+    CONST CATEGORIES_CACHE = 'categories.cache';
     CONST COLOR_CACHE = 'color.cache';
     CONST POPULAR_CACHE = 'popular.cache';
     
     public function menu($parent = null)
     {
     	try {
-    		if ($parent == 'designers') {
-	    		$designers = (new DesignerRepository)->getDesigners();
 
-	    		return $this->success($designers,200, true);
-	    	} else {
-	    		if ($parent == null) {
+            if (Cache::has(self::MENU_CACHE.'.'.$parent)) {
+                $categories = Cache::get(self::MENU_CACHE.'.'.$parent);
+            } else {
+                //Designer List
+                $categories = (new CategoryRepository)->getCategories();
+                $categories = collect($categories)->mapWithKeys(function ($item) {
+                    return [strtolower($item['name']) => $item['child']];
+                })->toArray();
 
-                    if (Cache::has(self::MENU_CACHE)) {
-                        $categories = Cache::get(self::MENU_CACHE);
-                    } else {
-                        //Designer List
-                        $categories = (new CategoryRepository)->getCategories();
-                        $categories = collect($categories)->mapWithKeys(function ($item) {
-                            return [strtolower($item['name']) => $item['child']];
-                        })->toArray();
-                        $categories['designers'] = (new DesignerRepository)->getDesigners();
+                $designers = (new DesignerRepository)->getDesignerWithGender();
 
-                        //Designer Navigation
-                        $designersResult = (new DesignerRepository)->getDesignersNav();
-                        $designersResult = collect($designersResult)->mapWithKeys(function ($item) {
-                            return [strtolower($item['name']) => $item['content']];
-                        })->toArray();
-                        $categories['designers_nav'] = $designersResult;
+                $designers = collect($designers)->filter(function ($item) use ($parent) {
+                    return $item->gender == $parent || $item->gender == 'unisex';
+                })->unique('name')->values();
 
-                        //Women Navigation
-                        $womensResult = (new DesignerRepository)->getWomensNav();
-                        $womensResult = collect($womensResult)->mapWithKeys(function ($item) {
-                            return [strtolower($item['name']) => $item['content']];
-                        })->toArray();
-                        $categories['womens_nav'] = $womensResult;
+                $categories['designers'] = $designers;
 
-                        //Men Navigation
-                        $MensResult = (new DesignerRepository)->getMensNav();
-                        $MensResult = collect($MensResult)->mapWithKeys(function ($item) {
-                            return [strtolower($item['name']) => $item['content']];
-                        })->toArray();
-                        $categories['mens_nav'] = $MensResult;
+                //Designer Navigation
+                $designersResult = (new DesignerRepository)->getDesignersNav();
+                $designersResult = collect($designersResult)->mapWithKeys(function ($item) {
+                    return [strtolower($item['name']) => $item['content']];
+                })->toArray();
+                $categories['designers_nav'] = $designersResult;
 
-                        //Kid Navigation
-                        $KidsResult = (new DesignerRepository)->getKidsNav();
-                        $KidsResult = collect($KidsResult)->mapWithKeys(function ($item) {
-                            return [strtolower($item['name']) => $item['content']];
-                        })->toArray();
-                        $categories['kids_nav'] = $KidsResult;
+                //Women Navigation
+                $womensResult = (new DesignerRepository)->getWomensNav();
+                $womensResult = collect($womensResult)->mapWithKeys(function ($item) {
+                    return [strtolower($item['name']) => $item['content']];
+                })->toArray();
+                $categories['womens_nav'] = $womensResult;
 
-                        //Sale Navigation
-                        $SaleResult = (new DesignerRepository)->getSalesNav();
-                        $SaleResult = collect($SaleResult)->mapWithKeys(function ($item) {
-                            return [strtolower($item['name']) => $item['content']];
-                        })->toArray();
-                        $categories['sales_nav'] = $SaleResult;
+                //Men Navigation
+                $MensResult = (new DesignerRepository)->getMensNav();
+                $MensResult = collect($MensResult)->mapWithKeys(function ($item) {
+                    return [strtolower($item['name']) => $item['content']];
+                })->toArray();
+                $categories['mens_nav'] = $MensResult;
 
-                        $expiresAt = Carbon::now()->addMinutes(60);
+                //Kid Navigation
+                $KidsResult = (new DesignerRepository)->getKidsNav();
+                $KidsResult = collect($KidsResult)->mapWithKeys(function ($item) {
+                    return [strtolower($item['name']) => $item['content']];
+                })->toArray();
+                $categories['kids_nav'] = $KidsResult;
 
-                        Cache::put(self::MENU_CACHE, $categories, $expiresAt);
-                    }
-	    		    
+                //Sale Navigation
+                $SaleResult = (new DesignerRepository)->getSalesNav();
+                $SaleResult = collect($SaleResult)->mapWithKeys(function ($item) {
+                    return [strtolower($item['name']) => $item['content']];
+                })->toArray();
+                $categories['sales_nav'] = $SaleResult;
 
-                    return $this->success($categories, 200, true);
-                } else {
-                    $categories = (new CategoryRepository)->getCategories();
+                $expiresAt = Carbon::now()->addMinutes(60);
 
-                    return $this->success($categories,200, true);
-                }
-	    	}
+                Cache::put(self::MENU_CACHE.'.'.$parent, $categories, $expiresAt);
+            }
+                
+
+                return $this->success($categories, 200, true);
     	} catch (Exception $e) {
     		return $this->error($e, 400, true);
     	}
@@ -381,6 +377,25 @@ class PageController extends BaseApiController
             echo  json_encode($datas);
 
 
+        } catch (Exception $e) {
+            return $this->error($e, 400, true);
+        }
+    }
+
+    public function categories()
+    {
+        try {
+            if (Cache::has(self::CATEGORIES_CACHE)) {
+                $categories = Cache::get(self::CATEGORIES_CACHE);
+            } else {
+                $categories = (new CategoryRepository)->getCategories();
+
+                $expiresAt = Carbon::now()->addMinutes(60);
+
+                Cache::put(self::CATEGORIES_CACHE, $categories, $expiresAt);
+
+                return $this->success($categories,200, true);
+            }
         } catch (Exception $e) {
             return $this->error($e, 400, true);
         }

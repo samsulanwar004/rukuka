@@ -47,4 +47,9 @@ class DesignerRepository
     {
         return Setting::where('group_setting','Sale Navigation')->get()->toArray();
     }
+
+    public function getDesignerWithGender()
+    {
+        return \DB::select('select distinct product_designers.name, product_designers.slug, products.gender from product_designers inner join products on product_designers.id = products.product_designers_id  where products.is_active = 1 and products.deleted_at IS NULL');
+    }
 }

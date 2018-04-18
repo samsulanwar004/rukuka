@@ -19,6 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('v1/menu/{parent?}', 'Api\PageController@menu')->name('menu');
 
+Route::get('v1/categories', 'Api\PageController@categories')->name('categories');
+
 Route::get('v1/search/{keyword?}', 'Api\PageController@search')->name('search.api');
 
 Route::get('v1/popular/{group}', 'Api\PageController@popular')->name('populer');
