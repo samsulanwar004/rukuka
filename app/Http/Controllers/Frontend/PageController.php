@@ -73,7 +73,32 @@ class PageController extends BaseController
     public function shop(Request $request, ProductRepository $product)
     {
         try {
-            
+            //get list category product
+            if($request->has('designer')) {
+                $categoryArr = $product->getCategoryProductDesigner($request);
+
+                if(count($categoryArr) != 0){
+                    $categoryArray = [];
+                    foreach ($categoryArr as $value)
+                        $categoryArray[] = $value->category_name;
+                }
+                else{
+                    $categoryArray = [];
+                }
+            }
+
+            // get list color product
+            $colorArr = $product->getColorByProduct($request);
+
+            if(count($colorArr) != 0){
+                $colorArray = [];
+                foreach ($colorArr as $value)
+                    $colorArray[] = $value->color_name;
+            }
+            else{
+                $colorArray = [];
+            }
+
             $products = $product->getProductByMenu($request);
 
             foreach ($request->all() as $key => $value) {
@@ -136,7 +161,9 @@ class PageController extends BaseController
             'sale',
             'recently',
             'colorId',
-            'sortByPrice'
+            'sortByPrice',
+            'categoryArray',
+            'colorArray'
         ));
 
     }

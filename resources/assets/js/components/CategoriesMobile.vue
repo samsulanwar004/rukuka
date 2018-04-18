@@ -22,18 +22,33 @@
                     <ul class="uk-nav uk-filter-nav">
                         <li>
                             <a :href="'/shop?menu='+parent+designerSlug+'&parent='+ category.name.toLowerCase() +'&category=all'">
-                            <span :class="{'text-underline': categorySlug == category.name.toLowerCase() && slug == 'all'}">
+                            <span :class="{'uk-text-bold': categorySlug == category.name.toLowerCase() && slug == 'all'}">
                                  {{ trans.all }}
                             </span>
                             </a>
                         </li>
-                        <li v-for="cat in category.child" v-if="cat.menu == parent || cat.menu == null">
-                            <a :href="'/shop?menu='+parent+designerSlug+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
-                          <span :class="{'text-underline': slug == cat.slug}">
-                              {{ cat.name }}
-                          </span>
-                            </a>
-                        </li>
+                        <div v-if="categoryArr" >
+                            <li v-for="cat in category.child" v-if="cat.menu == parent || cat.menu == null">
+                                <div v-for="catArr in categoryArr">
+                                    <div v-if="catArr == cat.name ">
+                                        <a :href="'/shop?menu='+parent+designerSlug+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
+                                          <span :class="{'uk-text-bold': slug == cat.slug}">
+                                              {{ cat.name }}
+                                          </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+                        <div v-else>
+                            <li v-for="cat in category.child" v-if="cat.menu == parent || cat.menu == null">
+                                <a :href="'/shop?menu='+parent+designerSlug+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
+                              <span :class="{'uk-text-bold': slug == cat.slug}">
+                                  {{ cat.name }}
+                              </span>
+                                </a>
+                            </li>
+                        </div>
                     </ul>
                 </div>
             </li>
@@ -44,7 +59,7 @@
 
 <script>
     export default {
-        props: ['parent', 'category_slug', 'slug', 'sale','locale','designer_slug'],
+        props: ['parent', 'category_slug', 'slug', 'sale','locale','designer_slug','category_array'],
         created() {
             var self = this;
             self.parent = this.parent;
@@ -62,8 +77,8 @@
                 categories: {},
                 categorySlug: this.category_slug,
                 trans: JSON.parse(this.locale,true),
-                designerSlug: {}
-
+                designerSlug: {},
+                categoryArr: JSON.parse(this.category_array,true),
             }
         },
 
