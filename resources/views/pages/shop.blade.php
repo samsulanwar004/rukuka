@@ -160,7 +160,7 @@
           <div id="nav1" class="uk-width-1-5@m uk-visible@m">
 
             <categories
-              api="{{ route('menu', ['parent' => $categories]) }}"
+              api="{{ route('categories') }}"
               parent="{{ $categories }}"
               slug="{{ $slug == null ? $category:$slug }}"
               category_slug="{{ $category }}"

@@ -77,7 +77,7 @@
     </div>
       <div class="cbp-af-header {{ $navigation || $category == 'designers' ? '':'uk-hidden' }}">
         <navigation
-          api="{{ route('menu')}}"
+          api="{{ route('menu', ['parent' => $navigation]) }}"
           men_link="{{ route('men') }}"
           women_link="{{ route('women') }}"
           designer_link="{{ route('designer') }}"

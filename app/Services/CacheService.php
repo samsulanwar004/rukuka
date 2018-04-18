@@ -16,6 +16,7 @@ class CacheService
     CONST MENU_CACHE = 'menu.cache';
     CONST POPULAR_CACHE = 'popular.cache';
     CONST COLOR_CACHE = 'color.cache';
+    CONST CATEGORIES_CACHE = 'categories.cache';
 
 	public function clearCacheSetting()
 	{
@@ -38,7 +39,13 @@ class CacheService
 
 	public function clearCacheMenu()
 	{
-		Cache::forget(self::MENU_CACHE);
+		$menu = array('mens', 'womens');
+
+		foreach ($menu as $group) {
+			Cache::forget(self::MENU_CACHE.'.'.$group);
+		}
+
+		Cache::forget(self::CATEGORIES_CACHE);
 	}
 
 	public function clearCachePopular()
