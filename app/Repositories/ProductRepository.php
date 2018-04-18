@@ -101,11 +101,11 @@ class ProductRepository
         return $query->paginate(self::COUNT_OF_PRODUCT);
     }
 
-	public function getProductByMenu($request)
+	public function getCategoryProductDesigner($request)
 	{
         $gender = $request->input('menu');
-        $category = $request->input('category');
-        $parent = $request->input('parent');
+        $category = null;
+        $parent = null;
         $designer = $request->input('designer');
 
         $query = \DB::table('products')->join('product_designers', function ($join) use ($designer) {
@@ -139,14 +139,152 @@ class ProductRepository
             }
         })
         ->select(
-            'products.id as id', 
-            'products.name as name', 
-            'products.slug as slug', 
-            'products.sell_price as sell_price', 
-            'products.price_before_discount as price_before_discount', 
+
+            'product_categories.name as category_name'
+
+        )
+        ->where('products.is_active',1)
+        ->whereNull('products.deleted_at')
+        ->where('products.gender', $gender);
+
+        if (in_array($request->input('menu'), array('womens', 'mens'))) {
+            $query->orWhere('products.gender', 'unisex');
+        }
+
+        if ($request->has('color_id')) {
+            $colorId = $request->input('color_id');
+
+            $query->join('product_colors', function ($join) use ($colorId) {
+                $join->on('products.product_colors_id', '=', 'product_colors.id')
+                ->where('product_colors.id', $colorId);
+            });
+        }
+
+        if ($request->has('price')) {
+            $query->orderBy('products.sell_price', $request->input('price'));
+        } else {
+            $query->orderBy('products.id', 'desc');
+        }
+
+        if ($designer) {
+            $this->setDesigner($this->getDesignerBySlug($designer));
+        }
+
+        return $query->distinct()->get();
+
+	}
+	public function getColorByProduct($request)
+	{
+        $gender = $request->input('menu');
+        $category = $request->input('category');
+        $parent = $request->input('parent');
+        $designer = $request->input('designer');
+
+        $query = \DB::table('products')->join('product_designers', function ($join) use ($designer) {
+            $join->on('products.product_designers_id', '=', 'product_designers.id')
+            ->whereNull('product_designers.deleted_at');
+
+            if ($designer) {
+                $join->where('product_designers.slug', $designer);
+            }
+
+        })->join('product_categories', function ($join) use ($parent, $category) {
+            $join->on('products.product_categories_id', '=', 'product_categories.id');
+
+            if ($parent && $parent != 'all') {
+                if ($category == 'all') {
+                    $parents = (new CategoryRepository)->getCategoryByParent($parent);
+
+                    $ids = [];
+                    if($parents) {
+                        foreach ($parents as $value) {
+                            $ids[] = $value['id'];
+                        }
+                    }
+
+                    if ($parents) {
+                        $join->whereIn('product_categories.id', $ids);
+                    }
+                } else {
+                    $join->where('product_categories.slug', $category);
+                }
+            }
+        })->join('product_colors', function ($join) {
+            $join->on('products.product_colors_id', '=', 'product_colors.id');
+        })
+        ->select(
+            'product_colors.name as color_name'
+
+        )
+        ->where('products.is_active',1)
+        ->whereNull('products.deleted_at')
+        ->where('products.gender', $gender);
+
+        if (in_array($request->input('menu'), array('womens', 'mens'))) {
+            $query->orWhere('products.gender', 'unisex');
+        }
+
+
+        if ($request->has('price')) {
+            $query->orderBy('products.sell_price', $request->input('price'));
+        } else {
+            $query->orderBy('products.id', 'desc');
+        }
+
+        if ($designer) {
+            $this->setDesigner($this->getDesignerBySlug($designer));
+        }
+
+        return $query->distinct()->get();
+
+	}
+	public function getProductByMenu($request)
+	{
+        $gender = $request->input('menu');
+        $category = $request->input('category');
+        $parent = $request->input('parent');
+        $designer = $request->input('designer');
+
+        $query = \DB::table('products')->join('product_designers', function ($join) use ($designer) {
+            $join->on('products.product_designers_id', '=', 'product_designers.id')
+            ->whereNull('product_designers.deleted_at');
+
+            if ($designer) {
+                $join->where('product_designers.slug', $designer);
+            }
+
+        })->join('product_categories', function ($join) use ($parent, $category) {
+            $join->on('products.product_categories_id', '=', 'product_categories.id');
+
+            if ($parent && $parent != 'all') {
+                if ($category == 'all') {
+                    $parents = (new CategoryRepository)->getCategoryByParent($parent);
+
+                    $ids = [];
+                    if($parents) {
+                        foreach ($parents as $value) {
+                            $ids[] = $value['id'];
+                        }
+                    }
+
+                    if ($parents) {
+                        $join->whereIn('product_categories.id', $ids);
+                    }
+                } else {
+                    $join->where('product_categories.slug', $category);
+                }
+            }
+        })
+        ->select(
+            'products.id as id',
+            'products.name as name',
+            'products.slug as slug',
+            'products.sell_price as sell_price',
+            'products.price_before_discount as price_before_discount',
             'products.created_at as created_at',
-            'product_categories.name as category_name', 
+            'product_categories.name as category_name',
             'product_designers.id as designer_id'
+
         )
         ->where('products.is_active',1)
         ->whereNull('products.deleted_at')

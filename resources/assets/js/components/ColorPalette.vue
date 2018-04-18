@@ -5,17 +5,21 @@
         <div class="uk-accordion-content">
           <ul class="uk-grid uk-grid-collapse">
             <li v-for="color in palette" :uk-tooltip="color.name">
-              <label>
-                <input type="radio" name="palette" v-on:click="pickColor(color.id)" :checked="color.id == color_id"/>
-                  <lazy-background
-                    :image-source="color.palette"
-                    :loading-image="loadingImage"
-                    :error-image="errorImage"
-                    :alt="color.name"
-                    width="32px"
-                    image-class="uk-border-circle uk-box-shadow-small">
-                  </lazy-background>
-              </label>
+              <div v-for="colArr in colorArr">
+                <div v-if="colArr == color.name ">
+                      <label>
+                        <input type="radio" name="palette" v-on:click="pickColor(color.id)" :checked="color.id == color_id"/>
+                          <lazy-background
+                            :image-source="color.palette"
+                            :loading-image="loadingImage"
+                            :error-image="errorImage"
+                            :alt="color.name"
+                            width="32px"
+                            image-class="uk-border-circle uk-box-shadow-small">
+                          </lazy-background>
+                      </label>
+                </div>
+              </div>
             </li>
           </ul>
         </div>
@@ -29,7 +33,7 @@
     import axios from 'axios';
     import VueLazyBackgroundImage from '../components/VueLazyBackgroundImage.vue';
     export default {
-        props: ['api', 'default_image', 'aws_link', 'color_id','locale','action_link'],
+        props: ['api', 'default_image', 'aws_link', 'color_id','locale','action_link','color_array'],
 
         components: {
           'lazy-background': VueLazyBackgroundImage
@@ -67,6 +71,7 @@
                 errorImage: {},
                 loadingImage: {},
                 trans: JSON.parse(this.locale,true),
+                colorArr: JSON.parse(this.color_array,true),
             }
         },
 
