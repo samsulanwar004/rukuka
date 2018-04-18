@@ -136,7 +136,9 @@
                     category_slug="{{ $category }}"
                     sale="{{ $sale == null ? $category:$sale }}"
                     locale="{{ json_encode(trans('app')) }}"
-                    designer_slug={{ $designer ? $designer->slug : ''}}
+                    designer_slug="{{ $designer ? $designer->slug : ''}}"
+                    category_array="{{json_encode($categoryArray)}}"
+                    category_array="{{json_encode($categoryArray)}}"
                   ></categories-mobile>
 
                   <color-palette-mobile
@@ -166,7 +168,8 @@
               category_slug="{{ $category }}"
               sale="{{ $sale == null ? $category:$sale }}"
               locale="{{ json_encode(trans('app')) }}"
-              designer_slug={{ $designer ? $designer->slug : ''}}
+              designer_slug="{{ $designer ? $designer->slug : ''}}"
+              category_array="{{json_encode($categoryArray)}}"
             ></categories>
             <color-palette
               api="{{ route('color') }}"
@@ -175,6 +178,7 @@
               color_id="{{ $colorId }}"
               locale="{{ json_encode(trans('app')) }}"
               action_link="{{ actionLink() }}"
+              color_array="{{json_encode($colorArray)}}"
             ></color-palette>
 
           </div>
