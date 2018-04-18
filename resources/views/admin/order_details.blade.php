@@ -54,8 +54,8 @@
             {{ $row->expired_date }} <br>
             @endif
           </div>
-          <div class="col-md-6">
-            Shipping Detail <hr>
+          <div class="col-md-3">
+            Customer Detail <hr>
             <b>User Account:</b> <br>
             {{ $row->address->user->email }} <br><br>
             <b>Address:</b> <br>
@@ -74,7 +74,14 @@
               }
             @endphp
           </div>
-          <div class="col-md-12">
+          <div class="col-md-3">
+            Shipping Detail <hr>
+            <b>Service</b> <br>
+            {{ $row->shipping_name }}
+            <br>
+            {{ $row->shipping_service }}
+          </div>
+          <div class="col-md-12" style="padding: 20px">
             <div class="table-responsive">
               <table id="table-detail" class="table table-striped">
                 <thead>
