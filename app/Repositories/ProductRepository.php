@@ -151,14 +151,6 @@ class ProductRepository
             $query->orWhere('products.gender', 'unisex');
         }
 
-        if ($request->has('color_id')) {
-            $colorId = $request->input('color_id');
-
-            $query->join('product_colors', function ($join) use ($colorId) {
-                $join->on('products.product_colors_id', '=', 'product_colors.id')
-                ->where('product_colors.id', $colorId);
-            });
-        }
 
         if ($request->has('price')) {
             $query->orderBy('products.sell_price', $request->input('price'));
