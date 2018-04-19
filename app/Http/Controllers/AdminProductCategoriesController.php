@@ -39,7 +39,7 @@
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Menu','name'=>'menu','type'=>'select','validation'=>'string|min:3|max:70','width'=>'col-sm-10','dataenum'=>'mens|Mens;womens|Womens'];
+			$this->form[] = ['label'=>'Menu','name'=>'menu','type'=>'select','validation'=>'string','width'=>'col-sm-10','dataenum'=>'mens|Mens;womens|Womens;none|None'];
 			$this->form[] = ['label'=>'Parent Category','name'=>'parent_product_categories_id','type'=>'hidden','validation'=>'integer|min:0','width'=>'col-sm-9','datatable'=>'product_categories,name'];
 			# END FORM DO NOT REMOVE THIS LINE
 
@@ -262,6 +262,10 @@
 	        {
 	        	$postdata['parent_product_categories_id'] = 0;
 	        }
+
+            if($postdata['menu'] == 'none'){
+                $postdata['menu']= null;
+            }
 	    }
 
 	    /* 
@@ -293,7 +297,9 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
 	        //Your code here
-
+            if($postdata['menu'] == 'none'){
+                $postdata['menu']= null;
+            }
 	    }
 
 	    /* 
