@@ -16,7 +16,7 @@
             </li>
         </ul>
         <ul class="uk-accordion" uk-accordion="multiple: false" >
-            <li v-for="category in categories" :class="{'uk-open': categorySlug == category.name.toLowerCase()}">
+            <li v-for="category in categories" :class="{'uk-open': categorySlug == category.name.toLowerCase()}" v-if="categoryFilter.includes(category.name)">
                 <h5 href="#" class="uk-accordion-title">{{ category.name.toUpperCase() }}</h5>
                 <div class="uk-accordion-content">
                     <ul class="uk-nav uk-filter-nav">
@@ -85,6 +85,37 @@
         computed: {
             sales: function () {
                 return this.sale != 'sale' ? '' : '/'+this.sale;
+            },
+            categoryFilter: function () {
+                var catArr = this.categoryArr;
+                var parent = [];
+
+                if(catArr){
+                    $.each(this.categories, function( index, parentArr ) {
+                        var child = [];
+
+                        $.each(parentArr.child, function( index, value ) {
+                            if(catArr.indexOf(value.name) != -1 ){
+                                child.push(value.name);
+                            }
+                        });
+
+                        if (child.length){
+                            parent.push(parentArr.name);
+                        }
+
+                    });
+                }else{
+
+                    $.each(this.categories, function( index, parentArr ) {
+                        parent.push(parentArr.name);
+                    });
+                }
+
+
+                return parent;
+
+
             }
         }
 
