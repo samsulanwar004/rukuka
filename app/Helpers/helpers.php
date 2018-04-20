@@ -98,9 +98,10 @@ if (! function_exists('uploadCDN')) {
 }
 
 if (! function_exists('actionLink')) {
-    function actionLink(array $param = null) {
+    function actionLink(array $param = null, $remove1 = null,$remove2 = null) {
         $query = request()->query();
-        
+        unset($query[$remove1]);
+        unset($query[$remove2]);
         if ($query) {
             $param = isset($param) ? mergeArrays($query, $param) : $query;
         }

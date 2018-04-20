@@ -151,13 +151,6 @@ class ProductRepository
             $query->orWhere('products.gender', 'unisex');
         }
 
-
-        if ($request->has('price')) {
-            $query->orderBy('products.sell_price', $request->input('price'));
-        } else {
-            $query->orderBy('products.id', 'desc');
-        }
-
         if ($designer) {
             $this->setDesigner($this->getDesignerBySlug($designer));
         }
@@ -214,13 +207,6 @@ class ProductRepository
 
         if (in_array($request->input('menu'), array('womens', 'mens'))) {
             $query->orWhere('products.gender', 'unisex');
-        }
-
-
-        if ($request->has('price')) {
-            $query->orderBy('products.sell_price', $request->input('price'));
-        } else {
-            $query->orderBy('products.id', 'desc');
         }
 
         if ($designer) {
@@ -297,7 +283,15 @@ class ProductRepository
 
         if ($request->has('price')) {
             $query->orderBy('products.sell_price', $request->input('price'));
-        } else {
+        }
+
+        if ($request->has('popular')) {
+            $query->orderBy('products.count', $request->input('price'));
+        }
+
+        if ($request->has('sort')) {
+            $query->orderBy('products.id', $request->input('sort'));
+        }else {
             $query->orderBy('products.id', 'desc');
         }
 
@@ -459,7 +453,15 @@ class ProductRepository
 
         if ($request->has('price')) {
             $query->orderBy('products.sell_price', $request->input('price'));
-        } else {
+        }
+
+        if ($request->has('popular')) {
+            $query->orderBy('products.count', $request->input('price'));
+        }
+
+        if ($request->has('sort')) {
+            $query->orderBy('products.id', $request->input('sort'));
+        }else {
             $query->orderBy('products.id', 'desc');
         }
 
@@ -477,6 +479,10 @@ class ProductRepository
 
     public function updateCountProductCategory($id){
         ProductCategory::where('id', $id)->increment('count');
+    }
+
+    public function updateCountProducts($id){
+        Product::where('id', $id)->increment('count');
     }
 
     public function getRecentlyViewedProduct($ids)

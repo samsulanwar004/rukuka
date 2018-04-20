@@ -245,11 +245,13 @@ return [
     'of'                        =>  'of',
 
     //resources/views/pages/shop.blade.php
-    'sort_by_price'             =>  'Sort by price',
+    'sort_by'                   =>  'Sort by',
+    'new_in'                    =>  'New In',
+    'popular_sort'              =>  'Popular',
     'high'                      =>  'Price high to low',
     'low'                       =>  'Price low to high',
     'recently_view'             =>  'Recently View',
-    'all_you_need'              =>  'All You Need',
+    'all_you_need'              =>  'All',
     'filter_nav'                =>  'Filter Navigation',
     'filter'                    =>  'Filter',
     'color_filter'              =>  'Color',

@@ -86,6 +86,7 @@ class PageController extends BaseController
                     $categoryArray = [];
                 }
             }
+            //end get list category product
 
             // get list color product
             $colorArr = $product->getColorByProduct($request);
@@ -98,6 +99,7 @@ class PageController extends BaseController
             else{
                 $colorArray = [];
             }
+            // end get list color product
 
             $products = $product->getProductByMenu($request);
 
@@ -107,6 +109,8 @@ class PageController extends BaseController
 
             $colorId = $request->has('color_id') ? $request->input('color_id') : null;
             $sortByPrice = $request->input('price');
+            $sortByNew = $request->input('sort');
+            $sortByPopular = $request->input('popular');
 
             $ids = [];
             foreach ($products as $value) {
@@ -163,7 +167,9 @@ class PageController extends BaseController
             'colorId',
             'sortByPrice',
             'categoryArray',
-            'colorArray'
+            'colorArray',
+            'sortByNew',
+            'sortByPopular'
         ));
 
     }
@@ -207,6 +213,10 @@ class PageController extends BaseController
             //Count Product Categories For Popular Search
             $idProductCategory = $product->product_categories_id;
             (new ProductRepository)->updateCountProductCategory($idProductCategory);
+
+            //Count Product Categories For Popular Search
+            $idProduct = $product->id;
+            (new ProductRepository)->updateCountProducts($idProduct);
 
             // Push product ID to session
             session()->push('products.recently_viewed', $product->getKey());
@@ -586,6 +596,8 @@ class PageController extends BaseController
 
         $keyword = $request->input('keyword');
         $sortByPrice = $request->input('price');
+        $sortByNew = $request->input('sort');
+        $sortByPopular = $request->input('popular');
         $navigation = $request->input('menu');
 
         if(count($products) == 0){
@@ -597,7 +609,9 @@ class PageController extends BaseController
                 'navigation',
                 'shops',
                 'keyword',
-                'sortByPrice'
+                'sortByPrice',
+                'sortByPopular',
+                'sortByNew'
             ));
         }
     }
