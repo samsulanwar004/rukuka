@@ -166,7 +166,6 @@
                     locale="{{ json_encode(trans('app')) }}"
                     designer_slug="{{ $designer ? $designer->slug : ''}}"
                     category_array="{{json_encode($categoryArray)}}"
-                    category_array="{{json_encode($categoryArray)}}"
                   ></categories-mobile>
 
                   <color-palette-mobile
