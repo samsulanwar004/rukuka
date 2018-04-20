@@ -24,28 +24,28 @@
                                 <div class="uk-card-body">
                                     <ul class="uk-list">
                                         <li>
-                                            <a href="{{ actionLink(['sort' => 'desc'],'price','popular') }}">
+                                            <a href="{{ actionLink(['sort' => 'desc'],['price','popular']) }}">
                                         <span class="{{ $sortByNew == 'desc' ? 'uk-text-bold':'' }}">
                                             {{ trans('app.new_in') }}
                                         </span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ actionLink(['popular' => 'desc'],'price','sort') }}">
+                                            <a href="{{ actionLink(['popular' => 'desc'],['price','sort']) }}">
                                         <span class="{{ $sortByPopular == 'desc' ? 'uk-text-bold':'' }}">
                                             {{ trans('app.popular_sort') }}
                                         </span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ actionLink(['price' => 'desc'],'sort','popular') }}">
+                                            <a href="{{ actionLink(['price' => 'desc'],['sort','popular']) }}">
                                         <span class="{{ $sortByPrice == 'desc' ? 'uk-text-bold':'' }}">
                                             {{ trans('app.high') }}
                                         </span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ actionLink(['price' => 'asc'],'sort','popular') }}">
+                                            <a href="{{ actionLink(['price' => 'asc'],['sort','popular']) }}">
                                         <span class="{{ $sortByPrice == 'asc' ? 'uk-text-bold':'' }}">
                                             {{ trans('app.low') }}
                                         </span>
@@ -59,9 +59,16 @@
                     </div>
                     <div>
                         <div class="uk-text-right">
-
-                            @include('pagination.default', ['paginator' => $products])
-
+                            <div class="uk-grid uk-flex uk-flex-right">
+                                <div>
+                                  @include('pagination.default', ['paginator' => $products])
+                                </div>
+                                <div>
+                                  <a href="{{ actionLink(['view' => 36]) }}" class="{{ $view == 36 ? 'uk-button-secondary' : 'uk-button-default'}} uk-button-small button-small-page" style="padding:3px 6px; text-decoration:none">36</a>
+                                  <a href="{{ actionLink(['view' => 48]) }}" class="{{ $view == 48 ? 'uk-button-secondary' : 'uk-button-default'}} uk-button-small button-small-page" style="padding:3px 6px; text-decoration:none; margin-left:10px">48</a>
+                                  <a href="{{ actionLink(['view' => 72]) }}" class="{{ $view == 72 ? 'uk-button-secondary' : 'uk-button-default'}} uk-button-small button-small-page">72</a>
+                                </div>
+                              </div>
                         </div>
                     </div>
                 </div>
@@ -77,28 +84,28 @@
                         <div class="uk-card-body">
                             <ul class="uk-list">
                                 <li>
-                                    <a href="{{ actionLink(['sort' => 'desc'],'price','popular') }}">
+                                    <a href="{{ actionLink(['sort' => 'desc'],['price','popular']) }}">
                                         <span class="{{ $sortByNew == 'desc' ? 'uk-text-bold':'' }}">
                                             {{ trans('app.new_in') }}
                                         </span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ actionLink(['popular' => 'desc'],'price','sort') }}">
+                                    <a href="{{ actionLink(['popular' => 'desc'],['price','sort']) }}">
                                         <span class="{{ $sortByPopular == 'desc' ? 'uk-text-bold':'' }}">
                                             {{ trans('app.popular_sort') }}
                                         </span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ actionLink(['price' => 'desc'],'sort','popular') }}">
+                                    <a href="{{ actionLink(['price' => 'desc'],['sort','popular']) }}">
                                         <span class="{{ $sortByPrice == 'desc' ? 'uk-text-bold':'' }}">
                                             {{ trans('app.high') }}
                                         </span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ actionLink(['price' => 'asc'],'sort','popular') }}">
+                                    <a href="{{ actionLink(['price' => 'asc'],['sort','popular']) }}">
                                         <span class="{{ $sortByPrice == 'asc' ? 'uk-text-bold':'' }}">
                                             {{ trans('app.low') }}
                                         </span>

@@ -15,7 +15,7 @@ class ProductRepository
 
 	public $designer;
 
-    const COUNT_OF_PRODUCT = 30;
+    const COUNT_OF_PRODUCT = 36;
 
 	public function model()
 	{
@@ -58,7 +58,7 @@ class ProductRepository
             $query->orderBy('products.id', 'desc');
         }
 
-        return $query->paginate(self::COUNT_OF_PRODUCT);
+        return $query->paginate($request->has('view') ? $request->input('view') : self::COUNT_OF_PRODUCT);
 	}
 
     public function getProductBySlugCategorySale($request, $slug)
@@ -98,7 +98,7 @@ class ProductRepository
             $query->orderBy('products.id', 'desc');
         }
 
-        return $query->paginate(self::COUNT_OF_PRODUCT);
+        return $query->paginate($request->has('view') ? $request->input('view') : self::COUNT_OF_PRODUCT);
     }
 
 	public function getCategoryProduct($request, $menu = null)
@@ -352,7 +352,7 @@ class ProductRepository
             $this->setDesigner($this->getDesignerBySlug($designer));
         }
 
-        return $query->paginate(self::COUNT_OF_PRODUCT);
+        return $query->paginate($request->has('view') ? $request->input('view') : self::COUNT_OF_PRODUCT);
 
 	}
 
@@ -404,7 +404,7 @@ class ProductRepository
             $query->orderBy('products.id', 'desc');
         }
 
-        return $query->paginate(self::COUNT_OF_PRODUCT);
+        return $query->paginate($request->has('view') ? $request->input('view') : self::COUNT_OF_PRODUCT);
 
 	}
 
@@ -518,7 +518,7 @@ class ProductRepository
             $query->orderBy('products.id', 'desc');
         }
 
-        return $query->paginate(self::COUNT_OF_PRODUCT);
+        return $query->paginate($request->has('view') ? $request->input('view') : self::COUNT_OF_PRODUCT);
     }
 
     public function getProductByKeyword($keyword)

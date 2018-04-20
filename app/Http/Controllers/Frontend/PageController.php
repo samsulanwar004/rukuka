@@ -154,8 +154,9 @@ class PageController extends BaseController
             $recently = $recentlyViewed ? array_keys(array_flip(array_reverse($recentlyViewed))) : [];
 
             $categories = $request->input('menu');
-            $category = $request->input('parent') ;
+            $category = $request->input('parent');
             $slug = $request->input('category');
+            $view = $request->has('view') ? $request->input('view') : 36;
 
             // when parent designer
             if ($request->has('designer')) {
@@ -180,7 +181,8 @@ class PageController extends BaseController
             'categoryArray',
             'colorArray',
             'sortByNew',
-            'sortByPopular'
+            'sortByPopular',
+            'view'
         ));
 
     }
@@ -610,6 +612,7 @@ class PageController extends BaseController
         $sortByNew = $request->input('sort');
         $sortByPopular = $request->input('popular');
         $navigation = $request->input('menu');
+        $view = $request->has('view') ? $request->input('view') : 36;
 
         if(count($products) == 0){
             return view('pages.search_404', compact('keyword','navigation'));
@@ -622,7 +625,8 @@ class PageController extends BaseController
                 'keyword',
                 'sortByPrice',
                 'sortByPopular',
-                'sortByNew'
+                'sortByNew',
+                'view'
             ));
         }
     }
