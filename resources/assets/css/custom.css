@@ -27,6 +27,16 @@
 	font-size:13px;
 }
 
+.button-small-page {
+	padding:3px 6px;
+	text-decoration:none;
+	margin-left:10px;
+}
+
+.cat-disabled {
+	color:#ccc;
+}
+
 .fixed-userpanel {
 	position: -webkit-sticky;
 	position: sticky;
