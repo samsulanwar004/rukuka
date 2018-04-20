@@ -22,7 +22,7 @@ class PageController extends BaseApiController
     CONST COLOR_CACHE = 'color.cache';
     CONST POPULAR_CACHE = 'popular.cache';
     
-    public function menu($parent = null)
+    public function menu(Request $request, $parent = null)
     {
     	try {
 
@@ -36,6 +36,19 @@ class PageController extends BaseApiController
                 })->toArray();
 
                 $designers = (new DesignerRepository)->getDesignerWithGender();
+
+                $categoryArr = (new ProductRepository)->getCategoryProduct($request, $parent);
+
+                if(count($categoryArr) != 0){
+                    $categoryArray = [];
+                    foreach ($categoryArr as $value)
+                        $categoryArray[] = $value->category_name;
+                }
+                else{
+                    $categoryArray = [];
+                }
+
+                $categories['category_available'] = $categoryArray;
 
                 $designers = collect($designers)->filter(function ($item) use ($parent) {
                     return $item->gender == $parent || $item->gender == 'unisex';

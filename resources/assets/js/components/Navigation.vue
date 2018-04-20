@@ -70,7 +70,14 @@
                                   <a :href="'/shop?menu='+navigation+'&parent=clothing&category=all'">{{ trans.all }} Clothing</a>
                                 </li>
                                   <li class="uk-parent" v-for="cat in categories.clothing" v-if="cat.menu == navigation || cat.menu == null">
-                                    <a :href="'/shop?menu='+navigation+'&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
+                                    <div v-if="categoryArr.includes(cat.name)">
+                                      <a :href="'/shop?menu='+navigation+'&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
+                                    </div>
+                                    <div v-else>
+                                        <span class="cat-disabled">
+                                            {{ cat.name }}
+                                        </span>
+                                    </div>
                                 </li>
                               </ul>
                             </div>
@@ -146,7 +153,14 @@
                                   <a :href="'/shop?menu='+navigation+'&parent=accessories&category=all'">{{ trans.all }} Accessories</a>
                                 </li>
                                   <li class="uk-parent" v-for="cat in categories.accessories" v-if="cat.menu == navigation || cat.menu == null">
-                                      <a :href="'/shop?menu='+navigation+'&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
+                                      <div v-if="categoryArr.includes(cat.name)">
+                                        <a :href="'/shop?menu='+navigation+'&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
+                                      </div>
+                                      <div v-else>
+                                          <span class="cat-disabled">
+                                              {{ cat.name }}
+                                          </span>
+                                      </div>
                                 </li>
                               </ul>
                             </div>
@@ -440,6 +454,7 @@
 
                 if (typeof navigations.data.data !== 'undefined') {
                   self.categories = navigations.data.data;
+                  self.categoryArr = navigations.data.data.category_available;
                 }
 
                 if (typeof navigations.data.data.designers !== 'undefined') {
@@ -536,7 +551,8 @@
                 currencyCode: this.currency_code,
                 language: this.language,
                 exchangeRate: {},
-                flagImage:{}
+                flagImage:{},
+                categoryArr: {}
             }
         },
         methods: {
@@ -613,7 +629,7 @@
         computed: {
           filteredBags: function () {
             return typeof this.bags[0] !== 'undefined' ? this.bags.slice(0,2) : {};
-          }
+          },
         },
 
         filters: {

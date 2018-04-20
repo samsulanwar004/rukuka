@@ -19,7 +19,7 @@
                 <span href="#" :class="{'uk-accordion-title' : true, 'cat-disabled' : !categoryFilter.includes(category.name)}">{{ category.name }}</span>
                 <div class="uk-accordion-content">
                     <ul class="uk-nav uk-filter-nav">
-                    <li v-if="categoryFilter.includes(category.name)">
+                    <li v-if="categoryFilter && categoryFilter.includes(category.name)">
                         <a :href="'/shop?menu='+parent+designerSlug+'&parent='+ category.name.toLowerCase() +'&category=all'">
                             <span :class="{'uk-text-bold': categorySlug == category.name.toLowerCase() && slug == 'all'}">
                                  {{ trans.all+' '+category.name }}
@@ -33,7 +33,7 @@
                     </li>
                     <div>
                         <li v-for="cat in category.child" v-if="cat.menu == parent || cat.menu == null">
-                            <div v-if="categoryArr.includes(cat.name)">
+                            <div v-if="categoryFilter && categoryArr.includes(cat.name)">
                                 <a :href="'/shop?menu='+parent+designerSlug+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
                                   <span :class="{'uk-text-bold': slug == cat.slug}">
                                       {{ cat.name }}
@@ -126,7 +126,6 @@
                         if (child.length){
                             parent.push(parentArr.name);
                         }
-
                     });
                 }else{
 
@@ -135,9 +134,7 @@
                     });
                 }
 
-
                 return parent;
-
 
             }
         }

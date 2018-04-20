@@ -101,9 +101,9 @@ class ProductRepository
         return $query->paginate(self::COUNT_OF_PRODUCT);
     }
 
-	public function getCategoryProduct($request)
+	public function getCategoryProduct($request, $menu = null)
 	{
-        $gender = $request->input('menu');
+        $gender = $request->has('menu') ? $request->input('menu') : $menu;
         $category = 'all';
         $parent = null;
         $designer = null;
@@ -147,12 +147,8 @@ class ProductRepository
         ->whereNull('products.deleted_at')
         ->where('products.gender', $gender);
 
-        if (in_array($request->input('menu'), array('womens', 'mens'))) {
+        if (in_array($gender, array('womens', 'mens'))) {
             $query->orWhere('products.gender', 'unisex');
-        }
-
-        if ($designer) {
-            $this->setDesigner($this->getDesignerBySlug($designer));
         }
 
         return $query->distinct()->get();
