@@ -31,7 +31,7 @@
                             {{ trans.all }}
                         </span>
                     </li>
-                    <div v-if="categoryArr">
+                    <div>
                         <li v-for="cat in category.child" v-if="cat.menu == parent || cat.menu == null">
                             <div v-if="categoryArr.includes(cat.name)">
                                 <a :href="'/shop?menu='+parent+designerSlug+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
@@ -47,15 +47,7 @@
                             </div>
                         </li>
                     </div>
-                    <div v-else>
-                        <li v-for="cat in category.child" v-if="cat.menu == parent || cat.menu == null">
-                          <a :href="'/shop?menu='+parent+designerSlug+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
-                              <span :class="{'uk-text-bold': slug == cat.slug}">
-                                  {{ cat.name }}
-                              </span>
-                          </a>
-                        </li>
-                    </div>
+
                 </ul>
                 </div>
             </li>

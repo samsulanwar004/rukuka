@@ -101,6 +101,63 @@ class ProductRepository
         return $query->paginate(self::COUNT_OF_PRODUCT);
     }
 
+	public function getCategoryProduct($request)
+	{
+        $gender = $request->input('menu');
+        $category = 'all';
+        $parent = null;
+        $designer = null;
+
+        $query = \DB::table('products')->join('product_designers', function ($join) use ($designer) {
+            $join->on('products.product_designers_id', '=', 'product_designers.id')
+            ->whereNull('product_designers.deleted_at');
+
+            if ($designer) {
+                $join->where('product_designers.slug', $designer);
+            }
+
+        })->join('product_categories', function ($join) use ($parent, $category) {
+            $join->on('products.product_categories_id', '=', 'product_categories.id');
+            
+            if ($parent && $parent != 'all') {
+                if ($category == 'all') {
+                    $parents = (new CategoryRepository)->getCategoryByParent($parent);
+
+                    $ids = [];
+                    if($parents) {
+                        foreach ($parents as $value) {
+                            $ids[] = $value['id'];
+                        }
+                    }
+
+                    if ($parents) {
+                        $join->whereIn('product_categories.id', $ids);
+                    }
+                } else {
+                    $join->where('product_categories.slug', $category);
+                }
+            }
+        })
+        ->select(
+
+            'product_categories.name as category_name'
+
+        )
+        ->where('products.is_active',1)
+        ->whereNull('products.deleted_at')
+        ->where('products.gender', $gender);
+
+        if (in_array($request->input('menu'), array('womens', 'mens'))) {
+            $query->orWhere('products.gender', 'unisex');
+        }
+
+        if ($designer) {
+            $this->setDesigner($this->getDesignerBySlug($designer));
+        }
+
+        return $query->distinct()->get();
+
+	}
 	public function getCategoryProductDesigner($request)
 	{
         $gender = $request->input('menu');
@@ -118,7 +175,7 @@ class ProductRepository
 
         })->join('product_categories', function ($join) use ($parent, $category) {
             $join->on('products.product_categories_id', '=', 'product_categories.id');
-            
+
             if ($parent && $parent != 'all') {
                 if ($category == 'all') {
                     $parents = (new CategoryRepository)->getCategoryByParent($parent);
