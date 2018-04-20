@@ -85,6 +85,17 @@ class PageController extends BaseController
                 else{
                     $categoryArray = [];
                 }
+            }else{
+                $categoryArr = $product->getCategoryProduct($request);
+
+                if(count($categoryArr) != 0){
+                    $categoryArray = [];
+                    foreach ($categoryArr as $value)
+                        $categoryArray[] = $value->category_name;
+                }
+                else{
+                    $categoryArray = [];
+                }
             }
             //end get list category product
 
