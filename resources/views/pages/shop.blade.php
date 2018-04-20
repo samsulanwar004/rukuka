@@ -102,8 +102,20 @@
                       </div>
                       <div>
                         <div class="uk-text-right">
+                          <div class="uk-grid uk-flex uk-flex-right">
+                            <div>
+                              @include('pagination.default', ['paginator' => $products])
+                            </div>
+                            <div>
+                              <a href="#" class="uk-button-small uk-button-secondary button-small-page" style="padding:3px 6px; text-decoration:none">36</a>
+                              <a href="#" class="uk-button-small uk-button-default button-small-page" style="padding:3px 6px; text-decoration:none; margin-left:10px">48</a>
+                              <a href="#" class="uk-button-small uk-button-default button-small-page">72</a>
+                            </div>
+                          </div>
 
-                          @include('pagination.default', ['paginator' => $products])
+
+
+
 
                         </div>
                       </div>
@@ -258,4 +270,3 @@
         @endif
     </div>
 @endsection
-

@@ -16,7 +16,7 @@
         </ul>
         <ul class="uk-accordion" uk-accordion="multiple: true" >
             <li v-for="category in categories" :class="{'' : true, 'uk-open' : categoryFilter.includes(category.name)}">
-                <span href="#" :class="{'uk-accordion-title' : true, 'uk-text-muted' : !categoryFilter.includes(category.name)}">{{ category.name }}</span>
+                <span href="#" :class="{'uk-accordion-title' : true, 'cat-disabled' : !categoryFilter.includes(category.name)}">{{ category.name }}</span>
                 <div class="uk-accordion-content">
                     <ul class="uk-nav uk-filter-nav">
                     <li v-if="categoryFilter.includes(category.name)">
@@ -27,7 +27,7 @@
                         </a>
                     </li>
                     <li v-else>
-                        <span class="uk-text-muted uk-disabled">
+                        <span class="cat-disabled">
                             {{ trans.all }}
                         </span>
                     </li>
@@ -41,7 +41,7 @@
                                 </a>
                             </div>
                             <div v-else>
-                                <span class="uk-text-muted uk-disabled">
+                                <span class="cat-disabled">
                                     {{ cat.name }}
                                 </span>
                             </div>
