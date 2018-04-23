@@ -3,7 +3,7 @@
 @section('content')
     <div class="uk-container">
         {{--MAIN BANNER--}}
-        <div uk-slideshow="ratio: 10:4; min-height: 200; max-height: 600; animation:scale; autoplay: true;" class="uk-margin-top">
+        <div uk-slideshow="ratio: 10:4; animation:scale; autoplay: true;" class="uk-margin-top">
             <div class="uk-position-relative uk-visible-toggle uk-light">
                 <ul class="uk-slideshow-items">
                   @foreach ($slider as $item)
