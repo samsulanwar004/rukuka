@@ -107,9 +107,9 @@
                               @include('pagination.default', ['paginator' => $products])
                             </div>
                             <div>
-                              <a href="{{ actionLink(['view' => 36]) }}" class="{{ $view == 36 ? 'uk-button-secondary' : 'uk-button-default'}} uk-button-small button-small-page" style="padding:3px 6px; text-decoration:none">36</a>
-                              <a href="{{ actionLink(['view' => 48]) }}" class="{{ $view == 48 ? 'uk-button-secondary' : 'uk-button-default'}} uk-button-small button-small-page" style="padding:3px 6px; text-decoration:none; margin-left:10px">48</a>
-                              <a href="{{ actionLink(['view' => 72]) }}" class="{{ $view == 72 ? 'uk-button-secondary' : 'uk-button-default'}} uk-button-small button-small-page">72</a>
+                              <a href="{{ actionLink(['view' => 36]) }}" class="{{ $view == 36 ? 'uk-button-secondary' : 'uk-button-default'}} uk-button-small button-small-page" style="text-decoration:none">36</a>
+                              <a href="{{ actionLink(['view' => 48]) }}" class="{{ $view == 48 ? 'uk-button-secondary' : 'uk-button-default'}} uk-button-small button-small-page" style="text-decoration:none">48</a>
+                              <a href="{{ actionLink(['view' => 72]) }}" class="{{ $view == 72 ? 'uk-button-secondary' : 'uk-button-default'}} uk-button-small button-small-page" style="text-decoration:none">72</a>
                             </div>
                           </div>
                         </div>
@@ -215,6 +215,46 @@
               action_link="{{ actionLink() }}"
               color_array="{{json_encode($colorArray)}}"
             ></color-palette>
+            <div>
+              <ul class="uk-accordion" uk-accordion>
+                <li><span href="#" class="uk-accordion-title">Size</span>
+                  <div class="uk-accordion-content">
+                    <ul class="uk-grid uk-grid-collapse">
+                      <li>
+                        <a href="#" class="uk-button-small uk-button-default size-button" style="text-decoration:none">S</a>
+                      </li>
+                      <li>
+                        <a href="#" class="uk-button-small uk-button-default size-button" style="text-decoration:none">M</a>
+                      </li>
+                      <li>
+                        <a href="#" class="uk-button-small uk-button-default size-button" style="text-decoration:none">L</a>
+                      </li>
+                      <li>
+                        <a href="#" class="uk-button-small uk-button-default size-button" style="text-decoration:none">XL</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <ul class="uk-accordion" uk-accordion>
+                <li><span href="#" class="uk-accordion-title">Price</span>
+                  <div class="uk-accordion-content">
+                    <div class="uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
+                      <div>
+                        <label class="uk-text-meta">Min Price</label>
+                        <input type="text" name="start" class="uk-input uk-form-small" value="" placeholder="Rp.">
+                      </div>
+                      <div>
+                        <label class="uk-text-meta">Max Price</label>
+                        <input type="text" name="start" class="uk-input uk-form-small" value="" placeholder="Rp.">
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
 
           </div>
           <div class="uk-width-expand@m">
