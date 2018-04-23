@@ -3,16 +3,16 @@
     <div>
         <ul class="uk-accordion">
             <li>
-                <h5 class="uk-link-reset uk-text-uppercase">
+                <span class="uk-link-reset">
                     <a v-if="sales" :href="'/shop?menu='+parent+designerSlug+'&parent=sale'">
                         {{ trans.all }}
                     </a>
                     <a v-else :href="'/shop?menu='+parent+designerSlug+'&parent=all'">
-                        <span :class="{'text-underline': categorySlug == 'all'}">
+                        <span :class="{'text-bold': categorySlug == 'all'}">
                             {{ trans.all }}
                         </span>
                     </a>
-                </h5>
+                </span>
             </li>
         </ul>
         <div v-if="designerSlug">
