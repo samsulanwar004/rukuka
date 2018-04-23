@@ -130,7 +130,7 @@ class PageController extends BaseController
 
             $image = $product->getProductImage($ids);
 
-            $shops = $products->map(function ($entry) use ($image){
+            $shops = $products->map(function ($entry) use ($image, $request) {
 
                 foreach ($image as $value) {
                     if ($entry->id == $value->products_id) {
@@ -141,7 +141,7 @@ class PageController extends BaseController
                 return [
                     'id' => $entry->id,
                     'name' => $entry->name,
-                    'slug' => $entry->slug,
+                    'slug' => $entry->gender != 'unisex' ? $entry->slug : $entry->slug.'?menu='.$request->input('menu'),
                     'price' => $entry->sell_price,
                     'price_before_discount' => $entry->price_before_discount,
                     'photo' => $entry->photo ? str_replace('original', 'medium', $entry->photo) : $entry->photo,
@@ -187,7 +187,7 @@ class PageController extends BaseController
 
     }
 
-    public function product($slug, $method = null, $sku = null, $id = null)
+    public function product(Request $request, $slug, $method = null, $sku = null, $id = null)
     {
         try {
             $exchange = (new CurrencyService)->getCurrentCurrency();
@@ -197,6 +197,10 @@ class PageController extends BaseController
             $product->sell_price = $product->sell_price / $exchange->value;
             $product->price_before_discount = $product->price_before_discount <= 0 ? $product->price_before_discount : $product->price_before_discount / $exchange->value;
             $product->currency = $exchange->symbol;
+
+            if ($request->has('menu')) {
+                $product->gender = $request->input('menu');
+            }
 
             $sumRating= collect($product->review)->sum('rating');
             $reviews = collect($product->review)->take(3);
@@ -587,7 +591,7 @@ class PageController extends BaseController
 
         $image = (new ProductRepository)->getProductImage($ids);
 
-        $shops = $products->map(function ($entry) use ($image) {
+        $shops = $products->map(function ($entry) use ($image, $request) {
 
             foreach ($image as $value) {
                 if ($entry->id == $value->products_id) {
@@ -599,7 +603,7 @@ class PageController extends BaseController
                 'id' => $entry->id,
                 'product_categories_id' => $entry->product_categories_id,
                 'name' => $entry->name,
-                'slug' => $entry->slug,
+                'slug' => $entry->gender != 'unisex' ? $entry->slug : $entry->slug.'?menu='.$request->input('menu'),
                 'price' => $entry->sell_price,
                 'price_before_discount' => $entry->price_before_discount,
                 'photo' => $entry->photo,
