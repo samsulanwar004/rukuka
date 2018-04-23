@@ -37,11 +37,14 @@
                             </a>
                         </li>
                         <li v-for="cat in categories.clothing" v-if="cat.menu == navigation || cat.menu == null">
-                            <a :href="'/shop?menu='+navigation+'&parent=clothing&category='+ cat.slug ">
-                                <span>
+                            <div v-if="categoryArr.includes(cat.name)">
+                              <a :href="'/shop?menu='+navigation+'&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
+                            </div>
+                            <div v-else>
+                                <span class="cat-disabled-mobile">
                                     {{ cat.name }}
                                 </span>
-                            </a>
+                            </div>
                         </li>
                     </span>
                     </ul>
@@ -59,11 +62,14 @@
                           </a>
                         </li>
                         <li v-for="cat in categories.accessories" v-if="cat.menu == navigation || cat.menu == null">
-                            <a :href="'/shop?menu='+navigation+'&parent=accessories&category='+ cat.slug ">
-                                 <span>
+                            <div v-if="categoryArr.includes(cat.name)">
+                                <a :href="'/shop?menu='+navigation+'&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
+                            </div>
+                            <div v-else>
+                                <span class="cat-disabled-mobile">
                                     {{ cat.name }}
-                                 </span>
-                            </a>
+                                </span>
+                            </div>
                         </li>
                     </span>
                     </ul>
@@ -139,6 +145,7 @@
                 if (typeof response !== 'undefined') {
                     if (typeof response !== 'undefined') {
                         self.categories = response;
+                        self.categoryArr = response.category_available;
                     }
 
                     if (typeof response.designers !== 'undefined') {
@@ -158,7 +165,8 @@
                 menLink: this.men_link,
                 womenLink: this.women_link,
                 designerLink: this.designer_link,
-                trans: JSON.parse(this.locale,true)
+                trans: JSON.parse(this.locale,true),
+                categoryArr: {}
             }
         }
     }

@@ -37,6 +37,10 @@
 	color:#ccc;
 }
 
+.cat-disabled-mobile {
+	color:#676565;
+}
+
 .fixed-userpanel {
 	position: -webkit-sticky;
 	position: sticky;
