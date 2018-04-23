@@ -230,7 +230,7 @@ return [
     'register'                  =>  'Register',
     'set_email_password'        =>  'Set Email and Password',
     'confirm_password'          =>  'Confirm Password',
-    'agreement_text_1'          =>  'By clicking the "register" button, I agree to recieve ruKuKa news by e-mail, sms or telephone.',
+    'agreement_text_1'          =>  'By clicking the "register" button, I agree to receieve ruKuKa news by e-mail, sms or telephone.',
     'agreement_text_2'          =>  'See our',
     'agreement_text_3'          =>  'for further information.',
 

@@ -70,7 +70,9 @@
                   <ul class="uk-list">
                     <li><input class="uk-checkbox" type="checkbox" name="subcriber" required="required" {{ old('subcriber') ? 'checked' : '' }}>
                     <span class="uk-text-meta">{{ trans('app.agreement_text_1') }}
-                    {{ trans('app.agreement_text_2') }} <a href="/page/terms-privacy">{{ trans('app.terms_privacy') }} {{ trans('app.agreement_text_3') }}</a> </span></li>
+                      {{--{{ trans('app.agreement_text_2') }} <a href="/page/terms-privacy">{{ trans('app.terms_privacy') }} {{ trans('app.agreement_text_3') }}</a> --}}
+                    </span>
+                    </li>
                     <li><button class="uk-button uk-button-secondary uk-width-1-1 uk-text-uppercase" type="submit">{{ trans('app.register') }}</button></li>
                     <li>
                       <a href="{{ route('social.login', ['provider' => 'facebook', 'return_url' => $ref]) }}" class="uk-button uk-button-primary uk-button-small uk-width-1-1">
