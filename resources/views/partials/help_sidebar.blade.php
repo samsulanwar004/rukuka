@@ -13,7 +13,7 @@
             <li><a href="{{ URL::to('page/about-us')}}">{{ trans('app.about_us') }}</a></li>
             <li><a href="{{ URL::to('page/partners')}}">{{ trans('app.partners') }}</a></li>
             <li><a href="{{ URL::to('page/careers')}}">{{ trans('app.careers') }}</a></li>
-            <li><a href="{{ URL::to('page/terms-privacy')}}">{{ trans('app.terms_privacy') }}</a></li>
+            {{--<li><a href="{{ URL::to('page/terms-privacy')}}">{{ trans('app.terms_privacy') }}</a></li>--}}
         </ul>
     </div>
     <div class="uk-hidden@m">
@@ -38,7 +38,7 @@
                                 <li><a href="{{ URL::to('page/about-us')}}">{{ trans('app.about_us') }}</a></li>
                                 <li><a href="{{ URL::to('page/partners')}}">{{ trans('app.partners') }}</a></li>
                                 <li><a href="{{ URL::to('page/careers')}}">{{ trans('app.careers') }}</a></li>
-                                <li><a href="{{ URL::to('page/terms-privacy')}}">{{ trans('app.terms_privacy') }}</a></li>
+                                {{--<li><a href="{{ URL::to('page/terms-privacy')}}">{{ trans('app.terms_privacy') }}</a></li>--}}
                             </ul>
                         </div>
                     </div>
