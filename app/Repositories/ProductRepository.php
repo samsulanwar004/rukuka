@@ -139,21 +139,15 @@ class ProductRepository
             }
         })
         ->select(
-
             'product_categories.name as category_name'
-
         )
         ->where('products.is_active',1)
         ->whereNull('products.deleted_at')
-        ->where('products.gender', $gender);
-
-        if (in_array($gender, array('womens', 'mens'))) {
-            $query->orWhere('products.gender', 'unisex');
-        }
+        ->whereIn('products.gender', [$gender,'unisex']);
 
         return $query->distinct()->get();
-
 	}
+
 	public function getCategoryProductDesigner($request)
 	{
         $gender = $request->input('menu');
@@ -192,21 +186,11 @@ class ProductRepository
             }
         })
         ->select(
-
             'product_categories.name as category_name'
-
         )
         ->where('products.is_active',1)
         ->whereNull('products.deleted_at')
-        ->where('products.gender', $gender);
-
-        if (in_array($request->input('menu'), array('womens', 'mens'))) {
-            $query->orWhere('products.gender', 'unisex');
-        }
-
-        if ($designer) {
-            $this->setDesigner($this->getDesignerBySlug($designer));
-        }
+        ->whereIn('products.gender', [$gender,'unisex']);
 
         return $query->distinct()->get();
 
@@ -252,23 +236,14 @@ class ProductRepository
         })
         ->select(
             'product_colors.name as color_name'
-
         )
         ->where('products.is_active',1)
         ->whereNull('products.deleted_at')
-        ->where('products.gender', $gender);
-
-        if (in_array($request->input('menu'), array('womens', 'mens'))) {
-            $query->orWhere('products.gender', 'unisex');
-        }
-
-        if ($designer) {
-            $this->setDesigner($this->getDesignerBySlug($designer));
-        }
+        ->whereIn('products.gender', [$gender,'unisex']);
 
         return $query->distinct()->get();
-
 	}
+
 	public function getProductByMenu($request)
 	{
         $gender = $request->input('menu');
@@ -319,11 +294,7 @@ class ProductRepository
         )
         ->where('products.is_active',1)
         ->whereNull('products.deleted_at')
-        ->where('products.gender', $gender);
-
-        if (in_array($request->input('menu'), array('womens', 'mens'))) {
-            $query->orWhere('products.gender', 'unisex');
-        }
+        ->whereIn('products.gender', [$gender,'unisex']);
 
         if ($request->has('color_id')) {
             $colorId = $request->input('color_id');
