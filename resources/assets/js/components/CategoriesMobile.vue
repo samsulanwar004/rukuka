@@ -56,8 +56,47 @@
             </ul>
         </div>
         <div v-else>
-            <ul class="uk-accordion" uk-accordion="multiple: true" >
+            <ul class="uk-accordion" uk-accordion="multiple: true" v-if="category_slug != 'all'">
                 <li v-for="category in categories" class="uk-open" v-if="category.name.toLowerCase() == category_slug ">
+                    <span href="#" class="uk-accordion-title">{{ category.name }}</span>
+                    <div class="uk-accordion-content">
+                        <ul class="uk-nav uk-filter-nav">
+                            <li v-if="categoryFilter && categoryFilter.includes(category.name)">
+                                <a :href="'/shop?menu='+parent+designerSlug+'&parent='+ category.name.toLowerCase() +'&category=all'">
+                        <span :class="{'uk-text-bold': categorySlug == category.name.toLowerCase() && slug == 'all'}">
+                             {{ trans.all+' '+category.name }}
+                        </span>
+                                </a>
+                            </li>
+                            <li v-else>
+                    <span class="cat-disabled">
+                        {{ trans.all }}
+                    </span>
+                            </li>
+                            <div>
+                                <li v-for="cat in category.child" v-if="cat.menu == parent || cat.menu == null">
+                                    <div v-if="categoryFilter && categoryArr.includes(cat.name)">
+                                        <a :href="'/shop?menu='+parent+designerSlug+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
+                              <span :class="{'uk-text-bold': slug == cat.slug}">
+                                  {{ cat.name }}
+                              </span>
+                                        </a>
+                                    </div>
+                                    <div v-else>
+                            <span class="cat-disabled">
+                                {{ cat.name }}
+                            </span>
+                                    </div>
+                                </li>
+                            </div>
+
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="uk-accordion" uk-accordion="multiple: true" v-else>
+                <li v-for="category in categories" class="uk-open">
                     <span href="#" class="uk-accordion-title">{{ category.name }}</span>
                     <div class="uk-accordion-content">
                         <ul class="uk-nav uk-filter-nav">

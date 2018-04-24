@@ -3,7 +3,7 @@
       <div class="uk-navbar-left">
           <ul class="uk-navbar-nav">
             <!-- New Arrival -->
-            <li class="uk-margin-medium-right">
+            <li :class="{'uk-active': category == 'all'}" class="uk-margin-medium-right">
               <a :href="'/shop?menu='+navigation+'&parent=all'">{{ trans.new_arrival }}</a>
             </li>
               <!--Start Designer-->
