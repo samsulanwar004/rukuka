@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul class="uk-accordion" uk-accordion>
-      <li><span href="#" class="uk-accordion-title">{{ trans.color }}</span>
+      <li :class="{ 'uk-open' : color_id }"><span href="#" class="uk-accordion-title">{{ trans.color }}</span>
         <div class="uk-accordion-content">
           <ul class="uk-grid uk-grid-collapse">
             <li v-for="color in palette" :uk-tooltip="color.name">

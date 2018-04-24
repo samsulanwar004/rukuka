@@ -217,21 +217,14 @@
             ></color-palette>
             <div>
               <ul class="uk-accordion" uk-accordion>
-                <li><span href="#" class="uk-accordion-title">Size</span>
+                <li class="{{ $onSize ? 'uk-open' : ''}}"><span href="#" class="uk-accordion-title">Size</span>
                   <div class="uk-accordion-content">
                     <ul class="uk-grid uk-grid-collapse">
-                      <li>
-                        <a href="#" class="uk-button-small uk-button-default size-button" style="text-decoration:none">S</a>
-                      </li>
-                      <li>
-                        <a href="#" class="uk-button-small uk-button-default size-button" style="text-decoration:none">M</a>
-                      </li>
-                      <li>
-                        <a href="#" class="uk-button-small uk-button-default size-button" style="text-decoration:none">L</a>
-                      </li>
-                      <li>
-                        <a href="#" class="uk-button-small uk-button-default size-button" style="text-decoration:none">XL</a>
-                      </li>
+                      @foreach($sizeArray as $size)
+                        <li>
+                          <a href="{{ actionLink(['size' => $size]) }}" class="{{ $onSize == $size ? 'uk-button-secondary' : 'uk-button-default'}} uk-button-small size-button" style="text-decoration:none">{{ strtoupper($size) }}</a>
+                        </li>
+                      @endforeach
                     </ul>
                   </div>
                 </li>

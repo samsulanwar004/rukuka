@@ -112,6 +112,19 @@ class PageController extends BaseController
             }
             // end get list color product
 
+            // get list size product
+            $sizeArr = $product->getSizeByProduct($request);
+
+            if(count($sizeArr) != 0){
+                $sizeArray = [];
+                foreach ($sizeArr as $value)
+                    $sizeArray[] = $value->size;
+            }
+            else{
+                $sizeArray = [];
+            }
+            // end get list size product
+
             $products = $product->getProductByMenu($request);
 
             foreach ($request->all() as $key => $value) {
@@ -123,20 +136,7 @@ class PageController extends BaseController
             $sortByNew = $request->input('sort');
             $sortByPopular = $request->input('popular');
 
-            $ids = [];
-            foreach ($products as $value) {
-                $ids[] = $value->id;
-            }
-
-            $image = $product->getProductImage($ids);
-
-            $shops = $products->map(function ($entry) use ($image, $request) {
-
-                foreach ($image as $value) {
-                    if ($entry->id == $value->products_id) {
-                        $entry->photo = $value->photo;
-                    }
-                }
+            $shops = $products->map(function ($entry) use ($request) {
 
                 return [
                     'id' => $entry->id,
@@ -157,6 +157,7 @@ class PageController extends BaseController
             $category = $request->input('parent');
             $slug = $request->input('category');
             $view = $request->has('view') ? $request->input('view') : 36;
+            $onSize = $request->has('size') ? $request->input('size') : '';
 
             // when parent designer
             if ($request->has('designer')) {
@@ -164,6 +165,7 @@ class PageController extends BaseController
             }
 
         } catch (Exception $e) {
+            logger($e->getMessage());
             return abort(404);
         }
 
@@ -182,7 +184,9 @@ class PageController extends BaseController
             'colorArray',
             'sortByNew',
             'sortByPopular',
-            'view'
+            'view',
+            'sizeArray',
+            'onSize'
         ));
 
     }
@@ -584,20 +588,7 @@ class PageController extends BaseController
             $products->appends($key, $value);
         }
 
-        $ids = [];
-        foreach ($products as $value) {
-            $ids[] = $value->id;
-        }
-
-        $image = (new ProductRepository)->getProductImage($ids);
-
-        $shops = $products->map(function ($entry) use ($image, $request) {
-
-            foreach ($image as $value) {
-                if ($entry->id == $value->products_id) {
-                    $entry->photo = $value->photo;
-                }
-            }
+        $shops = $products->map(function ($entry) use ($request) {
 
             return [
                 'id' => $entry->id,
@@ -606,7 +597,7 @@ class PageController extends BaseController
                 'slug' => $entry->gender != 'unisex' ? $entry->slug : $entry->slug.'?menu='.$request->input('menu'),
                 'price' => $entry->sell_price,
                 'price_before_discount' => $entry->price_before_discount,
-                'photo' => $entry->photo,
+                'photo' => $entry->photo ? str_replace('original', 'medium', $entry->photo) : $entry->photo,
                 'is_new' => $this->date->diffInDays(Carbon::parse($entry->created_at)) <= 7 ? true : false,
             ];
         });

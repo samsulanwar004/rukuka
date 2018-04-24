@@ -195,6 +195,7 @@ class ProductRepository
         return $query->distinct()->get();
 
 	}
+
 	public function getColorByProduct($request)
 	{
         $gender = $request->input('menu');
@@ -244,6 +245,57 @@ class ProductRepository
         return $query->distinct()->get();
 	}
 
+    public function getSizeByProduct($request)
+    {
+        $gender = $request->input('menu');
+        $category = $request->input('category');
+        $parent = $request->input('parent');
+        $designer = $request->input('designer');
+
+        $query = \DB::table('products')->join('product_designers', function ($join) use ($designer) {
+            $join->on('products.product_designers_id', '=', 'product_designers.id')
+            ->whereNull('product_designers.deleted_at');
+
+            if ($designer) {
+                $join->where('product_designers.slug', $designer);
+            }
+
+        })->join('product_categories', function ($join) use ($parent, $category) {
+            $join->on('products.product_categories_id', '=', 'product_categories.id');
+
+            if ($parent && $parent != 'all') {
+                if ($category == 'all') {
+                    $parents = (new CategoryRepository)->getCategoryByParent($parent);
+
+                    $ids = [];
+                    if($parents) {
+                        foreach ($parents as $value) {
+                            $ids[] = $value['id'];
+                        }
+                    }
+
+                    if ($parents) {
+                        $join->whereIn('product_categories.id', $ids);
+                    }
+                } else {
+                    $join->where('product_categories.slug', $category);
+                }
+            }
+        })->join('product_colors', function ($join) {
+            $join->on('products.product_colors_id', '=', 'product_colors.id');
+        })->join('product_stocks', function ($join) {
+            $join->on('products.id', '=', 'product_stocks.products_id');
+        })
+        ->select(
+            'product_stocks.size as size'
+        )
+        ->where('products.is_active',1)
+        ->whereNull('products.deleted_at')
+        ->whereIn('products.gender', [$gender,'unisex']);
+
+        return $query->distinct()->get();
+    }
+
 	public function getProductByMenu($request)
 	{
         $gender = $request->input('menu');
@@ -280,8 +332,9 @@ class ProductRepository
                     $join->where('product_categories.slug', $category);
                 }
             }
-        })
-        ->select(
+        })->join('product_images', function ($join) {
+            $join->on('products.id', '=', 'product_images.products_id');
+        })->select(
             'products.id as id',
             'products.name as name',
             'products.slug as slug',
@@ -290,12 +343,14 @@ class ProductRepository
             'products.price_before_discount as price_before_discount',
             'products.created_at as created_at',
             'product_categories.name as category_name',
-            'product_designers.id as designer_id'
+            'product_designers.id as designer_id',
+            'product_images.photo as photo'
 
         )
         ->where('products.is_active',1)
         ->whereNull('products.deleted_at')
-        ->whereIn('products.gender', [$gender,'unisex']);
+        ->whereIn('products.gender', [$gender,'unisex'])
+        ->groupBy('products.id');
 
         if ($request->has('color_id')) {
             $colorId = $request->input('color_id');
@@ -303,6 +358,15 @@ class ProductRepository
             $query->join('product_colors', function ($join) use ($colorId) {
                 $join->on('products.product_colors_id', '=', 'product_colors.id')
                 ->where('product_colors.id', $colorId);
+            });
+        }
+
+        if ($request->has('size')) {
+            $size = $request->input('size');
+
+            $query->join('product_stocks', function ($join) use ($size) {
+                $join->on('products.id', '=', 'product_stocks.products_id')
+                ->where('product_stocks.size', $size);  
             });
         }
 
@@ -323,6 +387,7 @@ class ProductRepository
         if ($designer) {
             $this->setDesigner($this->getDesignerBySlug($designer));
         }
+
 
         return $query->paginate($request->has('view') ? $request->input('view') : self::COUNT_OF_PRODUCT);
 
@@ -458,6 +523,8 @@ class ProductRepository
         $query = \DB::table('products')->join('product_designers', function ($join) {
             $join->on('products.product_designers_id', '=', 'product_designers.id')
             ->whereNull('product_designers.deleted_at');
+        })->join('product_images', function ($join) {
+            $join->on('products.id', '=', 'product_images.products_id');
         })
         ->select(
             'products.id as id',
@@ -467,7 +534,8 @@ class ProductRepository
             'products.sell_price as sell_price',
             'products.price_before_discount as price_before_discount',
             'products.created_at as created_at',
-            'products.product_categories_id as product_categories_id'
+            'products.product_categories_id as product_categories_id',
+            'product_images.photo as photo'
         )
 
         ->where('products.is_active',1)
@@ -475,7 +543,8 @@ class ProductRepository
         ->where('products.name','like','%'.$request->input('keyword').'%')
         ->orWhere('products.gender', 'unisex')
         ->where('products.name','like','%'.$request->input('keyword').'%')
-        ->whereNull('products.deleted_at');
+        ->whereNull('products.deleted_at')
+        ->groupBy('products.id');
 
         if ($request->has('price')) {
             $query->orderBy('products.sell_price', $request->input('price'));
