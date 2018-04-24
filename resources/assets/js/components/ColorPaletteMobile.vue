@@ -72,7 +72,8 @@
                   window.location.href = this.action_link+'&color_id='+colorId;
               } else {
                   delete myarr[position];
-                  window.location.href = myarr.join('&')+'&color_id='+colorId;
+                  var link = myarr.join('&')+'&color_id='+colorId;
+                  window.location.href =  link.replace('&&','&');
               }
           }
         }
