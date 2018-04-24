@@ -24,9 +24,9 @@
         {{--END MAIN BANNER--}}
 
         {{--2 ROW BANNER--}}
-        <div uk-slider="clsActivated: uk-transition-active;" class="uk-margin-top">
+        <div class="uk-margin-top">
             <div class="uk-position-relative uk-visible-toggle">
-                <ul class="uk-slider-items uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
+                <ul class="uk-grid uk-grid-small uk-child-width-1-2@m" uk-grid>
                     <li>
                         <div class="uk-panel uk-transition-toggle">
                             <a href="{{ $men['men_url_1'] }}" class="uk-link-reset">
@@ -37,8 +37,11 @@
                                         <h4 class="uk-margin-remove-top blog-subtitle">{{ $men['men_text_1_2'] }}</h4>
                                         <a href="{{ $men['men_url_1'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
                                     </div>
+                                    <div class="uk-overlay-primary uk-padding-xsmall uk-position-bottom uk-panel uk-light uk-hidden@m" style="background: rgba(0,0,0,.80)">
+                                      <h5><b>{{ $men['men_text_1_1'] }}</b></h5>
+                                    </div>
                                 </div>
-                                <span class="uk-margin-small uk-dark uk-hidden@m">{{ $men['men_text_1_1'] }}</span>
+
                             </a>
                         </div>
                         <hr class="uk-margin-remove-top uk-margin-bottom uk-visible@m" style="border-color: #333; border-width: 5px">
@@ -53,11 +56,14 @@
                                         <h4 class="uk-margin-remove-top blog-subtitle">{{ $men['men_text_2_2'] }}</h4>
                                         <a href="{{ $men['men_url_2'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
                                     </div>
+                                    <div class="uk-overlay-primary uk-padding-xsmall uk-position-bottom uk-panel uk-light uk-hidden@m" style="background: rgba(0,0,0,.80)">
+                                      <h5><b>{{ $men['men_text_2_2'] }}</b></h5>
+                                    </div>
                                 </div>
-                                <span class="uk-margin-small uk-dark uk-hidden@m">{{ $men['men_text_2_1'] }}</span>
+
                             </a>
                         </div>
-                        <hr class="uk-margin-remove-top uk-margin-bottom uk-visible@m" style="border-color: #333; border-width: 5px">
+                        <hr class="uk-margin-remove-top uk-visible@m" style="border-color: #333; border-width: 5px">
                     </li>
                 </ul>
             </div>
@@ -65,9 +71,9 @@
         {{--END 2 ROW BANNER--}}
 
         {{--3 ROW BANNER--}}
-        <div uk-slider="clsActivated: uk-transition-active;">
+        <div class="uk-margin-top">
             <div class="uk-position-relative uk-visible-toggle">
-                <ul class="uk-slider-items uk-grid uk-grid-small uk-child-width-1-3" uk-grid>
+                <ul class="uk-slider-items uk-grid uk-grid-small uk-child-width-1-3@m" uk-grid>
                     <li>
                         <div class="uk-panel uk-transition-toggle">
                             <a href="{{ $men['men_url_3'] }}" class="uk-link-reset">
@@ -78,8 +84,11 @@
                                         <h6 class="uk-margin-remove-top blog-subtitle">{{ $men['men_text_3_2'] }}</h6>
                                         <a href="{{ $men['men_url_3'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
                                     </div>
+                                    <div class="uk-overlay-primary uk-padding-xsmall uk-position-bottom uk-panel uk-light uk-hidden@m" style="background: rgba(0,0,0,.80)">
+                                      <h5><b>{{ $men['men_text_3_2'] }}</b></h5>
+                                    </div>
                                 </div>
-                                <span class="uk-margin-small uk-dark uk-hidden@m">{{ $men['men_text_3_1'] }}</span>
+
                             </a>
                         </div>
                         <hr class="uk-margin-remove-top uk-margin-bottom uk-visible@m" style="border-color: #333; border-width: 5px">
@@ -94,8 +103,11 @@
                                         <h6 class="uk-margin-remove-top blog-subtitle">{{ $men['men_text_4_2'] }}</h6>
                                         <a href="{{ $men['men_url_4'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
                                     </div>
+                                    <div class="uk-overlay-primary uk-padding-xsmall uk-position-bottom uk-panel uk-light uk-hidden@m" style="background: rgba(0,0,0,.80)">
+                                      <h5><b>{{ $men['men_text_4_2'] }}</b></h5>
+                                    </div>
                                 </div>
-                                <span class="uk-margin-small uk-dark uk-hidden@m">{{ $men['men_text_4_1'] }}</span>
+
                             </a>
                         </div>
                         <hr class="uk-margin-remove-top uk-margin-bottom uk-visible@m" style="border-color: #333; border-width: 5px">
@@ -110,8 +122,11 @@
                                         <h6 class="uk-margin-remove-top blog-subtitle">{{ $men['men_text_5_2'] }}</h6>
                                         <a href="{{ $men['men_url_5'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
                                     </div>
+                                    <div class="uk-overlay-primary uk-padding-xsmall uk-position-bottom uk-panel uk-light uk-hidden@m" style="background: rgba(0,0,0,.80)">
+                                      <h5><b>{{ $men['men_text_5_1'] }}</b></h5>
+                                    </div>
                                 </div>
-                                <span class="uk-margin-small uk-dark uk-hidden@m">{{ $men['men_text_5_1'] }}</span>
+
                             </a>
                         </div>
                         <hr class="uk-margin-remove-top uk-margin-bottom uk-visible@m" style="border-color: #333; border-width: 5px">
