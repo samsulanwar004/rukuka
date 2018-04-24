@@ -169,11 +169,9 @@ class PageController extends BaseController
             if($request->has('range')) {
                 $range = $request->input('range');
                 $rangeArr = explode('-',$range);
-                $payment = new CurrencyService;
-                $kurs  = $payment->getCurrentCurrency();
                 $range = [
-                    'price_min' => $rangeArr[0]*$kurs->value,
-                    'price_max' => $rangeArr[1]*$kurs->value,
+                    'price_min' => $rangeArr[0],
+                    'price_max' => $rangeArr[1],
                     ];
             }
 

@@ -105,7 +105,7 @@ class ProductRepository
 	public function getCategoryProduct($request, $menu = null)
 	{
         $gender = $request->has('menu') ? $request->input('menu') : $menu;
-        $category = 'all';
+        $category = null;
         $parent = null;
         $designer = null;
 

@@ -4,7 +4,7 @@
             <a :href="'/'+navigation.replace('s', '')" class="uk-link-reset"><h4 class="uk-margin-remove">{{ trans.rukuka }}</h4></a>
             <hr class="uk-margin-small">
             <ul class="uk-nav uk-nav-primary uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav v-if="navigation">
-                <li>
+                <li :class="{'uk-open uk-active': category == 'all' }">
                     <a class="uk-parent uk-text-uppercase" :href="'/shop?menu='+navigation+'&parent=all'">
                         <span>
                             {{ trans.new_arrival}}
