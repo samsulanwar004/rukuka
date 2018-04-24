@@ -73,6 +73,7 @@ class PageController extends BaseController
     public function shop(Request $request, ProductRepository $product)
     {
         try {
+
             //get list category product
             if($request->has('designer')) {
                 $categoryArr = $product->getCategoryProductDesigner($request);
@@ -113,6 +114,7 @@ class PageController extends BaseController
             // end get list color product
 
             $products = $product->getProductByMenu($request);
+
 
             foreach ($request->all() as $key => $value) {
                 $products->appends($key, $value);
@@ -163,6 +165,17 @@ class PageController extends BaseController
                 $designer = $product->getDesigner();
             }
 
+            if($request->has('range')) {
+                $range = $request->input('range');
+                $rangeArr = explode('-',$range);
+                $payment = new CurrencyService;
+                $kurs  = $payment->getCurrentCurrency();
+                $range = [
+                    'price_min' => $rangeArr[0]*$kurs->value,
+                    'price_max' => $rangeArr[1]*$kurs->value,
+                    ];
+            }
+
         } catch (Exception $e) {
             return abort(404);
         }
@@ -182,7 +195,8 @@ class PageController extends BaseController
             'colorArray',
             'sortByNew',
             'sortByPopular',
-            'view'
+            'view',
+            'range'
         ));
 
     }
