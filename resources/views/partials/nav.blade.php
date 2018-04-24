@@ -112,25 +112,25 @@
   </div>
   @if ($navigation || $category == 'designers')
     <div class="uk-section uk-section-xsmall uk-padding-remove uk-margin-medium-top">
-      <div class="uk-container">
+      {{-- <div class="uk-container">
         <div class="uk-alert-alert" uk-alert>
             <a href="#" class="uk-alert-close" uk-close></a>
             <p class="uk-text-center">
                 {{ trans('app.header_note') }} <a href="https://rukuka.com/lookbook/amazon-fashion-week"> <b> <u>{{ trans('app.afw') }}</u> </b> </a></b>
             </p>
         </div>
-      </div>
+      </div> --}}
     </div>
   @else
     <div class="uk-section uk-section-xsmall uk-padding-remove">
-      <div class="uk-container">
+      {{-- <div class="uk-container">
         <div class="uk-alert-alert" uk-alert>
             <a href="#" class="uk-alert-close" uk-close></a>
             <p class="uk-text-center">
                 {{ trans('app.header_note') }} <a href="https://rukuka.com/lookbook/amazon-fashion-week"> <b> <u>{{ trans('app.afw') }}</u> </b> </a></b>
             </p>
         </div>
-      </div>
+      </div> --}}
     </div>
   @endif
 
