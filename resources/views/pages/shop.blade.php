@@ -128,30 +128,30 @@
                     <ul class="uk-list">
                         <li>
                             <a href="{{ actionLink(['sort' => 'desc'],['price','popular']) }}">
-                                        <span class="{{ $sortByNew == 'desc' ? 'uk-text-bold':'' }}">
-                                            {{ trans('app.new_in') }}
-                                        </span>
+                                <span class="{{ $sortByNew == 'desc' ? 'uk-text-bold':'' }}">
+                                    {{ trans('app.new_in') }}
+                                </span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ actionLink(['popular' => 'desc'],['price','sort']) }}">
-                                        <span class="{{ $sortByPopular == 'desc' ? 'uk-text-bold':'' }}">
-                                            {{ trans('app.popular_sort') }}
-                                        </span>
+                                <span class="{{ $sortByPopular == 'desc' ? 'uk-text-bold':'' }}">
+                                    {{ trans('app.popular_sort') }}
+                                </span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ actionLink(['price' => 'desc'],['sort','popular']) }}">
-                                        <span class="{{ $sortByPrice == 'desc' ? 'uk-text-bold':'' }}">
-                                            {{ trans('app.high') }}
-                                        </span>
+                                <span class="{{ $sortByPrice == 'desc' ? 'uk-text-bold':'' }}">
+                                    {{ trans('app.high') }}
+                                </span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ actionLink(['price' => 'asc'],['sort','popular']) }}">
-                                        <span class="{{ $sortByPrice == 'asc' ? 'uk-text-bold':'' }}">
-                                            {{ trans('app.low') }}
-                                        </span>
+                                <span class="{{ $sortByPrice == 'asc' ? 'uk-text-bold':'' }}">
+                                    {{ trans('app.low') }}
+                                </span>
                             </a>
                         </li>
                     </ul>
@@ -232,18 +232,19 @@
             </div>
             <div>
               <ul class="uk-accordion" uk-accordion>
-                <li><span href="#" class="uk-accordion-title">Price</span>
+                  <li><span href="#" class="uk-accordion-title">Price</span>
                   <div class="uk-accordion-content">
                     <div class="uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
                       <div>
                         <label class="uk-text-meta">Min Price</label>
-                        <input type="text" name="start" class="uk-input uk-form-small" value="" placeholder="Rp.">
+                        <input type="number" name="price_min" id="price_min" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="">
                       </div>
                       <div>
                         <label class="uk-text-meta">Max Price</label>
-                        <input type="text" name="start" class="uk-input uk-form-small" value="" placeholder="Rp.">
+                        <input type="number" name="price_max" id="price_max" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="">
                       </div>
                     </div>
+                      <button class="uk-button uk-button-default" onclick="myFunction()" >Submit</button>
                   </div>
                 </li>
               </ul>
@@ -297,4 +298,31 @@
         </div>
         @endif
     </div>
+@endsection
+
+@section('footer_scripts')
+    <script type="text/javascript">
+        function myFunction() {
+            var min = document.getElementById("price_min").value;
+            var max = document.getElementById("price_max").value;
+            var range_value = min+'-'+max;
+            var href = window.location.href;
+
+            var search = function searchStringInArray (str, strArray) {
+                for (var j=0; j<strArray.length; j++) {
+                    if (strArray[j].match(str)) return j;
+                }
+                return -1;
+            }
+            var myarr = href.split("&");
+            var position = search('range',myarr);
+            if(position == -1) {
+                window.location.href = href+'&range='+range_value;
+            } else {
+                delete myarr[position];
+                var link = myarr.join('&')+'&range='+range_value;
+                window.location.href =  link.replace('&&','&');
+            }
+        }
+    </script>
 @endsection

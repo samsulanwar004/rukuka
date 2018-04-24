@@ -6,6 +6,7 @@ use App\Product;
 use App\Repositories\CategoryRepository;
 use App\Designer;
 use App\ProductCategory;
+use App\Services\CurrencyService;
 use App\Popular;
 use App\Color;
 use App\ProductImage;
@@ -380,6 +381,17 @@ class ProductRepository
 
         if ($request->has('sort')) {
             $query->orderBy('products.id', $request->input('sort'));
+        }
+
+        if($request->has('range')){
+            $range = $request->input('range');
+            $rangeArr = explode('-',$range);
+            $payment = new CurrencyService;
+            $kurs  = $payment->getCurrentCurrency();
+
+            $query->where('products.sell_price','>',$rangeArr[0]*$kurs->value);
+            $query->where('products.sell_price','<',$rangeArr[1]*$kurs->value);
+            $query->orderBy('products.sell_price', 'asc');
         }else {
             $query->orderBy('products.id', 'desc');
         }
