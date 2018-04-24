@@ -183,7 +183,45 @@
                     action_link="{{ actionLink() }}"
                     color_array="{{json_encode($colorArray)}}"
                   ></color-palette-mobile>
+
+                    <div>
+                        <ul class="uk-accordion" uk-accordion>
+                            <li class="{{ $onSize ? 'uk-open' : ''}}"><span href="#" class="uk-accordion-title">Size</span>
+                                <div class="uk-accordion-content">
+                                    <ul class="uk-grid uk-grid-collapse">
+                                        @foreach($sizeArray as $size)
+                                            <li>
+                                                <a href="{{ actionLink(['size' => $size]) }}" class="{{ $onSize == $size ? 'uk-button-secondary' : 'uk-button-default'}} uk-button-small size-button" style="text-decoration:none">{{ strtoupper($size) }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="uk-accordion" uk-accordion>
+                            <li><span href="#" class="uk-accordion-title">Price</span>
+                                <div class="uk-accordion-content">
+                                    <div class="uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
+                                        <div>
+                                            <label class="uk-text-meta">Min Price</label>
+                                            <input type="number" name="price_min" id="price_min" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="">
+                                        </div>
+                                        <div>
+                                            <label class="uk-text-meta">Max Price</label>
+                                            <input type="number" name="price_max" id="price_max" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="">
+                                        </div>
+                                    </div>
+                                    <button class="uk-button uk-button-default" onclick="myFunction()" >Submit</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+
+
+
                 <div class="uk-modal-footer">
                   <a href="#" class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-modal-close">{{ trans('app.close') }}</a>
                 </div>
