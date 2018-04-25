@@ -249,11 +249,11 @@
                                     <div class="uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
                                         <div>
                                             <label class="uk-text-meta">{{ trans('app.min_price') }}</label>
-                                            <input type="number" name="price_min" id="price_min_mobile" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="0">
+                                            <input type="number" name="price_min" id="price_min_mobile" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="">
                                         </div>
                                         <div>
                                             <label class="uk-text-meta">{{ trans('app.max_price') }}</label>
-                                            <input type="number" name="price_max" id="price_max_mobile" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="0">
+                                            <input type="number" name="price_max" id="price_max_mobile" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="">
                                         </div>
                                     </div>
                                     <button class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-margin-small-top" onclick="rangeMobile()" >FIND</button>
@@ -346,11 +346,11 @@
                     <div class="uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
                       <div>
                         <label class="uk-text-meta">{{ trans('app.min_price') }}</label>
-                        <input type="number" name="price_min" id="price_min" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="0">
+                        <input type="number" name="price_min" id="price_min" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="">
                       </div>
                       <div>
                         <label class="uk-text-meta">{{ trans('app.max_price') }}</label>
-                        <input type="number" name="price_max" id="price_max" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="0">
+                        <input type="number" name="price_max" id="price_max" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="">
                       </div>
                     </div>
                       <button class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-margin-small-top" onclick="range()" >{{ trans('app.find') }}</button>
@@ -413,6 +413,12 @@
         function range() {
             var min = document.getElementById("price_min").value;
             var max = document.getElementById("price_max").value;
+            if(min <= 0){
+                var min = 0;
+            }
+            if(max <= 0){
+                var max = 0;
+            }
             var range_value = min+'-'+max;
             var href = window.location.href;
 
@@ -435,6 +441,12 @@
         function rangeMobile() {
             var min = document.getElementById("price_min_mobile").value;
             var max = document.getElementById("price_max_mobile").value;
+            if(min <= 0){
+                var min = 0;
+            }
+            if(max <= 0){
+                var max = 0;
+            }
             var range_value = min+'-'+max;
             var href = window.location.href;
 
