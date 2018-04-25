@@ -1,97 +1,6 @@
 <template>
     <div class="uk-offcanvas-bar uk-text-left uk-flex uk-flex-wrap uk-flex-wrap-between">
         <div class="uk-width-1-1">
-            <!-- <a :href="'/'+navigation.replace('s', '')" class="uk-link-reset"><h4 class="uk-margin-remove">{{ trans.rukuka }}</h4></a>
-            <hr class="uk-margin-small"> -->
-            <!-- <ul class="uk-nav uk-nav-primary uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav v-if="navigation">
-                <li :class="{'uk-open uk-active': category == 'all' }">
-                    <a class="uk-parent " :href="'/shop?menu='+navigation+'&parent=all'">
-                        <span>
-                            {{ trans.new_arrival}}
-                        </span>
-                    </a>
-                </li>
-
-                <li :class="{'uk-parent': true , 'uk-open uk-active': designer }">
-                    <a :href="designerLink+'?menu='+navigation" class="">{{ trans.designers_nav }}</a>
-                    <ul class="uk-nav-sub">
-                        <li class="uk-parent" v-for="design in designers">
-                            <a :href="'/shop?menu='+navigation+'&designer='+ design.slug ">
-                            <span>
-                                {{ design.name }}
-                            </span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li :class="{'uk-parent': true , 'uk-open uk-active': category == 'clothing' }">
-                    <a class="">{{ trans.clothing }}</a>
-                    <ul class="uk-nav-sub">
-                    <span>
-                        <li>
-                            <a :href="'/shop?menu='+navigation+'&parent=clothing&category=all'">
-                                <span>
-                                    {{ trans.all }}
-                                </span>
-                            </a>
-                        </li>
-                        <li v-for="cat in categories.clothing" v-if="cat.menu == navigation || cat.menu == null">
-                            <div v-if="categoryArr.includes(cat.name)">
-                              <a :href="'/shop?menu='+navigation+'&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
-                            </div>
-                            <div v-else>
-                                <span class="cat-disabled-mobile">
-                                    {{ cat.name }}
-                                </span>
-                            </div>
-                        </li>
-                    </span>
-                    </ul>
-                </li>
-
-                <li :class="{'uk-parent': true , 'uk-open uk-active': category == 'accessories' }">
-                    <a class="">{{ trans.accessories }}</a>
-                    <ul class="uk-nav-sub">
-                    <span>
-                        <li>
-                          <a :href="'/shop?menu='+navigation+'&parent=accessories&category=all'">
-                              <span>
-                                  {{ trans.all }}
-                              </span>
-                          </a>
-                        </li>
-                        <li v-for="cat in categories.accessories" v-if="cat.menu == navigation || cat.menu == null">
-                            <div v-if="categoryArr.includes(cat.name)">
-                                <a :href="'/shop?menu='+navigation+'&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
-                            </div>
-                            <div v-else>
-                                <span class="cat-disabled-mobile">
-                                    {{ cat.name }}
-                                </span>
-                            </div>
-                        </li>
-                    </span>
-                    </ul>
-                </li>
-
-                <li :class="{'uk-open uk-active': category == 'homeware' }">
-                    <a :href="'/shop?menu='+navigation+'&parent=homeware&category=all'" class="">{{ trans.home_nav }}</a>
-                </li>
-
-                <li class="uk-parent">
-
-                    <ul class="uk-nav-sub">
-                        <li><a href="/shop/womens/sale">{{ trans.women_nav}}</a></li>
-                        <li><a href="/shop/mens/sale">{{ trans.men_nav}}</a></li>
-                        <li><a href="/shop/home/sale">{{ trans.home_nav}}</a></li>
-                    </ul>
-                </li>
-                <hr class="uk-margin-small">
-                <li :class="{'uk-open uk-active': editorial }">
-                    <a href="/editorial" class="">{{ trans.blog_nav }}</a>
-                </li>
-            </ul> -->
             <ul uk-tab="animation: uk-animation-slide-left-small" uk-grid class="uk-child-width-1-2">
                 <li :class="{'uk-active': navigation == 'mens' }">
                   <a href="/men" class=""><h4>{{ trans.men_nav}}</h4></a>
@@ -117,7 +26,7 @@
                       <li :class="{'uk-parent': true , 'uk-open uk-active': designer }">
                           <a :href="designerLink+'?menu=mens'" class="">{{ trans.designers_nav }}</a>
                           <ul class="uk-nav-sub">
-                              <li class="uk-parent" v-for="design in designers">
+                              <li class="uk-parent" v-for="design in designers" v-if="design.gender == 'mens' || design.gender == 'unisex'">
                                   <a :href="'/shop?menu=mens&designer='+ design.slug ">
                                   <span>
                                       {{ design.name }}
@@ -138,8 +47,8 @@
                                       </span>
                                   </a>
                               </li>
-                              <li v-for="cat in categories.clothing" v-if="cat.menu == navigation || cat.menu == null">
-                                  <div v-if="categoryArr.includes(cat.name)">
+                              <li v-for="cat in categories.clothing" v-if="cat.menu == 'mens' || cat.menu == null">
+                                  <div v-if="categoryArrMens.includes(cat.name)">
                                     <a :href="'/shop?menu=mens&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
                                   </div>
                                   <div v-else>
@@ -163,9 +72,9 @@
                                     </span>
                                 </a>
                               </li>
-                              <li v-for="cat in categories.accessories" v-if="cat.menu == navigation || cat.menu == null">
-                                  <div v-if="categoryArr.includes(cat.name)">
-                                      <a :href="'/shop?menu='+navigation+'&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
+                              <li v-for="cat in categories.accessories" v-if="cat.menu == 'mens' || cat.menu == null">
+                                  <div v-if="categoryArrMens.includes(cat.name)">
+                                      <a :href="'/shop?menu=mens&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
                                   </div>
                                   <div v-else>
                                       <span class="cat-disabled-mobile">
@@ -211,7 +120,7 @@
                       <li :class="{'uk-parent': true , 'uk-open uk-active': designer }">
                           <a :href="designerLink+'?menu=womens'" class="">{{ trans.designers_nav }}</a>
                           <ul class="uk-nav-sub">
-                              <li class="uk-parent" v-for="design in designers">
+                              <li class="uk-parent" v-for="design in designers" v-if="design.gender == 'womens' || design.gender == 'unisex'">
                                   <a :href="'/shop?menu=womens&designer='+ design.slug ">
                                   <span>
                                       {{ design.name }}
@@ -232,8 +141,8 @@
                                       </span>
                                   </a>
                               </li>
-                              <li v-for="cat in categories.clothing" v-if="cat.menu == navigation || cat.menu == null">
-                                  <div v-if="categoryArr.includes(cat.name)">
+                              <li v-for="cat in categories.clothing" v-if="cat.menu == 'womens' || cat.menu == null">
+                                  <div v-if="categoryArrWomens.includes(cat.name)">
                                     <a :href="'/shop?menu=womens&parent=clothing&category='+ cat.slug ">{{ cat.name }}</a>
                                   </div>
                                   <div v-else>
@@ -257,8 +166,8 @@
                                     </span>
                                 </a>
                               </li>
-                              <li v-for="cat in categories.accessories" v-if="cat.menu == navigation || cat.menu == null">
-                                  <div v-if="categoryArr.includes(cat.name)">
+                              <li v-for="cat in categories.accessories" v-if="cat.menu == 'womens' || cat.menu == null">
+                                  <div v-if="categoryArrWomens.includes(cat.name)">
                                       <a :href="'/shop?menu=womens&parent=accessories&category='+ cat.slug ">{{ cat.name }}</a>
                                   </div>
                                   <div v-else>
@@ -337,11 +246,12 @@
                 if (typeof response !== 'undefined') {
                     if (typeof response !== 'undefined') {
                         self.categories = response;
-                        self.categoryArr = response.category_available;
+                        self.categoryArrMens = response.category_mens_available;
+                        self.categoryArrWomens = response.category_womens_available;
                     }
 
-                    if (typeof response.designers !== 'undefined') {
-                        self.designers = response.designers.sort(sort_by('created_at', true, function(result){
+                    if (typeof response.designers_all !== 'undefined') {
+                        self.designers = response.designers_all.sort(sort_by('created_at', true, function(result){
                             return result;
                         })).slice(0,37);
                     }
@@ -358,7 +268,8 @@
                 womenLink: this.women_link,
                 designerLink: this.designer_link,
                 trans: JSON.parse(this.locale,true),
-                categoryArr: {}
+                categoryArrMens: {},  
+                categoryArrWomens: {}
             }
         }
     }

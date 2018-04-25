@@ -105,39 +105,13 @@ class ProductRepository
 	public function getCategoryProduct($request, $menu = null)
 	{
         $gender = $request->has('menu') ? $request->input('menu') : $menu;
-        $category = null;
-        $parent = null;
-        $designer = null;
 
-        $query = \DB::table('products')->join('product_designers', function ($join) use ($designer) {
+        $query = \DB::table('products')->join('product_designers', function ($join) {
             $join->on('products.product_designers_id', '=', 'product_designers.id')
             ->whereNull('product_designers.deleted_at');
 
-            if ($designer) {
-                $join->where('product_designers.slug', $designer);
-            }
-
-        })->join('product_categories', function ($join) use ($parent, $category) {
+        })->join('product_categories', function ($join) {
             $join->on('products.product_categories_id', '=', 'product_categories.id');
-            
-            if ($parent && $parent != 'all') {
-                if ($category == 'all') {
-                    $parents = (new CategoryRepository)->getCategoryByParent($parent);
-
-                    $ids = [];
-                    if($parents) {
-                        foreach ($parents as $value) {
-                            $ids[] = $value['id'];
-                        }
-                    }
-
-                    if ($parents) {
-                        $join->whereIn('product_categories.id', $ids);
-                    }
-                } else {
-                    $join->where('product_categories.slug', $category);
-                }
-            }
         })
         ->select(
             'product_categories.name as category_name'
