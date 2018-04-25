@@ -111,8 +111,9 @@
                           @endforeach
                           <div class="uk-width-expand">
 
-
-                          Filter :
+                          @if($sortByNew || $sortByPopular || $colorId || $onSize || $range || $sortByPrice)
+                              {{ trans('app.filter') }} :
+                          @endif
 
                           @if($sortByNew)
                               <a href="{{ actionLink(['sort' => null],['sort']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.new_in') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
@@ -127,7 +128,7 @@
                               <a href="{{ actionLink(['size' => null],['size']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.size') }} {{ ucwords($onSize) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
                           @endif
                           @if($range)
-                              <a href="{{ actionLink(['range' => null],['range']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ $currency_code }} {{ $range['price_min'] }} - {{$range['price_max'] }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</span></i></a>
+                              <a href="{{ actionLink(['range' => null],['range']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ $currency_code }} {{ $range['price_min'] }} - {{$range['price_max'] }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
                           @endif
                           @if($sortByPrice)
                               @if($sortByPrice == 'asc')
@@ -248,11 +249,11 @@
                                     <div class="uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
                                         <div>
                                             <label class="uk-text-meta">{{ trans('app.min_price') }}</label>
-                                            <input type="number" name="price_min" id="price_min_mobile" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="">
+                                            <input type="number" name="price_min" id="price_min_mobile" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="0">
                                         </div>
                                         <div>
                                             <label class="uk-text-meta">{{ trans('app.max_price') }}</label>
-                                            <input type="number" name="price_max" id="price_max_mobile" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="">
+                                            <input type="number" name="price_max" id="price_max_mobile" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="0">
                                         </div>
                                     </div>
                                     <button class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-margin-small-top" onclick="rangeMobile()" >FIND</button>
@@ -269,51 +270,37 @@
             </div>
           </div>
         </div>
-
-        <div class="uk-card uk-card-small uk-background-muted uk-margin-small-top">
-          <div class="uk-card-body" style="padding:10px">
-
-        {{--Start Filter Web--}}
-        @foreach (Config::get('languages') as $lang => $language)
-            @if ($lang == App::getLocale())
-                @php
-                    $currency_code = $language;
-                @endphp
-            @endif
-        @endforeach
-
-
-
-        Filter :
-
-        @if($sortByNew)
-            <a href="{{ actionLink(['sort' => null],['sort']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.new_in') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+        {{--Start Filter Mobile--}}
+        @if($sortByNew || $sortByPopular || $colorId || $onSize || $range || $sortByPrice)
+            <div class="uk-card uk-card-small uk-background-muted uk-margin-small-top uk-hidden@m ">
+                <div class="uk-card-body" style="padding:10px">
+                    {{ trans('app.filter') }} :
+                    @if($sortByNew)
+                        <a href="{{ actionLink(['sort' => null],['sort']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.new_in') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+                    @endif
+                    @if($sortByPopular)
+                        <a href="{{ actionLink(['popular' => null],['popular']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.popular_sort') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+                    @endif
+                    @if($colorId)
+                        <a href="{{ actionLink(['color_id' => null],['color_id']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ ucwords($colorId) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+                    @endif
+                    @if($onSize)
+                        <a href="{{ actionLink(['size' => null],['size']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.size') }} {{ ucwords($onSize) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+                    @endif
+                    @if($range)
+                        <a href="{{ actionLink(['range' => null],['range']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ $currency_code }} {{ $range['price_min'] }} - {{$range['price_max'] }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+                    @endif
+                    @if($sortByPrice)
+                        @if($sortByPrice == 'asc')
+                          <a href="{{ actionLink(['price' => null],['price']) }}"><span class="uk-label uk-label-success uk-text-capitalize">  {{ trans('app.low') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+                        @else()
+                          <a href="{{ actionLink(['price' => null],['price']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.high') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+                        @endif
+                    @endif
+                </div>
+            </div>
         @endif
-        @if($sortByPopular)
-            <a href="{{ actionLink(['popular' => null],['popular']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.popular_sort') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
-        @endif
-        @if($colorId)
-            <a href="{{ actionLink(['color_id' => null],['color_id']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ ucwords($colorId) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
-        @endif
-        @if($onSize)
-            <a href="{{ actionLink(['size' => null],['size']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.size') }} {{ ucwords($onSize) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
-        @endif
-        @if($range)
-            <a href="{{ actionLink(['range' => null],['range']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ $currency_code }} {{ $range['price_min'] }} - {{$range['price_max'] }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</span></i></a>
-        @endif
-        @if($sortByPrice)
-            @if($sortByPrice == 'asc')
-              <a href="{{ actionLink(['price' => null],['price']) }}"><span class="uk-label uk-label-success uk-text-capitalize">  {{ trans('app.low') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
-            @else()
-              <a href="{{ actionLink(['price' => null],['price']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.high') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
-            @endif
-        @endif
-
-      </div>
-    </div>
-
-
-        {{--End Filter Web --}}
+        {{--End Filter Mobile --}}
 
         <div class="uk-grid uk-margin-small-top" uk-grid>
           <div id="nav1" class="uk-width-1-5@m uk-visible@m">
@@ -359,11 +346,11 @@
                     <div class="uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
                       <div>
                         <label class="uk-text-meta">{{ trans('app.min_price') }}</label>
-                        <input type="number" name="price_min" id="price_min" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="">
+                        <input type="number" name="price_min" id="price_min" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="0">
                       </div>
                       <div>
                         <label class="uk-text-meta">{{ trans('app.max_price') }}</label>
-                        <input type="number" name="price_max" id="price_max" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="">
+                        <input type="number" name="price_max" id="price_max" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="0">
                       </div>
                     </div>
                       <button class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-margin-small-top" onclick="range()" >{{ trans('app.find') }}</button>
