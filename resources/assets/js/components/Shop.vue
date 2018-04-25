@@ -22,7 +22,7 @@
                 </div>
                 <div class="uk-card-body uk-padding-remove">
                   <div class="margin-5px-bot">
-                    <a href="#modal-shop" class="uk-button uk-button-small uk-button-secondary uk-width-1-1 uk-text-uppercase" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
+                    <a href="#modal-shop" class="uk-button uk-button-small uk-button-secondary uk-width-1-1 uk-visible@m uk-text-uppercase" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
                   </div>
                     <a :href="'/product/'+ product.slug" alt="product.name" class="shop_item_title uk-link-reset">{{ product.name.substring(0,30) }}
                     <br>
