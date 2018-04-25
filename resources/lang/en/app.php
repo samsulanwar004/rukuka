@@ -257,6 +257,9 @@ return [
     'color_filter'              =>  'Color',
     'product_not_available'     =>  'Product not available',
     'result'                    =>  'Results',
+    'price'                     =>  'Price',
+    'min_price'                 =>  'Min Price',
+    'max_price'                 =>  'Max Price',
 
     //resources/views/pages/product.blade.php
     'product_code'              =>  'Product Code:',

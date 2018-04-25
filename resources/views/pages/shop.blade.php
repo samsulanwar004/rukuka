@@ -186,7 +186,7 @@
 
                     <div>
                         <ul class="uk-accordion" uk-accordion>
-                            <li class="{{ $onSize ? 'uk-open' : ''}}"><span href="#" class="uk-accordion-title">Size</span>
+                            <li class="{{ $onSize ? 'uk-open' : ''}}"><span href="#" class="uk-accordion-title">{{ trans('app.size') }}</span>
                                 <div class="uk-accordion-content">
                                     <ul class="uk-grid uk-grid-collapse">
                                         @foreach($sizeArray as $size)
@@ -201,29 +201,24 @@
                     </div>
                     <div>
                         <ul class="uk-accordion" uk-accordion>
-                            <li><span href="#" class="uk-accordion-title">Price</span>
+                            <li><span href="#" class="uk-accordion-title">{{ trans('app.price') }}</span>
                                 <div class="uk-accordion-content">
                                     <div class="uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
                                         <div>
-                                            <label class="uk-text-meta">Min Price</label>
-                                            <input type="number" name="price_min" id="price_min" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="">
+                                            <label class="uk-text-meta">{{ trans('app.min_price') }}</label>
+                                            <input type="number" name="price_min" id="price_min_mobile" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="">
                                         </div>
                                         <div>
-                                            <label class="uk-text-meta">Max Price</label>
-                                            <input type="number" name="price_max" id="price_max" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="">
+                                            <label class="uk-text-meta">{{ trans('app.max_price') }}</label>
+                                            <input type="number" name="price_max" id="price_max_mobile" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="">
                                         </div>
                                     </div>
-
-                                      <button class="uk-button uk-button-default uk-button-small uk-width-1-1" onclick="myFunction()" >Submit</button>
-                                    
+                                    <button class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-margin-small-top" onclick="rangeMobile()" >FIND</button>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
-
-
-
                 <div class="uk-modal-footer">
                   <a href="#" class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-modal-close">{{ trans('app.close') }}</a>
                 </div>
@@ -257,7 +252,7 @@
             ></color-palette>
             <div>
               <ul class="uk-accordion" uk-accordion>
-                <li class="{{ $onSize ? 'uk-open' : ''}}"><span href="#" class="uk-accordion-title">Size</span>
+                <li class="{{ $onSize ? 'uk-open' : ''}}"><span href="#" class="uk-accordion-title">{{ trans('app.size') }}</span>
                   <div class="uk-accordion-content">
                     <ul class="uk-grid uk-grid-collapse">
                       @foreach($sizeArray as $size)
@@ -272,24 +267,23 @@
             </div>
             <div>
               <ul class="uk-accordion" uk-accordion>
-                  <li><span href="#" class="uk-accordion-title">Price</span>
+                  <li><span href="#" class="uk-accordion-title">{{ trans('app.price') }}</span>
                   <div class="uk-accordion-content">
                     <div class="uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
                       <div>
-                        <label class="uk-text-meta">Min Price</label>
+                        <label class="uk-text-meta">{{ trans('app.min_price') }}</label>
                         <input type="number" name="price_min" id="price_min" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="">
                       </div>
                       <div>
-                        <label class="uk-text-meta">Max Price</label>
+                        <label class="uk-text-meta">{{ trans('app.max_price') }}</label>
                         <input type="number" name="price_max" id="price_max" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="">
                       </div>
                     </div>
-                      <button class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-margin-small-top" onclick="myFunction()" >FIND</button>
+                      <button class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-margin-small-top" onclick="range()" >FIND</button>
                   </div>
                 </li>
               </ul>
             </div>
-
           </div>
           <div class="uk-width-expand@m">
             <shop
@@ -342,9 +336,31 @@
 
 @section('footer_scripts')
     <script type="text/javascript">
-        function myFunction() {
+        function range() {
             var min = document.getElementById("price_min").value;
             var max = document.getElementById("price_max").value;
+            var range_value = min+'-'+max;
+            var href = window.location.href;
+
+            var search = function searchStringInArray (str, strArray) {
+                for (var j=0; j<strArray.length; j++) {
+                    if (strArray[j].match(str)) return j;
+                }
+                return -1;
+            }
+            var myarr = href.split("&");
+            var position = search('range',myarr);
+            if(position == -1) {
+                window.location.href = href+'&range='+range_value;
+            } else {
+                delete myarr[position];
+                var link = myarr.join('&')+'&range='+range_value;
+                window.location.href =  link.replace('&&','&');
+            }
+        }
+        function rangeMobile() {
+            var min = document.getElementById("price_min_mobile").value;
+            var max = document.getElementById("price_max_mobile").value;
             var range_value = min+'-'+max;
             var href = window.location.href;
 
