@@ -73,7 +73,7 @@
         {{--3 ROW BANNER--}}
         <div class="uk-margin-top">
             <div class="uk-position-relative uk-visible-toggle">
-                <ul class="uk-slider-items uk-grid uk-grid-small uk-child-width-1-3@m" uk-grid>
+                <ul class="uk-grid uk-grid-small uk-child-width-1-3@m" uk-grid>
                     <li>
                         <div class="uk-panel uk-transition-toggle">
                             <a href="{{ $men['men_url_3'] }}" class="uk-link-reset">
@@ -110,7 +110,7 @@
 
                             </a>
                         </div>
-                        <hr class="uk-margin-remove-top uk-margin-bottom uk-visible@m" style="border-color: #333; border-width: 5px">
+                        <hr class="uk-margin-remove-top uk-visible@m" style="border-color: #333; border-width: 5px">
                     </li>
                     <li>
                         <div class="uk-panel uk-transition-toggle">

@@ -3521,9 +3521,9 @@ ul.uk-nav-sub {
  * Items
  */
 .uk-nav-primary > li > a {
-  font-size: 18px;
-  line-height: 1.5;
-  letter-spacing: 2px;
+  font-size: 16px;
+  line-height: 1.8;
+  letter-spacing: 1.5px;
   color: #666;
 }
 /* Hover + Focus */
@@ -10629,7 +10629,7 @@ iframe.uk-cover {
 .uk-overlay-primary .uk-nav-primary > li > a,
 .uk-overlay-primary-dark .uk-nav-primary > li > a,
 .uk-offcanvas-bar .uk-nav-primary > li > a {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.7);
 }
 .uk-light .uk-nav-primary > li > a:hover,
 .uk-light .uk-nav-primary > li > a:focus,

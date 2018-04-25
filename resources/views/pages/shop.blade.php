@@ -213,7 +213,9 @@
                                             <input type="number" name="price_max" id="price_max" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="">
                                         </div>
                                     </div>
-                                    <button class="uk-button uk-button-default" onclick="myFunction()" >Submit</button>
+
+                                      <button class="uk-button uk-button-default uk-button-small uk-width-1-1" onclick="myFunction()" >Submit</button>
+                                    
                                 </div>
                             </li>
                         </ul>
@@ -282,7 +284,7 @@
                         <input type="number" name="price_max" id="price_max" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="">
                       </div>
                     </div>
-                      <button class="uk-button uk-button-default" onclick="myFunction()" >Submit</button>
+                      <button class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-margin-small-top" onclick="myFunction()" >FIND</button>
                   </div>
                 </li>
               </ul>
