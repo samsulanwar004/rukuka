@@ -49,7 +49,7 @@ class ProductRepository
 
             $query->join('product_colors', function ($join) use ($colorId) {
                 $join->on('products.product_colors_id', '=', 'product_colors.id')
-                ->where('product_colors.id', $colorId);
+                ->where('product_colors.name', $colorId);
             });
         }
 
@@ -89,7 +89,7 @@ class ProductRepository
 
             $query->join('product_colors', function ($join) use ($colorId) {
                 $join->on('products.product_colors_id', '=', 'product_colors.id')
-                ->where('product_colors.id', $colorId);
+                ->where('product_colors.name', $colorId);
             });
         }
 
@@ -332,7 +332,7 @@ class ProductRepository
 
             $query->join('product_colors', function ($join) use ($colorId) {
                 $join->on('products.product_colors_id', '=', 'product_colors.id')
-                ->where('product_colors.id', $colorId);
+                ->where('product_colors.name', $colorId);
             });
         }
 
@@ -417,7 +417,7 @@ class ProductRepository
 
             $query->join('product_colors', function ($join) use ($colorId) {
                 $join->on('products.product_colors_id', '=', 'product_colors.id')
-                ->where('product_colors.id', $colorId);
+                ->where('product_colors.name', $colorId);
             });
         }
 
