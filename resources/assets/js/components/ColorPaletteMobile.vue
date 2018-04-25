@@ -6,7 +6,7 @@
                   <div v-for="colArr in colorArr">
                       <div v-if="colArr == color.name ">
                         <label>
-                          <input type="radio" name="palette" v-on:click="pickColor(color.id)" :checked="color.id == color_id"/>
+                          <input type="radio" name="palette" v-on:click="pickColor(color.name)" :checked="color.name == color_id"/>
                             <lazy-background
                               :image-source="color.palette"
                               :loading-image="loadingImage"
