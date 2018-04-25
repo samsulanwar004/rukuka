@@ -48,7 +48,35 @@ class PageController extends BaseApiController
                     $categoryArray = [];
                 }
 
+                //category for mens
+                $categoryArrMens = (new ProductRepository)->getCategoryProduct($request, 'mens');
+
+                if(count($categoryArrMens) != 0){
+                    $categoryArrayMens = [];
+                    foreach ($categoryArrMens as $value)
+                        $categoryArrayMens[] = $value->category_name;
+                }
+                else{
+                    $categoryArrayMens = [];
+                }
+
+                //category for womens
+                $categoryArrWomens = (new ProductRepository)->getCategoryProduct($request, 'womens');
+
+                if(count($categoryArrWomens) != 0){
+                    $categoryArrayWomens = [];
+                    foreach ($categoryArrWomens as $value)
+                        $categoryArrayWomens[] = $value->category_name;
+                }
+                else{
+                    $categoryArrayWomens = [];
+                }
+
                 $categories['category_available'] = $categoryArray;
+                $categories['category_mens_available'] = $categoryArrayMens;
+                $categories['category_womens_available'] = $categoryArrayWomens;
+
+                $categories['designers_all'] = collect($designers)->unique('name')->values();
 
                 $designers = collect($designers)->filter(function ($item) use ($parent) {
                     return $item->gender == $parent || $item->gender == 'unisex';

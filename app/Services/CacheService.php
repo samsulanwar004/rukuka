@@ -45,6 +45,8 @@ class CacheService
 			Cache::forget(self::MENU_CACHE.'.'.$group);
 		}
 
+		Cache::forget(self::MENU_CACHE.'.');
+
 		Cache::forget(self::CATEGORIES_CACHE);
 	}
 
