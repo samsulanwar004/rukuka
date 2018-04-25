@@ -61,6 +61,7 @@ return [
     'related'                   =>  'Related Product',
     'quick_shop'                =>  'Quick Shop',
     'close'                     =>  'Close',
+    'find'                      =>  'Find',
 
     //contact and social media
     'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',
@@ -248,8 +249,8 @@ return [
     'sort_by'                   =>  'Sort by',
     'new_in'                    =>  'New In',
     'popular_sort'              =>  'Popular',
-    'high'                      =>  'Price high to low',
-    'low'                       =>  'Price low to high',
+    'high'                      =>  'Price High to Low',
+    'low'                       =>  'Price Low to High',
     'recently_view'             =>  'Recently View',
     'all_you_need'              =>  'All',
     'filter_nav'                =>  'Filter Navigation',
