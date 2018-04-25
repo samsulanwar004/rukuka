@@ -60,8 +60,8 @@
             </div>
             <div class="uk-width-4-5@m">
                 <div class="uk-grid-small" uk-grid >
-                      <div class="uk-text-left uk-width-2-3" uk-grid>
-                        <div class="uk-margin-right uk-width-auto">
+                      <div class="uk-text-left uk-grid-small uk-width-expand" uk-grid>
+                        <div class="uk-width-auto">
                           <a href="#">{{ trans('app.sort_by') }}<i class="material-icons"  style="font-size: 18px; vertical-align:middle">expand_more</i></a>
                           <div uk-drop="mode: hover; delay-hide: 0" style="width: 200px">
                               <div class="uk-card uk-background-default uk-box-shadow-small uk-card-small">
@@ -115,25 +115,25 @@
                           Filter :
 
                           @if($sortByNew)
-                              <a href="{{ actionLink(['sort' => null],['sort']) }}"><span class="uk-label uk-label-success"> {{ trans('app.new_in') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+                              <a href="{{ actionLink(['sort' => null],['sort']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.new_in') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
                           @endif
                           @if($sortByPopular)
-                              <a href="{{ actionLink(['popular' => null],['popular']) }}" class="uk-button-secondary uk-button-small button-small-page" style="text-decoration:none" > {{ trans('app.popular_sort') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></a>
+                              <a href="{{ actionLink(['popular' => null],['popular']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.popular_sort') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
                           @endif
                           @if($colorId)
-                              <a href="{{ actionLink(['color_id' => null],['color_id']) }}" class="uk-button-secondary uk-button-small button-small-page" style="text-decoration:none" > {{ ucwords($colorId) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></a>
+                              <a href="{{ actionLink(['color_id' => null],['color_id']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ ucwords($colorId) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
                           @endif
                           @if($onSize)
-                              <a href="{{ actionLink(['size' => null],['size']) }}" class="uk-button-secondary uk-button-small button-small-page" style="text-decoration:none" > {{ trans('app.size') }} {{ ucwords($onSize) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></a>
+                              <a href="{{ actionLink(['size' => null],['size']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.size') }} {{ ucwords($onSize) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
                           @endif
                           @if($range)
-                              <a href="{{ actionLink(['range' => null],['range']) }}" class="uk-button-secondary uk-button-small button-small-page" style="text-decoration:none" > {{ $currency_code }} {{ $range['price_min'] }} - {{$range['price_max'] }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></a>
+                              <a href="{{ actionLink(['range' => null],['range']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ $currency_code }} {{ $range['price_min'] }} - {{$range['price_max'] }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</span></i></a>
                           @endif
                           @if($sortByPrice)
                               @if($sortByPrice == 'asc')
-                                <a href="{{ actionLink(['price' => null],['price']) }}" class="uk-button-secondary uk-button-small button-small-page" style="text-decoration:none" >  {{ trans('app.low') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></a>
+                                <a href="{{ actionLink(['price' => null],['price']) }}"><span class="uk-label uk-label-success uk-text-capitalize">  {{ trans('app.low') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
                               @else()
-                                <a href="{{ actionLink(['price' => null],['price']) }}" class="uk-button-secondary uk-button-small button-small-page" style="text-decoration:none" > {{ trans('app.high') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></a>
+                                <a href="{{ actionLink(['price' => null],['price']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.high') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
                               @endif
                           @endif
                           </div>
@@ -141,9 +141,9 @@
                           {{--End Filter Web --}}
 
                       </div>
-                      <div class="uk-width-1-3">
+                      <div class="uk-width-auto uk-flex uk-flex-right">
                         <div class="uk-text-right">
-                          <div class="uk-grid uk-flex uk-flex-right">
+                          <div class="uk-grid uk-grid-small">
                             <div>
                               @include('pagination.default', ['paginator' => $products])
                             </div>
@@ -199,38 +199,7 @@
                   </div>
                 </div>
             </div>
-              {{--Start Filter Mobile--}}
-              @foreach (Config::get('languages') as $lang => $language)
-                  @if ($lang == App::getLocale())
-                      @php
-                          $currency_code = $language;
-                      @endphp
-                  @endif
-              @endforeach
 
-              @if($sortByNew)
-                  <a href="{{ actionLink(['sort' => null],['sort']) }}" class="uk-button-secondary uk-button-small button-small-page" style="text-decoration:none" > {{ trans('app.new_in') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></a>
-              @endif
-              @if($sortByPopular)
-                  <a href="{{ actionLink(['popular' => null],['popular']) }}" class="uk-button-secondary uk-button-small button-small-page" style="text-decoration:none" > {{ trans('app.popular_sort') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></a>
-              @endif
-              @if($colorId)
-                  <a href="{{ actionLink(['color_id' => null],['color_id']) }}" class="uk-button-secondary uk-button-small button-small-page" style="text-decoration:none" > {{ ucwords(strtolower($colorId)) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></a>
-              @endif
-              @if($onSize)
-                  <a href="{{ actionLink(['size' => null],['size']) }}" class="uk-button-secondary uk-button-small button-small-page" style="text-decoration:none" > {{ trans('app.size') }} {{ $onSize }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></a>
-              @endif
-              @if($range)
-                  <a href="{{ actionLink(['range' => null],['range']) }}" class="uk-button-secondary uk-button-small button-small-page" style="text-decoration:none" > {{ $currency_code }} {{ $range['price_min'] }} - {{$range['price_max'] }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></a>
-              @endif
-              @if($sortByPrice)
-                  @if($sortByPrice == 'asc')
-                      <a href="{{ actionLink(['price' => null],['price']) }}" class="uk-button-secondary uk-button-small button-small-page" style="text-decoration:none" >  {{ trans('app.low') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></a>
-                  @else()
-                      <a href="{{ actionLink(['price' => null],['price']) }}" class="uk-button-secondary uk-button-small button-small-page" style="text-decoration:none" > {{ trans('app.high') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></a>
-                  @endif
-              @endif
-              {{--End Filter Mobile --}}
           </div>
 
           <div class="uk-text-right">
@@ -300,6 +269,51 @@
             </div>
           </div>
         </div>
+
+        <div class="uk-card uk-card-small uk-background-muted uk-margin-small-top">
+          <div class="uk-card-body" style="padding:10px">
+
+        {{--Start Filter Web--}}
+        @foreach (Config::get('languages') as $lang => $language)
+            @if ($lang == App::getLocale())
+                @php
+                    $currency_code = $language;
+                @endphp
+            @endif
+        @endforeach
+
+
+
+        Filter :
+
+        @if($sortByNew)
+            <a href="{{ actionLink(['sort' => null],['sort']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.new_in') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+        @endif
+        @if($sortByPopular)
+            <a href="{{ actionLink(['popular' => null],['popular']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.popular_sort') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+        @endif
+        @if($colorId)
+            <a href="{{ actionLink(['color_id' => null],['color_id']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ ucwords($colorId) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+        @endif
+        @if($onSize)
+            <a href="{{ actionLink(['size' => null],['size']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.size') }} {{ ucwords($onSize) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+        @endif
+        @if($range)
+            <a href="{{ actionLink(['range' => null],['range']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ $currency_code }} {{ $range['price_min'] }} - {{$range['price_max'] }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</span></i></a>
+        @endif
+        @if($sortByPrice)
+            @if($sortByPrice == 'asc')
+              <a href="{{ actionLink(['price' => null],['price']) }}"><span class="uk-label uk-label-success uk-text-capitalize">  {{ trans('app.low') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+            @else()
+              <a href="{{ actionLink(['price' => null],['price']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.high') }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+            @endif
+        @endif
+
+      </div>
+    </div>
+
+
+        {{--End Filter Web --}}
 
         <div class="uk-grid uk-margin-small-top" uk-grid>
           <div id="nav1" class="uk-width-1-5@m uk-visible@m">
