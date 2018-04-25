@@ -102,7 +102,7 @@
                           @foreach($product->images as $image)
                           <li>
                             <img src="{{ uploadCDN(str_replace('original', 'medium', $image->photo)) }}">
-                            <a class="uk-position-absolute uk-transform-center" style="left: 90%; top: 90%" href="#modal-full-split-{{ $image->id }}" uk-toggle uk-marker uk-tooltip="title: full view; pos: left"></a>
+                            {{-- <a class="uk-position-absolute uk-transform-center" style="left: 90%; top: 90%" href="#modal-full-split-{{ $image->id }}" uk-toggle uk-marker uk-tooltip="title: full view; pos: left"></a> --}}
                           </li>
                         @endforeach
                       @endif
