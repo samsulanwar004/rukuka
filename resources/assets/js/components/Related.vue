@@ -15,7 +15,7 @@
         </div>
         <div class="uk-card-body uk-padding-remove">
           <div class="margin-5px-bot">
-            <a :href="'#modal-related'+modal_code" class="uk-button uk-button-small uk-button-secondary uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
+            <a :href="'#modal-related'+modal_code" class="uk-button uk-button-small uk-visible@m uk-button-secondary uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
           </div>
           <a :href="'/product/'+ product.slug" class="shop_item_title uk-link-reset">{{ product.name.substring(0,35) }}
           <br>
