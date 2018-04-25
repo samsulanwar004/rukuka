@@ -35,7 +35,7 @@
               locale="{{ json_encode(trans('app')) }}"
               navigation="{{ $navigation }}"
             ></user-panel-mobile>
-            <div id="offcanvas-overlay-slide" uk-offcanvas="overlay: true">
+            <div id="offcanvas-overlay-slide"  uk-offcanvas="overlay: true">
               <navigation-mobile
                   men_link="{{ route('men') }}"
                   women_link="{{ route('women') }}"

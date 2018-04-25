@@ -206,14 +206,14 @@
                                     <div class="uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
                                         <div>
                                             <label class="uk-text-meta">{{ trans('app.min_price') }}</label>
-                                            <input type="number" name="price_min" id="price_min_mobile" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="0">
+                                            <input type="number" name="price_min" id="price_min_mobile" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="">
                                         </div>
                                         <div>
                                             <label class="uk-text-meta">{{ trans('app.max_price') }}</label>
-                                            <input type="number" name="price_max" id="price_max_mobile" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="0">
+                                            <input type="number" name="price_max" id="price_max_mobile" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="">
                                         </div>
                                     </div>
-                                    <button class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-margin-small" onclick="rangeMobile()" >{{ trans('app.submit') }}</button>
+                                    <button class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-margin-small-top" onclick="rangeMobile()" >FIND</button>
                                 </div>
                             </li>
                         </ul>
@@ -266,25 +266,24 @@
               </ul>
             </div>
             <div>
-                <ul class="uk-accordion" uk-accordion>
-                    <li><span href="#" class="uk-accordion-title">{{ trans('app.price') }}</span>
-                        <div class="uk-accordion-content">
-                            <div class="uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
-                                <div>
-                                    <label class="uk-text-meta">{{ trans('app.min_price') }}</label>
-                                    <input type="number" name="price_min" id="price_min" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="0">
-                                </div>
-                                <div>
-                                    <label class="uk-text-meta">{{ trans('app.max_price') }}</label>
-                                    <input type="number" name="price_max" id="price_max" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="0">
-                                </div>
-                            </div>
-                            <button class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-margin-small" onclick="range()" >{{ trans('app.submit') }}</button>
-                        </div>
-                    </li>
-                </ul>
+              <ul class="uk-accordion" uk-accordion>
+                  <li><span href="#" class="uk-accordion-title">{{ trans('app.price') }}</span>
+                  <div class="uk-accordion-content">
+                    <div class="uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
+                      <div>
+                        <label class="uk-text-meta">{{ trans('app.min_price') }}</label>
+                        <input type="number" name="price_min" id="price_min" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="">
+                      </div>
+                      <div>
+                        <label class="uk-text-meta">{{ trans('app.max_price') }}</label>
+                        <input type="number" name="price_max" id="price_max" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="">
+                      </div>
+                    </div>
+                      <button class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-margin-small-top" onclick="range()" >FIND</button>
+                  </div>
+                </li>
+              </ul>
             </div>
-
           </div>
           <div class="uk-width-expand@m">
             <shop

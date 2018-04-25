@@ -44,7 +44,7 @@
 
                                 </a>
                             </div>
-                            <hr class="uk-margin-remove-top uk-margin-bottom uk-visible@m" style="border-color: #333; border-width: 5px">
+                            <hr class="uk-margin-remove-top uk-visible@m" style="border-color: #333; border-width: 5px">
                         </li>
                         <li>
                             <div class="uk-panel uk-transition-toggle">
