@@ -152,7 +152,7 @@
     transition: all .2s ease-in;
 }
 .blog-subtitle:hover {
-	color:#000
+	color:#f7f7f7;
 }
 
 .blog-loadmore {

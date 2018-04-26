@@ -32,10 +32,8 @@
                                 <a href="{{ $women['women_url_1'] }}" class="uk-link-reset">
                                   <div class="uk-inline">
                                       <img src="{{ uploadCDN($women['women_banner_1']) }}" alt="rukuka womens" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                                      <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m">
+                                      <div class="uk-position-large uk-position-bottom uk-panel uk-light uk-visible@m">
                                         <h2 class="blog-subtitle"><b>{{ $women['women_text_1_1'] }}</b></h2>
-                                        <h4 class="uk-margin-remove-top blog-subtitle">{{ $women['women_text_1_2'] }}</h4>
-                                        <a href="{{ $women['women_url_1'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
                                       </div>
                                       <div class="uk-overlay-primary uk-padding-xsmall uk-position-bottom uk-panel uk-light uk-hidden@m" style="background: rgba(0,0,0,.80)">
                                         <h5><b>{{ $women['women_text_1_1'] }}</b></h5>
@@ -51,10 +49,8 @@
                                 <a href="{{ $women['women_url_2'] }}" class="uk-link-reset">
                                     <div class="uk-inline">
                                         <img src="{{ uploadCDN($women['women_banner_2']) }}" alt="rukuka womens" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                                        <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m">
+                                        <div class="uk-position-large uk-position-bottom uk-panel uk-light uk-visible@m">
                                             <h2 class="blog-subtitle"><b>{{ $women['women_text_2_1'] }}</b></h2>
-                                            <h4 class="uk-margin-remove-top blog-subtitle">{{ $women['women_text_2_2'] }}</h4>
-                                            <a href="{{ $women['women_url_2'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
                                         </div>
                                         <div class="uk-overlay-primary uk-padding-xsmall uk-position-bottom uk-panel uk-light uk-hidden@m" style="background: rgba(0,0,0,.80)">
                                           <h5><b>{{ $women['women_text_2_1'] }}</b></h5>
@@ -79,10 +75,8 @@
                                     <a href="{{ $women['women_url_3'] }}" class="uk-link-reset">
                                         <div class="uk-inline">
                                           <img src="{{ uploadCDN($women['women_banner_3']) }}" alt="rukuka womens" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                                          <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m">
+                                          <div class="uk-position-large uk-position-bottom uk-panel uk-light uk-visible@m">
                                             <h3 class="blog-subtitle"><b>{{ $women['women_text_3_1'] }}</b></h3>
-                                            <h6 class="uk-margin-remove-top blog-subtitle">{{ $women['women_text_3_2'] }}</h6>
-                                            <a href="{{ $women['women_url_3'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
                                           </div>
                                           <div class="uk-overlay-primary uk-padding-xsmall uk-position-bottom uk-panel uk-light uk-hidden@m" style="background: rgba(0,0,0,.80)">
                                             <h5><b>{{ $women['women_text_3_1'] }}</b></h5>
@@ -98,10 +92,8 @@
                                     <a href="{{ $women['women_url_4'] }}" class="uk-link-reset">
                                     <div class="uk-inline">
                                       <img src="{{ uploadCDN($women['women_banner_4']) }}" alt="rukuka womens" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                                      <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m">
+                                      <div class="uk-position-large uk-position-bottom uk-panel uk-light uk-visible@m">
                                         <h3 class="blog-subtitle"><b>{{ $women['women_text_4_1'] }}</b></h3>
-                                        <h6 class="uk-margin-remove-top blog-subtitle">{{ $women['women_text_4_2'] }}</h6>
-                                        <a href="{{ $women['women_url_4'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
                                       </div>
                                     </div>
                                     <div class="uk-overlay-primary uk-padding-xsmall uk-position-bottom uk-panel uk-light uk-hidden@m" style="background: rgba(0,0,0,.80)">
@@ -117,10 +109,10 @@
                                     <a href="{{ $women['women_url_5'] }}" class="uk-link-reset">
                                         <div class="uk-inline">
                                           <img src="{{ uploadCDN($women['women_banner_5']) }}" alt="rukuka womens" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                                          <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m">
+                                          <div class="uk-position-large uk-position-bottom uk-panel uk-light uk-visible@m">
                                             <h3 class="blog-subtitle"><b>{{ $women['women_text_5_1'] }}</b></h3>
-                                            <h6 class="uk-margin-remove-top blog-subtitle">{{ $women['women_text_5_2'] }}</h6>
-                                            <a href="{{ $women['women_url_5'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
+                                            {{-- <h6 class="uk-margin-remove-top blog-subtitle">{{ $women['women_text_5_2'] }}</h6>
+                                            <a href="{{ $women['women_url_5'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a> --}}
                                           </div>
                                           <div class="uk-overlay-primary uk-padding-xsmall uk-position-bottom uk-panel uk-light uk-hidden@m" style="background: rgba(0,0,0,.80)">
                                             <h5><b>{{ $women['women_text_5_1'] }}</b></h5>
