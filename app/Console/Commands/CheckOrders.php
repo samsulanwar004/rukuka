@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use DB;
 use Carbon\Carbon;
-use Log;
 
 class CheckOrders extends Command
 {
@@ -45,7 +44,5 @@ class CheckOrders extends Command
             ->whereDate('expired_date', '<', $now->toDateString())
             ->where('payment_status',0)
             ->update(['payment_status' => 2,'order_status' => 3,'cancel_reason' => 'Payment Expired']);
-
-        Log::info('Checking order expired');
     }
 }
