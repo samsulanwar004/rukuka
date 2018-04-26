@@ -137,7 +137,7 @@
         {{--END 3 ROW BANNER--}}
     </div>
 
-        <div class="uk-container uk-margin-top">
+    <div class="uk-container uk-margin-top">
         <h4 class="uk-margin-small uk-text-uppercase uk-text-center"><b>{{ trans('app.title_index_3') }}</b></h4>
         <popular
                 api="{{ route('populer', 'Women')}}"
@@ -150,5 +150,10 @@
                 locale="{{ json_encode(trans('app')) }}"
                 bag_link="{{ route('bag') }}"
         ></popular>
+    </div>
+    <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">
+        <div class="uk-panel uk-text-center">
+            <a  href="/shop?menu=womens&parent=all" class="uk-button uk-button-small uk-button-text uk-text-uppercase">{{ trans('app.show_all_product') }}</a>
+        </div>
     </div>
 @endsection
