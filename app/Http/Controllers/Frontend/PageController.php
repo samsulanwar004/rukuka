@@ -441,7 +441,7 @@ class PageController extends BaseController
                     if ($rowId) {
                         $item = $bag->getItemByRowId($rowId);
 
-                        if ($item->qty == $item->options->unit) {
+                        if ($item->qty >= $item->options->unit) {
                             throw new Exception("Size ".$item->options->size." out of stock", 1); 
                         }
                     }
@@ -463,7 +463,7 @@ class PageController extends BaseController
                 if ($rowId) {
                     $item = $bag->getItemByRowId($rowId);
 
-                    if ($item->qty == $item->options->unit) {
+                    if ($item->qty >= $item->options->unit) {
                         throw new Exception("Size ".$item->options->size." out of stock", 1); 
                     }
 
