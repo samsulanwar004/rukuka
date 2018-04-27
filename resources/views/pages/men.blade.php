@@ -32,10 +32,8 @@
                             <a href="{{ $men['men_url_1'] }}" class="uk-link-reset">
                                 <div class="uk-inline">
                                     <img src="{{ uploadCDN($men['men_banner_1']) }}" alt="rukuka mens" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                                    <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m">
+                                    <div class="uk-position-large uk-position-bottom uk-panel uk-light uk-visible@m">
                                         <h2 class="blog-subtitle"><b>{{ $men['men_text_1_1'] }}</b></h2>
-                                        <h4 class="uk-margin-remove-top blog-subtitle">{{ $men['men_text_1_2'] }}</h4>
-                                        <a href="{{ $men['men_url_1'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
                                     </div>
                                     <div class="uk-overlay-primary uk-padding-xsmall uk-position-bottom uk-panel uk-light uk-hidden@m" style="background: rgba(0,0,0,.80)">
                                       <h5><b>{{ $men['men_text_1_1'] }}</b></h5>
@@ -51,10 +49,8 @@
                             <a href="{{ $men['men_url_2'] }}" class="uk-link-reset">
                                 <div class="uk-inline">
                                     <img src="{{ uploadCDN($men['men_banner_2']) }}" alt="rukuka mens" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                                    <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m">
+                                    <div class="uk-position-large uk-position-bottom uk-panel uk-light uk-visible@m">
                                         <h2 class="blog-subtitle"><b>{{ $men['men_text_2_1'] }}</b></h2>
-                                        <h4 class="uk-margin-remove-top blog-subtitle">{{ $men['men_text_2_2'] }}</h4>
-                                        <a href="{{ $men['men_url_2'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
                                     </div>
                                     <div class="uk-overlay-primary uk-padding-xsmall uk-position-bottom uk-panel uk-light uk-hidden@m" style="background: rgba(0,0,0,.80)">
                                       <h5><b>{{ $men['men_text_2_2'] }}</b></h5>
@@ -79,10 +75,8 @@
                             <a href="{{ $men['men_url_3'] }}" class="uk-link-reset">
                                 <div class="uk-inline">
                                     <img src="{{ uploadCDN($men['men_banner_3']) }}" alt="rukuka mens" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                                    <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m">
+                                    <div class="uk-position-large uk-position-bottom uk-panel uk-light uk-visible@m">
                                         <h3 class="blog-subtitle"><b>{{ $men['men_text_3_1'] }}</b></h3>
-                                        <h6 class="uk-margin-remove-top blog-subtitle">{{ $men['men_text_3_2'] }}</h6>
-                                        <a href="{{ $men['men_url_3'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
                                     </div>
                                     <div class="uk-overlay-primary uk-padding-xsmall uk-position-bottom uk-panel uk-light uk-hidden@m" style="background: rgba(0,0,0,.80)">
                                       <h5><b>{{ $men['men_text_3_2'] }}</b></h5>
@@ -98,10 +92,8 @@
                             <a href="{{ $men['men_url_4'] }}" class="uk-link-reset">
                                 <div class="uk-inline">
                                     <img src="{{ uploadCDN($men['men_banner_4']) }}" alt="rukuka mens" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                                    <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m">
+                                    <div class="uk-position-large uk-position-bottom uk-panel uk-light uk-visible@m">
                                         <h3 class="blog-subtitle"><b>{{ $men['men_text_4_1'] }}</b></h3>
-                                        <h6 class="uk-margin-remove-top blog-subtitle">{{ $men['men_text_4_2'] }}</h6>
-                                        <a href="{{ $men['men_url_4'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
                                     </div>
                                     <div class="uk-overlay-primary uk-padding-xsmall uk-position-bottom uk-panel uk-light uk-hidden@m" style="background: rgba(0,0,0,.80)">
                                       <h5><b>{{ $men['men_text_4_2'] }}</b></h5>
@@ -117,10 +109,8 @@
                             <a href="{{ $men['men_url_5'] }}" class="uk-link-reset">
                                 <div class="uk-inline">
                                     <img src="{{ uploadCDN($men['men_banner_5']) }}" alt="rukuka mens" onerror="this.src = '{{imageCDN(config('common.default.image_3'))}}'">
-                                    <div class="uk-position-medium uk-position-bottom uk-panel uk-light uk-visible@m">
+                                    <div class="uk-position-large uk-position-bottom uk-panel uk-light uk-visible@m">
                                         <h3 class="blog-subtitle"><b>{{ $men['men_text_5_1'] }}</b></h3>
-                                        <h6 class="uk-margin-remove-top blog-subtitle">{{ $men['men_text_5_2'] }}</h6>
-                                        <a href="{{ $men['men_url_5'] }}" class="uk-button uk-button-default">{{ trans('app.subtitle_index_1') }}</a>
                                     </div>
                                     <div class="uk-overlay-primary uk-padding-xsmall uk-position-bottom uk-panel uk-light uk-hidden@m" style="background: rgba(0,0,0,.80)">
                                       <h5><b>{{ $men['men_text_5_1'] }}</b></h5>
@@ -138,7 +128,7 @@
 
       </div>
 
-        <div class="uk-container uk-margin-top">
+    <div class="uk-container uk-margin-top">
         <h4 class="uk-margin-small uk-text-uppercase uk-text-center"><b>{{ trans('app.title_index_3') }}</b></h4>
         <popular
                 api="{{ route('populer', 'Men')}}"
@@ -152,4 +142,11 @@
                 bag_link="{{ route('bag') }}"
         ></popular>
     </div>
+
+    <div class="uk-grid-small uk-margin-bottom uk-margin-small-top">
+        <div class="uk-panel uk-text-center">
+            <a  href="/shop?menu=mens&parent=all" class="uk-button uk-button-small uk-button-text uk-text-uppercase">{{ trans('app.show_all_product') }}</a>
+        </div>
+    </div>
+
 @endsection

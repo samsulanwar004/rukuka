@@ -125,10 +125,10 @@
                               <a href="{{ actionLink(['color_id' => null],['color_id']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ ucwords($colorId) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
                           @endif
                           @if($onSize)
-                              <a href="{{ actionLink(['size' => null],['size']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.size') }} {{ ucwords($onSize) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+                              <a href="{{ actionLink(['size' => null],['size']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.size') }} {{ strtoupper($onSize) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
                           @endif
                           @if($range)
-                              <a href="{{ actionLink(['range' => null],['range']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ $currency_code }} {{ $range['price_min'] }} - {{$range['price_max'] }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+                              <a href="{{ actionLink(['range' => null],['range']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ $currency_code }} {{ number_format($range['price_min']) }} - {{ number_format($range['price_max']) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
                           @endif
                           @if($sortByPrice)
                               @if($sortByPrice == 'asc')
@@ -234,7 +234,7 @@
                                     <ul class="uk-grid uk-grid-collapse">
                                         @foreach($sizeArray as $size)
                                             <li>
-                                                <a href="{{ actionLink(['size' => $size]) }}" class="{{ $onSize == $size ? 'uk-button-secondary' : 'uk-button-default'}} uk-button-small size-button" style="text-decoration:none">{{ strtoupper($size) }}</a>
+                                                <a href="{{ actionLink(['size' => strtolower($size)]) }}" class="{{ $onSize == strtolower($size) ? 'uk-button-secondary' : 'uk-button-default'}} uk-button-small size-button" style="text-decoration:none">{{ strtoupper($size) }}</a>
                                             </li>
                                         @endforeach
                                     </ul>
@@ -249,14 +249,14 @@
                                     <div class="uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
                                         <div>
                                             <label class="uk-text-meta">{{ trans('app.min_price') }}</label>
-                                            <input type="number" name="price_min" id="price_min_mobile" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="">
+                                            <input type="text" name="price_min" id="price_min_mobile" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="">
                                         </div>
                                         <div>
                                             <label class="uk-text-meta">{{ trans('app.max_price') }}</label>
-                                            <input type="number" name="price_max" id="price_max_mobile" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="">
+                                            <input type="text" name="price_max" id="price_max_mobile" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="">
                                         </div>
                                     </div>
-                                    <button class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-margin-small-top" onclick="rangeMobile()" >FIND</button>
+                                    <button class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-margin-small-top" onclick="rangeMobile()" >{{ trans('app.find') }}</button>
                                 </div>
                             </li>
                         </ul>
@@ -285,10 +285,10 @@
                         <a href="{{ actionLink(['color_id' => null],['color_id']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ ucwords($colorId) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
                     @endif
                     @if($onSize)
-                        <a href="{{ actionLink(['size' => null],['size']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.size') }} {{ ucwords($onSize) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+                        <a href="{{ actionLink(['size' => null],['size']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ trans('app.size') }} {{ strtoupper($onSize) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
                     @endif
                     @if($range)
-                        <a href="{{ actionLink(['range' => null],['range']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ $currency_code }} {{ $range['price_min'] }} - {{$range['price_max'] }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
+                        <a href="{{ actionLink(['range' => null],['range']) }}"><span class="uk-label uk-label-success uk-text-capitalize"> {{ $currency_code }} {{ number_format($range['price_min']) }} - {{ number_format($range['price_max']) }} <i class="material-icons"  style="font-size: 14px; vertical-align:middle">close</i></span></a>
                     @endif
                     @if($sortByPrice)
                         @if($sortByPrice == 'asc')
@@ -331,7 +331,7 @@
                     <ul class="uk-grid uk-grid-collapse">
                       @foreach($sizeArray as $size)
                         <li>
-                          <a href="{{ actionLink(['size' => $size]) }}" class="{{ $onSize == $size ? 'uk-button-secondary' : 'uk-button-default'}} uk-button-small size-button" style="text-decoration:none">{{ strtoupper($size) }}</a>
+                          <a href="{{ actionLink(['size' => strtolower($size)]) }}" class="{{ $onSize == strtolower($size) ? 'uk-button-secondary' : 'uk-button-default'}} uk-button-small size-button" style="text-decoration:none">{{ strtoupper($size) }}</a>
                         </li>
                       @endforeach
                     </ul>
@@ -346,11 +346,11 @@
                     <div class="uk-grid uk-grid-small uk-child-width-1-2" uk-grid>
                       <div>
                         <label class="uk-text-meta">{{ trans('app.min_price') }}</label>
-                        <input type="number" name="price_min" id="price_min" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="">
+                        <input type="text" name="price_min" id="price_min" min="0" class="uk-input uk-form-small" value="{{ $range['price_min'] }}" placeholder="">
                       </div>
                       <div>
                         <label class="uk-text-meta">{{ trans('app.max_price') }}</label>
-                        <input type="number" name="price_max" id="price_max" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="">
+                        <input type="text" name="price_max" id="price_max" min="0" class="uk-input uk-form-small" value="{{ $range['price_max'] }}" placeholder="">
                       </div>
                     </div>
                       <button class="uk-button uk-button-default uk-button-small uk-width-1-1 uk-margin-small-top" onclick="range()" >{{ trans('app.find') }}</button>
@@ -411,8 +411,11 @@
 @section('footer_scripts')
     <script type="text/javascript">
         function range() {
-            var min = document.getElementById("price_min").value;
-            var max = document.getElementById("price_max").value;
+            var input_min = document.getElementById("price_min").value;
+            var input_max = document.getElementById("price_max").value;
+            var min = replaceNumberFormat(input_min);
+            var max = replaceNumberFormat(input_max);
+
             if(min <= 0){
                 var min = 0;
             }
@@ -439,8 +442,11 @@
             }
         }
         function rangeMobile() {
-            var min = document.getElementById("price_min_mobile").value;
-            var max = document.getElementById("price_max_mobile").value;
+            var input_min = document.getElementById("price_min_mobile").value;
+            var input_max = document.getElementById("price_max_mobile").value;
+            var min = replaceNumberFormat(input_min);
+            var max = replaceNumberFormat(input_max);
+
             if(min <= 0){
                 var min = 0;
             }
@@ -466,5 +472,73 @@
                 window.location.href =  link.replace('&&','&');
             }
         }
+
+        function replaceNumberFormat(input)
+        {
+            var temp = '';
+            for (i = 0; i < input.length; i++) {
+                if(input[i] != '.'){
+                    temp = String(temp) + String(input[i]);
+                }
+            }
+            return temp;
+        }
+
+
+        $(document).ready(function(){
+
+        // Start Currency Format
+        /* price_min */
+        var price_min = document.getElementById('price_min');
+
+        price_min.addEventListener('keyup', function(e)
+        {
+            price_min.value = formatCurrency(this.value);
+        });
+        price_min.value = formatCurrency( price_min.value);
+
+        /* price_max */
+        var price_max = document.getElementById('price_max');
+        price_max.addEventListener('keyup', function(e)
+        {
+            price_max.value = formatCurrency(this.value);
+        });
+        price_max.value = formatCurrency( price_max.value);
+
+        /* price_min_mobile */
+        var price_min_mobile = document.getElementById('price_min_mobile');
+        price_min_mobile.addEventListener('keyup', function(e)
+        {
+            price_min_mobile.value = formatCurrency(this.value);
+        });
+        price_min_mobile.value = formatCurrency( price_min_mobile.value);
+
+        /* price_max_mobile */
+        var price_max_mobile = document.getElementById('price_max_mobile');
+        price_max_mobile.addEventListener('keyup', function(e)
+        {
+            price_max_mobile.value = formatCurrency(this.value);
+        });
+        price_max_mobile.value = formatCurrency( price_max_mobile.value);
+
+        function formatCurrency(number, prefix)
+        {
+            var number_string = number.replace(/[^,\d]/g, '').toString(),
+                split	= number_string.split(','),
+                remain 	= split[0].length % 3,
+                currency 	= split[0].substr(0, remain),
+                ribuan 	= split[0].substr(remain).match(/\d{3}/gi);
+
+            if (ribuan) {
+                separator = remain ? '.' : '';
+                currency += separator + ribuan.join('.');
+            }
+
+            currency = split[1] != undefined ? currency + ',' + split[1] : currency;
+            return prefix == undefined ? currency : (currency ? '' + currency : '');
+        }
+        });
+        // End Currency Format
+
     </script>
 @endsection
