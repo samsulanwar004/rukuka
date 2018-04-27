@@ -11,6 +11,8 @@ use App\Repositories\ProductStockRepository;
 use App\Repositories\PageRepository;
 use App\Repositories\LookbookRepository;
 use App\Repositories\BlogRepository;
+use App\Repositories\OrderRepository;
+use App\Repositories\PaymentRepository;
 use Exception;
 use Carbon\Carbon;
 use App\Services\BagService;
@@ -21,6 +23,8 @@ use Validator;
 use App\Services\CurrencyService;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Illuminate\Support\Facades\Cache;
+use App\Jobs\ProcessDecreaseStock;
+use App\Services\EmailService;
 
 class PageController extends BaseController
 {
@@ -674,12 +678,42 @@ class PageController extends BaseController
     public function callBackXendit(Request $request)
     {
 
-        $content = $request->getContent();
-        DB::table('callback_payments')->insert(
-        ['merchant' => 'xendit', 'response' => $content,'created_at' => date("Y-m-d H:i:s"),'updated_at' => date("Y-m-d H:i:s")]
-        );
+        try {
+            if ($_SERVER["REQUEST_METHOD"] === "POST") {
+                $datas = json_decode(file_get_contents("php://input"));
 
-        return $content;
+                if ($datas->status == 'PAID' || $datas->status == 'CAPTURED') {
+                    $message = 'already paid';
+                    $order = (new OrderRepository)->getOrderByPaymentCode($datas->id);
+                    
+                    if ($order && $order->payment_status != 1) {
+                        $order->payment_status = 1;
+                        $order->pending_reason = $message;
+                        $order->payment_response = json_encode($datas);
+                        $order->update();
+
+                        //create notification
+                        $users = config('common.admin.users_id');
+                        $module = 'orders';
+                        (new PaymentRepository)->notificationforAdmin($users, $order->order_code.' '.$message, $module);
+
+                        //EMAILSENT
+                        //sent invoice paid to buyer
+                        $emailService = (new EmailService);
+                        $emailService->sendInvoicePaid($order);
+
+                        //decrease stock
+                        ProcessDecreaseStock::dispatch($order)
+                            ->onConnection(config('common.queue_active'))
+                            ->onQueue(config('common.queue_list.processing'));
+                    }
+                }
+            }
+
+            return $this->success();
+        } catch (Exception $e) {
+            return $this->error($e);
+        }
     }
 
     public function exchange()

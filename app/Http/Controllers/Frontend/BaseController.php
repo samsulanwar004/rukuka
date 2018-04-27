@@ -58,6 +58,44 @@ class BaseController extends Controller
         }
     } 
 
+    /**
+     * Send the success response.
+     *
+     * @param  mixed|null $message
+     * @param  integer $httpCode
+     * @return \Illuminate\Http\Response|JsonResponse
+     */
+    protected function success($message = null, $httpCode = 200)
+    {
+        if (null == $message) {
+            return response()->json(
+                $this->generateMessage('Ok', 'Success'),
+                $httpCode
+            );
+        }
+
+        if (is_string($message)) {
+            return response()->json(
+                $this->generateMessage('Ok', $message),
+                $httpCode
+            );
+        }
+
+        if (is_array($message)) {
+            $m = [
+                'status' => 'Ok',
+                'message' => 'Success',
+            ];
+
+            $message = array_merge($m, isset($message['data']) ? $message : ['data' => $message]);
+
+            return response()->json(
+                $message,
+                $httpCode
+            );
+        }
+    }
+
     protected function error($message, $httpCode = 500, $isValidationMessage = false)
     {
         logger($message);

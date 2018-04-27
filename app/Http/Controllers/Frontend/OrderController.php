@@ -9,6 +9,7 @@ use App\Repositories\OrderRepository;
 use App\Services\BagService;
 use App\Services\EmailService;
 use App\Services\CurrencyService;
+use App\Services\XenditService;
 use App\Repositories\UserRepository;
 use App\Repositories\CourierRepository;
 use App\Repositories\PaymentRepository;
@@ -92,6 +93,23 @@ class OrderController extends BaseController
 	        $message = 'Waiting for payment';
 	        $orderCode = $this->generateOrderCode();
 
+	        //virtual account
+
+	        if ($paymentMethod === 'virtual_account') {
+	        	$options['secret_api_key'] = config('common.xendit_secret_key');
+
+		        $xenditPHPClient = new XenditService($options);
+
+		        $externalId = $orderCode;
+		        $payerEmail= $user->email;
+		        $amount = (int)$total + (int)$shipping;
+		        $description = 'Rukuka Pay';
+
+		        $response = $xenditPHPClient->createInvoice($externalId, $amount, $payerEmail, $description);
+	        } else {
+	        	$response['id'] = null;
+	        }
+
 	        $order = $this->order
 	        	->setOrderCode($orderCode)
 	        	->setUser($user)
@@ -101,7 +119,8 @@ class OrderController extends BaseController
 	        	->setOrderSubtotalAfterDiscount($total)
 	        	->setOrderSubtotalAfterCoupon($total)
 	        	->setShipping($address)
-	        	// ->setPayment($creditCard)
+	        	->setPaymentCode($response['id'])
+	        	->setPaymentResponse(json_encode($response))
 	        	->setShippingName($shippingName)
 	        	->setShippingService($shippingService)
 	        	->setShippingCost($shipping)
@@ -149,6 +168,21 @@ class OrderController extends BaseController
 					'shipping',
 					'kurs',
 					'totalwithshipping'
+				));
+            } elseif ($paymentMethod === 'virtual_account') {
+            	//EMAILSENT
+				//sent invoice unpaid to buyer
+	            $emailService = (new EmailService);
+	            $emailService->sendInvoiceUnpaidBankTransfer($order);
+
+            	return view('pages.checkout.checkout_finish_virtual_account', compact(
+					'order', 
+					'detail', 
+					'total', 
+					'shipping',
+					'kurs',
+					'totalwithshipping',
+					'response'
 				));
             } 
 

@@ -105,6 +105,21 @@
                         <div>
                           <div class="uk-card uk-card-default uk-background-muted uk-card-small uk-card-hover">
                             <div class="uk-card-header">
+                              <h4><input type="radio" class="uk-radio" name="payment_method" value="virtual_account" required="required" style="margin-top:0" {{ $currency != 'idr' ? 'disabled' : '' }}> Virtual Account</h4>
+                            </div>
+                            <div class="uk-card-body">
+                              <h6>Virtual Account Supported (IDR): </h6>
+                              <ul class="uk-grid uk-child-width-1-3">
+                                <li><img src="{{ imageCDN('bca.png') }}" alt="bca" height="50"></li>
+                                <li><img src="{{ imageCDN('bni.png') }}" alt="bni" height="50"></li>
+                                <li><img src="{{ imageCDN('mandiri.png') }}" alt="mandiri" height="50"></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <div class="uk-card uk-card-default uk-background-muted uk-card-small uk-card-hover">
+                            <div class="uk-card-header">
                               <h4><input type="radio" class="uk-radio" name="payment_method" value="creditcard" required="required" style="margin-top:0" {{ $currency != 'idr' ? 'checked' : '' }}> Credit Card</h4>
                             </div>
                             <div class="uk-card-body">

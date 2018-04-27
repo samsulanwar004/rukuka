@@ -30,6 +30,8 @@ class OrderRepository
 	private $expiredDate;
 	private $detail;
 	private $payment;
+	private $paymentCode;
+	private $paymentResponse;
 
     public function setUserEmail($value)
     {
@@ -283,6 +285,30 @@ class OrderRepository
 		return $this->payment;
 	}
 
+	public function setPaymentCode($value)
+	{
+		$this->paymentCode = $value;
+
+		return $this;
+	}
+
+	public function getPaymentCode()
+	{
+		return $this->paymentCode;
+	}
+
+	public function setPaymentResponse($value)
+	{
+		$this->paymentResponse = $value;
+
+		return $this;
+	}
+
+	public function getPaymentResponse()
+	{
+		return $this->paymentResponse;
+	}
+
 	public function save()
 	{
 		$order = new Order;
@@ -299,6 +325,9 @@ class OrderRepository
     	$order->pending_reason = $this->getPendingReason();
     	$order->order_date = $this->getOrderDate();
     	$order->expired_date = $this->getExpiredDate();
+
+    	$order->payment_code = $this->getPaymentCode();
+    	$order->payment_response = $this->getPaymentResponse();
 
     	$order->user()->associate($this->getUser());
     	$order->address()->associate($this->getShipping());
@@ -424,6 +453,12 @@ class OrderRepository
     public function getStockById($id)
     {
     	return ProductStock::where('id', $id)
+    		->first();
+    }
+
+    public function getOrderByPaymentCode($paymentCode)
+    {
+    	return Order::where('payment_code', $paymentCode)
     		->first();
     }
 }
