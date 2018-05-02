@@ -251,6 +251,15 @@ class OrderController extends BaseController
 	        $year = intval(date('Y'));
 	        $repayment = 1;
 
+	        //virtual account
+	        if ($paymentMethod === 'virtual_account') {
+	        	$options['secret_api_key'] = config('common.xendit_secret_key');
+
+		        $xenditPHPClient = new XenditService($options);
+
+		        $response = $xenditPHPClient->getInvoice($data_order->payment_code);
+	        }
+
 	        if ($paymentMethod === 'creditcard') {
 
             	return view('pages.checkout.checkout_finish', compact( 
@@ -274,6 +283,17 @@ class OrderController extends BaseController
 					'shipping',
 					'kurs',
 					'totalwithshipping'
+				));
+            } elseif ($paymentMethod === 'virtual_account') {
+
+            	return view('pages.checkout.checkout_finish_virtual_account', compact(
+					'order', 
+					'detail', 
+					'total', 
+					'shipping',
+					'kurs',
+					'totalwithshipping',
+					'response'
 				));
             }
 		
