@@ -972,19 +972,19 @@ class UserController extends BaseController
 
                 if($response_cc["status"] == "CAPTURED")
                 {
-                    $order = $payment->updateOrder($data);
+                    // $order = $payment->updateOrder($data);
 
                     $message = "Charge is successfully captured and the funds will be settled according to the settlement schedule.";
 
-                    //EMAILSENT
-                    //sent invoice paid to buyer
-                    $emailService = (new EmailService);
-                    $emailService->sendInvoicePaid($order);
+                    // //EMAILSENT
+                    // //sent invoice paid to buyer
+                    // $emailService = (new EmailService);
+                    // $emailService->sendInvoicePaid($order);
 
-                    //decrease stock
-                    ProcessDecreaseStock::dispatch($order)
-                        ->onConnection(config('common.queue_active'))
-                        ->onQueue(config('common.queue_list.processing'));
+                    // //decrease stock
+                    // ProcessDecreaseStock::dispatch($order)
+                    //     ->onConnection(config('common.queue_active'))
+                    //     ->onQueue(config('common.queue_list.processing'));
                 }
 
                 if($response_cc["status"] == "AUTHORIZED")
