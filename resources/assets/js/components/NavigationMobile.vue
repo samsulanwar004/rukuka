@@ -15,6 +15,9 @@
                 <li>
                   <span class="uk-text-danger uk-text-small uk-text-bold">Shop</span>
                   <ul class="uk-nav uk-nav-primary uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
+                      <li>
+                        <a href="/men">Men Page</a>
+                      </li>
                       <li :class="{'uk-open uk-active': category == 'all' }">
                           <a class="uk-parent " :href="'/shop?menu=mens&parent=all'">
                               <span>
@@ -109,6 +112,9 @@
                 <li>
                   <span class="uk-text-danger uk-text-small uk-text-bold">Shop</span>
                   <ul class="uk-nav uk-nav-primary uk-nav-default uk-nav-left uk-margin-auto-vertical uk-nav-parent-icon" uk-nav>
+                      <li>
+                        <a href="/women">Women Page</a>
+                      </li>
                       <li :class="{'uk-open uk-active': category == 'all' }">
                           <a class="uk-parent " :href="'/shop?menu=womens&parent=all'">
                               <span>
@@ -268,7 +274,7 @@
                 womenLink: this.women_link,
                 designerLink: this.designer_link,
                 trans: JSON.parse(this.locale,true),
-                categoryArrMens: {},  
+                categoryArrMens: {},
                 categoryArrWomens: {}
             }
         }
