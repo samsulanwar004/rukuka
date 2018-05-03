@@ -13,5 +13,5 @@
 <link rel="icon" type="image/png" sizes="16x16" href="{{imageCDN('pavicon/favicon-16x16.png')}}">
 <link rel="manifest" href="/images/pavicon/manifest.json">
 <meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="{{imageCDN('/images/pavicon/ms-icon-144x144.png')}}">
+<meta name="msapplication-TileImage" content="{{imageCDN('pavicon/ms-icon-144x144.png')}}">
 <meta name="theme-color" content="#ffffff">

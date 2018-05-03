@@ -198,6 +198,16 @@
 
 @endsection
 
+@section('header_scripts')
+<link href="{{ asset("vendor/crudbooster/assets/select2/dist/css/select2.min.css") }}" rel="stylesheet" />
+<script src="{{ asset("vendor/crudbooster/assets/select2/dist/js/select2.min.js") }}"></script>
+<style type="text/css">
+  select + .select2-container {
+    width: 100% !important;
+  }
+</style>
+@endsection
+
 @section('footer_scripts')
 
     <script type="text/javascript">
@@ -205,6 +215,12 @@
         $(function () {
             $('#modal-submit').on('click', function () {
                 $('#submit').click();
+            });
+
+            $('#form-country-empty').select2({
+              placeholder: "Select a state",
+              allowClear: true,
+              theme: "classic"
             });
         });
 

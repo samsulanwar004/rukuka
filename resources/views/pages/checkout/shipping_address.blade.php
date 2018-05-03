@@ -95,13 +95,13 @@
                     <div id="div-sub-district" class="uk-margin-small uk-text-meta uk-width-1-1">
                        <div>
                           <label>{{ trans('app.sub_district') }}</label>
-                          <input class="uk-input uk-form-small {{ $errors->has('sub_district') ? ' uk-form-danger' : '' }}" name="sub_district" id="form-subdistrict-empty" type="text" value="{{ old('sub_district') }}" required>
+                          <input class="uk-input uk-form-small {{ $errors->has('sub_district') ? ' uk-form-danger' : '' }}" name="sub_district" id="form-subdistrict-empty" type="text" value="{{ old('sub_district') }}" required="required">
                        </div>
                     </div>
                     <div  id="div-village" class="uk-margin-small uk-text-meta uk-width-1-1">
                        <div>
                           <label>{{ trans('app.village') }}</label>
-                          <input class="uk-input uk-form-small {{ $errors->has('village') ? ' uk-form-danger' : '' }}" name="village" id="form-village-empty" type="text" value="{{ old('village') }}" required>
+                          <input class="uk-input uk-form-small {{ $errors->has('village') ? ' uk-form-danger' : '' }}" name="village" id="form-village-empty" type="text" value="{{ old('village') }}" required="required">
                        </div>
                     </div>
                     <div class="uk-margin-small uk-text-meta uk-width-1-1">
@@ -223,7 +223,19 @@
    </div>
 </div>
 </div>
+@endsection
 
+@section('header_scripts')
+<link href="{{ asset("vendor/crudbooster/assets/select2/dist/css/select2.min.css") }}" rel="stylesheet" />
+<script src="{{ asset("vendor/crudbooster/assets/select2/dist/js/select2.min.js") }}"></script>
+<style type="text/css">
+  select + .select2-container {
+    width: 100% !important;
+  }
+</style>
+@endsection
+
+@section('footer_scripts')
 <script type="text/javascript">
     $(function () {
         var url = '{{ route('checkout.shipping') }}';
@@ -231,7 +243,9 @@
             e.preventDefault();
             var submit = $('#submit').val();
             var url = '{{ route('checkout.shipping') }}';
-            if (submit == 'SUBMIT') {
+            var valueSubmit = '{{ trans('app.submit') }}';
+
+            if (submit == valueSubmit) {
                 $('#submit').click();
             } else {
                 window.location.href = url;
@@ -241,6 +255,12 @@
 
         $('#modal-submit').on('click', function () {
             $('#new-address').click();
+        });
+
+        $('#form-country-empty').select2({
+          placeholder: "Select a state",
+          allowClear: true,
+          theme: "classic"
         });
     })
 
@@ -702,4 +722,5 @@
     // end punya vue -------
 </script>
 @endsection
+
 

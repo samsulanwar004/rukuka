@@ -81,6 +81,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="{{ elixirCDN('js/vendor.js') }}"></script>
     <script src="{{ elixirCDN('js/custom.js') }}"></script>
+    @section('header_scripts')
+    @show
   </head>
   <body>
 
