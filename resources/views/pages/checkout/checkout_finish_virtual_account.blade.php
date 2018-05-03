@@ -3,7 +3,7 @@
 @section('content')
 <div class="uk-section uk-section-muted uk-section-xsmall">
   <div class="uk-container uk-container-small">
-    <div class="uk-grid-small uk-margin-top uk-flex uk-flex-center" uk-grid>
+    {{-- <div class="uk-grid-small uk-margin-top uk-flex uk-flex-center" uk-grid>
       <div class="uk-width-3-4@m">
         <h3>{{ trans('app.checkout_almost') }} </h3>
         <div class="uk-card uk-card-default uk-margin-bottom">
@@ -37,20 +37,22 @@
                   </tbody>
                 </table>
             </div>
-            <div id="spinner" class="uk-text-center">
-                <div>
-                    <h2>Please wait...</h2> <br>
-                     <img src="https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/images/loading.gif" />    
-                </div>
-            </div>
-            <div class="payment-wrapper">
-                <iframe border=0 name=iframe src="{{ $response['invoice_url'] }}" frameborder="0"  allowfullscreen onload="document.getElementById('spinner').style.display='none';"></iframe>
-            </div>
+
 
         </div>
 
     </div>
   </div>
+   --}}
+   <div id="spinner" class="uk-text-center">
+       <div>
+           <h2>Please wait...</h2> <br>
+            <img src="https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/images/loading.gif" />
+       </div>
+   </div>
+   <div class="payment-wrapper">
+       <iframe border=0 name=iframe src="{{ $response['invoice_url'] }}" frameborder="0"  allowfullscreen onload="document.getElementById('spinner').style.display='none';"></iframe>
+   </div>
 </div>
 </div>
 @endsection
@@ -58,8 +60,8 @@
 @section('header_scripts')
   <style type="text/css">
     .payment-wrapper {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 */
+      /* position: relative;
+      padding-bottom: 56.25%; */
       padding-top: 25px;
       height: 0;
     }
