@@ -110,7 +110,7 @@
                             <div class="uk-card-body">
                               <h6>Virtual Account Supported (IDR): </h6>
                               <ul class="uk-grid uk-child-width-1-3">
-                                <li><img src="{{ imageCDN('bca.png') }}" alt="bca" height="50"></li>
+                                <li><img src="{{ imageCDN('bri.png') }}" alt="bca" height="50"></li>
                                 <li><img src="{{ imageCDN('bni.png') }}" alt="bni" height="50"></li>
                                 <li><img src="{{ imageCDN('mandiri.png') }}" alt="mandiri" height="50"></li>
                               </ul>
