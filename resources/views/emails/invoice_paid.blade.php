@@ -38,7 +38,7 @@
 </head>
 <body style="background: #E1E8ED;">
 
-  <tr class="mj-container" style="background-color:#E1E8ED;">
+  <div class="mj-container" style="background-color:#E1E8ED;">
     <div style="margin:0px auto;max-width:600px;background:#f8f8f8;">
       <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;background:#f8f8f8;" align="center" border="0">
         <tbody>
@@ -264,10 +264,7 @@
                  </tbody>
                </table>
               </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+            </div>
+          </div>
 </body>
 </html>
