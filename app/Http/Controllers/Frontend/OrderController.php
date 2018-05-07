@@ -140,7 +140,7 @@ class OrderController extends BaseController
 
             if ($paymentMethod === 'creditcard') {
             	//EMAILSENT
-				//sent invoice unpaid to buyer
+				//sent invoice unpaid credit card to buyer
 	            $emailService = (new EmailService);
 	            $emailService->sendInvoiceUnpaid($order);
 
@@ -157,7 +157,7 @@ class OrderController extends BaseController
 
             } elseif ($paymentMethod === 'bank_transfer') {
             	//EMAILSENT
-				//sent invoice unpaid to buyer
+				//sent invoice unpaid bank transfer to buyer
 	            $emailService = (new EmailService);
 	            $emailService->sendInvoiceUnpaidBankTransfer($order);
 
@@ -171,9 +171,9 @@ class OrderController extends BaseController
 				));
             } elseif ($paymentMethod === 'virtual_account') {
             	//EMAILSENT
-				//sent invoice unpaid to buyer
+				//sent invoice unpaid virtual account to buyer
 	            $emailService = (new EmailService);
-	            $emailService->sendInvoiceUnpaidBankTransfer($order);
+	            $emailService->sendInvoiceUnpaidVirtualAccount($order,$response);
 
             	return view('pages.checkout.checkout_finish_virtual_account', compact(
 					'order', 

@@ -264,7 +264,11 @@
                  </tbody>
                </table>
               </div>
-            </div>
-          </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </body>
 </html>

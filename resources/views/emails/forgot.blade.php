@@ -132,6 +132,7 @@
                     </td>
                   </tr>
                 </table>
+              </div>
               </td>
             </tr>
           </tbody>

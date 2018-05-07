@@ -6,6 +6,7 @@ use App\Mail\Activation;
 use App\Mail\Forgot;
 use App\Mail\InvoiceUnpaid;
 use App\Mail\InvoiceUnpaidBankTransfer;
+use App\Mail\InvoiceUnpaidVirtualAccount;
 use App\Mail\InvoicePaid;
 use App\Mail\Shipping;
 use App\Services\CurrencyService;
@@ -49,6 +50,17 @@ class EmailService
 
         $lang = (new CurrencyService)->getLang();
         $mail = (new InvoiceUnpaidBankTransfer($order, $lang))
+            ->onConnection(config('common.queue_active'))
+            ->onQueue(config('common.queue_list.user_mail'));
+
+        Mail::to($order->user->email)->queue($mail);
+    }
+
+    public function sendInvoiceUnpaidVirtualAccount($order,$response)
+    {
+
+        $lang = (new CurrencyService)->getLang();
+        $mail = (new InvoiceUnpaidVirtualAccount($order, $lang, $response))
             ->onConnection(config('common.queue_active'))
             ->onQueue(config('common.queue_list.user_mail'));
 

@@ -439,6 +439,8 @@ return [
     'sincerely'                 =>  'Sincerely',
     'rukuka_team'               =>  'ruKuKa Team',
     'shipping_label'            =>  'Shipping',
+    'va_button'                 =>  'Virtual Account',
+    'va_text'                   =>  'to the following Virtual Account link button. ',
 
     //resources/views/emails/invoice_unpaid.blade.php
     'unpaid_subject'            =>  'Invoice Unpaid',
