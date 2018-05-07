@@ -38,7 +38,7 @@
 </head>
 <body style="background: #E1E8ED;">
 
-<div class="mj-container" style="background-color:#E1E8ED;">
+  <div class="mj-container" style="background-color:#E1E8ED;">
     <div style="margin:0px auto;max-width:600px;background:#f8f8f8;">
       <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;background:#f8f8f8;" align="center" border="0">
         <tbody>
@@ -187,10 +187,10 @@
                         <div style="cursor:auto;color:#666;font-size:12px;line-height:22px;text-align:left;">
                           <p style="margin:0px">
                             {{trans('app.note',[], $locale)}} :<br>
-                            {{ trans('app.transfer_money',[], $locale) }}
+                            {{ trans('app.transfer_money') }}
                             <label> IDR.   {{ number_format($order->order_total_idr) }} </label>
                             {{trans('app.transfer_account',[], $locale)}} :<br>
-                          </p>
+                        </P>
                         </div>
                       </td>
                     </tr>
@@ -230,7 +230,7 @@
                           <tr>
                             <td>
                               @component('mail::button', ['url' => route('payment.confirm')])
-                                {{ trans('app.va_button',[], $locale) }}
+                                {{ trans('app.confirm_payment',[], $locale) }}
                               @endcomponent
                             </td>
                           </tr>
@@ -310,10 +310,7 @@
                  </tbody>
                </table>
               </div>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+            </div>
+          </div>
 </body>
 </html>

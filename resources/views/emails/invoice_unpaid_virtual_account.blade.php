@@ -280,10 +280,7 @@
                  </tbody>
                </table>
               </div>
-            </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+            </div>
+          </div>
 </body>
 </html>
