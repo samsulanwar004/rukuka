@@ -18,7 +18,7 @@
   .ReadMsgBody { width: 100%; }
   .ExternalClass { width: 100%; }
   .ExternalClass * { line-height:100%; }
-  body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: font-family: 'Lato', sans-serif;}
+  body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: 'Lato', sans-serif;}
   table, td { border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
   img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
   p { display: block; margin: 13px 0; }
@@ -72,60 +72,60 @@
   </tr>
 </tbody>
 </table>
-</div
+</div>
 <div style="margin:0px auto;max-width:600px;background:#f8f8f8;">
   <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;background:#f8f8f8;" align="center" border="0">
     <tbody>
       <tr>
         <td style="text-align:center;vertical-align:top;direction:ltr;padding:20px 0px;padding-bottom:0px;">
-      <div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
-        <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-          <tbody>
-            <tr>
-              <td style="word-wrap:break-word;padding:10px 25px;" align="center">
-                <div style="cursor:auto;color:#333;font-size:18px;line-height:22px;text-align:center;">
-                  {{ trans('app.hi',[], $locale) }} {{ $user->first_name }} {{ $user->last_name }}
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td style="word-wrap:break-word;padding:10px 25px;" align="center">
-                <div style="cursor:auto;color:#333;font-size:22px;line-height:22px;text-align:center;">
-                  {{ trans('app.activation_title',[], $locale) }}
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td style="word-wrap:break-word;padding:10px 25px;" align="center">
-                <div style="cursor:auto;color:#333;font-size:14px;line-height:22px;text-align:center;">
-                  {{ trans('app.activation_text',[], $locale) }}
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td style="word-wrap:break-word;" align="center">
-                <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;" align="center" border="0">
-                  <tbody>
-                    <tr>
-                      <td>
-                        @component('mail::button', ['url' => route('activation', ['code' => $user->verification_token ])])
-                            {{ trans('app.activation_activate_now',[], $locale) }} {{ $user->email }}
-                        @endcomponent
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td style="word-wrap:break-word;padding:10px 25px;padding-top:10px;padding-bottom:0px;padding-right:0px;padding-left:0px;">
-                <p style="font-size:1px;margin:0px auto;border-top:1px solid #f8f8f8;width:100%;"></p>
-              </td>
-    </tr>
-  </tbody>
-</table>
-</div>
-<div style="margin:0px auto;max-width:600px;background:#f8f8f8;">
+        <div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+            <tbody>
+              <tr>
+                <td style="word-wrap:break-word;padding:10px 25px;" align="center">
+                  <div style="cursor:auto;color:#333;font-size:18px;line-height:22px;text-align:center;">
+                    {{ trans('app.hi',[], $locale) }} {{ $user->first_name }} {{ $user->last_name }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="word-wrap:break-word;padding:10px 25px;" align="center">
+                  <div style="cursor:auto;color:#333;font-size:22px;line-height:22px;text-align:center;">
+                    {{ trans('app.activation_title',[], $locale) }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="word-wrap:break-word;padding:10px 25px;" align="center">
+                  <div style="cursor:auto;color:#333;font-size:14px;line-height:22px;text-align:center;">
+                    {{ trans('app.activation_text',[], $locale) }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="word-wrap:break-word;" align="center">
+                  <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;" align="center" border="0">
+                    <tbody>
+                      <tr>
+                        <td>
+                          @component('mail::button', ['url' => route('activation', ['code' => $user->verification_token ])])
+                              {{ trans('app.activation_activate_now',[], $locale) }} {{ $user->email }}
+                          @endcomponent
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td style="word-wrap:break-word;padding:10px 25px;padding-top:10px;padding-bottom:0px;padding-right:0px;padding-left:0px;">
+                  <p style="font-size:1px;margin:0px auto;border-top:1px solid #f8f8f8;width:100%;"></p>
+                </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+        <div style="margin:0px auto;max-width:600px;background:#f8f8f8;">
       <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;background:#f8f8f8;" align="center" border="0">
         <tbody>
           <tr>
@@ -155,6 +155,11 @@
 </tbody>
 </table>
 </div>
-    </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  </div>
 </body>
 </html>

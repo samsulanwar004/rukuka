@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
-  <title>{{trans('app.paid_subject',[], $locale)}} , {{$order->order_code}}</title>
+  <title>{{ trans('app.unpaid_subject',[], $locale) }} , {{$order->order_code}}</title>
   <!--[if !mso]><!-- -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!--<![endif]-->
@@ -37,8 +37,7 @@
 </style>
 </head>
 <body style="background: #E1E8ED;">
-
-  <tr class="mj-container" style="background-color:#E1E8ED;">
+  <div class="mj-container" style="background-color:#E1E8ED;">
     <div style="margin:0px auto;max-width:600px;background:#f8f8f8;">
       <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;background:#f8f8f8;" align="center" border="0">
         <tbody>
@@ -84,14 +83,14 @@
                     <tr>
                       <td style="word-wrap:break-word;padding:10px 25px;" align="center">
                         <div style="cursor:auto;color:#333;font-size:22px;line-height:22px;text-align:center;font-weight:800">
-                          {{ trans('app.paid_subject',[], $locale) }}
+                          {{ trans('app.unpaid_title',[], $locale) }}
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td style="word-wrap:break-word;padding:10px 25px;" align="center">
                         <div style="cursor:auto;color:#333;font-size:20px;line-height:22px;text-align:center;">
-                          {{ trans('app.paid_subtitle_1',[], $locale) }} {{ trans('app.paid_subtitle_2',[], $locale) }}
+                          {{ trans('app.unpaid_subtitle_1',[], $locale) }} {{ trans('app.unpaid_subtitle_2',[], $locale) }}
                         </div>
                       </td>
                     </tr>
@@ -186,11 +185,28 @@
                       <td style="word-wrap:break-word;padding:10px 25px;" align="left">
                         <div style="cursor:auto;color:#666;font-size:12px;line-height:22px;text-align:left;">
                           <p style="margin:0px">
-                          {{trans('app.note',[], $locale)}} :
-                          <br>{{ trans('app.note_currency',[], $locale) }} {{ number_format($order->order_total_idr) }}
-                        </P>
+                            {{trans('app.note',[], $locale)}} :<br>
+                            {{ trans('app.transfer_money',[], $locale) }}
+                            <label> IDR.   {{ number_format($order->order_total_idr) }} </label>
+                            {{trans('app.va_text',[], $locale)}}<br>
+                          </p>
                         </div>
                       </td>
+                    </tr>
+                    <tr>
+                        <td style="word-wrap:break-word;" align="center">
+                          <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;" align="center" border="0">
+                            <tbody>
+                            <tr>
+                              <td>
+                                @component('mail::button', ['url' => $response['invoice_url']])
+                                  {{ trans('app.va_button',[], $locale) }}
+                                @endcomponent
+                              </td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </td>
                     </tr>
                     <tr>
                       <td style="word-wrap:break-word;padding-bottom:0px;padding-right:0px;padding-left:0px;">
@@ -217,8 +233,8 @@
                                 <td style="word-wrap:break-word;padding:10px 25px;" align="left">
                                   <div style="cursor:auto;color:#666;font-size:12px;line-height:22px;text-align:left;">
                                     <p>
-                                      {{ trans('app.paid_text_1',[], $locale) }}
-                                    <br>{{ trans('app.paid_text_2',[], $locale) }}
+                                      {{ trans('app.unpaid_text_1',[], $locale) }}
+                                      <br>{{ trans('app.unpaid_text_2',[], $locale) }}
                                   </p>
                                     <p>
                                     {{ trans('app.please',[], $locale) }} <a href="{{URL::to('/help/contact-us')}}">{{ trans('app.contact_label',[], $locale) }}</a> {{ trans('app.contact_text',[], $locale) }}
@@ -264,10 +280,10 @@
                  </tbody>
                </table>
               </div>
-            </td>
-          </tr>
+            </tr>
         </tbody>
       </table>
     </div>
+  </div>
 </body>
 </html>
