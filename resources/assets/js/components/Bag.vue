@@ -1,5 +1,5 @@
 <template>
-    <div class="uk-margin-large" v-if="bag_count <= 0 || bags.length <= 0" >
+    <div class="uk-margin-large" v-if="bagCount <= 0">
         <h3 align="center"><p>{{ trans.no_bag }}</p></h3>
     </div>
     <div class="uk-margin-top" uk-grid v-else>
@@ -100,16 +100,19 @@
 
             Event.listen('bags', function (response) {
                 self.bags = response.data.bags;
+                self.bagCount = response.data.bags.length;
                 self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
             });
 
             Event.listen('removeBag', function (response) {
                 self.bags = response.data.bags;
+                self.bagCount = response.data.bags.length;
                 self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
             });
 
             Event.listen('addBag', function (response) {
                 self.bags = response.data.bags;
+                self.bagCount = response.data.bags.length;
                 self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
             });
 
@@ -127,6 +130,7 @@
                 loadingImage: {},
                 trans: JSON.parse(this.locale,true),
                 exchangeRate: {},
+                bagCount : this.bag_count
             }
         },
 
