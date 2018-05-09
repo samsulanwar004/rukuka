@@ -216,6 +216,7 @@
                     locale="{{ json_encode(trans('app')) }}"
                     designer_slug="{{ $designer ? $designer->slug : ''}}"
                     category_array="{{json_encode($categoryArray)}}"
+                    category_count="{{json_encode($categoryCount)}}"
                   ></categories-mobile>
 
                   <color-palette-mobile
@@ -314,6 +315,7 @@
               locale="{{ json_encode(trans('app')) }}"
               designer_slug="{{ $designer ? $designer->slug : ''}}"
               category_array="{{json_encode($categoryArray)}}"
+              category_count="{{json_encode($categoryCount)}}"
             ></categories>
             <color-palette
               api="{{ route('color') }}"

@@ -114,13 +114,13 @@ class ProductRepository
             $join->on('products.product_categories_id', '=', 'product_categories.id');
         })
         ->select(
-            'product_categories.name as category_name'
+            'product_categories.name as category_name', \DB::raw('count(*) as product_total')
         )
         ->where('products.is_active',1)
         ->whereNull('products.deleted_at')
         ->whereIn('products.gender', [$gender,'unisex']);
 
-        return $query->distinct()->get();
+        return $query->groupBy('product_categories.name')->get();
 	}
 
 	public function getCategoryProductDesigner($request)
@@ -161,14 +161,13 @@ class ProductRepository
             }
         })
         ->select(
-            'product_categories.name as category_name'
+            'product_categories.name as category_name', \DB::raw('count(*) as product_total')
         )
         ->where('products.is_active',1)
         ->whereNull('products.deleted_at')
         ->whereIn('products.gender', [$gender,'unisex']);
 
-        return $query->distinct()->get();
-
+        return $query->groupBy('product_categories.name')->get();
 	}
 
 	public function getColorByProduct($request)

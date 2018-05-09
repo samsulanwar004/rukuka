@@ -23,29 +23,29 @@
                         <ul class="uk-nav uk-filter-nav">
                             <li v-if="categoryFilter && categoryFilter.includes(category.name)">
                                 <a :href="'/shop?menu='+parent+designerSlug+'&parent='+ category.name.toLowerCase() +'&category=all'">
-                            <span :class="{'uk-text-bold': categorySlug == category.name.toLowerCase() && slug == 'all'}">
-                                 {{ trans.all+' '+category.name }}
-                            </span>
+                                    <span :class="{'uk-text-bold': categorySlug == category.name.toLowerCase() && slug == 'all'}">
+                                         {{ trans.all+' '+category.name }}
+                                    </span>
                                 </a>
                             </li>
                             <li v-else>
-                        <span class="cat-disabled">
-                            {{ trans.all }}
-                        </span>
+                                <span class="cat-disabled">
+                                    {{ trans.all }}
+                                </span>
                             </li>
                             <div>
                                 <li v-for="cat in category.child" v-if="cat.menu == parent || cat.menu == null">
                                     <div v-if="categoryFilter && categoryArr.includes(cat.name)">
                                         <a :href="'/shop?menu='+parent+designerSlug+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
-                                  <span :class="{'uk-text-bold': slug == cat.slug}">
-                                      {{ cat.name }}
-                                  </span>
+                                          <span :class="{'uk-text-bold': slug == cat.slug}">
+                                              {{ cat.name | countMe(categoryCount) }}
+                                          </span>
                                         </a>
                                     </div>
                                     <div v-else>
-                                <span class="cat-disabled">
-                                    {{ cat.name }}
-                                </span>
+                                        <span class="cat-disabled">
+                                            {{ cat.name }}
+                                        </span>
                                     </div>
                                 </li>
                             </div>
@@ -63,29 +63,29 @@
                         <ul class="uk-nav uk-filter-nav">
                             <li v-if="categoryFilter && categoryFilter.includes(category.name)">
                                 <a :href="'/shop?menu='+parent+designerSlug+'&parent='+ category.name.toLowerCase() +'&category=all'">
-                        <span :class="{'uk-text-bold': categorySlug == category.name.toLowerCase() && slug == 'all'}">
-                             {{ trans.all+' '+category.name }}
-                        </span>
+                                    <span :class="{'uk-text-bold': categorySlug == category.name.toLowerCase() && slug == 'all'}">
+                                         {{ trans.all+' '+category.name }}
+                                    </span>
                                 </a>
                             </li>
                             <li v-else>
-                    <span class="cat-disabled">
-                        {{ trans.all }}
-                    </span>
+                                <span class="cat-disabled">
+                                    {{ trans.all }}
+                                </span>
                             </li>
                             <div>
                                 <li v-for="cat in category.child" v-if="cat.menu == parent || cat.menu == null">
                                     <div v-if="categoryFilter && categoryArr.includes(cat.name)">
                                         <a :href="'/shop?menu='+parent+designerSlug+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
-                              <span :class="{'uk-text-bold': slug == cat.slug}">
-                                  {{ cat.name }}
-                              </span>
+                                          <span :class="{'uk-text-bold': slug == cat.slug}">
+                                              {{ cat.name | countMe(categoryCount) }}
+                                          </span>
                                         </a>
                                     </div>
                                     <div v-else>
-                            <span class="cat-disabled">
-                                {{ cat.name }}
-                            </span>
+                                        <span class="cat-disabled">
+                                            {{ cat.name }}
+                                        </span>
                                     </div>
                                 </li>
                             </div>
@@ -102,29 +102,29 @@
                         <ul class="uk-nav uk-filter-nav">
                             <li v-if="categoryFilter && categoryFilter.includes(category.name)">
                                 <a :href="'/shop?menu='+parent+designerSlug+'&parent='+ category.name.toLowerCase() +'&category=all'">
-                        <span :class="{'uk-text-bold': categorySlug == category.name.toLowerCase() && slug == 'all'}">
-                             {{ trans.all+' '+category.name }}
-                        </span>
+                                    <span :class="{'uk-text-bold': categorySlug == category.name.toLowerCase() && slug == 'all'}">
+                                         {{ trans.all+' '+category.name }}
+                                    </span>
                                 </a>
                             </li>
                             <li v-else>
-                    <span class="cat-disabled">
-                        {{ trans.all }}
-                    </span>
+                                <span class="cat-disabled">
+                                    {{ trans.all }}
+                                </span>
                             </li>
                             <div>
                                 <li v-for="cat in category.child" v-if="cat.menu == parent || cat.menu == null">
                                     <div v-if="categoryFilter && categoryArr.includes(cat.name)">
                                         <a :href="'/shop?menu='+parent+designerSlug+'&parent='+ category.name.toLowerCase() +'&category='+ cat.slug + sales">
-                              <span :class="{'uk-text-bold': slug == cat.slug}">
-                                  {{ cat.name }}
-                              </span>
+                                          <span :class="{'uk-text-bold': slug == cat.slug}">
+                                              {{ cat.name | countMe(categoryCount) }}
+                                          </span>
                                         </a>
                                     </div>
                                     <div v-else>
-                            <span class="cat-disabled">
-                                {{ cat.name }}
-                            </span>
+                                        <span class="cat-disabled">
+                                            {{ cat.name }}
+                                        </span>
                                     </div>
                                 </li>
                             </div>
@@ -140,7 +140,7 @@
 
 <script>
     export default {
-        props: ['parent', 'category_slug', 'slug', 'sale','locale','designer_slug','category_array'],
+        props: ['parent', 'category_slug', 'slug', 'sale','locale','designer_slug','category_array','category_count'],
         created() {
             var self = this;
             self.parent = this.parent;
@@ -160,6 +160,7 @@
                 trans: JSON.parse(this.locale,true),
                 designerSlug: {},
                 categoryArr: JSON.parse(this.category_array,true),
+                categoryCount: JSON.parse(this.category_count,true),
             }
         },
 
@@ -197,6 +198,12 @@
                 return parent;
 
 
+            }
+        },
+
+        filters: {
+            countMe: function (category, count) {
+                return category+' ('+count[category]+')';
             }
         }
 

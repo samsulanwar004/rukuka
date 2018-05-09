@@ -81,28 +81,23 @@ class PageController extends BaseController
             //get list category product
             if($request->has('designer')) {
                 $categoryArr = $product->getCategoryProductDesigner($request);
-
-                if(count($categoryArr) != 0){
-                    $categoryArray = [];
-                    foreach ($categoryArr as $value)
-                        $categoryArray[] = $value->category_name;
-                }
-                else{
-                    $categoryArray = [];
-                }
             }else{
                 $categoryArr = $product->getCategoryProduct($request);
-
-                if(count($categoryArr) != 0){
-                    $categoryArray = [];
-                    foreach ($categoryArr as $value)
-                        $categoryArray[] = $value->category_name;
-                }
-                else{
-                    $categoryArray = [];
-                }
             }
-            //end get list category product
+
+            if(count($categoryArr) != 0){
+                $categoryArray = [];
+                foreach ($categoryArr as $value)
+                    $categoryArray[] = $value->category_name;
+            }
+            else{
+                $categoryArray = [];
+            }
+
+            $categoryCount = $categoryArr->mapWithKeys(function ($item) {
+                return [$item->category_name => $item->product_total];
+            });
+            //end get list category product 
 
             // get list color product
             $colorArr = $product->getColorByProduct($request);
@@ -202,7 +197,8 @@ class PageController extends BaseController
             'view',
             'sizeArray',
             'onSize',
-            'range'
+            'range',
+            'categoryCount'
         ));
 
     }
