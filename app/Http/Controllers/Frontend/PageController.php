@@ -444,6 +444,10 @@ class PageController extends BaseController
                         if ($item->qty >= $item->options->unit) {
                             throw new Exception("Size ".$item->options->size." out of stock", 1); 
                         }
+                    } else {
+                        if ($product['qty'] > $stock->unit) {
+                            throw new Exception("Size ".$product['options']['size']." stock less than ".$product['qty'], 1); 
+                        }
                     }
                     
                     $bag->save($product, self::INSTANCE_SHOP);
