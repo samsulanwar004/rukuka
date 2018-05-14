@@ -86,6 +86,9 @@
                     <div class="uk-panel">
                       <span class="uk-text-small"><b>{{ bag.name }}</b></span><br>
                       <span class="uk-text-small">{{ bag.price | round(exchangeRate.symbol, exchangeRate.value) }} </span><br>
+                      <span class="uk-text-small uk-text-danger" v-if="bag.options.price_sale > 0 ">
+                        <del>{{ bag.options.price_sale | round(exchangeRate.symbol, exchangeRate.value) }}</del>
+                      </span><br>
                       <span class="uk-text-meta">{{ trans.color }} : {{ bag.options.color }}</span><br>
                       <span class="uk-text-meta">{{ trans.size }}  : {{ bag.options.size }}</span><br>
                       <a :href="product_link+'/'+bag.options.slug+'/bag/'+bag.id" class="uk-button uk-button-text uk-button-small" name="button"><span class="uk-icon" uk-icon="icon: pencil; ratio: 0.8"></span>{{ trans.edit }}</a>

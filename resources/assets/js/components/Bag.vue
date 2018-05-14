@@ -38,17 +38,22 @@
                               <input type="hidden" name="qty" :value="bag.qty">
                               <input type="hidden" name="move" :value="bag.id">
                               <button class="uk-button uk-button-small uk-button-default-warm uk-padding-small-right uk-margin-bottom uk-text-uppercase" type="submit">{{ trans.move_wishlist}}</button>
-                        <a class="uk-button uk-button-small uk-button-default-warm uk-padding-small-right uk-text-right uk-margin-bottom" v-on:click="removeBag(bag.id, bag.name)">{{ trans.remove }}</a>
-                        </form>
+                              <a class="uk-button uk-button-small uk-button-default-warm uk-padding-small-right uk-text-right uk-margin-bottom" v-on:click="removeBag(bag.id, bag.name)">{{ trans.remove }}</a>
+                          </form>
                         </td>
                         <td class="uk-text-nowrap">
-                        <ul class="uk-grid-small uk-flex-middle" uk-grid>
-                          <li><a class="uk-icon-link" uk-icon="icon: minus" v-on:click.prevent="min(bag.id, bag.qty, bag.name)"></a></li>
-                          <li><input type="text" name="qty" class="uk-input uk-form-width-xsmall uk-form-small" :value="bag.qty" v-on:keyup="countQty(bag.id, $event)"></li>
-                          <li><a class="uk-icon-link" uk-icon="icon: plus" v-on:click.prevent="plus(bag.id)"></a></li>
-                        </ul>
+                          <ul class="uk-grid-small uk-flex-middle" uk-grid>
+                            <li><a class="uk-icon-link" uk-icon="icon: minus" v-on:click.prevent="min(bag.id, bag.qty, bag.name)"></a></li>
+                            <li><input type="text" name="qty" class="uk-input uk-form-width-xsmall uk-form-small" :value="bag.qty" v-on:keyup="countQty(bag.id, $event)"></li>
+                            <li><a class="uk-icon-link" uk-icon="icon: plus" v-on:click.prevent="plus(bag.id)"></a></li>
+                          </ul>
                         </td>
-                        <td class="uk-text-nowrap"><h4>{{ bag.price | round(exchangeRate.symbol, exchangeRate.value) }}</h4></td>
+                        <td class="uk-text-nowrap">
+                          <span>{{ bag.price | round(exchangeRate.symbol, exchangeRate.value) }}</span><br>
+                          <span class="uk-text-danger" v-if="bag.options.price_sale > 0 ">
+                            <del>{{ bag.options.price_sale | round(exchangeRate.symbol, exchangeRate.value) }}</del>
+                          </span>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -60,6 +65,10 @@
             <h4 class="uk-text-uppercase">{{ trans.summary }}</h4>
           </div>
           <div class="uk-card-body">
+            <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid v-if="discount > 0">
+              <div class="uk-text-small"><h6 class="uk-text-danger">{{ trans.you_save }}</h6></div>
+              <div class="uk-text-right uk-text-danger">{{ youSave | round(exchangeRate.symbol, exchangeRate.value) }}</div>
+            </div>
             <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
               <div class="uk-text-small"><h6>{{ trans.subtotal }}</h6></div>
               <div class="uk-text-right">{{ subtotal | round(exchangeRate.symbol, exchangeRate.value) }}</div>
@@ -85,7 +94,7 @@
     import VueLazyBackgroundImage from '../components/VueLazyBackgroundImage.vue';
 
     export default {
-        props: ['bag_link', 'wishlist_link', 'auth', 'checkout_link', 'aws_link','default_image','locale', 'bag_count'],
+        props: ['bag_link', 'wishlist_link', 'auth', 'checkout_link', 'aws_link','default_image','locale', 'bag_count', 'discount'],
 
         components: {
           'lazy-background': VueLazyBackgroundImage
@@ -102,18 +111,21 @@
                 self.bags = response.data.bags;
                 self.bagCount = response.data.bags.length;
                 self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
+                self.youSave = response.data.discount;
             });
 
             Event.listen('removeBag', function (response) {
                 self.bags = response.data.bags;
                 self.bagCount = response.data.bags.length;
                 self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
+                self.youSave = response.data.discount;
             });
 
             Event.listen('addBag', function (response) {
                 self.bags = response.data.bags;
                 self.bagCount = response.data.bags.length;
                 self.subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
+                self.youSave = response.data.discount;
             });
 
             self.errorImage = this.aws_link+'/images/'+this.defaultImage.image_2;
@@ -130,7 +142,8 @@
                 loadingImage: {},
                 trans: JSON.parse(this.locale,true),
                 exchangeRate: {},
-                bagCount : this.bag_count
+                bagCount: this.bag_count,
+                youSave: this.discount
             }
         },
 

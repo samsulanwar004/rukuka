@@ -14,6 +14,7 @@
     default_image="{{ json_encode(config('common.default')) }}"
     locale="{{ json_encode(trans('app')) }}"
     bag_count="{{ count($bags) }}"
+    discount="{{ $discount }}"
   ></bag>
   <hr class="uk-margin-large uk-padding-large" style="border-color: #333; border-width: 3px">
   @if($recently)
@@ -23,16 +24,16 @@
       </div>
   </div>
   <related
-          api="{{ route('recently') }}"
-          product_api="{{ route('product.api') }}"
-          bag_api="{{ route('persist.bag') }}"
-          wishlist_api="{{ route('persist.wishlist') }}"
-          auth="{{ Auth::check() ? 1 : 0 }}"
-          aws_link="{{ config('filesystems.s3url') }}"
-          default_image="{{ json_encode(config('common.default')) }}"
-          recently="{{ json_encode($recently) }}"
-          bag_link="{{ route('bag') }}"
-          locale="{{ json_encode(trans('app')) }}"
+    api="{{ route('recently') }}"
+    product_api="{{ route('product.api') }}"
+    bag_api="{{ route('persist.bag') }}"
+    wishlist_api="{{ route('persist.wishlist') }}"
+    auth="{{ Auth::check() ? 1 : 0 }}"
+    aws_link="{{ config('filesystems.s3url') }}"
+    default_image="{{ json_encode(config('common.default')) }}"
+    recently="{{ json_encode($recently) }}"
+    bag_link="{{ route('bag') }}"
+    locale="{{ json_encode(trans('app')) }}"
   ></related>
   @endif
 </div>

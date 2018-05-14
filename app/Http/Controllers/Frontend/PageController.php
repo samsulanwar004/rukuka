@@ -432,7 +432,8 @@ class PageController extends BaseController
                             'height' =>  $stock->product->height,
                             'diameter' => $stock->product->diameter,
                             'preorder' => $stock->product->is_preorder == 1 ? $stock->product->preorder_day : null,
-                            'unit' => $stock->unit
+                            'unit' => $stock->unit,
+                            'price_sale' => $stock->product->price_before_discount
                         ]
                     ];
 
@@ -521,9 +522,11 @@ class PageController extends BaseController
 
             $index = 0;
             $bags = [];
+            $discount = 0;
             foreach ($getBags as $value) {
                 $bags[$index] = $value;
                 $index++;
+                $discount += $value->options['price_sale'] > $value->price ? $value->options['price_sale'] - $value->price : 0;
             }
 
             $subtotal = $bag->subtotal();
@@ -534,7 +537,8 @@ class PageController extends BaseController
                 'bagCount' => count($bags),
                 'bags' => $bags,
                 'subtotal' => $subtotal,
-                'wishlistCount' => isset($wishlistCount) ? $wishlistCount : null
+                'wishlistCount' => isset($wishlistCount) ? $wishlistCount : null,
+                'discount' => $discount
             ]);
 
         } catch (Exception $e) {
@@ -546,11 +550,18 @@ class PageController extends BaseController
     {
         $bags = (new BagService)->get(self::INSTANCE_SHOP);
 
+        $discount = 0;
+        if ($bags) {
+            foreach ($bags as $value) {
+                $discount += $value->options['price_sale'] > $value->price ? $value->options['price_sale'] - $value->price : 0;
+            }
+        }
+
         $recentlyViewed = session()->get('products.recently_viewed');
 
         $recently = $recentlyViewed ? array_keys(array_flip(array_reverse($recentlyViewed))) : [];
 
-        return view('pages.bag', compact('recently', 'bags'));
+        return view('pages.bag', compact('recently', 'bags', 'discount'));
     }
 
     public function page($slug){

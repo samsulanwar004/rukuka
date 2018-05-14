@@ -62,6 +62,7 @@ return [
     'quick_shop'                =>  'Quick Shop',
     'close'                     =>  'Close',
     'find'                      =>  'Find',
+    'you_save'                  =>  'You Save',
 
     //contact and social media
     'instagram'                 =>  'https://www.instagram.com/rukukadotcom/',
