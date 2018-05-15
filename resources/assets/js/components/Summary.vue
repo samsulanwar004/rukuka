@@ -5,6 +5,10 @@
        <h4 class="uk-text-uppercase">{{ trans.summary }}</h4>
     </div>
     <div class="uk-card-body">
+        <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid v-if="youSave > 0">
+          <div class="uk-text-small"><h6 class="uk-text-danger">{{ trans.you_save }}</h6></div>
+          <div class="uk-text-right uk-text-danger">{{ youSave | round(exchangeRate.symbol, exchangeRate.value) }}</div>
+        </div>
        <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid>
          <div class="uk-text-small"><h6 class="uk-text-uppercase">{{ trans.subtotal }}</h6></div>
          <div class="uk-text-right">{{ subtotal | round(exchangeRate.symbol, exchangeRate.value) }}</div>
@@ -40,6 +44,7 @@
                 total: {},
                 trans: JSON.parse(this.locale,true),
                 exchangeRate: {},
+                youSave: {}
             }
         },
 
@@ -55,6 +60,7 @@
               var subtotal = parseFloat(response.data.subtotal.replace(/,/g, ''));
               self.subtotal = subtotal;
               self.total = Number(subtotal) + Number(shipping_cost);
+              self.youSave = response.data.discount;
             });
 
         },
