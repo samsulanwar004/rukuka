@@ -526,7 +526,7 @@ class PageController extends BaseController
             foreach ($getBags as $value) {
                 $bags[$index] = $value;
                 $index++;
-                $discount += $value->options['price_sale'] > $value->price ? $value->options['price_sale'] - $value->price : 0;
+                $discount += $value->options['price_sale'] > $value->price ? ($value->options['price_sale'] - $value->price) * $value->qty : 0;
             }
 
             $subtotal = $bag->subtotal();
@@ -553,7 +553,7 @@ class PageController extends BaseController
         $discount = 0;
         if ($bags) {
             foreach ($bags as $value) {
-                $discount += $value->options['price_sale'] > $value->price ? $value->options['price_sale'] - $value->price : 0;
+                $discount += $value->options['price_sale'] > $value->price ? ($value->options['price_sale'] - $value->price) * $value->qty : 0;
             }
         }
 
