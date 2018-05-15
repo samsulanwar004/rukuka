@@ -65,7 +65,7 @@
             <h4 class="uk-text-uppercase">{{ trans.summary }}</h4>
           </div>
           <div class="uk-card-body">
-            <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid v-if="discount > 0">
+            <div class="uk-grid uk-child-width-1-2 uk-margin-small" uk-grid v-if="youSave > 0">
               <div class="uk-text-small"><h6 class="uk-text-danger">{{ trans.you_save }}</h6></div>
               <div class="uk-text-right uk-text-danger">{{ youSave | round(exchangeRate.symbol, exchangeRate.value) }}</div>
             </div>
