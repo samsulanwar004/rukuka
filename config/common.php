@@ -74,5 +74,10 @@ return [
 
 	'admin' => [
 		'users_id' => env('USERS_ID', '1')
+	],
+
+	'kuka_api' => [
+		'key' => env('KUKA_KEY_API'),
+		'payment_api' => env('KUKA_PAYMENT_API')
 	]
 ];

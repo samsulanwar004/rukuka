@@ -10,6 +10,7 @@ use App\Services\BagService;
 use App\Services\EmailService;
 use App\Services\CurrencyService;
 use App\Services\XenditService;
+use App\Services\ClientService;
 use App\Repositories\UserRepository;
 use App\Repositories\CourierRepository;
 use App\Repositories\PaymentRepository;
@@ -96,16 +97,38 @@ class OrderController extends BaseController
 	        //virtual account
 
 	        if ($paymentMethod === 'virtual_account') {
-	        	$options['secret_api_key'] = config('common.xendit_secret_key');
+	        	if (env('APP_ENV') == 'production') {
+	        		$options['secret_api_key'] = config('common.xendit_secret_key');
 
-		        $xenditPHPClient = new XenditService($options);
+			        $xenditPHPClient = new XenditService($options);
 
-		        $externalId = $orderCode;
-		        $payerEmail= $user->email;
-		        $amount = (int)$total + (int)$shipping;
-		        $description = 'Rukuka Pay';
+			        $externalId = $orderCode;
+			        $payerEmail= $user->email;
+			        $amount = (int)$total + (int)$shipping;
+			        $description = 'Rukuka Pay';
 
-		        $response = $xenditPHPClient->createInvoice($externalId, $amount, $payerEmail, $description);
+			        $response = $xenditPHPClient->createInvoice($externalId, $amount, $payerEmail, $description);
+	        	} else {
+	        		$method = 'post';
+	        		$url = config('common.kuka_api.payment_api').'/invoices';
+	        		$type = 'json';
+	        		$orderCodeVa = 'rukuka-'.$orderCode;
+	        		$amount = (int)$total + (int)$shipping;
+	        		$email = $user->email;
+
+	        		$data = [
+	        			'data' => [
+	        				'order_code' => $orderCodeVa,
+	        				'amount' => $amount,
+	        				'email' => $email,
+	        			],
+	        			'signature' => sha1($orderCodeVa.$amount.$email.config('common.kuka_api.key'))
+	        		];
+
+	        		$client = (new ClientService)->request($method, $url, $type, $data);
+
+	        		$response = $client['data'];
+	        	}
 	        } else {
 	        	$response['id'] = null;
 	        }
@@ -187,6 +210,7 @@ class OrderController extends BaseController
             } 
 
 		} catch (Exception $e) {
+			logger($e);
 			DB::rollBack();
 
 			return redirect('/bag')->withErrors($e->getMessage());
