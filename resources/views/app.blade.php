@@ -112,6 +112,8 @@
     <script src="{{ elixirCDN('js/app.js') }}"></script>
     @section('upload_scripts')
     @show
+    @section('navigation_scripts')
+    @show
     @section('footer_scripts')
     @show
   </body>

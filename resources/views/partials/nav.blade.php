@@ -134,7 +134,7 @@
     </div>
   @endif
 
-@section('footer_scripts')
+@section('navigation_scripts')
     <script>
         $.typeahead({
             input: '.js-typeahead-designers',
