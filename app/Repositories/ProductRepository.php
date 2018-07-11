@@ -318,6 +318,8 @@ class ProductRepository
             'products.created_at as created_at',
             'product_categories.name as category_name',
             'product_designers.id as designer_id',
+            'product_designers.name as designer_name',
+            'product_designers.slug as designer_slug',
             'product_images.photo as photo'
 
         )
@@ -520,7 +522,9 @@ class ProductRepository
             'products.price_before_discount as price_before_discount',
             'products.created_at as created_at',
             'products.product_categories_id as product_categories_id',
-            'product_images.photo as photo'
+            'product_images.photo as photo',
+            'product_designers.name as designer_name',
+            'product_designers.slug as designer_slug'
         )
 
         ->where('products.is_active',1)
