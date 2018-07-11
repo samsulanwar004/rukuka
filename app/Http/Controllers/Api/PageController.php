@@ -21,6 +21,11 @@ class PageController extends BaseApiController
     CONST CATEGORIES_CACHE = 'categories.cache';
     CONST COLOR_CACHE = 'color.cache';
     CONST POPULAR_CACHE = 'popular.cache';
+
+    public function __construct()
+    {
+        $this->date = Carbon::now('Asia/Jakarta');
+    }
     
     public function menu(Request $request, $parent = null)
     {
@@ -179,28 +184,19 @@ class PageController extends BaseApiController
             } else {
                 $popular = (new ProductRepository)->getMostProduct($group);
 
-                $ids = [];
-                foreach ($popular as $value) {
-                    $ids[] = $value->id;
-                }
-
-                $image = (new ProductRepository)->getProductImage($ids);
-
-                $popular = $popular->map(function ($entry) use ($image) {
-
-                    foreach ($image as $value) {
-                        if ($entry->id == $value->products_id) {
-                            $entry->photo = $value->photo;
-                        }
-                    }
+                $popular = $popular->map(function ($entry) {
 
                     return [
                         'id' => $entry->id,
                         'name' => $entry->name,
+                        'gender' => $entry->gender,
                         'slug' => $entry->slug,
                         'price' => $entry->sell_price,
                         'price_before_discount' => $entry->price_before_discount,
                         'photo' => $entry->photo ? str_replace('original', 'small', $entry->photo) : $entry->photo,
+                        'is_new' => $this->date->diffInDays(Carbon::parse($entry->created_at)) <= 7 ? true : false,
+                        'designer_name' => $entry->designer_name,
+                        'designer_slug' => $entry->designer_slug
                     ];
                 })->toArray();
 
@@ -220,28 +216,19 @@ class PageController extends BaseApiController
         try {
             $related = (new ProductRepository)->getRelatedProduct($categoryId);
 
-            $ids = [];
-            foreach ($related as $value) {
-                $ids[] = $value->id;
-            }
-
-            $image = (new ProductRepository)->getProductImage($ids);
-
-            $related = $related->map(function ($entry) use ($image) {
-
-                foreach ($image as $value) {
-                    if ($entry->id == $value->products_id) {
-                        $entry->photo = $value->photo;
-                    }
-                }
+            $related = $related->map(function ($entry) {
 
                 return [
                     'id' => $entry->id,
                     'name' => $entry->name,
+                    'gender' => $entry->gender,
                     'slug' => $entry->slug,
                     'price' => $entry->sell_price,
                     'price_before_discount' => $entry->price_before_discount,
                     'photo' => $entry->photo ? str_replace('original', 'small', $entry->photo) : $entry->photo,
+                    'is_new' => $this->date->diffInDays(Carbon::parse($entry->created_at)) <= 7 ? true : false,
+                    'designer_name' => $entry->designer_name,
+                    'designer_slug' => $entry->designer_slug
                 ];
             })->toArray();
 
@@ -300,28 +287,19 @@ class PageController extends BaseApiController
 
             $recently = (new ProductRepository)->getRecentlyViewedProduct($product);
 
-            $ids = [];
-            foreach ($recently as $value) {
-                $ids[] = $value->id;
-            }
-
-            $image = (new ProductRepository)->getProductImage($ids);
-
-            $recently = $recently->map(function ($entry) use ($image) {
-
-                foreach ($image as $value) {
-                    if ($entry->id == $value->products_id) {
-                        $entry->photo = $value->photo;
-                    }
-                }
+            $recently = $recently->map(function ($entry) {
 
                 return [
                     'id' => $entry->id,
                     'name' => $entry->name,
+                    'gender' => $entry->gender,
                     'slug' => $entry->slug,
                     'price' => $entry->sell_price,
                     'price_before_discount' => $entry->price_before_discount,
                     'photo' => $entry->photo ? str_replace('original', 'small', $entry->photo) : $entry->photo,
+                    'is_new' => $this->date->diffInDays(Carbon::parse($entry->created_at)) <= 7 ? true : false,
+                    'designer_name' => $entry->designer_name,
+                    'designer_slug' => $entry->designer_slug
                 ];
             })->toArray();
 

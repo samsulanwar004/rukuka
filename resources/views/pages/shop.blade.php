@@ -391,6 +391,7 @@
         </div>
         <related
                 api="{{ route('recently') }}"
+                menu ="{{ $categories }}"
                 product_api="{{ route('product.api') }}"
                 bag_api="{{ route('persist.bag') }}"
                 wishlist_api="{{ route('persist.wishlist') }}"

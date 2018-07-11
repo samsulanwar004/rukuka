@@ -162,6 +162,9 @@ class PageController extends BaseController
             $view = $request->has('view') ? $request->input('view') : 36;
             $onSize = $request->has('size') ? $request->input('size') : '';
 
+            // put session menu
+            $request->session()->put('menu.session', $categories);
+
             // when parent designer
             if ($request->has('designer')) {
                 $designer = $product->getDesigner();
@@ -305,7 +308,7 @@ class PageController extends BaseController
         return view('pages.designer', compact('designers', 'alpabeths', 'menu'));
     }
 
-    public function women()
+    public function women(Request $request)
     {
 
         if (Cache::has(self::SETTING_WOMEN_CACHE)) {
@@ -332,10 +335,12 @@ class PageController extends BaseController
             Cache::put(self::SLIDER_WOMEN_CACHE, $slider, $expiresAt);
         }
 
+        $request->session()->put('menu.session', 'womens');
+
         return view('pages.women', compact('women','slider'));
     }
 
-    public function men()
+    public function men(Request $request)
     {
 
         if (Cache::has(self::SETTING_MEN_CACHE)) {
@@ -361,6 +366,8 @@ class PageController extends BaseController
 
             Cache::put(self::SLIDER_MEN_CACHE, $slider, $expiresAt);
         }
+
+         $request->session()->put('menu.session', 'mens');
 
         return view('pages.men', compact('men','slider'));
     }
@@ -548,7 +555,7 @@ class PageController extends BaseController
         }
     }
 
-    public function showBagPage()
+    public function showBagPage(Request $request)
     {
         $bags = (new BagService)->get(self::INSTANCE_SHOP);
 
@@ -563,7 +570,13 @@ class PageController extends BaseController
 
         $recently = $recentlyViewed ? array_keys(array_flip(array_reverse($recentlyViewed))) : [];
 
-        return view('pages.bag', compact('recently', 'bags', 'discount'));
+        if ($request->session()->has('menu.session')) {
+            $menu = $request->session()->get('menu.session');
+        } else {
+            $menu = 'womens';
+        }
+
+        return view('pages.bag', compact('recently', 'bags', 'discount', 'menu'));
     }
 
     public function page($slug){
@@ -639,6 +652,9 @@ class PageController extends BaseController
         $sortByPopular = $request->input('popular');
         $navigation = $request->input('menu');
         $view = $request->has('view') ? $request->input('view') : 36;
+        
+        // put session menu
+        $request->session()->put('menu.session', $navigation);
 
         if(count($products) == 0){
             return view('pages.search_404', compact('keyword','navigation'));

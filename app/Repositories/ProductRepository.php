@@ -472,17 +472,29 @@ class ProductRepository
     {
         return \DB::table('products')->join('populars', function ($join) {
             $join->on('populars.products_id', '=', 'products.id');
+        })->join('product_designers', function ($join) {
+            $join->on('products.product_designers_id', '=', 'product_designers.id')
+            ->whereNull('product_designers.deleted_at');
+        })->join('product_images', function ($join) {
+            $join->on('products.id', '=', 'product_images.products_id');
         })->select(
             'products.id as id', 
             'products.name as name', 
             'products.slug as slug', 
+            'products.gender as gender',
             'products.sell_price as sell_price', 
-            'products.price_before_discount as price_before_discount'
+            'products.price_before_discount as price_before_discount',
+            'products.created_at as created_at',
+            'products.product_categories_id as product_categories_id',
+            'product_images.photo as photo',
+            'product_designers.name as designer_name',
+            'product_designers.slug as designer_slug'
         )
         ->where('populars.group_setting',$group)
         ->where('products.is_active',1)
         ->whereNull('products.deleted_at')
         ->orderBy('populars.order')
+        ->groupBy('products.id')
         ->get();  
     }
 
@@ -491,16 +503,28 @@ class ProductRepository
         return \DB::table('products')->join('product_categories', function ($join) use ($categoryId) {
             $join->on('products.product_categories_id', '=', 'product_categories.id')
             ->where('product_categories.id', $categoryId);
+        })->join('product_designers', function ($join) {
+            $join->on('products.product_designers_id', '=', 'product_designers.id')
+            ->whereNull('product_designers.deleted_at');
+        })->join('product_images', function ($join) {
+            $join->on('products.id', '=', 'product_images.products_id');
         })->select(
-            'products.id as id', 
-            'products.name as name', 
-            'products.slug as slug', 
-            'products.sell_price as sell_price', 
-            'products.price_before_discount as price_before_discount'
+            'products.id as id',
+            'products.name as name',
+            'products.slug as slug',
+            'products.gender as gender',
+            'products.sell_price as sell_price',
+            'products.price_before_discount as price_before_discount',
+            'products.created_at as created_at',
+            'products.product_categories_id as product_categories_id',
+            'product_images.photo as photo',
+            'product_designers.name as designer_name',
+            'product_designers.slug as designer_slug'
         )
         ->inRandomOrder()
         ->whereNull('products.deleted_at')
         ->where('products.is_active',1)
+        ->groupBy('products.id')
         ->take(4)
         ->get();
     }
@@ -572,11 +596,33 @@ class ProductRepository
     public function getRecentlyViewedProduct($ids)
     {
         $orders = implode(',', $ids);
-        return $this->model()
-            ->whereIn('id', $ids)
-            ->orderByRaw(\DB::raw("FIELD(id, $orders)"))
-            ->take(4)
-            ->get();
+        return \DB::table('products')->join('product_designers', function ($join) {
+            $join->on('products.product_designers_id', '=', 'product_designers.id')
+            ->whereNull('product_designers.deleted_at');
+        })->join('product_images', function ($join) {
+            $join->on('products.id', '=', 'product_images.products_id');
+        })
+        ->select(
+            'products.id as id',
+            'products.name as name',
+            'products.slug as slug',
+            'products.gender as gender',
+            'products.sell_price as sell_price',
+            'products.price_before_discount as price_before_discount',
+            'products.created_at as created_at',
+            'products.product_categories_id as product_categories_id',
+            'product_images.photo as photo',
+            'product_designers.name as designer_name',
+            'product_designers.slug as designer_slug'
+        )
+
+        ->where('products.is_active',1)
+        ->whereIn('products.id', $ids)
+        ->orderByRaw(\DB::raw("FIELD(products.id, $orders)"))
+        ->whereNull('products.deleted_at')
+        ->groupBy('products.id')
+        ->take(4)
+        ->get();
     }
 
     public function getLookbookProduct($ids)

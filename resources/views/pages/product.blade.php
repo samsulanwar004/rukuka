@@ -288,6 +288,7 @@
             <h4 class="uk-text-center uk-text-uppercase">{{ trans('app.related') }}</h4>
         <related
                 api="{{ route('related', ['categoryId' => $product->product_categories_id]) }}"
+                menu ="{{ strtolower($product->gender) }}"
                 product_api="{{ route('product.api') }}"
                 bag_api="{{ route('persist.bag') }}"
                 wishlist_api="{{ route('persist.wishlist') }}"
