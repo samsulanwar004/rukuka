@@ -34,6 +34,7 @@ import Lookbook from './components/Lookbook.vue';
 Vue.config.devtools = false
 Vue.config.debug = false
 Vue.config.silent = true
+Vue.config.productionTip = false
 
 Vue.use(VueResource);
 Vue.use(VeeValidate);

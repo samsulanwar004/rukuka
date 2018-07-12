@@ -89,8 +89,29 @@
                           </ul>
                       </li>
 
-                      <li :class="{'uk-open uk-active': category == 'homeware' }">
-                          <a :href="'/shop?menu=mens&parent=homeware&category=all'" class="">{{ trans.home_nav }}</a>
+                      <li :class="{'uk-parent': true , 'uk-open uk-active': category == 'homeware' }">
+                          <a class="">{{ trans.home_nav }}</a>
+                          <ul class="uk-nav-sub">
+                          <span>
+                              <li>
+                                <a :href="'/shop?menu=mens&parent=homeware&category=all'">
+                                    <span>
+                                        {{ trans.all }}
+                                    </span>
+                                </a>
+                              </li>
+                              <li v-for="cat in categories.homeware" v-if="cat.menu == 'mens' || cat.menu == null">
+                                  <div v-if="categoryArrMens.includes(cat.name)">
+                                      <a :href="'/shop?menu=mens&parent=homeware&category='+ cat.slug ">{{ cat.name }}</a>
+                                  </div>
+                                  <div v-else>
+                                      <span class="cat-disabled-mobile">
+                                          {{ cat.name }}
+                                      </span>
+                                  </div>
+                              </li>
+                          </span>
+                          </ul>
                       </li>
 
                       <li class="uk-parent">
@@ -186,8 +207,29 @@
                           </ul>
                       </li>
 
-                      <li :class="{'uk-open uk-active': category == 'homeware' }">
-                          <a :href="'/shop?menu=womens&parent=homeware&category=all'" class="">{{ trans.home_nav }}</a>
+                      <li :class="{'uk-parent': true , 'uk-open uk-active': category == 'homeware' }">
+                          <a class="">{{ trans.home_nav }}</a>
+                          <ul class="uk-nav-sub">
+                          <span>
+                              <li>
+                                <a :href="'/shop?menu=womens&parent=homeware&category=all'">
+                                    <span>
+                                        {{ trans.all }}
+                                    </span>
+                                </a>
+                              </li>
+                              <li v-for="cat in categories.homeware" v-if="cat.menu == 'womens' || cat.menu == null">
+                                  <div v-if="categoryArrWomens.includes(cat.name)">
+                                      <a :href="'/shop?menu=womens&parent=homeware&category='+ cat.slug ">{{ cat.name }}</a>
+                                  </div>
+                                  <div v-else>
+                                      <span class="cat-disabled-mobile">
+                                          {{ cat.name }}
+                                      </span>
+                                  </div>
+                              </li>
+                          </span>
+                          </ul>
                       </li>
 
                       <li class="uk-parent">
