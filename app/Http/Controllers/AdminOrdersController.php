@@ -411,9 +411,10 @@
 
 		  $data = [];
 		  $data['page_title'] = 'Detail Data';
-		  $data['row'] = (new OrderRepository)->getOrderById($id);
+		  $data['orderDetail'] = (new OrderRepository)->getOrderDetailByOrderId($id);
+		  $data['row'] = $data['orderDetail'][0];
 		  $data['return_url'] = request()->input('return_url');
-		  
+
 		  //Please use cbView method instead view method from laravel
 		  $this->cbView('admin.order_details',$data);
 		}

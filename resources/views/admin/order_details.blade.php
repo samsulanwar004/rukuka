@@ -57,11 +57,11 @@
           <div class="col-md-3">
             Customer Detail <hr>
             <b>User Account:</b> <br>
-            {{ $row->address->user->email }} <br><br>
+            {{ $row->email }} <br><br>
             <b>Address:</b> <br>
-            {{ $row->address->first_name }} {{ $row->address->last_name }} ({{ $row->address->phone_number }}) <br>
-            {{ $row->address->company != null ?  $row->address->company.', ' : ''}}<br>
-            {{ $row->address->address_line }}, {{ $row->address->city }}, {{ $row->address->province }}, {{ $row->address->postal }}, {{ $row->address->country }} <br>
+            {{ $row->first_name }} {{ $row->last_name }} ({{ $row->phone_number }}) <br>
+            {{ $row->company != null ?  $row->company.', ' : ''}}<br>
+            {{ $row->address_line }}, {{ $row->city }}, {{ $row->province }}, {{ $row->postal }}, {{ $row->country }} <br>
             @php
               if ($row->order_status == '0') {
                   echo '<span class="label label-primary">Sent Pending</span>';
@@ -97,7 +97,7 @@
                   @php
                     $total = null;
                   @endphp
-                  @foreach($row->details as $detail)
+                  @foreach($orderDetail as $detail)
                     <tr>
                         <td>{{ $detail->product_name }}</td>
                         <td><a href="/admin/product-stocks?q={{ $detail->sku }}">{{ $detail->sku }}</a></td>

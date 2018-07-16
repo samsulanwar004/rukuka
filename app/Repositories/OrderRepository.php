@@ -361,6 +361,39 @@ class OrderRepository
 			->first();
 	}
 
+	public function getOrderDetailByOrderId($id)
+	{
+		return \DB::table('orders')->join('order_details', function ($join) {
+            $join->on('orders.id', '=', 'order_details.orders_id');
+        })->join('users', function ($join) {
+            $join->on('users.id', '=', 'orders.users_id');
+        })
+        ->join('address', function ($join) {
+            $join->on('address.id', '=', 'orders.shipping_id');
+        })
+        ->select(
+            'orders.*',
+            'users.email',
+            'address.first_name',
+            'address.last_name',
+            'address.phone_number',
+            'address.company',
+            'address.address_line',
+            'address.city',
+            'address.province',
+            'address.postal',
+            'address.country',
+            'order_details.product_code',
+            'order_details.product_name',
+            'order_details.sku',
+            'order_details.qty',
+            'order_details.price',
+            'order_details.subtotal'
+        )
+        ->where('orders.id', $id)
+        ->get();
+	}
+
 	public function getTrackingAirwaybill(){
 		
 		$order = Order::with('user')
