@@ -326,7 +326,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {
 	        //Your code here
-            $product_code = $this->generateProductDate();
+            $product_code = $this->generateCode('products', 'product_code', 'PC');
 	        $postdata['product_code'] = $product_code;
 
 
@@ -361,17 +361,9 @@
             $product_code = strtoupper(substr($product->product_code,0,2));
 
             if($product_code == 'P2' || $product_code == 'KP'){
-                $pc = $this->generateProductDate();
+                $pc = $this->generateCode('products', 'product_code', 'PC');
                 $postdata['product_code'] = $pc;
             }
-
-            $regid = ['867352708284'];
-			$data['title'] = "This is a message title";
-			$data['content'] = "This is a message body";
-			// You can add more key as you need
-			// $data['your_other_key'] =
-			CRUDBooster::sendFCM($regid,$data);
-
 	    }
 
 	    /*
@@ -465,14 +457,46 @@
 	    	return $this->categoryId;
 	    }
 
-	    public function generateProductDate(){
-            $product_code = 'PC'.date('ym').rand(1000,9999);
-            $validator = \Validator::make(['product_code'=>$product_code],['product_code'=>'unique:products,product_code']);
+	    public function generateCode($table, $col, $code){
 
-            if($validator->fails()){
-                $this->generateProductDate();
-            }
-            return $product_code;
+            $unique = false;
+
+	        // Store tested results in array to not test them again
+	        $tested = [];
+
+	        do{
+
+	            // Generate random string of characters
+	            $random = $code.date('ym').rand(1000,9999);
+
+	            // Check if it's already testing
+	            // If so, don't query the database again
+	            if( in_array($random, $tested) ){
+	                continue;
+	            }
+
+	            // Check if it is unique in the database
+	            $count = DB::table($table)->where($col, '=', $random)->count();
+
+	            // Store the random character in the tested array
+	            // To keep track which ones are already tested
+	            $tested[] = $random;
+
+	            // String appears to be unique
+	            if( $count == 0){
+	                // Set unique to true to break the loop
+	                $unique = true;
+	            }
+
+	            // If unique is still false at this point
+	            // it will just repeat all the steps until
+	            // it has generated a random string of characters
+
+	        }
+	        while(!$unique);
+
+
+	        return $random;
         }
 
 	}

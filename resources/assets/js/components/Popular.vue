@@ -11,13 +11,22 @@
                 :placeholder='loadingImage'
                 :img-alt='product.name'
             ></lazy-image>
+            <div class="uk-postion-small uk-position-top-right" v-if="product.price_before_discount > 0">
+              <span class="uk-label uk-label-danger">SALE</span>
+            </div>
+            <div class="uk-postion-small uk-position-top-left" v-if="product.is_new">
+              <span class="uk-label uk-label-success">NEW</span>
+            </div>
           </a>
         </div>
         <div class="uk-card-body uk-padding-remove">
           <div class="margin-5px-bot">
             <a href="#modal-popular" class="uk-button uk-button-small uk-button-secondary uk-visible@m uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
           </div>
-          <a :href="'/product/'+ product.slug" class="shop_item_title uk-link-reset">{{ product.name.substring(0,35) }}
+          <a :href="'/shop?menu='+menu+'&designer='+product.designer_slug" class="shop_item_title uk-link-muted uk-link-reset">
+            <span>{{ product.designer_name }}</span>
+          </a> <br>
+          <a :href="'/product/'+ product.slug" class="uk-link-reset">{{ product.name.substring(0,35) }}
           <br>
             <span v-if="product.price_before_discount > 0 ">
               <del class="uk-text-small">
@@ -238,6 +247,7 @@
   export default {
     props: [
       'api',
+      'menu',
       'product_api',
       'bag_api',
       'wishlist_api',
