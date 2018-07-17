@@ -8,6 +8,14 @@
   font-family: SoleilBold;
   src: url('/images/fonts/Soleil-Bold.otf');
 }
+@font-face {
+  font-family: SoleilBook;
+  src: url('/images/fonts/Soleil-Book.otf');
+}
+@font-face {
+  font-family: SoleilRegular;
+  src: url('/images/fonts/Soleil-Regular.otf');
+}
 /* ========================================================================
    Component: Base
  ========================================================================== */
@@ -246,7 +254,7 @@ h5,
 h6,
 .uk-h6 {
   margin: 0 0 20px 0;
-  font-family: SoleilBold;
+  font-family: SoleilRegular;
   font-weight: 600;
   color: #000;
   letter-spacing: 2px;
