@@ -187,7 +187,16 @@
 	        | $this->script_js = "function() { ... }";
 	        |
 	        */
-	        $this->script_js = NULL;
+	        $this->script_js = "
+		        $(document).ready(function(){
+				    $('.openPopup').on('click',function(){
+				        var dataURL = $(this).attr('data-href');
+				        $('.modal-body').load(dataURL,function(){
+				            $('#myModal').modal({show:true});
+				        });
+				    }); 
+				});
+			";
 
 
             /*

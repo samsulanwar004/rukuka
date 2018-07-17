@@ -662,4 +662,34 @@ class ProductRepository
             ->first();
     }
 
+    public function getProductBySku($sku)
+    {
+        return \DB::table('products')->join('product_stocks', function ($join) use ($sku){
+            $join->on('products.id', '=', 'product_stocks.products_id')
+                ->where('product_stocks.sku', $sku);
+        })->join('product_designers', function ($join) {
+            $join->on('products.product_designers_id', '=', 'product_designers.id')
+            ->whereNull('product_designers.deleted_at');
+        })->join('product_images', function ($join) {
+            $join->on('products.id', '=', 'product_images.products_id');
+        })
+        ->join('product_colors', function ($join) {
+            $join->on('products.product_colors_id', '=', 'product_colors.id');
+        })->select(
+            'products.id as id', 
+            'products.name as name', 
+            'products.slug as slug',
+            'products.sell_price as sell_price', 
+            'products.price_before_discount as price_before_discount',
+            'product_images.photo as photo',
+            'product_designers.name as designer_name',
+            'product_designers.slug as designer_slug',
+            'product_stocks.sku',
+            'product_stocks.size',
+            'product_stocks.unit',
+            'product_colors.name as color'
+        )
+        ->first();  
+    }
+
 }

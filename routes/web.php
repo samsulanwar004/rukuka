@@ -185,6 +185,11 @@ Route::get('/lookbook/{lookbook_slug}/{collection_slug}', [
     'uses' => 'Frontend\PageController@getLookbookCollectionProduct',
 ]);
 
+Route::get('/get-product/{sku}', [
+    'as'   => 'get.product',
+    'uses' => 'Frontend\PageController@getProductByAjax',
+]);
+
 
 //MIDDLEWARE
 Route::middleware(['guest'])->group(function () {
