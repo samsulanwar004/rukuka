@@ -865,7 +865,6 @@ class PageController extends BaseController
                 <tr><td>Color</td><td>:</td><td>".$product->color."</td></tr>
                 <tr><td>SKU</td><td>:</td><td>".$product->sku."</td></tr>
                 <tr><td>Size</td><td>:</td><td>".$product->size."</td></tr>
-                <tr><td>Stock available</td><td>:</td><td>".$product->unit." unit</td></tr>
                 <tr><td>Photo</td><td>:</td><td><img width='300px' src='".uploadCDN(str_replace('original', 'small', $product->photo))."'></td></tr>
             </table>
         </p>";

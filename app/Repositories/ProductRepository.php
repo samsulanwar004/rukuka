@@ -686,7 +686,6 @@ class ProductRepository
             'product_designers.slug as designer_slug',
             'product_stocks.sku',
             'product_stocks.size',
-            'product_stocks.unit',
             'product_colors.name as color'
         )
         ->first();  
