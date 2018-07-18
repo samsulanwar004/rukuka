@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head> <title>rukuka is coming soon</title>
+<head> <title>rukuka is under maintance</title>
 <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet" type="text/css">
 
 <style>
@@ -10,7 +10,7 @@
 
     body {
        margin: 0;
-       background-color: #dadada;
+       background-color: #ffffff;
        padding: 0;
        width: 100%;
        color: #666666;
@@ -39,7 +39,7 @@
 <body>
     <div class="container">
         <div class="content">
-          <img src="{{ imageCDN('rukuka_is_coming.jpg') }}" alt="" width="600px">
+          <img src="{{ imageCDN('under_maintance.jpg') }}" alt="" width="800px">
         </div>
     </div>
 </body>
