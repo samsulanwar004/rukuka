@@ -78,6 +78,11 @@ class PageController extends BaseController
     {
         try {
 
+            //Session view count
+            if ($request->session()->has('view.session') && !$request->has('view')) {
+                $request->merge(['view' => $request->session()->get('view.session')]);
+            }
+
             //get list category product
             if($request->has('designer')) {
                 $categoryArr = $product->getCategoryProductDesigner($request);
@@ -161,6 +166,9 @@ class PageController extends BaseController
             $slug = $request->input('category');
             $view = $request->has('view') ? $request->input('view') : 36;
             $onSize = $request->has('size') ? $request->input('size') : '';
+
+            // put session view count
+            $request->session()->put('view.session', $view);
 
             // put session menu
             $request->session()->put('menu.session', $categories);
@@ -623,6 +631,12 @@ class PageController extends BaseController
 
     public function search(Request $request)
     {
+
+        //Session view count
+        if ($request->session()->has('view.session') && !$request->has('view')) {
+            $request->merge(['view' => $request->session()->get('view.session')]);
+        }
+
         $product = (new ProductRepository);
         $products = $product->getSearch($request);
 
@@ -652,6 +666,7 @@ class PageController extends BaseController
         $sortByPopular = $request->input('popular');
         $navigation = $request->input('menu');
         $view = $request->has('view') ? $request->input('view') : 36;
+        $request->session()->put('view.session', $view);
         
         // put session menu
         $request->session()->put('menu.session', $navigation);
