@@ -62,11 +62,8 @@
           <button v-if="prod.is_preorder == 0" class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right uk-text-uppercase" v-on:click="bag"> {{ trans.add_to_bag }} </button>
           <button v-else class="uk-width-1-1 uk-button uk-button-secondary uk-text-bold uk-padding-small-right uk-text-uppercase" v-on:click="bag"> Pre Order </button>
         </div>
-        <div class="uk-margin-small-top" v-if="method == 'wishlist'">
-            <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right uk-text-uppercase" v-on:click="updateWishlist(id)">{{ trans.update_wishlist }}</button>
-        </div>
-        <div class="uk-margin-small-top" v-else>
-            <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right uk-text-uppercase" v-on:click="wishlist">{{ trans.wishlist_label }}</button>
+        <div class="uk-margin-small-top">
+            <button class="uk-width-1-1 uk-button uk-button-default uk-text-bold uk-padding-small-right uk-text-uppercase" v-on:click="wishlist(prod.id)">{{ trans.wishlist_label }}</button>
         </div>
     </div>
 </template>
@@ -156,14 +153,13 @@
                     }
                 });
             },
-            wishlist: function  (event) {
+            wishlist: function  (productId) {
                 this.$validator.validateAll().then((result) => {
                     if(result) {
                         if (this.auth == 1) {
-                            var size = this.size;
 
                             axios.post(this.api_wishlist, {
-                                size: size
+                                products_id: productId
                             })
                             .then(function (response) {
                                 if (typeof response.data.message !== 'undefined') {
@@ -243,60 +239,6 @@
                             }
                         });
 
-                    } else {
-                        var items = this.errors.items;
-                        $.each(items, function (index, item) {
-                            UIkit.notification(item.msg, {
-                                status:'danger'
-                            });
-                        });
-                    }
-                });
-            },
-
-            updateWishlist: function (update) {
-                this.method = 'none';
-                let afterUpdateWishlist = this.wishlist_link;
-                this.$validator.validateAll().then((result) => {
-                    if(result) {
-                        if (this.auth == 1) {
-                            var size = this.size;
-
-                            axios.post(this.api_wishlist, {
-                                size: size,
-                                update: update
-                            })
-                            .then(function (response) {
-                                if (typeof response.data.message !== 'undefined') {
-                                    if (response.data.status.toLowerCase() == 'error') {
-                                        UIkit.notification(response.data.message.size[0], {
-                                            status:'danger'
-                                        });
-                                    }
-                                    if (response.data.status.toLowerCase() == 'ok') {
-                                        UIkit.notification("<span uk-icon='icon: check'></span> Update product wishlist successfully", {
-                                            status:'success'
-                                        });
-
-                                        Event.fire('addWishlist', response);
-
-                                        window.location.href = afterUpdateWishlist;
-                                    }
-                                }
-                            })
-                            .catch(function (error) {
-                                var error = JSON.parse(JSON.stringify(error));
-                                if (typeof error.response.data.message !== 'undefined') {
-                                    UIkit.notification(error.response.data.message, {
-                                        status:'danger'
-                                    });
-                                }
-                            });
-                        } else {
-                            UIkit.notification("Please login!", {
-                                status:'danger'
-                            });
-                        }
                     } else {
                         var items = this.errors.items;
                         $.each(items, function (index, item) {

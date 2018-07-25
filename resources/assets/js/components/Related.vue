@@ -17,6 +17,9 @@
             <div class="uk-postion-small uk-position-top-left" v-if="product.is_new">
               <span class="uk-label uk-label-success">NEW</span>
             </div>
+            <div class="uk-postion-small uk-position-bottom-right">
+              <a href="#" v-on:click.prevent="toggleLike(product.id)" :id="'like-related-'+product.id" class="uk-icon-link uk-icon like-potition" uk-icon="icon: heart; ratio: 1.5" :style="product.like | like"></a>
+            </div>
           </a>
         </div>
         <div class="uk-card-body uk-padding-remove">
@@ -203,7 +206,7 @@
               <div class="uk-panel">
                 <div>
                     <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
-                    <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="wishlist">{{ trans.wishlist_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                    <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="wishlist(productId)">{{ trans.wishlist_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
                 </div>
               </div>
               </div>
@@ -224,7 +227,7 @@
           <div class="uk-panel">
             <div>
                 <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
-                <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="wishlist">{{ trans.wishlist_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="wishlist(productId)">{{ trans.wishlist_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
             </div>
           </div>
           </div>
@@ -240,6 +243,10 @@
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
   }
+  .like-potition {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
 </style>
 <script>
   import axios from 'axios';
@@ -253,6 +260,7 @@
       'bag_api',
       'wishlist_api',
       'auth',
+      'token',
       'aws_link',
       'default_image',
       'recently',
@@ -268,12 +276,16 @@
     created() {
       var self = this;
       let api = this.api;
+      let token = this.token;
+      let menu = this.menu;
       var recently = this.recently;
 
       if (recently) {
         var product = JSON.parse(recently);
         axios.post(api, {
-            product: product
+            product: product,
+            api_token: token,
+            menu: menu
         })
         .then(function (response) {
             if (response.data.data !== 'undefined') {
@@ -320,6 +332,7 @@
     data() {
         return {
             products: {},
+            productId: {},
             name: {},
             price: {},
             priceBeforeDiscount: {},
@@ -353,6 +366,7 @@
         .then(function (response) {
           if (typeof response.data.data !== 'undefined') {
             var data = response.data.data;
+            self.productId = data.id;
             self.name = data.name;
             self.price = data.sell_price;
             self.priceBeforeDiscount = data.price_before_discount;
@@ -363,7 +377,7 @@
             self.content = data.content;
             self.sizeAndFit = data.size_and_fit;
             self.detailAndCare = data.detail_and_care;
-            self.slug =  data.slug;
+            self.slug =  data.gender != 'unisex' ? data.slug : data.slug+'?menu='+menu;
             self.size = self.stocks.length > 0 ? self.stocks[0].sku : null;
             self.isPreOrder =  data.is_preorder;
             self.preOrderDay =  data.preorder_day;
@@ -422,14 +436,13 @@
         });
       },
 
-      wishlist: function (event) {
+      wishlist: function (productId) {
         this.$validator.validateAll().then((result) => {
           if(result) {
               if (this.auth == 1) {
-                  var size = this.size;
 
                   axios.post(this.wishlist_api, {
-                      size: size
+                      products_id: productId
                   })
                   .then(function (response) {
                       if (typeof response.data.message !== 'undefined') {
@@ -444,6 +457,12 @@
                               });
 
                               Event.fire('addWishlist', response);
+
+                              document.getElementById('like-related-'+productId).style.color = "red";
+
+                              var _like = document.getElementById('like-'+productId);
+
+                              _like ? _like.style.color = "red" : '';
                           }
                       }
                   })
@@ -469,6 +488,72 @@
               });
           }
         });
+      },
+
+      removeWishlist: function (productId) {
+          this.$validator.validateAll().then((result) => {
+              if(result) {
+                  if (this.auth == 1) {
+
+                      axios.post(this.wishlist_api, {
+                          products_id: productId,
+                          unlist: 'ok'
+                      })
+                          .then(function (response) {
+                              if (typeof response.data.message !== 'undefined') {
+                                  if (response.data.status.toLowerCase() == 'error') {
+                                      UIkit.notification(response.data.message.size[0], {
+                                          status:'danger'
+                                      });
+                                  }
+                                  if (response.data.status.toLowerCase() == 'ok') {
+                                      UIkit.notification("<span uk-icon='icon: check'></span> Delete product from wishlist successfully", {
+                                          status:'success'
+                                      });
+
+                                      Event.fire('addWishlist', response);
+
+                                      document.getElementById('like-related-'+productId).style.color = "black";
+
+                                      _like = document.getElementById('like-'+productId);
+
+                                      _like ? _like.style.color = "black" : '';
+                                  }
+                              }
+                          })
+                          .catch(function (error) {
+                              var error = JSON.parse(JSON.stringify(error));
+                              if (typeof error.response.data.message !== 'undefined') {
+                                  UIkit.notification(error.response.data.message, {
+                                      status:'danger'
+                                  });
+                              }
+                          });
+                  } else {
+                      UIkit.notification("You are not logged in. To login, please click <a href='/login?return="+window.location.href+"'>here</a>", {
+                          status:'danger'
+                      });
+                  }
+              } else {
+                  var items = this.errors.items;
+                  $.each(items, function (index, item) {
+                      UIkit.notification(item.msg, {
+                          status:'danger'
+                      });
+                  });
+              }
+          });
+      },
+
+      toggleLike: function(productId)
+      {
+        var color = document.getElementById('like-related-'+productId).style.color;
+        if (color == 'black') {
+          this.wishlist(productId);
+        } else if (color == 'red') {
+          this.removeWishlist(productId);
+        }
+        
       }
     },
 
@@ -502,6 +587,14 @@
           return '/shop?menu='+menu;
         } else {
           return '/shop?menu='+value;
+        }
+      },
+
+      like: function (event) {
+        if (event) {
+          return 'color: red;';
+        } else {
+          return 'color: black;';
         }
       }
     }

@@ -145,11 +145,9 @@ class PageController extends BaseController
             //get wishlist
             $wishlists = [];
             if ($user = $this->getUserActive()) {
-                $wishlists = \DB::table('wishlists')
-                    ->where('users_id', $user->id)
-                    ->get();
+                $wishlists = (new UserRepository)->getWishlistByUserId($user->id);
                 $wishlists = $wishlists->map(function($entry) {
-                    return $entry->products_id;
+                    return $entry->id;
                 })->toArray();
             }
 
@@ -286,6 +284,7 @@ class PageController extends BaseController
         }
 
         $buttonBuy = new \stdClass;
+        $buttonBuy->id = $product->id;
         $buttonBuy->color = $product->palette->name;
         $buttonBuy->color_palette = $product->palette->palette;
         $buttonBuy->content = $product->content;

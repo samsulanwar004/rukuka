@@ -422,6 +422,10 @@
                                             Event.fire('addWishlist', response);
 
                                             document.getElementById('like-'+productId).style.color = "red";
+
+                                            var _like = document.getElementById('like-related-'+productId);
+                                            
+                                            _like ? _like.style.color = "red" : '';
                                         }
                                     }
                                 })
@@ -473,6 +477,10 @@
                                             Event.fire('addWishlist', response);
 
                                             document.getElementById('like-'+productId).style.color = "black";
+
+                                            var _like = document.getElementById('like-related-'+productId);
+
+                                            _like ? _like.style.color = "black" : '';
                                         }
                                     }
                                 })
