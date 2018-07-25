@@ -10,6 +10,11 @@
 
 }
 
+.menu-header {
+	font-size: 20px !important;
+	font-family: SoleilBold !important;
+}
+
 .margin-5px-bot {
 	margin-bottom: 5px;
 }
