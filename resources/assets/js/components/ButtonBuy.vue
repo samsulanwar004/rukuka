@@ -190,7 +190,7 @@
                                 }
                             });
                         } else {
-                            UIkit.notification("Please login!", {
+                            UIkit.notification("We can't add this to your wishlist if you are not logged in. To login, please click <a href='/login?return="+window.location.href+"'>here</a>", {
                                 status:'danger'
                             });
                         }

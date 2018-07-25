@@ -142,7 +142,20 @@ class PageController extends BaseController
             $sortByNew = $request->input('sort');
             $sortByPopular = $request->input('popular');
 
-            $shops = $products->map(function ($entry) use ($request) {
+            //get wishlist
+            $wishlists = [];
+            if ($user = $this->getUserActive()) {
+                $wishlists = \DB::table('wishlists')
+                    ->where('users_id', $user->id)
+                    ->get();
+                $wishlists = $wishlists->map(function($entry) {
+                    return $entry->products_id;
+                })->toArray();
+            }
+
+            $shops = $products->map(function ($entry) use ($request, $wishlists) {
+
+                $like = in_array($entry->id, $wishlists) ? true : false;
 
                 return [
                     'id' => $entry->id,
@@ -153,7 +166,8 @@ class PageController extends BaseController
                     'photo' => $entry->photo ? str_replace('original', 'medium', $entry->photo) : $entry->photo,
                     'is_new' => $this->date->diffInDays(Carbon::parse($entry->created_at)) <= 7 ? true : false,
                     'designer_name' => $entry->designer_name,
-                    'designer_slug' => $entry->designer_slug
+                    'designer_slug' => $entry->designer_slug,
+                    'like' => $like
                 ];
             });
 

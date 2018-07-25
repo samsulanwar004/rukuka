@@ -321,7 +321,6 @@ class ProductRepository
             'product_designers.name as designer_name',
             'product_designers.slug as designer_slug',
             'product_images.photo as photo'
-
         )
         ->where('products.is_active',1)
         ->whereNull('products.deleted_at')

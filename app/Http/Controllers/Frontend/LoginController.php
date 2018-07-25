@@ -29,7 +29,7 @@ class LoginController extends BaseController
     	$this->user = $user;
     }
 
-    public function showLoginPage()
+    public function showLoginPage(Request $request)
     {
         $ref = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
         $ref = $ref === null ? rtrim($ref, '/') : $this->redirectAfterLogin;
@@ -38,6 +38,8 @@ class LoginController extends BaseController
             $ref = url('checkout');
             session()->forget('as.checkout');
         }
+
+        $ref = $request->has('return') ? $request->input('return') : $ref;
 
         $bag = (new BagService)->get(self::INSTANCE_SHOP);
         $checkout = count($bag) ? true : false; 

@@ -19,6 +19,7 @@ use App\Review;
 use App\ConfirmPayment;
 use Illuminate\Support\Facades\Validator;
 use App\Jobs\ProcessDecreaseStock;
+use Carbon\Carbon;
 
 class UserController extends BaseController
 {
@@ -40,6 +41,7 @@ class UserController extends BaseController
     public function __construct(UserRepository $user)
     {
     	$this->user = $user;
+        $this->date = Carbon::now('Asia/Jakarta');
     }
 
     public function index()
@@ -316,13 +318,15 @@ class UserController extends BaseController
     {
         $user = $this->getUserActive();
 
-        return view('users.wishlist', compact('user'));
+        $gender = $user->gender == 'm' ? 'mens' : 'womens';
+
+        return view('users.wishlist', compact('user', 'gender'));
     }
 
     public function postWishlist(Request $request)
     {
         $rules = [
-            'size' => 'required|string|max:255'
+            'products_id' => 'required'
         ];
 
         $validation = $this->validRequest($request, $rules);
@@ -338,40 +342,33 @@ class UserController extends BaseController
 
             $user = $this->getUserActive();
 
-            $stock = (new ProductStockRepository)->getStockBySku($request->input('size'));
-            $id = null;
-            //remove the item from wishlist
-            if ($request->has('update')) {
-                $id = $request->input('update');
-            }
+            $product = (new ProductRepository)->getProductById($request->input('products_id'));
 
-            $wishlistExist = $this->user->checkWishlistExist($user->id, $stock->id);
+            $wishlistExist = $this->user->checkWishlistExist($user->id, $product->id);
 
             if ($wishlistExist) {
                 $id = $wishlistExist->id;
             }
 
             $product = [
-                'id' => $stock->sku,
-                'name' => $stock->product->name,
-                'qty' => $request->has('qty') ? $request->input('qty') : 1,
-                'price' => $stock->product->sell_price,
-                'options' => [
-                    'size' => $stock->size,
-                    'color' => $stock->product->palette->name,
-                    'photo' => $stock->product->images->first()->photo,
-                    'description' => $stock->product->content,
-                    'slug' => $stock->product->slug
-                ],
-                'product_stocks_id' => $stock->id
+                'products_id' => $product->id,
+                'price' => $product->sell_price,
+                'date' => $this->date->format('Y-m-d H:i:s')
             ];
 
-            $this->user
-                ->setUser($user)
-                ->persistWishlist($product, $id);
+            // unwishlist
+            if ($request->has('unlist')) {
+                $this->user
+                    ->wishlistDestroy($id);
+            } else {
+                $this->user
+                    ->setUser($user)
+                    ->persistWishlist($product, $id);
+            }
 
             //remove the item
             if ($request->has('move')) {
+                
                 $bag = new BagService;
                 $rowId = $bag->search($request->input('move'), self::INSTANCE_SHOP);
 
@@ -459,19 +456,25 @@ class UserController extends BaseController
     {
         try {
             $user = $this->getUserActive();
-            $wishlists = collect($user->wishlists)->map(function($entry) {
+
+            $myWish = $this->user->getWishlistByUserId($user->id);
+
+            $wishlists = $myWish->map(function($entry) use ($user) {
+
+                $gender = $user->gender == 'm' ? 'mens' : 'womens';
 
                 return [
                     'id' => $entry->id,
-                    'sku' => $entry->stock->sku,
-                    'name' => $entry->stock->product->name,
-                    'slug' => $entry->stock->product->slug,
-                    'price' => $entry->stock->product->sell_price,
-                    'currency' => $entry->stock->product->currency,
-                    'size' => $entry->content['options']['size'],
-                    'color' => $entry->content['options']['color'],
-                    'photo' => $entry->content['options']['photo'],
-                    'qty' => $entry->content['qty'],
+                    'wishlists_id' => $entry->wishlists_id,
+                    'name' => $entry->name,
+                    'gender' => $entry->gender != 'unisex' ? $entry->gender : $gender,
+                    'slug' => $entry->gender != 'unisex' ? $entry->slug : $entry->slug.'?menu='.$gender,
+                    'price' => $entry->sell_price,
+                    'price_before_discount' => $entry->price_before_discount,
+                    'photo' => $entry->photo ? str_replace('original', 'medium', $entry->photo) : $entry->photo,
+                    'is_new' => $this->date->diffInDays(Carbon::parse($entry->created_at)) <= 7 ? true : false,
+                    'designer_name' => $entry->designer_name,
+                    'designer_slug' => $entry->designer_slug,
                 ];
             });
 
@@ -827,7 +830,7 @@ class UserController extends BaseController
 
         try {
             $user = $this->getUserActive();
-            (new UserRepository)->setUser($user)->saveReview($request);
+            $this->user->setUser($user)->saveReview($request);
 
             return redirect($this->redirectAfterSubmitReview.$request->input('slug'))->with(['success' => 'Thank you for submit your review']);
         } catch (Exception $e) {

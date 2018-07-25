@@ -19,6 +19,6 @@ class Wishlist extends Model
 
     public function stock()
     {
-    	return $this->belongsTo(ProductStock::class, 'product_stocks_id');
+    	return $this->belongsTo(ProductStock::class, 'products_id');
     }
 }

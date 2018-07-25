@@ -34,8 +34,7 @@
                             <li class="uk-margin-remove" v-if="bag.options.preorder"><span class="uk-text-small uk-text-danger">Pre Order {{ bag.options.preorder }} days</span></li>
                           </ul>
                           <form v-on:submit.prevent="moveWishlist">
-                              <input type="hidden" name="size" :value="bag.id">
-                              <input type="hidden" name="qty" :value="bag.qty">
+                              <input type="hidden" name="product_id" :value="bag.options.product_id">
                               <input type="hidden" name="move" :value="bag.id">
                               <button class="uk-button uk-button-small uk-button-default-warm uk-padding-small-right uk-margin-bottom uk-text-uppercase" type="submit">{{ trans.move_wishlist}}</button>
                               <a class="uk-button uk-button-small uk-button-default-warm uk-padding-small-right uk-text-right uk-margin-bottom" v-on:click="removeBag(bag.id, bag.name)">{{ trans.remove }}</a>
@@ -249,15 +248,13 @@
             },
 
             moveWishlist: function (event) {
-                var size = event.target.elements.size.value;
-                var qty = event.target.elements.qty.value;
+                var productId = event.target.elements.product_id.value;
                 var move = event.target.elements.move.value;
 
                 if (this.auth == 1) {
 
                     axios.post(this.wishlist_link, {
-                        size: size,
-                        qty: qty,
+                        products_id: productId,
                         move: move
                     })
                     .then(function (response) {

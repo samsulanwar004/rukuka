@@ -13,12 +13,15 @@
 			<h4 class="uk-text-uppercase">{{ trans('app.wishlist') }}</h4>
       <wishlist
         wishlist_api="{{ route('persist.wishlist') }}"
+        product_api="{{ route('product.api') }}"
         bag_api="{{ route('persist.bag') }}"
 		wishlist_delete="{{ route('user.wishlist.destroy') }}"
         product_link="{{ route('product') }}"
         aws_link="{{ config('filesystems.s3url') }}"
 		default_image="{{ json_encode(config('common.default')) }}"
 		locale="{{ json_encode(trans('app')) }}"
+		bag_link="{{ route('bag') }}"
+		menu ="{{ $gender }}"
 	  ></wishlist>
   </div>
 </div>

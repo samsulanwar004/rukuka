@@ -467,9 +467,9 @@ class UserRepository
 
 		if (is_null($id)) {
 			$wishlist->user()->associate($this->getUser());
-			$wishlist->stock()->associate($product['product_stocks_id']);
+			$wishlist->stock()->associate($product['products_id']);
 		} else {
-			$wishlist->stock()->associate($product['product_stocks_id']);
+			$wishlist->stock()->associate($product['products_id']);
 		}
 
 		$wishlist->save();
@@ -481,9 +481,9 @@ class UserRepository
 			->first();
 	}
 
-	public function checkWishlistExist($userId, $stockId)
+	public function checkWishlistExist($userId, $productId)
 	{
-		return Wishlist::where('product_stocks_id', $stockId)
+		return Wishlist::where('products_id', $productId)
 			->where('users_id', $userId)
 			->first();
 	}
@@ -492,6 +492,40 @@ class UserRepository
 	{
 		return $this->getWishlistById($id)
 			->delete();
+	}
+
+	public function getWishlistByUserId($userId)
+	{
+		return DB::table('products')->join('wishlists', function ($join) {
+            $join->on('products.id', '=', 'wishlists.products_id');
+        })->join('product_images', function ($join) {
+            $join->on('products.id', '=', 'product_images.products_id');
+        })->join('product_designers', function ($join) {
+            $join->on('products.product_designers_id', '=', 'product_designers.id')
+            ->whereNull('product_designers.deleted_at');
+        })->join('product_categories', function ($join) {
+            $join->on('products.product_categories_id', '=', 'product_categories.id');
+        })->select(
+            'products.id as id',
+            'products.name as name',
+            'products.slug as slug',
+            'products.gender as gender',
+            'products.sell_price as sell_price',
+            'products.price_before_discount as price_before_discount',
+            'products.created_at as created_at',
+            'products.updated_at as updated_at',
+            'product_categories.name as category_name',
+            'product_designers.id as designer_id',
+            'product_designers.name as designer_name',
+            'product_designers.slug as designer_slug',
+            'product_images.photo as photo',
+            'wishlists.id as wishlists_id'
+        )
+        ->where('wishlists.users_id', $userId)
+        ->where('products.is_active',1)
+        ->whereNull('products.deleted_at')
+        ->groupBy('products.id')
+        ->get();
 	}
 
 	public function changeProfile($request)
