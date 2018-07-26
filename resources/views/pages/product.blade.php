@@ -293,6 +293,7 @@
                 bag_api="{{ route('persist.bag') }}"
                 wishlist_api="{{ route('persist.wishlist') }}"
                 auth="{{ Auth::check() ? 1 : 0 }}"
+                token="{{ Auth::check() ? Auth::user()->api_token : '' }}"
                 aws_link="{{ config('filesystems.s3url') }}"
                 default_image="{{ json_encode(config('common.default')) }}"
                 bag_link="{{ route('bag') }}"

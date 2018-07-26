@@ -17,6 +17,13 @@
             <div class="uk-postion-small uk-position-top-left" v-if="product.is_new">
               <span class="uk-label uk-label-success">NEW</span>
             </div>
+            <div class="uk-postion-small uk-position-bottom-right">
+              <a href="#" v-on:click.prevent="toggleLike(product.id)" class="like-potition">
+                <i class="material-icons" :id="'like-related-'+product.id" style="color: pink;font-size: 35px;">
+                  {{ product.like | like }}
+                </i>
+              </a>
+            </div>
           </a>
         </div>
         <div class="uk-card-body uk-padding-remove">

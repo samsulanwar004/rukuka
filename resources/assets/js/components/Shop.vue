@@ -5,7 +5,8 @@
         <div class="uk-panel uk-text-left" v-for="product in products">
             <div class="uk-card uk-card-small">
                 <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
-                    <a :href="'/product/'+ product.slug">
+                    <!-- <a :href="'/product/'+ product.slug"> -->
+                    <a href="#modal-shop" v-on:click.prevent="quick(product.id)" uk-toggle>
                         <lazy-image
                             :src='product.photo | awsLink(aws_link, errorImage)'
                             :img-class="['uk-transition-scale-up','uk-transition-opaque']"
@@ -19,7 +20,11 @@
                           <span class="uk-label uk-label-success">NEW</span>
                         </div>
                         <div class="uk-postion-small uk-position-bottom-right">
-                          <a href="#" v-on:click.prevent="toggleLike(product.id)" :id="'like-'+product.id" class="uk-icon-link uk-icon like-potition" uk-icon="icon: heart; ratio: 1.5" :style="product.like | like"></a>
+                          <a href="#" v-on:click.prevent="toggleLike(product.id)" class="like-potition">
+                            <i class="material-icons" :id="'like-'+product.id" style="color: pink;font-size: 35px;">
+                              {{ product.like | like }}
+                            </i>
+                          </a>
                         </div>
                     </a>
                 </div>
@@ -421,11 +426,11 @@
 
                                             Event.fire('addWishlist', response);
 
-                                            document.getElementById('like-'+productId).style.color = "red";
+                                            document.getElementById('like-'+productId).textContent = "favorite";
 
                                             var _like = document.getElementById('like-related-'+productId);
                                             
-                                            _like ? _like.style.color = "red" : '';
+                                            _like ? _like.textContent = "favorite" : '';
                                         }
                                     }
                                 })
@@ -438,7 +443,8 @@
                                     }
                                 });
                         } else {
-                            UIkit.notification("We can't add this to your wishlist if you are not logged in. To login, please click <a href='/login?return="+window.location.href+"'>here</a>", {
+                            var _link = window.location.href.replace('&', '|');
+                            UIkit.notification("<center>You are not logged in.<br> To login, please click <a href='/login?return="+_link+"'>here</a></center>", {
                                 status:'danger'
                             });
                         }
@@ -476,11 +482,11 @@
 
                                             Event.fire('addWishlist', response);
 
-                                            document.getElementById('like-'+productId).style.color = "black";
+                                            document.getElementById('like-'+productId).textContent = "favorite_border";
 
                                             var _like = document.getElementById('like-related-'+productId);
 
-                                            _like ? _like.style.color = "black" : '';
+                                            _like ? _like.textContent = "favorite_border" : '';
                                         }
                                     }
                                 })
@@ -493,7 +499,8 @@
                                     }
                                 });
                         } else {
-                            UIkit.notification("You are not logged in. To login, please click <a href='/login?return="+window.location.href+"'>here</a>", {
+                            var _link = window.location.href.replace('&', '|');
+                            UIkit.notification("<center>You are not logged in.<br> To login, please click <a href='/login?return="+_link+"'>here</a></center>", {
                                 status:'danger'
                             });
                         }
@@ -510,10 +517,11 @@
 
             toggleLike: function(productId)
             {
-              var color = document.getElementById('like-'+productId).style.color;
-              if (color == 'black') {
+              var _like = document.getElementById('like-'+productId).textContent;
+  
+              if (_like == 'favorite_border') {
                 this.wishlist(productId);
-              } else if (color == 'red') {
+              } else if (_like == 'favorite') {
                 this.removeWishlist(productId);
               }
               
@@ -547,9 +555,9 @@
 
           like: function (event) {
             if (event) {
-              return 'color: red;';
+              return 'favorite';
             } else {
-              return 'color: black;';
+              return 'favorite_border';
             }
           }
         }

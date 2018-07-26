@@ -23,8 +23,11 @@
                 <div class="uk-card-media-top uk-inline">
                   <div class="uk-position-small uk-position-top-right">
                     <ul class="uk-list">
-                      <li>
-                        <a v-on:click.prevent="removeWishlist(wish.wishlists_id)" class="uk-icon-button"  uk-icon="icon: trash"></a>
+                      <li uk-tooltip="Add to bag">
+                        <a href="#modal-shop" class="uk-icon-button" uk-toggle v-on:click.prevent="quick(wish.id)" uk-icon="icon: cart"></a>
+                      </li>
+                      <li uk-tooltip="Remove wishlist">
+                        <a v-on:click.prevent="removeWishlist(wish.wishlists_id)" class="uk-icon-button" uk-icon="icon: trash"></a>
                       </li>
                     </ul>
                   </div>
@@ -54,7 +57,7 @@
                       </span>
                     </a>
                     <br>
-                      <a href="#modal-shop" class="uk-button uk-button-secondary uk-button-small uk-width-1-1" uk-toggle v-on:click.prevent="quick(wish.id)">{{ trans.quick_shop }}</a>
+                      <!-- <a href="#modal-shop" class="uk-button uk-button-secondary uk-button-small uk-width-1-1" uk-toggle v-on:click.prevent="quick(wish.id)">{{ trans.quick_shop }}</a> -->
                 </div>
             </div>
 

@@ -39,7 +39,7 @@ class LoginController extends BaseController
             session()->forget('as.checkout');
         }
 
-        $ref = $request->has('return') ? $request->input('return') : $ref;
+        $ref = $request->has('return') ? str_replace('|', '&', $request->input('return')) : $ref;
 
         $bag = (new BagService)->get(self::INSTANCE_SHOP);
         $checkout = count($bag) ? true : false; 

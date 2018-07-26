@@ -272,6 +272,10 @@
                                 Event.fire('addWishlist', response);
                                 Event.fire('bags', response);
                                 Event.fire('removePopUp', response);
+
+                                var _like = document.getElementById('like-related-'+productId);
+
+                                _like ? _like.textContent = "favorite" : '';
                             }
                         }
                     })
