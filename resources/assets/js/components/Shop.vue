@@ -32,8 +32,8 @@
                   <!-- <div class="margin-5px-bot">
                     <a href="#modal-shop" class="uk-button uk-button-small uk-button-secondary uk-width-1-1 uk-visible@m uk-text-uppercase" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
                   </div> -->
-                    <a :href="'/shop?menu='+menu+'&designer='+product.designer_slug" class="shop_item_title uk-link-muted uk-link-reset"><span>{{ product.designer_name }}</span></a> <br>
-                    <a :href="'/product/'+ product.slug" alt="product.name" class="uk-link-reset">{{ product.name.substring(0,30) }}
+                    <a :href="'/shop?menu='+menu+'&designer='+product.designer_slug" class="uk-link-muted uk-link-reset"><b>{{ product.designer_name }}</b></a> <br>
+                    <a :href="'/product/'+ product.slug" alt="product.name">{{ product.name.substring(0,30) }}
                     <br>
                     <span v-if="product.price_before_discount > 0 ">
                         <del>
@@ -429,7 +429,7 @@
                                             document.getElementById('like-'+productId).textContent = "favorite";
 
                                             var _like = document.getElementById('like-related-'+productId);
-                                            
+
                                             _like ? _like.textContent = "favorite" : '';
                                         }
                                     }
@@ -518,13 +518,13 @@
             toggleLike: function(productId)
             {
               var _like = document.getElementById('like-'+productId).textContent;
-  
+
               if (_like == 'favorite_border') {
                 this.wishlist(productId);
               } else if (_like == 'favorite') {
                 this.removeWishlist(productId);
               }
-              
+
             }
         },
 

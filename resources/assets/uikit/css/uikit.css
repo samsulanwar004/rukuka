@@ -2,19 +2,19 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,600i,700,700i,800,800i');
 @font-face {
   font-family: SoleilLight;
-  src: url('/images/fonts/Soleil-Light.otf');
+  src: url('https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/images/fonts/Soleil-Light.otf');
 }
 @font-face {
   font-family: SoleilBold;
-  src: url('/images/fonts/Soleil-Bold.otf');
+  src: url('https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/images/fonts/Soleil-Bold.otf');
 }
 @font-face {
   font-family: SoleilBook;
-  src: url('/images/fonts/Soleil-Book.otf');
+  src: url('https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/images/fonts/Soleil-Book.otf');
 }
 @font-face {
   font-family: SoleilRegular;
-  src: url('/images/fonts/Soleil-Regular.otf');
+  src: url('https://s3-ap-southeast-1.amazonaws.com/rukuka-assets/images/fonts/Soleil-Regular.otf');
 }
 /* ========================================================================
    Component: Base
@@ -98,11 +98,13 @@ abbr[title] {
 b,
 strong {
   font-weight: 600;
+  font-family: SoleilBold;
 }
 /* 2 */
 b,
 strong {
   font-weight: 600;
+  font-family: SoleilBold;
 }
 /*
  * 1. Correct the odd `em` font sizing in all browsers.
