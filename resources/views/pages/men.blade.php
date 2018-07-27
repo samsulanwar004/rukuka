@@ -132,11 +132,12 @@
         <h4 class="uk-margin-small uk-text-uppercase uk-text-center"><b>{{ trans('app.title_index_3') }}</b></h4>
         <popular
                 api="{{ route('populer', 'Men')}}"
-                menu="mens"
+                menu ="{{ $menu }}"
                 product_api="{{ route('product.api') }}"
                 bag_api="{{ route('persist.bag') }}"
                 wishlist_api="{{ route('persist.wishlist') }}"
                 auth="{{ Auth::check() ? 1 : 0 }}"
+                token="{{ Auth::check() ? Auth::user()->api_token : '' }}"
                 aws_link="{{ config('filesystems.s3url') }}"
                 default_image="{{ json_encode(config('common.default')) }}"
                 locale="{{ json_encode(trans('app')) }}"

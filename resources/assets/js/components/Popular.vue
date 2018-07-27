@@ -4,7 +4,8 @@
     <div class="uk-panel uk-text-left uk-margin-small-bottom" v-for="product in products">
       <div class="uk-card uk-card-small uk-padding-remove">
         <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
-          <a :href="'/product/'+ product.slug">
+          <!-- <a :href="'/product/'+ product.slug"> -->
+          <a :href="'#modal-popular'" uk-toggle v-on:click.prevent="quick(product.id)">
             <lazy-image
                 :src='product.photo | awsLink(aws_link, errorImage)'
                 :img-class="['uk-transition-scale-up','uk-transition-opaque']"
@@ -19,7 +20,7 @@
             </div>
             <div class="uk-postion-small uk-position-bottom-right">
               <a href="#" v-on:click.prevent="toggleLike(product.id)" class="like-potition">
-                <i class="material-icons" :id="'like-related-'+product.id" style="color: pink;font-size: 35px;">
+                <i class="material-icons" :id="'like-popular-'+product.id" style="color: pink;font-size: 35px;">
                   {{ product.like | like }}
                 </i>
               </a>
@@ -27,10 +28,10 @@
           </a>
         </div>
         <div class="uk-card-body uk-padding-remove">
-          <div class="margin-5px-bot">
+          <!-- <div class="margin-5px-bot">
             <a href="#modal-popular" class="uk-button uk-button-small uk-button-secondary uk-visible@m uk-width-1-1" uk-toggle v-on:click.prevent="quick(product.id)">{{ trans.quick_shop }}</a>
-          </div>
-          <a :href="'/shop?menu='+menu+'&designer='+product.designer_slug" class="shop_item_title uk-link-muted uk-link-reset">
+          </div> -->
+          <a :href="product.gender | menu(menu)+'&designer='+product.designer_slug" class="shop_item_title uk-link-muted uk-link-reset">
             <span>{{ product.designer_name }}</span>
           </a> <br>
           <a :href="'/product/'+ product.slug" class="uk-link-reset">{{ product.name.substring(0,35) }}
@@ -208,7 +209,7 @@
               <div class="uk-panel">
                 <div>
                     <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
-                    <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="wishlist">{{ trans.wishlist_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                    <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="wishlist(productId)">{{ trans.wishlist_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
                 </div>
               </div>
               </div>
@@ -229,7 +230,7 @@
           <div class="uk-panel">
             <div>
                 <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
-                <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="wishlist">{{ trans.wishlist_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="wishlist(productId)">{{ trans.wishlist_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
             </div>
           </div>
           </div>
@@ -246,6 +247,10 @@
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
   }
+  .like-potition {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
 </style>
 <script>
   import axios from 'axios';
@@ -259,6 +264,7 @@
       'bag_api',
       'wishlist_api',
       'auth',
+      'token',
       'aws_link',
       'default_image',
       'bag_link',
@@ -272,7 +278,9 @@
     created() {
       var self = this;
       let api = this.api;
-      axios.get(api)
+      let token = this.token;
+      let menu = this.menu;
+      axios.get(api+'?menu='+menu+'&api_token='+token)
       .then(function (response) {
         if (response.data.data !== 'undefined') {
             self.products = response.data.data;
@@ -306,6 +314,7 @@
     data() {
         return {
             products: {},
+            productId: {},
             name: {},
             price: {},
             priceBeforeDiscount: {},
@@ -339,6 +348,7 @@
         .then(function (response) {
           if (typeof response.data.data !== 'undefined') {
             var data = response.data.data;
+            self.productId = data.id;
             self.name = data.name;
             self.price = data.sell_price;
             self.priceBeforeDiscount = data.price_before_discount;
@@ -349,7 +359,7 @@
             self.content = data.content;
             self.sizeAndFit = data.size_and_fit;
             self.detailAndCare = data.detail_and_care;
-            self.slug =  data.slug;
+            self.slug =  data.gender != 'unisex' ? data.slug : data.slug+'?menu='+menu;
             self.size = self.stocks.length > 0 ? self.stocks[0].sku : null;
             self.isPreOrder =  data.is_preorder;
             self.preOrderDay =  data.preorder_day;
@@ -407,14 +417,13 @@
         });
       },
 
-      wishlist: function (event) {
+      wishlist: function (productId) {
         this.$validator.validateAll().then((result) => {
           if(result) {
               if (this.auth == 1) {
-                  var size = this.size;
 
                   axios.post(this.wishlist_api, {
-                      size: size
+                      products_id: productId
                   })
                   .then(function (response) {
                       if (typeof response.data.message !== 'undefined') {
@@ -429,6 +438,8 @@
                               });
 
                               Event.fire('addWishlist', response);
+
+                              document.getElementById('like-popular-'+productId).textContent = "favorite";
                           }
                       }
                   })
@@ -441,7 +452,8 @@
                       }
                   });
               } else {
-                  UIkit.notification("Please login!", {
+                  var _link = window.location.href.replace('&', '|');
+                  UIkit.notification("<center>You are not logged in.<br> To login, please click <a href='/login?return="+_link+"'>here</a></center>", {
                       status:'danger'
                   });
               }
@@ -454,6 +466,70 @@
               });
           }
         });
+      },
+
+      removeWishlist: function (productId) {
+          this.$validator.validateAll().then((result) => {
+              if(result) {
+                  if (this.auth == 1) {
+
+                      axios.post(this.wishlist_api, {
+                          products_id: productId,
+                          unlist: 'ok'
+                      })
+                          .then(function (response) {
+                              if (typeof response.data.message !== 'undefined') {
+                                  if (response.data.status.toLowerCase() == 'error') {
+                                      UIkit.notification(response.data.message.size[0], {
+                                          status:'danger'
+                                      });
+                                  }
+                                  if (response.data.status.toLowerCase() == 'ok') {
+                                      UIkit.notification("<span uk-icon='icon: check'></span> Delete product from wishlist successfully", {
+                                          status:'success'
+                                      });
+
+                                      Event.fire('addWishlist', response);
+
+                                      document.getElementById('like-popular-'+productId).textContent = "favorite_border";
+                                  }
+                              }
+                          })
+                          .catch(function (error) {
+                              var error = JSON.parse(JSON.stringify(error));
+                              if (typeof error.response.data.message !== 'undefined') {
+                                  UIkit.notification(error.response.data.message, {
+                                      status:'danger'
+                                  });
+                              }
+                          });
+                  } else {
+                      var _link = window.location.href.replace('&', '|');
+                      UIkit.notification("<center>You are not logged in.<br> To login, please click <a href='/login?return="+_link+"'>here</a></center>", {
+                          status:'danger'
+                      });
+                  }
+              } else {
+                  var items = this.errors.items;
+                  $.each(items, function (index, item) {
+                      UIkit.notification(item.msg, {
+                          status:'danger'
+                      });
+                  });
+              }
+          });
+      },
+
+      toggleLike: function(productId)
+      {
+        var _like = document.getElementById('like-popular-'+productId).textContent;
+        
+        if (_like == 'favorite_border') {
+          this.wishlist(productId);
+        } else if (_like == 'favorite') {
+          this.removeWishlist(productId);
+        }
+        
       }
     },
 
@@ -480,6 +556,22 @@
         };
 
         return money(Number(Math.round(value+'e'+2)+'e-'+2), currency);
+      },
+
+      menu: function (value, menu) {
+        if (value == 'unisex') {
+          return '/shop?menu='+menu;
+        } else {
+          return '/shop?menu='+value;
+        }
+      },
+
+      like: function (event) {
+        if (event) {
+          return 'favorite';
+        } else {
+          return 'favorite_border';
+        }
       }
     }
   }

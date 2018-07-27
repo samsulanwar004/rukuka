@@ -356,9 +356,11 @@ class PageController extends BaseController
             Cache::put(self::SLIDER_WOMEN_CACHE, $slider, $expiresAt);
         }
 
-        $request->session()->put('menu.session', 'womens');
+        $menu = 'womens';
 
-        return view('pages.women', compact('women','slider'));
+        $request->session()->put('menu.session', $menu);
+
+        return view('pages.women', compact('women','slider', 'menu'));
     }
 
     public function men(Request $request)
@@ -388,9 +390,11 @@ class PageController extends BaseController
             Cache::put(self::SLIDER_MEN_CACHE, $slider, $expiresAt);
         }
 
-         $request->session()->put('menu.session', 'mens');
+        $menu = 'mens';
 
-        return view('pages.men', compact('men','slider'));
+        $request->session()->put('menu.session', $menu);
+
+        return view('pages.men', compact('men','slider', 'menu'));
     }
 
     public function kids()

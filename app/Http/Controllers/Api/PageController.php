@@ -177,7 +177,7 @@ class PageController extends BaseApiController
         }
     }
 
-    public function popular($group)
+    public function popular(Request $request, $group)
     {
         try {
             if (Cache::has(self::POPULAR_CACHE.'.'.$group)) {
@@ -185,26 +185,38 @@ class PageController extends BaseApiController
             } else {
                 $popular = (new ProductRepository)->getMostProduct($group);
 
-                $popular = $popular->map(function ($entry) {
-
-                    return [
-                        'id' => $entry->id,
-                        'name' => $entry->name,
-                        'gender' => $entry->gender,
-                        'slug' => $entry->slug,
-                        'price' => $entry->sell_price,
-                        'price_before_discount' => $entry->price_before_discount,
-                        'photo' => $entry->photo ? str_replace('original', 'small', $entry->photo) : $entry->photo,
-                        'is_new' => $this->date->diffInDays(Carbon::parse($entry->created_at)) <= 7 ? true : false,
-                        'designer_name' => $entry->designer_name,
-                        'designer_slug' => $entry->designer_slug
-                    ];
-                })->toArray();
-
                 $expiresAt = Carbon::now()->addMinutes(60);
 
                 Cache::put(self::POPULAR_CACHE.'.'.$group, $popular, $expiresAt);
             }
+
+            //get wishlist
+            $wishlists = [];
+            if ($user = $this->getUserActive()) {
+                $wishlists = (new UserRepository)->getWishlistByUserId($user->id);
+                $wishlists = $wishlists->map(function($entry) {
+                    return $entry->id;
+                })->toArray();
+            }
+
+            $popular = $popular->map(function ($entry) use ($request, $wishlists) {
+
+                $like = in_array($entry->id, $wishlists) ? true : false;
+
+                return [
+                    'id' => $entry->id,
+                    'name' => $entry->name,
+                    'gender' => $entry->gender,
+                    'slug' => $entry->gender != 'unisex' ? $entry->slug : $entry->slug.'?menu='.$request->input('menu'),
+                    'price' => $entry->sell_price,
+                    'price_before_discount' => $entry->price_before_discount,
+                    'photo' => $entry->photo ? str_replace('original', 'small', $entry->photo) : $entry->photo,
+                    'is_new' => $this->date->diffInDays(Carbon::parse($entry->created_at)) <= 7 ? true : false,
+                    'designer_name' => $entry->designer_name,
+                    'designer_slug' => $entry->designer_slug,
+                    'like' => $like
+                ];
+            })->toArray();
 
             return $this->success($popular, 200, true);
         } catch (Exception $e) {
