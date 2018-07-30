@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Cache;
+use App\ExchangeRate;
 
 class CacheService
 {
@@ -62,5 +63,10 @@ class CacheService
 	public function clearCacheColor()
 	{
 		Cache::forget(self::COLOR_CACHE);
+	}
+
+	public function clearCacheExchange($currency)
+	{
+		Cache::forget('currency.'.$currency.'.cache');
 	}
 }

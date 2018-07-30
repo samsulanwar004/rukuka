@@ -4,6 +4,7 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+	use App\Services\CacheService;
 
 	class AdminExchangeRatesController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -281,6 +282,8 @@
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
 	        $postdata['cms_users_id'] = CRUDBooster::myId();
+
+	        (new CacheService)->clearCacheExchange($postdata['currency_code_to']);
 	    }
 
 	    /* 
@@ -305,7 +308,6 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
 	        //Your code here
-
 	    }
 
 	    /* 
