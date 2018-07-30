@@ -79,5 +79,9 @@ return [
 	'kuka_api' => [
 		'key' => env('KUKA_KEY_API'),
 		'payment_api' => env('KUKA_PAYMENT_API')
+	],
+
+	'notification' => [
+		'email' => env('EMAIL_NOTIFICATION', 'admin@rukuka.com')
 	]
 ];

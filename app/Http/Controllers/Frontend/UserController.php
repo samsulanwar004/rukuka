@@ -984,6 +984,9 @@ class UserController extends BaseController
                     $emailService = (new EmailService);
                     $emailService->sendInvoicePaid($order);
 
+                    //EMAILSENTADMIN
+                    $emailService->sendNotificationInvoicePaidToAdmin($order);
+
                     //decrease stock
                     ProcessDecreaseStock::dispatch($order)
                         ->onConnection(config('common.queue_active'))

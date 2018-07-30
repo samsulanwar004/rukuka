@@ -451,6 +451,14 @@ return [
     'unpaid_text_1'             =>  'Thank you for ordering from us, Your order has been approved and is waiting for your payment. We will confirm you shortly once payment has been completed.',
     'unpaid_text_2'             =>  'You can review complete details of your order on the Order History page.',
 
+    //resources/views/emails/notification_invoice_unpaid.blade.php
+    'notification_unpaid_subject'            =>  'Notification Invoice Unpaid',
+    'notification_unpaid_title'              =>  'You have new order.',
+    'notification_button_order'              =>  'View Order',
+    //resources/views/emails/notification_invoice_unpaid.blade.php
+    'notification_paid_subject'            =>  'Notification Invoice Paid',
+    'notification_paid_title'              =>  'You have new payment success.',
+
     //resources/views/emails/invoice_paid.blade.php
     'paid_subject'              =>  'Invoice Paid',
     'paid_title'                =>  'Thank you for your order.',

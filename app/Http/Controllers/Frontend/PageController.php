@@ -776,6 +776,8 @@ class PageController extends BaseController
                         //sent invoice paid to buyer
                         $emailService = (new EmailService);
                         $emailService->sendInvoicePaid($order);
+                        //EMAILSENTADMIN
+                        $emailService->sendNotificationInvoicePaidToAdmin($order);
 
                         //decrease stock
                         ProcessDecreaseStock::dispatch($order)

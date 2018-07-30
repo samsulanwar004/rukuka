@@ -9,6 +9,7 @@ use App\Mail\InvoiceUnpaidBankTransfer;
 use App\Mail\InvoiceUnpaidVirtualAccount;
 use App\Mail\InvoicePaid;
 use App\Mail\Shipping;
+use App\Mail\NotificationInvoiceUnpaid;
 use App\Services\CurrencyService;
 use Illuminate\Support\Facades\Mail;
 
@@ -86,6 +87,26 @@ class EmailService
             ->onQueue(config('common.queue_list.user_mail'));
 
         Mail::to($order->user->email)->queue($mail);
+    }
+
+    public function sendNotificationInvoiceUnpaidToAdmin($order)
+    {
+        $lang = (new CurrencyService)->getLang();
+        $mail = (new NotificationInvoiceUnpaid($order, $lang))
+            ->onConnection(config('common.queue_active'))
+            ->onQueue(config('common.queue_list.user_mail'));
+
+        Mail::to(explode(',', config('common.notification.email')))->queue($mail);
+    }
+
+    public function sendNotificationInvoicePaidToAdmin($order)
+    {
+        $lang = (new CurrencyService)->getLang();
+        $mail = (new NotificationInvoiceUnpaid($order, $lang))
+            ->onConnection(config('common.queue_active'))
+            ->onQueue(config('common.queue_list.user_mail'));
+
+        Mail::to(explode(',', config('common.notification.email')))->queue($mail);
     }
 
 

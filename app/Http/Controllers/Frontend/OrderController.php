@@ -42,6 +42,7 @@ class OrderController extends BaseController
 			DB::beginTransaction();
 			$user = $this->getUserActive();
 			$bag = new BagService;
+			$emailService = (new EmailService);
 
             $address = $this->user
 	            ->setUser($user)
@@ -82,8 +83,9 @@ class OrderController extends BaseController
 	        $shippingName = $courir['data']->courier_name;
 	        $shippingService = $courir['data']->service_name_original;
 
+	        $countDay = $paymentMethod === 'virtual_account' ? 1 : 3;
 	        $orderDate = Carbon::now();
-	        $expiredDate = Carbon::now()->addDay(3);
+	        $expiredDate = Carbon::now()->addDay($countDay);
 
 	        $payment = new CurrencyService;
 			$kurs  = $payment->getCurrentCurrency();
@@ -164,8 +166,9 @@ class OrderController extends BaseController
             if ($paymentMethod === 'creditcard') {
             	//EMAILSENT
 				//sent invoice unpaid credit card to buyer
-	            $emailService = (new EmailService);
 	            $emailService->sendInvoiceUnpaid($order);
+	            //EMAILSENTADMIN
+            	$emailService->sendNotificationInvoiceUnpaidToAdmin($order);
 
             	return view('pages.checkout.checkout_finish', compact(
 					'order', 
@@ -181,8 +184,9 @@ class OrderController extends BaseController
             } elseif ($paymentMethod === 'bank_transfer') {
             	//EMAILSENT
 				//sent invoice unpaid bank transfer to buyer
-	            $emailService = (new EmailService);
 	            $emailService->sendInvoiceUnpaidBankTransfer($order);
+	            //EMAILSENTADMIN
+            	$emailService->sendNotificationInvoiceUnpaidToAdmin($order);
 
             	return view('pages.checkout.checkout_finish_bank_transfer', compact(
 					'order', 
@@ -195,8 +199,9 @@ class OrderController extends BaseController
             } elseif ($paymentMethod === 'virtual_account') {
             	//EMAILSENT
 				//sent invoice unpaid virtual account to buyer
-	            $emailService = (new EmailService);
 	            $emailService->sendInvoiceUnpaidVirtualAccount($order,$response);
+	            //EMAILSENTADMIN
+            	$emailService->sendNotificationInvoiceUnpaidToAdmin($order);
 
             	return view('pages.checkout.checkout_finish_virtual_account', compact(
 					'order', 
