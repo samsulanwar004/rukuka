@@ -38,8 +38,7 @@ class EmailService
 	public function sendInvoiceUnpaid($order)
     {
 
-        $lang = (new CurrencyService)->getLang();
-        $mail = (new InvoiceUnpaid($order, $lang))
+        $mail = (new InvoiceUnpaid($order, $order->current_currency))
             ->onConnection(config('common.queue_active'))
             ->onQueue(config('common.queue_list.user_mail'));
 
@@ -49,8 +48,7 @@ class EmailService
     public function sendInvoiceUnpaidBankTransfer($order)
     {
 
-        $lang = (new CurrencyService)->getLang();
-        $mail = (new InvoiceUnpaidBankTransfer($order, $lang))
+        $mail = (new InvoiceUnpaidBankTransfer($order, $order->current_currency))
             ->onConnection(config('common.queue_active'))
             ->onQueue(config('common.queue_list.user_mail'));
 
@@ -60,8 +58,7 @@ class EmailService
     public function sendInvoiceUnpaidVirtualAccount($order,$response)
     {
 
-        $lang = (new CurrencyService)->getLang();
-        $mail = (new InvoiceUnpaidVirtualAccount($order, $lang, $response))
+        $mail = (new InvoiceUnpaidVirtualAccount($order, $order->current_currency, $response))
             ->onConnection(config('common.queue_active'))
             ->onQueue(config('common.queue_list.user_mail'));
 
@@ -71,8 +68,7 @@ class EmailService
     public function sendInvoicePaid($order)
     {
 
-        $lang = (new CurrencyService)->getLang();
-        $mail = (new InvoicePaid($order, $lang))
+        $mail = (new InvoicePaid($order, $order->current_currency))
             ->onConnection(config('common.queue_active'))
             ->onQueue(config('common.queue_list.user_mail'));
 
@@ -82,7 +78,7 @@ class EmailService
     public function sendShipping($order)
     {
 
-        $mail = (new Shipping($order))
+        $mail = (new Shipping($order, $order->current_currency))
             ->onConnection(config('common.queue_active'))
             ->onQueue(config('common.queue_list.user_mail'));
 
@@ -91,8 +87,7 @@ class EmailService
 
     public function sendNotificationInvoiceUnpaidToAdmin($order)
     {
-        $lang = (new CurrencyService)->getLang();
-        $mail = (new NotificationInvoiceUnpaid($order, $lang))
+        $mail = (new NotificationInvoiceUnpaid($order, $order->current_currency))
             ->onConnection(config('common.queue_active'))
             ->onQueue(config('common.queue_list.user_mail'));
 
@@ -101,8 +96,7 @@ class EmailService
 
     public function sendNotificationInvoicePaidToAdmin($order)
     {
-        $lang = (new CurrencyService)->getLang();
-        $mail = (new NotificationInvoicePaid($order, $lang))
+        $mail = (new NotificationInvoicePaid($order, $order->current_currency))
             ->onConnection(config('common.queue_active'))
             ->onQueue(config('common.queue_list.user_mail'));
 

@@ -20,9 +20,10 @@ class Shipping extends Mailable
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(Order $order, $lang)
     {
         $this->order = $order;
+        $this->lang = $lang;
     }
 
     /**
@@ -33,9 +34,9 @@ class Shipping extends Mailable
     public function build()
     {
         return $this->markdown('emails.shipping', [
-            'order' => $this->shipping()
+            'order' => $this->shipping(), 'locale' => $this->lang
         ])
-            ->subject(trans('app.shipping_subject').'-'.$this->order->order_code)
+            ->subject(trans('app.shipping_subject',[], $this->lang).'-'.$this->order->order_code)
             ->replyTo(config('mail.replyto.address'));
     }
 
@@ -43,7 +44,8 @@ class Shipping extends Mailable
     {
         $order = $this->order;
 
-        $exchange = (new CurrencyService)->getCurrentCurrency();
+        $exchange = (new CurrencyService)->getCurrentCurrency($this->lang);
+        
         //inject currency
         $order->order_total_idr = $order->order_subtotal + $order->shipping_cost;
         $order->order_subtotal = $order->order_subtotal / $exchange->value;

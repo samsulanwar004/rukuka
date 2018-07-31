@@ -135,6 +135,9 @@ class OrderController extends BaseController
 	        	$response['id'] = null;
 	        }
 
+	        //get current currency 
+	        $currentCurrency = (new CurrencyService)->getLang();
+
 	        $order = $this->order
 	        	->setOrderCode($orderCode)
 	        	->setUser($user)
@@ -152,6 +155,7 @@ class OrderController extends BaseController
 	        	->setPendingReason($message)
 	        	->setOrderDate($orderDate)
 	        	->setExpiredDate($expiredDate)
+	        	->setCurrentCurrency($currentCurrency)
 	        	->setDetail($detail)
 	        	->save();
 

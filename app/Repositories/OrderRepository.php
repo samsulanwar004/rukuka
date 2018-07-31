@@ -32,6 +32,7 @@ class OrderRepository
 	private $payment;
 	private $paymentCode;
 	private $paymentResponse;
+	private $currentCurrency;
 
     public function setUserEmail($value)
     {
@@ -309,6 +310,18 @@ class OrderRepository
 		return $this->paymentResponse;
 	}
 
+	public function setCurrentCurrency($value)
+	{
+		$this->currentCurrency = $value;
+
+		return $this;
+	}
+
+	public function getCurrentCurrency()
+	{
+		return $this->currentCurrency;
+	}
+
 	public function save()
 	{
 		$order = new Order;
@@ -325,6 +338,7 @@ class OrderRepository
     	$order->pending_reason = $this->getPendingReason();
     	$order->order_date = $this->getOrderDate();
     	$order->expired_date = $this->getExpiredDate();
+    	$order->current_currency = $this->getCurrentCurrency();
 
     	$order->payment_code = $this->getPaymentCode();
     	$order->payment_response = $this->getPaymentResponse();
