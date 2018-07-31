@@ -102,7 +102,7 @@ class EmailService
     public function sendNotificationInvoicePaidToAdmin($order)
     {
         $lang = (new CurrencyService)->getLang();
-        $mail = (new NotificationInvoiceUnpaid($order, $lang))
+        $mail = (new NotificationInvoicePaid($order, $lang))
             ->onConnection(config('common.queue_active'))
             ->onQueue(config('common.queue_list.user_mail'));
 
