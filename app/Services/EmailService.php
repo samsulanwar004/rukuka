@@ -10,6 +10,7 @@ use App\Mail\InvoiceUnpaidVirtualAccount;
 use App\Mail\InvoicePaid;
 use App\Mail\Shipping;
 use App\Mail\NotificationInvoiceUnpaid;
+use App\Mail\NotificationInvoicePaid;
 use App\Services\CurrencyService;
 use Illuminate\Support\Facades\Mail;
 
