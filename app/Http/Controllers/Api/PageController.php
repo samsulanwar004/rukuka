@@ -224,7 +224,7 @@ class PageController extends BaseApiController
         }
     }
 
-    public function related($categoryId)
+    public function related(Request $request, $categoryId)
     {
         try {
             $related = (new ProductRepository)->getRelatedProduct($categoryId);
