@@ -18,6 +18,11 @@
             <div class="uk-postion-small uk-position-top-left" v-if="product.is_new">
               <span class="uk-label uk-label-success">NEW</span>
             </div>
+            <div class="uk-postion-medium uk-position-bottom-left uk-visible@m">
+              <a href="#"  class="like-position">
+                <i class="material-icons" style="color:#666 ;font-size: 35px;">shopping_basket</i>
+              </a>
+            </div>
             <div class="uk-postion-small uk-position-bottom-right">
               <a href="#" v-on:click.prevent="toggleLike(product.id)" class="like-potition">
                 <i class="material-icons" :id="'like-popular-'+product.id" style="color: pink;font-size: 35px;">
