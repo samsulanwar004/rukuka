@@ -1,6 +1,5 @@
 <template>
     <div class="uk-grid-small uk-child-width-1-3@m uk-child-width-1-2" uk-grid>
-
         <!-- start product -->
         <div class="uk-panel uk-text-left" v-for="product in products">
             <div class="uk-card uk-card-small">
@@ -19,8 +18,13 @@
                         <div class="uk-postion-small uk-position-top-left" v-if="product.is_new">
                           <span class="uk-label uk-label-success">NEW</span>
                         </div>
+                        <div class="uk-postion-medium uk-position-bottom-left uk-visible@m">
+                          <a href="#"  class="like-position">
+                            <i class="material-icons" style="color:#666 ;font-size: 35px;">shopping_basket</i>
+                          </a>
+                        </div>
                         <div class="uk-postion-small uk-position-bottom-right">
-                          <a href="#" v-on:click.prevent="toggleLike(product.id)" class="like-potition">
+                          <a href="#" v-on:click.prevent="toggleLike(product.id)" class="like-position">
                             <i class="material-icons" :id="'like-'+product.id" style="color: pink;font-size: 35px;">
                               {{ product.like | like }}
                             </i>
@@ -244,8 +248,9 @@
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
   }
-  .like-potition {
+  .like-position {
     margin-right: 10px;
+    margin-left:10px;
     margin-bottom: 10px;
   }
 </style>
