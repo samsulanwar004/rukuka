@@ -4,8 +4,7 @@
     <div class="uk-panel uk-text-left uk-margin-small-bottom" v-for="product in products">
       <div class="uk-card uk-card-small uk-padding-remove">
         <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
-          <!-- <a :href="'/product/'+ product.slug"> -->
-          <a :href="'#modal-popular'" uk-toggle v-on:click.prevent="quick(product.id)">
+          <a :href="'/product/'+ product.slug">
             <lazy-image
                 :src='product.photo | awsLink(aws_link, errorImage)'
                 :img-class="['uk-transition-scale-up','uk-transition-opaque']"
@@ -18,13 +17,13 @@
             <div class="uk-postion-small uk-position-top-left" v-if="product.is_new">
               <span class="uk-label uk-label-success">NEW</span>
             </div>
-            <div class="uk-postion-medium uk-position-bottom-left uk-visible@m">
-              <a href="#"  class="like-position">
+            <div class="uk-postion-medium uk-position-bottom-left uk-visible@m" uk-tooltip="Quick shop">
+              <a :href="'#modal-popular'" uk-toggle v-on:click.prevent="quick(product.id)" class="like-position">
                 <i class="material-icons" style="color:#666 ;font-size: 35px;">shopping_basket</i>
               </a>
             </div>
-            <div class="uk-postion-small uk-position-bottom-right">
-              <a href="#" v-on:click.prevent="toggleLike(product.id)" class="like-potition">
+            <div class="uk-postion-small uk-position-bottom-right" :id="'tooltip-popular-'+product.id" :uk-tooltip="product.like ? 'Remove wishlist' : 'Add to wishlist'">
+              <a href="#" v-on:click.prevent="toggleLike(product.id)" class="like-position">
                 <i class="material-icons" :id="'like-popular-'+product.id" style="color: pink;font-size: 35px;">
                   {{ product.like | like }}
                 </i>
@@ -213,7 +212,8 @@
               </div>
               <div class="uk-panel">
                 <div>
-                    <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                    <button v-if="isPreOrder == 0" class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                    <button v-else class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">Pre Order <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
                     <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="wishlist(productId)">{{ trans.wishlist_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
                 </div>
               </div>
@@ -234,7 +234,8 @@
           </div>
           <div class="uk-panel">
             <div>
-                <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                <button v-if="isPreOrder == 0" class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                <button v-else class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag"> Pre Order <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
                 <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="wishlist(productId)">{{ trans.wishlist_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
             </div>
           </div>
@@ -252,7 +253,7 @@
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
   }
-  .like-potition {
+  .like-position {
     margin-right: 10px;
     margin-bottom: 10px;
   }
@@ -349,6 +350,7 @@
         var self = this;
         self.size = null;
         self.isLoading = true;
+        let menu = this.menu;
         axios.get(this.product_api+'/'+e)
         .then(function (response) {
           if (typeof response.data.data !== 'undefined') {
@@ -444,7 +446,11 @@
 
                               Event.fire('addWishlist', response);
 
+                              // custom love
                               document.getElementById('like-popular-'+productId).textContent = "favorite";
+
+                              // custom tooltip
+                              document.getElementById('tooltip-popular-'+productId).setAttribute("uk-tooltip", "Remove wishlist");
                           }
                       }
                   })
@@ -496,7 +502,11 @@
 
                                       Event.fire('addWishlist', response);
 
+                                      // custom love
                                       document.getElementById('like-popular-'+productId).textContent = "favorite_border";
+
+                                      // custom tooltip
+                                      document.getElementById('tooltip-popular-'+productId).setAttribute("uk-tooltip", "Add to wishlist");
                                   }
                               }
                           })

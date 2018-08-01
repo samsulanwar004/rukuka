@@ -273,9 +273,13 @@
                                 Event.fire('bags', response);
                                 Event.fire('removePopUp', response);
 
+                                // custom love
                                 var _like = document.getElementById('like-related-'+productId);
 
                                 _like ? _like.textContent = "favorite" : '';
+
+                                // custom tooltip
+                                document.getElementById('tooltip-related-'+productId).setAttribute("uk-tooltip", "Remove wishlist");
                             }
                         }
                     })

@@ -4,32 +4,31 @@
         <div class="uk-panel uk-text-left" v-for="product in products">
             <div class="uk-card uk-card-small">
                 <div class="uk-card-media-top uk-inline-clip uk-transition-toggle">
-                    <!-- <a :href="'/product/'+ product.slug"> -->
-                    <a href="#modal-shop" v-on:click.prevent="quick(product.id)" uk-toggle>
-                        <lazy-image
-                            :src='product.photo | awsLink(aws_link, errorImage)'
-                            :img-class="['uk-transition-scale-up','uk-transition-opaque']"
-                            :placeholder='loadingImage'
-                            :img-alt='product.name'
-                        ></lazy-image>
-                        <div class="uk-postion-small uk-position-top-right" v-if="product.price_before_discount > 0">
-                          <span class="uk-label uk-label-danger">SALE</span>
-                        </div>
-                        <div class="uk-postion-small uk-position-top-left" v-if="product.is_new">
-                          <span class="uk-label uk-label-success">NEW</span>
-                        </div>
-                        <div class="uk-postion-medium uk-position-bottom-left uk-visible@m">
-                          <a href="#"  class="like-position">
-                            <i class="material-icons" style="color:#666 ;font-size: 35px;">shopping_basket</i>
-                          </a>
-                        </div>
-                        <div class="uk-postion-small uk-position-bottom-right">
-                          <a href="#" v-on:click.prevent="toggleLike(product.id)" class="like-position">
-                            <i class="material-icons" :id="'like-'+product.id" style="color: pink;font-size: 35px;">
-                              {{ product.like | like }}
-                            </i>
-                          </a>
-                        </div>
+                    <a :href="'/product/'+ product.slug">
+                      <lazy-image
+                          :src='product.photo | awsLink(aws_link, errorImage)'
+                          :img-class="['uk-transition-scale-up','uk-transition-opaque']"
+                          :placeholder='loadingImage'
+                          :img-alt='product.name'
+                      ></lazy-image>
+                      <div class="uk-postion-small uk-position-top-right" v-if="product.price_before_discount > 0">
+                        <span class="uk-label uk-label-danger">SALE</span>
+                      </div>
+                      <div class="uk-postion-small uk-position-top-left" v-if="product.is_new">
+                        <span class="uk-label uk-label-success">NEW</span>
+                      </div>
+                      <div class="uk-postion-medium uk-position-bottom-left uk-visible@m" uk-tooltip="Quick shop">
+                        <a href="#modal-shop" class="like-position" v-on:click.prevent="quick(product.id)" uk-toggle>
+                          <i class="material-icons" style="color:#666 ;font-size: 35px;">shopping_basket</i>
+                        </a>
+                      </div>
+                      <div class="uk-postion-small uk-position-bottom-right" :id="'tooltip-'+product.id" :uk-tooltip="product.like ? 'Remove wishlist' : 'Add to wishlist'">
+                        <a href="#" v-on:click.prevent="toggleLike(product.id)" class="like-position">
+                          <i class="material-icons" :id="'like-'+product.id" style="color: pink;font-size: 35px;">
+                            {{ product.like | like }}
+                          </i>
+                        </a>
+                      </div>
                     </a>
                 </div>
                 <div class="uk-card-body uk-padding">
@@ -197,8 +196,6 @@
                   <a :href="'/product/' +slug" class="uk-text-danger uk-text-right">{{ trans.see_detail }} <span uk-icon="icon: chevron-right"></span> </a>
                   </div>
                   <div class="uk-width-1-1">
-
-
                   <div class="uk-grid-match uk-child-width-auto uk-flex-between uk-grid uk-visible@m" uk-grid>
                   <div class="uk-first-column">
                     <div v-if="bagCount > 0">
@@ -210,7 +207,8 @@
                   </div>
                   <div class="uk-panel">
                     <div>
-                        <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                        <button v-if="isPreOrder == 0" class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                        <button v-else class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">Pre Order <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
                         <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="wishlist(productId)">{{ trans.wishlist_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
                     </div>
                   </div>
@@ -231,7 +229,8 @@
               </div>
               <div class="uk-panel">
                 <div>
-                    <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                    <button v-if="isPreOrder == 0" class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag">{{ trans.bag_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
+                    <button v-else class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="bag"> Pre Order <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
                     <button class="uk-button uk-button-default uk-button-small uk-text-uppercase" type="button" v-on:click="wishlist(productId)">{{ trans.wishlist_label }} <span class="uk-icon" uk-icon="icon:  plus; ratio: 0.6"></span></button>
                 </div>
               </div>
@@ -431,11 +430,19 @@
 
                                             Event.fire('addWishlist', response);
 
+                                            //custom icon love
                                             document.getElementById('like-'+productId).textContent = "favorite";
 
                                             var _like = document.getElementById('like-related-'+productId);
 
                                             _like ? _like.textContent = "favorite" : '';
+
+                                            // custom tooltip
+                                            document.getElementById('tooltip-'+productId).setAttribute("uk-tooltip", "Remove wishlist");
+
+                                            var _tooltip = document.getElementById('tooltip-related-'+productId);
+
+                                            _tooltip ? _tooltip.setAttribute("uk-tooltip", "Remove wishlist") : '';
                                         }
                                     }
                                 })
@@ -487,11 +494,19 @@
 
                                             Event.fire('addWishlist', response);
 
+                                            // custom love
                                             document.getElementById('like-'+productId).textContent = "favorite_border";
 
                                             var _like = document.getElementById('like-related-'+productId);
 
                                             _like ? _like.textContent = "favorite_border" : '';
+
+                                            // custom tooltip
+                                            document.getElementById('tooltip-'+productId).setAttribute("uk-tooltip", "Add to wishlist");
+
+                                            var _tooltip = document.getElementById('tooltip-related-'+productId);
+
+                                            _tooltip ? _tooltip.setAttribute("uk-tooltip", "Add to wishlist") : '';
                                         }
                                     }
                                 })
