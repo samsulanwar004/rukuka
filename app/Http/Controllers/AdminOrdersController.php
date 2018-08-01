@@ -6,6 +6,7 @@
 	use CRUDBooster;
 	use App\Repositories\OrderRepository;
     use App\Services\EmailService;
+    use App\Services\CurrencyService;
     use Carbon\Carbon;
     use App\Jobs\ProcessDecreaseStock;
 
@@ -422,6 +423,7 @@
 		  $data['page_title'] = 'Detail Data';
 		  $data['orderDetail'] = (new OrderRepository)->getOrderDetailByOrderId($id);
 		  $data['row'] = $data['orderDetail'][0];
+		  $data['currency'] = (new CurrencyService)->getCurrentCurrency($data['orderDetail'][0]->current_currency);
 		  $data['return_url'] = request()->input('return_url');
 
 		  //Please use cbView method instead view method from laravel
