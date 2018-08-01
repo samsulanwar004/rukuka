@@ -902,7 +902,7 @@ class PageController extends BaseController
     public function getProductByAjax($code)
     {
         $product = (new ProductRepository)->getProductBySku($code);
-
+        $preorder = $product->is_preorder == 1 ? $product->preorder_day.' days' : '-';
         echo "
         <p>
             <table>
@@ -911,7 +911,8 @@ class PageController extends BaseController
                 <tr><td>Color</td><td>:</td><td>".$product->color."</td></tr>
                 <tr><td>SKU</td><td>:</td><td>".$product->sku."</td></tr>
                 <tr><td>Size</td><td>:</td><td>".$product->size."</td></tr>
-                <tr><td>Photo</td><td>:</td><td><img width='300px' src='".uploadCDN(str_replace('original', 'small', $product->photo))."'></td></tr>
+                <tr><td>Preorder</td><td>:</td><td>".$preorder."</td></tr>
+                <tr><td>Photo</td><td>:</td><td><img width='500px' src='".uploadCDN(str_replace('original', 'small', $product->photo))."'></td></tr>
             </table>
         </p>";
     }

@@ -680,6 +680,8 @@ class ProductRepository
             'products.slug as slug',
             'products.sell_price as sell_price', 
             'products.price_before_discount as price_before_discount',
+            'products.is_preorder',
+            'products.preorder_day',
             'product_images.photo as photo',
             'product_designers.name as designer_name',
             'product_designers.slug as designer_slug',
