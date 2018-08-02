@@ -81,9 +81,9 @@
   <body>
     <div id="app">
       <!-- Preloader -->
-      {{-- <div id="preloader" class="uk-inline">
+      <div id="preloader" class="uk-inline">
         <div class="uk-position-center" uk-spinner="ratio: 4"></div>
-      </div> --}}
+      </div>
       <div class="uk-visible@m">
         @include('partials.nav')
       </div>
