@@ -14,7 +14,7 @@
   <input type="hidden" name="products_id" value="{{$product->id}}">
   <div class="uk-grid uk-margin-top" uk-grid>
     <div class="uk-width-2-5@m">
-    <img src="/{{ $product->images[0]['photo'] }}" alt="" width="450"></a>
+    <img src="{{ uploadCDN($product->images[0]['photo'] ? str_replace('original', 'medium', $product->images[0]['photo']) : $product->images[0]['photo']) }}" alt="" width="450"></a>
       <p class="uk-text-lead">
         {{$product->name}}
       </p>
@@ -70,6 +70,7 @@
       </div>
       <div class="uk-margin-top uk-margin-bottom">
         <button type="submit" class="uk-button uk-button-secondary uk-text-uppercase">{{ trans('app.submit') }}</button>
+        <a href="{{ route('product', ['slug' => $product->slug]) }}" type="button" class="uk-button uk-button-secondary uk-text-uppercase">{{ trans('app.back_to_product') }}</a>
       </div>
     </div>
   </div>

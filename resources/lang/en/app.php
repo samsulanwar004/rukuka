@@ -56,6 +56,7 @@ return [
     'trending'                  =>  'Trending Now',
     'popular'                   =>  'Most Popular',
     'back_to_home'              =>  'Back To Home',
+    'back_to_product'           =>  'Back To Product',
     'submit'                    =>  'Submit',
     'show_all_product'          =>  'Show All Product',
     'related'                   =>  'Related Product',
