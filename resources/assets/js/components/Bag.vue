@@ -292,7 +292,8 @@
                         }
                     });
                 } else {
-                    UIkit.notification("Please login!", {
+                    var _link = window.location.href.replace('&', '|');
+                    UIkit.notification("<center>You are not logged in.<br> To login, please click <a href='/login?return="+_link+"'>here</a></center>", {
                         status:'danger'
                     });
                 }

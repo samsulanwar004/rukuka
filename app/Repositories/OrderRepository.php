@@ -410,9 +410,7 @@ class OrderRepository
 
 	public function getTrackingAirwaybill(){
 		
-		$order = Order::with('user')
-						->with('address')
-						->where('order_code', $this->getOrderCode())
+		$order = Order::where('order_code', $this->getOrderCode())
 						->first();
 
 		// check order

@@ -340,7 +340,6 @@ class OrderController extends BaseController
 
 		$tracking = $this->order
                     ->setOrderCode($ordeCode)
-                    ->setUser($this->getUserActive())
                     ->getTrackingAirwaybill();
 			
 		return view('pages.tracking_ems', compact('tracking'));

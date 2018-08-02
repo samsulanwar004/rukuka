@@ -143,9 +143,45 @@
       <!-- /.box-body -->
 
       <div class="box-footer" style="background: #F5F5F5">
-
         <div class="form-group">
-          <div class="col-md-12" align="right">
+          <div class="col-md-6" align="left">
+            @if($tracking['error'] != '000')
+              <h3>
+                {{ $tracking['message'] }}
+              </h3>
+            @else
+              <h3>
+              {{ trans('app.status_shipment') }}
+              </h3>
+              <div>
+                <div class="table-responsive">
+                  <table class="table">
+                    <tbody>
+                    <tr>
+                      <th>{{trans('app.no')}}</th>
+                      <th>{{trans('app.office')}}</th>
+                      <th>{{trans('app.date')}}</th>
+                      <th>{{trans('app.time')}}</th>
+                      <th>{{trans('app.status')}}</th>
+                    </tr>
+
+                    @foreach ($tracking['data'] as $key => $trackingData)
+                      <tr>
+                        <td>{{++$key}}</td>
+                        <td>{{$trackingData->office}}</td>
+                        <td>{{explode(' ', $trackingData->eventDate)[0]}}</td>
+                        <td>{{explode(' ', $trackingData->eventDate)[1]}}</td>
+                        <td>{{$trackingData->eventName}}</td>
+                      </tr>
+                    @endforeach
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            @endif
+          </div>
+          <div class="col-md-6" align="right">
             <label class="control-label">Payment Status</label>
             <select class="form-control" name="payment_status" style="width: 300px">
               <option value="0" {{ $row->payment_status == 0 ? 'selected' : ''}}>

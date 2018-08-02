@@ -5,6 +5,7 @@
 	use DB;
 	use CRUDBooster;
 	use App\Repositories\OrderRepository;
+	use App\Repositories\CourierRepository;
     use App\Services\EmailService;
     use App\Services\CurrencyService;
     use Carbon\Carbon;
@@ -425,6 +426,10 @@
 		  $data['row'] = $data['orderDetail'][0];
 		  $data['currency'] = (new CurrencyService)->getCurrentCurrency($data['orderDetail'][0]->current_currency);
 		  $data['return_url'] = request()->input('return_url');
+		  $data['tracking'] = null;
+		  if ($data['orderDetail'][0]->airwaybill) {
+		  	$data['tracking'] =  (new CourierRepository)->getTrackingAndTracePosIndonesia($data['orderDetail'][0]->airwaybill);
+		  }
 
 		  //Please use cbView method instead view method from laravel
 		  $this->cbView('admin.order_details',$data);
