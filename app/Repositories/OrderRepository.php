@@ -384,6 +384,8 @@ class OrderRepository
         })
         ->join('address', function ($join) {
             $join->on('address.id', '=', 'orders.shipping_id');
+        })->join('countries', function ($join) {
+            $join->on('countries.countries_code', '=', 'address.country');
         })
         ->select(
             'orders.*',
@@ -396,7 +398,7 @@ class OrderRepository
             'address.city',
             'address.province',
             'address.postal',
-            'address.country',
+            'countries.countries_name as country',
             'order_details.product_code',
             'order_details.product_name',
             'order_details.sku',

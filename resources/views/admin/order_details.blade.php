@@ -31,7 +31,7 @@
             Air Waybill
             <span class="label label-info"> {{ $row->airwaybill }} </span> <br><br>
             <b>Order Date</b> <br>
-            {{ $row->order_date }} <br>
+            {{ date('d-m-Y h:i', strtotime($row->order_date)) }} <br>
 
           </div>
           <div class="col-md-3">
@@ -56,12 +56,19 @@
           </div>
           <div class="col-md-3">
             Customer Detail <hr>
-            <b>User Account:</b> <br>
+            <b>User Account</b> <br>
             {{ $row->email }} <br><br>
-            <b>Address:</b> <br>
+            <b>Address</b> <br>
             {{ $row->first_name }} {{ $row->last_name }} ({{ $row->phone_number }}) <br>
-            {{ $row->company != null ?  $row->company.', ' : ''}}<br>
-            {{ $row->address_line }}, {{ $row->city }}, {{ $row->province }}, {{ $row->postal }}, {{ $row->country }} <br>
+            {{ $row->company != null ?  $row->company.', <br>' : ''}}
+            {{ $row->address_line }}, {{ $row->city }}, {{ $row->province }}, {{ $row->postal }}, {{ $row->country }}
+          </div>
+          <div class="col-md-3">
+            Shipping Detail <hr>
+            <b>Service</b> <br>
+            {{ $row->shipping_name }}
+            <br>
+            {{ $row->shipping_service }} <br>
             @php
               if ($row->order_status == '0') {
                   echo '<span class="label label-primary">Sent Pending</span>';
@@ -73,13 +80,6 @@
                   echo '<span class="label label-danger">Cancel</span>';
               }
             @endphp
-          </div>
-          <div class="col-md-3">
-            Shipping Detail <hr>
-            <b>Service</b> <br>
-            {{ $row->shipping_name }}
-            <br>
-            {{ $row->shipping_service }}
           </div>
           <div class="col-md-12" style="padding: 20px">
             <div class="table-responsive">
