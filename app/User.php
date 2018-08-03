@@ -32,6 +32,10 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
+    public function setEmailAttribute($email){
+        $this->attributes['email'] = strtolower($email);
+    }
+
     public function creditCards()
     {
         return $this->hasMany(CreditCard::class, 'users_id', 'id')->orderBy('is_default', 'DESC');
