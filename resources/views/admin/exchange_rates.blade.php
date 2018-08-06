@@ -58,7 +58,7 @@ $(document).ready(function() {
   var ctx = document.getElementById("myChart");
 
   var jsonData = $.ajax({
-    url: 'http://local.rukuka.com/api/v1/exchange-rate',
+    url: '{{ route('exchange.live') }}',
     dataType: 'json',
   }).done(function (results) {
       document.getElementById('loading-chart').style = 'display: none;';
