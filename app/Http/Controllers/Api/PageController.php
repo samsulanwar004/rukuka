@@ -10,9 +10,11 @@ use App\Repositories\SettingRepository;
 use App\Repositories\PageRepository;
 use App\Repositories\LookbookRepository;
 use App\Repositories\UserRepository;
+use App\Repositories\ExchangeRateRepository;
 use Exception;
 use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
+use App\Services\ClientService;
 
 
 class PageController extends BaseApiController
@@ -22,6 +24,7 @@ class PageController extends BaseApiController
     CONST CATEGORIES_CACHE = 'categories.cache';
     CONST COLOR_CACHE = 'color.cache';
     CONST POPULAR_CACHE = 'popular.cache';
+    CONST EXCHANGE_CACHE = 'exchange.cache';
 
     public function __construct()
     {
@@ -452,6 +455,47 @@ class PageController extends BaseApiController
             }
 
             return $this->success($categories,200, true);
+        } catch (Exception $e) {
+            return $this->error($e, 400, true);
+        }
+    }
+
+    public function exchangeRate()
+    {
+        try {
+
+            $rate = (new ExchangeRateRepository)->getExchangeRateUnique();
+
+            if (Cache::has(self::EXCHANGE_CACHE)) {
+                $exchange = Cache::get(self::EXCHANGE_CACHE);
+            } else {
+                $exchange = [];
+                foreach ($rate as $value) {
+                    if (!in_array($value->currency_code_to, array('bnd','idr'))) {
+                        //get exchange rates live
+                        $url = 'https://exchangeratesapi.io/api/latest?base='.strtoupper($value->currency_code_to).'&symbols=IDR';
+                        $method = 'get';
+                        $type = 'json';
+                        $exchangeRate = (new ClientService)->request($method, $url, $type, $data = null, $auth = null);
+
+                        $exchange[] = $exchangeRate;
+                    }
+                }
+
+                $expiresAt = Carbon::now()->addMinutes(1440);
+
+                Cache::put(self::EXCHANGE_CACHE, $exchange, $expiresAt);
+            }
+
+            $exchange = collect($exchange)->map(function($entry) {
+                return [
+                    'base' => $entry['base'],
+                    'idr' => round($entry['rates']['IDR'])
+                ];
+            })->toArray();
+
+            return $this->success($exchange, 200, true);
+
         } catch (Exception $e) {
             return $this->error($e, 400, true);
         }

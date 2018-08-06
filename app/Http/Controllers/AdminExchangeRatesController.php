@@ -5,6 +5,7 @@
 	use DB;
 	use CRUDBooster;
 	use App\Services\CacheService;
+	use App\Repositories\ExchangeRateRepository;
 
 	class AdminExchangeRatesController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -345,6 +346,19 @@
 	        //Your code here
 
 	    }
+
+	    public function getIndex() {
+		  //First, Add an auth
+		   if(!CRUDBooster::isView()) CRUDBooster::denyAccess();
+		   
+		   //Create your own query 
+		   $data = [];
+		   $data['page_title'] = 'Exchange Rates';
+		   $data['result'] = (new ExchangeRateRepository)->getExchangeRateAvailable();
+		    
+		   //Create a view. Please use `cbView` method instead of view method from laravel.
+		   $this->cbView('admin.exchange_rates',$data);
+		}
 
 
 
