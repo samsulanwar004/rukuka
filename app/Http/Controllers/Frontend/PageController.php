@@ -132,7 +132,6 @@ class PageController extends BaseController
 
             $products = $product->getProductByMenu($request);
 
-
             foreach ($request->all() as $key => $value) {
                 $products->appends($key, $value);
             }
@@ -141,6 +140,7 @@ class PageController extends BaseController
             $sortByPrice = $request->input('price');
             $sortByNew = $request->input('sort');
             $sortByPopular = $request->input('popular');
+            $sortByDiscount = $request->input('discount');
 
             //get wishlist
             $wishlists = [];
@@ -211,7 +211,7 @@ class PageController extends BaseController
             'slug',
             'designer',
             'shops',
-            'sale',
+            'sortByDiscount',
             'recently',
             'colorId',
             'sortByPrice',
@@ -693,6 +693,7 @@ class PageController extends BaseController
         $sortByPrice = $request->input('price');
         $sortByNew = $request->input('sort');
         $sortByPopular = $request->input('popular');
+        $sortByDiscount = $request->input('discount');
         $navigation = $request->input('menu');
         $view = $request->has('view') ? $request->input('view') : 36;
         $request->session()->put('view.session', $view);
@@ -712,6 +713,7 @@ class PageController extends BaseController
                 'sortByPrice',
                 'sortByPopular',
                 'sortByNew',
+                'sortByDiscount',
                 'view'
             ));
         }

@@ -62,46 +62,6 @@ class ProductRepository
         return $query->paginate($request->has('view') ? $request->input('view') : self::COUNT_OF_PRODUCT);
 	}
 
-    public function getProductBySlugCategorySale($request, $slug)
-    {
-        $query = \DB::table('products')->join('product_designers', function ($join) {
-            $join->on('products.product_designers_id', '=', 'product_designers.id')
-            ->whereNull('product_designers.deleted_at');
-        })->join('product_categories', function ($join) use ($slug) {
-            $join->on('products.product_categories_id', '=', 'product_categories.id')
-            ->where('product_categories.slug', $slug);
-        })
-        ->select(
-            'products.id as id', 
-            'products.name as name', 
-            'products.slug as slug', 
-            'products.sell_price as sell_price', 
-            'products.price_before_discount as price_before_discount', 
-            'products.created_at as created_at',
-            'product_categories.name as category_name'
-        )
-        ->where('products.price_before_discount','>',0)
-        ->where('products.is_active',1)
-        ->whereNull('products.deleted_at');
-
-        if ($request->has('color_id')) {
-            $colorId = $request->input('color_id');
-
-            $query->join('product_colors', function ($join) use ($colorId) {
-                $join->on('products.product_colors_id', '=', 'product_colors.id')
-                ->where('product_colors.name', $colorId);
-            });
-        }
-
-        if ($request->has('price')) {
-            $query->orderBy('products.sell_price', $request->input('price'));
-        } else {
-            $query->orderBy('products.id', 'desc');
-        }
-
-        return $query->paginate($request->has('view') ? $request->input('view') : self::COUNT_OF_PRODUCT);
-    }
-
 	public function getCategoryProduct($request, $menu = null)
 	{
         $gender = $request->has('menu') ? $request->input('menu') : $menu;
@@ -320,7 +280,8 @@ class ProductRepository
             'product_designers.id as designer_id',
             'product_designers.name as designer_name',
             'product_designers.slug as designer_slug',
-            'product_images.photo as photo'
+            'product_images.photo as photo',
+            \DB::raw('IF(products.price_before_discount > products.sell_price,1,0) as discount_status')
         )
         ->where('products.is_active',1)
         ->whereNull('products.deleted_at')
@@ -357,6 +318,10 @@ class ProductRepository
             $query->orderBy('products.id', $request->input('sort'));
         }
 
+        if ($request->has('discount')) {
+            $query->orderBy('discount_status', $request->input('discount'));
+        }
+
         if($request->has('range')){
             $range = $request->input('range');
             $rangeArr = explode('-',$range);
@@ -374,58 +339,6 @@ class ProductRepository
             $this->setDesigner($this->getDesignerBySlug($designer));
         }
 
-
-        return $query->paginate($request->has('view') ? $request->input('view') : self::COUNT_OF_PRODUCT);
-
-	}
-
-	public function getProductByCategorySale($request, $category)
-	{
-		$parents = (new CategoryRepository)->getCategoryByParent($category);
-
-		$ids = [];
-		if($parents) {
-			foreach ($parents as $value) {
-				foreach ($value['child'] as $value) {
-					$ids[] = $value['id'];
-				}
-			}
-		}
-
-        $query = \DB::table('products')->join('product_designers', function ($join) {
-            $join->on('products.product_designers_id', '=', 'product_designers.id')
-            ->whereNull('product_designers.deleted_at');
-        })->join('product_categories', function ($join) use ($ids) {
-            $join->on('products.product_categories_id', '=', 'product_categories.id')
-            ->whereIn('product_categories.id', $ids);
-        })
-        ->select(
-            'products.id as id', 
-            'products.name as name', 
-            'products.slug as slug', 
-            'products.sell_price as sell_price', 
-            'products.price_before_discount as price_before_discount', 
-            'products.created_at as created_at',
-            'product_categories.name as category_name'
-        )
-        ->where('products.price_before_discount','>',0)
-        ->where('products.is_active',1)
-        ->whereNull('products.deleted_at');
-
-        if ($request->has('color_id')) {
-            $colorId = $request->input('color_id');
-
-            $query->join('product_colors', function ($join) use ($colorId) {
-                $join->on('products.product_colors_id', '=', 'product_colors.id')
-                ->where('product_colors.name', $colorId);
-            });
-        }
-
-        if ($request->has('price')) {
-            $query->orderBy('products.sell_price', $request->input('price'));
-        } else {
-            $query->orderBy('products.id', 'desc');
-        }
 
         return $query->paginate($request->has('view') ? $request->input('view') : self::COUNT_OF_PRODUCT);
 
@@ -547,7 +460,8 @@ class ProductRepository
             'products.product_categories_id as product_categories_id',
             'product_images.photo as photo',
             'product_designers.name as designer_name',
-            'product_designers.slug as designer_slug'
+            'product_designers.slug as designer_slug',
+            \DB::raw('IF(products.price_before_discount > products.sell_price,1,0) as discount_status')
         )
 
         ->where('products.is_active',1)
@@ -564,6 +478,10 @@ class ProductRepository
 
         if ($request->has('popular')) {
             $query->orderBy('products.count', $request->input('price'));
+        }
+
+        if ($request->has('discount')) {
+            $query->orderBy('discount_status', $request->input('discount'));
         }
 
         if ($request->has('sort')) {

@@ -263,6 +263,7 @@ return [
     'price'                     =>  'Price',
     'min_price'                 =>  'Min Price',
     'max_price'                 =>  'Max Price',
+    'discount'                  =>  'Discount',
 
     //resources/views/pages/product.blade.php
     'product_code'              =>  'Product Code:',
