@@ -13,7 +13,7 @@
     <form action="{{CRUDbooster::adminPath('product-reports')}}" method="get">
       <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" value="report-product-{{date('YmdHIs')}}" name="name" required="required">
+        <input type="text" class="form-control" id="name" value="{{$name}}" name="name" required="required">
       </div>
       <div class="form-group">
         <label for="designer">Designer Name</label>

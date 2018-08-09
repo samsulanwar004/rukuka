@@ -319,6 +319,7 @@
 
 		   $data['attribute'] = $request->has('attr') ? $request->input('attr') : $data['keys'];
 		   $data['designer'] = $request->has('designer') ? $request->input('designer') : null;
+		   $data['name'] = $request->has('name') ? $request->input('name') : 'report-product-'.date('YmdHIs');
 		   $data['date_create'] = $request->has('date_create') ? $request->input('date_create') : null;
 		   $data['designers'] = (new DesignerRepository)->getDesigners();
 
