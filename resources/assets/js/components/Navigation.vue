@@ -485,7 +485,7 @@
                 }
 
                 if (typeof navigations.data.data.designers !== 'undefined') {
-                   self.designers = navigations.data.data.designers.sort(sort_by('created_at', true, function(result){
+                   self.designers = navigations.data.data.designers.sort(sort_by('name', false, function(result){
                     return result;
                   })).slice(0,37);
                 }

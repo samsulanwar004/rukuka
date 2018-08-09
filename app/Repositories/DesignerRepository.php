@@ -50,6 +50,17 @@ class DesignerRepository
 
     public function getDesignerWithGender()
     {
-        return \DB::select('select distinct product_designers.name, product_designers.slug, products.gender from product_designers inner join products on product_designers.id = products.product_designers_id  where products.is_active = 1 and products.deleted_at IS NULL');
+        return \DB::table('product_designers')->join('products', function ($join) {
+            $join->on('products.product_designers_id', '=', 'product_designers.id')
+                ->where('products.is_active',1)
+                ->whereNull('products.deleted_at');
+        })->select(
+            'product_designers.name', 
+            'product_designers.slug',
+            'products.gender'
+        )
+        ->whereNull('product_designers.deleted_at')
+        ->groupBy('product_designers.name', 'product_designers.slug', 'products.gender')
+        ->get();
     }
 }

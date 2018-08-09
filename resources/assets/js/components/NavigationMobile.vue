@@ -299,7 +299,7 @@
                     }
 
                     if (typeof response.designers_all !== 'undefined') {
-                        self.designers = response.designers_all.sort(sort_by('created_at', true, function(result){
+                        self.designers = response.designers_all.sort(sort_by('name', false, function(result){
                             return result;
                         })).slice(0,37);
                     }
