@@ -108,8 +108,13 @@ if (! function_exists('actionLink')) {
         if ($query) {
             $param = isset($param) ? mergeArrays($query, $param) : $query;
         }
-
-        return '?'.http_build_query($param);
+        
+        if(is_array($param)) {
+            return '?'.http_build_query($param);
+        } else {
+            return null;
+        }
+        
     }
 }
 

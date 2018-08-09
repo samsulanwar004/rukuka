@@ -470,4 +470,9 @@ Route::post('/upload-update/{id?}', [
     'uses' => 'AdminProductImagesController@editUploadProduct',
 ]);
 
+Route::get('/export-product', [
+    'as'   => 'export.product',
+    'uses' => 'AdminProductReportsController@export',
+]);
+
 

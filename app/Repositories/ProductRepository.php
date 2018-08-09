@@ -610,4 +610,45 @@ class ProductRepository
         ->first();  
     }
 
+    public function getProductReport($request)
+    {
+        $query = \DB::table('products')->join('product_designers', function ($join) use ($request) {
+            $join->on('products.product_designers_id', '=', 'product_designers.id');
+            if ($request->has('designer')) {
+                $join->where('product_designers.id', $request->input('designer'));
+            }
+        })->join('product_categories', function ($join) {
+            $join->on('products.product_categories_id', '=', 'product_categories.id');
+        })->join('product_colors', function ($join) {
+            $join->on('products.product_colors_id', '=', 'product_colors.id');
+        })->leftJoin('product_stocks', function ($join) {
+            $join->on('products.id', '=', 'product_stocks.products_id');
+        })->select(
+            'products.product_code as product_code',
+            'products.name as product_name',
+            'products.gender as product_gender',
+            'products.sell_price as product_price',
+            \DB::raw('IF(products.is_active = 1,"active","unactive") as product_status'),
+            \DB::raw('IF(products.price_before_discount > products.sell_price,"yes","no") as discount'),
+            \DB::raw('IF(products.is_preorder = 1,"yes","no") as preorder'),
+            'product_categories.name as category',
+            'product_designers.name as designer',
+            'product_colors.name as color',
+            'product_stocks.sku',
+            'product_stocks.size',
+            'product_stocks.unit'
+        )
+        ->whereNull('products.deleted_at')
+        ->orderBy('products.id', 'DESC');
+
+        if ($request->has('date_create')) {
+            $value = $request->input('date_create');
+            $valueArray = explode(' - ', $value);
+            $query->whereBetween('products.created_at',[$valueArray[0].' 00:00:00', $valueArray[1].' '.date('H:i:s')]);
+        }
+
+        return $query->paginate(50);
+
+    }
+
 }

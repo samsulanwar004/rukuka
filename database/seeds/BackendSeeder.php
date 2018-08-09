@@ -311,6 +311,16 @@ class CmsModulsSeeder extends Seeder {
             'controller'=>'AdminConfirmPaymentsController',
             'is_protected'=>0,
             'is_active'=>0
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Product Reports',
+            'icon'=>'fa fa-circle-o',
+            'path'=>'product-reports',
+            'table_name'=>'',
+            'controller'=>'AdminProductReportsController',
+            'is_protected'=>0,
+            'is_active'=>0
             ]
         ];
 
@@ -759,6 +769,32 @@ class CmsMenusSeeder extends Seeder {
             'is_dashboard'=>0,
             'id_cms_privileges' => 1,
             'sorting' => 5
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Reports',
+            'type'=>'Route',
+            'path'=>'report',
+            'color' => 'normal',
+            'icon'=>'fa fa-newspaper-o',
+            'parent_id'=>0,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 10
+        ],[
+
+            'created_at'=>date('Y-m-d H:i:s'),
+            'name'=>'Product Reports',
+            'type'=>'Route',
+            'path'=>'AdminProductReportsControllerGetIndex',
+            'color' => 'normal',
+            'icon'=>'fa fa-circle-o',
+            'parent_id'=>32,
+            'is_active'=>1,
+            'is_dashboard'=>0,
+            'id_cms_privileges' => 1,
+            'sorting' => 1
         ]
     ];
 
