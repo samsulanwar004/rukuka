@@ -2,7 +2,7 @@
 <html>
 <head> <title>500</title>
 <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet" type="text/css">
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
     html, body {
        height: 100%;
@@ -49,7 +49,6 @@
         background-color: #0e0e0e;
     }
 </style>
-<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 <script type="text/javascript">
   function goBack() {
       window.history.back();
@@ -59,10 +58,10 @@
 <body>
     <div class="container">
         <div class="content">
-            <div class="title">Something went wrong!</div>      
+            <div class="title">Something went wrong!</div>   
             @if(app()->bound('sentry') && !empty(Sentry::getLastEventID()))
                 <div class="subtitle">Error ID: {{ Sentry::getLastEventID() }}</div>
-                <center><button class="btn" onclick="goBack()"><i class="fas fa-chevron-circle-left"></i></button></center>
+                <center><button class="btn" onclick="goBack()"><i class="material-icons">keyboard_backspace</i></i></button></center>
                 <!-- Sentry JS SDK 2.1.+ required -->
                 <script src="https://cdn.ravenjs.com/3.3.0/raven.min.js"></script>
 
