@@ -33,8 +33,8 @@
                           <div class="uk-width-1-3">
                               <select name="title" class="uk-select" required>
                                   <option value="" disabled selected>{{ trans('app.title') }}</option>
-                                  <option value="Mr.">Mr.</option>
-                                  <option value="Mrs.">Mrs</option>
+                                  <option @if(old('title') == 'Mr.') selected="selected" @endif value="Mr.">Mr.</option>
+                                  <option @if(old('title') == 'Mrs.') selected="selected" @endif value="Mrs.">Mrs</option>
                               </select>
                               <br/><span style="color:red">{{ $errors->first('title')}}</span>
                           </div>
@@ -74,6 +74,8 @@
                           </div>
                       </div>
 
+                      <div class="g-recaptcha uk-margin-small uk-width-1-1" data-sitekey="{{ config('common.google_recaptcha_key') }}"></div>
+
                       {{ Form::submit(trans('app.submit'), array('class' => 'uk-button uk-button-secondary uk-button-small uk-width-small'))}}
                       {{ Form::close() }}
                   </div>
@@ -82,4 +84,8 @@
           </div>
 
         </div>
+@endsection
+
+@section('header_scripts')
+<script src='https://www.google.com/recaptcha/api.js'></script>
 @endsection

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
 use Exception;
+use CRUDBooster;
 
 class BaseController extends Controller
 {  
@@ -127,5 +128,13 @@ class BaseController extends Controller
             'message' => $message,
         ];
     } 
+
+    public function notificationforAdmin($users, $message, $module)
+    {
+        $config['content'] = $message;
+        $config['to'] = CRUDBooster::adminPath($module);
+        $config['id_cms_users'] = explode(',', $users); 
+        CRUDBooster::sendNotification($config);
+    }
 
 }

@@ -727,6 +727,7 @@ class PageController extends BaseController
             'email' => 'required|email',
             'subject' => 'required|string',
             'message' => 'required|string',
+            'g-recaptcha-response' => 'required|recaptcha'
         ]);
 
         try {
@@ -742,6 +743,12 @@ class PageController extends BaseController
             $contact->message = $request->input('message');
             $contact->save();
             DB::commit();
+
+            //send notification
+            $users = config('common.admin.users_id');
+            $message = 'New message';
+            $module = 'contacts';
+            $this->notificationforAdmin($users, $message, $module);
 
             return redirect($this->redirectAfterInsertContact)->with(['success' => 'Thank you for contacting us, we will contact back to you as soon as we can.']);
         } catch (Exception $e) {
